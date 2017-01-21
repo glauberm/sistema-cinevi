@@ -1,0 +1,296 @@
+a {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+dt {
+    margin-top: 1.5rem;
+}
+
+dd {
+    font-size: 2rem;
+    display: inline-block;
+    margin-bottom: 1.25rem;
+}
+
+dl div dd:after {
+    content: ', ';
+}
+
+dd:only-of-type:after,
+dd:last-of-type:after {
+    content: '';
+}
+
+dd:last-of-type:after {
+    content: '';
+}
+
+.inherit {
+    font-size: inherit;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.width-auto {
+    width: auto;
+}
+
+legend {
+    margin-top: 10px;
+}
+
+.control-label.required:after {
+    content: " *";
+    color: #d9534f;
+}
+
+/* HEADER */
+.header svg  {
+    width: 175px;
+    height: 34px;
+}
+
+.header-security .header svg {
+    width: 226px;
+    height: 44px;
+}
+
+/* MENU TOPO */
+.menu-topo {
+    margin-top: 12px;
+}
+
+.menu-topo svg {
+    width: 26px;
+    height: 24px;
+    margin-right: 5px;
+    margin-bottom: -7px;
+}
+
+.menu-topo li a svg g,
+.menu-topo li a svg path {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.menu-topo li .logout svg g,
+.menu-topo li .logout svg path {
+    fill: #a94442;
+}
+
+.menu-topo li a:hover svg g,
+.menu-topo li a:hover svg path,
+.menu-topo li a:focus svg g,
+.menu-topo li a:focus svg path,
+.menu-topo li a:active svg g,
+.menu-topo li a:active svg path {
+    fill: #08A5D4;
+}
+
+.menu-topo li .logout:hover svg g,
+.menu-topo li .logout:hover svg path,
+.menu-topo li .logout:focus svg g,
+.menu-topo li .logout:focus svg path,
+.menu-topo li .logout:active svg g,
+.menu-topo li .logout:active svg path {
+    fill: #843534;
+}
+
+.menu-topo .active svg g,
+.menu-topo .active svg path {
+    fill: #DECC3A;
+}
+
+.menu-topo .active a:hover svg g,
+.menu-topo .active a:hover svg path,
+.menu-topo .active a:focus svg g,
+.menu-topo .active a:focus svg path,
+.menu-topo .active a:active svg g,
+.menu-topo .active a:active svg path {
+    fill: #DECC3A;
+}
+
+/* PANEL MENU */
+.panel-main .panel-heading a {
+    display: block;
+}
+
+.panel-main .panel-heading a:hover,
+.panel-main .panel-heading a:focus,
+.panel-main .panel-heading a:active {
+    text-decoration: none;
+}
+
+.panel-main .panel-heading svg {
+    width: 21px;
+    height: 18px;
+}
+
+.panel-main .panel-collapse svg {
+    width: 23px;
+    height: 21px;
+    margin: 5px 5px -5px 5px;
+}
+
+.panel-main .panel-collapse a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.panel-main .panel-collapse svg g,
+.panel-main .panel-collapse svg path {
+    fill: #006886;
+}
+
+.panel-main .panel-collapse .active svg g,
+.panel-main .panel-collapse .active svg path {
+    fill: #DECC3A;
+}
+
+/* NAVBAR */
+.navbar svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ÍCONES */
+.icone-voltar {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.collapsed .icone-voltar {
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/* FOOTER */
+.footer {
+    padding-bottom: 2rem;
+}
+
+.footer p {
+    padding: 7px 15px;
+}
+
+/* LOGIN */
+.well .page-header {
+    margin-top: 0;
+}
+
+.input-group svg {
+    width: 18px;
+    height: 18px;
+}
+
+.input-group-btn {
+    display: none;
+}
+
+/* BOOTSTRAP */
+.navbar-form {
+    border-top: 0 none;
+    border-bottom: 0 none;
+}
+
+.navbar .form-group {
+    margin-bottom: 0;
+}
+
+.list-group-item {
+    padding-top: 8px;
+    padding-bottom: 12px;
+}
+
+.caret {
+    margin-left: 4px;
+}
+
+.caret-inverse {
+    border-top: 0 none;
+    border-bottom: 4px dashed;
+    border-bottom: 4px solid;
+}
+
+/* FULL CALENDAR */
+.fc-event {
+    font-weight: 700 !important;
+    padding: .25em .5em .25em !important;
+    border: 1px solid #c8b41f !important;
+    font-size: 1.2rem !important;
+    color: #FFF;
+}
+
+.fc-left,
+.fc-right {
+    margin-bottom: 10px;
+}
+
+.fc-day-grid-event .fc-content {
+    white-space: normal !important;
+}
+
+/* CHOSEN */
+.chosen-container > a {
+    background: #FFF !important;
+    padding-left: 12px !important;
+}
+
+.chosen-container-single .chosen-default {
+    color: #999 !important;
+}
+
+.chosen-container .chosen-choices {
+    background: #FFF !important;
+    padding: 2px 10px 3px !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075) !important;
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075) !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075) !important;
+}
+
+.chosen-container-active .chosen-choices {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6) !important;
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6) !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6) !important;
+}
+
+.chosen-container-multi .chosen-choices .search-field input[type="text"] {
+    font-family: inherit !important;
+}
+
+.has-error .chosen-container .chosen-single,
+.has-error .chosen-container .chosen-choices {
+    border-color: #a94442 !important;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+}
+
+.has-error  .chosen-container-active .chosen-single,
+.has-error .chosen-container-active .chosen-choices {
+    border-color: #843534 !important;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483 !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483 !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483 !important;
+}

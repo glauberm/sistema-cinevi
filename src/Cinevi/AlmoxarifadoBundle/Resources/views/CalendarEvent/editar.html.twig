@@ -1,0 +1,9 @@
+{% extends 'CineviAdminBundle:Crud:base-editar.html.twig' %}
+
+{% set title = 'Editar Reserva de Equipamento(s) ' ~ item.title %}
+{% set routeAtual = path('edit_calendar_event', { 'id': item.id }) %}
+{% set routeListar = path('get_calendar_events') %}
+
+{% block form %}
+    {% include 'CineviAlmoxarifadoBundle:CalendarEvent:form.html.twig' with {form: editForm}  %}
+{% endblock %}

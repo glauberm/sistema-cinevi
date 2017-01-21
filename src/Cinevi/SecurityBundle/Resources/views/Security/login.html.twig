@@ -1,0 +1,23 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    {{ include('FOSUserBundle:Security:login_content.html.twig') }}
+{% endblock fos_user_content %}
+
+{% block voltar %}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#group-senha').css('display', 'table-cell');
+        $('#button-senha').click(function () {
+            if($(this).hasClass('active')) {
+                $('#password').prop('type', 'password');
+                $('#button-senha').removeClass('active');
+            } else {
+                $('#password').prop('type', 'text');
+                $('#button-senha').addClass('active');
+            }
+        });
+    </script>
+{% endblock %}

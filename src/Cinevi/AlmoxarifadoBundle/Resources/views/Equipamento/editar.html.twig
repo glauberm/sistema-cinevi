@@ -1,0 +1,9 @@
+{% extends 'CineviAdminBundle:Crud:base-editar.html.twig' %}
+
+{% set title = 'Editar ' ~ item.nome %}
+{% set routeAtual = path('edit_equipamento', { 'id': item.id }) %}
+{% set routeListar = path('get_equipamentos') %}
+
+{% block form %}
+    {% include 'CineviAlmoxarifadoBundle:Equipamento:form.html.twig' with {form: editForm} %}
+{% endblock %}

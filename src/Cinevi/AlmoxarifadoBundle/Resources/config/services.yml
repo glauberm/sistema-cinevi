@@ -1,0 +1,83 @@
+services:
+    cinevi.access.almoxarifado_calendarevent:
+        class: Cinevi\AlmoxarifadoBundle\Authorization\Voter\CalendarEventVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    cinevi.access.almoxarifado_equipamento:
+        class: Cinevi\AlmoxarifadoBundle\Authorization\Voter\EquipamentoVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    cinevi.access.almoxarifado_categoria:
+        class: Cinevi\AlmoxarifadoBundle\Authorization\Voter\CategoriaVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    cinevi.access.almoxarifado_projeto:
+        class: Cinevi\AlmoxarifadoBundle\Authorization\Voter\ProjetoVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    cinevi.almoxarifado.projeto_type:
+        class: Cinevi\AlmoxarifadoBundle\Form\Type\ProjetoType
+        arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker']
+        tags:
+            - { name: form.type, alias: view }
+
+    cinevi.almoxarifado.direcao_type:
+        class: Cinevi\AlmoxarifadoBundle\Form\Type\DirecaoType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: view }
+
+    cinevi.almoxarifado.producao_type:
+        class: Cinevi\AlmoxarifadoBundle\Form\Type\ProducaoType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: view }
+
+    cinevi.almoxarifado.fotografia_type:
+        class: Cinevi\AlmoxarifadoBundle\Form\Type\FotografiaType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: view }
+
+    cinevi.almoxarifado.som_type:
+        class: Cinevi\AlmoxarifadoBundle\Form\Type\SomType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: view }
+
+    cinevi.almoxarifado.arte_type:
+        class: Cinevi\AlmoxarifadoBundle\Form\Type\ArteType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: view }
+
+    cinevi.almoxarifado.calendarevent_type:
+        class: Cinevi\AlmoxarifadoBundle\Form\Type\CalendarEventType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: view }
+
+    cinevi.almoxarifado.equipamento_type:
+        class: Cinevi\AlmoxarifadoBundle\Form\Type\EquipamentoType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: view }
+
+    # Listener
+    cinevi.almoxarifado.load_data_listener:
+        class: Cinevi\AlmoxarifadoBundle\Listener\LoadDataListener
+        arguments: ['@doctrine.orm.entity_manager','@service_container','@security.authorization_checker','@security.token_storage']
+        tags:
+            - { name: 'kernel.event_listener', event: 'fullcalendar.set_data', method: loadData }

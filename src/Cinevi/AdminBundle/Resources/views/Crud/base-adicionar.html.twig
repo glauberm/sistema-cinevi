@@ -1,0 +1,22 @@
+{% extends 'CineviAdminBundle::base.html.twig' %}
+
+{% block mainAction %}
+    <a class="navbar-brand btn btn-link" href="{{ routeListar }}">
+        {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
+    </a>
+{% endblock %}
+
+{% block maisActionsButton %}{% endblock %}
+{% block maisActions %}{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {% block form %}{% endblock %}
+        <br/>
+        {{ form_row(form.save) }}
+    {{ form_end(form) }}
+
+{% endblock %}

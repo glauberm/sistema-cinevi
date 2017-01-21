@@ -1,0 +1,26 @@
+<div class="container">
+    <header class="header clearfix">
+        <a class="pull-left" href="{{ path('fos_user_profile_show') }}">
+            <h3 class="text-muted">
+                {% include 'CineviAdminBundle:SVG:logo.html.twig' %}
+            </h3>
+        </a>
+        <nav class="pull-right menu-topo">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <ul class="nav nav-pills">
+                    <li {% if app.request.get('_route') == 'fos_user_profile_edit' or app.request.get('_route') == 'fos_user_profile_show' %}class="active"{% endif %} role="presentation">
+                        <a href="{{ path('fos_user_profile_edit', {user:app.user}) }}">
+                            {% include 'CineviAdminBundle:SVG:perfil.html.twig' %}Meu Perfil
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="{{ path('fos_user_security_logout') }}" class="logout text-danger">
+                            {% include 'CineviAdminBundle:SVG:sair.html.twig' %}{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
+        </nav>
+    </header>
+</div>
+<br/>

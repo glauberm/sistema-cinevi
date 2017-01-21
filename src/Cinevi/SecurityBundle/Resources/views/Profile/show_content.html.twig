@@ -1,0 +1,12 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<dl>
+    <div class="row">
+        <div class="col-sm-6"><dt>{{ 'profile.show.username'|trans }}</dt><dd>{{ user.username }}</dd></div>
+        <div class="col-sm-6"><dt>{{ 'profile.show.email'|trans }}</dt><dd>{{ user.email }}</dd></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6"><dt>Telefone</dt><dd>{{ user.telefone }}</dd></div>
+        <div class="col-sm-6"><dt>Matrícula</dt><dd>{{ user.matricula }}</dd></div>
+    </div>
+</dl>

@@ -1,0 +1,18 @@
+{% extends 'CineviAdminBundle::base.html.twig' %}
+
+{% set title = 'Meu Perfil' %}
+{% set routeAtual = path('fos_user_profile_edit') %}
+
+{% block mainAction %}
+    <a class="navbar-brand btn btn-link" href="{{ path('fos_user_profile_show') }}">
+        {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
+    </a>
+{% endblock %}
+
+{% block maisActionsButton %}{% endblock %}
+{% block maisActions %}{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+{% endblock body %}

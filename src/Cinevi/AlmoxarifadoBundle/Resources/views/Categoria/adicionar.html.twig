@@ -1,0 +1,9 @@
+{% extends 'CineviAdminBundle:Crud:base-adicionar.html.twig' %}
+
+{% set title = 'Adicionar Categoria de Equipamento' %}
+{% set routeAtual = path('new_categoria') %}
+{% set routeListar = path('get_categorias') %}
+
+{% block form %}
+    {% include 'CineviAlmoxarifadoBundle:Categoria:form.html.twig' %}
+{% endblock %}

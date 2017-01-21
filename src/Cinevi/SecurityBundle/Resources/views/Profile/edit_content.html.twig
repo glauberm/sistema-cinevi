@@ -1,0 +1,18 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    <div class="row">
+        <div class="col-md-3 col-sm-6">{{ form_row(form.username) }}</div>
+        <div class="col-md-3 col-sm-6">{{ form_row(form.email) }}</div>
+        <div class="col-md-3 col-sm-6">{{ form_row(form.plainPassword.first) }}</div>
+        <div class="col-md-3 col-sm-6">{{ form_row(form.plainPassword.second) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">{{ form_row(form.telefone) }}</div>
+        <div class="col-sm-6">{{ form_row(form.matricula) }}</div>
+    </div>
+    {{ form_rest(form) }}
+    <div>
+        <input type="submit" class="btn btn-warning btn-lg" value="{{ 'profile.edit.submit'|trans }}" />
+    </div>
+{{ form_end(form) }}

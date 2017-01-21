@@ -1,0 +1,33 @@
+{% extends 'CineviAdminBundle:Crud:base-listar.html.twig' %}
+
+{% set title = 'Equipamentos' %}
+{% set routeAtual = path('get_equipamentos') %}
+{% set routeAdicionar = path('new_equipamento') %}
+
+{% block thead %}
+    <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.nome') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Categoria', 'c.nome') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Manutenção', 'item.manutencao') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Uso', 'item.uso') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Consumível', 'item.consumivel') }}</th>
+{% endblock %}
+
+{% block tbody %}
+    <td>
+        {% if is_granted('ROLE_FUNCIONARIO') %}
+            <a href="{{ path('edit_equipamento', { 'id': item.id }) }}">{{ item.nome }}</a>
+        {% else %}
+            <a href="{{ path('get_equipamento', { 'id': item.id }) }}">{{ item.nome }}</a>
+        {% endif %}
+    </td>
+    <td>
+        {% if is_granted('ROLE_FUNCIONARIO') %}
+            <a href="{{ path('edit_categoria', { 'id': item.categoria.id }) }}">{{ item.categoria.nome }}</a>
+        {% else %}
+            <a href="{{ path('get_categoria', { 'id': item.categoria.id }) }}">{{ item.categoria.nome }}</a>
+        {% endif %}
+    </td>
+    <td>{{ item.manutencao ? 'Sim' : 'Não' }}</td>
+    <td>{{ item.uso ? 'Sim' : 'Não' }}</td>
+    <td>{{ item.consumivel ? 'Sim' : 'Não' }}</td>
+{% endblock %}

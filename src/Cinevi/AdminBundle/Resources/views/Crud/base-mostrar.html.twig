@@ -1,0 +1,31 @@
+{% extends 'CineviAdminBundle::base.html.twig' %}
+
+{% block mainAction %}
+    <a class="navbar-brand btn btn-link" href="{{ routeListar }}">
+        {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
+    </a>
+{% endblock %}
+
+{% block maisBotoes %}
+    {% block maisBotoesBlock %}{% endblock %}
+    <div class="navbar-form navbar-nav">
+        <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
+    </div>
+    <div class="navbar-form navbar-nav">
+        <a class="btn btn-success" href="{{ routeAdicionar }}">Adicionar</a>
+    </div>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
+            {{ form_rest(deleteForm) }}
+            {{ form_row(deleteForm.save) }}
+        {{ form_end(deleteForm) }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    <dl>{% block dtdd %}{% endblock %}</dl>
+
+{% endblock %}

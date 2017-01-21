@@ -1,0 +1,15 @@
+{% extends 'CineviAdminBundle:Crud:base-editar.html.twig' %}
+
+{% set title = 'Editar ' ~ item.username %}
+{% set routeAtual = path('edit_user', { 'id': item.id }) %}
+{% set routeListar = path('get_users') %}
+
+{% block maisBotoes %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block form %}
+    {% include 'CineviSecurityBundle:User:form.html.twig' with {form: editForm}  %}
+{% endblock %}

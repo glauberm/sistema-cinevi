@@ -1,0 +1,9 @@
+{% extends 'CineviAdminBundle:Crud:base-adicionar.html.twig' %}
+
+{% set title = 'Adicionar Equipamento' %}
+{% set routeAtual = path('new_equipamento') %}
+{% set routeListar = path('get_equipamentos') %}
+
+{% block form %}
+    {% include 'CineviAlmoxarifadoBundle:Equipamento:form.html.twig' %}
+{% endblock %}

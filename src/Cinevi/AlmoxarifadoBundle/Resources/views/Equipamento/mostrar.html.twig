@@ -1,0 +1,35 @@
+{% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
+
+{% set title = item.nome %}
+{% set routeAtual = path('get_equipamento', { 'id': item.id }) %}
+{% set routeListar = path('get_equipamentos') %}
+{% set routeEditar = path('edit_equipamento', { 'id': item.id }) %}
+{% set routeAdicionar = path('new_equipamento') %}
+
+{% block maisActionsButton %}
+    {% if is_granted('ROLE_FUNCIONARIO') %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block maisBotoes %}
+    {% if is_granted('ROLE_FUNCIONARIO') %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block dtdd %}
+<div class="row">
+    <div class="col-sm-4"><dt>Nome</dt><dd>{{ item.nome }}</dd></div>
+    <div class="col-sm-4"><dt>Nº de Patrimônio</dt><dd>{{ item.patrimonio ? item.patrimonio : 'Não informado' }}</dd></div>
+    <div class="col-sm-4"><dt>Categoria</dt><dd>{{ item.categoria.nome }}</dd></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"><dt>Em Manutenção?</dt><dd>{{ item.manutencao ? 'Sim' : 'Não' }}</dd></div>
+    <div class="col-sm-4"><dt>Falta de Uso?</dt><dd>{{ item.uso ? 'Sim' : 'Não' }}</dd></div>
+    <div class="col-sm-4"><dt>Consumível?</dt><dd>{{ item.consumivel ? 'Sim' : 'Não' }}</dd></div>
+</div>
+{% if item.obs is defined and item.obs != null %}
+    <dt>Observações</dt><dd>{{ item.obs }}</dd>
+{% endif %}
+{% endblock %}

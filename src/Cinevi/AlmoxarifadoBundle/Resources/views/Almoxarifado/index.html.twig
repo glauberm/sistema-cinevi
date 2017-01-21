@@ -1,0 +1,12 @@
+{% extends 'CineviAdminBundle::base.html.twig' %}
+
+{% block body %}
+
+    <h1>{{ output }}</h1>
+
+    <ul>
+        <li><a href="{{ path('get_equipamentos') }}">Equipamentos</a></li>
+        <li><a href="{{ path('get_projetos') }}">Projetos</a></li>
+    </ul>
+
+{% endblock %}

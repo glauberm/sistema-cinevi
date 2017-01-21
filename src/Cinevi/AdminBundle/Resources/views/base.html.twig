@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% if title is defined %}{{ title }} – {% endif %}Departamento de Cinema e Vídeo da UFF</title>
+        {% block stylesheets %}
+            <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('vendor/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('vendor/chosen/css/chosen.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('vendor/chosen/css/bootstrap-chosen.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('vendor/datepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('css/estilos.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+        <meta name="description" content="Cadastre seus projetos, reserve equipamentos no almoxarifado, registre as cópias finais de seus filmes e muito mais ainda por vir." />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
+        <meta name="subject" content="Todos os serviços do departamento em qualquer lugar." />
+        <!-- FAVICONS -->
+    	<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
+    	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
+    	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}">
+    	<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('apple-icon-76x76.png') }}">
+    	<link rel="apple-touch-icon" sizes="114x114" href="{{ asset('apple-icon-114x114.png') }}">
+    	<link rel="apple-touch-icon" sizes="120x120" href="{{ asset('apple-icon-120x120.png') }}">
+    	<link rel="apple-touch-icon" sizes="144x144" href="{{ asset('apple-icon-144x144.png') }}">
+    	<link rel="apple-touch-icon" sizes="152x152" href="{{ asset('apple-icon-152x152.png') }}">
+    	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-icon-180x180.png') }}">
+    	<link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('android-icon-192x192.png') }}">
+    	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    	<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
+    	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    </head>
+    <body>
+
+        {% block header %}
+            {% include 'CineviAdminBundle::header.html.twig' %}
+        {% endblock %}
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-8 col-sm-push-4 col-md-9 col-md-push-3">
+
+                    {% block navbar %}
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    {% block maisActionsButton %}
+                                        <button type="button" class="navbar-toggle btn btn-default collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+                                            <span class="sr-only">Mais...</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    {% endblock %}
+                                    {% block mainAction %}{% endblock %}
+                                </div>
+
+                                {% block maisActions %}
+                                    <div class="collapse navbar-collapse in" id="main-navbar">
+                                        {% block maisBotoes %}{% endblock %}
+                                    </div>
+                                {% endblock %}
+                            </div>
+                        </nav>
+                    {% endblock %}
+
+                    {% block body %}
+                        <h1 class="page-header"><a href="{{ routeAtual }}">{{ title }}</a></h1>
+
+                        {% block alerts %}
+                            {% for type, messages in app.session.flashBag.all %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ type }} alert-dismissal fade in" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                                        {{ message|trans({}, 'FOSUserBundle') }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                            {% if app.user.confirmado is not defined or app.user.confirmado != true %}
+                                <div class="alert alert-danger alert-dismissal fade in" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                                    Seus dados ainda não foram confirmados por um(a) funcionário(a). Até lá, você não poderá realizar a maioria das ações do sistema. Clique no botão acima para editar o seu perfil.
+                                </div>
+                            {% endif %}
+                        {% endblock %}
+                    {% endblock %}
+                </div>
+
+                {% block mainMenu %}
+                    <div class="col-sm-4 col-sm-pull-8 col-md-3 col-md-pull-9">
+                        {% include 'CineviAdminBundle::menu.html.twig' %}
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+
+        {% block footer %}
+            {% include 'CineviAdminBundle::footer.html.twig' %}
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset('vendor/jquery/js/jquery.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('vendor/chosen/js/chosen.jquery.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('vendor/moment/js/moment.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('vendor/moment/js/locale/pt-br.js') }}" type="text/javascript"></script>
+        	<script src="{{ asset('vendor/autosize/js/autosize.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('vendor/datepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('vendor/responsive-bootstrap-toolkit/js/bootstrap-toolkit.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/scripts.js') }}" type="text/javascript"></script>
+        {% endblock %}
+    </body>
+</html>

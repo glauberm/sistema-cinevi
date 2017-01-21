@@ -1,0 +1,18 @@
+services:
+    cinevi.access.admin_user:
+        class: Cinevi\SecurityBundle\Authorization\Voter\UserVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    cinevi.form.admin_user:
+        class: Cinevi\SecurityBundle\Form\Type\UserType
+        arguments: ['@security.authorization_checker']
+        tags:
+            - { name: form.type, alias: view }
+
+    cinevi.form.profile:
+        class: Cinevi\SecurityBundle\Form\Type\ProfileType
+        tags:
+            - { name: form.type, alias: cinevi_profile }

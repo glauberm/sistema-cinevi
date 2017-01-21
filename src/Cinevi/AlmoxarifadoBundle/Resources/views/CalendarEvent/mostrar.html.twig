@@ -1,0 +1,37 @@
+{% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
+
+{% set title = 'Reserva de Equipamento(s) ' ~ item.title %}
+{% set routeAtual = path('get_calendar_event', { 'id': item.id }) %}
+{% set routeListar = path('get_calendar_events') %}
+{% set routeEditar = path('edit_calendar_event', { 'id': item.id }) %}
+{% set routeAdicionar = path('new_calendar_event') %}
+
+{% block maisActionsButton %}
+    {% if is_granted('ROLE_FUNCIONARIO') or item.user == app.user %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block maisBotoes %}
+    {% if is_granted('ROLE_FUNCIONARIO') or item.user == app.user %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block dtdd %}
+    <div class="row">
+        <div class="col-sm-4"><dt>Código</dt><dd>{{ item.title }}</dd></div>
+        <div class="col-sm-4"><dt>Usuário</dt><dd><a href="{{ path('get_user', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
+        <div class="col-sm-4"><dt>Projeto</dt><dd>{{ item.projeto.nome }}</dd></div>
+    </div>
+    <div>
+        <dt>Equipamentos</dt>
+        {% for equipamento in item.equipamentos %}
+            <dd><a href="{{ path('get_equipamento', {id : equipamento.id}) }}">{{ equipamento.nome }}</a></dd>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-sm-6"><dt>Data de Início</dt><dd>{{ item.startDate|date('d/m/Y') }}</dd></div>
+        <div class="col-sm-6"><dt>Data de Fim</dt><dd>{{ item.endDate|date('d/m/Y') }}</dd></div>
+    </div>
+{% endblock %}
