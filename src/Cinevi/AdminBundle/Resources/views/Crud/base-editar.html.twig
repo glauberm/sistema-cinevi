@@ -10,7 +10,6 @@
     {% block maisBotoesBlock %}{% endblock %}
     {% if is_granted('ROLE_FUNCIONARIO') %}
         {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-nav' } }) }}
-            {{ form_rest(deleteForm) }}
             {{ form_row(deleteForm.save) }}
         {{ form_end(deleteForm) }}
     {% endif %}
@@ -22,7 +21,6 @@
 
     {{ form_start(editForm, {'attr': {'novalidate': 'novalidate'}}) }}
         {% block form %}{% endblock %}
-        {{ form_rest(editForm) }}
         <br/>
         {{ form_row(editForm.save) }}
     {{ form_end(editForm) }}

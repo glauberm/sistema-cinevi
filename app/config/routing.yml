@@ -4,6 +4,10 @@ fos_user:
 ancarebeca_fullcalendar:
     resource: "@FullCalendarBundle/Resources/config/routing.yml"
 
+admin:
+    resource: "@CineviAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
 security:
     resource: "@CineviSecurityBundle/Resources/config/routing.yml"
     prefix:   /

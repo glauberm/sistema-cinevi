@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Departamento de Cinema e Vídeo da UFF</title>
+        <title>{% if title is defined %}{{ title }} – {% endif %}Departamento de Cinema e Vídeo da UFF</title>
         {% block stylesheets %}
             <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('vendor/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet" type="text/css" />
@@ -32,53 +32,15 @@
     <body>
         {% include 'CineviAdminBundle::header-security.html.twig' %}
 
-        <main class="container">
-            <div class="row">
-                <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
-                    <div class="well well-lg">
-                        <h2 class="page-header text-center">
-                            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-                        </h2>
-
-                        {% for type, messages in app.session.flashBag.all %}
-                            {% for message in messages %}
-                                <div class="alert alert-{{ type }} alert-dismissal fade in" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                    {{ message|trans({}, 'FOSUserBundle') }}
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-
-                        <div>
-                            {% block fos_user_content %}
-                            {% endblock fos_user_content %}
-                        </div>
-
-                        {% block voltar %}
-                            <br/>
-                            <div class="clearfix">
-                                <div class="pull-left">
-                                    <a class="btn btn-link" href="{{ path('fos_user_profile_show') }}">&laquo; Voltar</a>
-                                </div>
-                            </div>
-                        {% endblock %}
-                    </div>
-                </div>
-
-                <div class="col-md-8 col-sm-12 text-right">
-                    <div class="jumbotron">
-                        <h1>Todos os serviços do departamento em qualquer lugar.</h1>
-                        <p>Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo.</p>
-                    </div>
-                </div>
+        <main class="container container-error">
+            <div class="jumbotron text-center">
+                <h1>{{ title }}
+                <br/>
+                <small>{{ mensagem }}</small></h1>
+                <p>Código do erro: {{ codigo }}</p>
             </div>
         </main>
 
         {% include 'CineviAdminBundle::footer.html.twig' %}
-
-        {% block javascripts %}
-            <script src="{{ asset('vendor/jquery/js/jquery.min.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
-        {% endblock %}
     </body>
 </html>

@@ -1,12 +1,11 @@
 {% extends 'CineviAdminBundle::base.html.twig' %}
 
+{% block navbar %}{% endblock %}
+
 {% block body %}
 
-    <h1>{{ output }}</h1>
-
-    <ul>
-        <li><a href="{{ path('get_equipamentos') }}">Equipamentos</a></li>
-        <li><a href="{{ path('get_projetos') }}">Projetos</a></li>
-    </ul>
-
+    <div class="text-center">
+        <h1 class="page-header text-primary">Página em Construção</h1>
+        <p class="lead text-muted">{{ mensagem }}</h1>
+    </div>
 {% endblock %}

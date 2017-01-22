@@ -1,1 +1,5 @@
-<h1>Erro 404</h1>
+{% extends 'TwigBundle:Exception:error-base.html.twig' %}
+
+{% set title = 'Não encontrado' %}
+{% set codigo = '404' %}
+{% set mensagem = 'A página que você está procurando não foi encontrada.' %}

@@ -16,7 +16,6 @@
     </div>
     {% if is_granted('ROLE_SUPER_ADMIN') %}
         {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
-            {{ form_rest(deleteForm) }}
             {{ form_row(deleteForm.save) }}
         {{ form_end(deleteForm) }}
     {% endif %}

@@ -1,1 +1,5 @@
-<h1>Erro X</h1>
+{% extends 'TwigBundle:Exception:error-base.html.twig' %}
+
+{% set title = 'Erro 400' %}
+{% set codigo = '400' %}
+{% set mensagem = 'Algum erro não indentificado aconteceu. Tente voltar ou recarregar a página.' %}

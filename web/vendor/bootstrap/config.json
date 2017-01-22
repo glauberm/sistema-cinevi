@@ -92,7 +92,7 @@
     "@input-border-radius": "@border-radius-base",
     "@input-border-radius-large": "@border-radius-large",
     "@input-border-radius-small": "@border-radius-small",
-    "@input-border-focus": "#FEBF07",
+    "@input-border-focus": "#DECC3A",
     "@input-color-placeholder": "#999",
     "@input-height-base": "(@line-height-computed + (@padding-base-vertical * 2) + 2)",
     "@input-height-large": "(ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 2) + 2)",
@@ -211,7 +211,7 @@
     "@pager-active-bg": "@pagination-active-bg",
     "@pager-active-color": "@pagination-active-color",
     "@pager-disabled-color": "@pagination-disabled-color",
-    "@jumbotron-padding": "20px",
+    "@jumbotron-padding": "15px",
     "@jumbotron-color": "inherit",
     "@jumbotron-bg": "transparent",
     "@jumbotron-heading-color": "@brand-primary",
@@ -421,5 +421,5 @@
     "collapse.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=2799fe236731ab386d87e8a625670de2"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=b8bc41427fe88e7ee700801e02c4143a"
 }
