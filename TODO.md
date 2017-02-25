@@ -1,6 +1,6 @@
 # TODO
 - Substituir chosen por select2
-- Checar spool e emails no servidor
+- Checar spool e emails no servidor (mudar para /home/cinem752/spool)
 - Modal de créditos
 
 ## CÓPIAS FINAIS
@@ -9,9 +9,6 @@
 
 ## CRUD
 - Checar se dia atual é startDate ou endDate de alguma reserva e enviar email.
-
-## GERAL
-- Recriar home
 
 ## GERAL
 - Ações em múltiplos itens de uma vez
@@ -24,3 +21,4 @@
 ## GRÁFICOS
 - Quantidade de diretores, produtores, etc. em projetos
 - Quantidade de equipamentos por categoria
+- Quantidade de projetos/mês

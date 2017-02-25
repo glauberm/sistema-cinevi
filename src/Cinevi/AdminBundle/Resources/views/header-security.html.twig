@@ -1,16 +1,16 @@
-<div class="container">
-    <header class="header header-security text-center">
+<header class="header-security text-center">
+    <div class="container">
 
-        <h3 class="page-header text-muted">
-            <a href="{{ path('index') }}" class="page-header text-muted">
-                {% include 'CineviAdminBundle:SVG:logo.html.twig' %}
+        <h3 class="text-muted">
+            <a href="{{ path('index') }}" class="page-header">
+                <div class="logo page-header">
+                    {% include 'CineviAdminBundle:SVG:logo.html.twig' %}
+                </div>
             </a>
         </h3>
 
         {#<div class="text-center">
             <a href="#">Painel de Controle</a>
         </div>#}
-
-    </header>
-    <br/>
-</div>
+    </div>
+</header>
