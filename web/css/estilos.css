@@ -69,10 +69,15 @@ br.display-xs {
     background: -ms-linear-gradient(left, #f5e13a 0%,#EAD741 100%);
     background: linear-gradient(to right, #f5e13a 0%,#EAD741 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5e13a', endColorstr='#EAD741',GradientType=1 );
-    padding-bottom: 10px;
+    padding: 10px 0;
 }
 
-.header svg  {
+.header .logo {
+    position: relative;
+    top: 2px;
+}
+
+.header .logo svg  {
     width: 175px;
     height: 34px;
 }
@@ -83,18 +88,18 @@ br.display-xs {
 }
 
 /* MENU TOPO */
-.menu-topo {
-    margin-top: 18px;
-}
-
 .menu-topo span {
-    margin-left: 5px
+    margin-left: 2px;
 }
 
 .menu-topo svg {
     width: 26px;
     height: 24px;
     margin-bottom: -7px;
+}
+
+.menu-topo .nav > li > a {
+    padding: 10px;
 }
 
 .menu-topo li a svg g,
@@ -141,7 +146,7 @@ br.display-xs {
 
 .menu-topo .active svg g,
 .menu-topo .active svg path {
-    fill: #DECC3A;
+    fill: #EAD740;
 }
 
 .menu-topo .active a:hover svg g,
@@ -150,7 +155,7 @@ br.display-xs {
 .menu-topo .active a:focus svg path,
 .menu-topo .active a:active svg g,
 .menu-topo .active a:active svg path {
-    fill: #DECC3A;
+    fill: #EAD740;
 }
 
 /* PANEL MENU */
@@ -188,7 +193,7 @@ br.display-xs {
 
 .panel-main .panel-collapse .active svg g,
 .panel-main .panel-collapse .active svg path {
-    fill: #DECC3A;
+    fill: #EAD740;
 }
 
 /* NAVBAR */
