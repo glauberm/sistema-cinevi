@@ -46,8 +46,7 @@ class EquipamentoType extends AbstractType
                 'invalid_message' => 'Este valor não é válido.',
                 'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
-                    'class' => 'chosen-select',
-                    'data-placeholder' => 'Selecione uma opção...',
+                    'class' => 'select2-select',
                 )
             ))
             ->add('manutencao', ChoiceType::class, array(

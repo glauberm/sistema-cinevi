@@ -40,8 +40,7 @@ class CalendarEventType extends AbstractType
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
-                    'class' => 'chosen-select',
-                    'data-placeholder' => 'Selecione uma opção...',
+                    'class' => 'select2-select',
                 )
             ))
             ->add('equipamentos', EntityType::class, array(
@@ -53,8 +52,7 @@ class CalendarEventType extends AbstractType
                 'placeholder' => 'Selecione uma opção...',
                 'multiple' => true,
                 'attr' => array(
-                    'class' => 'chosen-select',
-                    'data-placeholder' => 'Selecione opções...',
+                    'class' => 'select2-select',
                 )
             ))
             ->add('projeto', EntityType::class, array(
@@ -65,8 +63,7 @@ class CalendarEventType extends AbstractType
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
-                    'class' => 'chosen-select',
-                    'data-placeholder' => 'Selecione uma opção...',
+                    'class' => 'select2-select',
                 )
             ))
             ->add('startDate', DateTimeType::class, array(

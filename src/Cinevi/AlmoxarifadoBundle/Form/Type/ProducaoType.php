@@ -33,8 +33,7 @@ class ProducaoType extends AbstractType
                 'placeholder' => 'Selecione uma opção...',
                 'multiple' => true,
                 'attr' => array(
-                    'data-placeholder' => 'Selecione opções...',
-                    'class' => 'chosen-select',
+                    'class' => 'select2-select',
                 )
             ))
             ->add('breveCurriculo', TextareaType::class, array(

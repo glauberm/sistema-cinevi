@@ -34,8 +34,7 @@ class SomType extends AbstractType
                 'placeholder' => 'Selecione uma opção...',
                 'multiple' => true,
                 'attr' => array(
-                    'class' => 'chosen-select',
-                    'data-placeholder' => 'Selecione opções...',
+                    'class' => 'select2-select',
                 )
             ))
             ->add('breveCurriculo', TextareaType::class, array(

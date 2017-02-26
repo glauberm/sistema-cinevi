@@ -55,8 +55,7 @@ class ProjetoType extends AbstractType
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
-                    'data-placeholder' => 'Selecione uma opção...',
-                    'class' => 'chosen-select',
+                    'class' => 'select2-select',
                 )
             ))
             ->add('modalidade', ChoiceType::class, array(
@@ -71,8 +70,7 @@ class ProjetoType extends AbstractType
                 'choices_as_values' => true,
                 'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
-                    'data-placeholder' => 'Selecione uma opção...',
-                    'class' => 'chosen-select',
+                    'class' => 'select2-select',
                 )
             ))
             ->add('professor', EntityType::class, array(
@@ -83,8 +81,7 @@ class ProjetoType extends AbstractType
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
-                    'data-placeholder' => 'Selecione uma opção...',
-                    'class' => 'chosen-select',
+                    'class' => 'select2-select',
                 )
             ))
             ->add('captacao', ChoiceType::class, array(
@@ -97,8 +94,7 @@ class ProjetoType extends AbstractType
                 'choices_as_values' => true,
                 'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
-                    'data-placeholder' => 'Selecione uma opção...',
-                    'class' => 'chosen-select',
+                    'class' => 'select2-select',
                 )
             ))
             ->add('detalhesCaptacao', TextareaType::class, array(

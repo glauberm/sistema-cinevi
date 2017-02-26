@@ -3,6 +3,11 @@
 - Checar spool e emails no servidor (mudar para /home/cinem752/spool)
 - Modal de créditos
 
+## EQUIPAMENTOS
+- Visualização de mostrar e editar
+- Formulário e validações
+- Checagem geral
+
 ## CÓPIAS FINAIS
 - Criar submenus e colocar chosen+ no submenu da cópia final
 - Além das fotos still, link (com possível senha) do filme

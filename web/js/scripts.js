@@ -1,7 +1,6 @@
-// CHOSEN
-$(".chosen-select").chosen({
-    no_results_text: "Não encontrado",
-    width: "100%"
+// SELECT2
+$(".select2-select").select2({
+    theme: "bootstrap"
 });
 
 // DATETIMEPICKER
