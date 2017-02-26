@@ -1,7 +1,4 @@
 Cinevi\AlmoxarifadoBundle\Entity\Equipamento:
-    constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: codigo
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: patrimonio
     properties:
         categoria:
             - NotBlank:

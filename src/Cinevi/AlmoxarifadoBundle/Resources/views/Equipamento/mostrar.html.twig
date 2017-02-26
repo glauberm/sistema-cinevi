@@ -37,8 +37,8 @@
     <div class="col-sm-6"><dt>Nº de Série</dt><dd>{{ item.nSerie ? item.nSerie : 'Não informado' }}</dd></div>
 </div>
 <div class="row">
-    <div class="col-md-6"><dt>Acessórios</dt><dd>{{ item.acessorios ? item.acessorios : 'Não informado' }}</dd></div>
-    <div class="col-md-6"><dt>Observações</dt><dd>{{ item.obs ? item.obs : 'Não informado' }}</dd></div>
+    <div class="col-md-6"><dt>Acessórios</dt><dd class="inherit">{{ item.acessorios ? item.acessorios : 'Não informado' }}</dd></div>
+    <div class="col-md-6"><dt>Observações</dt><dd class="inherit">{{ item.obs ? item.obs : 'Não informado' }}</dd></div>
 </div>
 <dt>Em Manutenção?</dt><dd>{{ item.manutencao ? 'Sim' : 'Não' }}</dd>
 {% endblock %}

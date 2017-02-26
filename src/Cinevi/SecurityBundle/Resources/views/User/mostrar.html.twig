@@ -32,10 +32,10 @@
         <div class="col-sm-6 col-md-3"><dt>Confirmado?</dt><dd>{{ item.confirmado ? 'Sim' : 'Não' }}</dd>
         </div>
         <div class="col-sm-6 col-md-3"><dt>Nível de Permissão</dt><dd>
-            {% if 'ROLE_FUNCIONARIO' in item.roles %}
-                Funcionário
-            {% elseif 'ROLE_SUPER_ADMIN' in item.roles %}
+            {% if 'ROLE_SUPER_ADMIN' in item.roles %}
                 Administrador
+            {% elseif 'ROLE_FUNCIONARIO' in item.roles %}
+                Funcionário
             {% else %}
                 Usuário
             {% endif %}
