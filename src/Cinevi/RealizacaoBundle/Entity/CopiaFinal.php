@@ -23,6 +23,11 @@ class CopiaFinal
     protected $titulo;
 
     /**
+      * @ORM\Column(type="string")
+     **/
+    protected $sinopse;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
      **/
     protected $user;
@@ -156,4 +161,24 @@ class CopiaFinal
      * @ORM\OneToOne(targetEntity="Cinevi\ProducaoBundle\Entity\FichaTecnica", cascade={"persist","merge"})
      **/
     protected $fichaTecnica;
+
+    /**
+     * @ORM\Column(type="text")
+     **/
+    protected $elenco;
+
+    /**
+     * @ORM\Column(type="text")
+     **/
+    protected $outrasInformacoes;
+
+    /**
+     * @ORM\Column(type="text")
+     **/
+    protected $participacoes;
+
+    /**
+     * @ORM\Column(type="text")
+     **/
+    protected $premios;
 }

@@ -6,12 +6,12 @@ ancarebeca_fullcalendar:
 
 admin:
     resource: "@CineviAdminBundle/Resources/config/routing.yml"
-    prefix:   /
 
 security:
     resource: "@CineviSecurityBundle/Resources/config/routing.yml"
-    prefix:   /
 
 almoxarifado:
     resource: "@CineviAlmoxarifadoBundle/Resources/config/routing.yml"
-    prefix:   /almoxarifado
+
+realizacao:
+    resource: "@CineviRealizacaoBundle/Resources/config/routing.yml"

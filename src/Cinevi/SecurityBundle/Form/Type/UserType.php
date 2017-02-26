@@ -31,9 +31,6 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, array(
                 'label' => 'Email',
             ))
-            ->add('plainPassword', PasswordType::class, array(
-                'label' => 'Senha',
-            ))
             ->add('matricula', IntegerType::class, array(
                 'label' => 'Matrícula',
             ))

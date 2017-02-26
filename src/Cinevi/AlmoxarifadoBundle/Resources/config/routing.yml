@@ -1,7 +1,3 @@
-almoxarifado_index:
-    path:      /
-    defaults:  { _controller: CineviAlmoxarifadoBundle:Almoxarifado:index }
-
 equipamentos:
     type:     rest
     resource: Cinevi\AlmoxarifadoBundle\Controller\EquipamentoController

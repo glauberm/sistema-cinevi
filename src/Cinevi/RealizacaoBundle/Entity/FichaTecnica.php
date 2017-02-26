@@ -23,137 +23,129 @@ class CopiaFinal
     protected $direcao;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\AssistenciaDirecao", cascade={"all"})
      **/
-    protected $user;
+    protected $assistenciaDirecao;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Producao", cascade={"all"})
      **/
-    protected $realizacao;
+    protected $producao;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\AssistenciaProducao", cascade={"all"})
      **/
-    protected $professor;
+    protected $assistenciaProducao;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Roteiro", cascade={"all"})
      **/
-    protected $cromia;
+    protected $roteiro;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Argumento", cascade={"all"})
      **/
-    protected $proporcao;
+    protected $argumento;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Montagem", cascade={"all"})
      **/
-    protected $captacao;
+    protected $montagem;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\AssistenciaMontagem", cascade={"all"})
      **/
-    protected $formato;
+    protected $assistenciaMontagem;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Fotografia", cascade={"all"})
      **/
-    protected $formatoNativo;
+    protected $fotografia;
 
     /**
-     * @ORM\Column(type="string")
-     **/
-    protected $codec;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $container;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     **/
-    protected $taxaBits;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $velocidade;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $som;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $resolucaoAudio;
-
-    /**
-     * @ORM\Column(type="boolean")
-     **/
-    protected $dcp;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $suporteMatriz;
-
-    /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Camera", cascade={"all"})
      **/
     protected $camera;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Still", cascade={"all"})
      **/
-    protected $captacaoSom;
+    protected $still;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\AssistenciaFotografia", cascade={"all"})
      **/
-    protected $softwareEdicao;
+    protected $assistenciaFotografia;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Som", cascade={"all"})
      **/
-    protected $locacoes;
+    protected $som;
 
     /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\EdicaoSom", cascade={"all"})
      **/
-    protected $orcamento;
+    protected $edicaoSom;
 
     /**
-     * @ORM\Column(type="simple_array")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\TecnicoSom", cascade={"all"})
      **/
-    protected $fontesFinanciamento;
+    protected $tecnicoSom;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Musica", cascade={"all"})
      **/
-    protected $apoiadores;
+    protected $musica;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\AssistenciaSom", cascade={"all"})
      **/
-    protected $genero;
+    protected $assistenciaSom;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Arte", cascade={"all"})
      **/
-    protected $duracao;
+    protected $arte;
 
     /**
-     * @ORM\OneToOne(targetEntity="Cinevi\ProducaoBundle\Entity\MateriaisDivulgacao", cascade={"persist","merge"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\AssistenciaArte", cascade={"all"})
      **/
-    protected $materiaisDivulgacao;
+    protected $assistenciaArte;
 
     /**
-     * @ORM\OneToOne(targetEntity="Cinevi\ProducaoBundle\Entity\FichaTecnica", cascade={"persist","merge"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Figurino", cascade={"all"})
      **/
-    protected $fichaTecnica;
+    protected $figurino;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\AssistenciaFigurino", cascade={"all"})
+     **/
+    protected $assistenciaFigurino;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Eletricista", cascade={"all"})
+     **/
+    protected $eletricista;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Maquinista", cascade={"all"})
+     **/
+    protected $maquinista;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Logger", cascade={"all"})
+     **/
+    protected $logger;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Plato", cascade={"all"})
+     **/
+    protected $plato;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Continuidade", cascade={"all"})
+     **/
+    protected $continuidade;
+
+
 }

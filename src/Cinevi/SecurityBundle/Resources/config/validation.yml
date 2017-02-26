@@ -1,0 +1,23 @@
+Cinevi\SecurityBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email
+            message: 'Este email já está em uso.'
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username
+            message: 'Este nome de usuário já está em uso.'
+    properties:
+        username:
+            - NotBlank:
+                message: 'Por favor, informe o seu nome de usuário.'
+        email:
+            - NotBlank:
+                message: 'Por favor, informe o seu email.'
+            - Email:
+                message: 'Por favor, informe um endereço de email válido.'
+        matricula:
+            - NotBlank:
+                message: 'Por favor, informe a matrícula do usuário.'
+        telefone:
+            - NotBlank:
+                message: 'Por favor, informe o telefone do usuário.'

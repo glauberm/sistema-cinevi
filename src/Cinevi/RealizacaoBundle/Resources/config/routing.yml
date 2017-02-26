@@ -1,7 +1,3 @@
-realizacao_index:
-    path:      /
-    defaults:  { _controller: CineviRealizacaoBundle:Realizacao:index }
-
 projetos:
     type:     rest
     resource: Cinevi\RealizacaoBundle\Controller\ProjetoController
