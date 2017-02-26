@@ -47,12 +47,7 @@ class CalendarEvent extends BaseEvent
      * @ORM\Column(type="datetime")
      **/
     protected $endDate;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     **/
-    protected $aprovado;
-
+    
 
     public function __construct($title = null, \DateTime $start = null)
     {
@@ -90,31 +85,8 @@ class CalendarEvent extends BaseEvent
     public function setTitleValue()
     {
         if(!$this->getTitle()) {
-            $this->title = "#".date("Y").".".date("m").".".date("d").".".date("H").".".date("i").".".date("s")."-".substr(uniqid(rand(), true), 0, 3);
+            $this->title = "#".substr(uniqid(rand(), true), 0, 3)."-".date("s").".".date("i").".".date("H").".".date("d").".".date("m").".".date("Y");
         }
-    }
-
-    /**
-     * Set aprovado
-     *
-     * @param boolean $aprovado
-     * @return CalendarEvent
-     */
-    public function setAprovado($aprovado)
-    {
-        $this->aprovado = $aprovado;
-
-        return $this;
-    }
-
-    /**
-     * Get aprovado
-     *
-     * @return boolean
-     */
-    public function getAprovado()
-    {
-        return $this->aprovado;
     }
 
     /**

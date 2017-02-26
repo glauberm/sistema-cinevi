@@ -452,4 +452,27 @@ class Projeto
     {
         return $this->arte;
     }
+
+    /**
+     * Set professor
+     *
+     * @param \Cinevi\SecurityBundle\Entity\User $professor
+     * @return Projeto
+     */
+    public function setProfessor(\Cinevi\SecurityBundle\Entity\User $professor = null)
+    {
+        $this->professor = $professor;
+
+        return $this;
+    }
+
+    /**
+     * Get professor
+     *
+     * @return \Cinevi\SecurityBundle\Entity\User 
+     */
+    public function getProfessor()
+    {
+        return $this->professor;
+    }
 }

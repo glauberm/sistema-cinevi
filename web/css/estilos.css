@@ -69,7 +69,7 @@ br.display-xs {
     background: -ms-linear-gradient(left, #f5e13a 0%,#EAD741 100%);
     background: linear-gradient(to right, #f5e13a 0%,#EAD741 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5e13a', endColorstr='#EAD741',GradientType=1 );
-    padding: 10px 0;
+    padding: 12px 0 10px;
 }
 
 .header .logo {

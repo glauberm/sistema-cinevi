@@ -18,9 +18,34 @@ class Equipamento
     protected $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Categoria", cascade={"merge"})
+     **/
+    protected $categoria;
+
+    /**
+     * @ORM\Column(type="string")
+     **/
+    protected $codigo;
+
+    /**
      * @ORM\Column(type="string")
      **/
     protected $nome;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     **/
+    protected $especificacao;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     **/
+    protected $fabricante;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     **/
+    protected $modelo;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -28,29 +53,24 @@ class Equipamento
     protected $patrimonio;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Categoria", cascade={"merge"})
+     * @ORM\Column(type="string", nullable=true)
      **/
-    protected $categoria;
+    protected $nSerie;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     **/
+    protected $acessorios;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     **/
+    protected $obs;
 
     /**
      * @ORM\Column(type="boolean")
      **/
     protected $manutencao;
-
-    /**
-     * @ORM\Column(type="boolean")
-     **/
-    protected $uso;
-
-    /**
-     * @ORM\Column(type="boolean")
-     **/
-    protected $consumivel;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     **/
-    protected $obs;
 
 
 
@@ -62,6 +82,29 @@ class Equipamento
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set codigo
+     *
+     * @param string $codigo
+     * @return Equipamento
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+
+        return $this;
+    }
+
+    /**
+     * Get codigo
+     *
+     * @return string
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
     }
 
     /**
@@ -88,6 +131,75 @@ class Equipamento
     }
 
     /**
+     * Set especificacao
+     *
+     * @param string $especificacao
+     * @return Equipamento
+     */
+    public function setEspecificacao($especificacao)
+    {
+        $this->especificacao = $especificacao;
+
+        return $this;
+    }
+
+    /**
+     * Get especificacao
+     *
+     * @return string
+     */
+    public function getEspecificacao()
+    {
+        return $this->especificacao;
+    }
+
+    /**
+     * Set fabricante
+     *
+     * @param string $fabricante
+     * @return Equipamento
+     */
+    public function setFabricante($fabricante)
+    {
+        $this->fabricante = $fabricante;
+
+        return $this;
+    }
+
+    /**
+     * Get fabricante
+     *
+     * @return string
+     */
+    public function getFabricante()
+    {
+        return $this->fabricante;
+    }
+
+    /**
+     * Set modelo
+     *
+     * @param string $modelo
+     * @return Equipamento
+     */
+    public function setModelo($modelo)
+    {
+        $this->modelo = $modelo;
+
+        return $this;
+    }
+
+    /**
+     * Get modelo
+     *
+     * @return string
+     */
+    public function getModelo()
+    {
+        return $this->modelo;
+    }
+
+    /**
      * Set patrimonio
      *
      * @param integer $patrimonio
@@ -111,6 +223,75 @@ class Equipamento
     }
 
     /**
+     * Set nSerie
+     *
+     * @param string $nSerie
+     * @return Equipamento
+     */
+    public function setNSerie($nSerie)
+    {
+        $this->nSerie = $nSerie;
+
+        return $this;
+    }
+
+    /**
+     * Get nSerie
+     *
+     * @return string
+     */
+    public function getNSerie()
+    {
+        return $this->nSerie;
+    }
+
+    /**
+     * Set acessorios
+     *
+     * @param string $acessorios
+     * @return Equipamento
+     */
+    public function setAcessorios($acessorios)
+    {
+        $this->acessorios = $acessorios;
+
+        return $this;
+    }
+
+    /**
+     * Get acessorios
+     *
+     * @return string
+     */
+    public function getAcessorios()
+    {
+        return $this->acessorios;
+    }
+
+    /**
+     * Set obs
+     *
+     * @param string $obs
+     * @return Equipamento
+     */
+    public function setObs($obs)
+    {
+        $this->obs = $obs;
+
+        return $this;
+    }
+
+    /**
+     * Get obs
+     *
+     * @return string
+     */
+    public function getObs()
+    {
+        return $this->obs;
+    }
+
+    /**
      * Set manutencao
      *
      * @param boolean $manutencao
@@ -131,75 +312,6 @@ class Equipamento
     public function getManutencao()
     {
         return $this->manutencao;
-    }
-
-    /**
-     * Set uso
-     *
-     * @param boolean $uso
-     * @return Equipamento
-     */
-    public function setUso($uso)
-    {
-        $this->uso = $uso;
-
-        return $this;
-    }
-
-    /**
-     * Get uso
-     *
-     * @return boolean
-     */
-    public function getUso()
-    {
-        return $this->uso;
-    }
-
-    /**
-     * Set consumivel
-     *
-     * @param boolean $consumivel
-     * @return Equipamento
-     */
-    public function setConsumivel($consumivel)
-    {
-        $this->consumivel = $consumivel;
-
-        return $this;
-    }
-
-    /**
-     * Get consumivel
-     *
-     * @return boolean
-     */
-    public function getConsumivel()
-    {
-        return $this->consumivel;
-    }
-
-    /**
-     * Set obs
-     *
-     * @param integer $obs
-     * @return Equipamento
-     */
-    public function setObs($obs)
-    {
-        $this->obs = $obs;
-
-        return $this;
-    }
-
-    /**
-     * Get obs
-     *
-     * @return integer
-     */
-    public function getObs()
-    {
-        return $this->obs;
     }
 
     /**

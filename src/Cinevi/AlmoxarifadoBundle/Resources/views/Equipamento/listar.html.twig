@@ -8,8 +8,6 @@
     <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.nome') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Categoria', 'c.nome') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Manutenção', 'item.manutencao') }}</th>
-    <th>{{ knp_pagination_sortable(pagination, 'Uso', 'item.uso') }}</th>
-    <th>{{ knp_pagination_sortable(pagination, 'Consumível', 'item.consumivel') }}</th>
 {% endblock %}
 
 {% block tbody %}
@@ -28,6 +26,4 @@
         {% endif %}
     </td>
     <td>{{ item.manutencao ? 'Sim' : 'Não' }}</td>
-    <td>{{ item.uso ? 'Sim' : 'Não' }}</td>
-    <td>{{ item.consumivel ? 'Sim' : 'Não' }}</td>
 {% endblock %}
