@@ -1,8 +1,13 @@
-# RESTful CRUD Symfony application
-A very minimal RESTful CRUD Symfony application to build upon.
+# Sistema do Departamento de Cinema e Vídeo da Universidade Federal Fluminense
+- Projetos
+- Categorias de Equipamentos
+- Equipamentos
+- Reservas de Equipamentos, com notificações por email via CRON
+- Cópias Finais de Filmes
 
-Features:
-- REST with FOSRestBundle
-- User management with FOSUserBundle
-- Permissions with voters
-- Symfony LTS (2.8)
+## Tecnologias utilizadas
+- Symfony
+- FOSUserBundle (Gerenciamento de usuários)
+- FOSRestBundle (REST)
+- KnpPaginatorBundle (Paginação)
+- FullCalendar (Calendário de reservas)

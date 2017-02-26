@@ -1,8 +1,20 @@
 Cinevi\AlmoxarifadoBundle\Entity\Equipamento:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: codigo
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: patrimonio
     properties:
+        categoria:
+            - NotBlank:
+                message: 'Por favor, informe a categoria do equipamento.'
+        codigo:
+            - NotBlank:
+                message: 'Por favor, informe o código do equipamento.'
         nome:
             - NotBlank:
-                message: 'Por favor, informe um nome para o equipamento.'
+                message: 'Por favor, informe o nome do equipamento.'
+        manutencao:
+            - NotBlank:
+                message: 'Por favor, informe se o equipamento está ou não em manutenção.'
 
 Cinevi\AlmoxarifadoBundle\Entity\Projeto:
     properties:

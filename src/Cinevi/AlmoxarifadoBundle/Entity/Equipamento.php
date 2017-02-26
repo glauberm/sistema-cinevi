@@ -48,7 +48,7 @@ class Equipamento
     protected $modelo;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true, unique=true)
      **/
     protected $patrimonio;
 
@@ -72,12 +72,12 @@ class Equipamento
      **/
     protected $manutencao;
 
-
+    
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -100,7 +100,7 @@ class Equipamento
     /**
      * Get codigo
      *
-     * @return string
+     * @return string 
      */
     public function getCodigo()
     {
@@ -123,7 +123,7 @@ class Equipamento
     /**
      * Get nome
      *
-     * @return string
+     * @return string 
      */
     public function getNome()
     {
@@ -146,7 +146,7 @@ class Equipamento
     /**
      * Get especificacao
      *
-     * @return string
+     * @return string 
      */
     public function getEspecificacao()
     {
@@ -169,7 +169,7 @@ class Equipamento
     /**
      * Get fabricante
      *
-     * @return string
+     * @return string 
      */
     public function getFabricante()
     {
@@ -192,7 +192,7 @@ class Equipamento
     /**
      * Get modelo
      *
-     * @return string
+     * @return string 
      */
     public function getModelo()
     {
@@ -202,7 +202,7 @@ class Equipamento
     /**
      * Set patrimonio
      *
-     * @param integer $patrimonio
+     * @param string $patrimonio
      * @return Equipamento
      */
     public function setPatrimonio($patrimonio)
@@ -215,7 +215,7 @@ class Equipamento
     /**
      * Get patrimonio
      *
-     * @return integer
+     * @return string 
      */
     public function getPatrimonio()
     {
@@ -238,7 +238,7 @@ class Equipamento
     /**
      * Get nSerie
      *
-     * @return string
+     * @return string 
      */
     public function getNSerie()
     {
@@ -261,7 +261,7 @@ class Equipamento
     /**
      * Get acessorios
      *
-     * @return string
+     * @return string 
      */
     public function getAcessorios()
     {
@@ -284,7 +284,7 @@ class Equipamento
     /**
      * Get obs
      *
-     * @return string
+     * @return string 
      */
     public function getObs()
     {
@@ -307,7 +307,7 @@ class Equipamento
     /**
      * Get manutencao
      *
-     * @return boolean
+     * @return boolean 
      */
     public function getManutencao()
     {
@@ -330,7 +330,7 @@ class Equipamento
     /**
      * Get categoria
      *
-     * @return \Cinevi\AlmoxarifadoBundle\Entity\Categoria
+     * @return \Cinevi\AlmoxarifadoBundle\Entity\Categoria 
      */
     public function getCategoria()
     {

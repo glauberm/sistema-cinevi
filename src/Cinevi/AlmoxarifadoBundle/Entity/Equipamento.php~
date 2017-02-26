@@ -30,12 +30,7 @@ class Equipamento
     /**
      * @ORM\Column(type="string")
      **/
-    protected $item;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     **/
-    protected $fabricante;
+    protected $nome;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -45,10 +40,15 @@ class Equipamento
     /**
      * @ORM\Column(type="string", nullable=true)
      **/
+    protected $fabricante;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     **/
     protected $modelo;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true, unique=true)
      **/
     protected $patrimonio;
 

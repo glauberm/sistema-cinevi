@@ -1,7 +1,5 @@
 # TODO
-- Substituir chosen por select2
 - Checar spool e emails no servidor (mudar para /home/cinem752/spool)
-- Modal de créditos
 
 ## EQUIPAMENTOS
 - Visualização de mostrar e editar

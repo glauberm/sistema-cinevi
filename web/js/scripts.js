@@ -6,13 +6,13 @@ $(".select2-select").select2({
 // DATETIMEPICKER
 $(".datepicker").datetimepicker({
     format: "DD/MM/YYYY"
-})
+});
 $(".timepicker").datetimepicker({
     format: "HH:mm"
-})
+});
 $(".date-timepicker").datetimepicker({
     format: "DD/MM/YYYY HH:mm"
-})
+});
 
 // AUTOSIZE
 autosize($('textarea.form-control'));
