@@ -1,0 +1,49 @@
+{% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
+
+{% set title = item.nome %}
+{% set routeAtual = path('get_projeto', { 'id': item.id }) %}
+{% set routeListar = path('get_projetos') %}
+{% set routeEditar = path('edit_projeto', { 'id': item.id }) %}
+{% set routeAdicionar = path('new_projeto') %}
+
+{% block maisActionsButton %}
+    {% if is_granted('ROLE_FUNCIONARIO') %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block maisBotoes %}
+    {% if is_granted('ROLE_FUNCIONARIO') %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block dtdd %}
+
+    <div class="row">
+        <div class="col-sm-4"><dt>Nome</dt><dd>{{ item.nome }}</dd></div>
+        <div class="col-sm-4"><dt>Usuário</dt><dd><a href="{{ path('get_user', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
+        <div class="col-sm-4"><dt>Modalidade</dt><dd>{{ item.modalidade }}</dd></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4"><dt>Professor(a)</dt><dd>{{ item.professor }}</dd></div>
+        <div class="col-sm-4"><dt>Gênero</dt><dd>{{ item.genero }}</dd></div>
+        <div class="col-sm-4"><dt>Locação</dt><dd>{{ item.locacao }}</dd></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4"><dt>Captação</dt><dd>{{ item.captacao }}</dd></div>
+        <div class="col-sm-8"><dt>Detalhes da Captação</dt><dd class="inherit">{{ item.detalhesCaptacao ? item.detalhesCaptacao : 'Não Informado'}}</dd></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4"><dt>Pré-produção</dt><dd>{{ item.preProducao|date('d/m/Y') }}</dd></div>
+        <div class="col-sm-4"><dt>Produção</dt><dd>{{ item.dataProducao|date('d/m/Y') }}</div>
+        <div class="col-sm-4"><dt>Pós-produção</dt><dd>{{ item.posProducao|date('d/m/Y') }}</div>
+    </div>
+
+    {% include 'CineviRealizacaoBundle:Direcao:item.html.twig' with {item: item.direcao} %}
+    {% include 'CineviRealizacaoBundle:Producao:item.html.twig' with {item: item.producao} %}
+    {% include 'CineviRealizacaoBundle:Fotografia:item.html.twig' with {item: item.fotografia} %}
+    {% include 'CineviRealizacaoBundle:Som:item.html.twig' with {item: item.som} %}
+    {% include 'CineviRealizacaoBundle:Arte:item.html.twig' with {item: item.arte} %}
+
+{% endblock %}

@@ -215,7 +215,6 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
      */
     public function putAction(Request $request, $id)
     {
-        //exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($request->request->get('cinevialmoxarifadobundle_projeto')),"</pre>"));
         $em = $this->getDoctrine()->getManager();
 
         $obj = $this->getDoctrine()->getManager()

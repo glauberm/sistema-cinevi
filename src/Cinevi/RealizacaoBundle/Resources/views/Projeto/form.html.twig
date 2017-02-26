@@ -1,0 +1,26 @@
+{{ form_row(form.nome) }}
+<div class="row">
+    <div class="col-sm-4">{{ form_row(form.user) }}</div>
+    <div class="col-sm-4">{{ form_row(form.modalidade) }}</div>
+    <div class="col-sm-4">{{ form_row(form.professor) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-6">{{ form_row(form.genero) }}</div>
+    <div class="col-sm-6">{{ form_row(form.locacao) }}</div>
+
+</div>
+<div class="row">
+    <div class="col-sm-6">{{ form_row(form.captacao) }}</div>
+    <div class="col-sm-6">{{ form_row(form.detalhesCaptacao) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-4">{{ form_row(form.preProducao) }}</div>
+    <div class="col-sm-4">{{ form_row(form.dataProducao) }}</div>
+    <div class="col-sm-4">{{ form_row(form.posProducao) }}</div>
+</div>
+
+{% include 'CineviRealizacaoBundle:Direcao:form.html.twig' with {form: form.direcao} %}
+{% include 'CineviRealizacaoBundle:Producao:form.html.twig' with {form: form.producao} %}
+{% include 'CineviRealizacaoBundle:Fotografia:form.html.twig' with {form: form.fotografia} %}
+{% include 'CineviRealizacaoBundle:Som:form.html.twig' with {form: form.som} %}
+{% include 'CineviRealizacaoBundle:Arte:form.html.twig' with {form: form.arte} %}

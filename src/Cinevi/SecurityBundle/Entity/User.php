@@ -35,9 +35,14 @@ class User extends BaseUser
     protected $confirmado;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      **/
     protected $professor;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     **/
+    protected $breveCurriculo;
 
 
     public function __construct()
@@ -172,7 +177,7 @@ class User extends BaseUser
     /**
      * Get professor
      *
-     * @return integer 
+     * @return integer
      */
     public function getProfessor()
     {

@@ -73,7 +73,6 @@ class Equipamento
     protected $manutencao;
 
 
-
     /**
      * Get id
      *

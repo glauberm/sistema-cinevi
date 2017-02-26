@@ -10,10 +10,6 @@ categorias:
     type:     rest
     resource: Cinevi\AlmoxarifadoBundle\Controller\CategoriaController
 
-projetos:
-    type:     rest
-    resource: Cinevi\AlmoxarifadoBundle\Controller\ProjetoController
-
 calendar_events:
     type:     rest
     resource: Cinevi\AlmoxarifadoBundle\Controller\CalendarEventController

@@ -1,0 +1,92 @@
+Cinevi\RealizacaoBundle\Entity\Projeto:
+    properties:
+        user:
+            - NotBlank:
+                message: 'Por favor, informe o responsável pelo projeto.'
+        nome:
+            - NotBlank:
+                message: 'Por favor, informe o nome do projeto.'
+        modalidade:
+            - NotBlank:
+                message: 'Por favor, informe a modalidade do projeto.'
+        professor:
+            - NotBlank:
+                message: 'Por favor, informe o professor orientador do projeto.'
+        captacao:
+            - NotBlank:
+                message: 'Por favor, informe o tipo de captação do projeto.'
+        genero:
+            - NotBlank:
+                message: 'Por favor, informe o gênero do projeto.'
+        locacao:
+            - NotBlank:
+                message: 'Por favor, informe a locação do projeto.'
+        preProducao:
+            - NotBlank:
+                message: 'Por favor, informe a data de pré-produção do projeto.'
+            - Date:
+                message: 'Por favor, informe uma data válida.'
+        dataProducao:
+            - NotBlank:
+                message: 'Por favor, informe a data de produção do projeto.'
+            - Date:
+                message: 'Por favor, informe uma data válida.'
+        posProducao:
+            - NotBlank:
+                message: 'Por favor, informe a data de pós-produção do projeto.'
+            - Date:
+                message: 'Por favor, informe uma data válida.'
+        direcao:
+            - Valid: ~
+        producao:
+            - Valid: ~
+        fotografia:
+            - Valid: ~
+        som:
+            - Valid: ~
+        arte:
+            - Valid: ~
+
+Cinevi\RealizacaoBundle\Entity\Direcao:
+    properties:
+        users:
+            - Count:
+                min: 1
+                minMessage: 'Por favor, selecione pelo menos uma opção.'
+
+Cinevi\RealizacaoBundle\Entity\Producao:
+    properties:
+        users:
+            - Count:
+                min: 1
+                minMessage: 'Por favor, selecione pelo menos uma opção.'
+
+Cinevi\RealizacaoBundle\Entity\Fotografia:
+    properties:
+        users:
+            - Count:
+                min: 1
+                minMessage: 'Por favor, selecione pelo menos uma opção.'
+        disciplina:
+            - NotBlank:
+                message: 'Por favor, informe se já informou a disciplina Fotografia e Iluminação.'
+
+Cinevi\RealizacaoBundle\Entity\Som:
+    properties:
+        users:
+            - Count:
+                min: 1
+                minMessage: 'Por favor, selecione pelo menos uma opção.'
+        disciplina:
+            - NotBlank:
+                message: 'Por favor, informe se já informou a disciplina Técnica de Som em Cinema e Audiovisual.'
+
+Cinevi\RealizacaoBundle\Entity\Arte:
+    properties:
+        users:
+            - Count:
+                min: 1
+                minMessage: 'Por favor, selecione pelo menos uma opção.'
+        disciplina:
+            - NotBlank:
+                message: 'Por favor, informe se já informou a disciplina Direção de Arte.'
