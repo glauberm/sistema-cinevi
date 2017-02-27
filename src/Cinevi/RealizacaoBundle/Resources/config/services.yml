@@ -6,38 +6,40 @@ services:
         tags:
             - { name: security.voter }
 
-    cinevi.realizacao.projeto_type:
-        class: Cinevi\RealizacaoBundle\Form\Type\ProjetoType
+    cinevi.access.realizacao_copiaFinal:
+        class: Cinevi\RealizacaoBundle\Authorization\Voter\CopiaFinalVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    cinevi.access.realizacao_funcao:
+        class: Cinevi\RealizacaoBundle\Authorization\Voter\FuncaoVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    cinevi.realizacao.realizacao_type:
+        class: Cinevi\RealizacaoBundle\Form\Type\RealizacaoType
         arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker']
         tags:
             - { name: form.type, alias: view }
 
-    cinevi.realizacao.direcao_type:
-        class: Cinevi\RealizacaoBundle\Form\Type\DirecaoType
+    cinevi.realizacao.projeto_type:
+        class: Cinevi\RealizacaoBundle\Form\Type\ProjetoType
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: form.type, alias: view }
 
-    cinevi.realizacao.producao_type:
-        class: Cinevi\RealizacaoBundle\Form\Type\ProducaoType
+    cinevi.realizacao.copiaFinal_type:
+        class: Cinevi\RealizacaoBundle\Form\Type\CopiaFinalType
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: form.type, alias: view }
 
-    cinevi.realizacao.fotografia_type:
-        class: Cinevi\RealizacaoBundle\Form\Type\FotografiaType
-        arguments: ['@doctrine.orm.entity_manager']
-        tags:
-            - { name: form.type, alias: view }
-
-    cinevi.realizacao.som_type:
-        class: Cinevi\RealizacaoBundle\Form\Type\SomType
-        arguments: ['@doctrine.orm.entity_manager']
-        tags:
-            - { name: form.type, alias: view }
-
-    cinevi.realizacao.arte_type:
-        class: Cinevi\RealizacaoBundle\Form\Type\ArteType
+    cinevi.realizacao.equipe_type:
+        class: Cinevi\RealizacaoBundle\Form\Type\EquipeType
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: form.type, alias: view }

@@ -26,7 +26,13 @@ class CalendarEventType extends AbstractType
         $equipamentoQB->orderBy('e.nome', 'ASC');
 
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
-        $userQB->orderBy('u.username', 'ASC');
+        $userQB->orderBy('u.username', 'ASC')->andWhere('u.professor != 1');
+
+        foreach ($userQB->getQuery()->getResult() as $result) {
+            if (false === $this->authorizationChecker->isGranted('view', $result)) {
+                $userQB->andWhere('u.id != '.$result->getId());
+            }
+        }
 
         $projetoQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Projeto')->createQueryBuilder('p');
         $projetoQB->orderBy('p.nome', 'ASC');

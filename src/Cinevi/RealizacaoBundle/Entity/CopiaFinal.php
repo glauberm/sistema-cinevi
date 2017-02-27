@@ -18,137 +18,102 @@ class CopiaFinal
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
-     **/
-    protected $titulo;
-
-    /**
-      * @ORM\Column(type="string")
-     **/
-    protected $sinopse;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
-     **/
-    protected $user;
-
-    /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Realizacao", cascade={"all"})
      **/
     protected $realizacao;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
-     **/
-    protected $professor;
-
-    /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
     protected $cromia;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
     protected $proporcao;
 
     /**
-     * @ORM\Column(type="string")
-     **/
-    protected $captacao;
-
-    /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
     protected $formato;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
-    protected $formatoNativo;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $codec;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $container;
+    protected $formatoDigitalNativo;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      **/
+    protected $codec;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     **/
+    protected $container;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     **/
     protected $taxaBits;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
     protected $velocidade;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
     protected $som;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
-    protected $resolucaoAudio;
+    protected $resolucaoAudioDigital;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      **/
     protected $dcp;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
-    protected $suporteMatriz;
+    protected $suporteMatrizDigital;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
     protected $camera;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
     protected $captacaoSom;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="simple_array", nullable=true)
      **/
     protected $softwareEdicao;
 
     /**
-     * @ORM\Column(type="text")
-     **/
-    protected $locacoes;
-
-    /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
      **/
     protected $orcamento;
 
     /**
-     * @ORM\Column(type="simple_array")
+     * @ORM\Column(type="simple_array", nullable=true)
      **/
     protected $fontesFinanciamento;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      **/
     protected $apoiadores;
 
     /**
-     * @ORM\Column(type="string")
-     **/
-    protected $genero;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      **/
     protected $duracao;
 

@@ -5,3 +5,7 @@ projetos:
 copiaFinals:
     type:     rest
     resource: Cinevi\RealizacaoBundle\Controller\CopiaFinalController
+
+funcaos:
+    type:     rest
+    resource: Cinevi\RealizacaoBundle\Controller\FuncaoController

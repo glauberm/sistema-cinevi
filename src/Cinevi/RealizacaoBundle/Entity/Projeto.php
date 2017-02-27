@@ -18,44 +18,9 @@ class Projeto
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Realizacao", cascade={"all"})
      **/
-    protected $user;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $nome;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $modalidade;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
-     **/
-    protected $professor;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $captacao;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     **/
-    protected $detalhesCaptacao;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $genero;
-
-    /**
-     * @ORM\Column(type="string")
-     **/
-    protected $locacao;
+    protected $realizacao;
 
     /**
      * @ORM\Column(type="date")
@@ -112,5 +77,5 @@ class Projeto
      **/
     protected $disciplinaArte;
 
-    
+
 }

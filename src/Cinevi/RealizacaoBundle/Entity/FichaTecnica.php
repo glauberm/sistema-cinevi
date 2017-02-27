@@ -23,7 +23,7 @@ class FichaTecnica
     protected $equipes;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      **/
     protected $elenco;
 
@@ -41,5 +41,6 @@ class FichaTecnica
      * @ORM\Column(type="text", nullable=true)
      **/
     protected $premios;
+
 
 }

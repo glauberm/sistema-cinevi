@@ -35,9 +35,9 @@ Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent:
             - NotBlank:
                 message: 'Por favor, informe a data de início da reserva.'
             - Date:
-                message: 'Por favor, informe uma data válida.'
+                message: 'Por favor, informe uma data no formato DD/MM/AAAA.'
         endDate:
             - NotBlank:
                 message: 'Por favor, informe a data de fim da reserva.'
             - Date:
-                message: 'Por favor, informe uma data válida.'
+                message: 'Por favor, informe uma data no formato DD/MM/AAAA.'
