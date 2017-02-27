@@ -29,7 +29,7 @@ class CalendarEvent extends BaseEvent
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Projeto", cascade={"merge"})
+     * @ORM\ManyToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Projeto", cascade={"merge"})
      **/
     protected $projeto;
 
@@ -47,7 +47,7 @@ class CalendarEvent extends BaseEvent
      * @ORM\Column(type="datetime")
      **/
     protected $endDate;
-    
+
 
     public function __construct($title = null, \DateTime $start = null)
     {
@@ -164,10 +164,10 @@ class CalendarEvent extends BaseEvent
     /**
      * Set projeto
      *
-     * @param \Cinevi\AlmoxarifadoBundle\Entity\Projeto $projeto
+     * @param \Cinevi\RealizacaoBundle\Entity\Projeto $projeto
      * @return CalendarEvent
      */
-    public function setProjeto(\Cinevi\AlmoxarifadoBundle\Entity\Projeto $projeto = null)
+    public function setProjeto(\Cinevi\RealizacaoBundle\Entity\Projeto $projeto = null)
     {
         $this->projeto = $projeto;
 
@@ -177,7 +177,7 @@ class CalendarEvent extends BaseEvent
     /**
      * Get projeto
      *
-     * @return \Cinevi\AlmoxarifadoBundle\Entity\Projeto
+     * @return \Cinevi\RealizacaoBundle\Entity\Projeto
      */
     public function getProjeto()
     {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Cinevi\ProducaoBundle\Entity;
+namespace Cinevi\RealizacaoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="producao_copias_finais")
+ * @ORM\Table(name="realizacao_copias_finais")
  */
 class CopiaFinal
 {
@@ -153,32 +153,9 @@ class CopiaFinal
     protected $duracao;
 
     /**
-     * @ORM\OneToOne(targetEntity="Cinevi\ProducaoBundle\Entity\MateriaisDivulgacao", cascade={"persist","merge"})
-     **/
-    protected $materiaisDivulgacao;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Cinevi\ProducaoBundle\Entity\FichaTecnica", cascade={"persist","merge"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\FichaTecnica", cascade={"persist","merge"})
      **/
     protected $fichaTecnica;
 
-    /**
-     * @ORM\Column(type="text")
-     **/
-    protected $elenco;
 
-    /**
-     * @ORM\Column(type="text")
-     **/
-    protected $outrasInformacoes;
-
-    /**
-     * @ORM\Column(type="text")
-     **/
-    protected $participacoes;
-
-    /**
-     * @ORM\Column(type="text")
-     **/
-    protected $premios;
 }

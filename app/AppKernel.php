@@ -23,7 +23,7 @@ class AppKernel extends Kernel
             new Cinevi\SecurityBundle\CineviSecurityBundle(),
             new Cinevi\AdminBundle\CineviAdminBundle(),
             new Cinevi\AlmoxarifadoBundle\CineviAlmoxarifadoBundle(),
-            new Cinevi\AlmoxarifadoBundle\CineviRealizacaoBundle(),
+            new Cinevi\RealizacaoBundle\CineviRealizacaoBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
