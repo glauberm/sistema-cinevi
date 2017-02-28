@@ -8,9 +8,9 @@
 
 {% block maisBotoes %}
     {% block maisBotoesBlock %}{% endblock %}
-    {% if is_granted('ROLE_FUNCIONARIO') %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
         {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-nav' } }) }}
-            {{ form_row(deleteForm.save) }}
+            {{ form_row(deleteForm.remover) }}
         {{ form_end(deleteForm) }}
     {% endif %}
 {% endblock %}
@@ -22,7 +22,7 @@
     {{ form_start(editForm, {'attr': {'novalidate': 'novalidate'}}) }}
         {% block form %}{% endblock %}
         <br/>
-        {{ form_row(editForm.save) }}
+        <button type="submit" class="btn btn-lg btn-warning">Salvar</button>
     {{ form_end(editForm) }}
 
 {% endblock %}

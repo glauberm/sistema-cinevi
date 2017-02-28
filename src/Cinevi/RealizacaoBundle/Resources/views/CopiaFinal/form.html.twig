@@ -33,4 +33,7 @@
     <div class="col-sm-6">{{ form_row(form.dcp) }}</div>
 </div>
 
-{% include 'CineviRealizacaoBundle:FichaTecnica:form.html.twig' with {form: form.fichaTecnica} %}
+<fieldset>
+    <legend>Ficha Técnica</legend>
+    {% include 'CineviRealizacaoBundle:FichaTecnica:form.html.twig' with {form: form.fichaTecnica} %}
+</fieldset>

@@ -88,12 +88,6 @@ class EquipamentoType extends AbstractType
                 'expanded' => true,
                 'choices_as_values' => true,
             ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Salvar',
-                'attr' => array(
-                    'class' => 'btn btn-lg btn-warning',
-                ),
-            ))
         ;
     }
 

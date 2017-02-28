@@ -55,11 +55,10 @@ class RealizacaoType extends AbstractType
                     'class' => 'input-lg',
                 ),
             ))
-            ->add('sinopse', TextType::class, array(
+            ->add('sinopse', TextareaType::class, array(
                 'label' => 'Sinopse',
                 'attr' => array(
                     'maxLength' => 255,
-                    'class' => 'textarea-count',
                 ),
             ))
             ->add('modalidade', ChoiceType::class, array(

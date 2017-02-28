@@ -161,9 +161,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             // Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
             $this->get('session')->getFlashBag()->set('success', 'Criação de '.$this->label.' realizada com sucesso!');
 
-            $view = View::createRouteRedirect('get_'.$this->routeSuffix, array(
-                'id' => $obj->getId(),
-            ));
+            $view = View::createRouteRedirect('cget_'.$this->routeSuffix);
 
             $view->setStatusCode(201);
         } else {

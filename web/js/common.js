@@ -21,7 +21,7 @@ autosize($('textarea.form-control'));
 (function($, viewport){
     $(document).ready(function() {
         if(viewport.is('<sm')) {
-            $('#mainMenu').collapse('hide');
+            $('#admin-menu').collapse('hide');
             $('#main-navbar').collapse('hide');
         }
     });
@@ -30,12 +30,3 @@ autosize($('textarea.form-control'));
 // ASC E DESC
 $('.asc').append('<b class="caret caret-inverse"></b>');
 $('.desc').append('<b class="caret"></b>');
-
-// TEXTAREA COUNT
-$('.textarea-count').keyup(function () {
-    let max = 255;
-    let len = $(this).val().length;
-    if (len >= max) {
-        $('#char-num').addClass('text-danger');
-    }
-});

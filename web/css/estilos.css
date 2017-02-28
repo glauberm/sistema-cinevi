@@ -58,14 +58,10 @@ textarea.form-control {
     resize: vertical;
 }
 
-br.display-xs {
-    margin: 10px 0;
-}
-
 /* HEADER */
 .header {
     border-bottom: 1px solid #decc3a;
-    background: #f5e13a;
+    background: #EAD741;
     padding: 12px 0 10px;
 }
 
@@ -156,6 +152,10 @@ br.display-xs {
 }
 
 /* PANEL MENU */
+.panel-main {
+    margin-top: 60px;
+}
+
 .panel-main .panel-heading a {
     display: block;
 }
@@ -248,6 +248,9 @@ br.display-xs {
 .main-security .well {
     border-color: #decc3a;
     background: #EAD741;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 /* ERROR */
@@ -320,5 +323,9 @@ br.display-xs {
 {
     .menu-topo .nav > li > a {
         padding: 10px 15px;
+    }
+
+    .panel-main {
+        margin-top: 0;
     }
 }

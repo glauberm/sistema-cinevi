@@ -88,12 +88,6 @@ class CalendarEventType extends AbstractType
                     'class' => 'datepicker',
                 )
             ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Salvar',
-                'attr' => array(
-                    'class' => 'btn btn-lg btn-warning',
-                ),
-            ))
         ;
     }
 

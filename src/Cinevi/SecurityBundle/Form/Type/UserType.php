@@ -37,12 +37,6 @@ class UserType extends AbstractType
             ->add('telefone', IntegerType::class, array(
                 'label' => 'Telefone',
             ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Salvar',
-                'attr' => array(
-                    'class' => 'btn btn-lg btn-warning',
-                ),
-            ))
         ;
 
         if($this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {

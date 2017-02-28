@@ -271,12 +271,6 @@ class CopiaFinalType extends AbstractType
             ->add('fichaTecnica', FichaTecnicaType::class, array(
                 'label' => null,
             ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Salvar',
-                'attr' => array(
-                    'class' => 'btn btn-lg btn-warning',
-                ),
-            ))
         ;
     }
 

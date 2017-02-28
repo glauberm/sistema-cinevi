@@ -1,11 +1,17 @@
 {% extends 'CineviAdminBundle:Crud:base-editar.html.twig' %}
 
 {% set title = 'Editar ' ~ item.nome %}
-{% set routeAtual = path('edit_copiaFinal', { 'id': item.id }) %}
-{% set routeListar = path('get_copiaFinals') %}
+{% set routeAtual = path('edit_copia_final', { 'id': item.id }) %}
+{% set routeListar = path('get_copia_finals') %}
 
 {% block form %}
 
     {% include 'CineviRealizacaoBundle:CopiaFinal:form.html.twig' with {form: editForm} %}
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/to-many.js') }}"></script>
+    <script src="{{ asset('js/cinevi/realizacao/ficha-tecnica/equipe.js') }}"></script>
 {% endblock %}

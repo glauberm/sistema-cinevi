@@ -12,7 +12,7 @@ class DeleteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('save', SubmitType::class, array(
+            ->add('remover', SubmitType::class, array(
                 'label' => 'Remover',
                 'attr' => array(
                     'class' => 'btn btn-danger',

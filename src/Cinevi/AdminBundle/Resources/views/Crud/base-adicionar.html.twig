@@ -16,7 +16,7 @@
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
         {% block form %}{% endblock %}
         <br/>
-        {{ form_row(form.save) }}
+        <button type="submit" class="btn btn-lg btn-warning">Salvar</button>
     {{ form_end(form) }}
 
 {% endblock %}

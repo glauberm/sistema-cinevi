@@ -183,4 +183,27 @@ class User extends BaseUser
     {
         return $this->professor;
     }
+
+    /**
+     * Set breveCurriculo
+     *
+     * @param string $breveCurriculo
+     * @return User
+     */
+    public function setBreveCurriculo($breveCurriculo)
+    {
+        $this->breveCurriculo = $breveCurriculo;
+
+        return $this;
+    }
+
+    /**
+     * Get breveCurriculo
+     *
+     * @return string 
+     */
+    public function getBreveCurriculo()
+    {
+        return $this->breveCurriculo;
+    }
 }

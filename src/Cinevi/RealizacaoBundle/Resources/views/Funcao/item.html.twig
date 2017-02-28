@@ -1,2 +1,3 @@
 <dt>Nome</dt><dd>{{ item.nome }}</dd>
-<dt>Descrição</dt><dd class="inherit">{{ item.descricao }}</dd>
+
+<dt>Descrição</dt><dd class="inherit">{{ item.descricao ? item.descricao : 'Não Informada(o)' }}</dd>

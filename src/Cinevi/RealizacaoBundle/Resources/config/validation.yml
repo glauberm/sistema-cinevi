@@ -9,9 +9,9 @@ Cinevi\RealizacaoBundle\Entity\Realizacao:
         sinopse:
             - NotBlank:
                 message: 'Por favor, informe uma sinopse.'
-            - MaxLength:
-                size: 255
-                message: 'A sinopse não pode ter mais de 255 caracteres.'
+            - Length:
+                max: 255
+                maxMessage: 'A sinopse não pode ter mais de 255 caracteres.'
         modalidade:
             - NotBlank:
                 message: 'Por favor, informe a modalidade.'

@@ -9,3 +9,9 @@
     {% include 'CineviRealizacaoBundle:Projeto:form.html.twig' with {form: editForm} %}
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/to-many.js') }}"></script>
+    <script src="{{ asset('js/cinevi/realizacao/ficha-tecnica/equipe.js') }}"></script>
+{% endblock %}

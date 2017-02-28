@@ -19,12 +19,6 @@ class CategoriaType extends AbstractType
                     'class' => 'input-lg'
                 )
             ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Salvar',
-                'attr' => array(
-                    'class' => 'btn btn-lg btn-warning',
-                ),
-            ))
         ;
     }
 

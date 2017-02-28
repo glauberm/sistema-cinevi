@@ -1,0 +1,19 @@
+{% extends 'CineviAdminBundle:Crud:base-listar.html.twig' %}
+
+{% set title = 'Cópias Finais' %}
+{% set routeAtual = path('get_copia_finals') %}
+{% set routeAdicionar = path('new_copia_final') %}
+
+{% block thead %}
+    <th>{{ knp_pagination_sortable(pagination, 'Título', 'item.realizacao.titulo') }}</th>
+{% endblock %}
+
+{% block tbody %}
+    <td>
+        {% if is_granted('ROLE_FUNCIONARIO') %}
+            <a href="{{ path('edit_copia_final', { 'id': item.id }) }}">{{ item.realizacao.titulo }}</a>
+        {% else %}
+            <a href="{{ path('get_copia_final', { 'id': item.id }) }}">{{ item.realizacao.titulo }}</a>
+        {% endif %}
+    </td>
+{% endblock %}

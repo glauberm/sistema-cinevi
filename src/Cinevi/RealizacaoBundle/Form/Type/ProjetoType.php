@@ -143,12 +143,6 @@ class ProjetoType extends AbstractType
                 'choices_as_values' => true,
                 'expanded' => true,
             ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Salvar',
-                'attr' => array(
-                    'class' => 'btn btn-lg btn-warning',
-                ),
-            ))
         ;
 
         /*$userTransformer = new EntityToIdObjectTransformer($this->om, "CineviSecurityBundle:User");
