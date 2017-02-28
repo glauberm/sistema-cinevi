@@ -1,0 +1,53 @@
+{% include 'CineviRealizacaoBundle:Realizacao:item.html.twig' with {item: item.realizacao} %}
+
+<div class="row">
+    <div class="col-sm-4"><dt>Pré-produção</dt><dd>{{ item.preProducao|date('d/m/Y') }}</dd></div>
+    <div class="col-sm-4"><dt>Produção</dt><dd>{{ item.dataProducao|date('d/m/Y') }}</dd></div>
+    <div class="col-sm-4"><dt>Pós-produção</dt><dd>{{ item.posProducao|date('d/m/Y') }}</dd></div>
+</div>
+
+<dt>Direção</dt>
+{% for user in item.direcao %}
+    <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+{% endfor %}
+
+<dt>Produção</dt>
+{% for user in item.producao %}
+    <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+{% endfor %}
+
+<div class="row">
+    <div class="col-sm-8">
+        <dt>Direção de Fotografia</dt>
+        {% for user in item.fotografia %}
+            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+        {% endfor %}
+    </div>
+    <div class="col-sm-4">
+        <dt>Já cursou(aram) a disciplina de Fotografia e Iluminação?</dt><dd>{{ item.disciplinaFotografia ? 'Sim' : 'Não' }}</dd>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8">
+        <dt>Direção de Som</dt>
+        {% for user in item.som %}
+            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+        {% endfor %}
+    </div>
+    <div class="col-sm-4">
+        <dt>Já cursou(aram) a disciplina de Som e Iluminação?</dt><dd>{{ item.disciplinaSom ? 'Sim' : 'Não' }}</dd>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8">
+        <dt>Direção de Arte</dt>
+        {% for user in item.arte %}
+            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+        {% endfor %}
+    </div>
+    <div class="col-sm-4">
+        <dt>Já cursou(aram) a disciplina de Arte e Iluminação?</dt><dd>{{ item.disciplinaArte ? 'Sim' : 'Não' }}</dd>
+    </div>
+</div>

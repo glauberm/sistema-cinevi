@@ -1,10 +1,10 @@
 {% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
 
 {% set title = item.nome %}
-{% set routeAtual = path('get_projeto', { 'id': item.id }) %}
-{% set routeListar = path('get_projetos') %}
-{% set routeEditar = path('edit_projeto', { 'id': item.id }) %}
-{% set routeAdicionar = path('new_projeto') %}
+{% set routeAtual = path('get_funcao', { 'id': item.id }) %}
+{% set routeListar = path('get_funcaos') %}
+{% set routeEditar = path('edit_funcao', { 'id': item.id }) %}
+{% set routeAdicionar = path('new_funcao') %}
 
 {% block maisActionsButton %}
     {% if is_granted('ROLE_FUNCIONARIO') %}
@@ -20,6 +20,6 @@
 
 {% block dtdd %}
 
-    {% include 'CineviRealizacaoBundle:Projeto:item.html.twig' with {item: item.direcao} %}
+    {% include 'CineviRealizacaoBundle:Funcao:item.html.twig' with {item: item.direcao} %}
 
 {% endblock %}

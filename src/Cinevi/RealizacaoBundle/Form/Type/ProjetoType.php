@@ -93,7 +93,7 @@ class ProjetoType extends AbstractType
                 )
             ))
             ->add('disciplinaFotografia', ChoiceType::class, array(
-                'label' => ' Já cursou a disciplina de Fotografia e Iluminação?',
+                'label' => ' Já cursou(aram) a disciplina de Fotografia e Iluminação?',
                 'choices' => array(
                     'Sim'   => '1',
                     'Não'   => '0',
@@ -114,7 +114,7 @@ class ProjetoType extends AbstractType
                 )
             ))
             ->add('disciplinaSom', ChoiceType::class, array(
-                'label' => ' Já cursou a disciplina de Técnica de Som em Cinema e Audiovisual?',
+                'label' => ' Já cursou(aram) a disciplina de Técnica de Som em Cinema e Audiovisual?',
                 'choices' => array(
                     'Sim'   => '1',
                     'Não'   => '0',
@@ -135,7 +135,7 @@ class ProjetoType extends AbstractType
                 )
             ))
             ->add('disciplinaArte', ChoiceType::class, array(
-                'label' => ' Já cursou a disciplina de Direção de Arte?',
+                'label' => ' Já cursou(aram) a disciplina de Direção de Arte?',
                 'choices' => array(
                     'Sim' => '1',
                     'Não' => '0',

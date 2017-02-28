@@ -24,11 +24,11 @@ class CopiaFinalType extends AbstractType
                 'choices' => array(
                     'P&B' => 'P&B',
                     'Cor' => 'Cor',
-                    'Ambas' => 'Ambas',
-                    'Outra' => 'Outra',
+                    'Outra(s)' => 'Outra(s)',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione uma opção...',
+                'placeholder' => 'Selecione opções...',
+                'multiple' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -193,7 +193,8 @@ class CopiaFinalType extends AbstractType
                     'Outro' => 'Outro',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione uma opção...',
+                'placeholder' => 'Selecione opções...',
+                'multiple' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -209,7 +210,8 @@ class CopiaFinalType extends AbstractType
                     'Outra' => 'Outra',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione uma opção...',
+                'placeholder' => 'Selecione opções...',
+                'multiple' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -230,7 +232,8 @@ class CopiaFinalType extends AbstractType
                     'Outro(s)' => 'Outro(s)',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione uma opção...',
+                'placeholder' => 'Selecione opções...',
+                'multiple' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),

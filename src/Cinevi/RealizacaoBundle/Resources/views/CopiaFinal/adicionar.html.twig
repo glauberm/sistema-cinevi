@@ -1,0 +1,11 @@
+{% extends 'CineviAdminBundle:Crud:base-adicionar.html.twig' %}
+
+{% set title = 'Adicionar Funcao' %}
+{% set routeAtual = path('new_copiaFinal') %}
+{% set routeListar = path('get_copiaFinals') %}
+
+{% block form %}
+
+    {% include 'CineviRealizacaoBundle:CopiaFinal:form.html.twig' with {form: form} %}
+
+{% endblock %}

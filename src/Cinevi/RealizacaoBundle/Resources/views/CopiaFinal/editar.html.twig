@@ -1,0 +1,11 @@
+{% extends 'CineviAdminBundle:Crud:base-editar.html.twig' %}
+
+{% set title = 'Editar ' ~ item.nome %}
+{% set routeAtual = path('edit_copiaFinal', { 'id': item.id }) %}
+{% set routeListar = path('get_copiaFinals') %}
+
+{% block form %}
+
+    {% include 'CineviRealizacaoBundle:CopiaFinal:form.html.twig' with {form: editForm} %}
+
+{% endblock %}

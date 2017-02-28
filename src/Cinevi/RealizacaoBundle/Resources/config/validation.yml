@@ -61,21 +61,21 @@ Cinevi\RealizacaoBundle\Entity\Projeto:
                 minMessage: 'Por favor, selecione pelo menos um usuário.'
         disciplinaFotografia:
             - NotBlank:
-                message: 'Por favor, informe se já cursou a disciplina Fotografia e Iluminação.'
+                message: 'Por favor, informe se já cursou(aram) a disciplina Fotografia e Iluminação.'
         som:
             - Count:
                 min: 1
                 minMessage: 'Por favor, selecione pelo menos um usuário.'
         disciplinaSom:
             - NotBlank:
-                message: 'Por favor, informe se já cursou a disciplina Técnica de Som em Cinema e Audiovisual.'
+                message: 'Por favor, informe se já cursou(aram) a disciplina Técnica de Som em Cinema e Audiovisual.'
         arte:
             - Count:
                 min: 1
                 minMessage: 'Por favor, selecione pelo menos um usuário.'
         disciplinaArte:
             - NotBlank:
-                message: 'Por favor, informe se já cursou a disciplina Direção de Arte.'
+                message: 'Por favor, informe se já cursou(aram) a disciplina Direção de Arte.'
 
 Cinevi\RealizacaoBundle\Entity\CopiaFinal:
     properties:

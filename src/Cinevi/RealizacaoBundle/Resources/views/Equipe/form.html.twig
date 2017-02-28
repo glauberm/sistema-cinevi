@@ -1,12 +1,8 @@
-<fieldset>
-    <legend id="{{ legend }}"><a href="#{{ legend }}">{{ legend }}</a></legend>
-    <div class="row">
-        <div class="col-sm-6">
-            {{ form_row(form.users) }}
-            {% block disciplina %}{% endblock %}
-        </div>
-        <div class="col-sm-6">
-            {{ form_row(form.breveCurriculo) }}
-        </div>
+<div class="row">
+    <div class="col-sm-5">
+        {{ form_row(form.funcao) }}
     </div>
-</fieldset>
+    <div class="col-sm-7">
+        {{ form_row(form.users) }}
+    </div>
+</div>

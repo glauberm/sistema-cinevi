@@ -1,0 +1,19 @@
+{% extends 'CineviAdminBundle:Crud:base-listar.html.twig' %}
+
+{% set title = 'Funcaos' %}
+{% set routeAtual = path('get_funcaos') %}
+{% set routeAdicionar = path('new_funcao') %}
+
+{% block thead %}
+    <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.nome') }}</th>
+{% endblock %}
+
+{% block tbody %}
+    <td>
+        {% if is_granted('ROLE_FUNCIONARIO') %}
+            <a href="{{ path('edit_funcao', { 'id': item.id }) }}">{{ item.nome }}</a>
+        {% else %}
+            <a href="{{ path('get_funcao', { 'id': item.id }) }}">{{ item.nome }}</a>
+        {% endif %}
+    </td>
+{% endblock %}
