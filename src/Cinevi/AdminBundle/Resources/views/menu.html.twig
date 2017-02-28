@@ -1,12 +1,12 @@
 <div class="panel panel-info panel-main" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel-heading" role="tab" id="headingOne">
         <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#mainMenu" aria-expanded="true" aria-controls="collapseMainMenu">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#main-menu" aria-expanded="true" aria-controls="collapse-main-menu">
                 Menu<div class="pull-right">{% include 'CineviAdminBundle:SVG:abrir.html.twig' %}</div>
             </a>
         </h4>
     </div>
-    <div id="mainMenu" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingMainMenu">
+    <div id="main-menu" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-main-menu">
         <div class="list-group">
             <a class="list-group-item {% if app.request.get('_route') == 'get_users' or app.request.get('_route') == 'new_user' or app.request.get('_route') == 'get_user' or app.request.get('_route') == 'edit_user' %}active{% endif %}" href="{{ path('get_users') }}">
                 {% include 'CineviAdminBundle:SVG:usuarios.html.twig' %}Usuários

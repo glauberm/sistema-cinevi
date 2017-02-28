@@ -75,8 +75,8 @@ textarea.form-control {
     height: 34px;
 }
 
-/* MAIN */
-.main {
+/* CONTENT */
+.content {
     padding-top: 20px;
 }
 
@@ -245,7 +245,7 @@ textarea.form-control {
     height: 44px;
 }
 
-.main-security .well {
+.content-security .well {
     border-color: #decc3a;
     background: #EAD741;
     -moz-box-shadow: none;

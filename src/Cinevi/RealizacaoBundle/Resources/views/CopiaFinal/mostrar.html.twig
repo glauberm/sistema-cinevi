@@ -1,7 +1,6 @@
 {% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
 
 {% set title = item.nome %}
-{% set routeAtual = path('get_copia_final', { 'id': item.id }) %}
 {% set routeListar = path('get_copia_finals') %}
 {% set routeEditar = path('edit_copia_final', { 'id': item.id }) %}
 {% set routeAdicionar = path('new_copia_final') %}

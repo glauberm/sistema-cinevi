@@ -1,7 +1,6 @@
 {% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
 
 {% set title = item.username %}
-{% set routeAtual = path('get_user', { 'id': item.id }) %}
 {% set routeListar = path('get_users') %}
 {% set routeEditar = path('edit_user', { 'id': item.id }) %}
 {% set routeAdicionar = path('new_user') %}

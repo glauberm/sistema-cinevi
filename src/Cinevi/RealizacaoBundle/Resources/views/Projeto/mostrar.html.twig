@@ -1,7 +1,6 @@
 {% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
 
 {% set title = item.nome %}
-{% set routeAtual = path('get_projeto', { 'id': item.id }) %}
 {% set routeListar = path('get_projetos') %}
 {% set routeEditar = path('edit_projeto', { 'id': item.id }) %}
 {% set routeAdicionar = path('new_projeto') %}

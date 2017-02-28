@@ -16,6 +16,8 @@
 - Fazer "Outros" podendo os usuários adicionarem?
 - Criar view de página inicial (fora do painel de controle) com infor dos usuários, filmes etc.
 - Talvez criar um atributo universal de "submetido por"?
+- Script para scrollar até o anchor #main-content sem foder com os $GET's?
+- Add o "pular para o main-content"
 
 ## Gráficos
 - Quantidade de diretores, produtores, etc. em projetos

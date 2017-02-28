@@ -32,10 +32,10 @@
     <body class="body-security">
         {% include 'CineviAdminBundle::header-security.html.twig' %}
 
-        <main class="main main-security">
+        <div class="content content-security">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
+                    <main class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
                         <div class="well well-lg">
                             <h2 class="page-header text-center">
                                 <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
@@ -64,17 +64,17 @@
                                 </div>
                             {% endblock %}
                         </div>
-                    </div>
+                    </main>
 
-                    <div class="col-md-8 col-sm-12 text-right">
+                    <aside class="col-md-8 col-sm-12 text-right">
                         <div class="jumbotron">
                             <h1>Todos os serviços do departamento em qualquer lugar.</h1>
                             <p>Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo com acesso à internet.</p>
                         </div>
-                    </div>
+                    </aside>
                 </div>
             </div>
-        </main>
+        </div>
 
         {% include 'CineviAdminBundle::footer.html.twig' %}
 

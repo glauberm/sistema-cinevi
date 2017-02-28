@@ -21,7 +21,7 @@ autosize($('textarea.form-control'));
 (function($, viewport){
     $(document).ready(function() {
         if(viewport.is('<sm')) {
-            $('#admin-menu').collapse('hide');
+            $('#main-menu').collapse('hide');
             $('#main-navbar').collapse('hide');
         }
     });
