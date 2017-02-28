@@ -9,10 +9,6 @@
 
 {% block tbody %}
     <td>
-        {% if is_granted('ROLE_FUNCIONARIO') %}
-            <a href="{{ path('edit_categoria', { 'id': item.id }) }}">{{ item.nome }}</a>
-        {% else %}
-            <a href="{{ path('get_categoria', { 'id': item.id }) }}">{{ item.nome }}</a>
-        {% endif %}
+        <a href="{{ path('get_categoria', { 'id': item.id }) }}">{{ item.nome }}</a>
     </td>
 {% endblock %}

@@ -13,8 +13,8 @@ class CategoriaControllerTest extends RestfulCrudControllerTest
         'categoria[nome]' => 'Teste',
     );
     // Edit
-    protected $editFilter = 'a:contains("Teste")';
-    protected $editLink = 'Teste';
+    protected $itemFilter = 'a:contains("Teste")';
+    protected $itemLink = 'Teste';
     protected $editArrayForm = array(
         'categoria[nome]' => 'Etset',
     );

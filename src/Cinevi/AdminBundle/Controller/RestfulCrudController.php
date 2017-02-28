@@ -66,7 +66,6 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $view = View::create();
         $view
             ->setData($pagination)
-            ->setStatusCode(200)
             ->setTemplate($this->bundleName.':'.$this->listarTemplate)
             ->setTemplateVar('pagination')
             ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($numResultados) {
@@ -88,7 +87,6 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $view = View::create();
         $view
             ->setData($form->createView())
-            ->setStatusCode(200)
             ->setTemplate($this->bundleName.':'.$this->criarTemplate)
             ->setTemplateVar('form')
             ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($obj) {
@@ -120,7 +118,6 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $view = View::create();
         $view
             ->setData($obj)
-            ->setStatusCode(200)
             ->setTemplate($this->bundleName.':'.$this->mostrarTemplate)
             ->setTemplateVar('item')
             ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($deleteForm) {
@@ -162,13 +159,10 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $this->get('session')->getFlashBag()->set('success', 'Criação de '.$this->label.' realizada com sucesso!');
 
             $view = View::createRouteRedirect('get_'.$this->routeSuffix.'s');
-
-            $view->setStatusCode(201);
         } else {
             $view = View::create();
             $view
                 ->setData($form->createView())
-                ->setStatusCode(200)
                 ->setTemplate($this->bundleName.':'.$this->criarTemplate)
                 ->setTemplateVar('form')
                 ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($obj) {
@@ -194,7 +188,6 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $view = View::create();
         $view
             ->setData($editForm->createView())
-            ->setStatusCode(200)
             ->setTemplate($this->bundleName.':'.$this->editarTemplate)
             ->setTemplateVar('editForm')
             ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($deleteForm, $obj) {
@@ -240,13 +233,10 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $this->get('session')->getFlashBag()->set('success', 'Edição de '.$this->label.' realizada com sucesso!');
 
             $view = View::createRouteRedirect('get_'.$this->routeSuffix.'s');
-
-            $view->setStatusCode(201);
         } else {
             $view = View::create();
             $view
                 ->setData($editForm->createView())
-                ->setStatusCode(200)
                 ->setTemplate($this->bundleName.':'.$this->editarTemplate)
                 ->setTemplateVar('editForm')
                 ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($deleteForm, $obj) {
@@ -293,8 +283,6 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $view = View::createRouteRedirect('edit_'.$this->routeSuffix, array(
                 'id' => $obj->getId(),
             ));
-
-            $view->setStatusCode(400);
         }
 
         return $view;
