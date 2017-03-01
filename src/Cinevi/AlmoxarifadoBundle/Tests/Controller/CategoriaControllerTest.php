@@ -8,17 +8,25 @@ class CategoriaControllerTest extends RestfulCrudControllerTest
 {
     // List
     protected $indexRoute = 'categorias';
-    // Add
-    protected $addArrayForm = array(
-        'categoria[nome]' => 'Teste',
-    );
     // Edit
-    protected $itemFilter = 'a:contains("Teste")';
-    protected $itemLink = 'Teste';
-    protected $editArrayForm = array(
-        'categoria[nome]' => 'Etset',
-    );
+    protected $itemEditFilter = 'a:contains("TesteC")';
+    protected $itemEditLink = 'TesteC';
     // Remove
-    protected $removeLink = 'Etset';
-    protected $removeFilter = '[value="Etset"]';
+    protected $itemRemoveLink = 'CEtset';
+    protected $itemRemoveFilter = '[value="CEtset"]';
+    
+
+    protected function getAddArrayForm()
+    {
+        return array(
+            'categoria[nome]' => 'TesteC',
+        );
+    }
+
+    protected function getEditArrayForm()
+    {
+        return array(
+            'categoria[nome]' => 'CEtset',
+        );
+    }
 }

@@ -13,17 +13,15 @@ abstract class RestfulCrudControllerTest extends WebTestCase
     protected $indexRoute;
     // Add
     protected $addLink = 'Adicionar';
-    protected $addArrayForm = array();
     protected $addButton = 'Salvar';
     // Edit
-    protected $itemFilter;
-    protected $itemLink;
+    protected $itemEditFilter;
+    protected $itemEditLink;
     protected $editLink = 'Editar';
-    protected $editArrayForm = array();
     protected $editButton = 'Salvar';
     // Remove
-    protected $removeLink;
-    protected $removeFilter;
+    protected $itemRemoveLink;
+    protected $itemRemoveFilter;
     protected $removeButton = 'Remover';
 
     // exit(var_dump($client->getResponse()->getContent()));
@@ -33,10 +31,14 @@ abstract class RestfulCrudControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $this->doLogin($this->username, $this->password, $client);
-        $crawler = $this->doList($client, $crawler);
-        $crawler = $this->doAdd($client, $crawler);
-        $crawler = $this->doEdit($client, $crawler);
-        $crawler = $this->doRemove($client, $crawler);
+
+        $crawler = $this->doList($client, $crawler, $this->indexRoute);
+
+        $crawler = $this->doAdd($client, $crawler, $this->addLink, $this->addButton, $this->getAddArrayForm());
+
+        $crawler = $this->doEdit($client, $crawler, $this->itemEditFilter, $this->itemEditLink, $this->editLink, $this->editButton, $this->getEditArrayForm());
+
+        $crawler = $this->doRemove($client, $crawler, $this->editLink, $this->itemRemoveLink, $this->itemRemoveFilter, $this->removeButton);
 
         $this->otherScenarios($client, $crawler);
     }
@@ -58,63 +60,69 @@ abstract class RestfulCrudControllerTest extends WebTestCase
         return $client->followRedirect();
     }
 
-    protected function doList($client, $crawler)
+    protected function doList($client, $crawler, $indexRoute)
     {
-        $crawler = $client->request('GET', '/'.$this->indexRoute);
+        $crawler = $client->request('GET', '/'.$indexRoute);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), 'Código de status HTTP inesperado para GET /'.$this->indexRoute);
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), 'Código de status HTTP inesperado para GET /'.$indexRoute);
 
         return $crawler;
     }
 
-    protected function doAdd($client, $crawler)
+    protected function doAdd($client, $crawler, $addLink, $addButton, $addArrayForm)
     {
-        $crawler = $client->click($crawler->selectLink($this->addLink)->link());
+        $crawler = $client->click($crawler->selectLink($addLink)->link());
 
-        $form = $crawler->selectButton($this->addButton)->form($this->addArrayForm);
+        $form = $crawler->selectButton($addButton)->form($addArrayForm);
 
         $client->submit($form);
 
-        $crawler = $client->followRedirect();
-
-        return $crawler;
+        return $client->followRedirect();
     }
 
-    protected function doEdit($client, $crawler)
+    protected function doEdit($client, $crawler, $itemEditFilter, $itemEditLink, $editLink, $editButton, $editArrayForm)
     {
-        $this->assertGreaterThan(0, $crawler->filter($this->itemFilter)->count(), 'Faltando elemento '.$this->itemFilter);
+        $this->assertGreaterThan(0, $crawler->filter($itemEditFilter)->count(), 'Faltando elemento '.$itemEditFilter);
 
-        $crawler = $client->click($crawler->selectLink($this->itemLink)->link());
+        $crawler = $client->click($crawler->selectLink($itemEditLink)->link());
 
-        $crawler = $client->click($crawler->selectLink($this->editLink)->link());
+        $crawler = $client->click($crawler->selectLink($editLink)->link());
 
-        $form = $crawler->selectButton($this->editButton)->form($this->editArrayForm);
+        $form = $crawler->selectButton($editButton)->form($editArrayForm);
 
         $client->submit($form);
 
-        $crawler = $client->followRedirect();
-
-        return $crawler;
+        return $client->followRedirect();
     }
 
-    protected function doRemove($client, $crawler)
+    protected function doRemove($client, $crawler, $editLink, $itemRemoveLink, $itemRemoveFilter, $removeButton)
     {
-        $crawler = $client->click($crawler->selectLink($this->removeLink)->link());
+        $crawler = $client->click($crawler->selectLink($itemRemoveLink)->link());
 
-        $crawler = $client->click($crawler->selectLink($this->editLink)->link());
+        $crawler = $client->click($crawler->selectLink($editLink)->link());
 
-        $this->assertGreaterThan(0, $crawler->filter($this->removeFilter)->count(), 'Faltando elemento '.$this->removeFilter);
+        $this->assertGreaterThan(0, $crawler->filter($itemRemoveFilter)->count(), 'Faltando elemento '.$itemRemoveFilter);
 
-        $client->submit($crawler->selectButton($this->removeButton)->form());
+        $client->submit($crawler->selectButton($removeButton)->form());
 
         $crawler = $client->followRedirect();
 
-        $this->assertNotRegExp('/'.$this->removeLink.'/', $client->getResponse()->getContent());
+        $this->assertNotRegExp('/'.$itemRemoveLink.'/', $client->getResponse()->getContent());
 
         return $crawler;
     }
 
     protected function otherScenarios($client, $crawler)
+    {
+        return $crawler;
+    }
+
+    protected function getAddArrayForm()
+    {
+        return;
+    }
+
+    protected function getEditArrayForm()
     {
         return;
     }

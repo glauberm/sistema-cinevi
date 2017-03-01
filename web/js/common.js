@@ -21,7 +21,9 @@ autosize($('textarea.form-control'));
 (function($, viewport){
     $(document).ready(function() {
         if(viewport.is('<sm')) {
-            $('#main-menu').collapse('hide');
+            $('#admin-menu').collapse('hide');
+            $('#almoxarifado-menu').collapse('hide');
+            $('#realizacao-menu').collapse('hide');
             $('#main-navbar').collapse('hide');
         }
     });

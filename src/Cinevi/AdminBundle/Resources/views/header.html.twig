@@ -1,27 +1,29 @@
-<header class="header clearfix">
+<header class="header">
     <div class="container">
+        <div class="clearfix">
+            <a class="pull-left" href="{{ path('index') }}">
+                <div class="logo">
+                    {% include 'CineviAdminBundle:SVG:logo.html.twig' %}
+                </div>
+            </a>
 
-        <a class="pull-left" href="{{ path('index') }}">
-            <div class="logo">
-                {% include 'CineviAdminBundle:SVG:logo.html.twig' %}
-            </div>
-        </a>
-
-        <nav class="pull-right menu-topo">
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <ul class="nav nav-pills">
-                    <li {% if app.request.get('_route') == 'fos_user_profile_edit' or app.request.get('_route') == 'fos_user_profile_show' %}class="active"{% endif %} role="presentation">
-                        <a href="{{ path('fos_user_profile_edit', {user:app.user}) }}">
-                            {% include 'CineviAdminBundle:SVG:perfil.html.twig' %}<span class="display-lg display-md display-sm hidden-xs">Meu Perfil</span>
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a href="{{ path('fos_user_security_logout') }}" class="logout text-danger">
-                            {% include 'CineviAdminBundle:SVG:sair.html.twig' %}<span class="display-lg display-md display-sm hidden-xs">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            {% endif %}
-        </nav>
+            <nav class="pull-right menu-topo">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <ul class="nav nav-pills">
+                        <li {% if app.request.get('_route') == 'fos_user_profile_edit' or app.request.get('_route') == 'fos_user_profile_show' %}class="active"{% endif %} role="presentation">
+                            <a href="{{ path('fos_user_profile_edit', {user:app.user}) }}">
+                                {% include 'CineviAdminBundle:SVG:perfil.html.twig' %}<span class="display-lg display-md display-sm hidden-xs">Meu Perfil</span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="{{ path('fos_user_security_logout') }}" class="logout text-danger">
+                                {% include 'CineviAdminBundle:SVG:sair.html.twig' %}<span class="display-lg display-md display-sm hidden-xs">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                {% endif %}
+            </nav>
+            
+        </div>
     </div>
 </header>

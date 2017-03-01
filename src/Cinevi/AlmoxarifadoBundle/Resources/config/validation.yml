@@ -16,7 +16,7 @@ Cinevi\AlmoxarifadoBundle\Entity\Equipamento:
             - NotBlank:
                 message: 'Por favor, informe o nome do equipamento.'
         manutencao:
-            - NotBlank:
+            - NotNull:
                 message: 'Por favor, informe se o equipamento está ou não em manutenção.'
 
 Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent:
