@@ -35,8 +35,9 @@ class UserControllerTest extends RestfulCrudControllerTest
     protected function getEditArrayForm()
     {
         return array(
-            'user[nome]' => 'UEtset',
+            'user[username]' => 'UEtset',
             'user[email]' => 'b@a.com.br',
+            'user[matricula]' => '1545575899',
             'user[telefone]' => '6297963685',
             'user[confirmado]' => '1',
             'user[enabled]' => '1',
