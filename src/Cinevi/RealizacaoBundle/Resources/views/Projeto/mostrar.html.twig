@@ -3,7 +3,6 @@
 {% set title = item.nome %}
 {% set routeListar = path('get_projetos') %}
 {% set routeEditar = path('edit_projeto', { 'id': item.id }) %}
-{% set routeAdicionar = path('new_projeto') %}
 
 {% block maisActionsButton %}
     {% if is_granted('ROLE_FUNCIONARIO') %}

@@ -11,9 +11,6 @@
     <div class="navbar-form navbar-nav">
         <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
     </div>
-    <div class="navbar-form navbar-nav">
-        <a class="btn btn-success" href="{{ routeAdicionar }}">Adicionar</a>
-    </div>
     {% if is_granted('ROLE_SUPER_ADMIN') %}
         {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
             {{ form_row(deleteForm.remover) }}

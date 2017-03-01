@@ -3,7 +3,6 @@
 {% set title = 'Reserva de Equipamento(s) ' ~ item.title %}
 {% set routeListar = path('get_calendar_events') %}
 {% set routeEditar = path('edit_calendar_event', { 'id': item.id }) %}
-{% set routeAdicionar = path('new_calendar_event') %}
 
 {% block maisActionsButton %}
     {% if is_granted('ROLE_FUNCIONARIO') or item.user == app.user %}

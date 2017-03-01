@@ -3,7 +3,6 @@
 {% set title = item.nome %}
 {% set routeListar = path('get_equipamentos') %}
 {% set routeEditar = path('edit_equipamento', { 'id': item.id }) %}
-{% set routeAdicionar = path('new_equipamento') %}
 
 {% block maisActionsButton %}
     {% if is_granted('ROLE_FUNCIONARIO') %}
