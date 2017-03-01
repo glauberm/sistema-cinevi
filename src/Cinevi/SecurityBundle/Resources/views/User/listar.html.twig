@@ -4,17 +4,13 @@
 {% set routeAdicionar = path('new_user') %}
 
 {% block thead %}
-    <th>{{ knp_pagination_sortable(pagination, 'Nome de usuário', 'item.username') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.username') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Email', 'item.email') }}</th>
 {% endblock %}
 
 {% block tbody %}
     <td>
-        {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <a href="{{ path('edit_user', { 'id': item.id }) }}">{{ item.username }}</a>
-        {% else %}
-            <a href="{{ path('get_user', { 'id': item.id }) }}">{{ item.username }}</a>
-        {% endif %}
+        <a href="{{ path('get_user', { 'id': item.id }) }}">{{ item.username }}</a>
     </td>
     <td>{{ item.email }}</td>
 {% endblock %}

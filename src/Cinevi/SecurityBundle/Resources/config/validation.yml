@@ -5,19 +5,34 @@ Cinevi\SecurityBundle\Entity\User:
             message: 'Este email já está em uso.'
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: username
-            message: 'Este nome de usuário já está em uso.'
+            message: 'Este nome já está em uso.'
     properties:
         username:
             - NotBlank:
-                message: 'Por favor, informe o seu nome de usuário.'
+                message: 'Por favor, informe o seu nome.'
         email:
             - NotBlank:
                 message: 'Por favor, informe o seu email.'
             - Email:
                 message: 'Por favor, informe um endereço de email válido.'
+        plainPassword:
+            - NotBlank:
+                message: 'Por favor, informe uma senha.'
+                groups: [new]
         matricula:
             - NotBlank:
                 message: 'Por favor, informe a matrícula do usuário.'
         telefone:
             - NotBlank:
                 message: 'Por favor, informe o telefone do usuário.'
+        confirmado:
+            - NotNull:
+                message: 'Por favor, informe se os dados do usuários foram confirmados ou não.'
+        professor:
+            - NotNull:
+                message: 'Por favor, informe se o usuário é ou não um(a) professor(a).'
+        roles:
+            - Count:
+                min: 1
+                minMessage: 'Por favor, selecione pelo menos um nível de permissão.'
+                groups: [superAdmin]

@@ -43,7 +43,14 @@ class EquipamentoControllerTest extends RestfulCrudControllerTest
             'equipamento[codigo]' => '2.99',
             'equipamento[nome]' => 'TesteE',
             'equipamento[categoria]' => $this->categoriaId,
-            'equipamento[manutencao]' => '0'
+            'equipamento[manutencao]' => '0',
+            'equipamento[especificacao]' => 'EspecificacaoE',
+            'equipamento[fabricante]' => 'FabricanteE',
+            'equipamento[modelo]' => 'ModeloE',
+            'equipamento[patrimonio]' => '15455758',
+            'equipamento[nSerie]' => 'E15455758',
+            'equipamento[acessorios]' => 'Lorem Ipsum Dolor Sit Amet',
+            'equipamento[obs]' => 'Esse item foi criado por um crawler',
         );
     }
 
@@ -53,7 +60,14 @@ class EquipamentoControllerTest extends RestfulCrudControllerTest
             'equipamento[codigo]' => '3.99',
             'equipamento[nome]' => 'EEtset',
             'equipamento[categoria]' => $this->categoriaId,
-            'equipamento[manutencao]' => '0'
+            'equipamento[manutencao]' => '0',
+            'equipamento[especificacao]' => 'EEspecificacaoE',
+            'equipamento[fabricante]' => 'EFabricanteE',
+            'equipamento[modelo]' => 'EModeloE',
+            'equipamento[patrimonio]' => '915455758',
+            'equipamento[nSerie]' => 'E15455758E',
+            'equipamento[acessorios]' => 'ELorem Ipsum Dolor Sit Amet',
+            'equipamento[obs]' => 'EEsse item foi criado por um crawler',
         );
     }
 

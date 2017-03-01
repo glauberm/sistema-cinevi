@@ -1,14 +1,15 @@
 services:
+    # Voters
     cinevi.access.admin_user:
         class: Cinevi\SecurityBundle\Authorization\Voter\UserVoter
         public: false
         arguments: ['@security.access.decision_manager']
         tags:
             - { name: security.voter }
-
+    # Forms
     cinevi.form.admin_user:
         class: Cinevi\SecurityBundle\Form\Type\UserType
-        arguments: ['@security.authorization_checker']
+        arguments: ['@security.authorization_checker','@cinevi.user_validation']
         tags:
             - { name: form.type, alias: view }
 
@@ -16,3 +17,12 @@ services:
         class: Cinevi\SecurityBundle\Form\Type\ProfileType
         tags:
             - { name: form.type, alias: cinevi_profile }
+
+    # Validation Groups
+    cinevi.user_validation_factory:
+        class: Cinevi\SecurityBundle\Validation\UserValidationGroupResolverFactory
+        arguments: ['@security.authorization_checker']
+
+    cinevi.user_validation:
+        class: Cinevi\SecurityBundle\Validation\UserValidationGroupResolver
+        factory: ['@cinevi.user_validation_factory', create]

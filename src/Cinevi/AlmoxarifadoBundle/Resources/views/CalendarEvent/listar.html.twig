@@ -38,11 +38,7 @@
                 <tbody>
                     {% for item in pagination %}
                         <tr>
-                            {% if is_granted('ROLE_FUNCIONARIO') %}
-                                <td><a href="{{ path('edit_calendar_event', { 'id': item.id }) }}">{{ item.title }}</a></td>
-                            {% else %}
-                                <td><a href="{{ path('get_calendar_event', { 'id': item.id }) }}">{{ item.title }}</a></td>
-                            {% endif %}
+                            <td><a href="{{ path('get_calendar_event', { 'id': item.id }) }}">{{ item.title }}</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

@@ -200,7 +200,7 @@ class User extends BaseUser
     /**
      * Get breveCurriculo
      *
-     * @return string 
+     * @return string
      */
     public function getBreveCurriculo()
     {

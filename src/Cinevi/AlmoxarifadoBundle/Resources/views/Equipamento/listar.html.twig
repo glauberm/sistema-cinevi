@@ -11,18 +11,10 @@
 
 {% block tbody %}
     <td>
-        {% if is_granted('ROLE_FUNCIONARIO') %}
-            <a href="{{ path('edit_equipamento', { 'id': item.id }) }}">{{ item.nome }}</a>
-        {% else %}
-            <a href="{{ path('get_equipamento', { 'id': item.id }) }}">{{ item.nome }}</a>
-        {% endif %}
+        <a href="{{ path('get_equipamento', { 'id': item.id }) }}">{{ item.nome }}</a>
     </td>
     <td>
-        {% if is_granted('ROLE_FUNCIONARIO') %}
-            <a href="{{ path('edit_categoria', { 'id': item.categoria.id }) }}">{{ item.categoria.nome }}</a>
-        {% else %}
-            <a href="{{ path('get_categoria', { 'id': item.categoria.id }) }}">{{ item.categoria.nome }}</a>
-        {% endif %}
+        <a href="{{ path('get_categoria', { 'id': item.categoria.id }) }}">{{ item.categoria.nome }}</a>
     </td>
     <td>{{ item.manutencao ? 'Sim' : 'Não' }}</td>
 {% endblock %}

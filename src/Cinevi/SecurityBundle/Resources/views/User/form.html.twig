@@ -3,14 +3,16 @@
     <div class="col-sm-6">{{ form_row(form.email) }}</div>
 </div>
 <div class="row">
-    <div class="col-sm-6">{{ form_row(form.matricula) }}</div>
-    <div class="col-sm-6">{{ form_row(form.telefone) }}</div>
+    <div class="col-sm-6 col-md-3">{{ form_row(form.plainPassword.first) }}</div>
+    <div class="col-sm-6 col-md-3">{{ form_row(form.plainPassword.second) }}</div>
+    <div class="col-sm-6 col-md-3">{{ form_row(form.matricula) }}</div>
+    <div class="col-sm-6 col-md-3">{{ form_row(form.telefone) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-4">{{ form_row(form.enabled) }}</div>
+    <div class="col-sm-4">{{ form_row(form.confirmado) }}</div>
+    <div class="col-sm-4">{{ form_row(form.professor) }}</div>
 </div>
 {% if is_granted('ROLE_SUPER_ADMIN') %}
-    <div class="row">
-        <div class="col-sm-6 col-md-3">{{ form_row(form.enabled) }}</div>
-        <div class="col-sm-6 col-md-3">{{ form_row(form.confirmado) }}</div>
-        <div class="col-sm-6 col-md-3">{{ form_row(form.professor) }}</div>
-        <div class="col-sm-6 col-md-3">{{ form_row(form.roles) }}</div>
-    </div>
+    {{ form_row(form.roles) }}
 {% endif %}
