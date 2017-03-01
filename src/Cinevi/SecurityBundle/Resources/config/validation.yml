@@ -22,9 +22,15 @@ Cinevi\SecurityBundle\Entity\User:
         matricula:
             - NotBlank:
                 message: 'Por favor, informe a matrícula do usuário.'
+            - Type:
+                type: integer
+                message: Por favor, informe apenas números.
         telefone:
             - NotBlank:
                 message: 'Por favor, informe o telefone do usuário.'
+            - Type:
+                type: integer
+                message: Por favor, informe apenas números.
         confirmado:
             - NotNull:
                 message: 'Por favor, informe se os dados do usuários foram confirmados ou não.'
@@ -32,7 +38,8 @@ Cinevi\SecurityBundle\Entity\User:
             - NotNull:
                 message: 'Por favor, informe se o usuário é ou não um(a) professor(a).'
         roles:
-            - Count:
-                min: 1
-                minMessage: 'Por favor, selecione pelo menos um nível de permissão.'
+            - Choice:
+                choices:  [ROLE_USER, ROLE_FUNCIONARIO, ROLE_SUPER_ADMIN]
+                multiple: true
+                message: 'Por favor, informe um nível de permissão válido.'
                 groups: [superAdmin]

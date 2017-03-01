@@ -21,6 +21,8 @@ class UserControllerTest extends RestfulCrudControllerTest
         return array(
             'user[username]' => 'TesteU',
             'user[email]' => 'a@a.com.br',
+            'user[plainPassword][first]' => '12345678',
+            'user[plainPassword][second]' => '12345678',
             'user[matricula]' => '15455758',
             'user[telefone]' => '21997963685',
             'user[confirmado]' => '0',
