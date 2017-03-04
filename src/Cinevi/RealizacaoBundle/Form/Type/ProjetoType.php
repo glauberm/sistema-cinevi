@@ -27,7 +27,7 @@ class ProjetoType extends AbstractType
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
         $userQB->orderBy('u.username', 'ASC')->andWhere('u.professor != 1');
         foreach ($userQB->getQuery()->getResult() as $result) {
-            $userArray[$result->getId()] = $result->getUsername();
+            $userArray[$result->getUsername()] = $result->getId();
         }
 
         $builder
@@ -64,6 +64,7 @@ class ProjetoType extends AbstractType
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione opções...',
                 'multiple' => true,
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -74,6 +75,7 @@ class ProjetoType extends AbstractType
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione opções...',
                 'multiple' => true,
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -84,6 +86,7 @@ class ProjetoType extends AbstractType
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione opções...',
                 'multiple' => true,
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -103,6 +106,7 @@ class ProjetoType extends AbstractType
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione opções...',
                 'multiple' => true,
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -122,6 +126,7 @@ class ProjetoType extends AbstractType
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione opções...',
                 'multiple' => true,
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),

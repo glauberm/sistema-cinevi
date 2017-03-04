@@ -33,7 +33,7 @@ class RealizacaoType extends AbstractType
         $userQB->orderBy('u.username', 'ASC')->andWhere('u.professor != 1');
         foreach ($userQB->getQuery()->getResult() as $result) {
             if (true === $this->authorizationChecker->isGranted('view', $result)) {
-                $userArray[$result->getId()] = $result->getUsername();
+                $userArray[$result->getUsername()] = $result->getId();
             }
         }
 
@@ -41,7 +41,7 @@ class RealizacaoType extends AbstractType
         $professorQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('p');
         $professorQB->orderBy('p.username', 'ASC')->andWhere('p.professor = 1');
         foreach ($professorQB->getQuery()->getResult() as $result) {
-            $professorArray[$result->getId()] = $result->getUsername();
+            $professorArray[$result->getUsername()] = $result->getId();
         }
 
         $builder
@@ -50,9 +50,10 @@ class RealizacaoType extends AbstractType
                 'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione uma opção...',
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
-                ),
+                )
             ))
             ->add('titulo', TextType::class, array(
                 'label' => 'Título',
@@ -87,6 +88,7 @@ class RealizacaoType extends AbstractType
                 'choices' => $professorArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione uma opção...',
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
