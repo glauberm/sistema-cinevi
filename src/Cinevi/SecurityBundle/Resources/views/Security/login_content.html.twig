@@ -41,11 +41,11 @@
     <input type="submit" id="_submit" name="_submit" class="btn btn-primary btn-lg btn-block" value="{{ 'security.login.submit'|trans }}" />
     <br/>
 </form>
-<div class="clearfix">
-    <div class="pull-left">
-        <a class="btn btn-link" href="{{ path('fos_user_registration_register') }}">Cadastre-se</a>
+<div class="row">
+    <div class="col-xs-6 text-left">
+        <a href="{{ path('fos_user_registration_register') }}">Cadastre-se</a>
     </div>
-    <div class="pull-right">
-        <a class="btn btn-link" href="{{ path('fos_user_resetting_request') }}">Esqueceu sua senha?</a>
+    <div class="col-xs-6 text-right">
+        <a href="{{ path('fos_user_resetting_request') }}">Esqueceu sua senha?</a>
     </div>
 </div>

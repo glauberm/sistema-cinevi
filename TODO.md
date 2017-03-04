@@ -1,17 +1,23 @@
 # TO-DO
 
+## Imediato
+- Checar o transformer
+- Teste do Projeto e Cópia Final
+
 ## Cópias Finais
 - Além das fotos still, link (com possível senha) do filme
 - VichUploaderBundle para os MateriaisDivulgacao (add em CopiaFinal)
 
-# Reservas
+## Factory
+- Criar factory (http://symfony.com/doc/2.8/service_container/factories.html)
+
+## Reservas
 - Ver DynamicType nos equipamentos
 
-# Usuários
+## Usuários
 - Adicionar breve descrição
 
-# Template
-- Passar header pra navbar-inverse
+## Template
 - Adicionar ícones nos botões de adicionar, editar e remover e deixá-los fixos na nav-bar. Possíveis botões extras vão para o accordion.
 
 ## CRON
@@ -22,7 +28,6 @@
 - Ações em múltiplos itens de uma vez
 - Adicionar https://packagist.org/packages/friendsofsymfony/elastica-bundle
 - Passar a listagem, a busca por roles e outros pro Repository
-- Fazer "Outros" podendo os usuários adicionarem?
 - Add o "pular para o main-content" (possivelmente outras questões de acessibilidade?)
 
 ## Gráficos
@@ -34,4 +39,4 @@
 - Mais campos das Cópias Finais para Realização para aproveitar também no Projeto
 - Mais funções no Projeto?
 - Interessa que os alunos preencham informações no sistema? (Talvez criar um atributo universal de "submetido por"? e Tentar um AJAX/DynamicType para poder adicionar o campo e já alterá-lo -- por exemplo, no campo das funções adicionar mais uma função através de um modal e já adicionar a opção sem recarregar)
-- Interessa uma home com vídeos e outras informações do sistema (Breve currículo para os usuários com rich-text editor e Criar view de página inicial (fora do painel de controle) com infor dos usuários, filmes etc.)
+- Interessa uma home com vídeos e outras informações do sistema (Breve currículo para os usuários com rich-text editor e Criar view de página inicial (fora do painel de controle) com infor dos usuários, filmes etc. e Fazer "Outros" podendo os usuários adicionarem?)

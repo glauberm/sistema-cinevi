@@ -6,13 +6,9 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-//use FOS\RestBundle\Form\Transformer\EntityToIdObjectTransformer;
+use Cinevi\AdminBundle\Form\Transformer\ArrayEntityToArrayIdObjectTransformer;
 
 class ProjetoType extends AbstractType
 {
@@ -20,119 +16,115 @@ class ProjetoType extends AbstractType
 
     public function __construct(EntityManager $em)
     {
-	    $this->em = $em;
+        $this->em = $em;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $userArray = array();
+
+        // Pega todos os usuários
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
         $userQB->orderBy('u.username', 'ASC')->andWhere('u.professor != 1');
+        foreach ($userQB->getQuery()->getResult() as $result) {
+            $userArray[$result->getId()] = $result->getUsername();
+        }
 
         $builder
             ->add('realizacao', RealizacaoType::class, array(
-                'label' => null
+                'label' => null,
             ))
             ->add('preProducao', DateType::class, array(
-                'label'  => 'Pré-Produção',
+                'label' => 'Pré-Produção',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
                 'attr' => array(
                     'class' => 'datepicker',
-                )
+                ),
             ))
             ->add('dataProducao', DateType::class, array(
-                'label'  => 'Produção',
+                'label' => 'Produção',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
                 'attr' => array(
                     'class' => 'datepicker',
-                )
+                ),
             ))
             ->add('posProducao', DateType::class, array(
-                'label'  => 'Pós-Produção',
+                'label' => 'Pós-Produção',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
                 'attr' => array(
                     'class' => 'datepicker',
-                )
+                ),
             ))
-            ->add('direcao', EntityType::class, array(
+            ->add('direcao', ChoiceType::class, array(
                 'label' => 'Direção',
-                'class' => 'CineviSecurityBundle:User',
-                'query_builder' => $userQB,
-                'choice_label' => 'getUsername',
+                'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'attr' => array(
                     'class' => 'select2-select',
-                )
+                ),
             ))
-            ->add('producao', EntityType::class, array(
+            ->add('producao', ChoiceType::class, array(
                 'label' => 'Produção',
-                'class' => 'CineviSecurityBundle:User',
-                'query_builder' => $userQB,
-                'choice_label' => 'getUsername',
+                'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'attr' => array(
                     'class' => 'select2-select',
-                )
+                ),
             ))
-            ->add('fotografia', EntityType::class, array(
+            ->add('fotografia', ChoiceType::class, array(
                 'label' => 'Direção de Fotografia',
-                'class' => 'CineviSecurityBundle:User',
-                'query_builder' => $userQB,
-                'choice_label' => 'getUsername',
+                'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'attr' => array(
                     'class' => 'select2-select',
-                )
+                ),
             ))
             ->add('disciplinaFotografia', ChoiceType::class, array(
                 'label' => ' Já cursou(aram) a disciplina de Fotografia e Iluminação?',
                 'choices' => array(
-                    'Sim'   => '1',
-                    'Não'   => '0',
+                    'Sim' => '1',
+                    'Não' => '0',
                 ),
                 'choices_as_values' => true,
                 'expanded' => true,
             ))
-            ->add('som', EntityType::class, array(
+            ->add('som', ChoiceType::class, array(
                 'label' => 'Direção de Som',
-                'class' => 'CineviSecurityBundle:User',
-                'query_builder' => $userQB,
-                'choice_label' => 'getUsername',
+                'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'attr' => array(
                     'class' => 'select2-select',
-                )
+                ),
             ))
             ->add('disciplinaSom', ChoiceType::class, array(
                 'label' => ' Já cursou(aram) a disciplina de Técnica de Som em Cinema e Audiovisual?',
                 'choices' => array(
-                    'Sim'   => '1',
-                    'Não'   => '0',
+                    'Sim' => '1',
+                    'Não' => '0',
                 ),
                 'choices_as_values' => true,
                 'expanded' => true,
             ))
-            ->add('arte', EntityType::class, array(
+            ->add('arte', ChoiceType::class, array(
                 'label' => 'Direção de Arte',
-                'class' => 'CineviSecurityBundle:User',
-                'query_builder' => $userQB,
-                'choice_label' => 'getUsername',
+                'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'attr' => array(
                     'class' => 'select2-select',
-                )
+                ),
             ))
             ->add('disciplinaArte', ChoiceType::class, array(
                 'label' => ' Já cursou(aram) a disciplina de Direção de Arte?',
@@ -145,8 +137,21 @@ class ProjetoType extends AbstractType
             ))
         ;
 
-        /*$userTransformer = new EntityToIdObjectTransformer($this->om, "CineviSecurityBundle:User");
-        $builder->get('user')->addModelTransformer($userTransformer);*/
+        $builder->get('direcao')
+            ->addModelTransformer(new ArrayEntityToArrayIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
+        ;
+        $builder->get('producao')
+            ->addModelTransformer(new ArrayEntityToArrayIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
+        ;
+        $builder->get('fotografia')
+            ->addModelTransformer(new ArrayEntityToArrayIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
+        ;
+        $builder->get('som')
+            ->addModelTransformer(new ArrayEntityToArrayIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
+        ;
+        $builder->get('arte')
+            ->addModelTransformer(new ArrayEntityToArrayIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -155,5 +160,4 @@ class ProjetoType extends AbstractType
             'data_class' => 'Cinevi\RealizacaoBundle\Entity\Projeto',
         ));
     }
-
 }

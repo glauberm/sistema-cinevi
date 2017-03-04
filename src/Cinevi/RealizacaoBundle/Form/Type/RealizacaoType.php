@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
 
 class RealizacaoType extends AbstractType
 {
@@ -25,24 +25,29 @@ class RealizacaoType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $userArray = array();
+        $professorArray = array();
+
+        // Pega os usuários que o usuário atual pode ver
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
         $userQB->orderBy('u.username', 'ASC')->andWhere('u.professor != 1');
-
         foreach ($userQB->getQuery()->getResult() as $result) {
-            if (false === $this->authorizationChecker->isGranted('view', $result)) {
-                $userQB->andWhere('u.id != '.$result->getId());
+            if (true === $this->authorizationChecker->isGranted('view', $result)) {
+                $userArray[$result->getId()] = $result->getUsername();
             }
         }
 
+        // Pega todos os professores
         $professorQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('p');
         $professorQB->orderBy('p.username', 'ASC')->andWhere('p.professor = 1');
+        foreach ($professorQB->getQuery()->getResult() as $result) {
+            $professorArray[$result->getId()] = $result->getUsername();
+        }
 
         $builder
-            ->add('user', EntityType::class, array(
+            ->add('user', ChoiceType::class, array(
                 'label' => 'Responsável',
-                'class' => 'CineviSecurityBundle:User',
-                'query_builder' => $userQB,
-                'choice_label' => 'getUsername',
+                'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
@@ -77,11 +82,9 @@ class RealizacaoType extends AbstractType
                     'class' => 'select2-select',
                 ),
             ))
-            ->add('professor', EntityType::class, array(
+            ->add('professor', ChoiceType::class, array(
                 'label' => 'Professor(a) Orientador(a)',
-                'class' => 'CineviSecurityBundle:User',
-                'query_builder' => $professorQB,
-                'choice_label' => 'getUsername',
+                'choices' => $professorArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
@@ -89,7 +92,7 @@ class RealizacaoType extends AbstractType
                 ),
             ))
             ->add('genero', ChoiceType::class, array(
-                'label' => 'Gênero',
+                'label' => 'Gênero(s)',
                 'choices' => array(
                     'Ficção' => 'Ficção',
                     'Documentário' => 'Documentário',
@@ -99,7 +102,7 @@ class RealizacaoType extends AbstractType
                 ),
                 'multiple' => true,
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione uma opção...',
+                'placeholder' => 'Selecione opções...',
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -125,6 +128,13 @@ class RealizacaoType extends AbstractType
             ->add('locacoes', TextareaType::class, array(
                 'label' => 'Locações',
             ))
+        ;
+
+        $builder->get('user')
+            ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
+        ;
+        $builder->get('professor')
+            ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
         ;
     }
 

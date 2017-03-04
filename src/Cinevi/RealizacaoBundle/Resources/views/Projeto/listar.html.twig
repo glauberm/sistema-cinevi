@@ -4,11 +4,11 @@
 {% set routeAdicionar = path('new_projeto') %}
 
 {% block thead %}
-    <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.nome') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Título', 'item.realizacao.titulo') }}</th>
 {% endblock %}
 
 {% block tbody %}
     <td>
-        <a href="{{ path('get_projeto', { 'id': item.id }) }}">{{ item.nome }}</a>
+        <a href="{{ path('get_projeto', { 'id': item.id }) }}">{{ item.realizacao.titulo }}</a>
     </td>
 {% endblock %}

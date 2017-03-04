@@ -7,7 +7,11 @@
     <div class="col-sm-4"><dt>Professor(a)</dt><dd>{{ item.professor.username }}</dd></div>
 </div>
 <div class="row">
-    <div class="col-sm-6"><dt>Gênero</dt><dd>{{ item.genero }}</dd></div>
+    <div class="col-sm-6"><dt>Gênero(s)</dt>
+        {% for genero in item.genero %}
+            <dd>{{ genero }}</dd>
+        {% endfor %}
+    </div>
     <div class="col-sm-6"><dt>Captação</dt><dd>{{ item.captacao }}</dd></div>
 </div>
 <div class="row">

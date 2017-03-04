@@ -11,6 +11,8 @@ use FOS\RestBundle\View\ViewHandlerInterface;
 use FOS\RestBundle\View\View;
 use Cinevi\AdminBundle\Form\Type\DeleteType;
 
+// exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($pagination),"</pre>"));
+
 abstract class RestfulCrudController extends FOSRestController implements ClassResourceInterface
 {
     protected $bundleName;
@@ -58,8 +60,6 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $request->query->getInt('page', 1),
             $numResultados
         );
-
-        // var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($pagination),"</pre>");
 
         // $listarForm = $this->getForm($builder->getQuery()->getResult(), ListarType::class, 'DELETE', 'delete_'.$this->routeSuffix, array('id' => $id));
 

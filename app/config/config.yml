@@ -68,6 +68,11 @@ swiftmailer:
         type: file
         path: "%kernel.root_dir%/spool"
 
+# SensioFrameworkExtra
+sensio_framework_extra:
+    request:
+        converters: true
+
 # FOSUserBundle Configuration
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
@@ -94,17 +99,22 @@ fos_user:
 
 # FOSRestBundle Configuration
 fos_rest:
-    disable_csrf_role: ROLE_USER
+    disable_csrf_role: null # Se der erro, mude para ROLE_USER
     routing_loader:
         default_format: html
     allowed_methods_listener: true
     unauthorized_challenge: "Basic realm=\"Restricted Area\""
     param_fetcher_listener: true
-    body_listener: true
+    body_listener:
+        array_normalizer: fos_rest.normalizer.camel_keys
+    body_converter:
+        enabled: true
+        validate: true
+        validation_errors_argument: validationErrors # This is the default value
     format_listener:
         enabled: true
         rules:
-            - { path: '^/', priorities: ['html','json','xml', 'rss'], fallback_format: ~, prefer_extension: true }
+            - { path: '^/', priorities: ['html','json','xml','rss'], fallback_format: ~, prefer_extension: true }
     view:
         view_response_listener:
             enabled:              true

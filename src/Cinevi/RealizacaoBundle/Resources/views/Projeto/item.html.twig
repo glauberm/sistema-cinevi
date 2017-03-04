@@ -6,15 +6,20 @@
     <div class="col-sm-4"><dt>Pós-produção</dt><dd>{{ item.posProducao|date('d/m/Y') }}</dd></div>
 </div>
 
-<dt>Direção</dt>
-{% for user in item.direcao %}
-    <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
-{% endfor %}
-
-<dt>Produção</dt>
-{% for user in item.producao %}
-    <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
-{% endfor %}
+<div class="row">
+    <div class="col-sm-6">
+        <dt>Direção</dt>
+        {% for user in item.direcao %}
+            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+        {% endfor %}
+    </div>
+    <div class="col-sm-6">
+        <dt>Produção</dt>
+        {% for user in item.producao %}
+            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+        {% endfor %}
+    </div>
+</div>
 
 <div class="row">
     <div class="col-sm-8">

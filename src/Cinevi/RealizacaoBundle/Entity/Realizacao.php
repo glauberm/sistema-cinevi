@@ -43,7 +43,7 @@ class Realizacao
     protected $professor;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="simple_array")
      **/
     protected $genero;
 
@@ -65,7 +65,7 @@ class Realizacao
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -88,7 +88,7 @@ class Realizacao
     /**
      * Get titulo
      *
-     * @return string 
+     * @return string
      */
     public function getTitulo()
     {
@@ -111,7 +111,7 @@ class Realizacao
     /**
      * Get sinopse
      *
-     * @return string 
+     * @return string
      */
     public function getSinopse()
     {
@@ -134,34 +134,11 @@ class Realizacao
     /**
      * Get modalidade
      *
-     * @return string 
+     * @return string
      */
     public function getModalidade()
     {
         return $this->modalidade;
-    }
-
-    /**
-     * Set genero
-     *
-     * @param string $genero
-     * @return Realizacao
-     */
-    public function setGenero($genero)
-    {
-        $this->genero = $genero;
-
-        return $this;
-    }
-
-    /**
-     * Get genero
-     *
-     * @return string 
-     */
-    public function getGenero()
-    {
-        return $this->genero;
     }
 
     /**
@@ -180,7 +157,7 @@ class Realizacao
     /**
      * Get locacoes
      *
-     * @return string 
+     * @return string
      */
     public function getLocacoes()
     {
@@ -203,7 +180,7 @@ class Realizacao
     /**
      * Get captacao
      *
-     * @return string 
+     * @return string
      */
     public function getCaptacao()
     {
@@ -226,7 +203,7 @@ class Realizacao
     /**
      * Get detalhesCaptacao
      *
-     * @return string 
+     * @return string
      */
     public function getDetalhesCaptacao()
     {
@@ -249,7 +226,7 @@ class Realizacao
     /**
      * Get user
      *
-     * @return \Cinevi\SecurityBundle\Entity\User 
+     * @return \Cinevi\SecurityBundle\Entity\User
      */
     public function getUser()
     {
@@ -272,10 +249,33 @@ class Realizacao
     /**
      * Get professor
      *
-     * @return \Cinevi\SecurityBundle\Entity\User 
+     * @return \Cinevi\SecurityBundle\Entity\User
      */
     public function getProfessor()
     {
         return $this->professor;
+    }
+
+    /**
+     * Set genero
+     *
+     * @param array $genero
+     * @return Realizacao
+     */
+    public function setGenero($genero)
+    {
+        $this->genero = $genero;
+
+        return $this;
+    }
+
+    /**
+     * Get genero
+     *
+     * @return array 
+     */
+    public function getGenero()
+    {
+        return $this->genero;
     }
 }

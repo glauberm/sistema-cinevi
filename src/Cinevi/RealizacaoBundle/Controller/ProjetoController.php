@@ -25,7 +25,7 @@ class ProjetoController extends RestfulCrudController
     {
         $template = $this->bundleName.':email';
 
-        $assunto = 'Novo Projeto: '.$obj->getNome();
+        $assunto = 'Novo Projeto: '.$obj->getRealizacao()->getTitulo();
 
         $path = $this->generateUrl('get_'.$this->routeSuffix, array(
             'id' => $obj->getId(),
@@ -33,7 +33,7 @@ class ProjetoController extends RestfulCrudController
 
         // Envia email para os emails no array
         $emails = array(
-            $obj->getUser()->getEmail(),
+            $obj->getRealizacao()->getUser()->getEmail(),
             'cinevi@vm.uff.br',
             'almoxarifadocinemauff@gmail.com',
             'acervodearteuff@gmail.com',
