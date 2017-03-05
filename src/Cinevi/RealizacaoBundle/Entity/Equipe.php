@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="realizacao_equipes")
  */
-abstract class Equipe
+class Equipe
 {
     /**
      * @ORM\Id
@@ -39,7 +39,7 @@ abstract class Equipe
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -62,7 +62,7 @@ abstract class Equipe
     /**
      * Get funcao
      *
-     * @return \Cinevi\RealizacaoBundle\Entity\Funcao 
+     * @return \Cinevi\RealizacaoBundle\Entity\Funcao
      */
     public function getFuncao()
     {
@@ -95,7 +95,7 @@ abstract class Equipe
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {

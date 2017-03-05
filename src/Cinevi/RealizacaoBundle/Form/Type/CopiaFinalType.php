@@ -27,8 +27,7 @@ class CopiaFinalType extends AbstractType
                     'Outra(s)' => 'Outra(s)',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione opções...',
-                'multiple' => true,
+                'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -44,8 +43,7 @@ class CopiaFinalType extends AbstractType
                     'Outra' => 'Outra',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione opções...',
-                'multiple' => true,
+                'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -64,6 +62,10 @@ class CopiaFinalType extends AbstractType
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
+                'required' => false,
+            ))
+            ->add('duracao', IntegerType::class, array(
+                'label' => 'Duração (em minutos)',
                 'required' => false,
             ))
             ->add('formatoDigitalNativo', ChoiceType::class, array(
@@ -174,17 +176,6 @@ class CopiaFinalType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('dcp', ChoiceType::class, array(
-                'label' => 'Foi feito DCP?',
-                'choices' => array(
-                    'Sim' => '1',
-                    'Não' => '0',
-                ),
-                'placeholder' => 'Não sei',
-                'choices_as_values' => true,
-                'expanded' => true,
-                'required' => false,
-            ))
             ->add('suporteMatrizDigital', ChoiceType::class, array(
                 'label' => 'Suporte da matriz digital',
                 'choices' => array(
@@ -195,8 +186,7 @@ class CopiaFinalType extends AbstractType
                     'Outro' => 'Outro',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione opções...',
-                'multiple' => true,
+                'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -212,8 +202,7 @@ class CopiaFinalType extends AbstractType
                     'Outra' => 'Outra',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione opções...',
-                'multiple' => true,
+                'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -256,7 +245,7 @@ class CopiaFinalType extends AbstractType
                 ),
                 'multiple'=> true,
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione uma opção...',
+                'placeholder' => 'Selecione opções...',
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -266,9 +255,16 @@ class CopiaFinalType extends AbstractType
                 'label' => 'Apoiadores (empresas, instituições, órgãos)',
                 'required' => false,
             ))
-            ->add('duracao', IntegerType::class, array(
-                'label' => 'Duração (em minutos)',
-                'required' => false,
+
+            ->add('dcp', ChoiceType::class, array(
+                'label' => 'Foi feito DCP?',
+                'choices' => array(
+                    'Sim' => '1',
+                    'Não' => '0',
+                ),
+                'placeholder' => 'Não sei',
+                'choices_as_values' => true,
+                'expanded' => true,
             ))
             ->add('fichaTecnica', FichaTecnicaType::class, array(
                 'label' => false,

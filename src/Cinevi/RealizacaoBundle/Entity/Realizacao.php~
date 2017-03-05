@@ -255,4 +255,27 @@ class Realizacao
     {
         return $this->professor;
     }
+
+    /**
+     * Set genero
+     *
+     * @param array $genero
+     * @return Realizacao
+     */
+    public function setGenero($genero)
+    {
+        $this->genero = $genero;
+
+        return $this;
+    }
+
+    /**
+     * Get genero
+     *
+     * @return array 
+     */
+    public function getGenero()
+    {
+        return $this->genero;
+    }
 }

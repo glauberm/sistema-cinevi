@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class RestfulCrudControllerTest extends WebTestCase
 {
+    protected $client;
     // Login
     protected $username = 'admin';
     protected $password = '12345678';
@@ -24,95 +25,95 @@ abstract class RestfulCrudControllerTest extends WebTestCase
     protected $itemRemoveFilter;
     protected $removeButton = 'Remover';
 
-    // exit(var_dump($client->getResponse()->getContent()));
+    // exit(var_dump($this->client->getResponse()->getContent()));
 
     public function testCompleteScenario()
     {
-        $client = static::createClient();
+        $this->client = static::createClient();
 
-        $crawler = $this->doLogin($this->username, $this->password, $client);
+        $crawler = $this->doLogin($this->username, $this->password);
 
-        $crawler = $this->doList($client, $crawler, $this->indexRoute);
+        $crawler = $this->doList($crawler, $this->indexRoute);
 
-        $crawler = $this->doAdd($client, $crawler, $this->addLink, $this->addButton, $this->getAddArrayForm());
+        $crawler = $this->doAdd($crawler, $this->addLink, $this->addButton, $this->getAddArrayForm());
 
-        $crawler = $this->doEdit($client, $crawler, $this->itemEditFilter, $this->itemEditLink, $this->editLink, $this->editButton, $this->getEditArrayForm());
+        $crawler = $this->doEdit($crawler, $this->itemEditFilter, $this->itemEditLink, $this->editLink, $this->editButton, $this->getEditArrayForm());
 
-        $crawler = $this->doRemove($client, $crawler, $this->editLink, $this->itemRemoveLink, $this->itemRemoveFilter, $this->removeButton);
+        $crawler = $this->doRemove($crawler, $this->editLink, $this->itemRemoveLink, $this->itemRemoveFilter, $this->removeButton);
 
-        $this->otherScenarios($client, $crawler);
+        $this->otherScenarios($crawler);
     }
 
-    private function doLogin($username, $password, $client)
+    private function doLogin($username, $password)
     {
-        $crawler = $client->request('GET', '/login');
+        $crawler = $this->client->request('GET', '/login');
 
         $form = $crawler->selectButton('_submit')->form(array(
             '_username' => $username,
             '_password' => $password,
         ));
 
-        $client->submit($form);
+        $this->client->submit($form);
 
         // Checa o login
-        $this->assertTrue($client->getResponse()->isRedirect());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
 
-        return $client->followRedirect();
+        return $this->client->followRedirect();
     }
 
-    protected function doList($client, $crawler, $indexRoute)
+    protected function doList($crawler, $indexRoute)
     {
-        $crawler = $client->request('GET', '/'.$indexRoute);
+        $crawler = $this->client->request('GET', '/'.$indexRoute);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), 'Código de status HTTP inesperado para GET /'.$indexRoute);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Código de status HTTP inesperado para GET /'.$indexRoute);
 
         return $crawler;
     }
 
-    protected function doAdd($client, $crawler, $addLink, $addButton, $addArrayForm)
+    protected function doAdd($crawler, $addLink, $addButton, $addArrayForm)
     {
-        $crawler = $client->click($crawler->selectLink($addLink)->link());
+        $crawler = $this->client->click($crawler->selectLink($addLink)->link());
 
         $form = $crawler->selectButton($addButton)->form($addArrayForm);
 
-        $client->submit($form);
+        $this->client->submit($form);
 
-        return $client->followRedirect();
+        return $this->client->followRedirect();
     }
 
-    protected function doEdit($client, $crawler, $itemEditFilter, $itemEditLink, $editLink, $editButton, $editArrayForm)
+    protected function doEdit($crawler, $itemEditFilter, $itemEditLink, $editLink, $editButton, $editArrayForm)
     {
         $this->assertGreaterThan(0, $crawler->filter($itemEditFilter)->count(), 'Faltando elemento '.$itemEditFilter);
 
-        $crawler = $client->click($crawler->selectLink($itemEditLink)->link());
+        $crawler = $this->client->click($crawler->selectLink($itemEditLink)->link());
 
-        $crawler = $client->click($crawler->selectLink($editLink)->link());
+        $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 
         $form = $crawler->selectButton($editButton)->form($editArrayForm);
 
-        $client->submit($form);
+        $this->client->submit($form);
 
-        return $client->followRedirect();
+        return $this->client->followRedirect();
     }
 
-    protected function doRemove($client, $crawler, $editLink, $itemRemoveLink, $itemRemoveFilter, $removeButton)
+    protected function doRemove($crawler, $editLink, $itemRemoveLink, $itemRemoveFilter, $removeButton)
     {
-        $crawler = $client->click($crawler->selectLink($itemRemoveLink)->link());
+        $crawler = $this->client->click($crawler->selectLink($itemRemoveLink)->link());
 
-        $crawler = $client->click($crawler->selectLink($editLink)->link());
+        $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 
         $this->assertGreaterThan(0, $crawler->filter($itemRemoveFilter)->count(), 'Faltando elemento '.$itemRemoveFilter);
 
-        $client->submit($crawler->selectButton($removeButton)->form());
+        $this->client->submit($crawler->selectButton($removeButton)->form());
 
-        $crawler = $client->followRedirect();
+        $crawler = $this->client->followRedirect();
 
-        $this->assertNotRegExp('/'.$itemRemoveLink.'/', $client->getResponse()->getContent());
+        $this->assertNotRegExp('/'.$itemRemoveLink.'/', $this->client->getResponse()->getContent());
 
         return $crawler;
     }
 
-    protected function otherScenarios($client, $crawler)
+    protected function otherScenarios($crawler)
     {
         return $crawler;
     }

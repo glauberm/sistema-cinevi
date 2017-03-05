@@ -1,6 +1,6 @@
 {% extends 'CineviAdminBundle:Crud:base-editar.html.twig' %}
 
-{% set title = 'Editar ' ~ item.nome %}
+{% set title = 'Editar ' ~ item.realizacao.titulo %}
 {% set routeListar = path('get_copia_finals') %}
 
 {% block form %}

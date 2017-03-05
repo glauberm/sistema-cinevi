@@ -1,10 +1,9 @@
-<div id="equipes"
-data-prototype="
+<div class="well" id="equipes" data-prototype="
     {% filter escape %}
-        {{ include('CineviRealizacaoBundle:Equipe:form.html.twig', { 'form': form.equipes.vars.prototype }) }}
+        {{ include('CineviRealizacaoBundle:Equipe:form.html.twig', { form: form.equipes.vars.prototype }) }}
     {% endfilter %}">
     {% for equipe in form.equipes %}
-        {% include 'CineviRealizacaoBundle:Funcao:form.html.twig' with {form: equipe} %}
+        {% include 'CineviRealizacaoBundle:Equipe:form.html.twig' with {form: equipe} %}
     {% endfor %}
 </div>
 

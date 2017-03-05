@@ -1,13 +1,14 @@
-var $addEquipeLink = $('<a href="#" class="btn btn-default">Adicionar</a>');
-var $newLinkLiEquipe = $('<div class="botao-wrap"></div>').append($addEquipeLink);
-$collectionHolderEquipe = $('div#equipe');
+let $addEquipeLink = $('<a href="#" class="btn btn-primary">Adicionar Equipe</a>');
+let $newLinkLiEquipe = $('<div class="to-many-wrap"></div>').append($addEquipeLink);
+
+$collectionHolderEquipe = $('div#equipes');
 $collectionHolderEquipe.append($newLinkLiEquipe);
 $collectionHolderEquipe.data('index', $collectionHolderEquipe.find(':input').length);
 $addEquipeLink.on('click', function(e)
 {
-    e.defaultPrevented;
+    e.preventDefault();
     addForm($collectionHolderEquipe, $newLinkLiEquipe);
 });
-$collectionHolderEquipe.find('div.toMany-item').each(function() {
+/*$collectionHolderEquipe.find('div.toMany-item').each(function() {
     addFormDeleteLink($(this));
-});
+});*/

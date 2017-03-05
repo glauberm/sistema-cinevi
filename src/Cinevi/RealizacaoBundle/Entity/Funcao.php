@@ -32,7 +32,7 @@ class Funcao
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -55,7 +55,7 @@ class Funcao
     /**
      * Get nome
      *
-     * @return string 
+     * @return string
      */
     public function getNome()
     {
@@ -78,7 +78,7 @@ class Funcao
     /**
      * Get descricao
      *
-     * @return string 
+     * @return string
      */
     public function getDescricao()
     {

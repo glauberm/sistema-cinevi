@@ -1,6 +1,6 @@
 {% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
 
-{% set title = item.nome %}
+{% set title = item.realizacao.titulo %}
 {% set routeListar = path('get_copia_finals') %}
 {% set routeEditar = path('edit_copia_final', { 'id': item.id }) %}
 
@@ -18,6 +18,6 @@
 
 {% block dtdd %}
 
-    {% include 'CineviRealizacaoBundle:CopiaFinal:item.html.twig' with {item: item.direcao} %}
+    {% include 'CineviRealizacaoBundle:CopiaFinal:item.html.twig' %}
 
 {% endblock %}

@@ -25,7 +25,7 @@ class CopiaFinalController extends RestfulCrudController
     {
         $template = $this->bundleName.':email';
 
-        $assunto = 'Nova Cópia Final: '.$obj->getNome();
+        $assunto = 'Nova Cópia Final: '.$obj->getRealizacao()->getTitulo();
 
         $path = $this->generateUrl('get_'.$this->routeSuffix, array(
             'id' => $obj->getId(),
@@ -33,7 +33,7 @@ class CopiaFinalController extends RestfulCrudController
 
         // Envia email para os emails no array
         $emails = array(
-            $obj->getUser()->getEmail(),
+            $obj->getRealizacao()->getUser()->getEmail(),
             'cinevi@vm.uff.br',
             'comissaoproducaouff@gmail.com'
         );

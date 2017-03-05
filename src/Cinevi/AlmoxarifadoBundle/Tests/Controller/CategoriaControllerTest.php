@@ -14,7 +14,7 @@ class CategoriaControllerTest extends RestfulCrudControllerTest
     // Remove
     protected $itemRemoveLink = 'CEtset';
     protected $itemRemoveFilter = '[value="CEtset"]';
-    
+
 
     protected function getAddArrayForm()
     {

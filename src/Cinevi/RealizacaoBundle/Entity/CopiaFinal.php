@@ -118,7 +118,7 @@ class CopiaFinal
     protected $duracao;
 
     /**
-     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\FichaTecnica", cascade={"persist","merge"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\FichaTecnica", cascade={"all"})
      **/
     protected $fichaTecnica;
 
@@ -127,7 +127,7 @@ class CopiaFinal
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -150,7 +150,7 @@ class CopiaFinal
     /**
      * Get cromia
      *
-     * @return string 
+     * @return string
      */
     public function getCromia()
     {
@@ -173,7 +173,7 @@ class CopiaFinal
     /**
      * Get proporcao
      *
-     * @return string 
+     * @return string
      */
     public function getProporcao()
     {
@@ -196,7 +196,7 @@ class CopiaFinal
     /**
      * Get formato
      *
-     * @return string 
+     * @return string
      */
     public function getFormato()
     {
@@ -219,7 +219,7 @@ class CopiaFinal
     /**
      * Get formatoDigitalNativo
      *
-     * @return string 
+     * @return string
      */
     public function getFormatoDigitalNativo()
     {
@@ -242,7 +242,7 @@ class CopiaFinal
     /**
      * Get codec
      *
-     * @return string 
+     * @return string
      */
     public function getCodec()
     {
@@ -265,7 +265,7 @@ class CopiaFinal
     /**
      * Get container
      *
-     * @return string 
+     * @return string
      */
     public function getContainer()
     {
@@ -288,7 +288,7 @@ class CopiaFinal
     /**
      * Get taxaBits
      *
-     * @return integer 
+     * @return integer
      */
     public function getTaxaBits()
     {
@@ -311,7 +311,7 @@ class CopiaFinal
     /**
      * Get velocidade
      *
-     * @return string 
+     * @return string
      */
     public function getVelocidade()
     {
@@ -334,7 +334,7 @@ class CopiaFinal
     /**
      * Get som
      *
-     * @return string 
+     * @return string
      */
     public function getSom()
     {
@@ -357,7 +357,7 @@ class CopiaFinal
     /**
      * Get resolucaoAudioDigital
      *
-     * @return string 
+     * @return string
      */
     public function getResolucaoAudioDigital()
     {
@@ -380,7 +380,7 @@ class CopiaFinal
     /**
      * Get dcp
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getDcp()
     {
@@ -403,7 +403,7 @@ class CopiaFinal
     /**
      * Get suporteMatrizDigital
      *
-     * @return string 
+     * @return string
      */
     public function getSuporteMatrizDigital()
     {
@@ -426,7 +426,7 @@ class CopiaFinal
     /**
      * Get camera
      *
-     * @return string 
+     * @return string
      */
     public function getCamera()
     {
@@ -449,7 +449,7 @@ class CopiaFinal
     /**
      * Get captacaoSom
      *
-     * @return string 
+     * @return string
      */
     public function getCaptacaoSom()
     {
@@ -472,7 +472,7 @@ class CopiaFinal
     /**
      * Get softwareEdicao
      *
-     * @return array 
+     * @return array
      */
     public function getSoftwareEdicao()
     {
@@ -495,7 +495,7 @@ class CopiaFinal
     /**
      * Get orcamento
      *
-     * @return string 
+     * @return string
      */
     public function getOrcamento()
     {
@@ -518,7 +518,7 @@ class CopiaFinal
     /**
      * Get fontesFinanciamento
      *
-     * @return array 
+     * @return array
      */
     public function getFontesFinanciamento()
     {
@@ -541,7 +541,7 @@ class CopiaFinal
     /**
      * Get apoiadores
      *
-     * @return string 
+     * @return string
      */
     public function getApoiadores()
     {
@@ -564,7 +564,7 @@ class CopiaFinal
     /**
      * Get duracao
      *
-     * @return integer 
+     * @return integer
      */
     public function getDuracao()
     {
@@ -587,7 +587,7 @@ class CopiaFinal
     /**
      * Get realizacao
      *
-     * @return \Cinevi\RealizacaoBundle\Entity\Realizacao 
+     * @return \Cinevi\RealizacaoBundle\Entity\Realizacao
      */
     public function getRealizacao()
     {
@@ -610,7 +610,7 @@ class CopiaFinal
     /**
      * Get fichaTecnica
      *
-     * @return \Cinevi\RealizacaoBundle\Entity\FichaTecnica 
+     * @return \Cinevi\RealizacaoBundle\Entity\FichaTecnica
      */
     public function getFichaTecnica()
     {

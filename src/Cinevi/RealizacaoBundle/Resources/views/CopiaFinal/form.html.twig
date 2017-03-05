@@ -1,10 +1,10 @@
 {% include 'CineviRealizacaoBundle:Realizacao:form.html.twig' with {form: form.realizacao} %}
 
 <div class="row">
-    <div class="col-sm-3">{{ form_row(form.cromia) }}</div>
-    <div class="col-sm-3">{{ form_row(form.proporcao) }}</div>
-    <div class="col-sm-3">{{ form_row(form.formato) }}</div>
-    <div class="col-sm-3">{{ form_row(form.duracao) }}</div>
+    <div class="col-sm-6 col-md-3">{{ form_row(form.cromia) }}</div>
+    <div class="col-sm-6 col-md-3">{{ form_row(form.proporcao) }}</div>
+    <div class="col-sm-6 col-md-3">{{ form_row(form.formato) }}</div>
+    <div class="col-sm-6 col-md-3">{{ form_row(form.duracao) }}</div>
 </div>
 <div class="row">
     <div class="col-sm-4">{{ form_row(form.formatoDigitalNativo) }}</div>
@@ -27,7 +27,6 @@
 </div>
 <div class="row">
     <div class="col-sm-6">{{ form_row(form.orcamento) }}</div>
-    <div class="col-sm-6">{{ form_row(form.orcamento) }}</div>
     <div class="col-sm-6">{{ form_row(form.fontesFinanciamento) }}</div>
 </div>
 <div class="row">
@@ -36,6 +35,6 @@
 </div>
 
 <fieldset>
-    <legend>Ficha Técnica</legend>
+    <legend><a id="Ficha Técnica" href="#Ficha Técnica">Ficha Técnica</a></legend>
     {% include 'CineviRealizacaoBundle:FichaTecnica:form.html.twig' with {form: form.fichaTecnica} %}
 </fieldset>

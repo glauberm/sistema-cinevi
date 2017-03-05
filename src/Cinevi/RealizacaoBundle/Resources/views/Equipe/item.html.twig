@@ -1,14 +1,4 @@
-<h2 id="{{ h2 }}"><a href="#{{ h2 }}">{{ h2 }}</a></h2>
-
-<div class="row">
-    <div class="col-sm-6"><dt>Equipe</dt>
-        {% for user in item.users %}
-            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
-        {% endfor %}
-    </div>
-    <div class="col-sm-6"><dt>Breve Currículo</dt><dd class="inherit">{{ item.breveCurriculo ? item.breveCurriculo : 'Não Informado' }}</dd></div>
-</div>
-
-{% if item.disciplina is defined and item.disciplina != null %}
-    <dt>Disciplina</dt><dd>{{ item.disciplina ? 'Sim' : 'Não' }}</dd>
-{% endif %}
+<dt>{{ item.funcao.nome }}</dt>
+{% for user in item.users %}
+    <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+{% endfor %}

@@ -18,7 +18,7 @@ class FichaTecnica
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Cinevi\RealizacaoBundle\Entity\Equipe", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="Cinevi\RealizacaoBundle\Entity\Equipe", cascade={"all"}, orphanRemoval=true)
      **/
     protected $equipes;
 
@@ -54,7 +54,7 @@ class FichaTecnica
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -77,7 +77,7 @@ class FichaTecnica
     /**
      * Get elenco
      *
-     * @return string 
+     * @return string
      */
     public function getElenco()
     {
@@ -100,7 +100,7 @@ class FichaTecnica
     /**
      * Get outrasInformacoes
      *
-     * @return string 
+     * @return string
      */
     public function getOutrasInformacoes()
     {
@@ -123,7 +123,7 @@ class FichaTecnica
     /**
      * Get festivais
      *
-     * @return string 
+     * @return string
      */
     public function getFestivais()
     {
@@ -146,7 +146,7 @@ class FichaTecnica
     /**
      * Get premios
      *
-     * @return string 
+     * @return string
      */
     public function getPremios()
     {
@@ -179,7 +179,7 @@ class FichaTecnica
     /**
      * Get equipes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEquipes()
     {

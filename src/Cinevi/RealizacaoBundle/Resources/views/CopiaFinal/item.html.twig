@@ -1,53 +1,50 @@
 {% include 'CineviRealizacaoBundle:Realizacao:item.html.twig' with {item: item.realizacao} %}
 
 <div class="row">
-    <div class="col-sm-4"><dt>Pré-produção</dt><dd>{{ item.preProducao|date('d/m/Y') }}</dd></div>
-    <div class="col-sm-4"><dt>Produção</dt><dd>{{ item.dataProducao|date('d/m/Y') }}</dd></div>
-    <div class="col-sm-4"><dt>Pós-produção</dt><dd>{{ item.posProducao|date('d/m/Y') }}</dd></div>
+    <div class="col-sm-6 col-md-3"><dt>Cromia</dt><dd>{{ item.cromia ? item.cromia : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6 col-md-3"><dt>Proporção</dt><dd>{{ item.proporcao ? item.proporcao : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6 col-md-3"><dt>Formato</dt><dd>{{ item.formato ? item.formato : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6 col-md-3"><dt>Duração (em minutos)</dt><dd>{{ item.duracao ? item.duracao : 'Não informada(o)' }}</dd></div>
 </div>
-
-<dt>Direção</dt>
-{% for user in item.direcao %}
-    <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
-{% endfor %}
-
-<dt>Produção</dt>
-{% for user in item.producao %}
-    <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
-{% endfor %}
-
 <div class="row">
-    <div class="col-sm-8">
-        <dt>Direção de Fotografia</dt>
-        {% for user in item.fotografia %}
-            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+    <div class="col-sm-4"><dt>Formato Digital Nativo</dt><dd>{{ item.formatoDigitalNativo ? item.formatoDigitalNativo : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Codec</dt><dd>{{ item.codec ? item.codec : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Container (wrapper)</dt><dd>{{ item.container ? item.container : 'Não informada(o)' }}</dd></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"><dt>Taxa de bits</dt><dd>{{ item.taxaBits ? item.taxaBits : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Velocidade</dt><dd>{{ item.velocidade ? item.velocidade : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Som</dt><dd>{{ item.som ? item.som : 'Não informada(o)' }}</dd></div>
+</div>
+<div class="row">
+    <div class="col-sm-6"><dt>Resolução de Áudio Digital</dt><dd>{{ item.resolucaoAudioDigital ? item.resolucaoAudioDigital : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6"><dt>Suporte de Matriz Digital</dt><dd>{{ item.suporteMatrizDigital ? item.suporteMatrizDigital : 'Não informada(o)' }}</dd></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"><dt>Câmera</dt><dd>{{ item.camera ? item.camera : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Equipamentos de Captação de Som</dt><dd class="inherit">{{ item.captacaoSom ? item.captacaoSom : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4">
+        <dt>Software de Edição</dt>
+        {% for softwareEdicao in item.softwareEdicao %}
+            <dd>{{ softwareEdicao }}</dd>
         {% endfor %}
     </div>
-    <div class="col-sm-4">
-        <dt>Já cursou(aram) a disciplina de Fotografia e Iluminação?</dt><dd>{{ item.disciplinaFotografia ? 'Sim' : 'Não' }}</dd>
-    </div>
 </div>
-
 <div class="row">
-    <div class="col-sm-8">
-        <dt>Direção de Som</dt>
-        {% for user in item.som %}
-            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+    <div class="col-sm-6"><dt>Orçamento</dt><dd>{{ item.orcamento ? 'R$ ' ~ item.orcamento : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6">
+        <dt>Fontes de Financiamento</dt>
+        {% for fontesFinanciamento in item.fontesFinanciamento %}
+            <dd>{{ fontesFinanciamento }}</dd>
         {% endfor %}
     </div>
-    <div class="col-sm-4">
-        <dt>Já cursou(aram) a disciplina de Som e Iluminação?</dt><dd>{{ item.disciplinaSom ? 'Sim' : 'Não' }}</dd>
-    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6"><dt>Apoiadores</dt><dd class="inherit">{{ item.apoiadores ? item.apoiadores : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6"><dt>Foi feito DCP?</dt><dd>{{ item.dcp ? item.dcp : 'Não informada(o)' }}</dd></div>
 </div>
 
-<div class="row">
-    <div class="col-sm-8">
-        <dt>Direção de Arte</dt>
-        {% for user in item.arte %}
-            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
-        {% endfor %}
-    </div>
-    <div class="col-sm-4">
-        <dt>Já cursou(aram) a disciplina de Arte e Iluminação?</dt><dd>{{ item.disciplinaArte ? 'Sim' : 'Não' }}</dd>
-    </div>
-</div>
+<fieldset>
+    <legend><a id="Ficha Técnica" href="#Ficha Técnica">Ficha Técnica</a></legend>
+    {% include 'CineviRealizacaoBundle:FichaTecnica:item.html.twig' with {item: item.fichaTecnica} %}
+</fieldset>
