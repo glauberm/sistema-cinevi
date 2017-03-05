@@ -6,7 +6,6 @@
 ## Cópias Finais
 - Além das fotos still, link (com possível senha) do filme
 - VichUploaderBundle para os MateriaisDivulgacao (add em CopiaFinal)
-- Na listagem, a ordenação do título está errada (no Projeto também)
 
 ## Reservas
 - Ver DynamicType nos equipamentos
@@ -41,6 +40,7 @@
 - Interessa uma home com vídeos e outras informações do sistema (Breve currículo para os usuários com rich-text editor e Criar view de página inicial (fora do painel de controle) com infor dos usuários, filmes etc. e Fazer "Outros" podendo os usuários adicionarem?)
 
 # Depois
+- Mudar rodapé do site: tirar o "Voltar ao topo" para "Código por Glauber Mota"
 - Ações em múltiplos itens de uma vez
 - Linhas na tabela pelo php ao invés de javascript
 - Adicionar https://packagist.org/packages/friendsofsymfony/elastica-bundle

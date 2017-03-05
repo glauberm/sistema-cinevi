@@ -10,8 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
 
 class EquipamentoType extends AbstractType
 {
@@ -24,17 +23,21 @@ class EquipamentoType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $categoriaArray = array();
+
         $categoriaQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Categoria')->createQueryBuilder('c');
         $categoriaQB->orderBy('c.nome', 'ASC');
+        foreach ($categoriaQB->getQuery()->getResult() as $result) {
+            $categoriaArray[$result->getNome()] = $result->getId();
+        }
 
         $builder
-            ->add('categoria', EntityType::class, array(
+            ->add('categoria', ChoiceType::class, array(
                 'label' => 'Categoria',
-                'class' => 'CineviAlmoxarifadoBundle:Categoria',
-                'query_builder' => $categoriaQB,
-                'choice_label' => 'getNome',
+                'choices' => $categoriaArray,
                 'invalid_message' => 'Este valor não é válido.',
                 'placeholder' => 'Selecione uma opção...',
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 )
@@ -88,6 +91,9 @@ class EquipamentoType extends AbstractType
                 'expanded' => true,
                 'choices_as_values' => true,
             ))
+        ;
+        $builder->get('categoria')
+            ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviAlmoxarifadoBundle:Categoria'))
         ;
     }
 

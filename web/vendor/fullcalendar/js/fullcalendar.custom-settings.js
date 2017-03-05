@@ -24,10 +24,8 @@ $(function () {
 // BOOTSTRAP COLLAPSE
 (function($, viewport){
     $(document).ready(function() {
-        if(viewport.is('>sm')) {
+        if(viewport.is('>=sm')) {
             $('#calendar-holder').fullCalendar( 'changeView', 'month' );
-        } else if(viewport.is('sm')) {
-            $('#calendar-holder').fullCalendar( 'changeView', 'basicWeek' )
         }
     });
 })(jQuery, ResponsiveBootstrapToolkit);

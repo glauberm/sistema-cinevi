@@ -22,7 +22,7 @@ services:
 
     cinevi.almoxarifado.calendarevent_type:
         class: Cinevi\AlmoxarifadoBundle\Form\Type\CalendarEventType
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker']
         tags:
             - { name: form.type, alias: view }
 

@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Cinevi\SecurityBundle\Validation\UserValidationGroupResolver;
 
@@ -74,6 +74,10 @@ class UserType extends AbstractType
                 ),
                 'choices_as_values' => true,
                 'expanded' => true,
+            ))
+            ->add('breveCurriculo', TextareaType::class, array(
+                'label' => 'Breve Currículo',
+                'required' => false,
             ))
         ;
 

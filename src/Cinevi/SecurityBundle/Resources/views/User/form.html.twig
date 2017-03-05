@@ -13,6 +13,7 @@
     <div class="col-sm-4">{{ form_row(form.confirmado) }}</div>
     <div class="col-sm-4">{{ form_row(form.professor) }}</div>
 </div>
+{{ form_row(form.breveCurriculo) }}
 {% if is_granted('ROLE_SUPER_ADMIN') %}
     {{ form_row(form.roles) }}
 {% endif %}

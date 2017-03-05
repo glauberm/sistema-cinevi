@@ -6,68 +6,83 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
+use Cinevi\AdminBundle\Form\Transformer\ArrayEntityToArrayIdObjectTransformer;
 
 class CalendarEventType extends AbstractType
 {
     private $em;
+    private $authorizationChecker;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker)
     {
-	    $this->em = $em;
+        $this->em = $em;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $equipamentoQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Equipamento')->createQueryBuilder('e');
-        $equipamentoQB->orderBy('e.nome', 'ASC');
+        $userArray = array();
+        $projetoArray = array();
+        $equipamentoArray = array();
 
+        // Pega os usuários que o usuário atual pode ver
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
-        $userQB->orderBy('u.username', 'ASC')->andWhere('u.professor != 1');
-
+        $userQB->orderBy('u.username', 'ASC');
         foreach ($userQB->getQuery()->getResult() as $result) {
-            if (false === $this->authorizationChecker->isGranted('view', $result)) {
-                $userQB->andWhere('u.id != '.$result->getId());
+            if (true === $this->authorizationChecker->isGranted('view', $result)) {
+                $userArray[$result->getUsername()] = $result->getId();
             }
         }
 
-        $projetoQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Projeto')->createQueryBuilder('p');
-        $projetoQB->orderBy('p.nome', 'ASC');
+        // Pega todos os equipamentos
+        $equipamentoQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Equipamento')->createQueryBuilder('e');
+        $equipamentoQB->orderBy('e.nome', 'ASC');
+        foreach ($equipamentoQB->getQuery()->getResult() as $result) {
+            $equipamentoArray[$result->getNome()] = $result->getId();
+        }
+
+        // Pega os projetos que o usuário atual pode ver
+        $projetoQB = $this->em->getRepository('CineviRealizacaoBundle:Projeto')->createQueryBuilder('p');
+        $projetoQB->orderBy('p.id', 'DESC');
+        foreach ($projetoQB->getQuery()->getResult() as $result) {
+            if (true === $this->authorizationChecker->isGranted('view', $result)) {
+                $projetoArray[$result->getRealizacao()->getTitulo()] = $result->getId();
+            }
+        }
 
         $builder
-            ->add('user', EntityType::class, array(
+            ->add('user', ChoiceType::class, array(
                 'label' => 'Responsável',
-                'class' => 'CineviSecurityBundle:User',
-                'query_builder' => $userQB,
-                'choice_label' => 'getUsername',
+                'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione uma opção...',
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 )
             ))
-            ->add('equipamentos', EntityType::class, array(
-                'label' => 'Equipamento',
-                'class' => 'CineviAlmoxarifadoBundle:Equipamento',
-                'query_builder' => $equipamentoQB,
-                'choice_label' => 'getNome',
-                'invalid_message' => 'Valor(es) inválido(s).',
-                'placeholder' => 'Selecione uma opção...',
+            ->add('equipamentos', ChoiceType::class, array(
+                'label' => 'Equipamento(s)',
+                'choices' => $equipamentoArray,
+                'invalid_message' => 'Este não é um valor válido.',
+                'placeholder' => 'Selecione opções...',
                 'multiple' => true,
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
-                )
+                ),
             ))
-            ->add('projeto', EntityType::class, array(
+            ->add('projeto', ChoiceType::class, array(
                 'label' => 'Projeto',
-                'class' => 'CineviAlmoxarifadoBundle:Projeto',
-                'query_builder' => $projetoQB,
-                'choice_label' => 'getNome',
+                'choices' => $projetoArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'placeholder' => 'Selecione uma opção...',
+                'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 )
@@ -88,6 +103,15 @@ class CalendarEventType extends AbstractType
                     'class' => 'datepicker',
                 )
             ))
+        ;
+        $builder->get('user')
+            ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
+        ;
+        $builder->get('equipamentos')
+            ->addModelTransformer(new ArrayEntityToArrayIdObjectTransformer($this->em, 'CineviRealizacaoBundle:Equipamento'))
+        ;
+        $builder->get('projeto')
+            ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviRealizacaoBundle:Projeto'))
         ;
     }
 
