@@ -1,15 +1,12 @@
 # TO-DO
 
 ## Imediato
-- Checar o transformer
-- Teste do Projeto e Cópia Final
+- Teste da Cópia Final
+- Corrigir Reservas
 
 ## Cópias Finais
 - Além das fotos still, link (com possível senha) do filme
 - VichUploaderBundle para os MateriaisDivulgacao (add em CopiaFinal)
-
-## Factory
-- Criar factory (http://symfony.com/doc/2.8/service_container/factories.html)
 
 ## Reservas
 - Ver DynamicType nos equipamentos
@@ -19,6 +16,9 @@
 
 ## Template
 - Adicionar ícones nos botões de adicionar, editar e remover e deixá-los fixos na nav-bar. Possíveis botões extras vão para o accordion.
+
+## Validação
+- Checar todos os integers para avaliação de number aparecer primerio
 
 ## CRON
 - Checar se dia atual é startDate ou endDate de alguma reserva e enviar email.
@@ -40,3 +40,7 @@
 - Mais funções no Projeto?
 - Interessa que os alunos preencham informações no sistema? (Talvez criar um atributo universal de "submetido por"? e Tentar um AJAX/DynamicType para poder adicionar o campo e já alterá-lo -- por exemplo, no campo das funções adicionar mais uma função através de um modal e já adicionar a opção sem recarregar)
 - Interessa uma home com vídeos e outras informações do sistema (Breve currículo para os usuários com rich-text editor e Criar view de página inicial (fora do painel de controle) com infor dos usuários, filmes etc. e Fazer "Outros" podendo os usuários adicionarem?)
+
+# Depois
+- Checar o deprecated no ```The hardcoded value you are using for the $referenceType argument of the Symfony\Component\Routing\Generator\UrlGenerator::generate method is deprecated since version 2.8 and will not be supported anymore in 3.0. Use the constants defined in the UrlGeneratorInterface instead:```
+- Criar factory (http://symfony.com/doc/2.8/service_container/factories.html)

@@ -1,3 +1,7 @@
+// ASC E DESC
+$('.asc').append('<b class="caret caret-inverse"></b>');
+$('.desc').append('<b class="caret"></b>');
+
 // SELECT2
 $(".select2-select").select2({
     theme: "bootstrap"
@@ -28,7 +32,3 @@ autosize($('textarea.form-control'));
         }
     });
 })(jQuery, ResponsiveBootstrapToolkit);
-
-// ASC E DESC
-$('.asc').append('<b class="caret caret-inverse"></b>');
-$('.desc').append('<b class="caret"></b>');

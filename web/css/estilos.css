@@ -73,6 +73,15 @@ textarea.form-control {
     -moz-box-shadow: inset 0 -1px 0 rgba(255,255,255,0.15),0 2px 5px rgba(0,0,0,0.2);
     -webkit-box-shadow: inset 0 -1px 0 rgba(255,255,255,0.15),0 2px 5px rgba(0,0,0,0.2);
     box-shadow: inset 0 -1px 0 rgba(255,255,255,0.15),0 2px 5px rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.header .a-logo {
+    float: left;
 }
 
 .header .logo {
@@ -87,7 +96,7 @@ textarea.form-control {
 
 /* CONTENT */
 .content {
-    padding-top: 30px;
+    padding-top: 100px;
 }
 
 /* ASIDE */
@@ -96,27 +105,31 @@ textarea.form-control {
 }
 
 /* MENU TOPO */
-.menu-topo {
+.header .menu-topo {
+    float: right;
+}
+
+.header .menu-topo {
     position: relative;
     top: -2px;
 }
 
-.menu-topo span {
+.header .menu-topo span {
     margin-left: 2px;
 }
 
-.menu-topo svg {
+.header .menu-topo svg {
     width: 26px;
     height: 24px;
     margin-bottom: -7px;
 }
 
-.menu-topo .nav > li > a {
+.header .menu-topo .nav > li > a {
     padding: 10px;
 }
 
-.menu-topo li a svg g,
-.menu-topo li a svg path {
+.header .menu-topo li a svg g,
+.header .menu-topo li a svg path {
     -webkit-transition: fill 0.3s ease;
     -moz-transition: fill 0.3s ease;
     -ms-transition: fill 0.3s ease;
@@ -124,103 +137,103 @@ textarea.form-control {
     transition: fill 0.3s ease;
 }
 
-.menu-topo .nav > li > a:hover,
-.menu-topo .nav > li > a:focus {
+.header .menu-topo .nav > li > a:hover,
+.header .menu-topo .nav > li > a:focus {
     background-color: transparent;
 }
 
-.menu-topo .nav > .active > a:hover,
-.menu-topo .nav > .active > a:focus {
+.header .menu-topo .nav > .active > a:hover,
+.header .menu-topo .nav > .active > a:focus {
     background-color: #006886;
 }
 
-.menu-topo li .logout svg g,
-.menu-topo li .logout svg path {
+.header .menu-topo li .logout svg g,
+.header .menu-topo li .logout svg path {
     fill: #a94442;
 }
 
-.menu-topo li a:hover svg g,
-.menu-topo li a:hover svg path,
-.menu-topo li a:focus svg g,
-.menu-topo li a:focus svg path,
-.menu-topo li a:active svg g,
-.menu-topo li a:active svg path {
+.header .menu-topo li a:hover svg g,
+.header .menu-topo li a:hover svg path,
+.header .menu-topo li a:focus svg g,
+.header .menu-topo li a:focus svg path,
+.header .menu-topo li a:active svg g,
+.header .menu-topo li a:active svg path {
     fill: #08A5D4;
 }
 
-.menu-topo li .logout:hover svg g,
-.menu-topo li .logout:hover svg path,
-.menu-topo li .logout:focus svg g,
-.menu-topo li .logout:focus svg path,
-.menu-topo li .logout:active svg g,
-.menu-topo li .logout:active svg path {
+.header .menu-topo li .logout:hover svg g,
+.header .menu-topo li .logout:hover svg path,
+.header .menu-topo li .logout:focus svg g,
+.header .menu-topo li .logout:focus svg path,
+.header .menu-topo li .logout:active svg g,
+.header .menu-topo li .logout:active svg path {
     fill: #843534;
 }
 
-.menu-topo .active svg g,
-.menu-topo .active svg path {
+.header .menu-topo .active svg g,
+.header .menu-topo .active svg path {
     fill: #EAD740;
 }
 
-.menu-topo .active a:hover svg g,
-.menu-topo .active a:hover svg path,
-.menu-topo .active a:focus svg g,
-.menu-topo .active a:focus svg path,
-.menu-topo .active a:active svg g,
-.menu-topo .active a:active svg path {
+.header .menu-topo .active a:hover svg g,
+.header .menu-topo .active a:hover svg path,
+.header .menu-topo .active a:focus svg g,
+.header .menu-topo .active a:focus svg path,
+.header .menu-topo .active a:active svg g,
+.header .menu-topo .active a:active svg path {
     fill: #EAD740;
 }
 
 /* PANEL MENU */
-.panel-main+.panel-main {
+.aside .panel-main+.panel-main {
     margin-top: 30px;
 }
 
-.panel-main .panel-heading a {
+.aside .panel-main .panel-heading a {
     display: block;
 }
 
-.panel-main .panel-heading a:hover,
-.panel-main .panel-heading a:focus,
-.panel-main .panel-heading a:active {
+.aside .panel-main .panel-heading a:hover,
+.aside .panel-main .panel-heading a:focus,
+.aside .panel-main .panel-heading a:active {
     text-decoration: none;
 }
 
-.panel-main .panel-heading svg {
+.aside .panel-main .panel-heading svg {
     width: 21px;
     height: 18px;
 }
 
-.panel-main .panel-collapse svg {
+.aside .panel-main .panel-collapse svg {
     width: 23px;
     height: 21px;
     margin: 5px 5px -5px 5px;
 }
 
-.panel-main .panel-collapse a {
+.aside .panel-main .panel-collapse a {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.panel-main .panel-collapse svg g,
-.panel-main .panel-collapse svg path {
+.aside .panel-main .panel-collapse svg g,
+.aside .panel-main .panel-collapse svg path {
     fill: #006886;
 }
 
-.panel-main .panel-collapse .active svg g,
-.panel-main .panel-collapse .active svg path {
+.aside .panel-main .panel-collapse .active svg g,
+.aside .panel-main .panel-collapse .active svg path {
     fill: #EAD740;
 }
 
 /* NAVBAR */
-.navbar svg {
+.main .navbar svg {
     width: 18px;
     height: 18px;
 }
 
 /* ÍCONES */
-.icone-voltar {
+.main .navbar .icone-voltar {
     -webkit-transition: transform 0.3s ease;
     -moz-transition: transform 0.3s ease;
     -ms-transition: transform 0.3s ease;
@@ -233,7 +246,7 @@ textarea.form-control {
     transform: rotate(45deg);
 }
 
-.collapsed .icone-voltar {
+.main .navbar .collapsed .icone-voltar {
     -moz-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     -o-transform: rotate(180deg);
@@ -260,7 +273,11 @@ textarea.form-control {
     border-color: #b3a21e;
 }
 
-.header-security svg {
+.header-security .logo {
+    display: inline-block;
+}
+
+.header-security .logo svg {
     width: 226px;
     height: 44px;
 }
@@ -351,5 +368,34 @@ textarea.form-control {
 
     .aside {
         margin-top: 0;
+    }
+}
+
+@media (max-width: 320px)
+{
+    .header {
+        position: static;
+        padding-bottom: 0;
+    }
+
+    .content {
+        padding-top: 30px;
+    }
+
+    .header .a-logo {
+        float: none;
+        text-align: center;
+    }
+
+    .header .menu-topo {
+        text-align: center;
+        display: block;
+        margin-top: 5px;
+        width: 100%;
+    }
+
+    .header .menu-topo .nav {
+        display: inline-block;
+        margin: 0 auto;
     }
 }

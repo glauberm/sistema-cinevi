@@ -35,7 +35,7 @@ class CopiaFinalType extends AbstractType
                 'required' => false,
             ))
             ->add('proporcao', ChoiceType::class, array(
-                'label' => 'Cromia',
+                'label' => 'Proporção',
                 'choices' => array(
                     'Padrão HD - 16:9' => 'Padrão HD - 16:9',
                     'Scope - 2,39:1' => 'Scope - 2,39:1',
@@ -44,7 +44,8 @@ class CopiaFinalType extends AbstractType
                     'Outra' => 'Outra',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione uma opção...',
+                'placeholder' => 'Selecione opções...',
+                'multiple' => true,
                 'attr' => array(
                     'class' => 'select2-select',
                 ),
@@ -123,7 +124,7 @@ class CopiaFinalType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('taxaBits', ChoiceType::class, array(
+            ->add('taxaBits', IntegerType::class, array(
                 'label' => 'Taxa de Bits',
                 'required' => false,
             ))
@@ -179,6 +180,7 @@ class CopiaFinalType extends AbstractType
                     'Sim' => '1',
                     'Não' => '0',
                 ),
+                'placeholder' => 'Não sei',
                 'choices_as_values' => true,
                 'expanded' => true,
                 'required' => false,
@@ -269,7 +271,7 @@ class CopiaFinalType extends AbstractType
                 'required' => false,
             ))
             ->add('fichaTecnica', FichaTecnicaType::class, array(
-                'label' => null,
+                'label' => false,
             ))
         ;
     }

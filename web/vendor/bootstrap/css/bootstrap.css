@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=469fa481eed325fbc60496989414103c)
- * Config saved to config.json and https://gist.github.com/469fa481eed325fbc60496989414103c
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=dc57caa192c47288eae356bf4370327f)
+ * Config saved to config.json and https://gist.github.com/dc57caa192c47288eae356bf4370327f
  */
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -1710,10 +1710,10 @@ output {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
-  border-color: #decc3a;
+  border-color: #ead740;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(222, 204, 58, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(222, 204, 58, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(234, 215, 64, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(234, 215, 64, 0.6);
 }
 .form-control::-moz-placeholder {
   color: #999999;
