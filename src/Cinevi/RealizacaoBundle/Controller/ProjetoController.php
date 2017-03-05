@@ -21,6 +21,11 @@ class ProjetoController extends RestfulCrudController
     protected $label = 'projeto';
     protected $formClassName = ProjetoType::class;
 
+    protected function listar($builder, EntityManager $em)
+    {
+        return $builder->join('item.realizacao', 'r');
+    }
+
     protected function posCriar($obj, EntityManager $em)
     {
         $template = $this->bundleName.':email';

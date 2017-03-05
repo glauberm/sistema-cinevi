@@ -1,7 +1,6 @@
 # TO-DO
 
 ## Imediato
-- Teste da Cópia Final
 - Corrigir Reservas
 
 ## Cópias Finais

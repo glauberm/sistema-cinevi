@@ -21,6 +21,11 @@ class CopiaFinalController extends RestfulCrudController
     protected $label = 'cópia final';
     protected $formClassName = CopiaFinalType::class;
 
+    protected function listar($builder, EntityManager $em)
+    {
+        return $builder->join('item.realizacao', 'r');
+    }
+    
     protected function posCriar($obj, EntityManager $em)
     {
         $template = $this->bundleName.':email';
