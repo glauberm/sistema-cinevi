@@ -1,20 +1,17 @@
-$(document).ready(function()
-{
-    ascDescCaller();
-    select2Caller();
-    dateTimePickerCaller();
-    autosizeCaller();
-});
+ascDescCaller();
+select2Caller();
+dateTimePickerCaller();
+autosizeCaller();
 
 // ASC E DESC
-function ascDescCaller()
+function ascDescCaller ()
 {
-    $('.asc').append('<b class="caret caret-inverse"></b>');
-    $('.desc').append('<b class="caret"></b>');
+    $(".asc").append("<b class='caret caret-inverse'></b>");
+    $(".desc").append("<b class='caret'></b>");
 }
 
 // SELECT2
-function select2Caller()
+function select2Caller ()
 {
     $(".select2-select").select2({
         theme: "bootstrap"
@@ -22,7 +19,7 @@ function select2Caller()
 }
 
 // DATETIMEPICKER
-function dateTimePickerCaller()
+function dateTimePickerCaller ()
 {
     $(".datepicker").datetimepicker({
         format: "DD/MM/YYYY"
@@ -36,19 +33,19 @@ function dateTimePickerCaller()
 }
 
 // AUTOSIZE
-function autosizeCaller()
+function autosizeCaller ()
 {
-    autosize($('textarea.form-control'));
+    autosize($("textarea.form-control"));
 }
 
 // BOOTSTRAP COLLAPSE
 (function($, viewport) {
     $(document).ready(function() {
-        if(viewport.is('<sm')) {
-            $('#admin-menu').collapse('hide');
-            $('#almoxarifado-menu').collapse('hide');
-            $('#realizacao-menu').collapse('hide');
-            $('#main-navbar').collapse('hide');
+        if(viewport.is("<sm")) {
+            $("#admin-menu").collapse("hide");
+            $("#almoxarifado-menu").collapse("hide");
+            $("#realizacao-menu").collapse("hide");
+            $("#main-navbar").collapse("hide");
         }
     });
 })(jQuery, ResponsiveBootstrapToolkit);

@@ -39,13 +39,6 @@ class CalendarEventType extends AbstractType
             }
         }
 
-        // Pega todos os equipamentos
-        $equipamentoQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Equipamento')->createQueryBuilder('e');
-        $equipamentoQB->orderBy('e.nome', 'ASC');
-        foreach ($equipamentoQB->getQuery()->getResult() as $result) {
-            $equipamentoArray[$result->getNome()] = $result->getId();
-        }
-
         // Pega os projetos que o usuário atual pode ver
         $projetoQB = $this->em->getRepository('CineviRealizacaoBundle:Projeto')->createQueryBuilder('p');
         $projetoQB->orderBy('p.id', 'DESC');
@@ -53,6 +46,16 @@ class CalendarEventType extends AbstractType
             if (true === $this->authorizationChecker->isGranted('view', $result)) {
                 $projetoArray[$result->getRealizacao()->getTitulo()] = $result->getId();
             }
+        }
+
+        // Pega todas os equipamentos por categoria
+        $categoriaQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Categoria')->createQueryBuilder('c');
+        $categoriaQB->orderBy('c.nome', 'ASC');
+        foreach ($categoriaQB->getQuery()->getResult() as $categoria) {
+            foreach ($categoria->getEquipamentos() as $equipamento) {
+                $equipamentosArray[$equipamento->getNome()] = $equipamento->getId();
+            }
+            $categoriaArray[$categoria->getNome()] = $equipamentosArray;
         }
 
         $builder
@@ -65,17 +68,6 @@ class CalendarEventType extends AbstractType
                 'attr' => array(
                     'class' => 'select2-select',
                 )
-            ))
-            ->add('equipamentos', ChoiceType::class, array(
-                'label' => 'Equipamento(s)',
-                'choices' => $equipamentoArray,
-                'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione opções...',
-                'multiple' => true,
-                'choices_as_values' => true,
-                'attr' => array(
-                    'class' => 'select2-select',
-                ),
             ))
             ->add('projeto', ChoiceType::class, array(
                 'label' => 'Projeto',
@@ -103,15 +95,26 @@ class CalendarEventType extends AbstractType
                     'class' => 'datepicker',
                 )
             ))
+            ->add('equipamentos', ChoiceType::class, array(
+                'label' => 'Equipamento(s)',
+                'choices' => $categoriaArray,
+                'invalid_message' => 'Este não é um valor válido.',
+                'placeholder' => 'Selecione opções...',
+                'multiple' => true,
+                'choices_as_values' => true,
+                'attr' => array(
+                    'class' => 'select2-select',
+                ),
+            ))
         ;
         $builder->get('user')
             ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
         ;
-        $builder->get('equipamentos')
-            ->addModelTransformer(new ArrayEntityToArrayIdObjectTransformer($this->em, 'CineviRealizacaoBundle:Equipamento'))
-        ;
         $builder->get('projeto')
             ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviRealizacaoBundle:Projeto'))
+        ;
+        $builder->get('equipamentos')
+            ->addModelTransformer(new ArrayEntityToArrayIdObjectTransformer($this->em, 'CineviAlmoxarifadoBundle:Equipamento'))
         ;
     }
 

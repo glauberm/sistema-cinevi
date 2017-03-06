@@ -35,6 +35,6 @@ services:
     # Listener
     cinevi.almoxarifado.load_data_listener:
         class: Cinevi\AlmoxarifadoBundle\Listener\LoadDataListener
-        arguments: ['@doctrine.orm.entity_manager','@service_container','@security.authorization_checker','@security.token_storage']
+        arguments: ['@doctrine.orm.entity_manager','@service_container']
         tags:
             - { name: 'kernel.event_listener', event: 'fullcalendar.set_data', method: loadData }

@@ -228,7 +228,7 @@ textarea.form-control {
 }
 
 /* ÍCONES */
-.main .navbar .icone-voltar {
+.aside .panel-main .icone-voltar {
     -webkit-transition: transform 0.3s ease;
     -moz-transition: transform 0.3s ease;
     -ms-transition: transform 0.3s ease;
@@ -241,7 +241,7 @@ textarea.form-control {
     transform: rotate(45deg);
 }
 
-.main .navbar .collapsed .icone-voltar {
+.aside .panel-main .collapsed .icone-voltar {
     -moz-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     -o-transform: rotate(180deg);
@@ -349,22 +349,10 @@ textarea.form-control {
 }
 
 /* FULL CALENDAR */
-/*.fc-event {
-    font-weight: 700 !important;
-    padding: .25em .5em .25em !important;
-    border: 1px solid #c8b41f !important;
-    font-size: 1.2rem !important;
-    color: #FFF;
+.fc-event {
+    padding: .25em .5em .25em;
+    font-size: inherit;
 }
-
-.fc-left,
-.fc-right {
-    margin-bottom: 10px;
-}
-
-.fc-day-grid-event .fc-content {
-    white-space: normal !important;
-}*/
 
 @media (min-width: 992px)
 {

@@ -3,9 +3,9 @@
 {% set title = 'Reservas de Equipamento(s)' %}
 
 {% block stylesheets %}
-    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
     <link rel="stylesheet" media="print" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.print.css') }}" />
+    {{ parent() }}
 {% endblock %}
 
 {% block mainAction %}
@@ -33,12 +33,16 @@
                 <thead>
                     <tr>
                         <th>{{ knp_pagination_sortable(pagination, 'Cód.', 'item.title') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Cód.', 'item.startDate') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Cód.', 'item.endDate') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in pagination %}
                         <tr>
                             <td><a href="{{ path('get_calendar_event', { 'id': item.id }) }}">{{ item.title }}</a></td>
+                            <td><a href="{{ path('get_calendar_event', { 'id': item.id }) }}">{{ item.startDate|date('d/m/Y') }}</a></td>
+                            <td><a href="{{ path('get_calendar_event', { 'id': item.id }) }}">{{ item.endDate|date('d/m/Y') }}</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -54,6 +58,43 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('vendor/fullcalendar/js/fullcalendar.custom-settings.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#calendar-holder").fullCalendar({
+                header: {
+                    left: "prev, next",
+                    center: "title",
+                    right: "month, basicWeek, basicDay,"
+                },
+                defaultView: "basicDay",
+                lang: "pt-br",
+                lazyFetching: true,
+                eventLimit: false, // allow "more" link when too many events
+                eventSources: [
+                    {
+                        url: "{{ path('ancarebeca_full_calendar_load') }}",
+                        type: "POST",
+                        data: {},
+                        error: function(xhr, status, error) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            console.log(err.Message);
+                        }
+                    }
+                ],
+                eventBackgroundColor: "#EAD741",
+                eventTextColor: "#120e08",
+                eventBorderColor: "#bbaa1f"
+            });
+        });
+
+        // BOOTSTRAP COLLAPSE
+        (function($, viewport){
+            $(document).ready(function() {
+                if(viewport.is(">=sm")) {
+                    $("#calendar-holder").fullCalendar( "changeView", "month" );
+                }
+            });
+        })(jQuery, ResponsiveBootstrapToolkit);
+    </script>
     <script src="{{ asset('vendor/fullcalendar/js/lang/pt-br.js') }}" type="text/javascript"></script>
 {% endblock %}

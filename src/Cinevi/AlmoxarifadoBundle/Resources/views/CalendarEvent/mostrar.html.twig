@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-sm-4"><dt>Código</dt><dd>{{ item.title }}</dd></div>
         <div class="col-sm-4"><dt>Usuário</dt><dd><a href="{{ path('get_user', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
-        <div class="col-sm-4"><dt>Projeto</dt><dd>{{ item.projeto.nome }}</dd></div>
+        <div class="col-sm-4"><dt>Projeto</dt><dd>{{ item.projeto.realizacao.titulo }}</dd></div>
     </div>
     <div>
         <dt>Equipamentos</dt>

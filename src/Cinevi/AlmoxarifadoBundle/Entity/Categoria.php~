@@ -22,6 +22,11 @@ class Categoria
      **/
     protected $nome;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Categoria", cascade={"merge"}, mappedBy="categoria")
+     **/
+    protected $equipamentos;
+
 
     /**
      * Get id

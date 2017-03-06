@@ -10,12 +10,10 @@
 ## Reservas
 - Ver DynamicType nos equipamentos
 
-## Usuários
-- Adicionar breve descrição
-
 ## Template
 - Adicionar ícones nos botões de adicionar, editar e remover e deixá-los fixos na nav-bar. Possíveis botões extras vão para o accordion.
 - Adicionar máscaras de dinheiro, integer
+- Mudar ícones nos links de painel de controle e de funções
 
 ## Validação
 - Checar todos os integers para avaliação de number aparecer primerio

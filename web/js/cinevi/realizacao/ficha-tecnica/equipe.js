@@ -1,5 +1,5 @@
-let $addEquipeLink = $('<a href="#" class="btn btn-primary">Adicionar Equipe</a>');
-let $newLinkLiEquipe = $('<div class="to-many-wrap"></div>').append($addEquipeLink);
+var $addEquipeLink = $('<a href="#" class="btn btn-primary">Adicionar Equipe</a>');
+var $newLinkLiEquipe = $('<div class="to-many-wrap"></div>').append($addEquipeLink);
 
 $collectionHolderEquipe = $('div#equipes');
 $collectionHolderEquipe.append($newLinkLiEquipe);
