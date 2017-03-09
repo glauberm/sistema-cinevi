@@ -64,7 +64,7 @@
                 header: {
                     left: "prev, next",
                     center: "title",
-                    right: "month, basicWeek, basicDay,"
+                    right: "month, basicWeek, basicDay"
                 },
                 defaultView: "basicDay",
                 lang: "pt-br",
@@ -83,18 +83,16 @@
                 ],
                 eventBackgroundColor: "#EAD741",
                 eventTextColor: "#120e08",
-                eventBorderColor: "#bbaa1f"
-            });
-        });
-
-        // BOOTSTRAP COLLAPSE
-        (function($, viewport){
-            $(document).ready(function() {
-                if(viewport.is(">=sm")) {
-                    $("#calendar-holder").fullCalendar( "changeView", "month" );
+                eventBorderColor: "#bbaa1f",
+                loading: function( isLoading, view ) {
+                    if(isLoading) {
+                        alert("oi!");
+                    } else {
+                        alert("tchau!");
+                    }
                 }
             });
-        })(jQuery, ResponsiveBootstrapToolkit);
+        });
     </script>
     <script src="{{ asset('vendor/fullcalendar/js/lang/pt-br.js') }}" type="text/javascript"></script>
 {% endblock %}
