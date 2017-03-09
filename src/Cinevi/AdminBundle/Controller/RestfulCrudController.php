@@ -46,7 +46,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $builder = $repository->createQueryBuilder('item')->orderBy('item.id', 'DESC');
         foreach ($builder->getQuery()->getResult() as $result) {
             if (false === $this->get('security.authorization_checker')->isGranted('view', $result)) {
-                $builder->andWhere('item.id != '.$result->getId());
+                $builder->where('item.id != '.$result->getId());
             }
         }
 

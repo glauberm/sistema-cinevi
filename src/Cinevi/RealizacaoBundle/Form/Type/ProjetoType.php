@@ -23,9 +23,9 @@ class ProjetoType extends AbstractType
     {
         $userArray = array();
 
-        // Pega todos os usuários
+        // Pega todos os usuários que não são professores
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
-        $userQB->orderBy('u.username', 'ASC')->andWhere('u.professor != 1');
+        $userQB->orderBy('u.username', 'ASC')->where('u.professor != 1');
         foreach ($userQB->getQuery()->getResult() as $result) {
             $userArray[$result->getUsername()] = $result->getId();
         }

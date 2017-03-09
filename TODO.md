@@ -6,7 +6,6 @@
 - Nova role que é só aprovação de usuário
 - O responsável por um projeto só pode criar outro projeto quando criar uma cópia final para aquele projeto
 - Adicionar campo Projeto na Cópia Final com opçãos de "Outros"
-- Reserva: link para o projeto
 - Na visualização do dia, mostrar com a cor verde se for retirada, e vermelho se for devolução
 - Campo de Equipamentos da Reserva só mostra equipamentos com manutenção -> "NÃO"
 - Exportar .csv dos equipamentos

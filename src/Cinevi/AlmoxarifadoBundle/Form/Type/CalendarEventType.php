@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
 use Cinevi\AdminBundle\Form\Transformer\ArrayEntityToArrayIdObjectTransformer;
 
@@ -33,7 +32,7 @@ class CalendarEventType extends AbstractType
 
         // Pega os usuários que o usuário atual pode ver
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
-        $userQB->orderBy('u.username', 'ASC');
+        $userQB->orderBy('u.username', 'ASC')->where('u.professor != 1');
         foreach ($userQB->getQuery()->getResult() as $result) {
             if (true === $this->authorizationChecker->isGranted('edit', $result)) {
                 $userArray[$result->getUsername()] = $result->getId();
@@ -53,7 +52,11 @@ class CalendarEventType extends AbstractType
         $categoriaQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Categoria')->createQueryBuilder('c');
         $categoriaQB->orderBy('c.nome', 'ASC');
         foreach ($categoriaQB->getQuery()->getResult() as $categoria) {
-            foreach ($categoria->getEquipamentos() as $equipamento) {
+            $equipamentoQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Equipamento')->createQueryBuilder('e');
+            $equipamentoQB->orderBy('e.nome', 'ASC')
+                ->where('e.categoria = '.$categoria->getId())
+                ->andWhere('e.manutencao != 1');
+            foreach ($equipamentoQB->getQuery()->getResult() as $equipamento) {
                 $equipamentosArray[$equipamento->getNome()] = $equipamento->getId();
             }
             $categoriaArray[$categoria->getNome()] = $equipamentosArray;
@@ -68,7 +71,7 @@ class CalendarEventType extends AbstractType
                 'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
-                )
+                ),
             ))
             ->add('projeto', ChoiceType::class, array(
                 'label' => 'Projeto',
@@ -78,23 +81,23 @@ class CalendarEventType extends AbstractType
                 'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
-                )
+                ),
             ))
             ->add('startDate', DateTimeType::class, array(
-                'label'  => 'Data de Retirada',
+                'label' => 'Data de Retirada',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
                 'attr' => array(
                     'class' => 'datepicker',
-                )
+                ),
             ))
             ->add('endDate', DateTimeType::class, array(
-                'label'  => 'Data de Devolução',
+                'label' => 'Data de Devolução',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
                 'attr' => array(
                     'class' => 'datepicker',
-                )
+                ),
             ))
             ->add('equipamentos', ChoiceType::class, array(
                 'label' => 'Equipamento(s)',
@@ -126,5 +129,4 @@ class CalendarEventType extends AbstractType
 
         ));
     }
-
 }

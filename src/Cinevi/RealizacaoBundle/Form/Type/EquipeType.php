@@ -34,7 +34,7 @@ class EquipeType extends AbstractType
 
         // Pega todos os usuários não-professores
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
-        $userQB->orderBy('u.username', 'ASC')->andWhere('u.professor != 1');
+        $userQB->orderBy('u.username', 'ASC')->where('u.professor != 1');
         foreach ($userQB->getQuery()->getResult() as $result) {
             $userArray[$result->getUsername()] = $result->getId();
         }
