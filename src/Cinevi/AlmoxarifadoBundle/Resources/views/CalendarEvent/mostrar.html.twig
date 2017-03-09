@@ -17,10 +17,10 @@
 {% endblock %}
 
 {% block dtdd %}
+    <dt>Código</dt><dd>{{ item.title }}</dd>
     <div class="row">
-        <div class="col-sm-4"><dt>Código</dt><dd>{{ item.title }}</dd></div>
-        <div class="col-sm-4"><dt>Usuário</dt><dd><a href="{{ path('get_user', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
-        <div class="col-sm-4">
+        <div class="col-sm-6"><dt>Usuário</dt><dd><a href="{{ path('get_user', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
+        <div class="col-sm-6">
             <dt>Projeto</dt>
             <dd><a href="{{ path('get_projeto', {id:item.projeto.id}) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
         </div>
