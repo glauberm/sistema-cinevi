@@ -95,7 +95,6 @@ class ProjetoType extends AbstractType
                 'label' => ' Já cursou(aram) a disciplina de Fotografia e Iluminação?',
                 'choices' => array(
                     'Sim' => '1',
-                    'Não' => '0',
                 ),
                 'choices_as_values' => true,
                 'expanded' => true,
@@ -115,7 +114,6 @@ class ProjetoType extends AbstractType
                 'label' => ' Já cursou(aram) a disciplina de Técnica de Som em Cinema e Audiovisual?',
                 'choices' => array(
                     'Sim' => '1',
-                    'Não' => '0',
                 ),
                 'choices_as_values' => true,
                 'expanded' => true,
@@ -135,7 +133,6 @@ class ProjetoType extends AbstractType
                 'label' => ' Já cursou(aram) a disciplina de Direção de Arte?',
                 'choices' => array(
                     'Sim' => '1',
-                    'Não' => '0',
                 ),
                 'choices_as_values' => true,
                 'expanded' => true,
