@@ -81,7 +81,7 @@ class CalendarEventType extends AbstractType
                 )
             ))
             ->add('startDate', DateTimeType::class, array(
-                'label'  => 'Data de Início',
+                'label'  => 'Data de Retirada',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
                 'attr' => array(
@@ -89,7 +89,7 @@ class CalendarEventType extends AbstractType
                 )
             ))
             ->add('endDate', DateTimeType::class, array(
-                'label'  => 'Data de Fim',
+                'label'  => 'Data de Devolução',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
                 'attr' => array(
