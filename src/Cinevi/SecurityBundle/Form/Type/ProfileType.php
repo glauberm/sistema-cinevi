@@ -13,7 +13,7 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('matricula', IntegerType::class, array(
-                'label' => 'Matrícula',
+                'label' => 'Matrícula/SIAP',
             ))
             ->add('telefone', IntegerType::class, array(
                 'label' => 'Telefone',

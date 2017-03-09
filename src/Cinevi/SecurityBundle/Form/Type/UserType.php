@@ -36,7 +36,7 @@ class UserType extends AbstractType
                 'label' => 'Email',
             ))
             ->add('matricula', IntegerType::class, array(
-                'label' => 'Matrícula',
+                'label' => 'Matrícula/SIAP',
             ))
             ->add('telefone', IntegerType::class, array(
                 'label' => 'Telefone',
