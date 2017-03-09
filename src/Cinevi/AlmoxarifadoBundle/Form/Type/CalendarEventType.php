@@ -27,7 +27,7 @@ class CalendarEventType extends AbstractType
     {
         $userArray = array();
         $projetoArray = array();
-        $equipamentoArray = array();
+        $equipamentosArray = array();
         $categoriaArray = array();
 
         // Pega os usuários que o usuário atual pode ver

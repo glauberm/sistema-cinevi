@@ -354,6 +354,16 @@ textarea.form-control {
     font-size: inherit;
 }
 
+.fc-basicDay-view.fc-start {
+    background-color: #5cb85c !important;
+    border-color: #3e8f3e !important;
+}
+
+.fc-basicDay-view.fc-end {
+    background-color: #d9534f !important;
+    border-color: #b92c28 !important;
+}
+
 @media (min-width: 992px)
 {
     .menu-topo .nav > li > a {
