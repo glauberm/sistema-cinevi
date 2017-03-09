@@ -29,12 +29,13 @@ class CalendarEventType extends AbstractType
         $userArray = array();
         $projetoArray = array();
         $equipamentoArray = array();
+        $categoriaArray = array();
 
         // Pega os usuários que o usuário atual pode ver
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
         $userQB->orderBy('u.username', 'ASC');
         foreach ($userQB->getQuery()->getResult() as $result) {
-            if (true === $this->authorizationChecker->isGranted('view', $result)) {
+            if (true === $this->authorizationChecker->isGranted('edit', $result)) {
                 $userArray[$result->getUsername()] = $result->getId();
             }
         }
@@ -43,7 +44,7 @@ class CalendarEventType extends AbstractType
         $projetoQB = $this->em->getRepository('CineviRealizacaoBundle:Projeto')->createQueryBuilder('p');
         $projetoQB->orderBy('p.id', 'DESC');
         foreach ($projetoQB->getQuery()->getResult() as $result) {
-            if (true === $this->authorizationChecker->isGranted('view', $result)) {
+            if (true === $this->authorizationChecker->isGranted('edit', $result)) {
                 $projetoArray[$result->getRealizacao()->getTitulo()] = $result->getId();
             }
         }

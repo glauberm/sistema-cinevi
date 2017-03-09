@@ -23,7 +23,7 @@ class Equipamento
     protected $categoria;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      **/
     protected $codigo;
 
@@ -48,7 +48,7 @@ class Equipamento
     protected $modelo;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, unique=true)
      **/
     protected $patrimonio;
 

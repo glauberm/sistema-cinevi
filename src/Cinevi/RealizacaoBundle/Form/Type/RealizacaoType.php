@@ -32,7 +32,7 @@ class RealizacaoType extends AbstractType
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
         $userQB->orderBy('u.username', 'ASC');
         foreach ($userQB->getQuery()->getResult() as $result) {
-            if (true === $this->authorizationChecker->isGranted('view', $result)) {
+            if (true === $this->authorizationChecker->isGranted('edit', $result)) {
                 $userArray[$result->getUsername()] = $result->getId();
             }
         }
