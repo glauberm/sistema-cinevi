@@ -22,7 +22,7 @@
         <div class="col-sm-4"><dt>Usuário</dt><dd><a href="{{ path('get_user', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
         <div class="col-sm-4">
             <dt>Projeto</dt>
-            <dd><a href="{{ path('get_projeto', {id:item.projeto.realizacao.id}) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
+            <dd><a href="{{ path('get_projeto', {id:item.projeto.id}) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
         </div>
     </div>
     <div>
