@@ -86,6 +86,13 @@
                                         Seus dados ainda não foram confirmados por um(a) funcionário(a). Até lá, você não poderá realizar a maioria das ações do sistema. Clique no botão acima para editar o seu perfil.
                                     </div>
                                 {% endif %}
+
+                                {% if form is defined and not form.vars.valid %}
+                                    <div class="alert alert-danger alert-dismissal fade in" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                                        Existem erros no formulário. Cheque os campos e tente novamente.
+                                    </div>
+                                {% endif %}
                             {% endblock %}
                         {% endblock %}
                     </main>

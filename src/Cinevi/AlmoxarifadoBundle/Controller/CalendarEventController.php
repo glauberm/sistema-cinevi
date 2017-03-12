@@ -26,6 +26,7 @@ class CalendarEventController extends RestfulCrudController
     {
         $reservas = $em->getRepository($this->repositoryName)->findAll();
 
+        $form = $this->checaFimDeSemana($form);
         $form = $this->checaIntervalo($form);
         $form = $this->checaReservas($form, $reservas);
 
@@ -36,6 +37,8 @@ class CalendarEventController extends RestfulCrudController
     {
         $reservas = $em->createQuery('SELECT c FROM '.$this->className.' c WHERE c.id != '.$obj->getId())->getResult();
 
+        $form = $this->checaFimDeSemana($form);
+        $form = $this->checaIntervalo($form);
         $form = $this->checaReservas($form, $reservas);
 
         return $form;
@@ -64,6 +67,25 @@ class CalendarEventController extends RestfulCrudController
         }
 
         return $obj;
+    }
+
+    private function checaFimDeSemana($form)
+    {
+        $startDate = $form->get('startDate')->getData();
+
+        if(!empty($startDate) && date('N', $startDate->format('U')) >= 6) {
+            $mensagemStartDate = 'A data de retirada não pode cair nos finais de semana.';
+            $form->get('startDate')->addError(new FormError($mensagemStartDate));
+        }
+
+        $endDate = $form->get('endDate')->getData();
+
+        if(!empty($endDate) && date('N', $endDate->format('U')) >= 6) {
+            $mensagemEndDate = 'A data de devolução não pode cair nos finais de semana.';
+            $form->get('endDate')->addError(new FormError($mensagemEndDate));
+        }
+
+        return $form;
     }
 
     private function checaIntervalo($form)
