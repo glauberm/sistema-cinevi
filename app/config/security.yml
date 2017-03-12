@@ -11,8 +11,9 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_FUNCIONARIO: ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_FUNCIONARIO
+        ROLE_DEPARTAMENTO: ROLE_USER
+        ROLE_ALMOXARIFADO: ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_DEPARTAMENTO, ROLE_ALMOXARIFADO]
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -25,8 +26,6 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                always_use_default_target_path: true
-                default_target_path:  /profile/
             logout:       true
             anonymous:    true
 

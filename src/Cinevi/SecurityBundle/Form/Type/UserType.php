@@ -84,10 +84,10 @@ class UserType extends AbstractType
         if($this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
             $builder
                 ->add('roles', ChoiceType::class, array(
-                    'label' => 'Permissões',
+                    'label' => 'Permissões Especiais',
                     'choices' => array(
-                        'Usuário'       => 'ROLE_USER',
-                        'Funcionário'   => 'ROLE_FUNCIONARIO',
+                        'Departamento'   => 'ROLE_DEPARTAMENTO',
+                        'Almoxarifado'   => 'ROLE_ALMOXARIFADO',
                         'Administrador' => 'ROLE_SUPER_ADMIN',
                     ),
                     'choices_as_values' => true,

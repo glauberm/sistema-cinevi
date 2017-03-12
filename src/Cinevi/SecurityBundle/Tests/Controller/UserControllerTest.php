@@ -44,7 +44,7 @@ class UserControllerTest extends RestfulCrudControllerTest
             'user[enabled]' => '1',
             'user[professor]' => '1',
             'user[breveCurriculo]' => '9Lorem Ipsum Dolor sit Amet.',
-            'user[roles]' => array('ROLE_USER','ROLE_FUNCIONARIO'),
+            'user[roles]' => array('ROLE_DEPARTAMENTO'),
         );
     }
 }

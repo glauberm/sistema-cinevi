@@ -1,7 +1,6 @@
 # TO-DO
 
 ## Da reunião
-- startDate do CalendarEvent no mínimo três dias depois de hoje -- edição também proibida pelo prazo de três dias, senão pode cancelar -- cancelamento por remoção (avisar se não der certo a questão da edição)
 - Se marcado como "Em Manutenção", avisar todos que pegaram esse equipamento depois daquela data
 - Nova role que é só aprovação de usuário
 - O responsável por um projeto só pode criar outro projeto quando criar uma cópia final para aquele projeto

@@ -22,7 +22,7 @@ class UserVoter extends BaseVoter
 
     protected function edit($obj, $user, TokenInterface $token)
     {
-        if ($this->decisionManager->decide($token, array('ROLE_FUNCIONARIO'))) {
+        if ($this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO'))) {
             return true;
         } else {
             return false;

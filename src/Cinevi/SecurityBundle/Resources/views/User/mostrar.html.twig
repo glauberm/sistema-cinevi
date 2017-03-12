@@ -28,15 +28,19 @@
         <div class="col-sm-6 col-md-3"><dt>Ativo?</dt><dd>{{ item.enabled ? 'Sim' : 'Não' }}</dd></div>
         <div class="col-sm-6 col-md-3"><dt>Confirmado?</dt><dd>{{ item.confirmado ? 'Sim' : 'Não' }}</dd>
         </div>
-        <div class="col-sm-6 col-md-3"><dt>Nível de Permissão</dt><dd>
-            {% if 'ROLE_SUPER_ADMIN' in item.roles %}
-                Administrador
-            {% elseif 'ROLE_FUNCIONARIO' in item.roles %}
-                Funcionário
-            {% else %}
-                Usuário
-            {% endif %}
-        </dd></div>
+        <div class="col-sm-6 col-md-3"><dt>Permissão(ões)</dt>
+            {% for role in item.roles %}
+                {% if role == 'ROLE_SUPER_ADMIN' %}
+                    <dd>Administrador</dd>
+                {% elseif role == 'ROLE_ALMOXARIFADO' %}
+                    <dd>Almoxarifado</dd>
+                {% elseif role == 'ROLE_ALMOXARIFADO' %}
+                    <dd>Departamento</dd>
+                {% else %}
+                    <dd>Usuário</dd>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
     <dt>Breve Currículo</dt><dd class="inherit">{{ item.breveCurriculo ? item.breveCurriculo : 'Não informada(o)' }}</dd>
 {% endblock %}

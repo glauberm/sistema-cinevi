@@ -5,13 +5,13 @@
 {% set routeEditar = path('edit_copia_final', { 'id': item.id }) %}
 
 {% block maisActionsButton %}
-    {% if is_granted('ROLE_FUNCIONARIO') %}
+    {% if is_granted('ROLE_DEPARTAMENTO') %}
         {{ parent() }}
     {% endif %}
 {% endblock %}
 
 {% block maisBotoes %}
-    {% if is_granted('ROLE_FUNCIONARIO') %}
+    {% if is_granted('ROLE_DEPARTAMENTO') %}
         {{ parent() }}
     {% endif %}
 {% endblock %}
