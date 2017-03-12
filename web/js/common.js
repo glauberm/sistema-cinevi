@@ -22,13 +22,11 @@ function select2Caller ()
 function dateTimePickerCaller ()
 {
     $(".datepicker").datetimepicker({
-        format: "DD/MM/YYYY"
-    });
-    $(".timepicker").datetimepicker({
-        format: "HH:mm"
-    });
-    $(".date-timepicker").datetimepicker({
-        format: "DD/MM/YYYY HH:mm"
+        format: "DD/MM/YYYY",
+        icons: {
+            previous: 'datepicker-left',
+            next: 'datepicker-right',
+        }
     });
 }
 

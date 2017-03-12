@@ -58,10 +58,6 @@ textarea.form-control {
     resize: vertical;
 }
 
-.help-block ul li+li {
-    margin-top: 10px;
-}
-
 /* HEADER */
 .header {
     padding: 12px 0 10px;
@@ -350,6 +346,19 @@ textarea.form-control {
     border-top: 0 none;
     border-bottom: 4px dashed;
     border-bottom: 4px solid;
+}
+
+.help-block ul li+li {
+    margin-top: 10px;
+}
+
+/* DATETIMEPICKER */
+.datepicker-left:before {
+    content: "«";
+}
+
+.datepicker-right:after {
+    content: "»";
 }
 
 /* FULL CALENDAR */
