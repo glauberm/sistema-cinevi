@@ -1,5 +1,6 @@
 services:
-    cinevi.access.almoxarifado_calendarevent:
+    # Voters
+    cinevi.access.almoxarifado_calendar_event:
         class: Cinevi\AlmoxarifadoBundle\Authorization\Voter\CalendarEventVoter
         public: false
         arguments: ['@security.access.decision_manager']
@@ -20,7 +21,8 @@ services:
         tags:
             - { name: security.voter }
 
-    cinevi.almoxarifado.calendarevent_type:
+    # Form Types
+    cinevi.almoxarifado.calendar_event_type:
         class: Cinevi\AlmoxarifadoBundle\Form\Type\CalendarEventType
         arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker']
         tags:

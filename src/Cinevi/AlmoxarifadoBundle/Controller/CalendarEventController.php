@@ -26,6 +26,7 @@ class CalendarEventController extends RestfulCrudController
     {
         $reservas = $em->getRepository($this->repositoryName)->findAll();
 
+        $form = $this->checaIntervalo($form);
         $form = $this->checaReservas($form, $reservas);
 
         return $form;
@@ -65,6 +66,40 @@ class CalendarEventController extends RestfulCrudController
         return $obj;
     }
 
+    private function checaIntervalo($form)
+    {
+        // Pega o intervalo entre hoje e o dia de retirada
+        $startDate = $form->getData()->getStartDate();
+
+        if(!empty($startDate)) {
+            $hoje = new \DateTime();
+            $diffStartDate = $hoje->diff($startDate);
+            $intervalStartDate = (int)$diffStartDate->format("%r%a");
+
+            $mensagemStartDate = 'As reservas precisam ser feitas com certa antecedência. O dia mais próximo no qual você pode marcar uma retirada é '.$hoje->add(new \DateInterval('P4D'))->format('d/m/Y').'.';
+
+            if($intervalStartDate < 3) {
+                $form->get('startDate')->addError(new FormError($mensagemStartDate));
+            }
+        }
+
+        // Pega o intervalo entre o dia de retirada e o dia de devolução
+        $endDate = $form->getData()->getEndDate();
+
+        if(!empty($endDate)) {
+            $diffEndDate = $startDate->diff($endDate);
+            $intervalEndDate = (int)$diffEndDate->format("%r%a");
+
+            $mensagemEndDate = 'As devoluções precisam ser feitas algum tempo depois da retirada. O dia mais próximo no qual você pode marcar uma devolução para esta data de retirada é '.$startDate->add(new \DateInterval('P1D'))->format('d/m/Y').'.';
+
+            if($intervalEndDate < 1) {
+                $form->get('endDate')->addError(new FormError($mensagemEndDate));
+            }
+        }
+
+        return $form;
+    }
+
     private function checaReservas($form, $reservas)
     {
         $interval = \DateInterval::createFromDateString('1 day');
@@ -72,37 +107,39 @@ class CalendarEventController extends RestfulCrudController
         $fStartDate = $form->get('startDate')->getData();
         $fEndDate = $form->get('endDate')->getData();
 
-        $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
+        if(!empty($fStartDate) && !empty($fEndDate)) {
+            $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
 
-        foreach( $reservas as $reserva ) {
+            foreach( $reservas as $reserva ) {
 
-            foreach( $reserva->getEquipamentos() as $rEquipamento ) {
-                foreach( $form->get('equipamentos')->getData() as $fEquipamento ) {
+                foreach( $reserva->getEquipamentos() as $rEquipamento ) {
+                    foreach( $form->get('equipamentos')->getData() as $fEquipamento ) {
 
-                    if( $rEquipamento == $fEquipamento ) {
+                        if( $rEquipamento == $fEquipamento ) {
 
-                        $rStartDate = $reserva->getStartDate();
-                        $rEndDate = $reserva->getEndDate();
-                        $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
+                            $rStartDate = $reserva->getStartDate();
+                            $rEndDate = $reserva->getEndDate();
+                            $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
 
-                        foreach ( $rPeriod as $rDay ) {
-                            foreach ( $fPeriod as $fDay ) {
-                                if($rDay == $fDay) {
-                                    $mensagem = $rEquipamento->getNome().' já está reservado do dia '.$reserva->getStartDate()->format('d/m/Y').' ao '.$reserva->getEndDate()->format('d/m/Y').'.';
+                            foreach ( $rPeriod as $rDay ) {
+                                foreach ( $fPeriod as $fDay ) {
+                                    if($rDay == $fDay) {
+                                        $mensagem = $rEquipamento->getNome().' já está reservado do dia '.$reserva->getStartDate()->format('d/m/Y').' ao '.$reserva->getEndDate()->format('d/m/Y').'.';
 
-                                    $form->get('startDate')->addError(new FormError($mensagem));
-                                    $form->get('endDate')->addError(new FormError($mensagem));
+                                        $form->get('startDate')->addError(new FormError($mensagem));
+                                        $form->get('endDate')->addError(new FormError($mensagem));
 
-                                    break 3;
+                                        break 3;
+                                    }
                                 }
                             }
+
                         }
 
                     }
-
                 }
-            }
 
+            }
         }
 
         return $form;

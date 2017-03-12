@@ -49,13 +49,17 @@ legend {
     margin-top: 30px;
 }
 
-.control-label.required:after {
+.form-group > .required:after {
     content: " *";
     color: #d9534f;
 }
 
 textarea.form-control {
     resize: vertical;
+}
+
+.help-block ul li+li {
+    margin-top: 10px;
 }
 
 /* HEADER */
