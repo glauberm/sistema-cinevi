@@ -2,21 +2,55 @@
 
 namespace Cinevi\RealizacaoBundle\Form\Type;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
 
 class CopiaFinalType extends AbstractType
 {
+    private $em;
+    private $authorizationChecker;
+
+    public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker)
+    {
+        $this->em = $em;
+        $this->authorizationChecker = $authorizationChecker;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $projetoArray = array();
+
+        // Pega todos os projetos que o usuário pode editar
+        $projetoQB = $this->em->getRepository('CineviRealizacaoBundle:Projeto')->createQueryBuilder('p');
+        $projetoQB->orderBy('p.id', 'DESC');
+        foreach ($projetoQB->getQuery()->getResult() as $result) {
+            if (true === $this->authorizationChecker->isGranted('edit', $result)) {
+                $projetoArray[$result->getRealizacao()->getTitulo()] = $result->getId();
+            }
+        }
+
         $builder
             ->add('realizacao', RealizacaoType::class, array(
                 'label' => null,
+            ))
+            ->add('projeto', ChoiceType::class, array(
+                'label' => 'Projeto',
+                'choices' => $projetoArray,
+                'invalid_message' => 'Este não é um valor válido.',
+                'placeholder' => 'Selecione uma opção...',
+                'choices_as_values' => true,
+                'placeholder' => 'Outro',
+                'attr' => array(
+                    'class' => 'select2-select',
+                ),
             ))
             ->add('cromia', ChoiceType::class, array(
                 'label' => 'Cromia',
@@ -268,6 +302,10 @@ class CopiaFinalType extends AbstractType
             ->add('fichaTecnica', FichaTecnicaType::class, array(
                 'label' => false,
             ))
+        ;
+        
+        $builder->get('projeto')
+            ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviRealizacaoBundle:Projeto'))
         ;
     }
 

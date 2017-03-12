@@ -5,6 +5,8 @@ namespace Cinevi\RealizacaoBundle\Tests\Controller;
 use Doctrine\ORM\EntityManager;
 use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 use Cinevi\SecurityBundle\Entity\User;
+use Cinevi\RealizacaoBundle\Entity\Realizacao;
+use Cinevi\RealizacaoBundle\Entity\Projeto;
 use Cinevi\RealizacaoBundle\Entity\Funcao;
 
 class CopiaFinalControllerTest extends RestfulCrudControllerTest
@@ -21,6 +23,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
     private $em;
     private $userId;
     private $professorId;
+    private $projetoId;
     private $funcaoId;
 
     protected function setUp()
@@ -53,16 +56,42 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
         $professor->setProfessor(true);
         $professor->setRoles(array('ROLE_USER'));
 
+        $realizacao = new Realizacao();
+        $realizacao->setUser($user);
+        $realizacao->setTitulo('RealizacaoX');
+        $realizacao->setSinopse('Lorem Ipsum Dolor Sit Amet.');
+        $realizacao->setModalidade('Livre Iniciativa');
+        $realizacao->setProfessor($professor);
+        $realizacao->setGenero('Ficção');
+        $realizacao->setCaptacao('Vídeo');
+        $realizacao->setDetalhesCaptacao('Lorem Ipsum Dolor Sit Amet.');
+        $realizacao->setLocacoes('Lorem Ipsum Dolor Sit Amet.');
+        $projeto = new Projeto();
+        $projeto->setRealizacao($realizacao);
+        $projeto->setPreProducao('08/08/2008');
+        $projeto->setDataProducao('08/08/2008');
+        $projeto->setPosProducao('08/08/2008');
+        $projeto->addDirecao($user);
+        $projeto->addProducao($user);
+        $projeto->addFotografium($user);
+        $projeto->setDisciplinaFotografia('0');
+        $projeto->addSom($user);
+        $projeto->setDisciplinaSom('0');
+        $projeto->addArte($user);
+        $projeto->setDisciplinaArte('0');
+
         $funcao = new Funcao();
         $funcao->setNome('FunçãoX');
 
         $this->em->persist($user);
         $this->em->persist($professor);
+        $this->em->persist($projeto);
         $this->em->persist($funcao);
         $this->em->flush();
 
         $this->userId = $user->getId();
         $this->professorId = $professor->getId();
+        $this->projetoId = $projeto->getId();
         $this->funcaoId = $funcao->getId();
     }
 
@@ -101,6 +130,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
             'copia_final[realizacao][captacao]' => 'Vídeo',
             'copia_final[realizacao][detalhesCaptacao]' => 'Lorem Ipsum Dolor Sit Amet.',
             'copia_final[realizacao][locacoes]' => 'Lorem Ipsum Dolor Sit Amet.',
+            'copia_final[projeto]' => $this->projetoId,
             'copia_final[cromia]' => 'P&B',
             'copia_final[proporcao]' => 'Padrão HD - 16:9',
             'copia_final[formato]' => 'Vídeo',
@@ -163,6 +193,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
             'copia_final[realizacao][captacao]' => 'Película',
             'copia_final[realizacao][detalhesCaptacao]' => '9Lorem Ipsum Dolor Sit Amet.',
             'copia_final[realizacao][locacoes]' => '9Lorem Ipsum Dolor Sit Amet.',
+            'copia_final[projeto]' => $this->projetoId,
             'copia_final[cromia]' => 'P&B',
             'copia_final[proporcao]' => 'Scope - 2,39:1',
             'copia_final[formato]' => 'Película',
@@ -215,15 +246,18 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
 
         $user = $this->em->getRepository('CineviSecurityBundle:User')->find($this->userId);
         $professor = $this->em->getRepository('CineviSecurityBundle:User')->find($this->professorId);
+        $projeto = $this->em->getRepository('CineviRealizacaoBundle:Projeto')->find($this->projetoId);
         $funcao = $this->em->getRepository('CineviRealizacaoBundle:Funcao')->find($this->funcaoId);
 
         $this->em->remove($user);
         $this->em->remove($professor);
+        $this->em->remove($projeto);
         $this->em->remove($funcao);
         $this->em->flush();
 
         $this->userId = null;
         $this->professorId = null;
+        $this->projetoId = null;
         $this->funcaoId = null;
 
         $this->em->close();

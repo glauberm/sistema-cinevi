@@ -1,10 +1,19 @@
 {% include 'CineviRealizacaoBundle:Realizacao:item.html.twig' with {item: item.realizacao} %}
 
 <div class="row">
-    <div class="col-sm-6 col-md-3"><dt>Cromia</dt><dd>{{ item.cromia ? item.cromia : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-6 col-md-3"><dt>Proporção</dt><dd>{{ item.proporcao ? item.proporcao : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-6 col-md-3"><dt>Formato</dt><dd>{{ item.formato ? item.formato : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-6 col-md-3"><dt>Duração (em minutos)</dt><dd>{{ item.duracao ? item.duracao : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6"><dt>Projeto</dt>
+        {% if item.projeto is defined and item.projeto != null %}
+            <dd><a href="{{ path('get_projeto', { 'id': item.projeto.id }) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
+        {% else %}
+            <dd>Outro</dd>
+        {% endif %}
+    </div>
+    <div class="col-sm-6"><dt>Cromia</dt><dd>{{ item.cromia ? item.cromia : 'Não informada(o)' }}</dd></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"><dt>Proporção</dt><dd>{{ item.proporcao ? item.proporcao : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Formato</dt><dd>{{ item.formato ? item.formato : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Duração (em minutos)</dt><dd>{{ item.duracao ? item.duracao : 'Não informada(o)' }}</dd></div>
 </div>
 <div class="row">
     <div class="col-sm-4"><dt>Formato Digital Nativo</dt><dd>{{ item.formatoDigitalNativo ? item.formatoDigitalNativo : 'Não informada(o)' }}</dd></div>

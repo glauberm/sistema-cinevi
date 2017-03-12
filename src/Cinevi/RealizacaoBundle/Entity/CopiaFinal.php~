@@ -23,6 +23,11 @@ class CopiaFinal
     protected $realizacao;
 
     /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Projeto", cascade={"merge"})
+     **/
+    protected $projeto;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      **/
     protected $cromia;

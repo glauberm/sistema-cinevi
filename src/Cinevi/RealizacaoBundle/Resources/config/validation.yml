@@ -78,6 +78,8 @@ Cinevi\RealizacaoBundle\Entity\Projeto:
                 message: 'Por favor, informe se já cursou(aram) a disciplina Direção de Arte.'
 
 Cinevi\RealizacaoBundle\Entity\CopiaFinal:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: projeto
     properties:
         realizacao:
             - Valid: ~

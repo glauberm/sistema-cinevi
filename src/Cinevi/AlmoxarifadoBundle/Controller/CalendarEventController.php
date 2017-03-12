@@ -24,10 +24,11 @@ class CalendarEventController extends RestfulCrudController
 
     protected function preCriar(Form $form, EntityManager $em)
     {
-        $reservas = $em->getRepository($this->repositoryName)->findAll();
-
         $form = $this->checaFimDeSemana($form);
         $form = $this->checaIntervalo($form);
+
+        $reservas = $em->getRepository($this->repositoryName)->findAll();
+
         $form = $this->checaReservas($form, $reservas);
 
         return $form;
@@ -35,10 +36,11 @@ class CalendarEventController extends RestfulCrudController
 
     protected function preEditar($obj, Form $form, EntityManager $em)
     {
-        $reservas = $em->createQuery('SELECT c FROM '.$this->className.' c WHERE c.id != '.$obj->getId())->getResult();
-
         $form = $this->checaFimDeSemana($form);
         $form = $this->checaIntervalo($form);
+
+        $reservas = $em->createQuery('SELECT c FROM '.$this->className.' c WHERE c.id != '.$obj->getId())->getResult();
+
         $form = $this->checaReservas($form, $reservas);
 
         return $form;

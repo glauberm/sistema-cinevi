@@ -5,13 +5,13 @@
 {% set routeEditar = path('edit_user', { 'id': item.id }) %}
 
 {% block maisActionsButton %}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
+    {% if is_granted('ROLE_DEPARTAMENTO') %}
         {{ parent() }}
     {% endif %}
 {% endblock %}
 
 {% block maisBotoes %}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
+    {% if is_granted('ROLE_DEPARTAMENTO') %}
         {{ parent() }}
     {% endif %}
 {% endblock %}
@@ -34,7 +34,7 @@
                     <dd>Administrador</dd>
                 {% elseif role == 'ROLE_ALMOXARIFADO' %}
                     <dd>Almoxarifado</dd>
-                {% elseif role == 'ROLE_ALMOXARIFADO' %}
+                {% elseif role == 'ROLE_DEPARTAMENTO' %}
                     <dd>Departamento</dd>
                 {% else %}
                     <dd>Usuário</dd>

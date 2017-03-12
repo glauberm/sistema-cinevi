@@ -98,7 +98,7 @@ class Projeto
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -121,7 +121,7 @@ class Projeto
     /**
      * Get preProducao
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPreProducao()
     {
@@ -144,7 +144,7 @@ class Projeto
     /**
      * Get dataProducao
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDataProducao()
     {
@@ -167,7 +167,7 @@ class Projeto
     /**
      * Get posProducao
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPosProducao()
     {
@@ -190,7 +190,7 @@ class Projeto
     /**
      * Get disciplinaFotografia
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getDisciplinaFotografia()
     {
@@ -213,7 +213,7 @@ class Projeto
     /**
      * Get disciplinaSom
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getDisciplinaSom()
     {
@@ -236,7 +236,7 @@ class Projeto
     /**
      * Get disciplinaArte
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getDisciplinaArte()
     {
@@ -259,7 +259,7 @@ class Projeto
     /**
      * Get realizacao
      *
-     * @return \Cinevi\RealizacaoBundle\Entity\Realizacao 
+     * @return \Cinevi\RealizacaoBundle\Entity\Realizacao
      */
     public function getRealizacao()
     {
@@ -292,7 +292,7 @@ class Projeto
     /**
      * Get direcao
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDirecao()
     {
@@ -325,7 +325,7 @@ class Projeto
     /**
      * Get producao
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getProducao()
     {
@@ -358,7 +358,7 @@ class Projeto
     /**
      * Get fotografia
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFotografia()
     {
@@ -391,7 +391,7 @@ class Projeto
     /**
      * Get som
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSom()
     {
@@ -424,7 +424,7 @@ class Projeto
     /**
      * Get arte
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getArte()
     {

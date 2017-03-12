@@ -23,6 +23,11 @@ class CopiaFinal
     protected $realizacao;
 
     /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Projeto", cascade={"merge"})
+     **/
+    protected $projeto;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      **/
     protected $cromia;
@@ -615,5 +620,28 @@ class CopiaFinal
     public function getFichaTecnica()
     {
         return $this->fichaTecnica;
+    }
+
+    /**
+     * Set projeto
+     *
+     * @param \Cinevi\RealizacaoBundle\Entity\Projeto $projeto
+     * @return CopiaFinal
+     */
+    public function setProjeto(\Cinevi\RealizacaoBundle\Entity\Projeto $projeto = null)
+    {
+        $this->projeto = $projeto;
+
+        return $this;
+    }
+
+    /**
+     * Get projeto
+     *
+     * @return \Cinevi\RealizacaoBundle\Entity\Projeto 
+     */
+    public function getProjeto()
+    {
+        return $this->projeto;
     }
 }

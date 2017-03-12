@@ -272,7 +272,7 @@ class Realizacao
     /**
      * Get genero
      *
-     * @return array 
+     * @return array
      */
     public function getGenero()
     {

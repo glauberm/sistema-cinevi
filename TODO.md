@@ -2,11 +2,8 @@
 
 ## Da reunião
 - Se marcado como "Em Manutenção", avisar todos que pegaram esse equipamento depois daquela data
-- Nova role que é só aprovação de usuário
 - O responsável por um projeto só pode criar outro projeto quando criar uma cópia final para aquele projeto
 - Adicionar campo Projeto na Cópia Final com opçãos de "Outros"
-- Na visualização do dia, mostrar com a cor verde se for retirada, e vermelho se for devolução
-- Campo de Equipamentos da Reserva só mostra equipamentos com manutenção -> "NÃO"
 - Exportar .csv dos equipamentos
 
 ## Cópias Finais
@@ -38,10 +35,13 @@
 - Quantidade de projetos/mês
 
 # Perguntas
+- Um Projeto para Uma Cópia Final, certo? (OneToOne)
+
 - Mais campos das Cópias Finais para Realização para aproveitar também no Projeto
 - Mais funções no Projeto?
 - Interessa que os alunos preencham informações no sistema? (Talvez criar um atributo universal de "submetido por"? e Tentar um AJAX/DynamicType para poder adicionar o campo e já alterá-lo -- por exemplo, no campo das funções adicionar mais uma função através de um modal e já adicionar a opção sem recarregar)
 - Interessa uma home com vídeos e outras informações do sistema (Breve currículo para os usuários com rich-text editor e Criar view de página inicial (fora do painel de controle) com infor dos usuários, filmes etc. e Fazer "Outros" podendo os usuários adicionarem?)
+
 
 # Depois
 - Mudar rodapé do site: tirar o "Voltar ao topo" para "Código por Glauber Mota"

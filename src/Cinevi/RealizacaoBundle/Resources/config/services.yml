@@ -1,4 +1,5 @@
 services:
+    # Voters
     cinevi.access.realizacao_projeto:
         class: Cinevi\RealizacaoBundle\Authorization\Voter\ProjetoVoter
         public: false
@@ -20,6 +21,7 @@ services:
         tags:
             - { name: security.voter }
 
+    # Form Types
     cinevi.realizacao.realizacao_type:
         class: Cinevi\RealizacaoBundle\Form\Type\RealizacaoType
         arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker']
@@ -34,7 +36,7 @@ services:
 
     cinevi.realizacao.copiaFinal_type:
         class: Cinevi\RealizacaoBundle\Form\Type\CopiaFinalType
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker']
         tags:
             - { name: form.type, alias: view }
 
