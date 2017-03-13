@@ -6,6 +6,7 @@ services:
         arguments: ['@security.access.decision_manager']
         tags:
             - { name: security.voter }
+
     # Forms
     cinevi.form.admin_user:
         class: Cinevi\SecurityBundle\Form\Type\UserType
@@ -17,6 +18,11 @@ services:
         class: Cinevi\SecurityBundle\Form\Type\ProfileType
         tags:
             - { name: form.type, alias: cinevi_profile }
+
+    cinevi.form.registration:
+        class: Cinevi\SecurityBundle\Form\Type\RegistrationType
+        tags:
+            - { name: form.type, alias: cinevi_registration }
 
     # Validation Groups
     cinevi.user_validation_factory:

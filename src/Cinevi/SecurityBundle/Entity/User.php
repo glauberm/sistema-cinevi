@@ -32,12 +32,12 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="boolean")
      **/
-    protected $confirmado;
+    protected $confirmado = 0;
 
     /**
      * @ORM\Column(type="boolean")
      **/
-    protected $professor;
+    protected $professor = 0;
 
     /**
      * @ORM\Column(type="text", nullable=true)

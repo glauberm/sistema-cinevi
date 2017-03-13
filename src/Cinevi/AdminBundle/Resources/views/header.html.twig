@@ -11,7 +11,7 @@
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <ul class="nav nav-pills">
                         <li {% if app.request.get('_route') == 'fos_user_profile_edit' or app.request.get('_route') == 'fos_user_profile_show' %}class="active"{% endif %} role="presentation">
-                            <a href="{{ path('fos_user_profile_edit', {user:app.user}) }}">
+                            <a href="{{ path('fos_user_profile_show', {user:app.user}) }}">
                                 {% include 'CineviAdminBundle:SVG:perfil.html.twig' %}<span class="display-lg display-md display-sm hidden-xs">Meu Perfil</span>
                             </a>
                         </li>

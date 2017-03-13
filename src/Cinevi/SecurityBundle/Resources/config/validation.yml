@@ -20,23 +20,25 @@ Cinevi\SecurityBundle\Entity\User:
                 message: 'Por favor, informe uma senha.'
                 groups: [new]
         matricula:
+            - Type:
+                type: integer
+                message: Por favor, informe apenas números.
             - NotBlank:
                 message: 'Por favor, informe a matrícula do usuário.'
+        telefone:
             - Type:
                 type: integer
                 message: Por favor, informe apenas números.
-        telefone:
             - NotBlank:
                 message: 'Por favor, informe o telefone do usuário.'
-            - Type:
-                type: integer
-                message: Por favor, informe apenas números.
         confirmado:
             - NotNull:
                 message: 'Por favor, informe se os dados do usuários foram confirmados ou não.'
+                groups: [departamento]
         professor:
             - NotNull:
                 message: 'Por favor, informe se o usuário é ou não um(a) professor(a).'
+                groups: [departamento]
         roles:
             - Choice:
                 choices:  [ROLE_DEPARTAMENTO,ROLE_ALMOXARIFADO,ROLE_SUPER_ADMIN]

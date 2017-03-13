@@ -81,6 +81,8 @@ fos_user:
     service:
         mailer: fos_user.mailer.twig_swift
     registration:
+        form:
+            type: Cinevi\SecurityBundle\Form\Type\RegistrationType
         confirmation:
             from_email:
                 address:        cinevi@vm.uff.br
@@ -95,7 +97,7 @@ fos_user:
             template:  CineviSecurityBundle:Resetting:email.html.twig
     profile:
         form:
-            type: cinevi_profile
+            type: Cinevi\SecurityBundle\Form\Type\ProfileType
 
 # FOSRestBundle Configuration
 fos_rest:
