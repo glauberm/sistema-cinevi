@@ -38,7 +38,7 @@ class ProjetoControllerTest extends RestfulCrudControllerTest
         $user->setEnabled(true);
         $user->setConfirmado(true);
         $user->setProfessor(false);
-        $user->setRoles(array('ROLE_USER'));
+        $user->setRoles(array());
 
         $professor = new User();
         $professor->setUsername('UserY');
@@ -49,7 +49,7 @@ class ProjetoControllerTest extends RestfulCrudControllerTest
         $professor->setEnabled(true);
         $professor->setConfirmado(true);
         $professor->setProfessor(true);
-        $professor->setRoles(array('ROLE_USER'));
+        $professor->setRoles(array('ROLE_SUPER_ADMIN'));
 
         $this->em->persist($user);
         $this->em->persist($professor);
@@ -77,11 +77,11 @@ class ProjetoControllerTest extends RestfulCrudControllerTest
             'projeto[direcao]' => array($this->userId),
             'projeto[producao]' => array($this->userId),
             'projeto[fotografia]' => array($this->userId),
-            'projeto[disciplinaFotografia]' => '0',
+            'projeto[disciplinaFotografia]' => '1',
             'projeto[som]' => array($this->userId),
-            'projeto[disciplinaSom]' => '0',
+            'projeto[disciplinaSom]' => '1',
             'projeto[arte]' => array($this->userId),
-            'projeto[disciplinaArte]' => '0',
+            'projeto[disciplinaArte]' => '1',
         );
     }
 

@@ -39,7 +39,7 @@ Cinevi\SecurityBundle\Entity\User:
                 message: 'Por favor, informe se o usuário é ou não um(a) professor(a).'
         roles:
             - Choice:
-                choices:  [ROLE_DEPARTAMENTO, ROLE_ALMOXARIFADO, ROLE_SUPER_ADMIN]
+                choices:  [ROLE_DEPARTAMENTO,ROLE_ALMOXARIFADO,ROLE_SUPER_ADMIN]
                 multiple: true
                 message: 'Por favor, informe um nível de permissão válido.'
                 groups: [superAdmin]

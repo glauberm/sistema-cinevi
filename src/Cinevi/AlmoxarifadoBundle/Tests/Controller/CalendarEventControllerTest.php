@@ -15,11 +15,11 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
     // List
     protected $indexRoute = 'calendar/events';
     // Edit
-    protected $itemEditFilter = 'a:contains("08/08/2008")';
-    protected $itemEditLink = '08/08/2008';
+    protected $itemEditFilter = 'a:contains("13/06/2018")';
+    protected $itemEditLink = '13/06/2018';
     // Remove
-    protected $itemRemoveLink = '09/09/2009';
-    protected $itemRemoveFilter = '[value="09/09/2009"]';
+    protected $itemRemoveLink = "12\/06\/2018";
+    protected $itemRemoveFilter = '[value="12/06/2018"]';
     // Entities
     private $em;
     private $userId;
@@ -45,7 +45,7 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
         $user->setEnabled(true);
         $user->setConfirmado(true);
         $user->setProfessor(false);
-        $user->setRoles(array('ROLE_USER'));
+        $user->setRoles(array());
 
         $professor = new User();
         $professor->setUsername('UserF');
@@ -56,7 +56,7 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
         $professor->setEnabled(true);
         $professor->setConfirmado(true);
         $professor->setProfessor(true);
-        $professor->setRoles(array('ROLE_USER'));
+        $professor->setRoles(array());
 
         $realizacao = new Realizacao();
         $realizacao->setUser($user);
@@ -64,23 +64,23 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
         $realizacao->setSinopse('Lorem Ipsum Dolor Sit Amet.');
         $realizacao->setModalidade('Livre Iniciativa');
         $realizacao->setProfessor($professor);
-        $realizacao->setGenero('Ficção');
+        $realizacao->setGenero(array('Ficção'));
         $realizacao->setCaptacao('Vídeo');
         $realizacao->setDetalhesCaptacao('Lorem Ipsum Dolor Sit Amet.');
         $realizacao->setLocacoes('Lorem Ipsum Dolor Sit Amet.');
         $projeto = new Projeto();
         $projeto->setRealizacao($realizacao);
-        $projeto->setPreProducao('08/08/2008');
-        $projeto->setDataProducao('08/08/2008');
-        $projeto->setPosProducao('08/08/2008');
+        $projeto->setPreProducao(new \DateTime('2008-08-08'));
+        $projeto->setDataProducao(new \DateTime('2008-08-08'));
+        $projeto->setPosProducao(new \DateTime('2008-08-08'));
         $projeto->addDirecao($user);
         $projeto->addProducao($user);
         $projeto->addFotografium($user);
-        $projeto->setDisciplinaFotografia('0');
+        $projeto->setDisciplinaFotografia('1');
         $projeto->addSom($user);
-        $projeto->setDisciplinaSom('0');
+        $projeto->setDisciplinaSom('1');
         $projeto->addArte($user);
-        $projeto->setDisciplinaArte('0');
+        $projeto->setDisciplinaArte('1');
 
         $categoria = new Categoria();
         $categoria->setNome('CategoriaX');
@@ -117,8 +117,8 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
         return array(
             'calendar_event[user]' => $this->userId,
             'calendar_event[projeto]' => $this->projetoId,
-            'calendar_event[startDate]' => '08/08/2008',
-            'calendar_event[endDate]' => '08/08/2008',
+            'calendar_event[startDate]' => '13/06/2018',
+            'calendar_event[endDate]' => '19/06/2018',
             'calendar_event[equipamentos]' => array($this->equipamentoId),
         );
     }
@@ -128,8 +128,8 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
         return array(
             'calendar_event[user]' => $this->userId,
             'calendar_event[projeto]' => $this->projetoId,
-            'calendar_event[startDate]' => '09/09/2009',
-            'calendar_event[endDate]' => '09/09/2009',
+            'calendar_event[startDate]' => '12/06/2018',
+            'calendar_event[endDate]' => '20/06/2018',
             'calendar_event[equipamentos]' => array($this->equipamentoId),
         );
     }
@@ -138,17 +138,14 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
     {
         parent::tearDown();
 
-        $this->userId = $user->getId();
-        $this->projetoId = $projeto->getId();
-        $this->categoriaId = $categoria->getId();
-        $this->equipamentoId = $equipamento->getId();
-
         $user = $this->em->getRepository('CineviSecurityBundle:User')->find($this->userId);
+        $professor = $this->em->getRepository('CineviSecurityBundle:User')->find($this->professorId);
         $projeto = $this->em->getRepository('CineviRealizacaoBundle:Projeto')->find($this->projetoId);
         $categoria = $this->em->getRepository('CineviAlmoxarifadoBundle:Categoria')->find($this->categoriaId);
         $equipamento = $this->em->getRepository('CineviAlmoxarifadoBundle:Equipamento')->find($this->equipamentoId);
 
         $this->em->remove($user);
+        $this->em->remove($professor);
         $this->em->remove($projeto);
         $this->em->remove($categoria);
         $this->em->remove($equipamento);

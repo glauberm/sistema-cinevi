@@ -43,7 +43,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
         $user->setEnabled(true);
         $user->setConfirmado(true);
         $user->setProfessor(false);
-        $user->setRoles(array('ROLE_USER'));
+        $user->setRoles(array());
 
         $professor = new User();
         $professor->setUsername('UserK');
@@ -54,7 +54,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
         $professor->setEnabled(true);
         $professor->setConfirmado(true);
         $professor->setProfessor(true);
-        $professor->setRoles(array('ROLE_USER'));
+        $professor->setRoles(array('ROLE_DEPARTAMENTO'));
 
         $realizacao = new Realizacao();
         $realizacao->setUser($user);
@@ -62,23 +62,23 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
         $realizacao->setSinopse('Lorem Ipsum Dolor Sit Amet.');
         $realizacao->setModalidade('Livre Iniciativa');
         $realizacao->setProfessor($professor);
-        $realizacao->setGenero('Ficção');
+        $realizacao->setGenero(array('Ficção'));
         $realizacao->setCaptacao('Vídeo');
         $realizacao->setDetalhesCaptacao('Lorem Ipsum Dolor Sit Amet.');
         $realizacao->setLocacoes('Lorem Ipsum Dolor Sit Amet.');
         $projeto = new Projeto();
         $projeto->setRealizacao($realizacao);
-        $projeto->setPreProducao('08/08/2008');
-        $projeto->setDataProducao('08/08/2008');
-        $projeto->setPosProducao('08/08/2008');
+        $projeto->setPreProducao(new \DateTime('2008-08-08'));
+        $projeto->setDataProducao(new \DateTime('2008-08-08'));
+        $projeto->setPosProducao(new \DateTime('2008-08-08'));
         $projeto->addDirecao($user);
         $projeto->addProducao($user);
         $projeto->addFotografium($user);
-        $projeto->setDisciplinaFotografia('0');
+        $projeto->setDisciplinaFotografia('1');
         $projeto->addSom($user);
-        $projeto->setDisciplinaSom('0');
+        $projeto->setDisciplinaSom('1');
         $projeto->addArte($user);
-        $projeto->setDisciplinaArte('0');
+        $projeto->setDisciplinaArte('1');
 
         $funcao = new Funcao();
         $funcao->setNome('FunçãoX');

@@ -98,7 +98,7 @@ abstract class RestfulCrudControllerTest extends WebTestCase
 
     protected function doRemove($crawler, $editLink, $itemRemoveLink, $itemRemoveFilter, $removeButton)
     {
-        $crawler = $this->client->click($crawler->selectLink($itemRemoveLink)->link());
+        $crawler = $this->client->click($crawler->selectLink(stripslashes($itemRemoveLink))->link());
 
         $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 

@@ -113,8 +113,9 @@ class CalendarEventController extends RestfulCrudController
         if(!empty($endDate)) {
             $diffEndDate = $startDate->diff($endDate);
             $intervalEndDate = (int)$diffEndDate->format("%r%a");
+            $cloneStartDate = clone $startDate;
 
-            $mensagemEndDate = 'As devoluções precisam ser feitas algum tempo depois da retirada. O dia mais próximo no qual você pode marcar uma devolução para esta data de retirada é '.$startDate->add(new \DateInterval('P1D'))->format('d/m/Y').'.';
+            $mensagemEndDate = 'As devoluções precisam ser feitas algum tempo depois da retirada. O dia mais próximo no qual você pode marcar uma devolução para esta data de retirada é '.$cloneStartDate->add(new \DateInterval('P1D'))->format('d/m/Y').'.';
 
             if($intervalEndDate < 1) {
                 $form->get('endDate')->addError(new FormError($mensagemEndDate));

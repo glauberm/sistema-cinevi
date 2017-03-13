@@ -3,14 +3,7 @@
 ## Da reunião
 - Se marcado como "Em Manutenção", avisar todos que pegaram esse equipamento depois daquela data
 - O responsável por um projeto só pode criar outro projeto quando criar uma cópia final para aquele projeto
-- Adicionar campo Projeto na Cópia Final com opçãos de "Outros"
 - Exportar .csv dos equipamentos
-
-## Cópias Finais
-- Além das fotos still, link (com possível senha) do filme
-- VichUploaderBundle para os MateriaisDivulgacao (add em CopiaFinal)
-
-## Reservas
 - Ver DynamicType nos equipamentos
 
 ## Template
@@ -20,6 +13,10 @@
 
 ## Validação
 - Checar todos os integers para avaliação de number aparecer primerio
+
+## Cópias Finais
+- Além das fotos still, link (com possível senha) do filme
+- VichUploaderBundle para os MateriaisDivulgacao (add em CopiaFinal)
 
 ## CRON
 - Checar se dia atual é startDate ou endDate de alguma reserva e enviar email.

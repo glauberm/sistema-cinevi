@@ -86,8 +86,8 @@ class UserType extends AbstractType
                 ->add('roles', ChoiceType::class, array(
                     'label' => 'Permissões Especiais',
                     'choices' => array(
-                        'Departamento'   => 'ROLE_DEPARTAMENTO',
-                        'Almoxarifado'   => 'ROLE_ALMOXARIFADO',
+                        'Departamento' => 'ROLE_DEPARTAMENTO',
+                        'Almoxarifado' => 'ROLE_ALMOXARIFADO',
                         'Administrador' => 'ROLE_SUPER_ADMIN',
                     ),
                     'choices_as_values' => true,

@@ -2,20 +2,23 @@ PHPUnit 4.2.6 by Sebastian Bergmann.
 
 Configuration read from /media/win_d/Projetos/sistema-cinevi/app/phpunit.xml.dist
 
-..string(49476) "<!DOCTYPE html>
+string(35475) "<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Adicionar Cópia Final – Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)</title>
-                    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <title>Reservas de Equipamento(s) - Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)</title>
+            <link rel="stylesheet" href="/bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css" />
+    <link rel="stylesheet" media="print" href="/bundles/fullcalendar/css/fullcalendar/fullcalendar.print.css" />
+                <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
             <link href="/vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
             <link href="/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
             <link href="/vendor/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
             <link href="/vendor/datepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
             <link href="/css/estilos.css" rel="stylesheet" type="text/css" />
-                <meta name="description" content="Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo com acesso à internet." />
+        
+        <meta name="description" content="Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo com acesso à internet." />
         <meta name="robots" content="noindex, nofollow" />
         <meta name="googlebot" content="noindex, nofollow" />
         <meta name="subject" content="Todos os serviços do departamento em qualquer lugar." />
@@ -85,7 +88,13 @@ Configuration read from /media/win_d/Projetos/sistema-cinevi/app/phpunit.xml.dis
                                                     <nav class="navbar navbar-default">
                                 <div class="container-fluid">
                                     <div class="navbar-header">
-                                                                                    <a class="navbar-brand btn btn-link" href="/copia/finals">
+                                                                                    <button type="button" class="navbar-toggle btn btn-default collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+                                                <span class="sr-only">Mais...</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+                                                                                    <a class="navbar-brand btn btn-link" href="/">
         <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
 <svg style="enable-background:new 0 0 199.404 199.404" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" height="512px" viewBox="0 0 199.404 199.404" width="512px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" alt="Voltar">
@@ -95,114 +104,54 @@ Configuration read from /media/win_d/Projetos/sistema-cinevi/app/phpunit.xml.dis
     </a>
                                     </div>
 
+                                                                            <div class="collapse navbar-collapse in" id="main-navbar">
+                                                    <div class="navbar-form navbar-nav">
+        <a class="btn btn-success" href="/calendars/events/new">Adicionar</a>
+    </div>
+                                        </div>
                                                                     </div>
                             </nav>
                         
                         
-                                <h1 class="page-header" id="main-content"><a href="#main-content">Adicionar Cópia Final</a></h1>
+                                <h1 class="page-header" id="main-content"><a href="#main-content">Reservas de Equipamento(s)</a></h1>
 
-                                                            
+                                                                                                                                        <div class="alert alert-success alert-dismissal fade in" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                                            Remoção de reserva realizada com sucesso!
+                                        </div>
+                                                                    
                                                                     <div class="alert alert-danger alert-dismissal fade in" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
                                         Seus dados ainda não foram confirmados por um(a) funcionário(a). Até lá, você não poderá realizar a maioria das ações do sistema. Clique no botão acima para editar o seu perfil.
                                     </div>
+                                
                                                                                     
 
-    <form name="copia_final" method="post" novalidate="novalidate">
-        
-    <div class="form-group"><label class="control-label required" for="copia_final_realizacao_titulo">Título</label><input type="text" id="copia_final_realizacao_titulo" name="copia_final[realizacao][titulo]" required="required" class="input-lg form-control" value="TesteP" /></div>
-<div class="form-group"><label class="control-label required" for="copia_final_realizacao_sinopse">Sinopse</label><textarea id="copia_final_realizacao_sinopse" name="copia_final[realizacao][sinopse]" required="required" maxLength="255" class="form-control">Lorem Ipsum Dolor Sit Amet.</textarea></div>
-<div class="row">
-    <div class="col-sm-4"><div class="form-group"><label class="control-label required" for="copia_final_realizacao_user">Responsável</label><select id="copia_final_realizacao_user" name="copia_final[realizacao][user]" required="required" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="1">admin</option><option value="7" selected="selected">UserZ</option></select></div></div>
-    <div class="col-sm-4"><div class="form-group"><label class="control-label required" for="copia_final_realizacao_modalidade">Modalidade</label><select id="copia_final_realizacao_modalidade" name="copia_final[realizacao][modalidade]" required="required" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="Livre Iniciativa" selected="selected">Livre Iniciativa</option><option value="Filme de Realização">Filme de Realização</option><option value="Disciplina Obrigatória">Disciplina Obrigatória</option><option value="Disciplina Não-Obrigatória">Disciplina Não-Obrigatória</option><option value="Edital">Edital</option><option value="Outra">Outra</option></select></div></div>
-    <div class="col-sm-4"><div class="form-group"><label class="control-label required" for="copia_final_realizacao_professor">Professor(a) Orientador(a)</label><select id="copia_final_realizacao_professor" name="copia_final[realizacao][professor]" required="required" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="8" selected="selected">UserK</option></select></div></div>
-</div>
-<div class="row">
-    <div class="col-sm-6"><div class="form-group"><label class="control-label required" for="copia_final_realizacao_genero">Gênero(s)</label><select id="copia_final_realizacao_genero" name="copia_final[realizacao][genero][]" required="required" class="select2-select form-control" multiple="multiple"><option value="Ficção" selected="selected">Ficção</option><option value="Documentário">Documentário</option><option value="Animação">Animação</option><option value="Experimental">Experimental</option><option value="Outro(s)">Outro(s)</option></select></div></div>
-    <div class="col-sm-6"><div class="form-group"><label class="control-label required" for="copia_final_realizacao_captacao">Captação</label><select id="copia_final_realizacao_captacao" name="copia_final[realizacao][captacao]" required="required" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="Vídeo" selected="selected">Vídeo</option><option value="Película">Película</option><option value="Digital">Digital</option><option value="Outra">Outra</option></select></div></div>
-</div>
-<div class="row">
-    <div class="col-sm-6"><div class="form-group"><label class="control-label" for="copia_final_realizacao_detalhesCaptacao">Detalhes da Captação</label><textarea id="copia_final_realizacao_detalhesCaptacao" name="copia_final[realizacao][detalhesCaptacao]" class="form-control">Lorem Ipsum Dolor Sit Amet.</textarea></div></div>
-    <div class="col-sm-6"><div class="form-group"><label class="control-label required" for="copia_final_realizacao_locacoes">Locações</label><textarea id="copia_final_realizacao_locacoes" name="copia_final[realizacao][locacoes]" required="required" class="form-control">Lorem Ipsum Dolor Sit Amet.</textarea></div></div>
-</div>
+    <div id="calendar-holder"></div>
 
-<div class="row">
-    <div class="col-sm-6 col-md-3"><div class="form-group"><label class="control-label" for="copia_final_cromia">Cromia</label><select id="copia_final_cromia" name="copia_final[cromia]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="P&amp;B" selected="selected">P&amp;B</option><option value="Cor">Cor</option><option value="Outra(s)">Outra(s)</option></select></div></div>
-    <div class="col-sm-6 col-md-3"><div class="form-group"><label class="control-label" for="copia_final_proporcao">Proporção</label><select id="copia_final_proporcao" name="copia_final[proporcao]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="Padrão HD - 16:9" selected="selected">Padrão HD - 16:9</option><option value="Scope - 2,39:1">Scope - 2,39:1</option><option value="Flat - 1:1,85">Flat - 1:1,85</option><option value="1,37:1">Acadêmico</option><option value="Outra">Outra</option></select></div></div>
-    <div class="col-sm-6 col-md-3"><div class="form-group"><label class="control-label" for="copia_final_formato">Formato da Cópia Final</label><select id="copia_final_formato" name="copia_final[formato]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="Vídeo" selected="selected">Vídeo</option><option value="Película">Película</option><option value="Digital">Digital</option><option value="Outro">Outro</option></select></div></div>
-    <div class="col-sm-6 col-md-3"><div class="form-group"><label class="control-label" for="copia_final_duracao">Duração (em minutos)</label><input type="number" id="copia_final_duracao" name="copia_final[duracao]" class="form-control" value="120" /></div></div>
-</div>
-<div class="row">
-    <div class="col-sm-4"><div class="form-group"><label class="control-label" for="copia_final_formatoDigitalNativo">Formato Digital Nativo</label><select id="copia_final_formatoDigitalNativo" name="copia_final[formatoDigitalNativo]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="CinemaDNG">CinemaDNG</option><option value="Prores" selected="selected">Prores</option><option value="AVCHD">AVCHD</option><option value="WMV">WMV</option><option value="QTTF">QTTF</option><option value="F4V">F4V</option><option value="MXF">MXF</option><option value="AXF">AXF</option><option value="MOV">MOV</option><option value="DNX">DNX</option><option value="TIFF">TIFF</option><option value="Outro">Outro</option></select></div></div>
-    <div class="col-sm-4"><div class="form-group"><label class="control-label" for="copia_final_codec">Codec</label><select id="copia_final_codec" name="copia_final[codec]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="Prores">Prores</option><option value="H.264" selected="selected">H.264</option><option value="MJPEG2000">MJPEG2000</option><option value="Outro">Outro</option></select></div></div>
-    <div class="col-sm-4"><div class="form-group"><label class="control-label" for="copia_final_container">Container (Wrapper)</label><select id="copia_final_container" name="copia_final[container]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="DNG" selected="selected">DNG</option><option value="MOV">MOV</option><option value="MTS">MTS</option><option value="AVI">AVI</option><option value="WMV">WMV</option><option value="MP4">MP4</option><option value="MPEG-2">MPEG-2</option><option value="MPEG-4">MPEG-4</option><option value="Outro">Outro</option></select></div></div>
-</div>
-<div class="row">
-    <div class="col-sm-4"><div class="form-group"><label class="control-label" for="copia_final_taxaBits">Taxa de Bits</label><input type="number" id="copia_final_taxaBits" name="copia_final[taxaBits]" class="form-control" value="64" /></div></div>
-    <div class="col-sm-4"><div class="form-group"><label class="control-label" for="copia_final_velocidade">Velocidade</label><select id="copia_final_velocidade" name="copia_final[velocidade]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="24 fps" selected="selected">24 fps</option><option value="29.97 fps">29.97 fps</option><option value="Outra">Outra</option></select></div></div>
-    <div class="col-sm-4"><div class="form-group"><label class="control-label" for="copia_final_som">Som</label><select id="copia_final_som" name="copia_final[som]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="Mono" selected="selected">Mono</option><option value="Estéreo">Estéreo</option><option value="5.1">5.1</option><option value="6.1">6.1</option><option value="Outro">Outro</option></select></div></div>
-</div>
-<div class="row">
-    <div class="col-sm-6"><div class="form-group"><label class="control-label" for="copia_final_resolucaoAudioDigital">Resolução do Audio Digital</label><select id="copia_final_resolucaoAudioDigital" name="copia_final[resolucaoAudioDigital]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="16 bits">16 bits</option><option value="24 bits" selected="selected">24 bits</option><option value="44.1 khz">44.1 khz</option><option value="48 khz">48 khz</option><option value="Outra">Outra</option></select></div></div>
-    <div class="col-sm-6"><div class="form-group"><label class="control-label" for="copia_final_suporteMatrizDigital">Suporte da matriz digital</label><select id="copia_final_suporteMatrizDigital" name="copia_final[suporteMatrizDigital]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="HD">HD</option><option value="HD Externo">HD Externo</option><option value="DVD-R" selected="selected">DVD-R</option><option value="LTO">LTO</option><option value="Outro">Outro</option></select></div></div>
-</div>
-<div class="row">
-    <div class="col-sm-4"><div class="form-group"><label class="control-label" for="copia_final_camera">Câmera</label><select id="copia_final_camera" name="copia_final[camera]" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="Canon 5D Mark II" selected="selected">Canon 5D Mark II</option><option value="Canon 5D Mark III">Canon 5D Mark III</option><option value="Canon 3Ti">Canon 3Ti</option><option value="SonyNEX-FS700K">SonyNEX-FS700K</option><option value="Outra">Outra</option></select></div></div>
-    <div class="col-sm-4"><div class="form-group"><label class="control-label" for="copia_final_captacaoSom">Equipamento de Captação de Som</label><textarea id="copia_final_captacaoSom" name="copia_final[captacaoSom]" class="form-control">Lorem, Ipsum e Dolor.</textarea></div></div>
-    <div class="col-sm-4"><div class="form-group"><label class="control-label" for="copia_final_softwareEdicao">Software(s) de edição</label><select id="copia_final_softwareEdicao" name="copia_final[softwareEdicao][]" class="select2-select form-control" multiple="multiple"><option value="Adobe Premiere" selected="selected">Adobe Premiere</option><option value="Sony Vegas" selected="selected">Sony Vegas</option><option value="FinalCut">FinalCut</option><option value="DaVinci Resolve">DaVinci Resolve</option><option value="Blender">Blender</option><option value="Outro(s)">Outro(s)</option></select></div></div>
-</div>
-<div class="row">
-    <div class="col-sm-6"><div class="form-group has-error"><label class="control-label" for="copia_final_orcamento">Orcamento</label><div class="input-group">
-                            <span class="input-group-addon">R$ </span>
-        <input type="text" id="copia_final_orcamento" name="copia_final[orcamento]" class="form-control" value="3.999,99" />    </div><span class="help-block">    <ul class="list-unstyled"><li><span class="glyphicon glyphicon-exclamation-sign"></span> Este valor não é válido.</li></ul>
-    </span></div></div>
-    <div class="col-sm-6"></div>
-    <div class="col-sm-6"><div class="form-group"><label class="control-label" for="copia_final_fontesFinanciamento">Fonte(s) de Financiamento</label><select id="copia_final_fontesFinanciamento" name="copia_final[fontesFinanciamento][]" class="select2-select form-control" multiple="multiple"><option value="Recursos Próprios" selected="selected">Recursos Próprios</option><option value="Edital" selected="selected">Edital</option><option value="Financiamento Coletivo">Financiamento Coletivo</option><option value="Outro(s)">Outro(s)</option></select></div></div>
-</div>
-<div class="row">
-    <div class="col-sm-6"><div class="form-group"><label class="control-label" for="copia_final_apoiadores">Apoiadores (empresas, instituições, órgãos)</label><textarea id="copia_final_apoiadores" name="copia_final[apoiadores]" class="form-control">Lorem, Ipsum e Dolor.</textarea></div></div>
-    <div class="col-sm-6"><div class="form-group"><label class="control-label required">Foi feito DCP?</label><div id="copia_final_dcp"><div class="radio">                                                                                <label class="required"><input type="radio" id="copia_final_dcp_0" name="copia_final[dcp]" required="required" value="1" checked="checked" /> Sim</label>
-    </div><div class="radio">                                                                                <label class="required"><input type="radio" id="copia_final_dcp_1" name="copia_final[dcp]" required="required" value="0" /> Não</label>
-    </div></div></div></div>
-</div>
+    <noscript>
+        <div class="table-responsive">
+            <table class="table table-striped table-hovered">
+                <thead>
+                    <tr>
+                        <th><a class="sortable" href="/calendar/events?sort=item.title&amp;direction=asc&amp;page=1" title="Cód.">Cód.</a>
+</th>
+                        <th><a class="sortable" href="/calendar/events?sort=item.startDate&amp;direction=asc&amp;page=1" title="Retirada">Retirada</a>
+</th>
+                        <th><a class="sortable" href="/calendar/events?sort=item.endDate&amp;direction=asc&amp;page=1" title="Devolução">Devolução</a>
+</th>
+                    </tr>
+                </thead>
+                <tbody>
+                                    </tbody>
+            </table>
+        </div>
 
-<fieldset>
-    <legend><a id="Ficha Técnica" href="#Ficha Técnica">Ficha Técnica</a></legend>
-    <div class="well" id="equipes" data-prototype="
-            &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;col-sm-5&quot;&gt;
-        &lt;div class=&quot;form-group&quot;&gt;&lt;label class=&quot;control-label required&quot; for=&quot;copia_final_fichaTecnica_equipes___name___funcao&quot;&gt;Função&lt;/label&gt;&lt;select id=&quot;copia_final_fichaTecnica_equipes___name___funcao&quot; name=&quot;copia_final[fichaTecnica][equipes][__name__][funcao]&quot; required=&quot;required&quot; class=&quot;select2-select form-control&quot;&gt;&lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Selecione uma opção...&lt;/option&gt;&lt;option value=&quot;3&quot;&gt;FunçãoX&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;col-sm-7&quot;&gt;
-        &lt;div class=&quot;form-group&quot;&gt;&lt;label class=&quot;control-label required&quot; for=&quot;copia_final_fichaTecnica_equipes___name___users&quot;&gt;Equipe&lt;/label&gt;&lt;select id=&quot;copia_final_fichaTecnica_equipes___name___users&quot; name=&quot;copia_final[fichaTecnica][equipes][__name__][users][]&quot; required=&quot;required&quot; class=&quot;select2-select form-control&quot; multiple=&quot;multiple&quot;&gt;&lt;option value=&quot;1&quot;&gt;admin&lt;/option&gt;&lt;option value=&quot;7&quot;&gt;UserZ&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+        <div class="text-center">
+            
 
-    ">
-            <div class="row">
-    <div class="col-sm-5">
-        <div class="form-group"><label class="control-label required" for="copia_final_fichaTecnica_equipes_0_funcao">Função</label><select id="copia_final_fichaTecnica_equipes_0_funcao" name="copia_final[fichaTecnica][equipes][0][funcao]" required="required" class="select2-select form-control"><option value="">Selecione uma opção...</option><option value="3" selected="selected">FunçãoX</option></select></div>
-    </div>
-    <div class="col-sm-7">
-        <div class="form-group"><label class="control-label required" for="copia_final_fichaTecnica_equipes_0_users">Equipe</label><select id="copia_final_fichaTecnica_equipes_0_users" name="copia_final[fichaTecnica][equipes][0][users][]" required="required" class="select2-select form-control" multiple="multiple"><option value="1">admin</option><option value="7" selected="selected">UserZ</option></select></div>
-    </div>
-</div>
-    </div>
-
-<div class="row">
-    <div class="col-sm-6"><div class="form-group"><label class="control-label" for="copia_final_fichaTecnica_elenco">Elenco</label><textarea id="copia_final_fichaTecnica_elenco" name="copia_final[fichaTecnica][elenco]" class="form-control">Lorem, Ipsum e Dolor.</textarea></div></div>
-    <div class="col-sm-6"><div class="form-group"><label class="control-label" for="copia_final_fichaTecnica_outrasInformacoes">Outras Informações dos Créditos</label><textarea id="copia_final_fichaTecnica_outrasInformacoes" name="copia_final[fichaTecnica][outrasInformacoes]" class="form-control">Lorem, Ipsum e Dolor.</textarea></div></div>
-</div>
-<div class="row">
-    <div class="col-sm-6"><div class="form-group"><label class="control-label" for="copia_final_fichaTecnica_festivais">Participações em festivais e mostras</label><textarea id="copia_final_fichaTecnica_festivais" name="copia_final[fichaTecnica][festivais]" class="form-control">Lorem, Ipsum e Dolor.</textarea></div></div>
-    <div class="col-sm-6"><div class="form-group"><label class="control-label" for="copia_final_fichaTecnica_premios">Prêmios</label><textarea id="copia_final_fichaTecnica_premios" name="copia_final[fichaTecnica][premios]" class="form-control">Lorem, Ipsum e Dolor.</textarea></div></div>
-</div>
-</fieldset>
-
-        <br/>
-        <button type="submit" class="btn btn-lg btn-warning">Salvar</button>
-    <input type="hidden" id="copia_final__token" name="copia_final[_token]" value="Oz0USfKciQgmM08Es-gL3yI0OwTEtVzMcM_AdQnAP38" /></form>
-
+        </div>
+    </noscript>
                     </main>
 
                                             <aside class="aside col-md-3 col-md-pull-9">
@@ -230,7 +179,7 @@ Configuration read from /media/win_d/Projetos/sistema-cinevi/app/phpunit.xml.dis
 	<path d="m18 44l8.92-4.87c0.367-0.201 0.596-0.586 0.596-1v-2.81c-0.885-1.23-2.45-3.71-3.34-6.91-1.1-1-1.7-2.4-1.7-3.9v-4c0-1.12 0.352-2.22 1-3.14v-4.73c-0.034-0.383-0.074-1.27 0.096-2.4-1.4-0.55-2.9-0.8-4.6-0.8-10.4 0-11 8.86-11 9v4.58c-0.648 0.706-1 1.52-1 2.33v3.45c0 1.08 0.483 2.08 1.31 2.76 0.825 3.11 2.85 5.46 3.64 6.28v2.74c0 0.787-0.428 1.51-1.17 1.92l-6.65 4.17c-2.57 1.4-4.15 4.1-4.15 7v3.8h12.5v-4.24c0-3.9 2.1-7.4 5.5-9.3z"/>
 </g>
 </svg>
-Painel
+Painel de Controle
                     </a>
                     <a class="list-group-item " href="/users">
                         <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -262,7 +211,7 @@ Usuários
             </div>
             <div id="almoxarifado-menu" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-almoxarifado-menu">
                 <div class="list-group">
-                    <a class="list-group-item " href="/calendar/events">
+                    <a class="list-group-item active" href="/calendar/events">
                         <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg style="enable-background:new 0 0 60 60" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 60 60" height="512px" width="512px" version="1.1" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g fill="#555">
@@ -396,25 +345,92 @@ Funções
     </div>
 </footer>
         
-                        <script src="/vendor/jquery/js/jquery.min.js" type="text/javascript"></script>
-            <script src="/vendor/select2/js/select2.min.js" type="text/javascript"></script>
-            <script src="/vendor/select2/js/i18n/pt-BR.js" type="text/javascript"></script>
-            <script src="/vendor/moment/js/moment.min.js" type="text/javascript"></script>
-            <script src="/vendor/moment/js/locale/pt-br.js" type="text/javascript"></script>
-        	<script src="/vendor/autosize/js/autosize.min.js" type="text/javascript"></script>
-            <script src="/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-            <script src="/vendor/datepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-            <script src="/vendor/responsive-bootstrap-toolkit/js/bootstrap-toolkit.min.js" type="text/javascript"></script>
-            <script src="/js/common.js" type="text/javascript"></script>
+                        <script src="/vendor/jquery/js/jquery.min.js"></script>
+            <script src="/vendor/select2/js/select2.min.js"></script>
+            <script src="/vendor/select2/js/i18n/pt-BR.js"></script>
+            <script src="/vendor/moment/js/moment.min.js"></script>
+            <script src="/vendor/moment/js/locale/pt-br.js"></script>
+        	<script src="/vendor/autosize/js/autosize.min.js"></script>
+            <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+            <script src="/vendor/datepicker/js/bootstrap-datetimepicker.min.js"></script>
+            <script src="/vendor/responsive-bootstrap-toolkit/js/bootstrap-toolkit.min.js"></script>
+            <script src="/js/common.js"></script>
         
-    <script src="/js/to-many.js"></script>
-    <script src="/js/cinevi/realizacao/ficha-tecnica/equipe.js"></script>
+    <script src="/bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js"></script>
+    <script>
+        $(function () {
+            $("#calendar-holder").fullCalendar({
+                header: {
+                    left: "prev, next",
+                    center: "title",
+                    right: "month, basicWeek, basicDay"
+                },
+                defaultView: "basicDay",
+                lang: "pt-br",
+                lazyFetching: true,
+                eventLimit: false, // allow "more" link when too many events
+                eventSources: [
+                    {
+                        url: "/full-calendar/load",
+                        type: "POST",
+                        data: {},
+                        error: function(xhr, status, error) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            console.log(err.Message);
+                        }
+                    }
+                ],
+                eventBackgroundColor: "#EAD741",
+                eventTextColor: "#120e08",
+                eventBorderColor: "#bbaa1f",
+                loading: function( isLoading, view ) {
+                    if(isLoading) {
+                        alert("oi!");
+                    } else {
+                        alert("tchau!");
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="/vendor/fullcalendar/js/lang/pt-br.js"></script>
     </body>
 </html>
 "
 
-Remaining deprecation notices (2)
+Remaining deprecation notices (3)
 
 Passing a $salt to Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder::encodePassword() is deprecated since version 2.8 and will be ignored in 3.0: 2x
-    2x in CopiaFinalControllerTest::setUp from Cinevi\RealizacaoBundle\Tests\Controller
+    2x in CalendarEventControllerTest::setUp from Cinevi\AlmoxarifadoBundle\Tests\Controller
+
+The hardcoded value you are using for the $referenceType argument of the Symfony\Component\Routing\Generator\UrlGenerator::generate method is deprecated since version 2.8 and will not be supported anymore in 3.0. Use the constants defined in the UrlGeneratorInterface instead: 1x
+    1x in CalendarEventControllerTest::testCompleteScenario from Cinevi\AlmoxarifadoBundle\Tests\Controller
+
+PHPUnit 4.2.6 by Sebastian Bergmann.
+
+Configuration read from /media/win_d/Projetos/sistema-cinevi/app/phpunit.xml.dist
+
+[31;1mE[0m
+
+Time: 8.44 seconds, Memory: 55.00Mb
+
+There was 1 error:
+
+1) Cinevi\AlmoxarifadoBundle\Tests\Controller\CalendarEventControllerTest::testCompleteScenario
+preg_match(): Unknown modifier '0'
+
+/media/win_d/Projetos/sistema-cinevi/vendor/symfony/phpunit-bridge/DeprecationErrorHandler.php:71
+/media/win_d/Projetos/sistema-cinevi/src/Cinevi/AdminBundle/Tests/Controller/RestfulCrudControllerTest.php:111
+/media/win_d/Projetos/sistema-cinevi/src/Cinevi/AdminBundle/Tests/Controller/RestfulCrudControllerTest.php:42
+[37;41m                                   [0m
+[37;41mFAILURES!                          [0m
+[37;41mTests: 1, Assertions: 5, Errors: 1.[0m
+
+Remaining deprecation notices (3)
+
+Passing a $salt to Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder::encodePassword() is deprecated since version 2.8 and will be ignored in 3.0: 2x
+    2x in CalendarEventControllerTest::setUp from Cinevi\AlmoxarifadoBundle\Tests\Controller
+
+The hardcoded value you are using for the $referenceType argument of the Symfony\Component\Routing\Generator\UrlGenerator::generate method is deprecated since version 2.8 and will not be supported anymore in 3.0. Use the constants defined in the UrlGeneratorInterface instead: 1x
+    1x in CalendarEventControllerTest::testCompleteScenario from Cinevi\AlmoxarifadoBundle\Tests\Controller
 
