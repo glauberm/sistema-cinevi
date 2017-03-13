@@ -6,6 +6,10 @@ categorias:
     type:     rest
     resource: Cinevi\AlmoxarifadoBundle\Controller\CategoriaController
 
+categorias_csv:
+    path:      /csv/categorias
+    defaults:  { _controller: CineviAlmoxarifadoBundle:Categoria:getCsv }
+
 calendar_events:
     type:     rest
     resource: Cinevi\AlmoxarifadoBundle\Controller\CalendarEventController

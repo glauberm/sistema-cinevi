@@ -43,21 +43,28 @@
         {{ knp_pagination_render(pagination) }}
     </div>
 
-    <div class="text-right jsonly">
-        <form class="form-inline">
-            <div class="form-group form-group-sm">
-                <label class="control-label" for="numResultados">Nº de Linhas</label>
-                <select name="numResultados" id="numResultados" class="form-control input-sm inline-block width-auto">
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="250">250</option>
-                    <option value="500">500</option>
-                </select>
-                <label class="control-label">Total de Itens: {{ pagination.getTotalItemCount }}</label>
+    <div class="clearfix">
+        {% block csv %}
+            <div class="pull-left text-left csv">
+                <a target="_blank" href="{{ routeCsv }}" class="btn btn-warning btn-sm">Baixar .CSV</a>
             </div>
-        </form>
+        {% endblock %}
+        <div class="pull-right text-right jsonly">
+            <form class="form-inline">
+                <div class="form-group form-group-sm">
+                    <label class="control-label" for="numResultados">Nº de Linhas</label>
+                    <select name="numResultados" id="numResultados" class="form-control input-sm inline-block width-auto">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="250">250</option>
+                        <option value="500">500</option>
+                    </select>
+                    <label class="control-label">Total de Itens: {{ pagination.getTotalItemCount }}</label>
+                </div>
+            </form>
+        </div>
     </div>
 
 {% endblock %}

@@ -33,6 +33,9 @@
     	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
     </head>
     <body>
+
+        <a class="overlay-alert pular-para-conteudo" href="#conteudo"><span class="label label-primary">Pular para Conteúdo</span></a>
+
         {% block header %}
             {% include 'CineviAdminBundle::header.html.twig' %}
         {% endblock %}
@@ -68,7 +71,7 @@
                         {% endblock %}
 
                         {% block body %}
-                            <h1 class="page-header" id="main-content"><a href="#main-content">{{ title }}</a></h1>
+                            <h1 class="page-header" id="conteudo"><a href="#conteudo">{{ title }}</a></h1>
 
                             {% block alerts %}
                                 {% for type, messages in app.session.flashBag.all %}

@@ -7,6 +7,7 @@
 - Ver DynamicType nos equipamentos
 
 ## Template
+- Adicionar o "Carregando..." nas reservas
 - Adicionar ícones nos botões de adicionar, editar e remover e deixá-los fixos na nav-bar. Possíveis botões extras vão para o accordion.
 - Adicionar máscaras de dinheiro, integer
 - Mudar ícones nos links de painel de controle e de funções
@@ -39,12 +40,8 @@
 - Interessa que os alunos preencham informações no sistema? (Talvez criar um atributo universal de "submetido por"? e Tentar um AJAX/DynamicType para poder adicionar o campo e já alterá-lo -- por exemplo, no campo das funções adicionar mais uma função através de um modal e já adicionar a opção sem recarregar)
 - Interessa uma home com vídeos e outras informações do sistema (Breve currículo para os usuários com rich-text editor e Criar view de página inicial (fora do painel de controle) com infor dos usuários, filmes etc. e Fazer "Outros" podendo os usuários adicionarem?)
 
-
 # Depois
-- Mudar rodapé do site: tirar o "Voltar ao topo" para "Código por Glauber Mota"
 - Ações em múltiplos itens de uma vez
 - Linhas na tabela pelo php ao invés de javascript
 - Adicionar https://packagist.org/packages/friendsofsymfony/elastica-bundle
 - Se criar o submitted by nos objetos (pela pergunta 'Interessa que os alunos preencham informações no sistema?'), também criar um atributo "rascunho" que, se existir, não mostra os objetos para todos (publico, criar botão "enviar/publicar"), só para o usuário que criou (rascunho, criar botão "salvar com rascunho")
-- Checar o deprecated no ```The hardcoded value you are using for the $referenceType argument of the Symfony\Component\Routing\Generator\UrlGenerator::generate method is deprecated since version 2.8 and will not be supported anymore in 3.0. Use the constants defined in the UrlGeneratorInterface instead:```
-- Criar factory (http://symfony.com/doc/2.8/service_container/factories.html)

@@ -86,9 +86,9 @@
                 eventBorderColor: "#bbaa1f",
                 loading: function( isLoading, view ) {
                     if(isLoading) {
-                        alert("oi!");
+                        $("body").append("<div id='overlay-alert' class='overlay-alert'><span class='label label-default'>Carregando...</span></div>");
                     } else {
-                        alert("tchau!");
+                        $("#overlay-alert").remove();
                     }
                 }
             });

@@ -10,6 +10,7 @@ use Symfony\Component\Form\Form;
 use FOS\RestBundle\View\ViewHandlerInterface;
 use FOS\RestBundle\View\View;
 use Cinevi\AdminBundle\Form\Type\DeleteType;
+use Cinevi\AdminBundle\Http\CsvResponse;
 
 // exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($pagination),"</pre>"));
 
@@ -297,6 +298,27 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         }
 
         return $this->createForm($formClass, $obj, $options);
+    }
+
+    public function getCsvAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $itens = $em->getRepository($this->bundleName)
+               ->createQueryBuilder('item')
+               ->select('item')
+               ->getQuery()
+               ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+
+        foreach($itens as $item) {
+            $keys[] = array_keys($item);
+        }
+
+        $arrayResultado = array_merge($keys, $itens);
+
+        //exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($itens), $keys, \Doctrine\Common\Util\Debug::dump($arrayResultado),"</pre>"));
+
+        return new CsvResponse('tabela_'.$this->label, $arrayResultado);
     }
 
     /**
