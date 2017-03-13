@@ -4,15 +4,17 @@
 {% set routeListar = path('get_users') %}
 {% set routeEditar = path('edit_user', { 'id': item.id }) %}
 
-{% block maisActionsButton %}
-    {% if is_granted('ROLE_DEPARTAMENTO') %}
-        {{ parent() }}
-    {% endif %}
-{% endblock %}
-
 {% block maisBotoes %}
+    {% block maisBotoesBlock %}{% endblock %}
     {% if is_granted('ROLE_DEPARTAMENTO') %}
-        {{ parent() }}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
+        </div>
+    {% endif %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
+            {{ form_row(deleteForm.remover) }}
+        {{ form_end(deleteForm) }}
     {% endif %}
 {% endblock %}
 

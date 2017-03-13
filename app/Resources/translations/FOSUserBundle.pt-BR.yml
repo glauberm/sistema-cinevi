@@ -28,7 +28,7 @@ change_password:
     flash:
         success: 'A senha foi alterada.'
 registration:
-    check_email: 'Um email foi enviado para o endereço %email%.\n\nEle pode demorar cerca de 15 minutos para chegar na sua caixa de entrada. Caso esteja demorando muito, cheque a pasta de Spam.\n\nPara ativar a sua conta, clique no link que estará mensagem.'
+    check_email: "Um email foi enviado para o endereço %email%.\n\nEle pode demorar cerca de 15 minutos para chegar na sua caixa de entrada. Caso esteja demorando muito, cheque a pasta de Spam.\n\nPara ativar a sua conta, clique no link que estará mensagem."
     confirmed: 'Parabéns, %username%. A sua conta foi ativada.'
     back: 'Retornar para a página de origem.'
     submit: Registrar
