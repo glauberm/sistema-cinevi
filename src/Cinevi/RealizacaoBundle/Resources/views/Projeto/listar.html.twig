@@ -4,6 +4,13 @@
 {% set routeAdicionar = path('new_projeto') %}
 {% set routeCsv = path('projetos_csv') %}
 
+{% block maisBotoes %}
+    {% block maisBotoesBlock %}{% endblock %}
+    <div class="navbar-form navbar-nav">
+        <a class="btn btn-success" href="{{ routeAdicionar }}">Adicionar</a>
+    </div>
+{% endblock %}
+
 {% block thead %}
     <th>{{ knp_pagination_sortable(pagination, 'Título', 'r.titulo') }}</th>
 {% endblock %}

@@ -144,10 +144,10 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
 
         $form = $this->getForm($obj, $this->formClassName, 'POST');
 
-        $form->handleRequest($request);
-
         // Chama o método a ser sobreescrito preCriar()
         $form = $this->preCriar($form, $em);
+
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em->persist($obj);
@@ -218,10 +218,10 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $editForm = $this->getForm($obj, $this->formClassName, 'PUT');
         $deleteForm = $this->getForm($obj, DeleteType::class, 'DELETE', 'delete_'.$this->routeSuffix, array('id' => $id));
 
-        $editForm->submit($request->request->get($editForm->getName()));
-
         // Chama o método a ser sobreescrito preEditar()
         $editForm = $this->preEditar($obj, $editForm, $em);
+
+        $editForm->submit($request->request->get($editForm->getName()));
 
         if ($editForm->isValid()) {
             $em->merge($obj);

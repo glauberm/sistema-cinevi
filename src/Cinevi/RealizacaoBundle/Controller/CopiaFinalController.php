@@ -38,7 +38,6 @@ class CopiaFinalController extends RestfulCrudController
 
         // Envia email para os emails no array
         $emails = array(
-            $obj->getRealizacao()->getUser()->getEmail(),
             'cinevi@vm.uff.br',
             'comissaoproducaouff@gmail.com'
         );

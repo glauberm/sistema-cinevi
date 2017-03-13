@@ -58,7 +58,6 @@ class CalendarEventController extends RestfulCrudController
 
         // Envia email para os emails no array
         $emails = array(
-            $obj->getUser()->getEmail(),
             $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail(),
             'almoxarifadocinemauff@gmail.com',
         );

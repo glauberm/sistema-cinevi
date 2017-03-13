@@ -38,7 +38,6 @@ class ProjetoController extends RestfulCrudController
 
         // Envia email para os emails no array
         $emails = array(
-            $obj->getRealizacao()->getUser()->getEmail(),
             'cinevi@vm.uff.br',
             'almoxarifadocinemauff@gmail.com',
             'acervodearteuff@gmail.com',

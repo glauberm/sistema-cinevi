@@ -1,3 +1,3 @@
 {% extends 'CineviAdminBundle::email.html.twig' %}
 
-{% set mensagem = "Um novo projeto de título <strong>" ~ item.realizacao.titulo ~ "</strong> acaba de ser registrado por <strong>" ~ item.realizacao.user.username ~ "</strong>.<br/>Para vê-lo, clique no link abaixo:<br/><br/>" ~ url %}
+{% set mensagem = "Um novo projeto de título <strong>" ~ item.realizacao.titulo ~ "</strong> acaba de ser registrado por <strong>" ~ item.realizacao.user.username ~ "</strong>.<br/>Para vê-lo, clique no link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}

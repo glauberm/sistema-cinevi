@@ -8,10 +8,10 @@
 
 {% block maisBotoes %}
     {% block maisBotoesBlock %}{% endblock %}
-    <div class="navbar-form navbar-nav">
-        <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
-    </div>
     {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
+        </div>
         {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
             {{ form_row(deleteForm.remover) }}
         {{ form_end(deleteForm) }}

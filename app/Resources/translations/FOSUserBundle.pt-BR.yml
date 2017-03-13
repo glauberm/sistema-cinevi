@@ -28,15 +28,15 @@ change_password:
     flash:
         success: 'A senha foi alterada.'
 registration:
-    check_email: 'Um email foi enviado para o endereço %email%. Para ativar a sua conta, clique no link na mensagem.'
+    check_email: 'Um email foi enviado para o endereço %email%.\n\nEle pode demorar cerca de 15 minutos para chegar na sua caixa de entrada. Caso esteja demorando muito, cheque a pasta de Spam.\n\nPara ativar a sua conta, clique no link que estará mensagem.'
     confirmed: 'Parabéns, %username%. A sua conta foi ativada.'
     back: 'Retornar para a página de origem.'
     submit: Registrar
     flash:
         user_created: 'O usuário foi criado com sucesso.'
     email:
-        subject: 'Bem-vindo(a), %username%!'
-        message: "Olá, %username%!\n\nPara completar a validação da sua conta, clique no link: %confirmationUrl%\n\nAtenciosamente,\na Equipe.\n"
+        subject: 'Bem-vinda(o), %username%!'
+        message: "Olá, %username%!\n\nPara completar a validação da sua conta, clique no link:\n\n%confirmationUrl%"
 resetting:
     password_already_requested: 'Este usuário já solicitou uma senha nas últimas 24 horas.'
     check_email: 'Foi enviado um email para %email%. Para recuperar a sua senha, clique no link da mensagem.'
@@ -49,7 +49,7 @@ resetting:
         success: 'A senha foi redefinida com sucesso.'
     email:
         subject: 'Redefinir senha'
-        message: "Olá, %username%!\n\nPara redefinir sua senha, clique no link: %confirmationUrl%\n\nAtenciosamente,\na Equipe.\n"
+        message: "Olá, %username%!\n\nPara redefinir sua senha, clique no link:\n\n%confirmationUrl%\n\nAtenciosamente,\na Equipe.\n"
 layout:
     logout: Sair
     login: Entrar

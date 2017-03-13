@@ -13,9 +13,11 @@
 
 {% block maisBotoes %}
     {% block maisBotoesBlock %}{% endblock %}
-    <div class="navbar-form navbar-nav">
-        <a class="btn btn-success" href="{{ routeAdicionar }}">Adicionar</a>
-    </div>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-success" href="{{ routeAdicionar }}">Adicionar</a>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block body %}
@@ -44,11 +46,11 @@
     </div>
 
     <div class="clearfix">
-        {% block csv %}
+        {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
             <div class="pull-left text-left csv">
                 <a target="_blank" href="{{ routeCsv }}" class="btn btn-warning btn-sm">Exportar .CSV</a>
             </div>
-        {% endblock %}
+        {% endif %}
         <div class="pull-right text-right jsonly">
             <form class="form-inline">
                 <div class="form-group form-group-sm">

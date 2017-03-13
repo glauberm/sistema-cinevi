@@ -13,9 +13,11 @@
                     <a class="list-group-item {% if app.request.get('_route') == 'index' %}active{% endif %}" href="{{ path('index') }}">
                         {% include 'CineviAdminBundle:SVG:usuarios.html.twig' %}Painel de Controle
                     </a>
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_users' or app.request.get('_route') == 'new_user' or app.request.get('_route') == 'get_user' or app.request.get('_route') == 'edit_user' %}active{% endif %}" href="{{ path('get_users') }}">
-                        {% include 'CineviAdminBundle:SVG:usuarios.html.twig' %}Usuários
-                    </a>
+                    {% if is_granted('ROLE_DEPARTAMENTO') %}
+                        <a class="list-group-item {% if app.request.get('_route') == 'get_users' or app.request.get('_route') == 'new_user' or app.request.get('_route') == 'get_user' or app.request.get('_route') == 'edit_user' or app.request.get('_route') == 'post_user' or app.request.get('_route') == 'put_user' %}active{% endif %}" href="{{ path('get_users') }}">
+                            {% include 'CineviAdminBundle:SVG:usuarios.html.twig' %}Usuários
+                        </a>
+                    {% endif %}
                     {% block maisOpcoesMainMenu %}{% endblock %}
                 </div>
             </div>
@@ -33,13 +35,13 @@
             </div>
             <div id="almoxarifado-menu" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-almoxarifado-menu">
                 <div class="list-group">
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_calendar_events' or app.request.get('_route') == 'new_calendar_event' or app.request.get('_route') == 'get_calendar_event' or app.request.get('_route') == 'edit_calendar_event' %}active{% endif %}" href="{{ path('get_calendar_events') }}">
+                    <a class="list-group-item {% if app.request.get('_route') == 'get_calendar_events' or app.request.get('_route') == 'new_calendar_event' or app.request.get('_route') == 'get_calendar_event' or app.request.get('_route') == 'edit_calendar_event'  or app.request.get('_route') == 'post_calendar_event' or app.request.get('_route') == 'put_calendar_event' %}active{% endif %}" href="{{ path('get_calendar_events') }}">
                         {% include 'CineviAdminBundle:SVG:reservas.html.twig' %}Reservas
                     </a>
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_equipamentos' or app.request.get('_route') == 'new_equipamento' or app.request.get('_route') == 'get_equipamento' or app.request.get('_route') == 'edit_equipamento' %}active{% endif %}" href="{{ path('get_equipamentos') }}">
+                    <a class="list-group-item {% if app.request.get('_route') == 'get_equipamentos' or app.request.get('_route') == 'new_equipamento' or app.request.get('_route') == 'get_equipamento' or app.request.get('_route') == 'edit_equipamento' or app.request.get('_route') == 'post_equipamento' or app.request.get('_route') == 'put_equipamento' %}active{% endif %}" href="{{ path('get_equipamentos') }}">
                         {% include 'CineviAdminBundle:SVG:equipamentos.html.twig' %}Equipamentos
                     </a>
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_categorias' or app.request.get('_route') == 'new_categoria' or app.request.get('_route') == 'get_categoria' or app.request.get('_route') == 'edit_categoria' %}active{% endif %}" href="{{ path('get_categorias') }}">
+                    <a class="list-group-item {% if app.request.get('_route') == 'get_categorias' or app.request.get('_route') == 'new_categoria' or app.request.get('_route') == 'get_categoria' or app.request.get('_route') == 'edit_categoria' or app.request.get('_route') == 'post_categoria' or app.request.get('_route') == 'put_categoria' %}active{% endif %}" href="{{ path('get_categorias') }}">
                         {% include 'CineviAdminBundle:SVG:categorias.html.twig' %}Categorias de Equipamento
                     </a>
                 </div>
@@ -58,13 +60,13 @@
             </div>
             <div id="realizacao-menu" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-realizacao-menu">
                 <div class="list-group">
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_projetos' or app.request.get('_route') == 'new_projeto' or app.request.get('_route') == 'get_projeto' or app.request.get('_route') == 'edit_projeto' %}active{% endif %}" href="{{ path('get_projetos') }}">
+                    <a class="list-group-item {% if app.request.get('_route') == 'get_projetos' or app.request.get('_route') == 'new_projeto' or app.request.get('_route') == 'get_projeto' or app.request.get('_route') == 'edit_projeto' or app.request.get('_route') == 'post_projeto' or app.request.get('_route') == 'put_projeto' %}active{% endif %}" href="{{ path('get_projetos') }}">
                         {% include 'CineviAdminBundle:SVG:projetos.html.twig' %}Projetos
                     </a>
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_copia_finals' or app.request.get('_route') == 'new_copia_final' or app.request.get('_route') == 'get_copia_final' or app.request.get('_route') == 'edit_copia_final' %}active{% endif %}" href="{{ path('get_copia_finals') }}">
+                    <a class="list-group-item {% if app.request.get('_route') == 'get_copia_finals' or app.request.get('_route') == 'new_copia_final' or app.request.get('_route') == 'get_copia_final' or app.request.get('_route') == 'edit_copia_final' or app.request.get('_route') == 'post_copia_final' or app.request.get('_route') == 'put_copia_final' %}active{% endif %}" href="{{ path('get_copia_finals') }}">
                         {% include 'CineviAdminBundle:SVG:copias-finais.html.twig' %}Cópias Finais
                     </a>
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_funcaos' or app.request.get('_route') == 'new_funcao' or app.request.get('_route') == 'get_funcao' or app.request.get('_route') == 'edit_funcao' %}active{% endif %}" href="{{ path('get_funcaos') }}">
+                    <a class="list-group-item {% if app.request.get('_route') == 'get_funcaos' or app.request.get('_route') == 'new_funcao' or app.request.get('_route') == 'get_funcao' or app.request.get('_route') == 'edit_funcao' or app.request.get('_route') == 'post_funcao' or app.request.get('_route') == 'put_funcao' %}active{% endif %}" href="{{ path('get_funcaos') }}">
                         {% include 'CineviAdminBundle:SVG:reservas.html.twig' %}Funções
                     </a>
                 </div>

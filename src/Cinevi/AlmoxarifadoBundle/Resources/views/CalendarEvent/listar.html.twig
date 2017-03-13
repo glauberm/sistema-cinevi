@@ -55,11 +55,12 @@
         </div>
     </noscript>
 
-    <br/>
-
-    <div class="text-left csv">
-        <a target="_blank" href="{{ routeCsv }}" class="btn btn-warning btn-sm">Exportar .CSV</a>
-    </div>
+    {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+        <br/>
+        <div class="text-left csv">
+            <a target="_blank" href="{{ routeCsv }}" class="btn btn-warning btn-sm">Exportar .CSV</a>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}

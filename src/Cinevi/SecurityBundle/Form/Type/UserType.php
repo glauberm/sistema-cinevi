@@ -6,6 +6,8 @@ use FOS\UserBundle\Util\LegacyFormHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -41,45 +43,48 @@ class UserType extends AbstractType
             ->add('telefone', IntegerType::class, array(
                 'label' => 'Telefone',
             ))
-            ->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(
-                'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
-                'options' => array('translation_domain' => 'FOSUserBundle'),
-                'first_options' => array('label' => 'form.new_password'),
-                'second_options' => array('label' => 'form.new_password_confirmation'),
-                'invalid_message' => 'fos_user.password.mismatch',
-            ))
-            ->add('confirmado', ChoiceType::class, array(
-                'label' => 'Confirmado?',
-                'choices' => array(
-                    'Não'   => '0',
-                    'Sim'   => '1',
-                ),
-                'choices_as_values' => true,
-                'expanded' => true,
-            ))
-            ->add('enabled', ChoiceType::class, array(
-                'label' => 'Ativo?',
-                'choices' => array(
-                    'Não' => '0',
-                    'Sim' => '1',
-                ),
-                'choices_as_values' => true,
-                'expanded' => true,
-            ))
-            ->add('professor', ChoiceType::class, array(
-                'label' => 'Professor?',
-                'choices' => array(
-                    'Não' => '0',
-                    'Sim' => '1',
-                ),
-                'choices_as_values' => true,
-                'expanded' => true,
-            ))
             ->add('breveCurriculo', TextareaType::class, array(
                 'label' => 'Breve Currículo',
                 'required' => false,
             ))
+            // Chama o método onPreSetData()
+            ->addEventListener(
+                FormEvents::PRE_SET_DATA,
+                array($this, 'onPreSetData')
+            )
         ;
+
+        if($this->authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
+            $builder
+                ->add('enabled', ChoiceType::class, array(
+                    'label' => 'Ativo?',
+                    'choices' => array(
+                        'Não' => '0',
+                        'Sim' => '1',
+                    ),
+                    'choices_as_values' => true,
+                    'expanded' => true,
+                ))
+                ->add('confirmado', ChoiceType::class, array(
+                    'label' => 'Confirmado?',
+                    'choices' => array(
+                        'Não'   => '0',
+                        'Sim'   => '1',
+                    ),
+                    'choices_as_values' => true,
+                    'expanded' => true,
+                ))
+                ->add('professor', ChoiceType::class, array(
+                    'label' => 'Professor?',
+                    'choices' => array(
+                        'Não' => '0',
+                        'Sim' => '1',
+                    ),
+                    'choices_as_values' => true,
+                    'expanded' => true,
+                ))
+            ;
+        }
 
         if($this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
             $builder
@@ -95,6 +100,29 @@ class UserType extends AbstractType
                     'expanded' => true,
                 ))
             ;
+        }
+    }
+
+    // Muda o formulário antes dele ser chamado
+    public function onPreSetData(FormEvent $event)
+    {
+        $user = $event->getData();
+        $form = $event->getForm();
+
+        if (!$user)
+            return;
+
+        if (!$user->getId()) {
+            $form
+                ->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(
+                    'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
+                    'options' => array('translation_domain' => 'FOSUserBundle'),
+                    'first_options' => array('label' => 'form.new_password'),
+                    'second_options' => array('label' => 'form.new_password_confirmation'),
+                    'invalid_message' => 'fos_user.password.mismatch',
+                )
+            );
+            $event->setData($user);
         }
     }
 
