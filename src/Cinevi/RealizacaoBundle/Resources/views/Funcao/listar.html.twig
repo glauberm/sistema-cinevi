@@ -2,6 +2,7 @@
 
 {% set title = 'Funções' %}
 {% set routeAdicionar = path('new_funcao') %}
+{% set routeCsv = path('funcaos_csv') %}
 
 {% block thead %}
     <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.nome') }}</th>

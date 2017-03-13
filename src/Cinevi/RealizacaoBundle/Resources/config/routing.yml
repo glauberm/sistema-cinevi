@@ -2,10 +2,22 @@ projetos:
     type:     rest
     resource: Cinevi\RealizacaoBundle\Controller\ProjetoController
 
+projetos_csv:
+    path:      /csv/projetos
+    defaults:  { _controller: CineviRealizacaoBundle:Projeto:getCsv }
+
 copiaFinals:
     type:     rest
     resource: Cinevi\RealizacaoBundle\Controller\CopiaFinalController
 
+copiaFinals_csv:
+    path:      /csv/copia/finals
+    defaults:  { _controller: CineviRealizacaoBundle:CopiaFinal:getCsv }
+
 funcaos:
     type:     rest
     resource: Cinevi\RealizacaoBundle\Controller\FuncaoController
+
+funcaos_csv:
+    path:      /csv/funcaos
+    defaults:  { _controller: CineviRealizacaoBundle:Funcao:getCsv }

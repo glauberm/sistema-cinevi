@@ -2,6 +2,7 @@
 
 {% set title = 'Usuários' %}
 {% set routeAdicionar = path('new_user') %}
+{% set routeCsv = path('users_csv') %}
 
 {% block thead %}
     <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.username') }}</th>

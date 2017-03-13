@@ -3,11 +3,10 @@
 ## Da reunião
 - Se marcado como "Em Manutenção", avisar todos que pegaram esse equipamento depois daquela data
 - O responsável por um projeto só pode criar outro projeto quando criar uma cópia final para aquele projeto
-- Exportar .csv dos equipamentos
+- Exportar .csv dos equipamentos  -- CORRIGIR E FAZER TESTES
 - Ver DynamicType nos equipamentos
 
 ## Template
-- Adicionar o "Carregando..." nas reservas
 - Adicionar ícones nos botões de adicionar, editar e remover e deixá-los fixos na nav-bar. Possíveis botões extras vão para o accordion.
 - Adicionar máscaras de dinheiro, integer
 - Mudar ícones nos links de painel de controle e de funções
@@ -25,7 +24,6 @@
 ## Geral
 - Checar spool e emails no servidor (mudar para /home/cinem752/spool)
 - Passar a listagem, a busca por roles e outros pro Repository
-- Add o "pular para o main-content" (possivelmente outras questões de acessibilidade?)
 
 ## Gráficos
 - Quantidade de diretores, produtores, etc. em projetos

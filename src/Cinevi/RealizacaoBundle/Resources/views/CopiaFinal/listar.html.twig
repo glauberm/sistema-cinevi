@@ -2,6 +2,7 @@
 
 {% set title = 'Cópias Finais' %}
 {% set routeAdicionar = path('new_copia_final') %}
+{% set routeCsv = path('copiaFinals_csv') %}
 
 {% block thead %}
     <th>{{ knp_pagination_sortable(pagination, 'Título', 'r.titulo') }}</th>

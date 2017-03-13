@@ -9,11 +9,11 @@ class CsvResponse extends Response
     protected $data;
     protected $filename;
 
-    public function __construct($filename = 'tabela', $data = array(), $status = 200, $headers = array())
+    public function __construct($filename, $data = array(), $status = 200, $headers = array())
     {
         parent::__construct('', $status, $headers);
+        $this->filename = 'tabela_'.$filename.'.csv';
         $this->setData($data);
-        $this->filename = $filename.'.csv';
     }
 
     public function setData(array $data)
@@ -21,6 +21,15 @@ class CsvResponse extends Response
         $output = fopen('php://temp', 'r+');
 
         foreach ($data as $row) {
+            foreach ($row as $lineKey => $lineValue) {
+                if($lineValue instanceof \DateTime) {
+                    $row[$lineKey] = $lineValue->format('d/m/Y');
+                }
+                else if(is_array($lineValue)) {
+                    $row[$lineKey] = implode(', ',$lineValue);
+                }
+            }
+
             fputcsv($output, $row);
         }
         rewind($output);

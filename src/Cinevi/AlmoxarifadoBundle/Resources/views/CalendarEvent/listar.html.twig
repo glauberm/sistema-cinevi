@@ -1,6 +1,7 @@
 {% extends 'CineviAdminBundle::base.html.twig' %}
 
 {% set title = 'Reservas de Equipamento(s)' %}
+{% set routeCsv = path('calendar_events_csv') %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
@@ -53,6 +54,12 @@
             {{ knp_pagination_render(pagination) }}
         </div>
     </noscript>
+
+    <br/>
+
+    <div class="text-left csv">
+        <a target="_blank" href="{{ routeCsv }}" class="btn btn-warning btn-sm">Exportar .CSV</a>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

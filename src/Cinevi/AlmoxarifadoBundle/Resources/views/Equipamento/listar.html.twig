@@ -2,6 +2,7 @@
 
 {% set title = 'Equipamentos' %}
 {% set routeAdicionar = path('new_equipamento') %}
+{% set routeCsv = path('equipamentos_csv') %}
 
 {% block thead %}
     <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.nome') }}</th>

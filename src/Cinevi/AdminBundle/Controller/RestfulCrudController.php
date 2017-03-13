@@ -304,6 +304,8 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
     {
         $em = $this->getDoctrine()->getManager();
 
+        $keys = array();
+
         $itens = $em->getRepository($this->bundleName)
                ->createQueryBuilder('item')
                ->select('item')
@@ -318,7 +320,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
 
         //exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($itens), $keys, \Doctrine\Common\Util\Debug::dump($arrayResultado),"</pre>"));
 
-        return new CsvResponse('tabela_'.$this->label, $arrayResultado);
+        return new CsvResponse($this->routeSuffix, $arrayResultado);
     }
 
     /**
