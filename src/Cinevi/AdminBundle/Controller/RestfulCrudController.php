@@ -149,12 +149,15 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
 
         $form->handleRequest($request);
 
+        // Chama o método a ser sobreescrito posCriar()
+        $form = $this->posCriar($form, $em);
+
         if ($form->isValid()) {
             $em->persist($obj);
             $em->flush();
 
-            // Chama o método a ser sobreescrito posCriar()
-            $obj = $this->posCriar($obj, $em);
+            // Chama o método a ser sobreescrito posPersist()
+            $obj = $this->posPersist($obj, $em);
 
             // Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
             $this->get('session')->getFlashBag()->set('success', 'Criação de '.$this->label.' realizada com sucesso!');
@@ -223,12 +226,15 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
 
         $editForm->submit($request->request->get($editForm->getName()));
 
+        // Chama o método a ser sobreescrito posEditar()
+        $editForm = $this->posEditar($obj, $editForm, $em);
+
         if ($editForm->isValid()) {
             $em->merge($obj);
             $em->flush();
 
-            // Chama o método a ser sobreescrito posEditar()
-            $obj = $this->posEditar($obj, $em);
+            // Chama o método a ser sobreescrito posMerge()
+            $obj = $this->posMerge($obj, $em);
 
             // Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
             $this->get('session')->getFlashBag()->set('success', 'Edição de '.$this->label.' realizada com sucesso!');
@@ -344,7 +350,12 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         return $form;
     }
 
-    protected function posCriar($obj, EntityManager $em)
+    protected function posCriar(Form $form, EntityManager $em)
+    {
+        return $form;
+    }
+
+    protected function posPersist($obj, EntityManager $em)
     {
         return $obj;
     }
@@ -354,7 +365,12 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         return $form;
     }
 
-    protected function posEditar($obj, EntityManager $em)
+    protected function posEditar($obj, Form $form, EntityManager $em)
+    {
+        return $form;
+    }
+
+    protected function posMerge($obj, EntityManager $em)
     {
         return $obj;
     }

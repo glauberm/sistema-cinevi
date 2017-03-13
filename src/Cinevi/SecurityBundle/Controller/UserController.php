@@ -30,7 +30,7 @@ class UserController extends RestfulCrudController
         return $form;
     }
 
-    protected function posEditar($obj, EntityManager $em)
+    protected function posMerge($obj, EntityManager $em)
     {
         if($this->confirmado == false && $obj->getConfirmado() == true) {
             $template = $this->bundleName.':email';

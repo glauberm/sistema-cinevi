@@ -22,7 +22,7 @@ class CalendarEventController extends RestfulCrudController
     protected $label = 'reserva';
     protected $formClassName = CalendarEventType::class;
 
-    protected function preCriar(Form $form, EntityManager $em)
+    protected function posCriar(Form $form, EntityManager $em)
     {
         $form = $this->checaFimDeSemana($form);
         $form = $this->checaIntervalo($form);
@@ -34,7 +34,7 @@ class CalendarEventController extends RestfulCrudController
         return $form;
     }
 
-    protected function preEditar($obj, Form $form, EntityManager $em)
+    protected function posEditar($obj, Form $form, EntityManager $em)
     {
         $form = $this->checaFimDeSemana($form);
         $form = $this->checaIntervalo($form);
@@ -46,7 +46,7 @@ class CalendarEventController extends RestfulCrudController
         return $form;
     }
 
-    protected function posCriar($obj, EntityManager $em)
+    protected function posPersist($obj, EntityManager $em)
     {
         $template = $this->bundleName.':email';
 

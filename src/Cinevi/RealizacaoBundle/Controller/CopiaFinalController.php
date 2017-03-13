@@ -26,7 +26,7 @@ class CopiaFinalController extends RestfulCrudController
         return $builder->join('item.realizacao', 'r');
     }
 
-    protected function posCriar($obj, EntityManager $em)
+    protected function posPersist($obj, EntityManager $em)
     {
         $template = $this->bundleName.':email';
 
