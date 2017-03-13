@@ -15,9 +15,18 @@ class FuncaoVoter extends BaseVoter
         $this->decisionManager = $decisionManager;
     }
 
-    protected function create($obj, $user, TokenInterface $token)
+    protected function view($obj, $user, TokenInterface $token)
     {
         return true;
+    }
+
+    protected function create($obj, $user, TokenInterface $token)
+    {
+        if ($this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO'))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     protected function edit($obj, $user, TokenInterface $token)

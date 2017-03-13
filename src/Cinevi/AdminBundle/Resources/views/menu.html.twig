@@ -13,11 +13,9 @@
                     <a class="list-group-item {% if app.request.get('_route') == 'index' %}active{% endif %}" href="{{ path('index') }}">
                         {% include 'CineviAdminBundle:SVG:usuarios.html.twig' %}Painel de Controle
                     </a>
-                    {% if is_granted('ROLE_DEPARTAMENTO') %}
-                        <a class="list-group-item {% if app.request.get('_route') == 'get_users' or app.request.get('_route') == 'new_user' or app.request.get('_route') == 'get_user' or app.request.get('_route') == 'edit_user' or app.request.get('_route') == 'post_user' or app.request.get('_route') == 'put_user' %}active{% endif %}" href="{{ path('get_users') }}">
-                            {% include 'CineviAdminBundle:SVG:usuarios.html.twig' %}Usuários
-                        </a>
-                    {% endif %}
+                    <a class="list-group-item {% if app.request.get('_route') == 'get_users' or app.request.get('_route') == 'new_user' or app.request.get('_route') == 'get_user' or app.request.get('_route') == 'edit_user' or app.request.get('_route') == 'post_user' or app.request.get('_route') == 'put_user' %}active{% endif %}" href="{{ path('get_users') }}">
+                        {% include 'CineviAdminBundle:SVG:usuarios.html.twig' %}Usuários
+                    </a>
                     {% block maisOpcoesMainMenu %}{% endblock %}
                 </div>
             </div>

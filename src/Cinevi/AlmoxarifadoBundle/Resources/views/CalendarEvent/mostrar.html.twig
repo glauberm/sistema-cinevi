@@ -4,15 +4,17 @@
 {% set routeListar = path('get_calendar_events') %}
 {% set routeEditar = path('edit_calendar_event', { 'id': item.id }) %}
 
-{% block maisActionsButton %}
-    {% if is_granted('ROLE_ALMOXARIFADO') or item.user == app.user %}
-        {{ parent() }}
-    {% endif %}
-{% endblock %}
-
 {% block maisBotoes %}
+    {% block maisBotoesBlock %}{% endblock %}
     {% if is_granted('ROLE_ALMOXARIFADO') or item.user == app.user %}
-        {{ parent() }}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
+        </div>
+    {% endif %}
+    {% if is_granted('ROLE_ALMOXARIFADO') or item.user == app.user %}
+        {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
+            {{ form_row(deleteForm.remover) }}
+        {{ form_end(deleteForm) }}
     {% endif %}
 {% endblock %}
 

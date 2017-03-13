@@ -4,6 +4,15 @@
 {% set routeAdicionar = path('new_user') %}
 {% set routeCsv = path('users_csv') %}
 
+{% block maisBotoes %}
+    {% block maisBotoesBlock %}{% endblock %}
+    {% if is_granted('ROLE_DEPARTAMENTO') %}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-success" href="{{ routeAdicionar }}">Adicionar</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block thead %}
     <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.username') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Email', 'item.email') }}</th>

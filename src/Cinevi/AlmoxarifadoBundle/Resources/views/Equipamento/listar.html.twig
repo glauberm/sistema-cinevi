@@ -4,6 +4,15 @@
 {% set routeAdicionar = path('new_equipamento') %}
 {% set routeCsv = path('equipamentos_csv') %}
 
+{% block maisBotoes %}
+    {% block maisBotoesBlock %}{% endblock %}
+    {% if is_granted('ROLE_ALMOXARIFADO') %}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-success" href="{{ routeAdicionar }}">Adicionar</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block thead %}
     <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.nome') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Categoria', 'c.nome') }}</th>

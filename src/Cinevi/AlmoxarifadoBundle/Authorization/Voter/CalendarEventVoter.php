@@ -15,6 +15,11 @@ class CalendarEventVoter extends BaseVoter
         $this->decisionManager = $decisionManager;
     }
 
+    protected function view($obj, $user, TokenInterface $token)
+    {
+        return true;
+    }
+
     protected function create($obj, $user, TokenInterface $token)
     {
         return true;
