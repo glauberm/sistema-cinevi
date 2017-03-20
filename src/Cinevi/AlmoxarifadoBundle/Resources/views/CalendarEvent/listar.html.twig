@@ -9,16 +9,9 @@
     {{ parent() }}
 {% endblock %}
 
-{% block mainAction %}
-    <a class="navbar-brand btn btn-link" href="{{ path('index') }}">
-        {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
-    </a>
-{% endblock %}
-
-{% block maisBotoes %}
-    {% block maisBotoesBlock %}{% endblock %}
+{% block addAction %}
     <div class="navbar-form navbar-nav">
-        <a class="btn btn-success" href="{{ path('new_calendar_event') }}">Adicionar</a>
+        <a class="btn btn-success" href="{{ path('new_calendar_event') }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
     </div>
 {% endblock %}
 

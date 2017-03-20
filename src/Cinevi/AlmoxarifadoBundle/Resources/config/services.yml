@@ -3,7 +3,7 @@ services:
     cinevi.access.almoxarifado_calendar_event:
         class: Cinevi\AlmoxarifadoBundle\Authorization\Voter\CalendarEventVoter
         public: false
-        arguments: ['@security.access.decision_manager']
+        arguments: ['@security.access.decision_manager','@doctrine.orm.entity_manager']
         tags:
             - { name: security.voter }
 
@@ -24,7 +24,7 @@ services:
     # Form Types
     cinevi.almoxarifado.calendar_event_type:
         class: Cinevi\AlmoxarifadoBundle\Form\Type\CalendarEventType
-        arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker']
+        arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker', '@security.token_storage']
         tags:
             - { name: form.type, alias: view }
 

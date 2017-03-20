@@ -4,27 +4,13 @@
 {% set routeListar = path('get_users') %}
 {% set routeEditar = path('edit_user', { 'id': item.id }) %}
 
-{% block maisBotoes %}
-    {% block maisBotoesBlock %}{% endblock %}
-    {% if is_granted('ROLE_DEPARTAMENTO') %}
-        <div class="navbar-form navbar-nav">
-            <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
-        </div>
-    {% endif %}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
-        {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
-            {{ form_row(deleteForm.remover) }}
-        {{ form_end(deleteForm) }}
-    {% endif %}
-{% endblock %}
-
 {% block dtdd %}
     <div class="row">
         <div class="col-sm-6"><dt>Nome</dt><dd>{{ item.username }}</dd></div>
         <div class="col-sm-6"><dt>Email</dt><dd>{{ item.email }}</dd></div>
     </div>
     <div class="row">
-        <div class="col-sm-6"><dt>Matrícula/SIAP</dt><dd>{{ item.matricula }}</dd></div>
+        <div class="col-sm-6"><dt>Matrícula/SIAPE</dt><dd>{{ item.matricula }}</dd></div>
         <div class="col-sm-6"><dt>Professor?</dt><dd>{{ item.professor ? 'Sim' : 'Não' }}</dd></div>
     </div>
     <div class="row">

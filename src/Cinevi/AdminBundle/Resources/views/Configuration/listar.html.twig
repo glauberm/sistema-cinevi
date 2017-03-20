@@ -1,0 +1,14 @@
+{% extends 'CineviAdminBundle:Crud:base-listar.html.twig' %}
+
+{% set title = 'Configurações' %}
+{% set routeCsv = path('configuration_csv') %}
+
+{% block thead %}
+    <th>{{ knp_pagination_sortable(pagination, 'Id', 'item.id') }}</th>
+{% endblock %}
+
+{% block tbody %}
+    <td>
+        <a href="{{ path('get_configuration', { 'id': item.id }) }}">{{ item.id }}</a>
+    </td>
+{% endblock %}

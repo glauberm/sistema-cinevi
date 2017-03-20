@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
@@ -16,11 +17,13 @@ class CalendarEventType extends AbstractType
 {
     private $em;
     private $authorizationChecker;
+    private $tokenStorageInterface;
 
-    public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorageInterface)
     {
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
+        $this->tokenStorageInterface = $tokenStorageInterface;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -32,7 +35,7 @@ class CalendarEventType extends AbstractType
 
         // Pega os usuários que o usuário atual pode ver
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
-        $userQB->orderBy('u.username', 'ASC')->where('u.professor != 1');
+        $userQB->orderBy('u.username', 'ASC');
         foreach ($userQB->getQuery()->getResult() as $result) {
             if (true === $this->authorizationChecker->isGranted('edit', $result)) {
                 $userArray[$result->getUsername()] = $result->getId();
@@ -57,7 +60,15 @@ class CalendarEventType extends AbstractType
                 ->where('e.categoria = '.$categoria->getId())
                 ->andWhere('e.manutencao != 1');
             foreach ($equipamentoQB->getQuery()->getResult() as $equipamento) {
-                $equipamentosArray[$equipamento->getNome()] = $equipamento->getId();
+                if($equipamento->getUsers()->isEmpty()) {
+                    $equipamentosArray[$equipamento->getNome()] = $equipamento->getId();
+                } else {
+                    foreach($equipamento->getUsers() as $user) {
+                        if($user == $this->tokenStorageInterface->getToken()->getUser() || $this->authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
+                            $equipamentosArray[$equipamento->getNome()] = $equipamento->getId();
+                        }
+                    }
+                }
             }
             $categoriaArray[$categoria->getNome()] = $equipamentosArray;
         }
@@ -67,9 +78,9 @@ class CalendarEventType extends AbstractType
                 'label' => 'Responsável',
                 'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione uma opção...',
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione uma opção...',
                     'class' => 'select2-select',
                 ),
             ))
@@ -77,9 +88,9 @@ class CalendarEventType extends AbstractType
                 'label' => 'Projeto',
                 'choices' => $projetoArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione uma opção...',
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione uma opção...',
                     'class' => 'select2-select',
                 ),
             ))
@@ -103,10 +114,10 @@ class CalendarEventType extends AbstractType
                 'label' => 'Equipamento(s)',
                 'choices' => $categoriaArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione opções...',
                     'class' => 'select2-select',
                 ),
             ))

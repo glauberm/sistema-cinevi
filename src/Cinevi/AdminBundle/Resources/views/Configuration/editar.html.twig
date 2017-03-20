@@ -1,0 +1,8 @@
+{% extends 'CineviAdminBundle:Crud:base-editar.html.twig' %}
+
+{% set title = 'Editar Configurações' %}
+{% set routeListar = path('index') %}
+
+{% block form %}
+    {% include 'CineviAdminBundle:Configuration:form.html.twig' with {form: editForm} %}
+{% endblock %}

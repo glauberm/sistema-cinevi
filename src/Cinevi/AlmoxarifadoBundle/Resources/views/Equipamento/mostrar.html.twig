@@ -4,22 +4,7 @@
 {% set routeListar = path('get_equipamentos') %}
 {% set routeEditar = path('edit_equipamento', { 'id': item.id }) %}
 
-{% block maisBotoes %}
-    {% block maisBotoesBlock %}{% endblock %}
-    {% if is_granted('ROLE_ALMOXARIFADO') %}
-        <div class="navbar-form navbar-nav">
-            <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
-        </div>
-    {% endif %}
-    {% if is_granted('ROLE_ALMOXARIFADO') %}
-        {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
-            {{ form_row(deleteForm.remover) }}
-        {{ form_end(deleteForm) }}
-    {% endif %}
-{% endblock %}
-
 {% block dtdd %}
-
 <div class="row">
     <div class="col-sm-3 col-md-2"><dt>Cód.</dt><dd>{{ item.codigo }}</dd></div>
     <div class="col-sm-9 col-md-10"><dt>Nome</dt><dd>{{ item.nome }}</dd></div>

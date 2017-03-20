@@ -34,7 +34,7 @@ class EquipeType extends AbstractType
 
         // Pega todos os usuários não-professores
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
-        $userQB->orderBy('u.username', 'ASC')->where('u.professor != 1');
+        $userQB->orderBy('u.username', 'ASC');
         foreach ($userQB->getQuery()->getResult() as $result) {
             $userArray[$result->getUsername()] = $result->getId();
         }
@@ -44,9 +44,9 @@ class EquipeType extends AbstractType
                 'label' => 'Função',
                 'choices' => $funcaoArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione uma opção...',
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione uma opção...',
                     'class' => 'select2-select',
                 ),
             ))
@@ -54,10 +54,10 @@ class EquipeType extends AbstractType
                 'label' => 'Equipe',
                 'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione opções...',
                     'class' => 'select2-select',
                 ),
             ))

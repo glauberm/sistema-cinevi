@@ -38,10 +38,16 @@ class UserType extends AbstractType
                 'label' => 'Email',
             ))
             ->add('matricula', IntegerType::class, array(
-                'label' => 'Matrícula/SIAP',
+                'label' => 'Matrícula/SIAPE',
+                'attr' => array(
+                    'class' => 'input-number'
+                )
             ))
             ->add('telefone', IntegerType::class, array(
                 'label' => 'Telefone',
+                'attr' => array(
+                    'class' => 'input-tel',
+                )
             ))
             ->add('breveCurriculo', TextareaType::class, array(
                 'label' => 'Breve Currículo',
@@ -98,6 +104,7 @@ class UserType extends AbstractType
                     'choices_as_values' => true,
                     'multiple' => true,
                     'expanded' => true,
+                    'required' => false,
                 ))
             ;
         }

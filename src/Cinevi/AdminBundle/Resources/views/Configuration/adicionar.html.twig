@@ -1,0 +1,8 @@
+{% extends 'CineviAdminBundle:Crud:base-adicionar.html.twig' %}
+
+{% set title = 'Adicionar Configuração' %}
+{% set routeListar = path('index') %}
+
+{% block form %}
+    {% include 'CineviAdminBundle:Configuration:form.html.twig' %}
+{% endblock %}

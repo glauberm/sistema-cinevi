@@ -31,7 +31,7 @@ class ProjetoControllerTest extends RestfulCrudControllerTest
 
         $user = new User();
         $user->setUsername('UserX');
-        $user->setEmail('x@x.com.br');
+        $user->setEmail('glaubernm@gmail.com');
         $user->setPlainPassword('12345678');
         $user->setMatricula('12345678');
         $user->setTelefone('12345678');
@@ -42,7 +42,7 @@ class ProjetoControllerTest extends RestfulCrudControllerTest
 
         $professor = new User();
         $professor->setUsername('UserY');
-        $professor->setEmail('y@y.com.br');
+        $professor->setEmail('glaubernm@hotmail.com');
         $professor->setPlainPassword('12345678');
         $professor->setMatricula('92345678');
         $professor->setTelefone('92345678');

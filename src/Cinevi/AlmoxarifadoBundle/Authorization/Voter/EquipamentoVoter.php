@@ -31,7 +31,7 @@ class EquipamentoVoter extends BaseVoter
 
     protected function edit($obj, $user, TokenInterface $token)
     {
-        if ($this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO'))) {
+        if ($this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO')) || $this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO'))) {
             return true;
         } else {
             return false;

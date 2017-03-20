@@ -72,6 +72,11 @@ class Equipamento
      **/
     protected $manutencao;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
+     **/
+    protected $users;
+
 
     /**
      * Get id
@@ -334,5 +339,45 @@ class Equipamento
     public function getCategoria()
     {
         return $this->categoria;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add users
+     *
+     * @param \Cinevi\SecurityBundle\Entity\User $users
+     * @return Equipamento
+     */
+    public function addUser(\Cinevi\SecurityBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Cinevi\SecurityBundle\Entity\User $users
+     */
+    public function removeUser(\Cinevi\SecurityBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

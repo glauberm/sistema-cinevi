@@ -27,6 +27,8 @@ class CsvResponse extends Response
                 }
                 else if(is_array($lineValue)) {
                     $row[$lineKey] = implode(', ',$lineValue);
+                } else {
+                    $row[$lineKey] = (string)$lineValue;
                 }
             }
 
@@ -40,6 +42,8 @@ class CsvResponse extends Response
             $this->data .= $line;
         }
         $this->data .= fgets($output);
+
+        fclose($output);
 
         return $this->update();
     }

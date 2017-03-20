@@ -4,10 +4,9 @@
 {% set routeAdicionar = path('new_copia_final') %}
 {% set routeCsv = path('copiaFinals_csv') %}
 
-{% block maisBotoes %}
-    {% block maisBotoesBlock %}{% endblock %}
+{% block addAction %}
     <div class="navbar-form navbar-nav">
-        <a class="btn btn-success" href="{{ routeAdicionar }}">Adicionar</a>
+        <a class="btn btn-success" href="{{ routeAdicionar }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
     </div>
 {% endblock %}
 

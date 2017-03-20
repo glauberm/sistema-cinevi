@@ -25,7 +25,7 @@ class ProjetoType extends AbstractType
 
         // Pega todos os usuários que não são professores
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
-        $userQB->orderBy('u.username', 'ASC')->where('u.professor != 1');
+        $userQB->orderBy('u.username', 'ASC');
         foreach ($userQB->getQuery()->getResult() as $result) {
             $userArray[$result->getUsername()] = $result->getId();
         }
@@ -62,10 +62,10 @@ class ProjetoType extends AbstractType
                 'label' => 'Direção',
                 'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione opções...',
                     'class' => 'select2-select',
                 ),
             ))
@@ -73,10 +73,10 @@ class ProjetoType extends AbstractType
                 'label' => 'Produção',
                 'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione opções...',
                     'class' => 'select2-select',
                 ),
             ))
@@ -84,10 +84,10 @@ class ProjetoType extends AbstractType
                 'label' => 'Direção de Fotografia',
                 'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione opções...',
                     'class' => 'select2-select',
                 ),
             ))
@@ -103,11 +103,11 @@ class ProjetoType extends AbstractType
                 'label' => 'Direção de Som',
                 'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
+                    'placeholder' => 'Selecione opções...',
                 ),
             ))
             ->add('disciplinaSom', ChoiceType::class, array(
@@ -122,10 +122,10 @@ class ProjetoType extends AbstractType
                 'label' => 'Direção de Arte',
                 'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione opções...',
                 'multiple' => true,
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione opções...',
                     'class' => 'select2-select',
                 ),
             ))

@@ -47,6 +47,18 @@ class CopiaFinalController extends RestfulCrudController
             $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
         }
 
+        // Email para o usuário
+        $destinatario = $obj->getRealizacao()->getUser()->getEmail();
+        $template = $this->bundleName.':email-user';
+
+        $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+
+        // Email para o professor
+        $destinatario = $obj->getRealizacao()->getProfessor()->getEmail();
+        $template = $this->bundleName.':email-professor';
+
+        $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+
         return $obj;
     }
 }

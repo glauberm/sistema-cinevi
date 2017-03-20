@@ -30,7 +30,7 @@ class RealizacaoType extends AbstractType
 
         // Pega os usuários que o usuário atual pode ver
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
-        $userQB->orderBy('u.username', 'ASC')->where('u.professor != 1');;
+        $userQB->orderBy('u.username', 'ASC');
         foreach ($userQB->getQuery()->getResult() as $result) {
             if (true === $this->authorizationChecker->isGranted('edit', $result)) {
                 $userArray[$result->getUsername()] = $result->getId();
@@ -49,9 +49,9 @@ class RealizacaoType extends AbstractType
                 'label' => 'Responsável',
                 'choices' => $userArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione uma opção...',
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione uma opção...',
                     'class' => 'select2-select',
                 )
             ))
@@ -78,19 +78,19 @@ class RealizacaoType extends AbstractType
                     'Outra' => 'Outra',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
                     'class' => 'select2-select',
+                    'placeholder' => 'Selecione uma opção...',
                 ),
             ))
             ->add('professor', ChoiceType::class, array(
                 'label' => 'Professor(a) Orientador(a)',
                 'choices' => $professorArray,
                 'invalid_message' => 'Este não é um valor válido.',
-                'placeholder' => 'Selecione uma opção...',
                 'choices_as_values' => true,
                 'attr' => array(
                     'class' => 'select2-select',
+                    'placeholder' => 'Selecione uma opção...',
                 ),
             ))
             ->add('genero', ChoiceType::class, array(
@@ -104,9 +104,9 @@ class RealizacaoType extends AbstractType
                 ),
                 'multiple' => true,
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione opções...',
                 'attr' => array(
                     'class' => 'select2-select',
+                    'placeholder' => 'Selecione opções...',
                 ),
             ))
             ->add('captacao', ChoiceType::class, array(
@@ -118,8 +118,8 @@ class RealizacaoType extends AbstractType
                     'Outra' => 'Outra',
                 ),
                 'choices_as_values' => true,
-                'placeholder' => 'Selecione uma opção...',
                 'attr' => array(
+                    'placeholder' => 'Selecione uma opção...',
                     'class' => 'select2-select',
                 ),
             ))

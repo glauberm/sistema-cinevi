@@ -28,7 +28,7 @@ change_password:
     flash:
         success: 'A senha foi alterada.'
 registration:
-    check_email: 'Um email foi enviado para o endereço %email%. Para ativar a sua conta, clique no link na mensagem.'
+    check_email: 'Um email foi enviado para o endereço %email%. Para ativar a sua conta, acesse o link na mensagem.'
     confirmed: 'Parabéns, %username%. A sua conta foi ativada.'
     back: 'Retornar para a página de origem.'
     submit: Registrar
@@ -36,10 +36,10 @@ registration:
         user_created: 'O usuário foi criado com sucesso.'
     email:
         subject: 'Bem-vinda(o), %username%!'
-        message: "Olá, %username%!\n\nPara completar a validação da sua conta, clique no link:\n\n%confirmationUrl%\n\n\nAtenciosamente,\no Departamento.\n"
+        message: "Olá, %username%!\n\nPara completar a validação da sua conta, acesse o link:\n\n%confirmationUrl%\n\n\nAtenciosamente,\no Departamento.\n"
 resetting:
     password_already_requested: 'Este usuário já solicitou uma senha nas últimas 24 horas.'
-    check_email: 'Foi enviado um email para %email%. Para recuperar a sua senha, clique no link da mensagem.'
+    check_email: 'Foi enviado um email para %email%. Para recuperar a sua senha, acesse o link da mensagem.'
     request:
         username: 'Usuário ou email'
         submit: 'Recuperar senha'
@@ -49,7 +49,7 @@ resetting:
         success: 'A senha foi redefinida com sucesso.'
     email:
         subject: 'Redefinir senha'
-        message: "Olá, %username%!\n\nPara redefinir sua senha, clique no link:\n\n%confirmationUrl%\n\n\nAtenciosamente,\no Departamento.\n"
+        message: "Olá, %username%!\n\nPara redefinir sua senha, acesse o link:\n\n%confirmationUrl%\n\n\nAtenciosamente,\no Departamento.\n"
 layout:
     logout: Sair
     login: Entrar

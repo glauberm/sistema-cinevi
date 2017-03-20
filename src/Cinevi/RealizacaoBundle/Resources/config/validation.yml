@@ -85,6 +85,14 @@ Cinevi\RealizacaoBundle\Entity\CopiaFinal:
             - Valid: ~
         fichaTecnica:
             - Valid: ~
+        duracao:
+            - Type:
+                type: integer
+                message: Por favor, informe apenas números.
+        taxaBits:
+            - Type:
+                type: integer
+                message: Por favor, informe apenas números.
 
 Cinevi\RealizacaoBundle\Entity\FichaTecnica:
     properties:

@@ -18,7 +18,7 @@ class Equipamento
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Categoria", cascade={"merge"}, inversedBy="equipamentos")
+     * @ORM\ManyToOne(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Categoria", cascade={"merge"})
      **/
     protected $categoria;
 
@@ -71,6 +71,11 @@ class Equipamento
      * @ORM\Column(type="boolean")
      **/
     protected $manutencao;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\User", cascade={"merge"})
+     **/
+    protected $users;
 
 
     /**

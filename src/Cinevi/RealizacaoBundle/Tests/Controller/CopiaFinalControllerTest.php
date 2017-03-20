@@ -36,7 +36,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
 
         $user = new User();
         $user->setUsername('UserZ');
-        $user->setEmail('z@z.com.br');
+        $user->setEmail('glaubernm@gmail.com');
         $user->setPlainPassword('12345678');
         $user->setMatricula('812345678');
         $user->setTelefone('812345678');
@@ -47,7 +47,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
 
         $professor = new User();
         $professor->setUsername('UserK');
-        $professor->setEmail('k@k.com.br');
+        $professor->setEmail('glaubernm@hotmail.com');
         $professor->setPlainPassword('12345678');
         $professor->setMatricula('52345678');
         $professor->setTelefone('52345678');

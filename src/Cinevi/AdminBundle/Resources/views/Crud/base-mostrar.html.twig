@@ -1,21 +1,17 @@
 {% extends 'CineviAdminBundle::base.html.twig' %}
 
-{% block mainAction %}
+{% block mainActions %}
     <a class="navbar-brand btn btn-link" href="{{ routeListar }}">
         {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
     </a>
-{% endblock %}
-
-{% block maisBotoes %}
-    {% block maisBotoesBlock %}{% endblock %}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
+    {% if is_granted('edit', item) %}
         <div class="navbar-form navbar-nav">
-            <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
+            <a class="btn btn-info" href="{{ routeEditar }}">{% include 'CineviAdminBundle:SVG:editar.html.twig' %}<span class="hidden-xs">Editar</span></a>
         </div>
     {% endif %}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
+    {% if is_granted('delete', item) %}
         {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
-            {{ form_row(deleteForm.remover) }}
+            <button type="submit" class="btn btn-danger">{% include 'CineviAdminBundle:SVG:remover.html.twig' %}<span class="hidden-xs">Remover</span></button>
         {{ form_end(deleteForm) }}
     {% endif %}
 {% endblock %}

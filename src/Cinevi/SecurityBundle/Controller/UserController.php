@@ -39,15 +39,9 @@ class UserController extends RestfulCrudController
 
             $path = $this->generateUrl('index', array(), true);
 
-            // Envia email para os emails no array
-            $emails = array(
-                $obj->getEmail(),
-            );
-
-            foreach($emails as $email) {
-                $destinatario = $email;
-                $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
-            }
+            $destinatario = $obj->getEmail();
+            
+            $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
         }
 
         return $obj;

@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
+use Cinevi\AdminBundle\Form\Transformer\ArrayEntityToArrayIdObjectTransformer;
 
 class EquipamentoType extends AbstractType
 {
@@ -24,6 +25,7 @@ class EquipamentoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $categoriaArray = array();
+        $usersArray = array();
 
         $categoriaQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Categoria')->createQueryBuilder('c');
         $categoriaQB->orderBy('c.nome', 'ASC');
@@ -31,14 +33,20 @@ class EquipamentoType extends AbstractType
             $categoriaArray[$result->getNome()] = $result->getId();
         }
 
+        $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
+        $userQB->orderBy('u.username', 'ASC');
+        foreach ($userQB->getQuery()->getResult() as $result) {
+            $usersArray[$result->getUsername()] = $result->getId();
+        }
+
         $builder
             ->add('categoria', ChoiceType::class, array(
                 'label' => 'Categoria',
                 'choices' => $categoriaArray,
                 'invalid_message' => 'Este valor não é válido.',
-                'placeholder' => 'Selecione uma opção...',
                 'choices_as_values' => true,
                 'attr' => array(
+                    'placeholder' => 'Selecione uma opção...',
                     'class' => 'select2-select',
                 )
             ))
@@ -69,6 +77,9 @@ class EquipamentoType extends AbstractType
             ->add('patrimonio', IntegerType::class, array(
                 'label' => 'Nº de Patrimônio',
                 'required' => false,
+                'attr' => array(
+                    'class' => 'input-number'
+                )
             ))
             ->add('nSerie', TextType::class, array(
                 'label' => 'Nº de Série',
@@ -91,9 +102,24 @@ class EquipamentoType extends AbstractType
                 'expanded' => true,
                 'choices_as_values' => true,
             ))
+            ->add('users', ChoiceType::class, array(
+                'label' => 'Quais usuários podem reservar este equipamento?',
+                'choices' => $usersArray,
+                'invalid_message' => 'Este não é um valor válido.',
+                'required' => false,
+                'multiple' => true,
+                'choices_as_values' => true,
+                'attr' => array(
+                    'class' => 'select2-select',
+                    'placeholder' => 'Todos os usuários',
+                ),
+            ))
         ;
         $builder->get('categoria')
             ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviAlmoxarifadoBundle:Categoria'))
+        ;
+        $builder->get('users')
+            ->addModelTransformer(new ArrayEntityToArrayIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
         ;
     }
 

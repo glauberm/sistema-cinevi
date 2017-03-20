@@ -621,4 +621,27 @@ class CopiaFinal
     {
         return $this->fichaTecnica;
     }
+
+    /**
+     * Set projeto
+     *
+     * @param \Cinevi\RealizacaoBundle\Entity\Projeto $projeto
+     * @return CopiaFinal
+     */
+    public function setProjeto(\Cinevi\RealizacaoBundle\Entity\Projeto $projeto = null)
+    {
+        $this->projeto = $projeto;
+
+        return $this;
+    }
+
+    /**
+     * Get projeto
+     *
+     * @return \Cinevi\RealizacaoBundle\Entity\Projeto 
+     */
+    public function getProjeto()
+    {
+        return $this->projeto;
+    }
 }

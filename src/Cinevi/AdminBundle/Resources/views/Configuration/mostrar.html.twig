@@ -1,0 +1,10 @@
+{% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
+
+{% set title = 'Configurações' %}
+{% set routeListar = path('index') %}
+{% set routeEditar = path('edit_configuration', { 'id': item.id }) %}
+
+{% block dtdd %}
+    <dt>Apenas professores podem reservar equipamentos?</dt>
+    <dd>{{ item.reservasFechadas ? 'Sim' : 'Não' }}</dd>
+{% endblock %}

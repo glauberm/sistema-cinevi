@@ -38,7 +38,7 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
 
         $user = new User();
         $user->setUsername('UserP');
-        $user->setEmail('p@p.com.br');
+        $user->setEmail('glaubernm@gmail.com');
         $user->setPlainPassword('12345678');
         $user->setMatricula('12745678');
         $user->setTelefone('12745678');
@@ -49,7 +49,7 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
 
         $professor = new User();
         $professor->setUsername('UserF');
-        $professor->setEmail('f@f.com.br');
+        $professor->setEmail('glaubernm@hotmail.com');
         $professor->setPlainPassword('12345678');
         $professor->setMatricula('92045678');
         $professor->setTelefone('92045678');

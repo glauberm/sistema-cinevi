@@ -1,3 +1,7 @@
 index:
     path:      /
     defaults:  { _controller: CineviAdminBundle:Index:index }
+
+configurations:
+    type:     rest
+    resource: Cinevi\AdminBundle\Controller\ConfigurationController

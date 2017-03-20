@@ -4,20 +4,6 @@
 {% set routeListar = path('get_funcaos') %}
 {% set routeEditar = path('edit_funcao', { 'id': item.id }) %}
 
-{% block maisBotoes %}
-    {% block maisBotoesBlock %}{% endblock %}
-    {% if is_granted('ROLE_DEPARTAMENTO') %}
-        <div class="navbar-form navbar-nav">
-            <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
-        </div>
-    {% endif %}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
-        {{ form_start(deleteForm, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
-            {{ form_row(deleteForm.remover) }}
-        {{ form_end(deleteForm) }}
-    {% endif %}
-{% endblock %}
-
 {% block dtdd %}
 
     {% include 'CineviRealizacaoBundle:Funcao:item.html.twig' with {item: item} %}

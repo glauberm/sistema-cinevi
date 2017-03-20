@@ -262,6 +262,24 @@ a.pular-para-conteudo:active {
     height: 18px;
 }
 
+.main .navbar .btn-default,
+.main .navbar .btn-primary,
+.main .navbar .btn-success,
+.main .navbar .btn-warning,
+.main .navbar .btn-danger,
+.main .navbar .btn-info {
+    padding: 6px 8px;
+}
+
+.main .navbar .btn-default svg,
+.main .navbar .btn-primary svg,
+.main .navbar .btn-success svg,
+.main .navbar .btn-warning svg,
+.main .navbar .btn-danger svg,
+.main .navbar .btn-info svg {
+    margin-bottom: -4px;
+}
+
 /* ÍCONES */
 .aside .panel-main .icone-voltar {
     -webkit-transition: transform 0.3s ease;
@@ -362,6 +380,8 @@ a.pular-para-conteudo:active {
 .navbar-form {
     border-top: 0 none;
     border-bottom: 0 none;
+    padding: 0 15px;
+    display: inline-block;
 }
 
 .navbar .form-group {
@@ -420,6 +440,24 @@ a.pular-para-conteudo:active {
 
     .aside {
         margin-top: 0;
+    }
+
+    .main .navbar .btn-default,
+    .main .navbar .btn-primary,
+    .main .navbar .btn-success,
+    .main .navbar .btn-warning,
+    .main .navbar .btn-danger,
+    .main .navbar .btn-info {
+        padding: 6px 10px;
+    }
+
+    .main .navbar .btn-default svg,
+    .main .navbar .btn-primary svg,
+    .main .navbar .btn-success svg,
+    .main .navbar .btn-warning svg,
+    .main .navbar .btn-danger svg,
+    .main .navbar .btn-info svg {
+        margin-right: 3px;
     }
 }
 

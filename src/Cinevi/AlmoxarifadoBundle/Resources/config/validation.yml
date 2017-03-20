@@ -15,6 +15,10 @@ Cinevi\AlmoxarifadoBundle\Entity\Equipamento:
         nome:
             - NotBlank:
                 message: 'Por favor, informe o nome do equipamento.'
+        patrimonio:
+            - Type:
+                type: integer
+                message: Por favor, informe apenas números.
         manutencao:
             - NotNull:
                 message: 'Por favor, informe se o equipamento está ou não em manutenção.'

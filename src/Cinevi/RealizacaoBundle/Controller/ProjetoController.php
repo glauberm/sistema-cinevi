@@ -38,7 +38,6 @@ class ProjetoController extends RestfulCrudController
 
         // Envia email para os emails no array
         $emails = array(
-            'cinevi@vm.uff.br',
             'almoxarifadocinemauff@gmail.com',
             'acervodearteuff@gmail.com',
             'comissaoproducaouff@gmail.com'
@@ -48,6 +47,18 @@ class ProjetoController extends RestfulCrudController
             $destinatario = $email;
             $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
         }
+
+        // Email para o usuário
+        $destinatario = $obj->getRealizacao()->getUser()->getEmail();
+        $template = $this->bundleName.':email-user';
+
+        $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+
+        // Email para o professor
+        $destinatario = $obj->getRealizacao()->getProfessor()->getEmail();
+        $template = $this->bundleName.':email-professor';
+
+        $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
 
         return $obj;
     }

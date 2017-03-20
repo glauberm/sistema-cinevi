@@ -4,11 +4,10 @@
 {% set routeAdicionar = path('new_user') %}
 {% set routeCsv = path('users_csv') %}
 
-{% block maisBotoes %}
-    {% block maisBotoesBlock %}{% endblock %}
+{% block addAction %}
     {% if is_granted('ROLE_DEPARTAMENTO') %}
         <div class="navbar-form navbar-nav">
-            <a class="btn btn-success" href="{{ routeAdicionar }}">Adicionar</a>
+            <a class="btn btn-success" href="{{ routeAdicionar }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
         </div>
     {% endif %}
 {% endblock %}

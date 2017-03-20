@@ -35,6 +35,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $em = $this->getDoctrine()->getManager();
 
         $repository = $em->getRepository($this->bundleName);
+        $configuration = $this->getConfiguration($em);
 
         // Número de resultados
         if ($request->query->get('numResultados')) {
@@ -69,8 +70,9 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             ->setData($pagination)
             ->setTemplate($this->bundleName.':'.$this->listarTemplate)
             ->setTemplateVar('pagination')
-            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($numResultados) {
+            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($numResultados, $configuration) {
                 return array(
+                    'configuration' => $configuration,
                     'numResultados' => $numResultados,
                 );
             })
@@ -81,7 +83,11 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
 
     public function newAction()
     {
+        $em = $this->getDoctrine()->getManager();
+
         $obj = new $this->className();
+
+        $configuration = $this->getConfiguration($em);
 
         $form = $this->getForm($obj, $this->formClassName, 'POST', 'post_'.$this->routeSuffix);
 
@@ -90,9 +96,10 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             ->setData($form->createView())
             ->setTemplate($this->bundleName.':'.$this->criarTemplate)
             ->setTemplateVar('form')
-            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($obj) {
+            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($obj, $configuration) {
                 return array(
                     'item' => $obj,
+                    'configuration' => $configuration,
                 );
             })
         ;
@@ -105,9 +112,13 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
      */
     public function getAction($id)
     {
-        $obj = $this->getDoctrine()->getManager()
-            ->getRepository($this->repositoryName)->find($id)
+        $em = $this->getDoctrine()->getManager();
+
+        $obj = $em->getRepository($this->repositoryName)
+            ->find($id)
         ;
+
+        $configuration = $this->getConfiguration($em);
 
         $this->denyAccessUnlessGranted('view', $obj, 'Você não tem permissão para visualizar este '.$this->label.'.');
 
@@ -121,9 +132,10 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             ->setData($obj)
             ->setTemplate($this->bundleName.':'.$this->mostrarTemplate)
             ->setTemplateVar('item')
-            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($deleteForm) {
+            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($deleteForm, $configuration) {
                 return array(
                     'deleteForm' => $deleteForm->createView(),
+                    'configuration' => $configuration,
                 );
             })
         ;
@@ -139,6 +151,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $em = $this->getDoctrine()->getManager();
 
         $obj = new $this->className();
+        $configuration = $this->getConfiguration($em);
 
         $this->denyAccessUnlessGranted('create', $obj, 'Você não tem permissão para criar um(a) '.$this->label.'.');
 
@@ -169,9 +182,10 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
                 ->setData($form->createView())
                 ->setTemplate($this->bundleName.':'.$this->criarTemplate)
                 ->setTemplateVar('form')
-                ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($obj) {
+                ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($obj, $configuration) {
                     return array(
                         'item' => $obj,
+                        'configuration' => $configuration,
                     );
                 })
             ;
@@ -182,9 +196,13 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
 
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $obj = $this->getDoctrine()->getManager()
             ->getRepository($this->repositoryName)->find($id)
         ;
+
+        $configuration = $this->getConfiguration($em);
 
         $editForm = $this->getForm($obj, $this->formClassName, 'PUT', 'put_'.$this->routeSuffix, array('id' => $id));
         $deleteForm = $this->getForm($obj, DeleteType::class, 'DELETE', 'delete_'.$this->routeSuffix, array('id' => $id));
@@ -194,10 +212,11 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             ->setData($editForm->createView())
             ->setTemplate($this->bundleName.':'.$this->editarTemplate)
             ->setTemplateVar('editForm')
-            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($deleteForm, $obj) {
+            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($deleteForm, $obj, $configuration) {
                 return array(
                     'deleteForm' => $deleteForm->createView(),
                     'item' => $obj,
+                    'configuration' => $configuration,
                 );
             })
         ;
@@ -215,6 +234,8 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $obj = $this->getDoctrine()->getManager()
             ->getRepository($this->repositoryName)->find($id)
         ;
+
+        $configuration = $this->getConfiguration($em);
 
         $this->denyAccessUnlessGranted('edit', $obj, 'Você não tem permissão para editar um(a) '.$this->label.'.');
 
@@ -246,10 +267,11 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
                 ->setData($editForm->createView())
                 ->setTemplate($this->bundleName.':'.$this->editarTemplate)
                 ->setTemplateVar('editForm')
-                ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($deleteForm, $obj) {
+                ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($deleteForm, $obj, $configuration) {
                     return array(
                         'deleteForm' => $deleteForm->createView(),
                         'item' => $obj,
+                        'configuration' => $configuration,
                     );
                 })
             ;
@@ -266,21 +288,27 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $em = $this->getDoctrine()->getManager();
 
         $obj = $this->getDoctrine()->getManager()
-             ->getRepository($this->repositoryName)->find($id)
-         ;
+            ->getRepository($this->repositoryName)->find($id)
+        ;
 
         $this->denyAccessUnlessGranted('delete', $obj, 'Você não tem permissão para deletar um(a) '.$this->label.'.');
 
         $form = $this->getForm($obj, DeleteType::class, 'DELETE');
 
+        // Chama o método a ser sobreescrito preDeletar()
+        $editForm = $this->preDeletar($obj, $form, $em);
+
         $form->submit($request->request->get($form->getName()));
+
+        // Chama o método a ser sobreescrito posDeletar()
+        $editForm = $this->posDeletar($obj, $form, $em);
 
         if ($form->isValid()) {
             $em->remove($obj);
             $em->flush();
 
-            // Chama o método a ser sobreescrito posDeletar()
-            $obj = $this->posDeletar($obj, $em);
+            // Chama o método a ser sobreescrito posRemove()
+            $obj = $this->posRemove($obj, $em);
 
             // @TODO: Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
             $this->get('session')->getFlashBag()->set('success', 'Remoção de '.$this->label.' realizada com sucesso!');
@@ -320,13 +348,21 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
 
         foreach($itens as $item) {
             $keys[] = array_keys($item);
+            break;
         }
 
         $arrayResultado = array_merge($keys, $itens);
 
-        //exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($itens), $keys, \Doctrine\Common\Util\Debug::dump($arrayResultado),"</pre>"));
-
         return new CsvResponse($this->routeSuffix, $arrayResultado);
+    }
+
+    protected function getConfiguration(EntityManager $em)
+    {
+        return $em->getRepository('CineviAdminBundle:Configuration')
+            ->createQueryBuilder('config')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 
     /**
@@ -375,7 +411,17 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         return $obj;
     }
 
-    protected function posDeletar($obj, EntityManager $em)
+    protected function preDeletar($obj, Form $form, EntityManager $em)
+    {
+        return $form;
+    }
+
+    protected function posDeletar($obj, Form $form, EntityManager $em)
+    {
+        return $form;
+    }
+
+    protected function posRemove($obj, EntityManager $em)
     {
         return $obj;
     }

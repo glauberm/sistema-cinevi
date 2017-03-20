@@ -9,35 +9,21 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\ViewHandlerInterface;
 use FOS\RestBundle\View\View;
 
-class IndexController extends FOSRestController
+class IndexController extends Controller
 {
-    protected $bundleName = "CineviAdminBundle:Index";
-    protected $indexTemplate = 'index.html.twig';
-
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $output = $this->getOutput($em);
-
-        $view = View::create();
-        $view
-            ->setData($output)
-            ->setStatusCode(200)
-            ->setTemplate($this->bundleName.':'.$this->indexTemplate)
-            ->setTemplateVar('output')
+        $configuration = $em->getRepository('CineviAdminBundle:Configuration')
+            ->createQueryBuilder('config')
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
 
-        return $view;
-    }
-
-    protected function getOutput(EntityManager $em)
-    {
-        $output = array(
-            'mensagem' => "Navegue pelo menu para continuar usando o sistema."
-        );
-
-        return $output;
+        return $this->render('CineviAdminBundle:Index:index.html.twig', array(
+            'configuration' => $configuration,
+        ));
     }
 
 }

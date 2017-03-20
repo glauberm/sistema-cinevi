@@ -67,6 +67,18 @@ class CalendarEventController extends RestfulCrudController
             $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
         }
 
+        // Email para o usuário
+        $destinatario = $obj->getUser()->getEmail();
+        $template = $this->bundleName.':email-user';
+
+        $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+
+        // Email para o usuário
+        $destinatario = $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail();
+        $template = $this->bundleName.':email-professor';
+
+        $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+
         return $obj;
     }
 
@@ -112,11 +124,10 @@ class CalendarEventController extends RestfulCrudController
         if(!empty($endDate)) {
             $diffEndDate = $startDate->diff($endDate);
             $intervalEndDate = (int)$diffEndDate->format("%r%a");
-            $cloneStartDate = clone $startDate;
 
-            $mensagemEndDate = 'As devoluções precisam ser feitas algum tempo depois da retirada. O dia mais próximo no qual você pode marcar uma devolução para esta data de retirada é '.$cloneStartDate->add(new \DateInterval('P1D'))->format('d/m/Y').'.';
+            $mensagemEndDate = 'As devoluções precisam ser feitas algum tempo depois da retirada. O dia mais próximo no qual você pode marcar uma devolução para esta data de retirada é '.$startDate->format('d/m/Y').'.';
 
-            if($intervalEndDate < 1) {
+            if($intervalEndDate < 0) {
                 $form->get('endDate')->addError(new FormError($mensagemEndDate));
             }
         }

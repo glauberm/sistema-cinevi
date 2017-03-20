@@ -1,0 +1,21 @@
+DEPARTAMENTO DE CINEMA E VÍDEO DA UNIVERSIDADE FEDERAL FLUMINENSE (UFF)
+
+{{ assunto }}
+
+Uma nova reserva de equipamento acaba de
+ser registrada por {{ item.user.username }}
+de {{ item.startDate|date('d/m/Y') }} a {{ item.endDate|date('d/m/Y') }}
+para o projeto {{ item.projeto.realizacao.titulo }} que tem você
+como professor responsável.
+
+ para o projeto <strong>" ~ item.projeto.realizacao.titulo ~ "</strong> que tem você como professor responsável.<br/>Para vê-la, acesse o link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}
+
+Para vê-la, acesse o link abaixo:
+
+
+{{ url }}
+
+--
+cinevi@vm.uff.br | (21) 2629-9761
+Rua Professor Lara Vilela, 126, São Domingos
+Niterói, RJ - 24210-590

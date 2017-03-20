@@ -20,7 +20,7 @@ class UserControllerTest extends RestfulCrudControllerTest
     {
         return array(
             'user[username]' => 'TesteU',
-            'user[email]' => 'a@a.com.br',
+            'user[email]' => 'glaubernm@gmail.com',
             'user[plainPassword][first]' => '12345678',
             'user[plainPassword][second]' => '12345678',
             'user[matricula]' => '15455758',
@@ -37,7 +37,7 @@ class UserControllerTest extends RestfulCrudControllerTest
     {
         return array(
             'user[username]' => 'UEtset',
-            'user[email]' => 'b@a.com.br',
+            'user[email]' => 'glaubernm@hotmail.com',
             'user[matricula]' => '1545575899',
             'user[telefone]' => '6297963685',
             'user[confirmado]' => '1',

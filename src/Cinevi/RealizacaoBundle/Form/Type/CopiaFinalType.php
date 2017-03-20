@@ -100,6 +100,9 @@ class CopiaFinalType extends AbstractType
             ->add('duracao', IntegerType::class, array(
                 'label' => 'Duração (em minutos)',
                 'required' => false,
+                'attr' => array(
+                    'class' => 'input-number'
+                )
             ))
             ->add('formatoDigitalNativo', ChoiceType::class, array(
                 'label' => 'Formato Digital Nativo',
@@ -162,6 +165,9 @@ class CopiaFinalType extends AbstractType
             ->add('taxaBits', IntegerType::class, array(
                 'label' => 'Taxa de Bits',
                 'required' => false,
+                'attr' => array(
+                    'class' => 'input-number'
+                )
             ))
             ->add('velocidade', ChoiceType::class, array(
                 'label' => 'Velocidade',
@@ -297,13 +303,14 @@ class CopiaFinalType extends AbstractType
                 ),
                 'placeholder' => 'Não sei',
                 'choices_as_values' => true,
+                'required' => false,
                 'expanded' => true,
             ))
             ->add('fichaTecnica', FichaTecnicaType::class, array(
                 'label' => false,
             ))
         ;
-        
+
         $builder->get('projeto')
             ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviRealizacaoBundle:Projeto'))
         ;

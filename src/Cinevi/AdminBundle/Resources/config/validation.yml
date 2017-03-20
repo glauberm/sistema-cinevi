@@ -1,0 +1,5 @@
+Cinevi\AdminBundle\Entity\Configuration:
+    properties:
+        reservasFechadas:
+            - NotBlank:
+                message: 'Por favor, informe se as reservas estão fechadas ou não.'
