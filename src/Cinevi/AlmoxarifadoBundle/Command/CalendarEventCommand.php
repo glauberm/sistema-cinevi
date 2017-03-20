@@ -151,7 +151,9 @@ class CalendarEventCommand extends BaseCommand
                 $output->writeln('Foram enviados emails avisando de devoluções ontem.');
             }
 
-            $output->writeln('Comando executado com sucesso.');
+            $output->writeln('Comando executado com sucesso. Foram encontradas reservas, mas nenhuma bateu.');
         }
+
+        $output->writeln('Comando executado com sucesso. Não foram encontradas reservas.');
     }
 }
