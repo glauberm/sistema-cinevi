@@ -3,12 +3,12 @@
 ## Da reunião
 - Ver DynamicType nos equipamentos
 
-## CRON
-- Checar se dia atual é startDate ou endDate de alguma reserva e enviar email.
-
 ## Cópias Finais
 - Além das fotos still, link (com possível senha) do filme
 - VichUploaderBundle para os MateriaisDivulgacao (add em CopiaFinal)
+
+## CRON
+- Comando para deletar emails da caixa de entrada automaticamente a cada ano.
 
 ## Gráficos
 - Quantidade de diretores, produtores, etc. em projetos
@@ -16,7 +16,7 @@
 - Quantidade de projetos/mês
 
 # Depois
-- Passar a listagem, a busca por roles e outros pro Repository
+- Passar a listagem, a busca por roles, as createQueryBuilder dos formulários e outros pro Repository
 - Ações em múltiplos itens de uma vez
 - Nº de Linhas na tabela pelo php ao invés de javascript
 - Adicionar https://packagist.org/packages/friendsofsymfony/elastica-bundle

@@ -29,6 +29,36 @@ class CalendarEventCommand extends BaseCommand
             $diffStartDate = $hoje->diff($reserva->getStartDate());
             $intervalStartDate = (int)$diffStartDate->format("%r%a");
 
+            // Manda email: um dia antes de retirada
+            if($intervalStartDate == -1) {
+                $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-retirada-user-antes';
+
+                $assunto = 'Retirada de Equipamento(s): '.$reserva->getTitle();
+
+                $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
+                    'id' => $reserva->getId(),
+                ), true);
+
+                $destinatario = 'almoxarifadocinemauff@gmail.com';
+
+                $this->sendMail($this->getContainer(), $reserva, $path, $assunto, $destinatario, $template);
+
+                // Email para o usuário
+                $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-retirada-user-antes';
+
+                $assunto = 'Retirada de Equipamento(s): '.$reserva->getTitle();
+
+                $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
+                    'id' => $reserva->getId(),
+                ), true);
+
+                $destinatario = $reserva->getUser()->getEmail();
+
+                $this->sendMail($this->getContainer(), $reserva, $path, $assunto, $destinatario, $template);
+
+                $output->writeln('Foram enviados emails avisando de retiradas amanhã.');
+            }
+
             // Manda email: dia de retirada
             if($intervalStartDate == 0) {
                 $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-retirada';
@@ -90,6 +120,35 @@ class CalendarEventCommand extends BaseCommand
                 $this->sendMail($this->getContainer(), $reserva, $path, $assunto, $destinatario, $template);
 
                 $output->writeln('Foram enviados emails avisando de devoluções hoje.');
+            }
+
+            if($intervalEndDate == 1) {
+                $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-devolucao-depois';
+
+                $assunto = 'Devolução de Equipamento(s): '.$reserva->getTitle();
+
+                $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
+                    'id' => $reserva->getId(),
+                ), true);
+
+                $destinatario = 'almoxarifadocinemauff@gmail.com';
+
+                $this->sendMail($this->getContainer(), $reserva, $path, $assunto, $destinatario, $template);
+
+                // Email para o usuário
+                $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-devolucao-user-depois';
+
+                $assunto = 'Devolução de Equipamento(s): '.$reserva->getTitle();
+
+                $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
+                    'id' => $reserva->getId(),
+                ), true);
+
+                $destinatario = $reserva->getUser()->getEmail();
+
+                $this->sendMail($this->getContainer(), $reserva, $path, $assunto, $destinatario, $template);
+
+                $output->writeln('Foram enviados emails avisando de devoluções ontem.');
             }
 
             $output->writeln('Comando executado com sucesso.');

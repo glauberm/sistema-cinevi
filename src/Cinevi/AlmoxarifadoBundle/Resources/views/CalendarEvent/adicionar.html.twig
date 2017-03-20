@@ -17,3 +17,9 @@
 {% block form %}
     {% include 'CineviAlmoxarifadoBundle:CalendarEvent:form.html.twig' %}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/cinevi/almoxarifado/calendar-event.js') }}"></script>
+{% endblock %}

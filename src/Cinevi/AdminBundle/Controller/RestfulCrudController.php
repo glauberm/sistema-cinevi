@@ -164,7 +164,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         // Chama o método a ser sobreescrito posCriar()
         $form = $this->posCriar($form, $em);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($obj);
             $em->flush();
 
@@ -249,7 +249,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         // Chama o método a ser sobreescrito posEditar()
         $editForm = $this->posEditar($obj, $editForm, $em);
 
-        if ($editForm->isValid()) {
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em->merge($obj);
             $em->flush();
 
@@ -302,7 +302,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         // Chama o método a ser sobreescrito posDeletar()
         $editForm = $this->posDeletar($obj, $form, $em);
 
-        if ($form->isValid()) {
+        if ($editForm->isSubmitted() && $form->isValid()) {
             $em->remove($obj);
             $em->flush();
 

@@ -34,6 +34,12 @@ services:
         tags:
             - { name: form.type, alias: view }
 
+    cinevi.almoxarifado.equipamento_extension_type:
+        class: Cinevi\AlmoxarifadoBundle\Form\Type\EquipamentoExtensionType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: view }
+
     # Listener
     cinevi.almoxarifado.load_data_listener:
         class: Cinevi\AlmoxarifadoBundle\Listener\LoadDataListener

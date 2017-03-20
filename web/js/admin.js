@@ -20,7 +20,7 @@ function select2Caller ()
         $(this).select2({
             theme: "bootstrap",
             placeholder: placeHolder,
-            language: 'pt-br'
+            language: "pt-BR"
         });
     });
 }

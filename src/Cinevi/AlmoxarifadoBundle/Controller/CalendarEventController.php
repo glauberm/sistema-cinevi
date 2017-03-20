@@ -110,24 +110,24 @@ class CalendarEventController extends RestfulCrudController
             $diffStartDate = $hoje->diff($startDate);
             $intervalStartDate = (int)$diffStartDate->format("%r%a");
 
-            $mensagemStartDate = 'As reservas precisam ser feitas com certa antecedência. O dia mais próximo no qual você pode marcar uma retirada é '.$hoje->add(new \DateInterval('P4D'))->format('d/m/Y').'.';
-
             if($intervalStartDate < 3) {
+                $mensagemStartDate = 'As reservas precisam ser feitas com certa antecedência. O dia mais próximo no qual você pode marcar uma retirada é '.$hoje->add(new \DateInterval('P4D'))->format('d/m/Y').'.';
+
                 $form->get('startDate')->addError(new FormError($mensagemStartDate));
             }
-        }
 
-        // Pega o intervalo entre o dia de retirada e o dia de devolução
-        $endDate = $form->getData()->getEndDate();
+            // Pega o intervalo entre o dia de retirada e o dia de devolução
+            $endDate = $form->getData()->getEndDate();
 
-        if(!empty($endDate)) {
-            $diffEndDate = $startDate->diff($endDate);
-            $intervalEndDate = (int)$diffEndDate->format("%r%a");
+            if(!empty($endDate)) {
+                $diffEndDate = $startDate->diff($endDate);
+                $intervalEndDate = (int)$diffEndDate->format("%r%a");
 
-            $mensagemEndDate = 'As devoluções precisam ser feitas algum tempo depois da retirada. O dia mais próximo no qual você pode marcar uma devolução para esta data de retirada é '.$startDate->format('d/m/Y').'.';
+                if($intervalEndDate < 0) {
+                    $mensagemEndDate = 'As devoluções precisam ser feitas algum tempo depois da retirada. O dia mais próximo no qual você pode marcar uma devolução para esta data de retirada é '.$startDate->format('d/m/Y').'.';
 
-            if($intervalEndDate < 0) {
-                $form->get('endDate')->addError(new FormError($mensagemEndDate));
+                    $form->get('endDate')->addError(new FormError($mensagemEndDate));
+                }
             }
         }
 
@@ -140,17 +140,15 @@ class CalendarEventController extends RestfulCrudController
 
         $fStartDate = $form->get('startDate')->getData();
         $fEndDate = $form->get('endDate')->getData();
+        $fEquipamentos = $form->get('equipamentos')->getData();
 
-        if(!empty($fStartDate) && !empty($fEndDate)) {
+        if(!empty($fStartDate) && !empty($fEndDate) && !empty($fEquipamentos)) {
             $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
 
             foreach( $reservas as $reserva ) {
-
                 foreach( $reserva->getEquipamentos() as $rEquipamento ) {
-                    foreach( $form->get('equipamentos')->getData() as $fEquipamento ) {
-
+                    foreach( $fEquipamentos as $fEquipamento ) {
                         if( $rEquipamento == $fEquipamento ) {
-
                             $rStartDate = $reserva->getStartDate();
                             $rEndDate = $reserva->getEndDate();
                             $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
@@ -167,12 +165,9 @@ class CalendarEventController extends RestfulCrudController
                                     }
                                 }
                             }
-
                         }
-
                     }
                 }
-
             }
         }
 
