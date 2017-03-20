@@ -16,7 +16,7 @@ trait MailerTrait
             ->setFrom($remetente)
             ->setTo($destinatario)
             ->setBody(
-                $this->renderView(
+                $container->get('twig')->render(
                     $template.'.html.twig',
                     array(
                         'item' => $obj,
@@ -28,7 +28,7 @@ trait MailerTrait
                 'text/html'
             )
             ->addPart(
-                $this->renderView(
+                $container->get('twig')->render(
                     $template.'.txt.twig',
                     array(
                         'item' => $obj,

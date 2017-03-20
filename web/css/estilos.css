@@ -434,6 +434,13 @@ a.pular-para-conteudo:active {
     border-color: #b92c28 !important;
 }
 
+.fc-basicDay-view .fc-start.fc-end {
+    background-color: #006886 !important;
+    border-color: #00313f !important;
+    color: #FFF !important;
+}
+
+
 @media (min-width: 992px)
 {
     .menu-topo .nav > li > a {

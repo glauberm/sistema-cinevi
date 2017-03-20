@@ -1,7 +1,6 @@
 # TO-DO
 
 ## Da reunião
-- O responsável por um projeto só pode criar outro projeto quando criar uma cópia final para aquele projeto - SÓ SE FOR ALUNO
 - Ver DynamicType nos equipamentos
 
 ## CRON
