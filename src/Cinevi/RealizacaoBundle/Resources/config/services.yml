@@ -7,7 +7,7 @@ services:
         tags:
             - { name: security.voter }
 
-    cinevi.access.realizacao_copiaFinal:
+    cinevi.access.realizacao_copia_final:
         class: Cinevi\RealizacaoBundle\Authorization\Voter\CopiaFinalVoter
         public: false
         arguments: ['@security.access.decision_manager']
@@ -34,7 +34,7 @@ services:
         tags:
             - { name: form.type, alias: view }
 
-    cinevi.realizacao.copiaFinal_type:
+    cinevi.realizacao.copia_final_type:
         class: Cinevi\RealizacaoBundle\Form\Type\CopiaFinalType
         arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker']
         tags:

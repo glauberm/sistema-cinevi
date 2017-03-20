@@ -18,7 +18,7 @@ class Projeto
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Realizacao", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Realizacao", cascade={"all"}, inversedBy="projeto")
      **/
     protected $realizacao;
 
@@ -81,6 +81,11 @@ class Projeto
      * @ORM\Column(type="boolean")
      **/
     protected $disciplinaArte;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\CopiaFinal", cascade={"merge"}, mappedBy="projeto")
+     **/
+    protected $copiaFinal;
 
 
     /**
@@ -429,5 +434,28 @@ class Projeto
     public function getArte()
     {
         return $this->arte;
+    }
+
+    /**
+     * Set copiaFinal
+     *
+     * @param \Cinevi\RealizacaoBundle\Entity\CopiaFinal $copiaFinal
+     * @return Projeto
+     */
+    public function setCopiaFinal(\Cinevi\RealizacaoBundle\Entity\CopiaFinal $copiaFinal = null)
+    {
+        $this->copiaFinal = $copiaFinal;
+
+        return $this;
+    }
+
+    /**
+     * Get copiaFinal
+     *
+     * @return \Cinevi\RealizacaoBundle\Entity\CopiaFinal
+     */
+    public function getCopiaFinal()
+    {
+        return $this->copiaFinal;
     }
 }

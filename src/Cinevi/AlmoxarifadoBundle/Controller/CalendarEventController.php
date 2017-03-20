@@ -19,7 +19,6 @@ class CalendarEventController extends RestfulCrudController
     protected $repositoryName = 'CineviAlmoxarifadoBundle:CalendarEvent';
     protected $className = CalendarEvent::class;
     protected $routeSuffix = 'calendar_event';
-    protected $label = 'reserva';
     protected $formClassName = CalendarEventType::class;
 
     protected function posCriar(Form $form, EntityManager $em)

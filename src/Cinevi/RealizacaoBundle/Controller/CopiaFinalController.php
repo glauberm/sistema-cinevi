@@ -18,7 +18,6 @@ class CopiaFinalController extends RestfulCrudController
     protected $repositoryName = 'CineviRealizacaoBundle:CopiaFinal';
     protected $className = CopiaFinal::class;
     protected $routeSuffix = 'copia_final';
-    protected $label = 'cópia final';
     protected $formClassName = CopiaFinalType::class;
 
     protected function listar($builder, EntityManager $em)

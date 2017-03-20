@@ -18,7 +18,7 @@ class Realizacao
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
+     * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"}, inversedBy="realizacaos")
      **/
     protected $user;
 
@@ -61,6 +61,17 @@ class Realizacao
      * @ORM\Column(type="text", nullable=true)
      **/
     protected $detalhesCaptacao;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Projeto", cascade={"persist","merge"}, inversedBy="realizacao")
+     **/
+    protected $projeto;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\CopiaFinal", cascade={"persist","merge"}, inversedBy="realizacao")
+     **/
+    protected $copiaFinal;
+
 
     /**
      * Get id

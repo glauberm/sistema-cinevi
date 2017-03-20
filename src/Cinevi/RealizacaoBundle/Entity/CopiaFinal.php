@@ -18,12 +18,12 @@ class CopiaFinal
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Realizacao", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Realizacao", cascade={"all"}, inversedBy="copiaFinal")
      **/
     protected $realizacao;
 
     /**
-     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Projeto", cascade={"merge"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Projeto", cascade={"merge"}, inversedBy="copiaFinal")
      **/
     protected $projeto;
 
@@ -638,7 +638,7 @@ class CopiaFinal
     /**
      * Get projeto
      *
-     * @return \Cinevi\RealizacaoBundle\Entity\Projeto 
+     * @return \Cinevi\RealizacaoBundle\Entity\Projeto
      */
     public function getProjeto()
     {

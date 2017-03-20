@@ -44,6 +44,11 @@ class User extends BaseUser
      **/
     protected $breveCurriculo;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Cinevi\RealizacaoBundle\Entity\Realizacao", cascade={"merge"}, mappedBy="user")
+     **/
+    protected $realizacaos;
+
 
     public function __construct()
     {
@@ -205,5 +210,38 @@ class User extends BaseUser
     public function getBreveCurriculo()
     {
         return $this->breveCurriculo;
+    }
+
+    /**
+     * Add realizacaos
+     *
+     * @param \Cinevi\RealizacaoBundle\Entity\Realizacao $realizacaos
+     * @return User
+     */
+    public function addRealizacao(\Cinevi\RealizacaoBundle\Entity\Realizacao $realizacaos)
+    {
+        $this->realizacaos[] = $realizacaos;
+
+        return $this;
+    }
+
+    /**
+     * Remove realizacaos
+     *
+     * @param \Cinevi\RealizacaoBundle\Entity\Realizacao $realizacaos
+     */
+    public function removeRealizacao(\Cinevi\RealizacaoBundle\Entity\Realizacao $realizacaos)
+    {
+        $this->realizacaos->removeElement($realizacaos);
+    }
+
+    /**
+     * Get realizacaos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRealizacaos()
+    {
+        return $this->realizacaos;
     }
 }

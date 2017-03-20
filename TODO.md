@@ -1,7 +1,6 @@
 # TO-DO
 
 ## Da reunião
-- Se marcado como "Em Manutenção", avisar todos que pegaram esse equipamento depois daquela data
 - O responsável por um projeto só pode criar outro projeto quando criar uma cópia final para aquele projeto - SÓ SE FOR ALUNO
 - Ver DynamicType nos equipamentos
 

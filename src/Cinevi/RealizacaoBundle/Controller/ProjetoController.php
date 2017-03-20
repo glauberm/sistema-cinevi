@@ -5,6 +5,7 @@ namespace Cinevi\RealizacaoBundle\Controller;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormError;
 use Cinevi\AdminBundle\Controller\RestfulCrudController;
 use Cinevi\AdminBundle\Mailer\MailerTrait;
 use Cinevi\RealizacaoBundle\Entity\Projeto;
@@ -18,12 +19,25 @@ class ProjetoController extends RestfulCrudController
     protected $repositoryName = 'CineviRealizacaoBundle:Projeto';
     protected $className = Projeto::class;
     protected $routeSuffix = 'projeto';
-    protected $label = 'projeto';
     protected $formClassName = ProjetoType::class;
 
     protected function listar($builder, EntityManager $em)
     {
         return $builder->join('item.realizacao', 'r');
+    }
+
+    protected function posCriar(Form $form, EntityManager $em)
+    {
+        $form = $this->checaCopiaFinal($form);
+
+        return $form;
+    }
+
+    protected function posEditar($obj, Form $form, EntityManager $em)
+    {
+        $form = $this->checaCopiaFinal($form);
+
+        return $form;
     }
 
     protected function posPersist($obj, EntityManager $em)
@@ -89,5 +103,29 @@ class ProjetoController extends RestfulCrudController
         }
 
         return $obj;
+    }
+
+    private function checaCopiaFinal($form)
+    {
+        $user = $form->get('realizacao')->get('user')->getData();
+
+        if($user->getProfessor() !== true && !$this->isGranted('ROLE_DEPARTAMENTO')) {
+            $projetosArray = array();
+
+            foreach($user->getRealizacaos() as $realizacao) {
+                if($realizacao->getProjeto()) {
+                    $projetosArray[] = $realizacao->getProjeto();
+                }
+            }
+
+            foreach($projetosArray as $projeto) {
+                if(!$projeto->getCopiaFinal()) {
+                    $mensagem = 'Antes de registrar um novo projeto com este responsável, você precisa registrar a cópia final do projeto '.$realizacao->getTitulo().'.';
+                    $form->get('realizacao')->get('user')->addError(new FormError($mensagem));
+                }
+            }
+        }
+
+        return $form;
     }
 }

@@ -14,6 +14,5 @@ class CategoriaController extends RestfulCrudController
     protected $repositoryName = 'CineviAlmoxarifadoBundle:Categoria';
     protected $className = Categoria::class;
     protected $routeSuffix = 'categoria';
-    protected $label = 'categoria';
     protected $formClassName = CategoriaType::class;
 }

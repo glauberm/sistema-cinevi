@@ -21,7 +21,6 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
     protected $className;
     protected $routeSuffix;
     protected $formClassName;
-    protected $label = 'item';
     protected $listarTemplate = 'listar.html.twig';
     protected $criarTemplate = 'adicionar.html.twig';
     protected $editarTemplate = 'editar.html.twig';
@@ -120,7 +119,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
 
         $configuration = $this->getConfiguration($em);
 
-        $this->denyAccessUnlessGranted('view', $obj, 'Você não tem permissão para visualizar este '.$this->label.'.');
+        $this->denyAccessUnlessGranted('view', $obj, 'Você não tem permissão para visualizar este item.');
 
         $deleteForm = $this->getForm($obj, DeleteType::class, 'DELETE', 'delete_'.$this->routeSuffix, array('id' => $id));
 
@@ -153,7 +152,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $obj = new $this->className();
         $configuration = $this->getConfiguration($em);
 
-        $this->denyAccessUnlessGranted('create', $obj, 'Você não tem permissão para criar um(a) '.$this->label.'.');
+        $this->denyAccessUnlessGranted('create', $obj, 'Você não tem permissão para criar um(a) item.');
 
         $form = $this->getForm($obj, $this->formClassName, 'POST');
 
@@ -173,7 +172,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $obj = $this->posPersist($obj, $em);
 
             // Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
-            $this->get('session')->getFlashBag()->set('success', 'Criação de '.$this->label.' realizada com sucesso!');
+            $this->get('session')->getFlashBag()->set('success', 'Criação de item realizada com sucesso!');
 
             $view = View::createRouteRedirect('get_'.$this->routeSuffix.'s');
         } else {
@@ -237,7 +236,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
 
         $configuration = $this->getConfiguration($em);
 
-        $this->denyAccessUnlessGranted('edit', $obj, 'Você não tem permissão para editar um(a) '.$this->label.'.');
+        $this->denyAccessUnlessGranted('edit', $obj, 'Você não tem permissão para editar um(a) item.');
 
         $editForm = $this->getForm($obj, $this->formClassName, 'PUT');
         $deleteForm = $this->getForm($obj, DeleteType::class, 'DELETE', 'delete_'.$this->routeSuffix, array('id' => $id));
@@ -258,7 +257,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $obj = $this->posMerge($obj, $em);
 
             // Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
-            $this->get('session')->getFlashBag()->set('success', 'Edição de '.$this->label.' realizada com sucesso!');
+            $this->get('session')->getFlashBag()->set('success', 'Edição de item realizada com sucesso!');
 
             $view = View::createRouteRedirect('get_'.$this->routeSuffix.'s');
         } else {
@@ -291,7 +290,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             ->getRepository($this->repositoryName)->find($id)
         ;
 
-        $this->denyAccessUnlessGranted('delete', $obj, 'Você não tem permissão para deletar um(a) '.$this->label.'.');
+        $this->denyAccessUnlessGranted('delete', $obj, 'Você não tem permissão para deletar um(a) item.');
 
         $form = $this->getForm($obj, DeleteType::class, 'DELETE');
 
@@ -311,7 +310,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $obj = $this->posRemove($obj, $em);
 
             // @TODO: Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
-            $this->get('session')->getFlashBag()->set('success', 'Remoção de '.$this->label.' realizada com sucesso!');
+            $this->get('session')->getFlashBag()->set('success', 'Remoção de item realizada com sucesso!');
 
             $view = View::createRouteRedirect('get_'.$this->routeSuffix.'s');
         } else {

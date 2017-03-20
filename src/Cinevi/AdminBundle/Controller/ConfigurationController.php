@@ -16,7 +16,6 @@ class ConfigurationController extends RestfulCrudController
     protected $repositoryName = 'CineviAdminBundle:Configuration';
     protected $className = Configuration::class;
     protected $routeSuffix = 'configuration';
-    protected $label = 'configuração';
     protected $formClassName = ConfigurationType::class;
 
     public function cgetAction(Request $request)

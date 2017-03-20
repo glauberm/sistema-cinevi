@@ -3,10 +3,10 @@
 {% endfor %}
 
 <div class="row">
-    <div class="col-sm-6"><dt>Elenco</dt><dd class="inherit">{{ item.elenco }}</dd></div>
-    <div class="col-sm-6"><dt>Outras Informações</dt><dd class="inherit">{{ item.outrasInformacoes }}</dd></div>
+    <div class="col-sm-6"><dt>Elenco</dt><dd class="inherit">{{ item.elenco ? item.elenco : 'Não informado' }}</dd></div>
+    <div class="col-sm-6"><dt>Outras Informações</dt><dd class="inherit">{{ item.outrasInformacoes ? item.outrasInformacoes : 'Não informado' }}</dd></div>
 </div>
 <div class="row">
-    <div class="col-sm-6"><dt>Participações em Festivais e Mostras</dt><dd class="inherit">{{ item.festivais }}</dd></div>
-    <div class="col-sm-6"><dt>Prêmios</dt><dd class="inherit">{{ item.premios }}</dd></div>
+    <div class="col-sm-6"><dt>Participações em Festivais e Mostras</dt><dd class="inherit">{{ item.festivais ? item.festivais : 'Não informado' }}</dd></div>
+    <div class="col-sm-6"><dt>Prêmios</dt><dd class="inherit">{{ item.premios ? item.premios : 'Não informado' }}</dd></div>
 </div>

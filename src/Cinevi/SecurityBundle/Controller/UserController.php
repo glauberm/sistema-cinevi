@@ -18,7 +18,6 @@ class UserController extends RestfulCrudController
     protected $repositoryName = 'CineviSecurityBundle:User';
     protected $className = User::class;
     protected $routeSuffix = 'user';
-    protected $label = 'usuário';
     protected $formClassName = UserType::class;
 
     private $confirmado;

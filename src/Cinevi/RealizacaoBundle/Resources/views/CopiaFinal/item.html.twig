@@ -8,30 +8,30 @@
             <dd>Outro</dd>
         {% endif %}
     </div>
-    <div class="col-sm-6"><dt>Cromia</dt><dd>{{ item.cromia ? item.cromia : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6"><dt>Cromia</dt><dd>{{ item.cromia ? item.cromia : 'Não informado' }}</dd></div>
 </div>
 <div class="row">
-    <div class="col-sm-4"><dt>Proporção</dt><dd>{{ item.proporcao ? item.proporcao : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-4"><dt>Formato</dt><dd>{{ item.formato ? item.formato : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-4"><dt>Duração (em minutos)</dt><dd>{{ item.duracao ? item.duracao : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Proporção</dt><dd>{{ item.proporcao ? item.proporcao : 'Não informado' }}</dd></div>
+    <div class="col-sm-4"><dt>Formato</dt><dd>{{ item.formato ? item.formato : 'Não informado' }}</dd></div>
+    <div class="col-sm-4"><dt>Duração (em minutos)</dt><dd>{{ item.duracao ? item.duracao : 'Não informado' }}</dd></div>
 </div>
 <div class="row">
-    <div class="col-sm-4"><dt>Formato Digital Nativo</dt><dd>{{ item.formatoDigitalNativo ? item.formatoDigitalNativo : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-4"><dt>Codec</dt><dd>{{ item.codec ? item.codec : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-4"><dt>Container (wrapper)</dt><dd>{{ item.container ? item.container : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Formato Digital Nativo</dt><dd>{{ item.formatoDigitalNativo ? item.formatoDigitalNativo : 'Não informado' }}</dd></div>
+    <div class="col-sm-4"><dt>Codec</dt><dd>{{ item.codec ? item.codec : 'Não informado' }}</dd></div>
+    <div class="col-sm-4"><dt>Container (wrapper)</dt><dd>{{ item.container ? item.container : 'Não informado' }}</dd></div>
 </div>
 <div class="row">
-    <div class="col-sm-4"><dt>Taxa de bits</dt><dd>{{ item.taxaBits ? item.taxaBits : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-4"><dt>Velocidade</dt><dd>{{ item.velocidade ? item.velocidade : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-4"><dt>Som</dt><dd>{{ item.som ? item.som : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Taxa de bits</dt><dd>{{ item.taxaBits ? item.taxaBits : 'Não informado' }}</dd></div>
+    <div class="col-sm-4"><dt>Velocidade</dt><dd>{{ item.velocidade ? item.velocidade : 'Não informado' }}</dd></div>
+    <div class="col-sm-4"><dt>Som</dt><dd>{{ item.som ? item.som : 'Não informado' }}</dd></div>
 </div>
 <div class="row">
-    <div class="col-sm-6"><dt>Resolução de Áudio Digital</dt><dd>{{ item.resolucaoAudioDigital ? item.resolucaoAudioDigital : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-6"><dt>Suporte de Matriz Digital</dt><dd>{{ item.suporteMatrizDigital ? item.suporteMatrizDigital : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6"><dt>Resolução de Áudio Digital</dt><dd>{{ item.resolucaoAudioDigital ? item.resolucaoAudioDigital : 'Não informado' }}</dd></div>
+    <div class="col-sm-6"><dt>Suporte de Matriz Digital</dt><dd>{{ item.suporteMatrizDigital ? item.suporteMatrizDigital : 'Não informado' }}</dd></div>
 </div>
 <div class="row">
-    <div class="col-sm-4"><dt>Câmera</dt><dd>{{ item.camera ? item.camera : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-4"><dt>Equipamentos de Captação de Som</dt><dd class="inherit">{{ item.captacaoSom ? item.captacaoSom : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-4"><dt>Câmera</dt><dd>{{ item.camera ? item.camera : 'Não informado' }}</dd></div>
+    <div class="col-sm-4"><dt>Equipamentos de Captação de Som</dt><dd class="inherit">{{ item.captacaoSom ? item.captacaoSom : 'Não informado' }}</dd></div>
     <div class="col-sm-4">
         <dt>Software de Edição</dt>
         {% for softwareEdicao in item.softwareEdicao %}
@@ -40,7 +40,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-6"><dt>Orçamento</dt><dd>{{ item.orcamento ? 'R$ ' ~ item.orcamento : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6"><dt>Orçamento</dt><dd>{{ item.orcamento ? 'R$ ' ~ item.orcamento : 'Não informado' }}</dd></div>
     <div class="col-sm-6">
         <dt>Fontes de Financiamento</dt>
         {% for fontesFinanciamento in item.fontesFinanciamento %}
@@ -49,8 +49,8 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-6"><dt>Apoiadores</dt><dd class="inherit">{{ item.apoiadores ? item.apoiadores : 'Não informada(o)' }}</dd></div>
-    <div class="col-sm-6"><dt>Foi feito DCP?</dt><dd>{{ item.dcp ? item.dcp : 'Não informada(o)' }}</dd></div>
+    <div class="col-sm-6"><dt>Apoiadores</dt><dd class="inherit">{{ item.apoiadores ? item.apoiadores : 'Não informado' }}</dd></div>
+    <div class="col-sm-6"><dt>Foi feito DCP?</dt><dd>{{ item.dcp ? item.dcp : 'Não informado' }}</dd></div>
 </div>
 
 <fieldset>

@@ -6,11 +6,11 @@ projetos_csv:
     path:      /csv/projetos
     defaults:  { _controller: CineviRealizacaoBundle:Projeto:getCsv }
 
-copiaFinals:
+copia_finals:
     type:     rest
     resource: Cinevi\RealizacaoBundle\Controller\CopiaFinalController
 
-copiaFinals_csv:
+copia_finals_csv:
     path:      /csv/copia/finals
     defaults:  { _controller: CineviRealizacaoBundle:CopiaFinal:getCsv }
 

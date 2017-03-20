@@ -16,6 +16,5 @@ class FuncaoController extends RestfulCrudController
     protected $repositoryName = 'CineviRealizacaoBundle:Funcao';
     protected $className = Funcao::class;
     protected $routeSuffix = 'funcao';
-    protected $label = 'função';
     protected $formClassName = FuncaoType::class;
 }

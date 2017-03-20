@@ -18,7 +18,7 @@ class Realizacao
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
+     * @ORM\ManyToOne(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"}, inversedBy="realizacaos")
      **/
     protected $user;
 
@@ -61,6 +61,17 @@ class Realizacao
      * @ORM\Column(type="text", nullable=true)
      **/
     protected $detalhesCaptacao;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Projeto", cascade={"persist","merge"}, mappedBy="realizacao")
+     **/
+    protected $projeto;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\CopiaFinal", cascade={"persist","merge"}, mappedBy="realizacao")
+     **/
+    protected $copiaFinal;
+
 
     /**
      * Get id
@@ -277,5 +288,51 @@ class Realizacao
     public function getGenero()
     {
         return $this->genero;
+    }
+
+    /**
+     * Set projeto
+     *
+     * @param \Cinevi\RealizacaoBundle\Entity\Projeto $projeto
+     * @return Realizacao
+     */
+    public function setProjeto(\Cinevi\RealizacaoBundle\Entity\Projeto $projeto = null)
+    {
+        $this->projeto = $projeto;
+
+        return $this;
+    }
+
+    /**
+     * Get projeto
+     *
+     * @return \Cinevi\RealizacaoBundle\Entity\Projeto
+     */
+    public function getProjeto()
+    {
+        return $this->projeto;
+    }
+
+    /**
+     * Set copiaFinal
+     *
+     * @param \Cinevi\RealizacaoBundle\Entity\CopiaFinal $copiaFinal
+     * @return Realizacao
+     */
+    public function setCopiaFinal(\Cinevi\RealizacaoBundle\Entity\CopiaFinal $copiaFinal = null)
+    {
+        $this->copiaFinal = $copiaFinal;
+
+        return $this;
+    }
+
+    /**
+     * Get copiaFinal
+     *
+     * @return \Cinevi\RealizacaoBundle\Entity\CopiaFinal
+     */
+    public function getCopiaFinal()
+    {
+        return $this->copiaFinal;
     }
 }

@@ -18,7 +18,6 @@ class EquipamentoController extends RestfulCrudController
     protected $repositoryName = 'CineviAlmoxarifadoBundle:Equipamento';
     protected $className = Equipamento::class;
     protected $routeSuffix = 'equipamento';
-    protected $label = 'equipamento';
     protected $formClassName = EquipamentoType::class;
 
     private $manutencao;

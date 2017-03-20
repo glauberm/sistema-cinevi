@@ -18,7 +18,7 @@ class Projeto
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Realizacao", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Realizacao", cascade={"all"}, inversedBy="projeto")
      **/
     protected $realizacao;
 
@@ -81,6 +81,11 @@ class Projeto
      * @ORM\Column(type="boolean")
      **/
     protected $disciplinaArte;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\CopiaFinal", cascade={"merge"}, mappedBy="projeto")
+     **/
+    protected $copiaFinal;
 
 
     /**

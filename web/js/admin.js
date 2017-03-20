@@ -19,7 +19,8 @@ function select2Caller ()
 
         $(this).select2({
             theme: "bootstrap",
-            placeholder: placeHolder
+            placeholder: placeHolder,
+            language: 'pt-br'
         });
     });
 }
