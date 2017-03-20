@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
 use Cinevi\AdminBundle\Form\Transformer\ArrayEntityToArrayIdObjectTransformer;
 use Cinevi\AlmoxarifadoBundle\Form\Type\EquipamentoExtensionType;
+use Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent;
 
 class CalendarEventType extends AbstractType
 {
@@ -202,7 +203,7 @@ class CalendarEventType extends AbstractType
         $fEquipamentos = $equipamentoQB->getQuery()->getResult();
 
         if(!empty($id)) {
-            $reservas = $em->createQuery('SELECT c FROM '.$this->className.' cv WHERE cv.id != '.$id)->getResult();
+            $reservas = $this->em->createQuery('SELECT cv FROM '.CalendarEvent::class.' cv WHERE cv.id != '.$id)->getResult();
         } else {
             $reservas = $this->em->getRepository('CineviAlmoxarifadoBundle:CalendarEvent')->findAll();
         }

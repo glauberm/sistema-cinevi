@@ -44,7 +44,7 @@ abstract class RestfulCrudControllerTest extends WebTestCase
         $this->otherScenarios($crawler);
     }
 
-    private function doLogin($username, $password)
+    protected function doLogin($username, $password)
     {
         $crawler = $this->client->request('GET', '/login');
 

@@ -3,6 +3,12 @@
 {% set title = 'Editar Configurações' %}
 {% set routeListar = path('index') %}
 
+{% block mainActions %}
+    <a class="navbar-brand btn btn-link" href="{{ routeListar }}">
+        {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
+    </a>
+{% endblock %}
+
 {% block form %}
     {% include 'CineviAdminBundle:Configuration:form.html.twig' with {form: editForm} %}
 {% endblock %}

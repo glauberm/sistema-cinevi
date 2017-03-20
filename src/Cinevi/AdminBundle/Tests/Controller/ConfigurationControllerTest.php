@@ -9,6 +9,20 @@ class ConfigurationControllerTest extends RestfulCrudControllerTest
     // List
     protected $indexRoute = 'configurations';
 
+    public function testCompleteScenario()
+    {
+        $this->client = static::createClient();
+
+        $crawler = $this->doLogin($this->username, $this->password);
+
+        $crawler = $this->doList($crawler, $this->indexRoute);
+
+        $crawler = $this->doAdd($crawler, $this->addLink, $this->addButton, $this->getAddArrayForm());
+
+        $crawler = $this->doEdit($crawler, $this->itemEditFilter, $this->itemEditLink, $this->editLink, $this->editButton, $this->getEditArrayForm());
+
+        $this->otherScenarios($crawler);
+    }
 
     protected function getAddArrayForm()
     {
@@ -42,16 +56,5 @@ class ConfigurationControllerTest extends RestfulCrudControllerTest
         $this->client->submit($form);
 
         return $this->client->followRedirect();
-    }
-
-    protected function doRemove($crawler, $editLink, $itemRemoveLink, $itemRemoveFilter, $removeButton)
-    {
-        $this->client->submit($crawler->selectButton($removeButton)->form());
-
-        $crawler = $this->client->followRedirect();
-
-        $this->assertNotRegExp('/'.$itemRemoveLink.'/', $this->client->getResponse()->getContent());
-
-        return $crawler;
     }
 }
