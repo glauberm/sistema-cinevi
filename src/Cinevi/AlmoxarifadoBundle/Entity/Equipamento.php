@@ -77,6 +77,11 @@ class Equipamento
      **/
     protected $users;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent", cascade={"merge"}, mappedBy="equipamentos")
+     **/
+    protected $calendarEvents;
+
 
     /**
      * Get id
@@ -379,5 +384,38 @@ class Equipamento
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Add calendarEvents
+     *
+     * @param \Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent $calendarEvents
+     * @return Equipamento
+     */
+    public function addCalendarEvent(\Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent $calendarEvents)
+    {
+        $this->calendarEvents[] = $calendarEvents;
+
+        return $this;
+    }
+
+    /**
+     * Remove calendarEvents
+     *
+     * @param \Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent $calendarEvents
+     */
+    public function removeCalendarEvent(\Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent $calendarEvents)
+    {
+        $this->calendarEvents->removeElement($calendarEvents);
+    }
+
+    /**
+     * Get calendarEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCalendarEvents()
+    {
+        return $this->calendarEvents;
     }
 }

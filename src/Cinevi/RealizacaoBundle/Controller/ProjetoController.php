@@ -60,6 +60,34 @@ class ProjetoController extends RestfulCrudController
 
         $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
 
+        // Email para a equipe
+        $emailsEquipes = array();
+
+        $template = $this->bundleName.':email-equipe';
+
+        foreach($obj->getDirecao() as $user) {
+            $emailsEquipes[] = $user->getEmail();
+        }
+        foreach($obj->getProducao() as $user) {
+            $emailsEquipes[] = $user->getEmail();
+        }
+        foreach($obj->getFotografia() as $user) {
+            $emailsEquipes[] = $user->getEmail();
+        }
+        foreach($obj->getSom() as $user) {
+            $emailsEquipes[] = $user->getEmail();
+        }
+        foreach($obj->getArte() as $user) {
+            $emailsEquipes[] = $user->getEmail();
+        }
+
+        $emailsEquipes = array_unique($emailsEquipes);
+
+        foreach($emailsEquipes as $email) {
+            $destinatario = $email;
+            $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+        }
+
         return $obj;
     }
 }

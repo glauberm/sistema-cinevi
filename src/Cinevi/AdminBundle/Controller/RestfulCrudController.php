@@ -323,7 +323,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         return $view;
     }
 
-    private function getForm($obj, $formClass, $method, $routeName = null, $params = array())
+    protected function getForm($obj, $formClass, $method, $routeName = null, $params = array())
     {
         $options = array();
         $options['method'] = $method;

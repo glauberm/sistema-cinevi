@@ -31,6 +31,11 @@ Cinevi\SecurityBundle\Entity\User:
                 message: Por favor, informe apenas números.
             - NotBlank:
                 message: 'Por favor, informe o telefone do usuário.'
+            - Range:
+                min: 1000000000
+                max: 99999999999
+                minMessage: O número deve ter pelo menos 10 algarismos.
+                maxMessage: O número deve ter no máximo 11 algarismos.
         enabled:
             - NotNull:
                 message: 'Por favor, informe se o usuário está ativo ou não.'

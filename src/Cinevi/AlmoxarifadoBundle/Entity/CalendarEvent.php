@@ -34,7 +34,7 @@ class CalendarEvent extends BaseEvent
     protected $projeto;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Equipamento", cascade={"merge"})
+     * @ORM\ManyToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Equipamento", cascade={"merge"}, inversedBy="calendarEvents")
      **/
     protected $equipamentos;
 

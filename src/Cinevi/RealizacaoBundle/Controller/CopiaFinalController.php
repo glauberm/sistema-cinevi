@@ -38,7 +38,6 @@ class CopiaFinalController extends RestfulCrudController
 
         // Envia email para os emails no array
         $emails = array(
-            'cinevi@vm.uff.br',
             'comissaoproducaouff@gmail.com'
         );
 
@@ -58,6 +57,25 @@ class CopiaFinalController extends RestfulCrudController
         $template = $this->bundleName.':email-professor';
 
         $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+
+        // Email para a equipe
+        $emailsEquipes = array();
+
+        $template = $this->bundleName.':email-equipe';
+
+        foreach($obj->getFichaTecnica()->getEquipes() as $equipe) {
+            foreach($equipe->getUsers() as $user) {
+                $emailsEquipes[] = $user->getEmail();
+                $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+            }
+        }
+
+        $emailsEquipes = array_unique($emailsEquipes);
+
+        foreach($emailsEquipes as $email) {
+            $destinatario = $email;
+            $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+        }
 
         return $obj;
     }

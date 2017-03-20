@@ -73,7 +73,7 @@ class CalendarEventController extends RestfulCrudController
 
         $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
 
-        // Email para o usuário
+        // Email para o professor
         $destinatario = $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail();
         $template = $this->bundleName.':email-professor';
 

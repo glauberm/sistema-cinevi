@@ -4,6 +4,8 @@ namespace Cinevi\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\RestBundle\View\ViewHandlerInterface;
+use FOS\RestBundle\View\View;
 use Cinevi\AdminBundle\Controller\RestfulCrudController;
 use Cinevi\AdminBundle\Entity\Configuration;
 use Cinevi\AdminBundle\Form\Type\ConfigurationType;

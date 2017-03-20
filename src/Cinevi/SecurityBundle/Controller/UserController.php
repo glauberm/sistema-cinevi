@@ -40,7 +40,7 @@ class UserController extends RestfulCrudController
             $path = $this->generateUrl('index', array(), true);
 
             $destinatario = $obj->getEmail();
-            
+
             $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
         }
 

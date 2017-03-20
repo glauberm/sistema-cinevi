@@ -34,7 +34,7 @@ class CalendarEvent extends BaseEvent
     protected $projeto;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Equipamento", cascade={"merge"})
+     * @ORM\ManyToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Equipamento", cascade={"merge"}, inversedBy="calendarEvents")
      **/
     protected $equipamentos;
 
@@ -85,7 +85,7 @@ class CalendarEvent extends BaseEvent
     public function setTitleValue()
     {
         if(!$this->getTitle()) {
-            $this->title = "#".substr(uniqid(rand(), true), 0, 3)."-".date("s").".".date("i").".".date("H").".".date("d").".".date("m").".".date("Y");
+            $this->title = "#".substr(uniqid(rand(), true), 0, 3).date("H").date("i").date("s").date("d").date("m").date("y");
         }
     }
 

@@ -1,8 +1,5 @@
 # TO-DO
 
-## Da nova reunião
-- Checar emails (para quem estão sendo enviados)
-
 ## Da reunião
 - Se marcado como "Em Manutenção", avisar todos que pegaram esse equipamento depois daquela data
 - O responsável por um projeto só pode criar outro projeto quando criar uma cópia final para aquele projeto - SÓ SE FOR ALUNO
