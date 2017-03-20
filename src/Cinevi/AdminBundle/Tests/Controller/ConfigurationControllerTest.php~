@@ -1,0 +1,57 @@
+<?php
+
+namespace Cinevi\AdminBundle\Tests\Controller;
+
+use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
+
+class ConfigurationControllerTest extends RestfulCrudControllerTest
+{
+    // List
+    protected $indexRoute = 'configurations';
+
+
+    protected function getAddArrayForm()
+    {
+        return array(
+            'configuration[reservasFechadas]' => '1',
+        );
+    }
+
+    protected function getEditArrayForm()
+    {
+        return array(
+            'configuration[reservasFechadas]' => '0',
+        );
+    }
+
+    protected function doAdd($crawler, $addLink, $addButton, $addArrayForm)
+    {
+        $form = $crawler->selectButton($addButton)->form($addArrayForm);
+
+        $this->client->submit($form);
+
+        return $this->client->followRedirect();
+    }
+
+    protected function doEdit($crawler, $itemEditFilter, $itemEditLink, $editLink, $editButton, $editArrayForm)
+    {
+        $crawler = $this->client->click($crawler->selectLink($editLink)->link());
+
+        $form = $crawler->selectButton($editButton)->form($editArrayForm);
+
+        $this->client->submit($form);
+
+        return $this->client->followRedirect();
+    }
+
+    protected function doRemove($crawler, $editLink, $itemRemoveLink, $itemRemoveFilter, $removeButton)
+    {
+        $this->client->submit($crawler->selectButton($removeButton)->form());
+
+        $crawler = $this->client->followRedirect();
+
+        $this->assertNotRegExp('/'.$itemRemoveLink.'/', $this->client->getResponse()->getContent());
+
+        return $crawler;
+    }
+}

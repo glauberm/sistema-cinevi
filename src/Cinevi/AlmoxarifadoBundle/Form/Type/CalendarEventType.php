@@ -93,7 +93,7 @@ class CalendarEventType extends AbstractType
         ;
 
         // FORM MODIFIER
-        $formModifier = function (FormInterface $form, \DateTime $startDate = null, \DateTime $endDate = null)
+        $formModifier = function (FormInterface $form, \DateTime $startDate = null, \DateTime $endDate = null, $id = null)
         {
             $categoriaArray = array();
             $equipamentosArray = array();
@@ -101,7 +101,7 @@ class CalendarEventType extends AbstractType
             $equipamentoQB = $this->equipamentosValidos();
 
             if(!empty($startDate) && !empty($endDate)) {
-                $equipamentoQB = $this->equipamentosPorData($form, $equipamentoQB, $startDate, $endDate);
+                $equipamentoQB = $this->equipamentosPorData($form, $equipamentoQB, $startDate, $endDate, $id);
             }
 
             $categoriaQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Categoria')->createQueryBuilder('c');
@@ -141,18 +141,18 @@ class CalendarEventType extends AbstractType
                 $form = $event->getForm();
                 $data = $event->getData();
 
-                $formModifier($form, $data->getStartDate(), $data->getEndDate());
+                $formModifier($form, $data->getStartDate(), $data->getEndDate(), $event->getData()->getId());
             }
         );
 
-        $builder->get('endDate')->addEventListener(
-            FormEvents::POST_SUBMIT,
+        $builder->addEventListener(
+            FormEvents::SUBMIT,
             function (FormEvent $event) use ($formModifier)
             {
-                $startDate = $event->getForm()->getParent()->get('startDate')->getData();
-                $endDate = $event->getForm()->getParent()->get('endDate')->getData();
+                $startDate = $event->getForm()->get('startDate')->getData();
+                $endDate = $event->getForm()->get('endDate')->getData();
 
-                $formModifier($event->getForm()->getParent(), $startDate, $endDate);
+                $formModifier($event->getForm(), $startDate, $endDate, $event->getData()->getId());
             }
         );
 
@@ -196,11 +196,16 @@ class CalendarEventType extends AbstractType
         return $equipamentoQB;
     }
 
-    private function equipamentosPorData($form, $equipamentoQB, \DateTime $fStartDate, \DateTime $fEndDate)
+    private function equipamentosPorData($form, $equipamentoQB, \DateTime $fStartDate, \DateTime $fEndDate, $id = null)
     {
         $interval = \DateInterval::createFromDateString('1 day');
         $fEquipamentos = $equipamentoQB->getQuery()->getResult();
-        $reservas = $this->em->getRepository('CineviAlmoxarifadoBundle:CalendarEvent')->findAll();
+
+        if(!empty($id)) {
+            $reservas = $em->createQuery('SELECT c FROM '.$this->className.' cv WHERE cv.id != '.$id)->getResult();
+        } else {
+            $reservas = $this->em->getRepository('CineviAlmoxarifadoBundle:CalendarEvent')->findAll();
+        }
 
         if(!empty($fEquipamentos)) {
             $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);

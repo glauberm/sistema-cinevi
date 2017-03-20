@@ -1,8 +1,5 @@
 # TO-DO
 
-## Da reunião
-- Ver DynamicType nos equipamentos
-
 ## Cópias Finais
 - Além das fotos still, link (com possível senha) do filme
 - VichUploaderBundle para os MateriaisDivulgacao (add em CopiaFinal)
