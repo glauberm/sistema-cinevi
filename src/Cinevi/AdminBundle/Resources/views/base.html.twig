@@ -75,7 +75,7 @@
                                 {% if app.user.confirmado is not defined or app.user.confirmado != true %}
                                     <div class="alert alert-danger alert-dismissal fade in" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                        Seus dados ainda não foram confirmados por um(a) funcionário(a). Até lá, você não poderá realizar ações no sistema. Edite o <a href="{{ path('fos_user_profile_show', {user:app.user}) }}" class="alert-link">seu perfil</a> com nome, matrícula e telefone corretos e você receberá um email assim que seu cadastro for confirmado.
+                                        Seus dados ainda não foram confirmados. Até lá, você não poderá realizar ações no sistema. Edite o <a href="{{ path('fos_user_profile_show', {user:app.user}) }}" class="alert-link">seu perfil</a> com nome, matrícula e telefone corretos e você receberá um email assim que seu cadastro for confirmado. Caso você não receba este email, entre em contato com o departamento.
                                     </div>
                                 {% endif %}
 
