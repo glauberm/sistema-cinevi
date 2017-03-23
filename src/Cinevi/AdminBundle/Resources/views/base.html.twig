@@ -86,12 +86,14 @@
                                     </div>
                                 {% endif %}
 
-                                {% if configuration is empty %}
-                                    <div class="alert alert-warning alert-dismissal fade in" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                        As configurações ainda não foram criadas. <a href="{{ path('get_configurations') }}" class="alert-link">Crie-as</a> para controlar o funcionamento do sistema.
-                                    </div>
-                                {% endif %}
+                                {% block blockConfiguration %}
+                                    {% if configuration is empty %}
+                                        <div class="alert alert-warning alert-dismissal fade in" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                                            As configurações ainda não foram criadas. <a href="{{ path('get_configurations') }}" class="alert-link">Crie-as</a> para controlar o funcionamento do sistema.
+                                        </div>
+                                    {% endif %}
+                                {% endblock %}
                             {% endblock %}
                         {% endblock %}
                     </main>

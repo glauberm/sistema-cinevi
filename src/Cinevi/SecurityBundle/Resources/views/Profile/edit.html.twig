@@ -1,15 +1,15 @@
 {% extends 'CineviAdminBundle::base.html.twig' %}
 
 {% set title = 'Meu Perfil' %}
+{% set routeListar = path('fos_user_profile_show') %}
 
-{% block mainAction %}
-    <a class="navbar-brand btn btn-link" href="{{ path('fos_user_profile_show') }}">
+{% block blockConfiguration %}{% endblock %}
+
+{% block mainActions %}
+    <a class="navbar-brand btn btn-link" href="{{ routeListar }}">
         {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
     </a>
 {% endblock %}
-
-{% block maisActionsButton %}{% endblock %}
-{% block maisActions %}{% endblock %}
 
 {% block body %}
     {{ parent() }}
