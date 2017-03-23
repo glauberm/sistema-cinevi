@@ -44,7 +44,7 @@
             <div class="container">
 
                 <div class="row">
-                    <main class="main col-md-9 col-md-push-3">
+                    <main class="main {% if app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}col-md-9 col-md-push-3{% endif %}">
 
                         {% block navbar %}
                             <nav class="navbar navbar-default">
@@ -98,11 +98,14 @@
                         {% endblock %}
                     </main>
 
-                    {% block mainMenu %}
-                        <aside class="aside col-md-3 col-md-pull-9">
-                            {% include 'CineviAdminBundle::menu.html.twig' %}
-                        </aside>
-                    {% endblock %}
+                    {% if app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+                        {% block mainMenu %}
+                            <aside class="aside col-md-3 col-md-pull-9">
+                                {% include 'CineviAdminBundle::menu.html.twig' %}
+                            </aside>
+                        {% endblock %}
+                    {% endif %}
+
                 </div>
             </div>
         </div>
