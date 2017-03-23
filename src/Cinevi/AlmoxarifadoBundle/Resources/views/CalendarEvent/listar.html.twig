@@ -10,17 +10,10 @@
     {{ parent() }}
 {% endblock %}
 
-{% block mainActions %}
-    <a class="navbar-brand btn btn-link" href="{{ path('index') }}">
-        {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
-    </a>
-    {% block addAction %}
-        {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <div class="navbar-form navbar-nav">
-                <a class="btn btn-success" href="{{ routeAdicionar }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
-            </div>
-        {% endif %}
-    {% endblock %}
+{% block addAction %}
+    <div class="navbar-form navbar-nav">
+        <a class="btn btn-success" href="{{ routeAdicionar }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
+    </div>
 {% endblock %}
 
 {% block body %}
