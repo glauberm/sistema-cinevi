@@ -13,10 +13,8 @@
             <link href="{{ asset('vendor/datepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('css/estilos.css') }}" rel="stylesheet" type="text/css" />
         {% endblock %}
-        <meta name="description" content="Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo com acesso à internet." />
         <meta name="robots" content="noindex, nofollow" />
         <meta name="googlebot" content="noindex, nofollow" />
-        <meta name="subject" content="Todos os serviços do departamento em qualquer lugar." />
         <!-- FAVICONS -->
     	<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
     	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
@@ -44,7 +42,7 @@
             <div class="container">
 
                 <div class="row">
-                    <main class="main {% if app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}col-md-9 col-md-push-3{% endif %}">
+                    <main class="main {% if app.user is not empty and app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}col-md-9 col-md-push-3{% endif %}">
 
                         {% block navbar %}
                             <nav class="navbar navbar-default">
@@ -98,7 +96,7 @@
                         {% endblock %}
                     </main>
 
-                    {% if app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+                    {% if app.user is not empty and app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
                         {% block mainMenu %}
                             <aside class="aside col-md-3 col-md-pull-9">
                                 {% include 'CineviAdminBundle::menu.html.twig' %}

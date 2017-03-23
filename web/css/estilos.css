@@ -94,7 +94,8 @@ a.pular-para-conteudo:active {
 }
 
 /* HEADER */
-.header {
+.header,
+.header-public {
     padding: 12px 0 10px;
     border-bottom: 1px solid #bbaa1f;
     background: #ead741;
@@ -353,6 +354,11 @@ a.pular-para-conteudo:active {
     background: -ms-linear-gradient(top, #decc3a 0%,#ead741 100%);
     background: linear-gradient(to bottom, #decc3a 0%,#ead741 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#decc3a', endColorstr='#ead741',GradientType=0 );
+}
+
+/* PUBLIC */
+.header-public {
+    padding: 0;
 }
 
 /* ERROR */

@@ -9,7 +9,6 @@ Assim que o processo for finalizado você receberá um email de confirmação e 
 - Qualquer usuário pode cadastrar Função (pendente aprovação)
 - Na reserva "Equipamento(s)" para "Equipamento(s)" disponíveis.
 - Na reserva -> Mensagem de sucesso fala "para editar ou excluir sua reserva, clique nela pelo calendário ou através do link".
--Sumir com TODAS as views para os não confirmados!
 - Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo com acesso à internet. Site de uso exclusivo para alunos, funcionários e professores do Departamento de Cinema e Vídeo da UFF.
 - Criar home pública com o mesmo texto do login mas sem o formulário: "Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo com acesso à internet. Se você é aluno, funcionário ou professor do Departamento de Cinema e Vídeo da UFF, acesse o sistema.
 - Colocar alerta no topo do site de "Clique em "Acessar o Sistema" no menu para ir ao sistema".
