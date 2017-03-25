@@ -4,37 +4,15 @@
 
 {% block blockConfiguration %}{% endblock %}
 
-{% block navbar %}
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                {% block maisActionsButton %}
-                    <button type="button" class="navbar-toggle btn btn-default collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
-                        <span class="sr-only">Mais...</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                {% endblock %}
-                {% block mainAction %}
-                    <a class="navbar-brand btn btn-link" href="{{ path('index') }}">
-                        {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
-                    </a>
-                {% endblock %}
-            </div>
-
-            {% block maisActions %}
-                <div class="collapse navbar-collapse in" id="main-navbar">
-                    {% block maisBotoes %}
-                        {% block maisBotoesBlock %}{% endblock %}
-                        <div class="navbar-form navbar-nav">
-                            <a class="btn btn-info" href="{{ path('fos_user_profile_edit') }}">Editar</a>
-                        </div>
-                    {% endblock %}
-                </div>
-            {% endblock %}
+{% block mainActions %}
+    <a class="navbar-brand btn btn-link" href="{{ routeListar }}">
+        {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
+    </a>
+    {% if is_granted('edit', item) %}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-info" href="{{ routeEditar }}">{% include 'CineviAdminBundle:SVG:editar.html.twig' %}<span class="hidden-xs">Editar</span></a>
         </div>
-    </nav>
+    {% endif %}
 {% endblock %}
 
 {% block body %}
