@@ -3,7 +3,6 @@
 ## Da reunião
 - Ações múltiplas de confirmação na tabela dos usuários - Confirmação
 - Criar confirmação para Cópia Final ("Pendente entrega a cópia do filme") com notificação o usuário.
-- Cópia final após criação: "" -> CRIAR COMO ALERTA ACIMA DA MENSAGEM DE SUCESSO DA CRIAÇÃO E CASO O ATUAL USER SEJA O RESPONSÁVEL DA CÓPIA FINAL
 - Qualquer usuário pode cadastrar Função (pendente aprovação) *** COLOCAR OPÇÕES PARA OS USUÁRIOS COMPLETAREM TODAS AS OPÇÕES DAS CÓPIAS FINAIS ***
 
 # Site
