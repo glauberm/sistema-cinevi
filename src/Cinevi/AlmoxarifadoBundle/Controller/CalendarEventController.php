@@ -78,6 +78,8 @@ class CalendarEventController extends RestfulCrudController
 
         $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
 
+        $this->get('session')->getFlashBag()->set('success', 'Criação de reserva realizada com sucesso! Para editar ou excluir sua reserva, clique nela pelo calendário.');
+
         return $obj;
     }
 

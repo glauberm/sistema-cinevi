@@ -112,7 +112,7 @@ a.pular-para-conteudo:active {
 }
 
 .header .a-logo {
-    float: left;
+    display: block;
 }
 
 .header .logo {
@@ -121,8 +121,8 @@ a.pular-para-conteudo:active {
 }
 
 .header .logo svg  {
-    width: 175px;
-    height: 34px;
+    max-width: 175px;
+    max-height: 34px;
 }
 
 /* CONTENT */
@@ -137,19 +137,19 @@ a.pular-para-conteudo:active {
 
 /* MENU TOPO */
 .header .menu-topo {
-    float: right;
-}
-
-.header .menu-topo {
     position: relative;
-    top: -2px;
+    margin-top: -42px;
 }
 
-.header .menu-topo span {
+.header .menu-topo span,
+.header-public .link-sistema span,
+.header-security .link-sistema span {
     margin-left: 2px;
 }
 
-.header .menu-topo svg {
+.header .menu-topo svg,
+.header-public .link-sistema svg,
+.header-security .link-sistema svg {
     width: 26px;
     height: 24px;
     margin-bottom: -7px;
@@ -160,7 +160,11 @@ a.pular-para-conteudo:active {
 }
 
 .header .menu-topo li a svg g,
-.header .menu-topo li a svg path {
+.header .menu-topo li a svg path,
+.header-public .link-sistema svg g,
+.header-public .link-sistema svg path,
+.header-security .link-sistema svg g,
+.header-security .link-sistema svg path {
     -webkit-transition: fill 0.3s ease;
     -moz-transition: fill 0.3s ease;
     -ms-transition: fill 0.3s ease;
@@ -169,7 +173,11 @@ a.pular-para-conteudo:active {
 }
 
 .header .menu-topo .nav > li > a:hover,
-.header .menu-topo .nav > li > a:focus {
+.header .menu-topo .nav > li > a:focus,
+.header-public .link-sistema:hover,
+.header-public .link-sistema:focus,
+.header-security .link-sistema:hover,
+.header-security .link-sistema:focus {
     background-color: transparent;
 }
 
@@ -188,7 +196,11 @@ a.pular-para-conteudo:active {
 .header .menu-topo li a:focus svg g,
 .header .menu-topo li a:focus svg path,
 .header .menu-topo li a:active svg g,
-.header .menu-topo li a:active svg path {
+.header .menu-topo li a:active svg path,
+.header-public .link-sistema:hover svg g,
+.header-public .link-sistema:focus svg path,
+.header-security .link-sistema:hover svg g,
+.header-security .link-sistema:focus svg path {
     fill: #08A5D4;
 }
 
@@ -332,12 +344,12 @@ a.pular-para-conteudo:active {
 }
 
 .header-security .logo {
-    display: inline-block;
+    display: block;
 }
 
 .header-security .logo svg {
-    width: 226px;
-    height: 44px;
+    max-width: 226px;
+    max-height: 44px;
 }
 
 .content-security {
@@ -359,6 +371,12 @@ a.pular-para-conteudo:active {
 /* PUBLIC */
 .header-public {
     padding: 0;
+}
+
+.header-public .link-sistema,
+.header-security .link-sistema {
+    margin: -80px 20px 20px;
+    padding: 10px 15px;
 }
 
 /* ERROR */
@@ -449,6 +467,14 @@ a.pular-para-conteudo:active {
 
 @media (min-width: 992px)
 {
+    .content-security .jumbotron {
+        padding-top: 0;
+    }
+
+    .content-security .jumbotron h1 {
+        margin-top: 0;
+    }
+
     .menu-topo .nav > li > a {
         padding: 10px 15px;
     }
@@ -485,7 +511,6 @@ a.pular-para-conteudo:active {
     }
 
     .header .a-logo {
-        float: none;
         text-align: center;
     }
 
@@ -499,5 +524,12 @@ a.pular-para-conteudo:active {
     .header .menu-topo .nav {
         display: inline-block;
         margin: 0 auto;
+    }
+}
+
+@media (max-width: 540px) {
+    .header-public .link-sistema,
+    .header-security .link-sistema {
+        margin: -20px 0 10px 20px;
     }
 }

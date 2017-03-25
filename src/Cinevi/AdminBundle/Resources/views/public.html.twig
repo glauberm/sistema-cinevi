@@ -49,6 +49,11 @@
 
         {% include 'CineviAdminBundle::footer.html.twig' %}
 
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <!--[if lt IE 9]>
+                <script src="{{ asset('vendor/html5shiv/js/html5shiv.min.js') }}"></script>
+                <script src="{{ asset('vendor/respond/js/respond.min.js') }}"></script>
+            <![endif]-->
+        {% endblock %}
     </body>
 </html>

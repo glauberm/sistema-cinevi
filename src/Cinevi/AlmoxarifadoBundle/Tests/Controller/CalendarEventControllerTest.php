@@ -13,7 +13,7 @@ use Cinevi\AlmoxarifadoBundle\Entity\Equipamento;
 class CalendarEventControllerTest extends RestfulCrudControllerTest
 {
     // List
-    protected $indexRoute = 'calendar/events';
+    protected $indexRoute = 's/calendar/events';
     // Edit
     protected $itemEditFilter = 'a:contains("13/06/2018")';
     protected $itemEditLink = '13/06/2018';

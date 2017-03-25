@@ -127,6 +127,11 @@ class CopiaFinal
      **/
     protected $fichaTecnica;
 
+    /**
+     * @ORM\Column(type="boolean")
+     **/
+    protected $confirmado;
+
 
 
     /**
@@ -643,5 +648,28 @@ class CopiaFinal
     public function getProjeto()
     {
         return $this->projeto;
+    }
+
+    /**
+     * Set confirmado
+     *
+     * @param boolean $confirmado
+     * @return CopiaFinal
+     */
+    public function setConfirmado($confirmado)
+    {
+        $this->confirmado = $confirmado;
+
+        return $this;
+    }
+
+    /**
+     * Get confirmado
+     *
+     * @return boolean 
+     */
+    public function getConfirmado()
+    {
+        return $this->confirmado;
     }
 }

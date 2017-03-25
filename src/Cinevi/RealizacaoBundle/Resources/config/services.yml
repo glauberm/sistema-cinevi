@@ -45,3 +45,12 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: form.type, alias: view }
+
+    # Validation Groups
+    cinevi.user_validation_factory:
+        class: Cinevi\SecurityBundle\Validation\UserValidationGroupResolverFactory
+        arguments: ['@security.authorization_checker']
+
+    cinevi.user_validation:
+        class: Cinevi\SecurityBundle\Validation\UserValidationGroupResolver
+        factory: ['@cinevi.user_validation_factory', create]

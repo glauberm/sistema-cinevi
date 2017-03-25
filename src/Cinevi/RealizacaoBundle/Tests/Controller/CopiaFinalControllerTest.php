@@ -12,7 +12,7 @@ use Cinevi\RealizacaoBundle\Entity\Funcao;
 class CopiaFinalControllerTest extends RestfulCrudControllerTest
 {
     // List
-    protected $indexRoute = 'copia/finals';
+    protected $indexRoute = 's/copia/finals';
     // Edit
     protected $itemEditFilter = 'a:contains("TesteP")';
     protected $itemEditLink = 'TesteP';
@@ -154,6 +154,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
             'copia_final[fichaTecnica][outrasInformacoes]' => 'Lorem, Ipsum e Dolor.',
             'copia_final[fichaTecnica][festivais]' => 'Lorem, Ipsum e Dolor.',
             'copia_final[fichaTecnica][premios]' => 'Lorem, Ipsum e Dolor.',
+            'copia_final[confirmado]' => '0',
         );
     }
 
@@ -217,6 +218,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
             'copia_final[fichaTecnica][outrasInformacoes]' => '9Lorem, Ipsum e Dolor.',
             'copia_final[fichaTecnica][festivais]' => '9Lorem, Ipsum e Dolor.',
             'copia_final[fichaTecnica][premios]' => '9Lorem, Ipsum e Dolor.',
+            'copia_final[confirmado]' => '1',
         );
     }
 

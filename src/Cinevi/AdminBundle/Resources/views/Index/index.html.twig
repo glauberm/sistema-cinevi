@@ -1,6 +1,6 @@
 {% extends 'CineviAdminBundle::base.html.twig' %}
 
-{% set title = 'Página em Construção' %}
+{% set title = 'Início' %}
 
 {% block navbar %}{% endblock %}
 
@@ -8,6 +8,10 @@
 
     {{ parent() }}
 
-    <p class="lead text-muted">Navegue pelo menu para continuar usando o sistema.</h1>
+    <p>Para visualizar o calendário de reserva de equipamentos, clique em <strong><a href="{{ path('get_calendar_events') }}">Reservas</a></strong>, no menu <strong>Almoxarifado</strong>.</p>
+
+    <p>Para cadastrar um projeto, clique em <strong><a href="{{ path('get_calendar_events') }}">Projetos</a></strong>, no menu <strong>Realização</strong>, e depois em <strong>Adicionar</strong> para criar seu projeto, preenchendo o formulário.</p>
+
+    <p>Para reservar equipamentos para um projeto já cadastrado, clique em <strong><a href="{{ path('get_calendar_events') }}">Reservas</a></strong>, no menu <strong>Almoxarifado</strong>, e depois em <strong>Adicionar</strong> para então preencher as datas de retirada e devolução e incluir os equipamentos solicitados. Após salvar, você poderá visualizar sua reserva no calendário.</p>
 
 {% endblock %}

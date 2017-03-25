@@ -1,11 +1,14 @@
 <header class="header-security text-center">
     <div class="container">
 
-        <a href="{{ path('public') }}">
-            <div class="logo page-header">
-                {% include 'CineviAdminBundle:SVG:logo.html.twig' %}
-            </div>
-        </a>
+        <div class="clearfix">
+            <a href="{{ path('public') }}">
+                <div class="logo page-header">
+                    {% include 'CineviAdminBundle:SVG:logo.html.twig' %}
+                </div>
+            </a>
+            <a class="link-sistema pull-right" href="{{ path('index') }}" class="btn btn-link">{% include 'CineviAdminBundle:SVG:sistema.html.twig' %}<span>Sistema</span></a></li>
+        </div>
 
     </div>
 </header>

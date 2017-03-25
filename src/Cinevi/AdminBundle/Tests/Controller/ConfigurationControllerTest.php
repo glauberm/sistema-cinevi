@@ -7,7 +7,7 @@ use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 class ConfigurationControllerTest extends RestfulCrudControllerTest
 {
     // List
-    protected $indexRoute = 'configurations';
+    protected $indexRoute = 's/configurations';
 
     public function testCompleteScenario()
     {

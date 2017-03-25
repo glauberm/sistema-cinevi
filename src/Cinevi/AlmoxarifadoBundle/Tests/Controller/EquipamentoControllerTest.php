@@ -9,7 +9,7 @@ use Cinevi\AlmoxarifadoBundle\Entity\Categoria;
 class EquipamentoControllerTest extends RestfulCrudControllerTest
 {
     // List
-    protected $indexRoute = 'equipamentos';
+    protected $indexRoute = 's/equipamentos';
     // Edit
     protected $itemEditFilter = 'a:contains("TesteE")';
     protected $itemEditLink = 'TesteE';

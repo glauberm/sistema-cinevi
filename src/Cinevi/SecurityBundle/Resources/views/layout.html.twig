@@ -69,7 +69,7 @@
                     <aside class="col-md-8 col-sm-12 text-right">
                         <div class="jumbotron">
                             <h1>Todos os serviços do departamento em qualquer lugar.</h1>
-                            <p>Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo com acesso à internet. <strong>Sistema de uso exclusivo de alunos, funcionários e professores do Departamento de Cinema e Vídeo da UFF.</strong></p>
+                            <p>Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo com acesso à internet.</p><p><strong>Sistema de uso exclusivo de alunos, funcionários e professores do Departamento de Cinema e Vídeo da UFF.</strong></p>
                         </div>
                     </aside>
                 </div>
@@ -81,6 +81,10 @@
         {% block javascripts %}
             <script src="{{ asset('vendor/jquery/js/jquery.min.js') }}"></script>
             <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+            <!--[if lt IE 9]>
+                <script src="{{ asset('vendor/html5shiv/js/html5shiv.min.js') }}"></script>
+                <script src="{{ asset('vendor/respond/js/respond.min.js') }}"></script>
+            <![endif]-->
             <script src="{{ asset('vendor/jquery-mask/js/jquery.mask.min.js') }}"></script>
             <script src="{{ asset('js/masks.js') }}"></script>
         {% endblock %}

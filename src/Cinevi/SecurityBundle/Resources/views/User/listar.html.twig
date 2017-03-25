@@ -15,6 +15,7 @@
 {% block thead %}
     <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.username') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Email', 'item.email') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Confirmado', 'item.confirmado') }}</th>
 {% endblock %}
 
 {% block tbody %}
@@ -22,4 +23,5 @@
         <a href="{{ path('get_user', { 'id': item.id }) }}">{{ item.username }}</a>
     </td>
     <td>{{ item.email }}</td>
+    <td>{{ item.confirmado ? 'Sim' : 'Não' }}</td>
 {% endblock %}

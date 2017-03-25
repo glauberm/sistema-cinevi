@@ -127,6 +127,11 @@ class CopiaFinal
      **/
     protected $fichaTecnica;
 
+    /**
+     * @ORM\Column(type="boolean")
+     **/
+    protected $confirmado;
+
 
 
     /**

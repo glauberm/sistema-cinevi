@@ -41,3 +41,7 @@
     <legend><a id="Ficha Técnica" href="#Ficha Técnica">Ficha Técnica</a></legend>
     {% include 'CineviRealizacaoBundle:FichaTecnica:form.html.twig' with {form: form.fichaTecnica} %}
 </fieldset>
+
+{% if is_granted('ROLE_DEPARTAMENTO') %}
+    {{ form_row(form.confirmado) }}
+{% endif %}

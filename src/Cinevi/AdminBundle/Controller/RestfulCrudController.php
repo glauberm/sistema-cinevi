@@ -168,11 +168,11 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $em->persist($obj);
             $em->flush();
 
-            // Chama o método a ser sobreescrito posPersist()
-            $obj = $this->posPersist($obj, $em);
-
             // Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
             $this->get('session')->getFlashBag()->set('success', 'Criação de item realizada com sucesso!');
+
+            // Chama o método a ser sobreescrito posPersist()
+            $obj = $this->posPersist($obj, $em);
 
             $view = View::createRouteRedirect('get_'.$this->routeSuffix.'s');
         } else {
@@ -253,11 +253,11 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $em->merge($obj);
             $em->flush();
 
-            // Chama o método a ser sobreescrito posMerge()
-            $obj = $this->posMerge($obj, $em);
-
             // Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
             $this->get('session')->getFlashBag()->set('success', 'Edição de item realizada com sucesso!');
+
+            // Chama o método a ser sobreescrito posMerge()
+            $obj = $this->posMerge($obj, $em);
 
             $view = View::createRouteRedirect('get_'.$this->routeSuffix.'s');
         } else {
@@ -306,11 +306,11 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $em->remove($obj);
             $em->flush();
 
-            // Chama o método a ser sobreescrito posRemove()
-            $obj = $this->posRemove($obj, $em);
-
             // @TODO: Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
             $this->get('session')->getFlashBag()->set('success', 'Remoção de item realizada com sucesso!');
+
+            // Chama o método a ser sobreescrito posRemove()
+            $obj = $this->posRemove($obj, $em);
 
             $view = View::createRouteRedirect('get_'.$this->routeSuffix.'s');
         } else {

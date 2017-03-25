@@ -20,6 +20,8 @@ class CopiaFinalController extends RestfulCrudController
     protected $routeSuffix = 'copia_final';
     protected $formClassName = CopiaFinalType::class;
 
+    private $confirmado;
+
     protected function listar($builder, EntityManager $em)
     {
         return $builder->join('item.realizacao', 'r');
@@ -73,6 +75,36 @@ class CopiaFinalController extends RestfulCrudController
 
         foreach($emailsEquipes as $email) {
             $destinatario = $email;
+            $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+        }
+
+        // Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
+        $this->get('session')->getFlashBag()->set('success', 'Criação de cópia final realizada com sucesso! Para finalizar o processo você deve se encontrar com o Cláudio (disponível na Sala Zeca Porto, de 8h às 14h), que pode ser contactado pelo e-mail claudio.ciambelli@gmail.com. Você deve entregá-lo um arquivo da versão final do filme, obrigatoriamente no formato: MPEG4 H264. Deverá entregá-lo também uma cópia de visionamento, no formato MOV.
+        Assim que o processo for finalizado você receberá um email de confirmação e poderá voltar a cadastrar projetos.');
+
+        return $obj;
+    }
+
+    protected function preEditar($obj, Form $form, EntityManager $em)
+    {
+        $this->confirmado = $obj->getConfirmado();
+
+        return $form;
+    }
+
+    protected function posMerge($obj, EntityManager $em)
+    {
+        if($this->confirmado == false && $obj->getConfirmado() == true) {
+            $template = $this->bundleName.':email-confirmacao';
+
+            $assunto = 'Confirmação de Cópia Final: '.$obj->getRealizacao()->getTitulo();
+
+            $path = $this->generateUrl('get_copia_final', array(
+                'id' => $obj->getId()
+            ), true);
+
+            $destinatario = $obj->getRealizacao()->getUser()->getEmail();
+
             $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
         }
 

@@ -9,7 +9,7 @@ use Cinevi\SecurityBundle\Entity\User;
 class ProjetoControllerTest extends RestfulCrudControllerTest
 {
     // List
-    protected $indexRoute = 'projetos';
+    protected $indexRoute = 's/projetos';
     // Edit
     protected $itemEditFilter = 'a:contains("TesteP")';
     protected $itemEditLink = 'TesteP';

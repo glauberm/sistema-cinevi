@@ -311,6 +311,20 @@ class CopiaFinalType extends AbstractType
             ))
         ;
 
+        if($this->authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
+            $builder
+                ->add('confirmado', ChoiceType::class, array(
+                    'label' => 'Aprovação da cópia final confirmada?',
+                    'choices' => array(
+                        'Não'   => '0',
+                        'Sim'   => '1',
+                    ),
+                    'choices_as_values' => true,
+                    'expanded' => true,
+                ))
+            ;
+        }
+
         $builder->get('projeto')
             ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviRealizacaoBundle:Projeto'))
         ;

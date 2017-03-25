@@ -7,7 +7,7 @@ use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 class CategoriaControllerTest extends RestfulCrudControllerTest
 {
     // List
-    protected $indexRoute = 'categorias';
+    protected $indexRoute = 's/categorias';
     // Edit
     protected $itemEditFilter = 'a:contains("TesteC")';
     protected $itemEditLink = 'TesteC';

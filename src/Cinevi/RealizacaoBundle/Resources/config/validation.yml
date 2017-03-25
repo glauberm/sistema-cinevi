@@ -93,6 +93,10 @@ Cinevi\RealizacaoBundle\Entity\CopiaFinal:
             - Type:
                 type: integer
                 message: Por favor, informe apenas números.
+        confirmado:
+            - NotNull:
+                message: 'Por favor, informe se os dados do usuários foram confirmados ou não.'
+                groups: [departamento]
 
 Cinevi\RealizacaoBundle\Entity\FichaTecnica:
     properties:
