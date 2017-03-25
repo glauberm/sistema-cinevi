@@ -23,7 +23,7 @@ class Equipamento
     protected $categoria;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      **/
     protected $codigo;
 
@@ -33,22 +33,7 @@ class Equipamento
     protected $nome;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     **/
-    protected $especificacao;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     **/
-    protected $fabricante;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     **/
-    protected $modelo;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, unique=true)
      **/
     protected $patrimonio;
 
@@ -137,75 +122,6 @@ class Equipamento
     public function getNome()
     {
         return $this->nome;
-    }
-
-    /**
-     * Set especificacao
-     *
-     * @param string $especificacao
-     * @return Equipamento
-     */
-    public function setEspecificacao($especificacao)
-    {
-        $this->especificacao = $especificacao;
-
-        return $this;
-    }
-
-    /**
-     * Get especificacao
-     *
-     * @return string
-     */
-    public function getEspecificacao()
-    {
-        return $this->especificacao;
-    }
-
-    /**
-     * Set fabricante
-     *
-     * @param string $fabricante
-     * @return Equipamento
-     */
-    public function setFabricante($fabricante)
-    {
-        $this->fabricante = $fabricante;
-
-        return $this;
-    }
-
-    /**
-     * Get fabricante
-     *
-     * @return string
-     */
-    public function getFabricante()
-    {
-        return $this->fabricante;
-    }
-
-    /**
-     * Set modelo
-     *
-     * @param string $modelo
-     * @return Equipamento
-     */
-    public function setModelo($modelo)
-    {
-        $this->modelo = $modelo;
-
-        return $this;
-    }
-
-    /**
-     * Get modelo
-     *
-     * @return string
-     */
-    public function getModelo()
-    {
-        return $this->modelo;
     }
 
     /**
@@ -412,7 +328,7 @@ class Equipamento
     /**
      * Get calendarEvents
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCalendarEvents()
     {

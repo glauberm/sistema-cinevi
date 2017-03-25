@@ -96,8 +96,8 @@ class CalendarEventType extends AbstractType
         // FORM MODIFIER
         $formModifier = function (FormInterface $form, \DateTime $startDate = null, \DateTime $endDate = null, $id = null)
         {
-            $categoriaArray = array();
             $equipamentosArray = array();
+            $equipamentosPorCategoriaArray = array();
 
             $equipamentoQB = $this->equipamentosValidos();
 
@@ -105,25 +105,14 @@ class CalendarEventType extends AbstractType
                 $equipamentoQB = $this->equipamentosPorData($form, $equipamentoQB, $startDate, $endDate, $id);
             }
 
-            $categoriaQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Categoria')->createQueryBuilder('c');
-            $categoriaQB->orderBy('c.nome', 'ASC');
-
-            foreach ($categoriaQB->getQuery()->getResult() as $categoria) {
-                $equipamentoQB
-                    ->andWhere('e.categoria = '.$categoria->getId())
-                ;
-
-                foreach ($equipamentoQB->getQuery()->getResult() as $equipamento) {
-                    $equipamentosArray[$equipamento->getNome()] = $equipamento->getId();
-                }
-
-                $categoriaArray[$categoria->getNome()] = $equipamentosArray;
+            foreach ($equipamentoQB->getQuery()->getResult() as $equipamento) {
+                $equipamentosPorCategoriaArray[$equipamento->getCategoria()->getNome()][$equipamento->getNome()] = $equipamento->getId();
             }
 
             $form
                 ->add('equipamentos', EquipamentoExtensionType::class, array(
                     'label' => 'Equipamento(s) Disponíveis',
-                    'choices' => $categoriaArray,
+                    'choices' => $equipamentosPorCategoriaArray,
                     'invalid_message' => 'Este não é um valor válido.',
                     'multiple' => true,
                     'choices_as_values' => true,

@@ -62,18 +62,6 @@ class EquipamentoType extends AbstractType
                     'class' => 'input-lg'
                 )
             ))
-            ->add('especificacao', TextType::class, array(
-                'label' => 'Especificação',
-                'required' => false,
-            ))
-            ->add('fabricante', TextType::class, array(
-                'label' => 'Fabricante',
-                'required' => false,
-            ))
-            ->add('modelo', TextType::class, array(
-                'label' => 'Modelo',
-                'required' => false,
-            ))
             ->add('patrimonio', IntegerType::class, array(
                 'label' => 'Nº de Patrimônio',
                 'required' => false,

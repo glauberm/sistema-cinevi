@@ -198,9 +198,17 @@ a.pular-para-conteudo:active {
 .header .menu-topo li a:active svg g,
 .header .menu-topo li a:active svg path,
 .header-public .link-sistema:hover svg g,
+.header-public .link-sistema:focus svg g,
+.header-public .link-sistema:active svg g,
+.header-public .link-sistema:hover svg path,
 .header-public .link-sistema:focus svg path,
+.header-public .link-sistema:active svg path,
 .header-security .link-sistema:hover svg g,
-.header-security .link-sistema:focus svg path {
+.header-security .link-sistema:focus svg g,
+.header-security .link-sistema:active svg g,
+.header-security .link-sistema:hover svg path,
+.header-security .link-sistema:focus svg path,
+.header-security .link-sistema:active svg path {
     fill: #08A5D4;
 }
 
