@@ -13,12 +13,14 @@
 {% endblock %}
 
 {% block thead %}
+    <th>{{ knp_pagination_sortable(pagination, 'Cód.', 'item.codigo') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.nome') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Categoria', 'c.nome') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Manutenção', 'item.manutencao') }}</th>
 {% endblock %}
 
 {% block tbody %}
+    <td>{{ item.codigo }}</td>
     <td>
         <a href="{{ path('get_equipamento', { 'id': item.id }) }}">{{ item.nome }}</a>
     </td>

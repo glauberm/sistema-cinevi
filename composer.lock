@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "818415d660045af2f656d7acbd681246",
-    "content-hash": "74b564137cf769d275731c06c9f1989c",
+    "hash": "d3f8c53678133c57ebd7a168aae6c2a6",
+    "content-hash": "4a6e3271810833d186e4d33516a97fae",
     "packages": [
         {
             "name": "ancarebeca/full-calendar-bundle",
@@ -55,6 +55,50 @@
                 "symfony2 calendar"
             ],
             "time": "2015-08-23 18:46:49"
+        },
+        {
+            "name": "checkdomain/holiday",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/checkdomain/Holiday.git",
+                "reference": "fba86aa8cfa032a7115133778011ae99c3816051"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/checkdomain/Holiday/zipball/fba86aa8cfa032a7115133778011ae99c3816051",
+                "reference": "fba86aa8cfa032a7115133778011ae99c3816051",
+                "shasum": ""
+            },
+            "require": {
+                "ext-calendar": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Checkdomain\\Holiday": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Paap",
+                    "email": "b.paap@checkdomain.de",
+                    "homepage": "http://checkdomain.de"
+                }
+            ],
+            "description": "Checkdomain/Holiday provides a simple class to get holidays for a specified country",
+            "keywords": [
+                "holiday"
+            ],
+            "time": "2016-12-19 11:04:59"
         },
         {
             "name": "doctrine/annotations",

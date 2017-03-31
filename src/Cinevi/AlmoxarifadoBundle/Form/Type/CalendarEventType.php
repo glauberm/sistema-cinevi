@@ -106,7 +106,7 @@ class CalendarEventType extends AbstractType
             }
 
             foreach ($equipamentoQB->getQuery()->getResult() as $equipamento) {
-                $equipamentosPorCategoriaArray[$equipamento->getCategoria()->getNome()][$equipamento->getNome()] = $equipamento->getId();
+                $equipamentosPorCategoriaArray[$equipamento->getCategoria()->getNome()]['['.$equipamento->getCodigo().'] '.$equipamento->getNome()] = $equipamento->getId();
             }
 
             $form
@@ -165,7 +165,7 @@ class CalendarEventType extends AbstractType
     {
         // Encontre seus equipamentos que não estejam em manutenção
         $equipamentoQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Equipamento')->createQueryBuilder('e');
-        $equipamentoQB->orderBy('e.nome', 'ASC')
+        $equipamentoQB->orderBy('e.codigo', 'ASC')
             ->where('e.manutencao != 1')
         ;
 

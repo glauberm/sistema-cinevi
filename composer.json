@@ -25,7 +25,8 @@
         "friendsofsymfony/rest-bundle": "^2.1",
         "jms/serializer-bundle": "^1.1",
         "ancarebeca/full-calendar-bundle": "2.0.2",
-        "knplabs/knp-paginator-bundle": "^2.5"
+        "knplabs/knp-paginator-bundle": "^2.5",
+        "checkdomain/holiday": "^2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
