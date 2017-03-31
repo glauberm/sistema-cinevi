@@ -31,10 +31,6 @@ Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent:
         projeto:
             - NotBlank:
                 message: 'Por favor, informe o projeto.'
-        equipamentos:
-            - Count:
-                min: 1
-                minMessage: 'Por favor, selecione pelo menos um equipamento.'
         startDate:
             - NotBlank:
                 message: 'Por favor, informe a data de início da reserva.'
@@ -45,3 +41,7 @@ Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent:
                 message: 'Por favor, informe a data de fim da reserva.'
             - Date:
                 message: 'Por favor, informe uma data no formato DD/MM/AAAA.'
+        equipamentos:
+            - Count:
+                min: 1
+                minMessage: 'Por favor, selecione pelo menos um equipamento.'

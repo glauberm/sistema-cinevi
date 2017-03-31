@@ -1,9 +1,7 @@
 # TO-DO
 
-- CalendarEvent: ajax só é chamado no endDate -- melhor dar erro do que ficar vazio -- ver NotBlank?
+- VALIDAÇÃO NO CAMPO DE EQUIPAMENTOS DA RESERVA: NÃO PODE SER VAZIO
 - Entrando como aluno, eu não deveria poder clicar em "Usuários" e visualizar a lista de usuários. Isso deve estar habilitado só para "Departamento", "Almoxarifado" e "Administrador" verem (mas só "Departamento" e "Administrador" editarem)
-- Os equipamentos Fone estão com um erro de digitação: p2, estério Tsi 433 (não é estério, mas estéreo)
-- O equipamento DV/HDD/DVD JVC SR-DVM700 Blu-ray/DVD/Mini DV/Player deve sair do sistema, pois ele não está no almoxarifado e não é para ser emprestado.
 - No cadastro da cópia final campos não obrigatórios para link do Vimeo e senha.
 - Que a cópia final cadastrada depois do funcionário ter dado baixa gere um email para a comissão de festivais (morenoantonio.n@gmail.com)
 - Barrar além dos finais de semana os feriados deste ano
@@ -19,9 +17,6 @@
 - Ações múltiplas de confirmação na tabela dos usuários - Confirmação
 - Criar confirmação para Cópia Final ("Pendente entrega a cópia do filme") com notificação o usuário.
 - Qualquer usuário pode cadastrar Função (pendente aprovação) *** COLOCAR OPÇÕES PARA OS USUÁRIOS COMPLETAREM TODAS AS OPÇÕES DAS CÓPIAS FINAIS ***
-
-# Site
-- Colocar alerta no topo do site de "Clique em "Acessar o Sistema" no menu para ir ao sistema".
 
 ## Cópias Finais
 - Máscara de dinheiro

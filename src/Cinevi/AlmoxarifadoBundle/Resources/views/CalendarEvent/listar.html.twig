@@ -97,7 +97,7 @@
                 eventBorderColor: "#bbaa1f",
                 loading: function( isLoading, view ) {
                     if(isLoading) {
-                        $("body").append("<div id='overlay-alert' class='overlay-alert'><span class='label label-default'>Carregando...</span></div>");
+                        $("body").append("<div id='overlay-alert' class='overlay-alert'><span class='label label-danger'>Carregando...</span></div>");
                     } else {
                         $("#overlay-alert").remove();
                     }

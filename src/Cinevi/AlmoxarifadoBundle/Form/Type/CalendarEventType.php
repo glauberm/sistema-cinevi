@@ -14,8 +14,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
-use Cinevi\AdminBundle\Form\Transformer\ArrayEntityToArrayIdObjectTransformer;
-use Cinevi\AlmoxarifadoBundle\Form\Type\EquipamentoExtensionType;
 use Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent;
 
 class CalendarEventType extends AbstractType
@@ -23,6 +21,7 @@ class CalendarEventType extends AbstractType
     private $em;
     private $authorizationChecker;
     private $tokenStorageInterface;
+    private $id;
 
     public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorageInterface)
     {
@@ -94,14 +93,13 @@ class CalendarEventType extends AbstractType
         ;
 
         // FORM MODIFIER
-        $formModifier = function (FormInterface $form, \DateTime $startDate = null, \DateTime $endDate = null, $id = null)
-        {
+        $formModifier = function (FormInterface $form, \DateTime $startDate = null, \DateTime $endDate = null, $id = null) {
             $equipamentosArray = array();
             $equipamentosPorCategoriaArray = array();
 
             $equipamentoQB = $this->equipamentosValidos();
 
-            if(!empty($startDate) && !empty($endDate)) {
+            if (!empty($startDate) && !empty($endDate)) {
                 $equipamentoQB = $this->equipamentosPorData($form, $equipamentoQB, $startDate, $endDate, $id);
             }
 
@@ -119,30 +117,30 @@ class CalendarEventType extends AbstractType
                     'attr' => array(
                         'placeholder' => 'Selecione opções...',
                         'class' => 'select2-select',
-                    )
+                    ),
                 ))
             ;
         };
 
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($formModifier)
-            {
+            function (FormEvent $event) use ($formModifier) {
                 $form = $event->getForm();
                 $data = $event->getData();
+                $this->id = $event->getData()->getId();
 
-                $formModifier($form, $data->getStartDate(), $data->getEndDate(), $event->getData()->getId());
+                $formModifier($form, $data->getStartDate(), $data->getEndDate(), $this->id);
             }
         );
 
-        $builder->addEventListener(
-            FormEvents::SUBMIT,
-            function (FormEvent $event) use ($formModifier)
-            {
-                $startDate = $event->getForm()->get('startDate')->getData();
-                $endDate = $event->getForm()->get('endDate')->getData();
+        $builder->get('endDate')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) use ($formModifier) {
+                $form = $event->getForm()->getParent();
+                $startDate = $form->get('startDate')->getData();
+                $endDate = $form->get('endDate')->getData();
 
-                $formModifier($event->getForm(), $startDate, $endDate, $event->getData()->getId());
+                $formModifier($form, $startDate, $endDate, $this->id);
             }
         );
 
@@ -172,10 +170,10 @@ class CalendarEventType extends AbstractType
         // Para cada equipamento
         foreach ($equipamentoQB->getQuery()->getResult() as $equipamento) {
             // Veja se o campo users está vazio
-            if(!$equipamento->getUsers()->isEmpty()) {
-                foreach($equipamento->getUsers() as $user) {
+            if (!$equipamento->getUsers()->isEmpty()) {
+                foreach ($equipamento->getUsers() as $user) {
                     // Se não estiver, checa se o usuário está entre esses ou tem ROLE_DEPARTAMENTO
-                    if($user !== $this->tokenStorageInterface->getToken()->getUser() || !$this->authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
+                    if ($user !== $this->tokenStorageInterface->getToken()->getUser() || !$this->authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
                         // Se não tiver, exclui esse equipamento dos resultados
                         $equipamentoQB->andWhere('e.id != '.$result->getId());
                     }
@@ -191,27 +189,32 @@ class CalendarEventType extends AbstractType
         $interval = \DateInterval::createFromDateString('1 day');
         $fEquipamentos = $equipamentoQB->getQuery()->getResult();
 
-        if(!empty($id)) {
-            $reservas = $this->em->createQuery('SELECT cv FROM '.CalendarEvent::class.' cv WHERE cv.id != '.$id)->getResult();
+        if (!empty($id)) {
+            $reservas = $this->em->createQueryBuilder();
+            $reservas->select('cv')
+                    ->from('CineviAlmoxarifadoBundle:CalendarEvent', 'cv')
+                    ->where('cv.id != (:id)')
+                    ->setParameter('id', $id);
+
+            $reservas = $reservas->getQuery()->getResult();
         } else {
             $reservas = $this->em->getRepository('CineviAlmoxarifadoBundle:CalendarEvent')->findAll();
         }
 
-        if(!empty($fEquipamentos)) {
+        if (!empty($fEquipamentos)) {
             $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
 
-            foreach( $reservas as $reserva ) {
-                foreach( $reserva->getEquipamentos() as $rEquipamento ) {
-                    foreach( $fEquipamentos as $fEquipamento ) {
-                        if( $rEquipamento == $fEquipamento ) {
-
+            foreach ($reservas as $reserva) {
+                foreach ($reserva->getEquipamentos() as $rEquipamento) {
+                    foreach ($fEquipamentos as $fEquipamento) {
+                        if ($rEquipamento == $fEquipamento) {
                             $rStartDate = $reserva->getStartDate();
                             $rEndDate = $reserva->getEndDate();
                             $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
 
-                            foreach ( $rPeriod as $rDay ) {
-                                foreach ( $fPeriod as $fDay ) {
-                                    if($rDay == $fDay) {
+                            foreach ($rPeriod as $rDay) {
+                                foreach ($fPeriod as $fDay) {
+                                    if ($rDay == $fDay) {
                                         // Se bater, exclui esse equipamento dos resultados
                                         $equipamentoQB->andWhere('e.id != '.$rEquipamento->getId());
 
@@ -219,7 +222,6 @@ class CalendarEventType extends AbstractType
                                     }
                                 }
                             }
-
                         }
                     }
                 }

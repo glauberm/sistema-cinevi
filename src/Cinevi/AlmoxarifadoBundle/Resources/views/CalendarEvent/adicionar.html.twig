@@ -20,6 +20,8 @@
 
 {% block javascripts %}
     {{ parent() }}
-
     <script src="{{ asset('js/cinevi/almoxarifado/calendar-event.js') }}"></script>
+    <script>
+        calendarEventAjax('POST');
+    </script>
 {% endblock %}
