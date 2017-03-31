@@ -1,6 +1,6 @@
-var $date = $('#calendar_event_startDate, #calendar_event_endDate');
+var $date = $('#calendar_event_endDate');
 // When date gets selected ...
-$date.on("change dp.change", function() {
+$date.on("dp.change", function() {
     // ... retrieve the corresponding form.
     var $form = $(this).closest('form');
     // Simulate form data, but only include the selected sport value.
