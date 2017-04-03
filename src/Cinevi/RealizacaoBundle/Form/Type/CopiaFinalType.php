@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
 
@@ -294,7 +295,6 @@ class CopiaFinalType extends AbstractType
                 'label' => 'Apoiadores (empresas, instituições, órgãos)',
                 'required' => false,
             ))
-
             ->add('dcp', ChoiceType::class, array(
                 'label' => 'Foi feito DCP?',
                 'choices' => array(
@@ -309,6 +309,14 @@ class CopiaFinalType extends AbstractType
             ->add('fichaTecnica', FichaTecnicaType::class, array(
                 'label' => false,
             ))
+            ->add('linkVideo', UrlType::class, array(
+                'label' => 'Link para o vídeo no YouTube/Vimeo',
+                'required' => false,
+    	    ))
+            ->add('senhaVideo', TextType::class, array(
+                'label' => 'Senha para o vídeo',
+                'required' => false,
+    	    ))
         ;
 
         if($this->authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {

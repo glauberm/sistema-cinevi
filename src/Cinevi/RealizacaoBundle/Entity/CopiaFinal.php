@@ -123,6 +123,16 @@ class CopiaFinal
     protected $duracao;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     **/
+    protected $linkVideo;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     **/
+    protected $senhaVideo;
+
+    /**
      * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\FichaTecnica", cascade={"all"})
      **/
     protected $fichaTecnica;
@@ -131,7 +141,6 @@ class CopiaFinal
      * @ORM\Column(type="boolean")
      **/
     protected $confirmado;
-
 
 
     /**
@@ -666,10 +675,56 @@ class CopiaFinal
     /**
      * Get confirmado
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getConfirmado()
     {
         return $this->confirmado;
+    }
+
+    /**
+     * Set linkVideo
+     *
+     * @param string $linkVideo
+     * @return CopiaFinal
+     */
+    public function setLinkVideo($linkVideo)
+    {
+        $this->linkVideo = $linkVideo;
+
+        return $this;
+    }
+
+    /**
+     * Get linkVideo
+     *
+     * @return string 
+     */
+    public function getLinkVideo()
+    {
+        return $this->linkVideo;
+    }
+
+    /**
+     * Set senhaVideo
+     *
+     * @param string $senhaVideo
+     * @return CopiaFinal
+     */
+    public function setSenhaVideo($senhaVideo)
+    {
+        $this->senhaVideo = $senhaVideo;
+
+        return $this;
+    }
+
+    /**
+     * Get senhaVideo
+     *
+     * @return string 
+     */
+    public function getSenhaVideo()
+    {
+        return $this->senhaVideo;
     }
 }

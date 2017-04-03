@@ -85,6 +85,9 @@ Cinevi\RealizacaoBundle\Entity\CopiaFinal:
             - Valid: ~
         fichaTecnica:
             - Valid: ~
+        linkVideo:
+            - Url:
+                message: Por favor, informe um link válido.
         duracao:
             - Type:
                 type: integer

@@ -1,6 +1,5 @@
 # TO-DO
 
-- Entrando como aluno, eu não deveria poder clicar em "Usuários" e visualizar a lista de usuários. Isso deve estar habilitado só para "Departamento", "Almoxarifado" e "Administrador" verem (mas só "Departamento" e "Administrador" editarem)
 - No cadastro da cópia final campos não obrigatórios para link do Vimeo e senha.
 - Que a cópia final cadastrada depois do funcionário ter dado baixa gere um email para a comissão de festivais (morenoantonio.n@gmail.com)
 - Barrar além dos finais de semana os feriados deste ano

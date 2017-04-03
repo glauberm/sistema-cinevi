@@ -1,6 +1,10 @@
 {% include 'CineviRealizacaoBundle:Realizacao:form.html.twig' with {form: form.realizacao} %}
 
 <div class="row">
+    <div class="col-sm-6">{{ form_row(form.linkVideo) }}</div>
+    <div class="col-sm-6">{{ form_row(form.senhaVideo) }}</div>
+</div>
+<div class="row">
     <div class="col-sm-6">{{ form_row(form.projeto) }}</div>
     <div class="col-sm-6">{{ form_row(form.cromia) }}</div>
 </div>
