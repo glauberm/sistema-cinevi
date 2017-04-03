@@ -47,24 +47,17 @@ class CalendarEventController extends RestfulCrudController
 
     protected function posPersist($obj, EntityManager $em)
     {
-        $template = $this->bundleName.':email';
-
         $assunto = 'Nova Reserva de Equipamento: '.$obj->getTitle();
 
         $path = $this->generateUrl('get_'.$this->routeSuffix, array(
             'id' => $obj->getId(),
         ), true);
 
-        // Envia email para os emails no array
-        $emails = array(
-            $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail(),
-            'almoxarifadocinemauff@gmail.com',
-        );
+        // Email para o almoxarifado
+        $destinatario = 'almoxarifadocinemauff@gmail.com';
+        $template = $this->bundleName.':email';
 
-        foreach($emails as $email) {
-            $destinatario = $email;
-            $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
-        }
+        $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
 
         // Email para o usuário
         $destinatario = $obj->getUser()->getEmail();
@@ -79,6 +72,35 @@ class CalendarEventController extends RestfulCrudController
         $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
 
         $this->get('session')->getFlashBag()->set('success', 'Criação de reserva realizada com sucesso! Para editar ou excluir sua reserva, clique nela pelo calendário.');
+
+        return $obj;
+    }
+
+    protected function posMerge($obj, EntityManager $em)
+    {
+        $assunto = 'Edição na Reserva de Equipamento: '.$obj->getTitle();
+
+        $path = $this->generateUrl('get_'.$this->routeSuffix, array(
+            'id' => $obj->getId(),
+        ), true);
+
+        // Email para o almoxarifado
+        $destinatario = 'almoxarifadocinemauff@gmail.com';
+        $template = $this->bundleName.':email-edicao';
+
+        $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+
+        // Email para o usuário
+        $destinatario = $obj->getUser()->getEmail();
+        $template = $this->bundleName.':email-edicao-user';
+
+        $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+
+        // Email para o professor
+        $destinatario = $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail();
+        $template = $this->bundleName.':email-edicao-professor';
+
+        $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
 
         return $obj;
     }
