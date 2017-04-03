@@ -1,10 +1,8 @@
 # TO-DO
 
 - Barrar além dos finais de semana os feriados deste ano
-- (essa sugestão pode ser executada ao longo do semestre) Que quando a gente clica nas reservas os equipamentos reservados apareçam não em linha, e sim em coluna
 - Na casa do Rafael aquela opção de alterar o número de linhas visualizadas no item "equipamentos" funcionou, no teste no IACS não (no IACS usamos MAC, não sei se isso tem algo a ver)
 - (acho que essa aqui também não é pra curto prazo) Foi pedido pra que se pudesse ver os equipamentos por categoria antes da reserva
-- O nome da disciplina de Direção de Arte é Design Visual
 - Não tem logo da UFF na nossa página
 - Arrumar coisas para SEO
 
