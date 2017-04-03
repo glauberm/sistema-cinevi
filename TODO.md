@@ -1,8 +1,6 @@
 # TO-DO
 
-- Que a cópia final cadastrada depois do funcionário ter dado baixa gere um email para a comissão de festivais (morenoantonio.n@gmail.com)
 - Barrar além dos finais de semana os feriados deste ano
-- Quando há alteração na reserva o professor responsável pelo projeto recebe notificação?
 - (essa sugestão pode ser executada ao longo do semestre) Que quando a gente clica nas reservas os equipamentos reservados apareçam não em linha, e sim em coluna
 - Na casa do Rafael aquela opção de alterar o número de linhas visualizadas no item "equipamentos" funcionou, no teste no IACS não (no IACS usamos MAC, não sei se isso tem algo a ver)
 - (acho que essa aqui também não é pra curto prazo) Foi pedido pra que se pudesse ver os equipamentos por categoria antes da reserva
