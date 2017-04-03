@@ -75,7 +75,7 @@ Cinevi\RealizacaoBundle\Entity\Projeto:
                 minMessage: 'Por favor, selecione pelo menos um usuário.'
         disciplinaArte:
             - NotBlank:
-                message: 'Por favor, informe se já cursou(aram) a disciplina Direção de Arte.'
+                message: 'Por favor, informe se já cursou(aram) a disciplina Design Visual.'
 
 Cinevi\RealizacaoBundle\Entity\CopiaFinal:
     constraints:

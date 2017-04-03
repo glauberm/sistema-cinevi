@@ -130,7 +130,7 @@ class ProjetoType extends AbstractType
                 ),
             ))
             ->add('disciplinaArte', ChoiceType::class, array(
-                'label' => ' Já cursou(aram) a disciplina de Direção de Arte?',
+                'label' => ' Já cursou(aram) a disciplina de Design Visual?',
                 'choices' => array(
                     'Sim' => '1',
                 ),
