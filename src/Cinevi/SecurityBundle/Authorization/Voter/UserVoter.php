@@ -17,7 +17,11 @@ class UserVoter extends BaseVoter
 
     protected function view($obj, $user, TokenInterface $token)
     {
-        return true;
+        if ($this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO')) || $this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO')) || $obj === $user) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     protected function create($obj, $user, TokenInterface $token)
