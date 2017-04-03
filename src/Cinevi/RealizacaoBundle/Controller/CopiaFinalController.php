@@ -67,7 +67,6 @@ class CopiaFinalController extends RestfulCrudController
         foreach($obj->getFichaTecnica()->getEquipes() as $equipe) {
             foreach($equipe->getUsers() as $user) {
                 $emailsEquipes[] = $user->getEmail();
-                $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
             }
         }
 
@@ -103,9 +102,14 @@ class CopiaFinalController extends RestfulCrudController
                 'id' => $obj->getId()
             ), true);
 
-            $destinatario = $obj->getRealizacao()->getUser()->getEmail();
+            $emailsConfirmacao = array(
+                'morenoantonio.n@gmail.com',
+                $obj->getRealizacao()->getUser()->getEmail()
+            );
 
-            $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+            foreach($emailsConfirmacao as $emailConfirmacao) {
+                $this->sendMail($this->container, $obj, $path, $assunto, $emailConfirmacao, $template);
+            }
         }
 
         return $obj;

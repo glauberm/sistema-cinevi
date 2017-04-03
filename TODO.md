@@ -1,6 +1,5 @@
 # TO-DO
 
-- No cadastro da cópia final campos não obrigatórios para link do Vimeo e senha.
 - Que a cópia final cadastrada depois do funcionário ter dado baixa gere um email para a comissão de festivais (morenoantonio.n@gmail.com)
 - Barrar além dos finais de semana os feriados deste ano
 - Quando há alteração na reserva o professor responsável pelo projeto recebe notificação?
