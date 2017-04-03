@@ -6,6 +6,24 @@
 
 {% block dtdd %}
     <dt>Código</dt><dd>{{ item.title }}</dd>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Cód.</th>
+                    <th>Equipamento</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for equipamento in item.equipamentos %}
+                    <tr>
+                        <td>{{ equipamento.codigo }}</td>
+                        <td>{{ equipamento.nome }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <div class="row">
         <div class="col-sm-6"><dt>Usuário</dt><dd><a href="{{ path('get_user', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
         <div class="col-sm-6">
@@ -13,25 +31,6 @@
             <dd><a href="{{ path('get_projeto', {id:item.projeto.id}) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
         </div>
     </div>
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <thead>
-                <th>
-                    <td>Cód.</td>
-                    <td>Equipamento</td>
-                </th>
-            </thead>
-            <tbody>
-                {% for equipamento in item.equipamentos %}
-                    <tr>
-                        <td>{{ equipamento.title }}</td>
-                        <td>{{ equipamento.nome }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
     <div class="row">
         <div class="col-sm-6"><dt>Data de Início</dt><dd>{{ item.startDate|date('d/m/Y') }}</dd></div>
         <div class="col-sm-6"><dt>Data de Fim</dt><dd>{{ item.endDate|date('d/m/Y') }}</dd></div>

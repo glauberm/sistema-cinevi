@@ -22,6 +22,9 @@ Cinevi\AlmoxarifadoBundle\Entity\Equipamento:
         manutencao:
             - NotNull:
                 message: 'Por favor, informe se o equipamento está ou não em manutenção.'
+        atrasado:
+            - NotNull:
+                message: 'Por favor, informe se o equipamento está com a devolução atrasada ou não.'
 
 Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent:
     properties:

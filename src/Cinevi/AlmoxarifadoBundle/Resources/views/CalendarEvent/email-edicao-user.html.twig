@@ -1,0 +1,3 @@
+{% extends 'CineviAdminBundle::email.html.twig' %}
+
+{% set mensagem = "Você acaba de editar sua reserva de equipamento(s) de código <strong>" ~ item.title ~ "</strong>.<br/><br/>Para vê-la, acesse o link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}

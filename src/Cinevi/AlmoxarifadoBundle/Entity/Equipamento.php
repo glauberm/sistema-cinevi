@@ -339,4 +339,27 @@ class Equipamento
     {
         return $this->calendarEvents;
     }
+
+    /**
+     * Set atrasado
+     *
+     * @param boolean $atrasado
+     * @return Equipamento
+     */
+    public function setAtrasado($atrasado)
+    {
+        $this->atrasado = $atrasado;
+
+        return $this;
+    }
+
+    /**
+     * Get atrasado
+     *
+     * @return boolean 
+     */
+    public function getAtrasado()
+    {
+        return $this->atrasado;
+    }
 }

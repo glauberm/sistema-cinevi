@@ -90,6 +90,7 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
         $equipamento->setNome('TesteE');
         $equipamento->setCategoria($categoria);
         $equipamento->setManutencao('0');
+        $equipamento->setAtrasado('0');
         $equipamento->setPatrimonio('15455758');
         $equipamento->setNSerie('E15455758');
         $equipamento->setAcessorios('Lorem Ipsum Dolor Sit Amet');
