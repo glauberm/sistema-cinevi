@@ -90,6 +90,15 @@ class EquipamentoType extends AbstractType
                 'expanded' => true,
                 'choices_as_values' => true,
             ))
+            ->add('atrasado', ChoiceType::class, array(
+                'label' => 'Devolução Atrasada?',
+                'choices' => array(
+                    'Não' => '0',
+                    'Sim' => '1',
+                ),
+                'expanded' => true,
+                'choices_as_values' => true,
+            ))
             ->add('users', ChoiceType::class, array(
                 'label' => 'Quais usuários podem reservar este equipamento?',
                 'choices' => $usersArray,

@@ -21,6 +21,7 @@ class EquipamentoController extends RestfulCrudController
     protected $formClassName = EquipamentoType::class;
 
     private $manutencao;
+    private $atrasado;
 
     protected function listar($builder, EntityManager $em)
     {
@@ -30,6 +31,7 @@ class EquipamentoController extends RestfulCrudController
     protected function preEditar($obj, Form $form, EntityManager $em)
     {
         $this->manutencao = $obj->getManutencao();
+        $this->atrasado = $obj->getAtrasado();
 
         return $form;
     }
@@ -40,6 +42,24 @@ class EquipamentoController extends RestfulCrudController
             $template = $this->bundleName.':email';
 
             $assunto = 'Manutenção de Equipamento: '.$obj->getNome();
+
+            foreach($obj->getCalendarEvents() as $reserva) {
+                if($reserva->getStartDate() > new \DateTime()) {
+                    $path = $this->generateUrl('get_calendar_event', array(
+                        'id' => $reserva->getId()
+                    ), true);
+
+                    $destinatario = $reserva->getUser()->getEmail();
+
+                    $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
+                }
+            }
+        }
+
+        if($this->atrasado == false && $obj->getAtrasado() == true) {
+            $template = $this->bundleName.':email-atrasado';
+
+            $assunto = 'Devolução Atrasada de Equipamento: '.$obj->getNome();
 
             foreach($obj->getCalendarEvents() as $reserva) {
                 if($reserva->getStartDate() > new \DateTime()) {

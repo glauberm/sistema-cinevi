@@ -58,6 +58,11 @@ class Equipamento
     protected $manutencao;
 
     /**
+     * @ORM\Column(type="boolean")
+     **/
+    protected $atrasado;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Cinevi\SecurityBundle\Entity\User", cascade={"merge"})
      **/
     protected $users;
