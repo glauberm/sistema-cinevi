@@ -39,7 +39,7 @@ class LoadDataListener
 
             $equipamentos = array();
             foreach( $reserva->getEquipamentos() as $equipamento ) {
-                $equipamentos[] = $equipamento->getNome();
+                $equipamentos[] = '['.$equipamento->getCodigo().'] '.$equipamento->getNome();
             }
 
             $event->setTitle( $reserva->getTitle()." (".$reserva->getUser()->getUsername().") - ".implode(", ", $equipamentos) );
