@@ -5,6 +5,13 @@ Cinevi\AlmoxarifadoBundle\Entity\Categoria:
                 message: 'Por favor, informe o nome da categoria.'
 
 Cinevi\AlmoxarifadoBundle\Entity\Equipamento:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: codigo
+            message: 'Este código já está em uso.'
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: patrimonio
+            message: 'Este número de patrimônio já está em uso.'
     properties:
         categoria:
             - NotBlank:
