@@ -18,5 +18,9 @@
     <div class="col-md-6"><dt>Acessórios</dt><dd class="inherit">{{ item.acessorios ? item.acessorios : 'Não informado' }}</dd></div>
     <div class="col-md-6"><dt>Observações</dt><dd class="inherit">{{ item.obs ? item.obs : 'Não informado' }}</dd></div>
 </div>
-<dt>Em Manutenção?</dt><dd>{{ item.manutencao ? 'Sim' : 'Não' }}</dd>
+<div class="row">
+    <div class="col-md-6"><dt>Em Manutenção?</dt><dd>{{ item.manutencao ? 'Sim' : 'Não' }}</dd></div>
+    <div class="col-md-6"><dt>Devolução Atrasada?</dt><dd>{{ item.atrasado ? 'Sim' : 'Não' }}</dd></div>
+</div>
+
 {% endblock %}

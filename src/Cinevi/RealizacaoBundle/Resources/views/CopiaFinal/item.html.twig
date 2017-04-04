@@ -1,6 +1,16 @@
 {% include 'CineviRealizacaoBundle:Realizacao:item.html.twig' with {item: item.realizacao} %}
 
 <div class="row">
+    <div class="col-md-6"><dt>Link para o vídeo</dt>
+        {% if item.projeto is defined and item.projeto != null %}
+            <dd><a href="{{ item.linkVideo }}">{{ item.linkVideo }}</a></dd>
+        {% else %}
+            <dd>Não informado</dd>
+        {% endif %}
+    </div>
+    <div class="col-md-6"><dt>Senha do Vídeo</dt><dd>{{ item.senhaVideo ? item.senhaVideo : 'Não informada' }}</dd></div>
+</div>
+<div class="row">
     <div class="col-sm-6"><dt>Projeto</dt>
         {% if item.projeto is defined and item.projeto != null %}
             <dd><a href="{{ path('get_projeto', { 'id': item.projeto.id }) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
