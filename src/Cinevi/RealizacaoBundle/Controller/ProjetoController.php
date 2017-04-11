@@ -35,7 +35,7 @@ class ProjetoController extends RestfulCrudController
 
     protected function posEditar($obj, Form $form, EntityManager $em)
     {
-        $form = $this->checaCopiaFinal($form);
+        $form = $this->checaCopiaFinal($form, $obj);
 
         return $form;
     }
@@ -105,7 +105,7 @@ class ProjetoController extends RestfulCrudController
         return $obj;
     }
 
-    private function checaCopiaFinal($form)
+    private function checaCopiaFinal($form, $obj = null)
     {
         $user = $form->get('realizacao')->get('user')->getData();
 
@@ -119,7 +119,7 @@ class ProjetoController extends RestfulCrudController
             }
 
             foreach($projetosArray as $projeto) {
-                if(!$projeto->getCopiaFinal()) {
+                if($projeto != $obj && !$projeto->getCopiaFinal()) {
                     $mensagem = 'Antes de registrar um novo projeto com este responsável, você precisa registrar a cópia final do projeto '.$realizacao->getTitulo().'.';
                     $form->get('realizacao')->get('user')->addError(new FormError($mensagem));
                 }
