@@ -13,7 +13,7 @@ class ConfigurationType extends AbstractType
     {
         $builder
             ->add('reservasFechadas', ChoiceType::class, array(
-                'label' => 'Apenas professores podem reservar equipamentos?',
+                'label' => 'Apenas professores podem reservar equipamentos/espaços?',
                 'choices' => array(
                     'Sim' => '1',
                     'Não' => '0'

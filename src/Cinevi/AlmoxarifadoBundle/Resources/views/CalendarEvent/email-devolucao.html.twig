@@ -1,3 +1,3 @@
 {% extends 'CineviAdminBundle::email.html.twig' %}
 
-{% set mensagem = "Hoje é a data de <strong>devolução</strong> da reserva de equipamento de código <strong>" ~ item.title ~ "</strong> feita por <strong>" ~ item.user.username ~ "</strong>.<br/><br/>Para vê-la, acesse o link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}
+{% set mensagem = "Hoje é a data de <strong>devolução</strong> da reserva de equipamento/espaço de código <strong>" ~ item.title ~ "</strong> feita por <strong>" ~ item.user.username ~ "</strong>.<br/><br/>Para vê-la, acesse o link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}

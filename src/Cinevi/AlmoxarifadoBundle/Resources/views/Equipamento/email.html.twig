@@ -1,3 +1,3 @@
 {% extends 'CineviAdminBundle::email.html.twig' %}
 
-{% set mensagem = "O equipamento <strong>" ~ item.nome ~ "</strong> que você reservou foi marcado para a manutenção e provavelmente não poderá ser retirado na data da sua reserva.<br/><br/>Para vê-la, acesse o link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}
+{% set mensagem = "O equipamento/espaço <strong>" ~ item.nome ~ "</strong> que você reservou foi marcado para a manutenção e provavelmente não poderá ser retirado na data da sua reserva.<br/><br/>Para vê-la, acesse o link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}
