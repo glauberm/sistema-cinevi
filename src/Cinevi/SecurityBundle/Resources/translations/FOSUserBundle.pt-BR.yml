@@ -11,13 +11,13 @@ group:
         deleted: 'O grupo foi removido'
 security:
     login:
-        username: Usuário
+        username: Nome Completo
         password: Senha
         remember_me: 'Permanecer conectado'
         submit: Entrar
 profile:
     show:
-        username: Usuário
+        username: Nome Completo
         email: Email
     edit:
         submit: Atualizar
@@ -41,7 +41,7 @@ resetting:
     password_already_requested: 'Este usuário já solicitou uma senha nas últimas 24 horas.'
     check_email: 'Foi enviado um email para %email%. Para recuperar a sua senha, acesse o link da mensagem.'
     request:
-        username: 'Usuário ou email'
+        username: 'Nome Completo ou Email'
         submit: 'Recuperar senha'
     reset:
         submit: 'Alterar senha'
@@ -57,7 +57,7 @@ layout:
     logged_in_as: 'Conectado como %username%'
 form:
     group_name: 'Nome do Grupo'
-    username: Usuário
+    username: Nome Completo
     email: Email
     current_password: 'Senha atual'
     password: Senha

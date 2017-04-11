@@ -23,7 +23,7 @@ class ProjetoController extends RestfulCrudController
 
     protected function listar($builder, EntityManager $em)
     {
-        return $builder->join('item.realizacao', 'r');
+        return $builder->join('item.realizacao', 'r')->leftJoin('r.user', 'u');
     }
 
     protected function posCriar(Form $form, EntityManager $em)

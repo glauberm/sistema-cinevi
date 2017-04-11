@@ -12,10 +12,14 @@
 
 {% block thead %}
     <th>{{ knp_pagination_sortable(pagination, 'Título', 'r.titulo') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Usuário', 'u.username') }}</th>
 {% endblock %}
 
 {% block tbody %}
     <td>
         <a href="{{ path('get_projeto', { 'id': item.id }) }}">{{ item.realizacao.titulo }}</a>
+    </td>
+    <td>
+        <a href="{{ path('get_user', { 'id': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
     </td>
 {% endblock %}
