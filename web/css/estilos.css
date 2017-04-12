@@ -326,6 +326,11 @@ a.pular-para-conteudo:active {
     transform: rotate(180deg);
 }
 
+.icone-uff {
+    max-width: 56px;
+    height: auto;
+}
+
 /* TO-MANY */
 .to-many-adicionar {
     margin-bottom: 20px;
