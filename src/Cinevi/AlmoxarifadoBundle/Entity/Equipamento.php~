@@ -18,7 +18,7 @@ class Equipamento
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Categoria", cascade={"merge"})
+     * @ORM\ManyToOne(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Categoria", cascade={"merge"}, inversedBy="equipamentos")
      **/
     protected $categoria;
 
@@ -338,5 +338,28 @@ class Equipamento
     public function getCalendarEvents()
     {
         return $this->calendarEvents;
+    }
+
+    /**
+     * Set atrasado
+     *
+     * @param boolean $atrasado
+     * @return Equipamento
+     */
+    public function setAtrasado($atrasado)
+    {
+        $this->atrasado = $atrasado;
+
+        return $this;
+    }
+
+    /**
+     * Get atrasado
+     *
+     * @return boolean
+     */
+    public function getAtrasado()
+    {
+        return $this->atrasado;
     }
 }

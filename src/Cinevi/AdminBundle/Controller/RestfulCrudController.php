@@ -108,7 +108,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
     /**
      * Encontra e mostra uma entidade.
      */
-    public function getAction($id)
+    public function getAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 

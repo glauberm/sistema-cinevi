@@ -18,7 +18,7 @@ class Equipamento
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Categoria", cascade={"merge"})
+     * @ORM\ManyToOne(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Categoria", cascade={"merge"}, inversedBy="equipamentos")
      **/
     protected $categoria;
 
@@ -356,7 +356,7 @@ class Equipamento
     /**
      * Get atrasado
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getAtrasado()
     {

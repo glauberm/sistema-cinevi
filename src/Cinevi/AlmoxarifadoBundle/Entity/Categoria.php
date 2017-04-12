@@ -22,6 +22,10 @@ class Categoria
      **/
     protected $nome;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Equipamento", cascade={"merge"}, mappedBy="categoria")
+     **/
+    protected $equipamentos;
 
     /**
      * Get id
@@ -54,5 +58,46 @@ class Categoria
     public function getNome()
     {
         return $this->nome;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->equipamentos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add equipamentos
+     *
+     * @param \Cinevi\AlmoxarifadoBundle\Entity\Equipamento $equipamentos
+     * @return Categoria
+     */
+    public function addEquipamento(\Cinevi\AlmoxarifadoBundle\Entity\Equipamento $equipamentos)
+    {
+        $this->equipamentos[] = $equipamentos;
+
+        return $this;
+    }
+
+    /**
+     * Remove equipamentos
+     *
+     * @param \Cinevi\AlmoxarifadoBundle\Entity\Equipamento $equipamentos
+     */
+    public function removeEquipamento(\Cinevi\AlmoxarifadoBundle\Entity\Equipamento $equipamentos)
+    {
+        $this->equipamentos->removeElement($equipamentos);
+    }
+
+    /**
+     * Get equipamentos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEquipamentos()
+    {
+        return $this->equipamentos;
     }
 }
