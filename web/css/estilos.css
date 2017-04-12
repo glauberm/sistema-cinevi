@@ -113,6 +113,7 @@ a.pular-para-conteudo:active {
 
 .header .a-logo {
     display: block;
+    max-width: 175px;
 }
 
 .header .logo {

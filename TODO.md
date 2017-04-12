@@ -1,6 +1,5 @@
 # TO-DO
 
-- (acho que essa aqui também não é pra curto prazo) Foi pedido pra que se pudesse ver os equipamentos por categoria antes da reserva
 - Não tem logo da UFF na nossa página
 - Arrumar coisas para SEO
 
