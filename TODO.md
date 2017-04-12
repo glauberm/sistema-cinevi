@@ -1,8 +1,5 @@
 # TO-DO
 
-- Não tem logo da UFF na nossa página
-- Arrumar coisas para SEO
-
 ## Da reunião
 - Ações múltiplas de confirmação na tabela dos usuários - Confirmação
 - Qualquer usuário pode cadastrar Função (pendente aprovação) *** COLOCAR OPÇÕES PARA OS USUÁRIOS COMPLETAREM TODAS AS OPÇÕES DAS CÓPIAS FINAIS ***
