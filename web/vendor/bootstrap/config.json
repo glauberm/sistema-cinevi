@@ -16,7 +16,7 @@
     "@link-color": "@brand-primary",
     "@link-hover-color": "lighten(@link-color, 15%)",
     "@link-hover-decoration": "none",
-    "@font-family-sans-serif": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif",
+    "@font-family-sans-serif": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
     "@font-family-serif": "Georgia, \"Times New Roman\", Times, serif",
     "@font-family-monospace": "Menlo, Monaco, Consolas, \"Courier New\", monospace",
     "@font-family-base": "@font-family-sans-serif",
@@ -421,5 +421,5 @@
     "collapse.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=dc57caa192c47288eae356bf4370327f"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=80241bb469f2e0c82454c81a4a6f014e"
 }
