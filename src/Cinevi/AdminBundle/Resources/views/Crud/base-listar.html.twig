@@ -50,12 +50,12 @@
         </div>
         <div class="pull-right text-right">
             <form name="num_resultados" method="get" novalidate="novalidate" class="navbar-form navbar-right">
-                <div class="form-group">
-                    <label class="control-label" for="numResultados">Nº de resultados</label>
+                <div class="form-group form-group-sm">
+                    <label class="control-label" for="numResultados"><small class="text-muted">Nº de resultados</small></label>
 
                     <input id="num_resultados_numResultados" name="numResultados" placeholder="10" class="form-control" type="number" {% if numResultados is defined and numResultados != null %} value="{{ numResultados }}" {% endif %}>
                 </div>
-                <button type="submit" class="btn btn-warning">OK</button>
+                <button type="submit" class="btn btn-warning btn-sm">OK</button>
             </form>
         </div>
     </div>
