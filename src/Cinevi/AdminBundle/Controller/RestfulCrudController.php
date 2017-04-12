@@ -34,6 +34,7 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
         $em = $this->getDoctrine()->getManager();
 
         $repository = $em->getRepository($this->bundleName);
+
         $configuration = $this->getConfiguration($em);
 
         // Número de resultados
@@ -62,17 +63,15 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $numResultados
         );
 
-        // $listarForm = $this->getForm($builder->getQuery()->getResult(), ListarType::class, 'DELETE', 'delete_'.$this->routeSuffix, array('id' => $id));
-
         $view = View::create();
         $view
             ->setData($pagination)
             ->setTemplate($this->bundleName.':'.$this->listarTemplate)
             ->setTemplateVar('pagination')
-            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($numResultados, $configuration) {
+            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($configuration, $numResultados) {
                 return array(
                     'configuration' => $configuration,
-                    'numResultados' => $numResultados,
+                    'numResultados' => $numResultados
                 );
             })
         ;

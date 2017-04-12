@@ -1,10 +1,5 @@
 {% extends 'CineviAdminBundle::base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <noscript><style> .jsonly { display: none } </style></noscript>
-{% endblock %}
-
 {% block mainActions %}
     <a class="navbar-brand btn btn-link" href="{{ path('index') }}">
         {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
@@ -48,39 +43,21 @@
     </div>
 
     <div class="clearfix">
-        {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
-            <div class="pull-left text-left csv">
-                <a target="_blank" href="{{ routeCsv }}" class="btn btn-warning btn-sm">Exportar .CSV</a>
-            </div>
-        {% endif %}
-        <div class="pull-right text-right jsonly">
-            <form class="form-inline">
-                <div class="form-group form-group-sm">
-                    <label class="control-label" for="numResultados">Nº de Linhas</label>
-                    <select name="numResultados" id="numResultados" class="form-control input-sm inline-block width-auto">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="250">250</option>
-                        <option value="500">500</option>
-                    </select>
-                    <label class="control-label">Total de Itens: {{ pagination.getTotalItemCount }}</label>
+        <div class="pull-left text-left csv">
+            {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+                <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Exportar .CSV</a>
+            {% endif %}
+        </div>
+        <div class="pull-right text-right">
+            <form name="num_resultados" method="get" action="/app_dev.php/s/categorias" novalidate="novalidate" class="navbar-form navbar-right">
+                <div class="form-group">
+                    <label class="control-label" for="numResultados">Nº de resultados</label>
+
+                    <input id="num_resultados_numResultados" name="numResultados" placeholder="10" class="form-control" type="number" {% if numResultados is defined and numResultados != null %} value="{{ numResultados }}" {% endif %}>
                 </div>
+                <button type="submit" class="btn btn-warning">OK</button>
             </form>
         </div>
     </div>
 
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        $('#numResultados').val({{ numResultados }});
-
-        $('#numResultados').change(function () {
-            let src = $(this).val();
-            location.href = '?numResultados=' + src;
-        });
-    </script>
 {% endblock %}
