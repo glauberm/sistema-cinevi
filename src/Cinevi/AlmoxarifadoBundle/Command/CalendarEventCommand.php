@@ -33,7 +33,7 @@ class CalendarEventCommand extends BaseCommand
             if($intervalStartDate == -1) {
                 $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-retirada-user-antes';
 
-                $assunto = 'Retirada de Equipamento(s)/Espaço(s): '.$reserva->getTitle();
+                $assunto = 'Retirada de Reserváveis: '.$reserva->getTitle();
 
                 $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
                     'id' => $reserva->getId(),
@@ -46,7 +46,7 @@ class CalendarEventCommand extends BaseCommand
                 // Email para o usuário
                 $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-retirada-user-antes';
 
-                $assunto = 'Retirada de Equipamento(s)/Espaço(s): '.$reserva->getTitle();
+                $assunto = 'Retirada de Reserváveis: '.$reserva->getTitle();
 
                 $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
                     'id' => $reserva->getId(),
@@ -63,7 +63,7 @@ class CalendarEventCommand extends BaseCommand
             if($intervalStartDate == 0) {
                 $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-retirada';
 
-                $assunto = 'Retirada de Equipamento(s)/Espaço(s): '.$reserva->getTitle();
+                $assunto = 'Retirada de Reserváveis: '.$reserva->getTitle();
 
                 $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
                     'id' => $reserva->getId(),
@@ -76,7 +76,7 @@ class CalendarEventCommand extends BaseCommand
                 // Email para o usuário
                 $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-retirada-user';
 
-                $assunto = 'Retirada de Equipamento(s)/Espaço(s): '.$reserva->getTitle();
+                $assunto = 'Retirada de Reserváveis: '.$reserva->getTitle();
 
                 $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
                     'id' => $reserva->getId(),
@@ -96,7 +96,7 @@ class CalendarEventCommand extends BaseCommand
             if($intervalEndDate == 0) {
                 $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-devolucao';
 
-                $assunto = 'Devolução de Equipamento(s)/Espaço(s): '.$reserva->getTitle();
+                $assunto = 'Devolução de Reserváveis: '.$reserva->getTitle();
 
                 $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
                     'id' => $reserva->getId(),
@@ -109,7 +109,7 @@ class CalendarEventCommand extends BaseCommand
                 // Email para o usuário
                 $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-devolucao-user';
 
-                $assunto = 'Devolução de Equipamento(s)/Espaço(s): '.$reserva->getTitle();
+                $assunto = 'Devolução de Reserváveis: '.$reserva->getTitle();
 
                 $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
                     'id' => $reserva->getId(),
@@ -125,7 +125,7 @@ class CalendarEventCommand extends BaseCommand
             if($intervalEndDate == 1) {
                 $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-devolucao-depois';
 
-                $assunto = 'Devolução de Equipamento(s)/Espaço(s): '.$reserva->getTitle();
+                $assunto = 'Devolução de Reserváveis: '.$reserva->getTitle();
 
                 $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
                     'id' => $reserva->getId(),
@@ -138,7 +138,7 @@ class CalendarEventCommand extends BaseCommand
                 // Email para o usuário
                 $template = 'CineviAlmoxarifadoBundle:CalendarEvent:email-devolucao-user-depois';
 
-                $assunto = 'Devolução de Equipamento(s)/Espaço(s): '.$reserva->getTitle();
+                $assunto = 'Devolução de Reserváveis: '.$reserva->getTitle();
 
                 $path = $this->getContainer()->get('router')->generate('get_calendar_event', array(
                     'id' => $reserva->getId(),

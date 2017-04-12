@@ -109,7 +109,7 @@ class CalendarEventType extends AbstractType
 
             $form
                 ->add('equipamentos', EquipamentoExtensionType::class, array(
-                    'label' => 'Equipamento(s) Disponíveis',
+                    'label' => 'Equipamento(s)/Espaço(s) Disponíveis',
                     'choices' => $equipamentosPorCategoriaArray,
                     'invalid_message' => 'Este não é um valor válido.',
                     'multiple' => true,

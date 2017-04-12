@@ -100,7 +100,7 @@ class EquipamentoType extends AbstractType
                 'choices_as_values' => true,
             ))
             ->add('users', ChoiceType::class, array(
-                'label' => 'Quais usuários podem reservar este equipamento/espaço?',
+                'label' => 'Quais usuários podem reservar este item?',
                 'choices' => $usersArray,
                 'invalid_message' => 'Este não é um valor válido.',
                 'required' => false,

@@ -44,10 +44,10 @@
                         {% include 'CineviAdminBundle:SVG:reservas.html.twig' %}Reservas
                     </a>
                     <a class="list-group-item {% if app.request.get('_route') == 'get_equipamentos' or app.request.get('_route') == 'new_equipamento' or app.request.get('_route') == 'get_equipamento' or app.request.get('_route') == 'edit_equipamento' or app.request.get('_route') == 'post_equipamento' or app.request.get('_route') == 'put_equipamento' %}active{% endif %}" href="{{ path('get_equipamentos') }}">
-                        {% include 'CineviAdminBundle:SVG:equipamentos.html.twig' %}Equipamentos/Espaços
+                        {% include 'CineviAdminBundle:SVG:equipamentos.html.twig' %}Reserváveis
                     </a>
                     <a class="list-group-item {% if app.request.get('_route') == 'get_categorias' or app.request.get('_route') == 'new_categoria' or app.request.get('_route') == 'get_categoria' or app.request.get('_route') == 'edit_categoria' or app.request.get('_route') == 'post_categoria' or app.request.get('_route') == 'put_categoria' %}active{% endif %}" href="{{ path('get_categorias') }}">
-                        {% include 'CineviAdminBundle:SVG:categorias.html.twig' %}Categorias de Equipamentos/Espaços
+                        {% include 'CineviAdminBundle:SVG:categorias.html.twig' %}Categorias de Reserváveis
                     </a>
                 </div>
             </div>

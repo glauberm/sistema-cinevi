@@ -50,7 +50,7 @@ class CalendarEventController extends RestfulCrudController
 
     protected function posPersist($obj, EntityManager $em)
     {
-        $assunto = 'Nova Reserva de Equipamento/Espaço: '.$obj->getTitle();
+        $assunto = 'Nova Reserva: '.$obj->getTitle();
 
         $path = $this->generateUrl('get_'.$this->routeSuffix, array(
             'id' => $obj->getId(),
@@ -81,7 +81,7 @@ class CalendarEventController extends RestfulCrudController
 
     protected function posMerge($obj, EntityManager $em)
     {
-        $assunto = 'Edição na Reserva de Equipamento/Espaço: '.$obj->getTitle();
+        $assunto = 'Edição de Reserva: '.$obj->getTitle();
 
         $path = $this->generateUrl('get_'.$this->routeSuffix, array(
             'id' => $obj->getId(),

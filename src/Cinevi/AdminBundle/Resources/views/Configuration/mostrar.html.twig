@@ -5,6 +5,6 @@
 {% set routeEditar = path('edit_configuration', { 'id': item.id }) %}
 
 {% block dtdd %}
-    <dt>Apenas professores podem reservar equipamentos/espaços?</dt>
+    <dt>Apenas professores podem realizar reservas?</dt>
     <dd>{{ item.reservasFechadas ? 'Sim' : 'Não' }}</dd>
 {% endblock %}

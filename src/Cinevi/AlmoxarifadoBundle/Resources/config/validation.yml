@@ -15,23 +15,23 @@ Cinevi\AlmoxarifadoBundle\Entity\Equipamento:
     properties:
         categoria:
             - NotBlank:
-                message: 'Por favor, informe a categoria do equipamento/espaço.'
+                message: 'Por favor, informe a categoria do reservável.'
         codigo:
             - NotBlank:
-                message: 'Por favor, informe o código do equipamento/espaço.'
+                message: 'Por favor, informe o código do reservável.'
         nome:
             - NotBlank:
-                message: 'Por favor, informe o nome do equipamento/espaço.'
+                message: 'Por favor, informe o nome do reservável.'
         patrimonio:
             - Type:
                 type: integer
                 message: Por favor, informe apenas números.
         manutencao:
             - NotNull:
-                message: 'Por favor, informe se o equipamento/espaço está ou não em manutenção.'
+                message: 'Por favor, informe se o reservável está ou não em manutenção.'
         atrasado:
             - NotNull:
-                message: 'Por favor, informe se o equipamento/espaço está com a devolução atrasada ou não.'
+                message: 'Por favor, informe se o reservável está com a devolução atrasada ou não.'
 
 Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent:
     properties:
@@ -54,4 +54,4 @@ Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent:
         equipamentos:
             - Count:
                 min: 1
-                minMessage: 'Por favor, selecione pelo menos um equipamento/espaço.'
+                minMessage: 'Por favor, selecione pelo menos um item.'
