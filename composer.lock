@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d3f8c53678133c57ebd7a168aae6c2a6",
-    "content-hash": "4a6e3271810833d186e4d33516a97fae",
+    "hash": "8958c24bb9e387c7298681f89bc620e9",
+    "content-hash": "96bc1db0bc033fbd3c20e18101b3dfe5",
     "packages": [
         {
             "name": "ancarebeca/full-calendar-bundle",
@@ -57,30 +57,32 @@
             "time": "2015-08-23 18:46:49"
         },
         {
-            "name": "checkdomain/holiday",
-            "version": "2.1.0",
+            "name": "azuyalabs/yasumi",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/checkdomain/Holiday.git",
-                "reference": "fba86aa8cfa032a7115133778011ae99c3816051"
+                "url": "https://github.com/azuyalabs/yasumi.git",
+                "reference": "c0f2af9ec9da4a3e9f63582e1029c38fcc483a5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/checkdomain/Holiday/zipball/fba86aa8cfa032a7115133778011ae99c3816051",
-                "reference": "fba86aa8cfa032a7115133778011ae99c3816051",
+                "url": "https://api.github.com/repos/azuyalabs/yasumi/zipball/c0f2af9ec9da4a3e9f63582e1029c38fcc483a5e",
+                "reference": "c0f2af9ec9da4a3e9f63582e1029c38fcc483a5e",
                 "shasum": ""
             },
             "require": {
-                "ext-calendar": "*",
-                "php": ">=5.3"
+                "php": ">=5.6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "friendsofphp/php-cs-fixer": "~1.13",
+                "fzaninotto/faker": "~1.6",
+                "mikey179/vfsstream": "~1.6",
+                "phpunit/phpunit": "~5.7"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Checkdomain\\Holiday": "lib/"
+                "psr-4": {
+                    "Yasumi\\": "src/Yasumi/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -89,16 +91,23 @@
             ],
             "authors": [
                 {
-                    "name": "Benjamin Paap",
-                    "email": "b.paap@checkdomain.de",
-                    "homepage": "http://checkdomain.de"
+                    "name": "Sacha Telgenhof",
+                    "email": "me@sachatelgenhof.nl"
                 }
             ],
-            "description": "Checkdomain/Holiday provides a simple class to get holidays for a specified country",
+            "description": "Yasumi is an easy PHP Library for calculating national holidays.",
             "keywords": [
-                "holiday"
+                "Bank",
+                "calculation",
+                "calendar",
+                "celebration",
+                "date",
+                "holiday",
+                "holidays",
+                "national",
+                "time"
             ],
-            "time": "2016-12-19 11:04:59"
+            "time": "2017-02-07 00:26:55"
         },
         {
             "name": "doctrine/annotations",

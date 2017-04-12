@@ -10,6 +10,7 @@ use Cinevi\AdminBundle\Controller\RestfulCrudController;
 use Cinevi\AdminBundle\Mailer\MailerTrait;
 use Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent;
 use Cinevi\AlmoxarifadoBundle\Form\Type\CalendarEventType;
+use Yasumi\Yasumi;
 
 class CalendarEventController extends RestfulCrudController
 {
@@ -24,6 +25,7 @@ class CalendarEventController extends RestfulCrudController
     protected function posCriar(Form $form, EntityManager $em)
     {
         $form = $this->checaFimDeSemana($form);
+        $form = $this->checaFeriado($form);
         $form = $this->checaIntervalo($form);
 
         $reservas = $em->getRepository($this->repositoryName)->findAll();
@@ -36,6 +38,7 @@ class CalendarEventController extends RestfulCrudController
     protected function posEditar($obj, Form $form, EntityManager $em)
     {
         $form = $this->checaFimDeSemana($form);
+        $form = $this->checaFeriado($form);
         $form = $this->checaIntervalo($form);
 
         $reservas = $em->createQuery('SELECT c FROM '.$this->className.' c WHERE c.id != '.$obj->getId())->getResult();
@@ -119,6 +122,37 @@ class CalendarEventController extends RestfulCrudController
         if(!empty($endDate) && date('N', $endDate->format('U')) >= 6) {
             $mensagemEndDate = 'A data de devolução não pode cair nos finais de semana.';
             $form->get('endDate')->addError(new FormError($mensagemEndDate));
+        }
+
+        return $form;
+    }
+
+    private function checaFeriado($form)
+    {
+        $startDate = $form->get('startDate')->getData();
+
+        if(!empty($startDate)) {
+            $startDateYear = $startDate->format('Y');
+            $startDateHolidays = Yasumi::create('Brazil', $startDateYear);
+
+            foreach($startDateHolidays->getHolidayDates() as $holiday) {
+                if($holiday == $startDate->format('Y-m-d')) {
+                    $form->get('startDate')->addError(new FormError('A data de retirada não pode cair em um feriado.'));
+                }
+            }
+        }
+
+        $endDate = $form->get('endDate')->getData();
+
+        if(!empty($endDate)) {
+            $endDateYear = $endDate->format('Y');
+            $endDateHolidays = Yasumi::create('Brazil', $endDateYear);
+
+            foreach($endDateHolidays->getHolidayDates() as $holiday) {
+                if($holiday == $endDate->format('Y-m-d')) {
+                    $form->get('endDate')->addError(new FormError('A data de devolução não pode cair em um feriado.'));
+                }
+            }
         }
 
         return $form;
