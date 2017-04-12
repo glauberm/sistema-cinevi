@@ -19,8 +19,39 @@ class CategoriaController extends RestfulCrudController
     protected $routeSuffix = 'categoria';
     protected $formClassName = CategoriaType::class;
 
+    /*
+     * Sobreescrevendo com a mesma coisa
+     * porque deu erro do id virar 'new'
+     * no getAction() caso não sobreescrit
+    */
+    public function newAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $obj = new $this->className();
+
+        $configuration = $this->getConfiguration($em);
+
+        $form = $this->getForm($obj, $this->formClassName, 'POST', 'post_'.$this->routeSuffix);
+
+        $view = View::create();
+        $view
+            ->setData($form->createView())
+            ->setTemplate($this->bundleName.':'.$this->criarTemplate)
+            ->setTemplateVar('form')
+            ->setTemplateData(function (ViewHandlerInterface $viewHandler, View $view) use ($obj, $configuration) {
+                return array(
+                    'item' => $obj,
+                    'configuration' => $configuration,
+                );
+            })
+        ;
+
+        return $view;
+    }
+
     /**
-     * Encontra e mostra uma entidade.
+     * Sobreescrevendo o método para adicionar a listagem de equipamentos
      */
     public function getAction(Request $request, $id)
     {
@@ -39,7 +70,7 @@ class CategoriaController extends RestfulCrudController
         // Chama o método a ser sobreescrito mostrar()
         $obj = $this->mostrar($obj);
 
-        /* PAGINADOR DE EQUIPAMENTOS */
+        // PAGINADOR DE EQUIPAMENTOS
         // Número de resultados
         if ($request->query->get('numResultados')) {
             $numResultados = $request->query->get('numResultados');
