@@ -6,6 +6,20 @@
 
 {% block dtdd %}
     <dt>Código</dt><dd>{{ item.title }}</dd>
+
+    <div class="row">
+        <div class="col-sm-6"><dt>Usuário</dt><dd><a href="{{ path('get_user', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
+        <div class="col-sm-6">
+            <dt>Projeto</dt>
+            <dd><a href="{{ path('get_projeto', {id:item.projeto.id}) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6"><dt>Data de Início</dt><dd>{{ item.startDate|date('d/m/Y') }}</dd></div>
+        <div class="col-sm-6"><dt>Data de Fim</dt><dd>{{ item.endDate|date('d/m/Y') }}</dd></div>
+    </div>
+    
+    <h2 id="reservaveis">Reserváveis</h2>
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
@@ -24,15 +38,5 @@
             </tbody>
         </table>
     </div>
-    <div class="row">
-        <div class="col-sm-6"><dt>Usuário</dt><dd><a href="{{ path('get_user', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
-        <div class="col-sm-6">
-            <dt>Projeto</dt>
-            <dd><a href="{{ path('get_projeto', {id:item.projeto.id}) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6"><dt>Data de Início</dt><dd>{{ item.startDate|date('d/m/Y') }}</dd></div>
-        <div class="col-sm-6"><dt>Data de Fim</dt><dd>{{ item.endDate|date('d/m/Y') }}</dd></div>
-    </div>
+
 {% endblock %}

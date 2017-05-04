@@ -1,12 +1,13 @@
 # TO-DO
 
 ## Da reunião
+- Telefone para string e máscara de telefone
+- Máscara de dinheiro
+- Email das reservas não está chegando - adicionar lista dos equipamentos no email também. Colocar lista com paginador na página de mostrar reservas e se pá colocar um exportar .csv também.
+
+## Depois
 - Ações múltiplas de confirmação na tabela dos usuários - Confirmação
 - Qualquer usuário pode cadastrar Função (pendente aprovação) *** COLOCAR OPÇÕES PARA OS USUÁRIOS COMPLETAREM TODAS AS OPÇÕES DAS CÓPIAS FINAIS ***
-- Nº de Linhas na tabela pelo php ao invés de javascript
-
-## Cópias Finais
-- Máscara de dinheiro
 - Além das fotos still, link (com possível senha) do filme
 - VichUploaderBundle para os MateriaisDivulgacao (add em CopiaFinal)
 
