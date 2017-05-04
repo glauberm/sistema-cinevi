@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinevi\SecurityBundle\Validation;
+namespace Cinevi\RealizacaoBundle\Validation;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;

@@ -14,16 +14,18 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
+use Cinevi\RealizacaoBundle\Validation\CopiaFinalValidationGroupResolver;
 
 class CopiaFinalType extends AbstractType
 {
     private $em;
     private $authorizationChecker;
 
-    public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker, CopiaFinalValidationGroupResolver $groupResolver)
     {
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
+        $this->groupResolver = $groupResolver;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -344,6 +346,7 @@ class CopiaFinalType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Cinevi\RealizacaoBundle\Entity\CopiaFinal',
+            'validation_groups' => $this->groupResolver,
         ));
     }
 }
