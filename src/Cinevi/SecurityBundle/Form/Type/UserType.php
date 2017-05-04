@@ -43,7 +43,7 @@ class UserType extends AbstractType
                     'class' => 'input-number'
                 )
             ))
-            ->add('telefone', IntegerType::class, array(
+            ->add('telefone', TextType::class, array(
                 'label' => 'Telefone',
                 'attr' => array(
                     'class' => 'input-tel',
