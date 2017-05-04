@@ -1,7 +1,7 @@
 # TO-DO
 
 ## Da reunião
-- Telefone para string e máscara de telefone
+- Corrigir Cópia Final
 - Máscara de dinheiro
 - Email das reservas não está chegando - adicionar lista dos equipamentos no email também. Colocar lista com paginador na página de mostrar reservas e se pá colocar um exportar .csv também.
 

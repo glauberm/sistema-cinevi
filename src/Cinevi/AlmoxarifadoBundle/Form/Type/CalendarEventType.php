@@ -186,7 +186,7 @@ class CalendarEventType extends AbstractType
 
     private function equipamentosPorData($form, $equipamentoQB, \DateTime $fStartDate, \DateTime $fEndDate, $id = null)
     {
-        $interval = \DateInterval::createFromDateString('1 day');
+        $interval = new \DateInterval('P1D');
         $fEquipamentos = $equipamentoQB->getQuery()->getResult();
 
         if (!empty($id)) {
@@ -207,16 +207,32 @@ class CalendarEventType extends AbstractType
             foreach ($reservas as $reserva) {
                 foreach ($reserva->getEquipamentos() as $rEquipamento) {
                     foreach ($fEquipamentos as $fEquipamento) {
+                        $arrayRPeriod = array();
+                        $arrayFPeriod = array();
+                        
                         if ($rEquipamento == $fEquipamento) {
                             $rStartDate = $reserva->getStartDate();
                             $rEndDate = $reserva->getEndDate();
                             $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
 
-                            if ($rPeriod == $fPeriod) {
-                                // Se bater, exclui esse equipamento dos resultados
-                                $equipamentoQB->andWhere('e.id != '.$rEquipamento->getId());
+                            foreach ($rPeriod as $rDay) {
+                                $arrayRPeriod[] = $rDay;
+                            }
 
-                                break 3;
+                            foreach ($fPeriod as $fDay) {
+                                $arrayFPeriod[] = $fDay;
+                            }
+
+                            foreach ($arrayRPeriod as $rDay) {
+                                foreach ($arrayFPeriod as $fDay) {
+
+                                    if ($rDay == $fDay) {
+                                        // Se bater, exclui esse equipamento dos resultados
+                                        $equipamentoQB->andWhere('e.id != '.$rEquipamento->getId());
+
+                                        break 3;
+                                    }
+                                }
                             }
                         }
                     }
