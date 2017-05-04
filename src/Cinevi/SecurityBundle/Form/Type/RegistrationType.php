@@ -24,6 +24,10 @@ class RegistrationType extends AbstractType
                     'class' => 'input-tel',
                 )
             ))
+            ->add('breveCurriculo', TextareaType::class, array(
+                'label' => 'Breve Currículo',
+                'required' => false,
+            ))
         ;
     }
 

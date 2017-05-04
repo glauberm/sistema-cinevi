@@ -212,15 +212,11 @@ class CalendarEventType extends AbstractType
                             $rEndDate = $reserva->getEndDate();
                             $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
 
-                            foreach ($rPeriod as $rDay) {
-                                foreach ($fPeriod as $fDay) {
-                                    if ($rDay == $fDay) {
-                                        // Se bater, exclui esse equipamento dos resultados
-                                        $equipamentoQB->andWhere('e.id != '.$rEquipamento->getId());
+                            if ($rPeriod == $fPeriod) {
+                                // Se bater, exclui esse equipamento dos resultados
+                                $equipamentoQB->andWhere('e.id != '.$rEquipamento->getId());
 
-                                        break 3;
-                                    }
-                                }
+                                break 3;
                             }
                         }
                     }

@@ -202,26 +202,22 @@ class CalendarEventController extends RestfulCrudController
 
         if(!empty($fStartDate) && !empty($fEndDate) && !empty($fEquipamentos)) {
             $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
+            foreach($reservas as $reserva) {
+                foreach($reserva->getEquipamentos() as $rEquipamento) {
+                    foreach( $fEquipamentos as $fEquipamento) {
 
-            foreach( $reservas as $reserva ) {
-                foreach( $reserva->getEquipamentos() as $rEquipamento ) {
-                    foreach( $fEquipamentos as $fEquipamento ) {
-                        if( $rEquipamento == $fEquipamento ) {
+                        if ($rEquipamento == $fEquipamento) {
                             $rStartDate = $reserva->getStartDate();
                             $rEndDate = $reserva->getEndDate();
                             $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
 
-                            foreach ( $rPeriod as $rDay ) {
-                                foreach ( $fPeriod as $fDay ) {
-                                    if($rDay == $fDay) {
-                                        $mensagem = $rEquipamento->getNome().' já está reservado do dia '.$reserva->getStartDate()->format('d/m/Y').' ao '.$reserva->getEndDate()->format('d/m/Y').'.';
+                            if ($rPeriod == $fPeriod) {
+                                $mensagem = $rEquipamento->getNome().' já está reservado do dia '.$reserva->getStartDate()->format('d/m/Y').' ao '.$reserva->getEndDate()->format('d/m/Y').'.';
 
-                                        $form->get('startDate')->addError(new FormError($mensagem));
-                                        $form->get('endDate')->addError(new FormError($mensagem));
+                                $form->get('startDate')->addError(new FormError($mensagem));
+                                $form->get('endDate')->addError(new FormError($mensagem));
 
-                                        break 3;
-                                    }
-                                }
+                                break;
                             }
                         }
                     }
