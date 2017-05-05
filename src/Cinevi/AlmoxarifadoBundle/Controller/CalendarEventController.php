@@ -201,25 +201,33 @@ class CalendarEventController extends RestfulCrudController
         $fEquipamentos = $form->get('equipamentos')->getData();
 
         if(!empty($fStartDate) && !empty($fEndDate) && !empty($fEquipamentos)) {
+            $arrayFPeriod = array();
+            if($fStartDate == $fEndDate) {
+                $fEndDate->add($interval);
+            }
+
             $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
+
+            foreach ($fPeriod as $fDay) {
+                $arrayFPeriod[] = $fDay;
+            }
 
             foreach( $reservas as $reserva ) {
                 foreach( $reserva->getEquipamentos() as $rEquipamento ) {
                     foreach( $fEquipamentos as $fEquipamento ) {
-                        $arrayRPeriod = array();
-                        $arrayFPeriod = array();
-
                         if( $rEquipamento == $fEquipamento ) {
                             $rStartDate = $reserva->getStartDate();
                             $rEndDate = $reserva->getEndDate();
+
+                            $arrayRPeriod = array();
+                            if($rStartDate == $rEndDate) {
+                                $rEndDate->add($interval);
+                            }
+
                             $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
 
                             foreach ($rPeriod as $rDay) {
                                 $arrayRPeriod[] = $rDay;
-                            }
-
-                            foreach ($fPeriod as $fDay) {
-                                $arrayFPeriod[] = $fDay;
                             }
 
                             foreach ($arrayRPeriod as $rDay) {

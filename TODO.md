@@ -1,5 +1,7 @@
 # TO-DO
 
+- Rotas de copia_final e calendar_events para algo sem underline para deixar as url melhores.
+
 ## Depois
 - Ações múltiplas de confirmação na tabela dos usuários - Confirmação
 - Qualquer usuário pode cadastrar Função (pendente aprovação) *** COLOCAR OPÇÕES PARA OS USUÁRIOS COMPLETAREM TODAS AS OPÇÕES DAS CÓPIAS FINAIS ***
