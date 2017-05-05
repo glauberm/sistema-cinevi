@@ -1,8 +1,5 @@
 # TO-DO
 
-## Da reunião
-- Email das reservas não está chegando - adicionar lista dos equipamentos no email também. Colocar lista com paginador na página de mostrar reservas e se pá colocar um exportar .csv também.
-
 ## Depois
 - Ações múltiplas de confirmação na tabela dos usuários - Confirmação
 - Qualquer usuário pode cadastrar Função (pendente aprovação) *** COLOCAR OPÇÕES PARA OS USUÁRIOS COMPLETAREM TODAS AS OPÇÕES DAS CÓPIAS FINAIS ***
