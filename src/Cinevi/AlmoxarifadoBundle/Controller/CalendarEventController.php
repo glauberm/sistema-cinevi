@@ -201,16 +201,11 @@ class CalendarEventController extends RestfulCrudController
         $fEquipamentos = $form->get('equipamentos')->getData();
 
         if(!empty($fStartDate) && !empty($fEndDate) && !empty($fEquipamentos)) {
-            $arrayFPeriod = array();
             if($fStartDate == $fEndDate) {
                 $fEndDate->add($interval);
             }
 
             $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
-
-            foreach ($fPeriod as $fDay) {
-                $arrayFPeriod[] = $fDay;
-            }
 
             foreach( $reservas as $reserva ) {
                 foreach( $reserva->getEquipamentos() as $rEquipamento ) {
@@ -219,7 +214,6 @@ class CalendarEventController extends RestfulCrudController
                             $rStartDate = $reserva->getStartDate();
                             $rEndDate = $reserva->getEndDate();
 
-                            $arrayRPeriod = array();
                             if($rStartDate == $rEndDate) {
                                 $rEndDate->add($interval);
                             }
@@ -227,11 +221,7 @@ class CalendarEventController extends RestfulCrudController
                             $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
 
                             foreach ($rPeriod as $rDay) {
-                                $arrayRPeriod[] = $rDay;
-                            }
-
-                            foreach ($arrayRPeriod as $rDay) {
-                                foreach ($arrayFPeriod as $fDay) {
+                                foreach ($fPeriod as $fDay) {
 
                                     if( $rDay == $fDay ) {
                                         $mensagem = $rEquipamento->getNome().' já está reservado do dia '.$reserva->getStartDate()->format('d/m/Y').' ao '.$reserva->getEndDate()->format('d/m/Y').'.';
