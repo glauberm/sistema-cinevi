@@ -85,7 +85,10 @@
                 <script src="{{ asset('vendor/html5shiv/js/html5shiv.min.js') }}"></script>
                 <script src="{{ asset('vendor/respond/js/respond.min.js') }}"></script>
             <![endif]-->
-            <script src="{{ asset('vendor/jquery-mask/js/jquery.mask.min.js') }}"></script>
+            <script src="{{ asset('vendor/autosize/js/autosize.min.js') }}"></script>
+            <script>
+                autosize($("textarea.form-control"));
+            </script>
             <script src="{{ asset('js/masks.js') }}"></script>
         {% endblock %}
     </body>
