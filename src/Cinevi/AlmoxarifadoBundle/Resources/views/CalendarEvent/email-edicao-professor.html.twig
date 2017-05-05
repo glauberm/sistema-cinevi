@@ -1,3 +1,26 @@
 {% extends 'CineviAdminBundle::email.html.twig' %}
 
-{% set mensagem = "A reserva de código <strong>" ~ item.title ~ "</strong> que tem você como professor responsável acaba de ser editada.<br/><br/>Para vê-la, acesse o link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}
+{% block mensagem %}
+
+<p>A reserva de código <strong>{{ item.title }}</strong> que tem você como professor responsável acaba de ser editada.</p>
+
+<table border="1" style="border-collapse: collapse; border-spacing: 0; width: 100%; margin-bottom: 20px; font-size: 1rem; color: #333; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;">
+    <thead>
+        <tr>
+            <th>Cód.</th>
+            <th>Reservável</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equipamento in item.equipamentos %}
+            <tr>
+                <td>{{ equipamento.codigo }}</td>
+                <td>{{ equipamento.nome }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p>Para vê-la, acesse o link abaixo:</p><p><a target='_blank' href='{{ url }}'>{{ url }}</a></p>
+
+{% endblock %}

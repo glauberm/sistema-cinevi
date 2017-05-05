@@ -1,3 +1,7 @@
 {% extends 'CineviAdminBundle::email.html.twig' %}
 
-{% set mensagem = item.username ~ ", seu cadastro foi confirmado!<br/>Para acessar o sistema, acesse o link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}
+{% block mensagem %}
+
+<p>{{ item.username }}, seu cadastro foi confirmado!</p><p>Para acessar o sistema, acesse o link abaixo:</p><p><a target='_blank' href='{{ url }}'>{{ url }}</a></p>
+
+{% endblock %}

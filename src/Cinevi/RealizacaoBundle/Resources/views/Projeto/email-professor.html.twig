@@ -1,3 +1,7 @@
 {% extends 'CineviAdminBundle::email.html.twig' %}
 
-{% set mensagem = "Um novo projeto de título <strong>" ~ item.realizacao.titulo ~ "</strong> acaba de ser registrado por <strong>" ~ item.realizacao.user.username ~ "</strong> tendo você como professor(a) responsável.<br/><br/>Para vê-lo, acesse o link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}
+{% block mensagem %}
+
+<p>Um novo projeto de título <strong>{{ item.realizacao.titulo }}</strong> acaba de ser registrado por <strong>{{ item.realizacao.user.username }}</strong> tendo você como professor(a) responsável.</p><p>Para vê-lo, acesse o link abaixo:</p><p><a target='_blank' href='{{ url }}'>{{ url }}</a></p>
+
+{% endblock %}

@@ -1,3 +1,7 @@
 {% extends 'CineviAdminBundle::email.html.twig' %}
 
-{% set mensagem = "O reservável <strong>" ~ item.nome ~ "</strong> está com uma devolução atrasada e provavelmente não poderá ser retirado na data da sua reserva.<br/><br/>Para vê-la, acesse o link abaixo:<br/><br/><a target='_blank' href='" ~ url ~ "'>" ~ url ~ "</a>" %}
+{% block mensagem %}
+
+<p>O reservável <strong>{{ item.nome }}</strong> está com uma devolução atrasada e provavelmente não poderá ser retirado na data da sua reserva.</p><p>Para vê-la, acesse o link abaixo:</p><p><a target='_blank' href='{{ url }}'>{{ url }}</a></p>
+
+{% endblock %}
