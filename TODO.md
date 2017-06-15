@@ -1,5 +1,6 @@
 # TO-DO
 
+- MELHORAR A FUNÇÃO DO CALENDAR_EVENT QUE ESTÁ NO TYPE E NO CONTROLLER. FAZER AS DUAS PEGAREM A LÓGICA DE UMA SÓ E ENXUGAR PARA MELHORAR A PERFOMANCE.
 - Rotas de copia_final e calendar_events para algo sem underline para deixar as url melhores.
 
 ## Depois

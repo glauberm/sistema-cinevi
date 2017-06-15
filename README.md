@@ -1,13 +1,3 @@
 # Sistema do Departamento de Cinema e Vídeo da Universidade Federal Fluminense
-- Projetos
-- Categorias de Equipamentos
-- Equipamentos
-- Reservas de Equipamentos, com notificações por email via CRON
-- Cópias Finais de Filmes
 
-## Tecnologias utilizadas
-- Symfony
-- FOSUserBundle (Gerenciamento de usuários)
-- FOSRestBundle (REST)
-- KnpPaginatorBundle (Paginação)
-- FullCalendar (Calendário de reservas)
+Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo com acesso à internet. Sistema para alunos, funcionários ou professores do Departamento de Cinema e Vídeo da Universidade Federal Fluminense.
