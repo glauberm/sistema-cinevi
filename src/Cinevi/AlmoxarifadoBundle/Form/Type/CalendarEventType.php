@@ -100,7 +100,7 @@ class CalendarEventType extends AbstractType
             $equipamentoQB = $this->equipamentosValidos();
 
             if (!empty($startDate) && !empty($endDate)) {
-                $equipamentoQB = $this->equipamentosPorData($form, $equipamentoQB, $startDate, $endDate, $id);
+                $equipamentoQB = $this->equipamentosPorData($equipamentoQB, $startDate, $endDate, $id);
             }
 
             foreach ($equipamentoQB->getQuery()->getResult() as $equipamento) {
@@ -184,7 +184,7 @@ class CalendarEventType extends AbstractType
         return $equipamentoQB;
     }
 
-    private function equipamentosPorData($form, $equipamentoQB, \DateTime $fStartDate, \DateTime $fEndDate, $id = null)
+    private function equipamentosPorData($equipamentoQB, \DateTime $fStartDate, \DateTime $fEndDate, $id = null)
     {
         $interval = new \DateInterval('P1D');
         $fEquipamentos = $equipamentoQB->getQuery()->getResult();
@@ -203,10 +203,13 @@ class CalendarEventType extends AbstractType
 
         if (!empty($fEquipamentos)) {
             if($fStartDate == $fEndDate) {
-                $fEndDate->add($interval);
-            }
+                $cfEndDate = clone $fEndDate;
+                $cfEndDate->add($interval);
 
-            $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
+                $fPeriod = new \DatePeriod($fStartDate, $interval, $cfEndDate);
+            } else {
+                $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
+            }
 
             foreach ($reservas as $reserva) {
                 foreach ($reserva->getEquipamentos() as $rEquipamento) {
@@ -216,10 +219,13 @@ class CalendarEventType extends AbstractType
                             $rEndDate = $reserva->getEndDate();
 
                             if($rStartDate == $rEndDate) {
-                                $rEndDate->add($interval);
-                            }
+                                $crEndDate = clone $rEndDate;
+                                $crEndDate->add($interval);
 
-                            $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
+                                $rPeriod = new \DatePeriod($rStartDate, $interval, $crEndDate);
+                            } else {
+                                $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
+                            }
 
                             foreach ($rPeriod as $rDay) {
                                 foreach ($fPeriod as $fDay) {

@@ -67,6 +67,8 @@ swiftmailer:
     spool:
         type: file
         path: "%kernel.root_dir%/spool"
+    port: 465
+    sender_address: "%mailer_user%"
 
 # SensioFrameworkExtra
 sensio_framework_extra:

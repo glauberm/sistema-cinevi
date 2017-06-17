@@ -194,7 +194,7 @@ class CalendarEventController extends RestfulCrudController
 
     private function checaReservas($form, $reservas)
     {
-        $interval = \DateInterval::createFromDateString('1 day');
+        $interval = new \DateInterval('P1D');
 
         $fStartDate = $form->get('startDate')->getData();
         $fEndDate = $form->get('endDate')->getData();
@@ -202,10 +202,13 @@ class CalendarEventController extends RestfulCrudController
 
         if(!empty($fStartDate) && !empty($fEndDate) && !empty($fEquipamentos)) {
             if($fStartDate == $fEndDate) {
-                $fEndDate->add($interval);
-            }
+                $cfEndDate = clone $fEndDate;
+                $cfEndDate->add($interval);
 
-            $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
+                $fPeriod = new \DatePeriod($fStartDate, $interval, $cfEndDate);
+            } else {
+                $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
+            }
 
             foreach( $reservas as $reserva ) {
                 foreach( $reserva->getEquipamentos() as $rEquipamento ) {
@@ -215,10 +218,13 @@ class CalendarEventController extends RestfulCrudController
                             $rEndDate = $reserva->getEndDate();
 
                             if($rStartDate == $rEndDate) {
-                                $rEndDate->add($interval);
-                            }
+                                $crEndDate = clone $rEndDate;
+                                $crEndDate->add($interval);
 
-                            $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
+                                $rPeriod = new \DatePeriod($rStartDate, $interval, $crEndDate);
+                            } else {
+                                $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
+                            }
 
                             foreach ($rPeriod as $rDay) {
                                 foreach ($fPeriod as $fDay) {
