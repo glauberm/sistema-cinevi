@@ -8,7 +8,7 @@ trait MailerTrait
 {
     public function sendMail(ContainerInterface $container, $obj, $path, $assunto, $destinatario, $template)
     {
-        $remetente = 'cinevi@vm.uff.br';
+        $remetente = 'contato@cinemauff.com.br';
 
         // HTML
         $message = \Swift_Message::newInstance()
