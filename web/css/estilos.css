@@ -96,6 +96,11 @@ a.pular-para-conteudo:active {
     overflow: inherit;
 }
 
+.csv-counter {
+    position: relative;
+    top: 4px;
+}
+
 /* HEADER */
 .header,
 .header-public {

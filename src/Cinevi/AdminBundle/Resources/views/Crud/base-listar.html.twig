@@ -43,10 +43,11 @@
     </div>
 
     <div class="clearfix">
-        <div class="pull-left text-left csv">
+        <div class="pull-left text-left csv-counter">
             {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
                 <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Exportar .CSV</a>
             {% endif %}
+            <div class="navbar-form"><label><small class="text-muted">Total de Itens: {{ pagination.getTotalItemCount }}</small></label></div>
         </div>
         <div class="pull-right text-right">
             <form name="num_resultados" method="get" novalidate="novalidate" class="navbar-form navbar-right">

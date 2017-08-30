@@ -56,14 +56,35 @@
         <div class="text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
+
+        <div class="clearfix">
+            <div class="pull-left text-left csv-counter">
+                {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+                    <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Exportar .CSV</a>
+                {% endif %}
+                <div class="navbar-form"><label><small class="text-muted">Total de Itens: {{ pagination.getTotalItemCount }}</small></label></div>
+            </div>
+            <div class="pull-right text-right">
+                <form name="num_resultados" method="get" novalidate="novalidate" class="navbar-form navbar-right">
+                    <div class="form-group form-group-sm">
+                        <label class="control-label" for="numResultados"><small class="text-muted">Nº de resultados</small></label>
+
+                        <input id="num_resultados_numResultados" name="numResultados" placeholder="10" class="form-control" type="number" {% if numResultados is defined and numResultados != null %} value="{{ numResultados }}" {% endif %}>
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-sm">OK</button>
+                </form>
+            </div>
+        </div>
     </noscript>
 
-    {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
-        <br/>
-        <div class="text-left csv">
-            <a target="_blank" href="{{ routeCsv }}" class="btn btn-warning btn-sm">Exportar .CSV</a>
+    <div class="clearfix">
+        <div class="pull-left text-left csv-counter">
+            {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+                <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Exportar .CSV</a>
+            {% endif %}
+            <div class="navbar-form"><label><small class="text-muted">Total de Itens: {{ pagination.getTotalItemCount }}</small></label></div>
         </div>
-    {% endif %}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
