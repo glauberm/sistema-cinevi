@@ -1,8 +1,8 @@
 {% extends 'CineviAdminBundle::base.html.twig' %}
 
 {% set title = 'Reservas' %}
-{% set routeCsv = path('calendar_events_csv') %}
-{% set routeAdicionar = path('new_calendar_event') %}
+{% set routeCsv = path('reservas_csv') %}
+{% set routeAdicionar = path('new_reserva') %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
@@ -44,9 +44,9 @@
                 <tbody>
                     {% for item in pagination %}
                         <tr>
-                            <td><a href="{{ path('get_calendar_event', { 'id': item.id }) }}">{{ item.title }}</a></td>
-                            <td><a href="{{ path('get_calendar_event', { 'id': item.id }) }}">{{ item.startDate|date('d/m/Y') }}</a></td>
-                            <td><a href="{{ path('get_calendar_event', { 'id': item.id }) }}">{{ item.endDate|date('d/m/Y') }}</a></td>
+                            <td><a href="{{ path('get_reserva', { 'id': item.id }) }}">{{ item.title }}</a></td>
+                            <td><a href="{{ path('get_reserva', { 'id': item.id }) }}">{{ item.startDate|date('d/m/Y') }}</a></td>
+                            <td><a href="{{ path('get_reserva', { 'id': item.id }) }}">{{ item.endDate|date('d/m/Y') }}</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

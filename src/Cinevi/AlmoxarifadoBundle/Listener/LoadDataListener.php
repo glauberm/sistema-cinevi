@@ -47,7 +47,7 @@ class LoadDataListener
             $event->setEndDate($reserva->getEndDate()->add(new \DateInterval('P1D')));
 
             // URL
-            $url = $this->container->get('router')->generate('get_calendar_event', array(
+            $url = $this->container->get('router')->generate('get_reserva', array(
                 'id' => $reserva->getId(),
             ));
             $event->setUrl($url);

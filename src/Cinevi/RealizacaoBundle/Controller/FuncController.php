@@ -10,11 +10,11 @@ use Cinevi\AdminBundle\Mailer\MailerTrait;
 use Cinevi\RealizacaoBundle\Entity\Funcao;
 use Cinevi\RealizacaoBundle\Form\Type\FuncaoType;
 
-class FuncaoController extends RestfulCrudController
+class FuncController extends RestfulCrudController
 {
     protected $bundleName = 'CineviRealizacaoBundle:Funcao';
     protected $repositoryName = 'CineviRealizacaoBundle:Funcao';
     protected $className = Funcao::class;
-    protected $routeSuffix = 'funcao';
+    protected $routeSuffix = 'func';
     protected $formClassName = FuncaoType::class;
 }

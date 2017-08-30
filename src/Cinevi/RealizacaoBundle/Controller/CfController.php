@@ -10,14 +10,14 @@ use Cinevi\AdminBundle\Mailer\MailerTrait;
 use Cinevi\RealizacaoBundle\Entity\CopiaFinal;
 use Cinevi\RealizacaoBundle\Form\Type\CopiaFinalType;
 
-class CopiaFinalController extends RestfulCrudController
+class CfController extends RestfulCrudController
 {
     use MailerTrait;
 
     protected $bundleName = 'CineviRealizacaoBundle:CopiaFinal';
     protected $repositoryName = 'CineviRealizacaoBundle:CopiaFinal';
     protected $className = CopiaFinal::class;
-    protected $routeSuffix = 'copia_final';
+    protected $routeSuffix = 'cf';
     protected $formClassName = CopiaFinalType::class;
 
     private $confirmado;
@@ -98,7 +98,7 @@ class CopiaFinalController extends RestfulCrudController
 
             $assunto = 'Confirmação de Cópia Final: '.$obj->getRealizacao()->getTitulo();
 
-            $path = $this->generateUrl('get_copia_final', array(
+            $path = $this->generateUrl('get_cf', array(
                 'id' => $obj->getId()
             ), true);
 

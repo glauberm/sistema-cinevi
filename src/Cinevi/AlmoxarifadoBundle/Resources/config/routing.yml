@@ -14,10 +14,10 @@ categorias_csv:
     path:      /csv/categorias
     defaults:  { _controller: CineviAlmoxarifadoBundle:Categoria:getCsv }
 
-calendar_events:
+reservas:
     type:     rest
-    resource: Cinevi\AlmoxarifadoBundle\Controller\CalendarEventController
+    resource: Cinevi\AlmoxarifadoBundle\Controller\ReservaController
 
-calendar_events_csv:
-    path:      /csv/calendar_events
-    defaults:  { _controller: CineviAlmoxarifadoBundle:CalendarEvent:getCsv }
+reservas_csv:
+    path:      /csv/reservas
+    defaults:  { _controller: CineviAlmoxarifadoBundle:Reserva:getCsv }

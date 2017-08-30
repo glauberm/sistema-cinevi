@@ -1,8 +1,8 @@
 {% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
 
 {% set title = 'Reserva ' ~ item.title %}
-{% set routeListar = path('get_calendar_events') %}
-{% set routeEditar = path('edit_calendar_event', { 'id': item.id }) %}
+{% set routeListar = path('get_reservas') %}
+{% set routeEditar = path('edit_reserva', { 'id': item.id }) %}
 
 {% block dtdd %}
     <dt>Código</dt><dd>{{ item.title }}</dd>

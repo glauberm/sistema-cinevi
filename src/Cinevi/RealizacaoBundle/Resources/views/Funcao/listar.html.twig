@@ -1,8 +1,8 @@
 {% extends 'CineviAdminBundle:Crud:base-listar.html.twig' %}
 
 {% set title = 'Funções' %}
-{% set routeAdicionar = path('new_funcao') %}
-{% set routeCsv = path('funcaos_csv') %}
+{% set routeAdicionar = path('new_func') %}
+{% set routeCsv = path('funcs_csv') %}
 
 {% block addAction %}
     {% if is_granted('ROLE_DEPARTAMENTO') %}
@@ -18,6 +18,6 @@
 
 {% block tbody %}
     <td>
-        <a href="{{ path('get_funcao', { 'id': item.id }) }}">{{ item.nome }}</a>
+        <a href="{{ path('get_func', { 'id': item.id }) }}">{{ item.nome }}</a>
     </td>
 {% endblock %}

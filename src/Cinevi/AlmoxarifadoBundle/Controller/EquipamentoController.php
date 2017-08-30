@@ -45,7 +45,7 @@ class EquipamentoController extends RestfulCrudController
 
             foreach($obj->getCalendarEvents() as $reserva) {
                 if($reserva->getStartDate() > new \DateTime()) {
-                    $path = $this->generateUrl('get_calendar_event', array(
+                    $path = $this->generateUrl('get_reserva', array(
                         'id' => $reserva->getId()
                     ), true);
 
@@ -63,7 +63,7 @@ class EquipamentoController extends RestfulCrudController
 
             foreach($obj->getCalendarEvents() as $reserva) {
                 if($reserva->getStartDate() > new \DateTime()) {
-                    $path = $this->generateUrl('get_calendar_event', array(
+                    $path = $this->generateUrl('get_reserva', array(
                         'id' => $reserva->getId()
                     ), true);
 

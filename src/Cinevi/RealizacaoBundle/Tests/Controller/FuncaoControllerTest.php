@@ -7,7 +7,7 @@ use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 class FuncaoControllerTest extends RestfulCrudControllerTest
 {
     // List
-    protected $indexRoute = 's/funcaos';
+    protected $indexRoute = 's/funcs';
     // Edit
     protected $itemEditFilter = 'a:contains("TesteF")';
     protected $itemEditLink = 'TesteF';

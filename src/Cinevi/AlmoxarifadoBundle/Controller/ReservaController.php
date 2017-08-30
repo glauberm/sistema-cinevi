@@ -12,14 +12,14 @@ use Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent;
 use Cinevi\AlmoxarifadoBundle\Form\Type\CalendarEventType;
 use Yasumi\Yasumi;
 
-class CalendarEventController extends RestfulCrudController
+class ReservaController extends RestfulCrudController
 {
     use MailerTrait;
 
     protected $bundleName = 'CineviAlmoxarifadoBundle:CalendarEvent';
     protected $repositoryName = 'CineviAlmoxarifadoBundle:CalendarEvent';
     protected $className = CalendarEvent::class;
-    protected $routeSuffix = 'calendar_event';
+    protected $routeSuffix = 'reserva';
     protected $formClassName = CalendarEventType::class;
 
     protected function posCriar(Form $form, EntityManager $em)
