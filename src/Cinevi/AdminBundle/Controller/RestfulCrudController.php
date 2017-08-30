@@ -44,11 +44,12 @@ abstract class RestfulCrudController extends FOSRestController implements ClassR
             $numResultados = 10;
         }
 
-        // Exclusão por permissões de visualização
         $builder = $repository->createQueryBuilder('item')->orderBy('item.id', 'DESC');
+        
+        // Exclusão por permissões de visualização
         foreach ($builder->getQuery()->getResult() as $result) {
-            if (false === $this->get('security.authorization_checker')->isGranted('view', $result)) {
-                $builder->where('item.id != '.$result->getId());
+            if (false == $this->get('security.authorization_checker')->isGranted('view', $result)) {
+                $builder->andWhere('item.id != '.$result->getId());
             }
         }
 

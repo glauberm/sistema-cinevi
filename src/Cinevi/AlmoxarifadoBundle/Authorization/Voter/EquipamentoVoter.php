@@ -17,7 +17,11 @@ class EquipamentoVoter extends BaseVoter
 
     protected function view($obj, $user, TokenInterface $token)
     {
-        return true;
+        if ($user->getConfirmado() === true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     protected function create($obj, $user, TokenInterface $token)
