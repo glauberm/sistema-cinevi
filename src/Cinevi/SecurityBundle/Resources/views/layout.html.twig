@@ -5,15 +5,24 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)</title>
+        <meta name="description" content="Cadastre projetos, reserve equipamentos no almoxarifado e muito mais pelo celular, tablet ou qualquer outro dispositivo com acesso à internet. Sistema para alunos, funcionários ou professores do Departamento de Cinema e Vídeo da Universidade Federal Fluminense." />
+        <meta name="subject" content="Todos os serviços do departamento qualquer lugar." />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
         {% block stylesheets %}
             <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('vendor/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('css/estilos.css') }}" rel="stylesheet" type="text/css" />
+            <!--[if gte IE 9]>
+                <style type="text/css">
+                    .header,
+                    .header-public,
+                    .content-security .well {
+                        filter: none;
+                    }
+                </style>
+            <![endif]-->
         {% endblock %}
-        <meta name="robots" content="noindex, nofollow" />
-        <meta name="googlebot" content="noindex, nofollow" />
-        <meta name="description" content="Cadastre projetos, reserve equipamentos no almoxarifado e muito mais pelo celular, tablet ou qualquer outro dispositivo com acesso à internet. Sistema para alunos, funcionários ou professores do Departamento de Cinema e Vídeo da Universidade Federal Fluminense." />
-        <meta name="subject" content="Todos os serviços do departamento qualquer lugar." />
         <!-- FAVICONS -->
     	<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
     	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
