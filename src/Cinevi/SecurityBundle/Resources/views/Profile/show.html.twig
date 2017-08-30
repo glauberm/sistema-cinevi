@@ -10,7 +10,7 @@
     <a class="navbar-brand btn btn-link" href="{{ routeListar }}">
         {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
     </a>
-    {% if is_granted('edit', user) %}
+    {% if is_granted('edit', user) or app.user == user %}
         <div class="navbar-form navbar-nav">
             <a class="btn btn-info" href="{{ routeEditar }}">{% include 'CineviAdminBundle:SVG:editar.html.twig' %}<span class="hidden-xs">Editar</span></a>
         </div>
