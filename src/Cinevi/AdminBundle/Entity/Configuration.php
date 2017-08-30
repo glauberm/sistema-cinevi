@@ -21,12 +21,16 @@ class Configuration
      **/
     protected $reservasFechadas;
 
+    /**
+     * @ORM\Column(type="text")
+     **/
+    protected $mensagemCopiaFinal;
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -49,10 +53,34 @@ class Configuration
     /**
      * Get reservasFechadas
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getReservasFechadas()
     {
         return $this->reservasFechadas;
+    }
+
+    /**
+     * Set mensagemCopiaFinal
+     *
+     * @param boolean $mensagemCopiaFinal
+     *
+     * @return Configuration
+     */
+    public function setMensagemCopiaFinal($mensagemCopiaFinal)
+    {
+        $this->mensagemCopiaFinal = $mensagemCopiaFinal;
+
+        return $this;
+    }
+
+    /**
+     * Get mensagemCopiaFinal
+     *
+     * @return boolean
+     */
+    public function getMensagemCopiaFinal()
+    {
+        return $this->mensagemCopiaFinal;
     }
 }

@@ -77,9 +77,20 @@ class CfController extends RestfulCrudController
             $this->sendMail($this->container, $obj, $path, $assunto, $destinatario, $template);
         }
 
+        // Pega se tem mensagem no config para adicionar à mensagem.
+        $configuration = $this->getConfiguration($em);
+
+        $mensagem = 'Criação de cópia final realizada com sucesso!';
+
+        if($configuration->getMensagemCopiaFinal()) {
+            $mensagem .= ' '.$configuration->getMensagemCopiaFinal();
+        }
+
         // Note: use FOSHttpCacheBundle to automatically move this flash message to a cookie
-        $this->get('session')->getFlashBag()->set('success', 'Criação de cópia final realizada com sucesso! Para finalizar o processo você deve se encontrar com o Cláudio (disponível na Sala Zeca Porto, de 8h às 14h), que pode ser contactado pelo e-mail claudio.ciambelli@gmail.com. Você deve entregá-lo um arquivo da versão final do filme, obrigatoriamente no formato: MPEG4 H264. Deverá entregá-lo também uma cópia de visionamento, no formato MOV.
-        Assim que o processo for finalizado você receberá um email de confirmação e poderá voltar a cadastrar projetos.');
+        $this->get('session')->getFlashBag()->set('success', $mensagem);
+
+        /*$this->get('session')->getFlashBag()->set('success', 'Criação de cópia final realizada com sucesso! Para finalizar o processo você deve se encontrar com o Cláudio (disponível na Sala Zeca Porto, de 8h às 14h), que pode ser contactado pelo e-mail claudio.ciambelli@gmail.com. Você deve entregá-lo um arquivo da versão final do filme, obrigatoriamente no formato: MPEG4 H264. Deverá entregá-lo também uma cópia de visionamento, no formato MOV.
+        Assim que o processo for finalizado você receberá um email de confirmação e poderá voltar a cadastrar projetos.');*/
 
         return $obj;
     }

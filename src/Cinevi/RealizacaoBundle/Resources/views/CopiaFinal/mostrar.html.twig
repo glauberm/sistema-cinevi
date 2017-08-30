@@ -7,11 +7,10 @@
 {% block alerts %}
     {{ parent() }}
 
-    {% if (app.user is defined and app.user == item.realizacao.user) and item.confirmado is not defined or item.confirmado != true %}
+    {% if (app.user is defined and app.user == item.realizacao.user) and (item.confirmado is not defined or item.confirmado != true) and (configuration is defined and configuration.mensagemCopiaFinal is defined and configuration.mensagemCopiaFinal is not empty) %}
         <div class="alert alert-danger alert-dismissal fade in" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-            Para finalizar o processo você deve se encontrar com o Cláudio (disponível na Sala Zeca Porto, de 8h às 14h), que pode ser contactado pelo e-mail claudio.ciambelli@gmail.com. Você deve entregá-lo um arquivo da versão final do filme, obrigatoriamente no formato: MPEG4 H264. Deverá entregá-lo também uma cópia de visionamento, no formato MOV.
-            Assim que o processo for finalizado você receberá um email de confirmação e poderá voltar a cadastrar projetos.
+            {{ configuration.mensagemCopiaFinal }}
         </div>
     {% endif %}
 {% endblock %}

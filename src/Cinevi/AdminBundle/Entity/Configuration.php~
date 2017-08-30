@@ -21,5 +21,42 @@ class Configuration
      **/
     protected $reservasFechadas;
 
+    /**
+     * @ORM\Column(type="boolean")
+     **/
+    protected $mensagemCopiaFinal;
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set reservasFechadas
+     *
+     * @param boolean $reservasFechadas
+     * @return Configuration
+     */
+    public function setReservasFechadas($reservasFechadas)
+    {
+        $this->reservasFechadas = $reservasFechadas;
+
+        return $this;
+    }
+
+    /**
+     * Get reservasFechadas
+     *
+     * @return boolean
+     */
+    public function getReservasFechadas()
+    {
+        return $this->reservasFechadas;
+    }
 }

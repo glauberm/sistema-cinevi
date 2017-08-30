@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ConfigurationType extends AbstractType
 {
@@ -21,6 +22,10 @@ class ConfigurationType extends AbstractType
                 'invalid_message' => 'Este não é um valor válido.',
                 'expanded' => true,
                 'choices_as_values' => true,
+            ))
+            ->add('mensagemCopiaFinal', TextareaType::class, array(
+                'label' => 'Mensagem para Cópias Finais ainda não confirmadas',
+                'required' => false,
             ))
         ;
     }

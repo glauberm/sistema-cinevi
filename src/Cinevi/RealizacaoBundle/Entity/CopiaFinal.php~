@@ -681,4 +681,50 @@ class CopiaFinal
     {
         return $this->confirmado;
     }
+
+    /**
+     * Set linkVideo
+     *
+     * @param string $linkVideo
+     * @return CopiaFinal
+     */
+    public function setLinkVideo($linkVideo)
+    {
+        $this->linkVideo = $linkVideo;
+
+        return $this;
+    }
+
+    /**
+     * Get linkVideo
+     *
+     * @return string 
+     */
+    public function getLinkVideo()
+    {
+        return $this->linkVideo;
+    }
+
+    /**
+     * Set senhaVideo
+     *
+     * @param string $senhaVideo
+     * @return CopiaFinal
+     */
+    public function setSenhaVideo($senhaVideo)
+    {
+        $this->senhaVideo = $senhaVideo;
+
+        return $this;
+    }
+
+    /**
+     * Get senhaVideo
+     *
+     * @return string 
+     */
+    public function getSenhaVideo()
+    {
+        return $this->senhaVideo;
+    }
 }
