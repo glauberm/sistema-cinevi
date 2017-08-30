@@ -382,6 +382,7 @@ a.pular-para-conteudo:active {
     background: -webkit-gradient(linear, left top, left bottom, from(#decc3a),to(#ead741));
     background: linear-gradient(to bottom, #decc3a 0%,#ead741 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#decc3a', endColorstr='#ead741',GradientType=0 );
+    color: #3D3A28;
 }
 
 /* PUBLIC */
@@ -412,6 +413,10 @@ a.pular-para-conteudo:active {
 .input-group svg {
     width: 18px;
     height: 18px;
+}
+
+.input-group svg path {
+    fill: #3D3A28;
 }
 
 .input-group-btn-security {
@@ -459,25 +464,50 @@ a.pular-para-conteudo:active {
 }
 
 /* FULL CALENDAR */
-.fc-event {
-    padding: .25em .5em .25em;
+.reserva {
+    padding: 2px 6px 2px;
     font-size: inherit;
+    background-color: #dbdbdb;
+    border: 1px solid #ccc;
+    color: #333;
+}
+
+.reserva:hover,
+.reserva:focus,
+.reserva:active {
+    color: #111;
+    background-color: #d6d6d6;
+}
+
+.reserva-propria {
+    background: #EAD741;
+    border: 1px solid #bbaa1f;
+    color: #3D3A28;
+}
+
+.reserva-propria:hover,
+.reserva-propria:focus,
+.reserva-propria:active {
+    color: #1C1B16;
+    background-color: #decc3a;
 }
 
 .fc-basicDay-view .fc-start {
     background-color: #5cb85c !important;
     border-color: #3e8f3e !important;
+    color: #283D28 !important;
 }
 
 .fc-basicDay-view .fc-end {
     background-color: #d9534f !important;
     border-color: #b92c28 !important;
+    color: #3D2928 !important;
 }
 
 .fc-basicDay-view .fc-start.fc-end {
     background-color: #006886 !important;
     border-color: #00313f !important;
-    color: #FFF !important;
+    color: #A3E3F4 !important;
 }
 
 /* SELECT2 */
