@@ -15,10 +15,10 @@
 {% block body_html %}
 
     {% set _assunto %}
-        {{ 'resetting.email.subject'|trans({'%username%': user.username})|nl2br|raw }}
+        {{ 'resetting.email.subject'|trans({'%username%': user.username})|nl2br }}
     {% endset %}
     {% set _mensagem %}
-        {{ 'resetting.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl})|nl2br|raw }}
+        {{ 'resetting.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl})|nl2br }}
     {% endset %}
 
     {% include 'CineviSecurityBundle::email-html.html.twig' with {'assunto': _assunto, 'mensagem': _mensagem} %}

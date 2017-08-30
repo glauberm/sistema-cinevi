@@ -60,13 +60,14 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport:     "%mailer_transport%"
+    host:          "%mailer_host%"
+    username:      "%mailer_user%"
+    password:      "%mailer_password%"
+    encryption:    ssl
     spool:
-        type: file
-        path: "%kernel.root_dir%/spool"
+        type:      file
+        path:      "%kernel.root_dir%/spool"
 
 # SensioFrameworkExtra
 sensio_framework_extra:
@@ -80,20 +81,18 @@ fos_user:
     user_class: Cinevi\SecurityBundle\Entity\User
     service:
         mailer: fos_user.mailer.twig_swift
+    from_email:
+        address:        "%mailer_user%"
+        sender_name:    Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)
     registration:
         form:
             type: Cinevi\SecurityBundle\Form\Type\RegistrationType
         confirmation:
-            from_email:
-                address:        cinevi@vm.uff.br
-                sender_name:    Departamento de Cinema e Vídeo da Universidade Federal Fluminense
             enabled:   true
             template:  CineviSecurityBundle:Registration:email.html.twig
     resetting:
+        retry_ttl: 900
         email:
-            from_email:
-                address:        cinevi@vm.uff.br
-                sender_name:    Departamento de Cinema e Vídeo da Universidade Federal Fluminense
             template:  CineviSecurityBundle:Resetting:email.html.twig
     profile:
         form:

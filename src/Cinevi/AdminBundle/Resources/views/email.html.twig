@@ -1,19 +1,18 @@
 {% autoescape false %}
 
-    <div style="background-color: #EEE; padding: 40px 20px 60px; text-align: center; line-height: 1.35;">
-        <h3 style="color: #BFA82F; margin: 0px auto; width: 375px; display: block; font-size: 1.2rem; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;">
-            <a href="{{ absolute_url(path('index')) }}" target="_blank"><img alt="Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)" src="{{ absolute_url(asset('logo-email.png')) }}"></a>
+    <div style='background-color: #EEE; padding: 40px 20px 60px; text-align: center; line-height: 1.35;'>
+        <h3 style='margin: 0px auto; width: 375px; display: block; font-size: 1.2rem; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;'>
+            <a style='color: #BFA82F; text-decoration: none;' href='{{ absolute_url(path("index")) }}' target='_blank'><img src='{{ absolute_url(asset("logo-email.png")) }}' alt='Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)' /></a>
         </h3>
         <br/><br/>
-        <div style="background-color: #FFF; width: 80%; margin: 0 auto;">
-            <div style="padding: 20px 60px 30px; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; color: #333; border-bottom: 4px solid #E3E3E3; border-left: 2px solid #E3E3E3; border-right: 2px solid #E3E3E3;">
-                <h1 style="color: #006886; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;">{{ assunto }}</h1>
-                <br/>
-                <div style="font-size: 1rem; color: #333; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;">{% block mensagem %}{% endblock %}</div>
+        <div style='background-color: #FFF; width: 80%; margin: 0 auto;'>
+            <div style='padding: 20px 60px 30px; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; color: #333; border-bottom: 4px solid #E3E3E3; border-left: 2px solid #E3E3E3; border-right: 2px solid #E3E3E3;'>
+                <div style='color: #006886; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;'><h1>{{ assunto }}</h1></div>
+                <div style='font-size: 1rem; color: #333; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;'>{% block mensagem %}{% endblock %}</div>
             </div>
         </div>
         <br/>
-        <small style="text-align: center; font-size: 0.7rem; color: #565656; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;">
+        <small style='text-align: center; font-size: 0.7rem; color: #565656; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;'>
             cinevi@vm.uff.br | (21) 2629-9761<br/>
             Rua Professor Lara Vilela, 126, São Domingos<br/>
             Niterói, RJ - 24210-590
