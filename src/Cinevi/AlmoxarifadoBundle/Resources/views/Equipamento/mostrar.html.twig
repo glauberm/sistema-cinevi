@@ -9,7 +9,7 @@
     <div class="col-sm-3 col-md-2"><dt>Cód.</dt><dd>{{ item.codigo }}</dd></div>
     <div class="col-sm-9 col-md-10"><dt>Nome</dt><dd>{{ item.nome }}</dd></div>
 </div>
-<dt>Categoria</dt><dd>{{ item.categoria.nome }}</dd>
+<dt>Categoria</dt><dd><a href="{{ path('get_categoria', { 'id': item.categoria.id }) }}">{{ item.categoria.nome }}</a></dd>
 <div class="row">
     <div class="col-sm-6"><dt>Nº de Patrimônio</dt><dd>{{ item.patrimonio ? item.patrimonio : 'Não informado' }}</dd></div>
     <div class="col-sm-6"><dt>Nº de Série</dt><dd>{{ item.nSerie ? item.nSerie : 'Não informado' }}</dd></div>

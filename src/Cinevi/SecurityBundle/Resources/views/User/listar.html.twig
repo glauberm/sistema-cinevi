@@ -14,7 +14,9 @@
 
 {% block thead %}
     <th>{{ knp_pagination_sortable(pagination, 'Nome Completo', 'item.username') }}</th>
-    <th>{{ knp_pagination_sortable(pagination, 'Matrícula/SIAPE', 'item.matricula') }}</th>
+    {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+        <th>{{ knp_pagination_sortable(pagination, 'Matrícula/SIAPE', 'item.matricula') }}</th>
+    {% endif %}
     <th>{{ knp_pagination_sortable(pagination, 'Ativo', 'item.enabled') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Confirmado', 'item.confirmado') }}</th>
     <th>{{ knp_pagination_sortable(pagination, 'Professor', 'item.professor') }}</th>
@@ -24,7 +26,9 @@
     <td>
         <a href="{{ path('get_user', { 'id': item.id }) }}">{{ item.username }}</a>
     </td>
-    <td>{{ item.matricula }}</td>
+    {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+        <td>{{ item.matricula }}</td>
+    {% endif %}
     <td>{{ item.enabled ? 'Sim' : 'Não' }}</td>
     <td>{{ item.confirmado ? 'Sim' : 'Não' }}</td>
     <td>{{ item.professor ? 'Sim' : 'Não' }}</td>
