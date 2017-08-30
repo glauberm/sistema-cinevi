@@ -117,6 +117,12 @@ a.pular-para-conteudo:active {
     max-width: 175px;
 }
 
+.header-security .a-logo {
+    display: block;
+    max-width: 226px;
+    margin: 0 auto;
+}
+
 .header .logo {
     position: relative;
     top: 2px;
@@ -562,5 +568,6 @@ a.pular-para-conteudo:active {
     .header-public .link-sistema,
     .header-security .link-sistema {
         margin: -20px 0 10px 20px;
+        width: 100%;
     }
 }
