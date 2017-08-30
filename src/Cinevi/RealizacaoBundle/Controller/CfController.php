@@ -82,7 +82,7 @@ class CfController extends RestfulCrudController
 
         $mensagem = 'Criação de cópia final realizada com sucesso!';
 
-        if($configuration->getMensagemCopiaFinal()) {
+        if($configuration && $configuration->getMensagemCopiaFinal()) {
             $mensagem .= ' '.$configuration->getMensagemCopiaFinal();
         }
 

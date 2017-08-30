@@ -22,7 +22,7 @@ class Configuration
     protected $reservasFechadas;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      **/
     protected $mensagemCopiaFinal;
 
