@@ -12,7 +12,7 @@ use Cinevi\RealizacaoBundle\Entity\Funcao;
 class CopiaFinalControllerTest extends RestfulCrudControllerTest
 {
     // List
-    protected $indexRoute = 's/cfs';
+    protected $indexRoute = 's/copias-finais';
     // Edit
     protected $itemEditFilter = 'a:contains("TesteP")';
     protected $itemEditLink = 'TesteP';

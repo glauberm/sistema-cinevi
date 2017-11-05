@@ -68,7 +68,7 @@
                     <a class="list-group-item {% if app.request.get('_route') == 'get_projetos' or app.request.get('_route') == 'new_projeto' or app.request.get('_route') == 'get_projeto' or app.request.get('_route') == 'edit_projeto' or app.request.get('_route') == 'post_projeto' or app.request.get('_route') == 'put_projeto' %}active{% endif %}" href="{{ path('get_projetos') }}">
                         {% include 'CineviAdminBundle:SVG:projetos.html.twig' %}Projetos
                     </a>
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_cfs' or app.request.get('_route') == 'new_cf' or app.request.get('_route') == 'get_cf' or app.request.get('_route') == 'edit_cf' or app.request.get('_route') == 'post_cf' or app.request.get('_route') == 'put_cf' %}active{% endif %}" href="{{ path('get_cfs') }}">
+                    <a class="list-group-item {% if app.request.get('_route') == 'cget_copias-finais' or app.request.get('_route') == 'new_copias-finais' or app.request.get('_route') == 'get_copias-finais' or app.request.get('_route') == 'edit_copias-finais' or app.request.get('_route') == 'post_copias-finais' or app.request.get('_route') == 'put_copias-finais' %}active{% endif %}" href="{{ path('cget_copias-finais') }}">
                         {% include 'CineviAdminBundle:SVG:copias-finais.html.twig' %}Cópias Finais
                     </a>
                     <a class="list-group-item {% if app.request.get('_route') == 'get_funcs' or app.request.get('_route') == 'new_func' or app.request.get('_route') == 'get_func' or app.request.get('_route') == 'edit_func' or app.request.get('_route') == 'post_func' or app.request.get('_route') == 'put_func' %}active{% endif %}" href="{{ path('get_funcs') }}">

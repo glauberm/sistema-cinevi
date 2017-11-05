@@ -1,6 +1,6 @@
 {% extends 'CineviAdminBundle::email.html.twig' %}
 
-{% block mensagem %}
+{% block message %}
 
 <p>Um novo projeto de título <strong>{{ item.realizacao.titulo }}</strong> acaba de ser registrado por <strong>{{ item.realizacao.user.username }}</strong>.</p><p>Para vê-lo, acesse o link abaixo:</p><p><a target='_blank' href='{{ url }}'>{{ url }}</a></p>
 

@@ -5,7 +5,7 @@ namespace Cinevi\RealizacaoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cinevi\RealizacaoBundle\Entity\CopiaFinalRepository")
  * @ORM\Table(name="realizacao_copias_finais")
  */
 class CopiaFinal
@@ -698,7 +698,7 @@ class CopiaFinal
     /**
      * Get linkVideo
      *
-     * @return string 
+     * @return string
      */
     public function getLinkVideo()
     {
@@ -721,7 +721,7 @@ class CopiaFinal
     /**
      * Get senhaVideo
      *
-     * @return string 
+     * @return string
      */
     public function getSenhaVideo()
     {

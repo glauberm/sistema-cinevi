@@ -1,8 +1,8 @@
 {% extends 'CineviAdminBundle:Crud:base-list.html.twig' %}
 
 {% set title = 'Cópias Finais' %}
-{% set routeAdd = path('new_cf') %}
-{% set routeCsv = path('cfs_csv') %}
+{% set routeAdd = path('new_copias-finais') %}
+{% set routeCsv = path('copias_finais_csv') %}
 
 {% block addAction %}
     <div class="navbar-form navbar-nav">
@@ -17,9 +17,9 @@
 
 {% block tbody %}
     <td>
-        <a href="{{ path('get_cf', { 'id': item.id }) }}">{{ item.realizacao.titulo }}</a>
+        <a href="{{ path('get_copias-finais', { 'params': item.id }) }}">{{ item.realizacao.titulo }}</a>
     </td>
     <td>
-        <a href="{{ path('get_usuarios', { 'id': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
+        <a href="{{ path('get_usuarios', { 'params': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
     </td>
 {% endblock %}

@@ -6,13 +6,13 @@ projetos_csv:
     path:      /csv/projetos
     defaults:  { _controller: CineviRealizacaoBundle:Projeto:getCsv }
 
-cfs:
+copias_finais:
     type:     rest
-    resource: Cinevi\RealizacaoBundle\Controller\CfController
+    resource: Cinevi\RealizacaoBundle\Controller\CopiaFinalController
 
-cfs_csv:
-    path:      /csv/cfs
-    defaults:  { _controller: CineviRealizacaoBundle:Cf:getCsv }
+copias_finais_csv:
+    path:      /csv/copias-finais
+    defaults:  { _controller: CineviRealizacaoBundle:CopiaFinal:getCsv }
 
 funcs:
     type:     rest

@@ -32,7 +32,6 @@ class CopiaFinalType extends AbstractType
     {
         $projetoArray = array();
 
-        // Pega todos os projetos que o usuário pode editar
         $projetoQB = $this->em->getRepository('CineviRealizacaoBundle:Projeto')->createQueryBuilder('p');
         $projetoQB->orderBy('p.id', 'DESC');
         foreach ($projetoQB->getQuery()->getResult() as $result) {

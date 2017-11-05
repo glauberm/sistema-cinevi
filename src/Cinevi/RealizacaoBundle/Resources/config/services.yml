@@ -7,7 +7,7 @@ services:
         tags:
             - { name: security.voter }
 
-    cinevi.access.realizacao_copia_final:
+    cinevi_realizacao_copia_final.access:
         class: Cinevi\RealizacaoBundle\Authorization\Voter\CopiaFinalVoter
         public: false
         arguments: ['@security.access.decision_manager']
@@ -34,9 +34,9 @@ services:
         tags:
             - { name: form.type, alias: view }
 
-    cinevi.realizacao.copia_final_type:
+    cinevi_realizacao_copia_final.form:
         class: Cinevi\RealizacaoBundle\Form\Type\CopiaFinalType
-        arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker','@cinevi.copia_final_validation']
+        arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker','@cinevi_realizacao_copia_final.validation']
         tags:
             - { name: form.type, alias: view }
 
@@ -47,10 +47,10 @@ services:
             - { name: form.type, alias: view }
 
     # Validation Groups
-    cinevi.copia_final_validation_factory:
+    cinevi_realizacao_copia_final.validation_factory:
         class: Cinevi\RealizacaoBundle\Validation\CopiaFinalValidationGroupResolverFactory
         arguments: ['@security.authorization_checker']
 
-    cinevi.copia_final_validation:
+    cinevi_realizacao_copia_final.validation:
         class: Cinevi\RealizacaoBundle\Validation\CopiaFinalValidationGroupResolver
-        factory: ['@cinevi.copia_final_validation_factory', create]
+        factory: ['@cinevi_realizacao_copia_final.validation_factory', create]

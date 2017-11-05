@@ -11,7 +11,7 @@ use Cinevi\AdminBundle\Controller\RestfulCommonController;
 use Cinevi\ConfigBundle\Form\Type\ConfigType;
 
 /**
- * @RouteResource("Configuracoes", pluralize=false)
+ * @RouteResource("configuracoes", pluralize=false)
  */
 class ConfigController extends RestfulCommonController implements ClassResourceInterface
 {
@@ -19,7 +19,9 @@ class ConfigController extends RestfulCommonController implements ClassResourceI
 
     public function getAction(Request $request)
     {
-        $obj = $this->getConfig($this->getDoctrine()->getManager());
+        $em = $this->getDoctrine()->getManager();
+
+        $obj = $em->getRepository('CineviConfigBundle:Config')->getConfig();
 
         $this->denyAccessUnlessGranted('view', $obj);
 
@@ -28,7 +30,9 @@ class ConfigController extends RestfulCommonController implements ClassResourceI
 
     public function editAction(Request $request)
     {
-        $obj = $this->getConfig($this->getDoctrine()->getManager());
+        $em = $this->getDoctrine()->getManager();
+
+        $obj = $em->getRepository('CineviConfigBundle:Config')->getConfig();
 
         $form = $this->getForm($obj, ConfigType::class, 'PUT', 'put_configuracoes');
 
@@ -39,7 +43,7 @@ class ConfigController extends RestfulCommonController implements ClassResourceI
     {
         $em = $this->getDoctrine()->getManager();
 
-        $obj = $this->getConfig($em);
+        $obj = $em->getRepository('CineviConfigBundle:Config')->getConfig();
 
         $this->denyAccessUnlessGranted('edit', $obj);
 
@@ -59,13 +63,5 @@ class ConfigController extends RestfulCommonController implements ClassResourceI
         }
 
         return $view;
-    }
-
-    private function getConfig(EntityManager $em) {
-        return $em->getRepository('CineviConfigBundle:Config')
-            ->createQueryBuilder('config')
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
     }
 }

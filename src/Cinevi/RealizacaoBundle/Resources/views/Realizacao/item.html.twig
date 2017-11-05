@@ -2,9 +2,9 @@
 <dt>Sinopse</dt><dd class="inherit">{{ item.sinopse }}</dd>
 
 <div class="row">
-    <div class="col-sm-4"><dt>Usuário</dt><dd><a href="{{ path('get_usuarios', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
+    <div class="col-sm-4"><dt>Usuário</dt><dd><a href="{{ path('get_usuarios', { 'params' : item.user.id }) }}">{{ item.user.username }}</a></dd></div>
     <div class="col-sm-4"><dt>Modalidade</dt><dd>{{ item.modalidade }}</dd></div>
-    <div class="col-sm-4"><dt>Professor(a)</dt><dd><a href="{{ path('get_usuarios', {id: item.professor.id}) }}">{{ item.professor.username }}</a></dd></div>
+    <div class="col-sm-4"><dt>Professor(a)</dt><dd><a href="{{ path('get_usuarios', { 'params': item.professor.id }) }}">{{ item.professor.username }}</a></dd></div>
 </div>
 <div class="row">
     <div class="col-sm-6"><dt>Gênero(s)</dt>
