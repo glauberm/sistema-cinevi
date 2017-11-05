@@ -1,0 +1,3 @@
+configuracoes:
+    type:     rest
+    resource: Cinevi\ConfigBundle\Controller\ConfigController

@@ -1,0 +1,8 @@
+{% extends 'CineviAdminBundle:Crud:base-edit.html.twig' %}
+
+{% set title = 'Editar ' ~ item.username %}
+{% set routeList = path('cget_usuarios') %}
+
+{% block form %}
+    {% include 'CineviSecurityBundle:User:form.html.twig' with {form: editForm}  %}
+{% endblock %}

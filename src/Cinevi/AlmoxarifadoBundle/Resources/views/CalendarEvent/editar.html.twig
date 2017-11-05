@@ -1,7 +1,7 @@
-{% extends 'CineviAdminBundle:Crud:base-editar.html.twig' %}
+{% extends 'CineviAdminBundle:Crud:base-edit.html.twig' %}
 
 {% set title = 'Editar Reserva ' ~ item.title %}
-{% set routeListar = path('get_reservas') %}
+{% set routeList = path('get_reservas') %}
 
 {% block form %}
     {% include 'CineviAlmoxarifadoBundle:CalendarEvent:form.html.twig' with {form: editForm}  %}

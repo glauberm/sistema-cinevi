@@ -2,7 +2,5 @@
 
 {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset', 'novalidate': 'novalidate' } }) }}
     {{ form_widget(form) }}
-    <div>
-        <input type="submit" class="btn btn-lg btn-primary btn-block" value="{{ 'resetting.reset.submit'|trans }}" />
-    </div>
+    <input type="submit" class="btn btn-lg btn-primary btn-block" value="{{ 'resetting.reset.submit'|trans }}" />
 {{ form_end(form) }}

@@ -17,11 +17,7 @@ class UserVoter extends BaseVoter
 
     protected function view($obj, $user, TokenInterface $token)
     {
-        if ($this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO')) || $this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO')) || $obj === $user) {
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     }
 
     protected function create($obj, $user, TokenInterface $token)
@@ -35,7 +31,7 @@ class UserVoter extends BaseVoter
 
     protected function edit($obj, $user, TokenInterface $token)
     {
-        if ($this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO')) || $obj === $user) {
+        if ($this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO')) || ($obj === $user && $user->getConfirmado() === true)) {
             return true;
         } else {
             return false;

@@ -38,6 +38,6 @@ class ProfileType extends AbstractType
 
     public function getName()
     {
-        return 'cinevi_profile';
+        return 'cinevi_security_profile';
     }
 }

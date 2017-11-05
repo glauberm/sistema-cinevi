@@ -1,13 +1,13 @@
-{% extends 'CineviAdminBundle:Crud:base-listar.html.twig' %}
+{% extends 'CineviAdminBundle:Crud:base-list.html.twig' %}
 
 {% set title = 'Funções' %}
-{% set routeAdicionar = path('new_func') %}
+{% set routeAdd = path('new_func') %}
 {% set routeCsv = path('funcs_csv') %}
 
 {% block addAction %}
     {% if is_granted('ROLE_DEPARTAMENTO') %}
         <div class="navbar-form navbar-nav">
-            <a class="btn btn-success" href="{{ routeAdicionar }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
+            <a class="btn btn-success" href="{{ routeAdd }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
         </div>
     {% endif %}
 {% endblock %}

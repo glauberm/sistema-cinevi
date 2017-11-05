@@ -1,12 +1,12 @@
-{% extends 'CineviAdminBundle:Crud:base-listar.html.twig' %}
+{% extends 'CineviAdminBundle:Crud:base-list.html.twig' %}
 
 {% set title = 'Cópias Finais' %}
-{% set routeAdicionar = path('new_cf') %}
+{% set routeAdd = path('new_cf') %}
 {% set routeCsv = path('cfs_csv') %}
 
 {% block addAction %}
     <div class="navbar-form navbar-nav">
-        <a class="btn btn-success" href="{{ routeAdicionar }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
+        <a class="btn btn-success" href="{{ routeAdd }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
     </div>
 {% endblock %}
 
@@ -20,6 +20,6 @@
         <a href="{{ path('get_cf', { 'id': item.id }) }}">{{ item.realizacao.titulo }}</a>
     </td>
     <td>
-        <a href="{{ path('get_user', { 'id': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
+        <a href="{{ path('get_usuarios', { 'id': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
     </td>
 {% endblock %}

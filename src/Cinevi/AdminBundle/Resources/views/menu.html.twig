@@ -14,12 +14,12 @@
                         {% include 'CineviAdminBundle:SVG:inicio.html.twig' %}Início
                     </a>
                     {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_users' or app.request.get('_route') == 'new_user' or app.request.get('_route') == 'get_user' or app.request.get('_route') == 'edit_user' or app.request.get('_route') == 'post_user' or app.request.get('_route') == 'put_user' %}active{% endif %}" href="{{ path('get_users') }}">
+                    <a class="list-group-item {% if app.request.get('_route') == 'cget_usuarios' or app.request.get('_route') == 'new_usuarios' or app.request.get('_route') == 'get_usuarios' or app.request.get('_route') == 'edit_usuarios' or app.request.get('_route') == 'post_usuarios' or app.request.get('_route') == 'put_usuarios' %}active{% endif %}" href="{{ path('cget_usuarios') }}">
                         {% include 'CineviAdminBundle:SVG:usuarios.html.twig' %}Usuários
                     </a>
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <a class="list-group-item {% if app.request.get('_route') == 'get_configurations' or app.request.get('_route') == 'new_configuration' or app.request.get('_route') == 'get_configuration' or app.request.get('_route') == 'edit_configuration' or app.request.get('_route') == 'post_configuration' or app.request.get('_route') == 'put_configuration' %}active{% endif %}" href="{{ path('get_configurations') }}">
+                        <a class="list-group-item {% if app.request.get('_route') == 'get_configuracoes' or app.request.get('_route') == 'edit_configuracoes' or app.request.get('_route') == 'put_configuracoes' %}active{% endif %}" href="{{ path('get_configuracoes') }}">
                             {% include 'CineviAdminBundle:SVG:config.html.twig' %}Configurações
                         </a>
                     {% endif %}

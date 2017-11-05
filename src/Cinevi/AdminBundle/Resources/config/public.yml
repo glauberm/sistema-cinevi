@@ -1,3 +1,0 @@
-public:
-    path:      /
-    defaults:  { _controller: CineviAdminBundle:Public:public }

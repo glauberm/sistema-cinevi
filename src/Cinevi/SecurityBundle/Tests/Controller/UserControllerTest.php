@@ -7,7 +7,7 @@ use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 class UserControllerTest extends RestfulCrudControllerTest
 {
     // List
-    protected $indexRoute = 's/users';
+    protected $indexRoute = 's/usuarios';
     // Edit
     protected $itemEditFilter = 'a:contains("TesteU")';
     protected $itemEditLink = 'TesteU';

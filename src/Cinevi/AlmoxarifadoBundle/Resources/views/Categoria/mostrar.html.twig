@@ -1,14 +1,14 @@
-{% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
+{% extends 'CineviAdminBundle:Crud:base-show.html.twig' %}
 
 {% set title = item.nome %}
-{% set routeListar = path('get_categorias') %}
-{% set routeEditar = path('edit_categoria', { 'id': item.id }) %}
+{% set routeList = path('get_categorias') %}
+{% set routeEdit = path('edit_categoria', { 'id': item.id }) %}
 
 {% block maisBotoes %}
     {% block maisBotoesBlock %}{% endblock %}
     {% if is_granted('ROLE_ALMOXARIFADO') %}
         <div class="navbar-form navbar-nav">
-            <a class="btn btn-info" href="{{ routeEditar }}">Editar</a>
+            <a class="btn btn-info" href="{{ routeEdit }}">Editar</a>
         </div>
     {% endif %}
     {% if is_granted('ROLE_SUPER_ADMIN') %}

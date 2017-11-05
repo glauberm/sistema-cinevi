@@ -26,7 +26,6 @@
                 </style>
             <![endif]-->
         {% endblock %}
-        <!-- FAVICONS -->
     	<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
     	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
     	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}">
@@ -40,6 +39,10 @@
     	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
     	<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
     	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+        <!--[if lt IE 9]>
+            <script src="{{ asset('vendor/html5shiv/js/html5shiv.min.js') }}"></script>
+            <script src="{{ asset('vendor/respond/js/respond.min.js') }}"></script>
+        <![endif]-->
     </head>
     <body>
 
@@ -96,7 +99,7 @@
                                 {% endif %}
 
                                 {% block blockConfiguration %}
-                                    {% if configuration is empty %}
+                                    {% if configuration is defined and configuration is empty %}
                                         <div class="alert alert-warning alert-dismissal fade in" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
                                             As configurações ainda não foram criadas. <a href="{{ path('get_configurations') }}" class="alert-link">Crie-as</a> para controlar o funcionamento do sistema.
@@ -124,10 +127,6 @@
         {% endblock %}
 
         {% block javascripts %}
-            <!--[if lt IE 9]>
-                <script src="{{ asset('vendor/html5shiv/js/html5shiv.min.js') }}"></script>
-                <script src="{{ asset('vendor/respond/js/respond.min.js') }}"></script>
-            <![endif]-->
             <script src="{{ asset('vendor/jquery/js/jquery.min.js') }}"></script>
             <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
             <script src="{{ asset('vendor/select2/js/i18n/pt-BR.js') }}"></script>

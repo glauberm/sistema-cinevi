@@ -13,13 +13,13 @@
 
 {% block body_html %}
 
-    {% set _assunto %}
+    {% set _subject %}
         {{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl})|nl2br }}
     {% endset %}
-    {% set _mensagem %}
+    {% set _message %}
         {{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl})|nl2br }}
     {% endset %}
 
-    {% include 'CineviSecurityBundle::email-html.html.twig' with {'assunto': _assunto, 'mensagem': _mensagem } %}
+    {% include 'CineviSecurityBundle::email.html.twig' with {'subject': _subject, 'message': _message } %}
 
 {% endblock %}

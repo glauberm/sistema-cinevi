@@ -6,23 +6,23 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 trait MailerTrait
 {
-    public function sendMail(ContainerInterface $container, $obj, $path, $assunto, $destinatario, $template)
+    public function sendMail(ContainerInterface $container, $obj, $path, $subject, $to, $template)
     {
         $remetente = 'contato@cinemauff.com.br';
 
         // HTML
         $message = \Swift_Message::newInstance()
-            ->setSubject($assunto)
+            ->setSubject($subject)
             ->setFrom($remetente)
-            ->setTo($destinatario)
+            ->setTo($to)
             ->setBody(
                 $container->get('twig')->render(
                     $template.'.html.twig',
                     array(
                         'item' => $obj,
                         'url' => $path,
-                        'assunto' => $assunto,
-                        'destinatario' => $destinatario,
+                        'subject' => $subject,
+                        'to' => $to,
                     )
                 ),
                 'text/html'
@@ -33,8 +33,8 @@ trait MailerTrait
                     array(
                         'item' => $obj,
                         'url' => $path,
-                        'assunto' => $assunto,
-                        'destinatario' => $destinatario,
+                        'subject' => $subject,
+                        'to' => $to,
                     )
                 ),
                 'text/plain'

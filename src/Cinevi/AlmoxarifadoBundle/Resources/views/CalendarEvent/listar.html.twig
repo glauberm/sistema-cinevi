@@ -2,7 +2,7 @@
 
 {% set title = 'Reservas' %}
 {% set routeCsv = path('reservas_csv') %}
-{% set routeAdicionar = path('new_reserva') %}
+{% set routeAdd = path('new_reserva') %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
@@ -16,7 +16,7 @@
     </a>
     {% block addAction %}
         <div class="navbar-form navbar-nav">
-            <a class="btn btn-success" href="{{ routeAdicionar }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
+            <a class="btn btn-success" href="{{ routeAdd }}">{% include 'CineviAdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
         </div>
     {% endblock %}
 {% endblock %}

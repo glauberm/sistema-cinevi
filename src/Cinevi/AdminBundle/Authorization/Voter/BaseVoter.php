@@ -43,14 +43,8 @@ abstract class BaseVoter extends Voter
             return false;
         }
 
-        // Se tiver ROLE_SUPER_ADMIN pode tudo
         if ($this->decisionManager->decide($token, array('ROLE_SUPER_ADMIN'))) {
             return true;
-        }
-
-        // Se não estiver confirmado, não pode fazer nada
-        if ($user->getConfirmado() !== true) {
-            return false;
         }
 
         switch ($attribute) {
@@ -62,9 +56,9 @@ abstract class BaseVoter extends Voter
                 return $this->edit($obj, $user, $token);
             case self::DELETE:
                 return $this->delete($obj, $user, $token);
+            default:
+                return false;
         }
-
-        throw new \LogicException('Você não tem permissão para estar aqui.');
     }
 
     protected function view($obj, $user, TokenInterface $token)

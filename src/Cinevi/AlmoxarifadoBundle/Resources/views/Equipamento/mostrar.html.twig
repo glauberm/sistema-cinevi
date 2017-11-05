@@ -1,8 +1,8 @@
-{% extends 'CineviAdminBundle:Crud:base-mostrar.html.twig' %}
+{% extends 'CineviAdminBundle:Crud:base-show.html.twig' %}
 
 {% set title = item.nome %}
-{% set routeListar = path('get_equipamentos') %}
-{% set routeEditar = path('edit_equipamento', { 'id': item.id }) %}
+{% set routeList = path('get_equipamentos') %}
+{% set routeEdit = path('edit_equipamento', { 'id': item.id }) %}
 
 {% block dtdd %}
 <div class="row">

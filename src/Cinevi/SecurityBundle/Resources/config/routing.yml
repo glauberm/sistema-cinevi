@@ -1,7 +1,7 @@
-users:
+usuarios:
     type:     rest
     resource: Cinevi\SecurityBundle\Controller\UserController
 
-users_csv:
-    path:      /csv/users
+usuarios_csv:
+    path:      /csv/usuarios
     defaults:  { _controller: CineviSecurityBundle:User:getCsv }

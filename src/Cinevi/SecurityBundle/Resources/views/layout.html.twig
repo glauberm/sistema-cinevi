@@ -23,7 +23,6 @@
                 </style>
             <![endif]-->
         {% endblock %}
-        <!-- FAVICONS -->
     	<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
     	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
     	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}">
@@ -37,9 +36,13 @@
     	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
     	<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
     	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+        <!--[if lt IE 9]>
+            <script src="{{ asset('vendor/html5shiv/js/html5shiv.min.js') }}"></script>
+            <script src="{{ asset('vendor/respond/js/respond.min.js') }}"></script>
+        <![endif]-->
     </head>
     <body class="body-security">
-        {% include 'CineviAdminBundle::header-security.html.twig' %}
+        {% include 'CineviSecurityBundle::header-security.html.twig' %}
 
         <div class="content content-security">
             <div class="container">
@@ -63,15 +66,7 @@
                                 {% block fos_user_content %}
                                 {% endblock fos_user_content %}
                             </div>
-
-                            {% block voltar %}
-                                <br/>
-                                <div class="clearfix">
-                                    <div class="pull-left">
-                                        <a class="btn btn-link" href="{{ path('fos_user_profile_show') }}">&laquo; Voltar</a>
-                                    </div>
-                                </div>
-                            {% endblock %}
+                            
                         </div>
                     </main>
 
@@ -90,14 +85,8 @@
         {% block javascripts %}
             <script src="{{ asset('vendor/jquery/js/jquery.min.js') }}"></script>
             <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-            <!--[if lt IE 9]>
-                <script src="{{ asset('vendor/html5shiv/js/html5shiv.min.js') }}"></script>
-                <script src="{{ asset('vendor/respond/js/respond.min.js') }}"></script>
-            <![endif]-->
             <script src="{{ asset('vendor/autosize/js/autosize.min.js') }}"></script>
-            <script>
-                autosize($("textarea.form-control"));
-            </script>
+            <script> autosize($("textarea.form-control")); </script>
             <script src="{{ asset('js/masks.js') }}"></script>
         {% endblock %}
     </body>

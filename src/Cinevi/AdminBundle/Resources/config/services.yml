@@ -1,7 +1,0 @@
-services:
-    cinevi.access.admin_configuration:
-        class: Cinevi\AdminBundle\Authorization\Voter\ConfigurationVoter
-        public: false
-        arguments: ['@security.access.decision_manager']
-        tags:
-            - { name: security.voter }

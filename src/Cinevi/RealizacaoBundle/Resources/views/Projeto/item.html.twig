@@ -10,13 +10,13 @@
     <div class="col-sm-6">
         <dt>Direção</dt>
         {% for user in item.direcao %}
-            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+            <dd><a href="{{ path('get_usuarios', {id : user.id}) }}">{{ user.username }}</a></dd>
         {% endfor %}
     </div>
     <div class="col-sm-6">
         <dt>Produção</dt>
         {% for user in item.producao %}
-            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+            <dd><a href="{{ path('get_usuarios', {id : user.id}) }}">{{ user.username }}</a></dd>
         {% endfor %}
     </div>
 </div>
@@ -25,7 +25,7 @@
     <div class="col-sm-8">
         <dt>Direção de Fotografia</dt>
         {% for user in item.fotografia %}
-            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+            <dd><a href="{{ path('get_usuarios', {id : user.id}) }}">{{ user.username }}</a></dd>
         {% endfor %}
     </div>
     <div class="col-sm-4">
@@ -37,7 +37,7 @@
     <div class="col-sm-8">
         <dt>Direção de Som</dt>
         {% for user in item.som %}
-            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+            <dd><a href="{{ path('get_usuarios', {id : user.id}) }}">{{ user.username }}</a></dd>
         {% endfor %}
     </div>
     <div class="col-sm-4">
@@ -49,7 +49,7 @@
     <div class="col-sm-8">
         <dt>Direção de Arte</dt>
         {% for user in item.arte %}
-            <dd><a href="{{ path('get_user', {id : user.id}) }}">{{ user.username }}</a></dd>
+            <dd><a href="{{ path('get_usuarios', {id : user.id}) }}">{{ user.username }}</a></dd>
         {% endfor %}
     </div>
     <div class="col-sm-4">

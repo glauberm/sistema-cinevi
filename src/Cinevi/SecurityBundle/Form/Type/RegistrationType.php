@@ -38,6 +38,6 @@ class RegistrationType extends AbstractType
 
     public function getName()
     {
-        return 'cinevi_registration';
+        return 'cinevi_security_registration';
     }
 }

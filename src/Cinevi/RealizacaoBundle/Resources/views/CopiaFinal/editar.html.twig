@@ -1,7 +1,7 @@
-{% extends 'CineviAdminBundle:Crud:base-editar.html.twig' %}
+{% extends 'CineviAdminBundle:Crud:base-edit.html.twig' %}
 
 {% set title = 'Editar ' ~ item.realizacao.titulo %}
-{% set routeListar = path('get_cfs') %}
+{% set routeList = path('get_cfs') %}
 
 {% block alerts %}
     {{ parent() }}

@@ -1,0 +1,26 @@
+<div class="text-center">
+    {{ knp_pagination_render(pagination) }}
+</div>
+<div class="clearfix">
+    <div class="pull-left text-left csv-counter">
+        {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+            <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Baixar como tabela</a>
+        {% endif %}
+        <div class="navbar-form">
+            <small>
+                <label class="text-muted">Total de Itens: {{ pagination.getTotalItemCount }}</label>
+            </small>
+        </div>
+    </div>
+    <div class="pull-right text-right">
+        <form name="form_{{ name }}" method="get" novalidate="novalidate" class="navbar-form">
+            <div class="form-group form-group-sm">
+                <small>
+                    <label class="text-muted control-label" for="{{ name }}">Nº de resultados</label>
+                </small>
+                <input id="input_{{ name }}" name="{{ name }}" placeholder="10" class="form-control" type="number" {% if app.request.query.get(name) is defined %} value="{{ app.request.query.get(name) }}" {% endif %}>
+            </div>
+            <button type="submit" class="btn btn-info btn-sm">OK</button>
+        </form>
+    </div>
+</div>

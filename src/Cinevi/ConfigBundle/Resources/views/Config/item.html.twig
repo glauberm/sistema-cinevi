@@ -1,0 +1,11 @@
+<fieldset>
+    <legend>Reservas</legend>
+    <dt>Apenas professores podem realizar reservas?</dt>
+    <dd>{{ item.reservasFechadas ? 'Sim' : 'Não' }}</dd>
+</fieldset>
+
+<fieldset>
+    <legend>Cópias Finais</legend>
+    <dt>Mensagem para Cópias Finais ainda não confirmadas</dt>
+    <dd class="inherit">{{ item.mensagemCopiaFinal ? item.mensagemCopiaFinal|nl2br : 'Não definida' }}</dd>
+</fieldset>

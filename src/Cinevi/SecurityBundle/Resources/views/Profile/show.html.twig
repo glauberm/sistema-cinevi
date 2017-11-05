@@ -1,18 +1,18 @@
 {% extends 'CineviAdminBundle::base.html.twig' %}
 
 {% set title = app.user.username %}
-{% set routeListar = path('index') %}
-{% set routeEditar = path('fos_user_profile_edit') %}
+{% set routeList = path('index') %}
+{% set routeEdit = path('fos_user_profile_edit') %}
 
 {% block blockConfiguration %}{% endblock %}
 
 {% block mainActions %}
-    <a class="navbar-brand btn btn-link" href="{{ routeListar }}">
+    <a class="navbar-brand btn btn-link" href="{{ routeList }}">
         {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
     </a>
     {% if is_granted('edit', user) or app.user == user %}
         <div class="navbar-form navbar-nav">
-            <a class="btn btn-info" href="{{ routeEditar }}">{% include 'CineviAdminBundle:SVG:editar.html.twig' %}<span class="hidden-xs">Editar</span></a>
+            <a class="btn btn-info" href="{{ routeEdit }}">{% include 'CineviAdminBundle:SVG:editar.html.twig' %}<span class="hidden-xs">Editar</span></a>
         </div>
     {% endif %}
 {% endblock %}

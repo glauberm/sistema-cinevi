@@ -1,7 +1,7 @@
-{% extends 'CineviAdminBundle:Crud:base-adicionar.html.twig' %}
+{% extends 'CineviAdminBundle:Crud:base-add.html.twig' %}
 
 {% set title = 'Adicionar Cópia Final' %}
-{% set routeListar = path('get_cfs') %}
+{% set routeList = path('get_cfs') %}
 
 {% block form %}
     {% include 'CineviRealizacaoBundle:CopiaFinal:form.html.twig' with {form: form} %}

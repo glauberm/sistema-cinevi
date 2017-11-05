@@ -1,34 +1,32 @@
 services:
-    # Voters
-    cinevi.access.admin_user:
+
+    cinevi_security_user.access:
         class: Cinevi\SecurityBundle\Authorization\Voter\UserVoter
         public: false
         arguments: ['@security.access.decision_manager']
         tags:
             - { name: security.voter }
 
-    # Forms
-    cinevi.form.admin_user:
+    cinevi_security_user.form:
         class: Cinevi\SecurityBundle\Form\Type\UserType
-        arguments: ['@security.authorization_checker','@cinevi.user_validation']
+        arguments: ['@security.authorization_checker','@cinevi_security_user.validation']
         tags:
             - { name: form.type, alias: view }
 
-    cinevi.form.profile:
+    cinevi_security_profile.form:
         class: Cinevi\SecurityBundle\Form\Type\ProfileType
         tags:
-            - { name: form.type, alias: cinevi_profile }
+            - { name: form.type, alias: cinevi_security_profile }
 
-    cinevi.form.registration:
+    cinevi_security_registration.form:
         class: Cinevi\SecurityBundle\Form\Type\RegistrationType
         tags:
-            - { name: form.type, alias: cinevi_registration }
+            - { name: form.type, alias: cinevi_security_registration }
 
-    # Validation Groups
-    cinevi.user_validation_factory:
+    cinevi_security_user.validation_factory:
         class: Cinevi\SecurityBundle\Validation\UserValidationGroupResolverFactory
         arguments: ['@security.authorization_checker']
 
-    cinevi.user_validation:
+    cinevi_security_user.validation:
         class: Cinevi\SecurityBundle\Validation\UserValidationGroupResolver
-        factory: ['@cinevi.user_validation_factory', create]
+        factory: ['@cinevi_security_user.validation_factory', create]

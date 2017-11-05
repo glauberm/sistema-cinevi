@@ -22,8 +22,11 @@ class AppKernel extends Kernel
             new AncaRebeca\FullCalendarBundle\FullCalendarBundle(),
             new Cinevi\SecurityBundle\CineviSecurityBundle(),
             new Cinevi\AdminBundle\CineviAdminBundle(),
+            new Cinevi\ConfigBundle\CineviConfigBundle(),
+            new Cinevi\IndexBundle\CineviIndexBundle(),
             new Cinevi\AlmoxarifadoBundle\CineviAlmoxarifadoBundle(),
             new Cinevi\RealizacaoBundle\CineviRealizacaoBundle(),
+            new Cinevi\PublicBundle\CineviPublicBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
