@@ -28,7 +28,6 @@ class RealizacaoType extends AbstractType
         $userArray = array();
         $professorArray = array();
 
-        // Pega os usuários que o usuário atual pode ver
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
         $userQB->orderBy('u.username', 'ASC');
         foreach ($userQB->getQuery()->getResult() as $result) {
@@ -37,7 +36,6 @@ class RealizacaoType extends AbstractType
             }
         }
 
-        // Pega todos os professores
         $professorQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('p');
         $professorQB->orderBy('p.username', 'ASC')->where('p.professor = 1');
         foreach ($professorQB->getQuery()->getResult() as $result) {

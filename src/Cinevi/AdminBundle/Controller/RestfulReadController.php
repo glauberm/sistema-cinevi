@@ -59,7 +59,12 @@ abstract class RestfulReadController extends RestfulCommonController implements 
     {
         $em = $this->getDoctrine()->getManager();
 
-        $itens = $em->getRepository($this->bundleName)->getCsv();
+        $repository = $em->getRepository($this->bundleName);
+
+        $qb = $repository->list('item');
+        $qb = $this->list($request, $em, $qb, 'item');
+
+        $itens = $repository->getCsv($qb);
 
         $keys = array();
         foreach ($itens as $item) {

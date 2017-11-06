@@ -1,7 +1,7 @@
 {% extends 'CineviAdminBundle:Crud:base-list.html.twig' %}
 
 {% set title = 'Projetos' %}
-{% set routeAdd = path('new_projeto') %}
+{% set routeAdd = path('new_projetos') %}
 {% set routeCsv = path('projetos_csv') %}
 
 {% block addAction %}
@@ -17,9 +17,9 @@
 
 {% block tbody %}
     <td>
-        <a href="{{ path('get_projeto', { 'id': item.id }) }}">{{ item.realizacao.titulo }}</a>
+        <a href="{{ path('get_projetos', { 'params': item.id }) }}">{{ item.realizacao.titulo }}</a>
     </td>
     <td>
-        <a href="{{ path('get_usuarios', { 'id': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
+        <a href="{{ path('get_usuarios', { 'params': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
     </td>
 {% endblock %}

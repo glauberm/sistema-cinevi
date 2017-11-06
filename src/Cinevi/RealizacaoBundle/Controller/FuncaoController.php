@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
+use FOS\RestBundle\Routing\ClassResourceInterface;
 use Cinevi\AdminBundle\Controller\RestfulCrudController;
 use Cinevi\AdminBundle\Mailer\MailerTrait;
 use Cinevi\RealizacaoBundle\Entity\Funcao;
@@ -14,7 +15,7 @@ use Cinevi\RealizacaoBundle\Form\Type\FuncaoType;
 /**
  * @RouteResource("funcoes", pluralize=false)
  */
-class FuncaoController extends RestfulCrudController
+class FuncaoController extends RestfulCrudController implements ClassResourceInterface
 {
     protected $bundleName = 'CineviRealizacaoBundle:Funcao';
     protected $repositoryName = 'CineviRealizacaoBundle:Funcao';

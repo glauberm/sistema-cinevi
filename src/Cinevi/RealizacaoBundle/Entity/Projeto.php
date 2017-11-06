@@ -5,7 +5,7 @@ namespace Cinevi\RealizacaoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cinevi\RealizacaoBundle\Entity\ProjetoRepository")
  * @ORM\Table(name="realizacao_projetos")
  */
 class Projeto

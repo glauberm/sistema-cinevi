@@ -27,7 +27,7 @@ class ProjetoVoter extends BaseVoter
 
     protected function edit($obj, $user, TokenInterface $token)
     {
-        if (($this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO'))) || ($obj->getRealizacao()->getUser() === $user)) {
+        if (($this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO'))) || ($obj->getRealizacao()->getUser() === $user && $user->getConfirmado() === true)) {
             return true;
         } else {
             return false;

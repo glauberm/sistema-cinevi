@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
+use FOS\RestBundle\Routing\ClassResourceInterface;
 use Cinevi\AdminBundle\Controller\RestfulCrudController;
 use Cinevi\AdminBundle\Mailer\MailerTrait;
 use Cinevi\RealizacaoBundle\Entity\CopiaFinal;
@@ -14,7 +15,7 @@ use Cinevi\RealizacaoBundle\Form\Type\CopiaFinalType;
 /**
  * @RouteResource("copias-finais", pluralize=false)
  */
-class CopiaFinalController extends RestfulCrudController
+class CopiaFinalController extends RestfulCrudController implements ClassResourceInterface
 {
     protected $bundleName = 'CineviRealizacaoBundle:CopiaFinal';
     protected $repositoryName = 'CineviRealizacaoBundle:CopiaFinal';
@@ -61,8 +62,6 @@ class CopiaFinalController extends RestfulCrudController
         if($obj->getConfirmado() == false){
             $this->changeMessage('Criação de cópia final realizada com sucesso!', $em);
         }
-
-        return $obj;
     }
 
     protected function preFormPut($obj, Form $form, EntityManager $em) : Form
@@ -92,8 +91,6 @@ class CopiaFinalController extends RestfulCrudController
         if($obj->getConfirmado() == false){
             $this->changeMessage('Edição de cópia final realizada com sucesso!', $em);
         }
-
-        return $obj;
     }
 
     private function changeMessage($message, EntityManager $em)

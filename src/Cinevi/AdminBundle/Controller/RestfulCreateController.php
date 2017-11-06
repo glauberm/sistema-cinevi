@@ -73,7 +73,7 @@ abstract class RestfulCreateController extends RestfulReadController implements 
     {
         return $return;
     }
-    
+
     protected function preFormPost(Form $form, EntityManager $em) : Form
     {
         return $form;

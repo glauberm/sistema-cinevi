@@ -14,11 +14,9 @@ abstract class CrudRepository extends EntityRepository
         ;
     }
 
-    public function getCsv($builderName = 'item')
+    public function getCsv($qb)
     {
-        return $this
-            ->createQueryBuilder($builderName)
-            ->select($builderName)
+        return $qb
             ->getQuery()
             ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)
         ;

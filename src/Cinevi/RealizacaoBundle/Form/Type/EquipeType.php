@@ -25,14 +25,12 @@ class EquipeType extends AbstractType
         $funcaoArray = array();
         $userArray = array();
 
-        // Pega todas as funções
         $funcaoQB = $this->em->getRepository('CineviRealizacaoBundle:Funcao')->createQueryBuilder('f');
         $funcaoQB->orderBy('f.nome', 'ASC');
         foreach ($funcaoQB->getQuery()->getResult() as $result) {
             $funcaoArray[$result->getNome()] = $result->getId();
         }
 
-        // Pega todos os usuários não-professores
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
         $userQB->orderBy('u.username', 'ASC');
         foreach ($userQB->getQuery()->getResult() as $result) {
