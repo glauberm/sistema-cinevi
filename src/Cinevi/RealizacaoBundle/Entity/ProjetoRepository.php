@@ -12,6 +12,7 @@ class ProjetoRepository extends CrudRepository
             ->createQueryBuilder($builderName)
             ->join('item.realizacao', 'r')
             ->leftJoin('r.user', 'u')
+            ->leftJoin('r.modalidade', 'm')
             ->orderBy($builderName.'.id', 'DESC')
         ;
     }

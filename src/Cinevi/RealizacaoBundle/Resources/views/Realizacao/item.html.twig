@@ -8,7 +8,7 @@
     </div>
     <div class="col-sm-4">
         <dt>Modalidade</dt>
-        <dd>{{ item.modalidade }}</dd>
+        <dd><a href="{{ path('get_modalidades', { 'params': item.modalidade.id }) }}">{{ item.modalidade.nome }}</a></dd>
     </div>
     <div class="col-sm-4">
         <dt>Professor(a)</dt>

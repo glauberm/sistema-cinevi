@@ -33,7 +33,7 @@ class Realizacao
     protected $sinopse;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\Modalidade", cascade={"merge"})
      **/
     protected $modalidade;
 
@@ -127,29 +127,6 @@ class Realizacao
     public function getSinopse()
     {
         return $this->sinopse;
-    }
-
-    /**
-     * Set modalidade
-     *
-     * @param string $modalidade
-     * @return Realizacao
-     */
-    public function setModalidade($modalidade)
-    {
-        $this->modalidade = $modalidade;
-
-        return $this;
-    }
-
-    /**
-     * Get modalidade
-     *
-     * @return string
-     */
-    public function getModalidade()
-    {
-        return $this->modalidade;
     }
 
     /**
@@ -334,5 +311,29 @@ class Realizacao
     public function getCopiaFinal()
     {
         return $this->copiaFinal;
+    }
+
+    /**
+     * Set modalidade
+     *
+     * @param \Cinevi\RealizacaoBundle\Entity\Modalidade $modalidade
+     *
+     * @return Realizacao
+     */
+    public function setModalidade(\Cinevi\RealizacaoBundle\Entity\Modalidade $modalidade = null)
+    {
+        $this->modalidade = $modalidade;
+
+        return $this;
+    }
+
+    /**
+     * Get modalidade
+     *
+     * @return \Cinevi\RealizacaoBundle\Entity\Modalidade
+     */
+    public function getModalidade()
+    {
+        return $this->modalidade;
     }
 }

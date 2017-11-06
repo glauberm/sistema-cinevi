@@ -5,10 +5,10 @@ namespace Cinevi\RealizacaoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Cinevi\RealizacaoBundle\Entity\FuncaoRepository")
- * @ORM\Table(name="realizacao_funcoes")
+ * @ORM\Entity(repositoryClass="Cinevi\RealizacaoBundle\Entity\ModalidadeRepository")
+ * @ORM\Table(name="realizacao_modalidades")
  */
-class Funcao
+class Modalidade
 {
     /**
      * @ORM\Id
@@ -43,7 +43,7 @@ class Funcao
      * Set nome
      *
      * @param string $nome
-     * @return Funcao
+     * @return Modalidade
      */
     public function setNome($nome)
     {
@@ -66,7 +66,7 @@ class Funcao
      * Set descricao
      *
      * @param string $descricao
-     * @return Funcao
+     * @return Modalidade
      */
     public function setDescricao($descricao)
     {
