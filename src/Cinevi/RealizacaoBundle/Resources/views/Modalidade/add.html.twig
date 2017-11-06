@@ -1,0 +1,10 @@
+{% extends 'CineviAdminBundle:Crud:base-add.html.twig' %}
+
+{% set title = 'Adicionar Modalidade' %}
+{% set routeList = path('cget_modalidades') %}
+
+{% block form %}
+
+    {% include 'CineviRealizacaoBundle:Modalidade:form.html.twig' with {form: form} %}
+
+{% endblock %}

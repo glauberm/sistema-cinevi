@@ -74,6 +74,9 @@
                     <a class="list-group-item {% if app.request.get('_route') == 'cget_funcoes' or app.request.get('_route') == 'new_funcoes' or app.request.get('_route') == 'get_funcoes' or app.request.get('_route') == 'edit_funcoes' or app.request.get('_route') == 'post_funcoes' or app.request.get('_route') == 'put_funcoes' %}active{% endif %}" href="{{ path('cget_funcoes') }}">
                         {% include 'CineviAdminBundle:SVG:funcoes.html.twig' %}Funções
                     </a>
+                    <a class="list-group-item {% if app.request.get('_route') == 'cget_modalidades' or app.request.get('_route') == 'new_modalidades' or app.request.get('_route') == 'get_modalidades' or app.request.get('_route') == 'edit_modalidades' or app.request.get('_route') == 'post_modalidades' or app.request.get('_route') == 'put_modalidades' %}active{% endif %}" href="{{ path('cget_modalidades') }}">
+                        {% include 'CineviAdminBundle:SVG:modalidades.html.twig' %}Modalidades
+                    </a>
                 </div>
             </div>
         </div>

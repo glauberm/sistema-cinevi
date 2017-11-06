@@ -1,0 +1,5 @@
+<dt>Nome</dt><dd>{{ item.nome }}</dd>
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Descrição',
+    'item': item.descricao
+} %}

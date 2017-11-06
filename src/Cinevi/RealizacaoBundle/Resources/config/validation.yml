@@ -135,3 +135,9 @@ Cinevi\RealizacaoBundle\Entity\Funcao:
         nome:
             - NotBlank:
                 message: 'Por favor, informe o nome da função (ex.: Direção de Fotografia).'
+
+Cinevi\RealizacaoBundle\Entity\Modalidade:
+    properties:
+        nome:
+            - NotBlank:
+                message: 'Por favor, informe o nome da modalidade.'

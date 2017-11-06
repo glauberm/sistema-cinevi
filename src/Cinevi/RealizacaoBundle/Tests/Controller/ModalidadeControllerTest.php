@@ -4,10 +4,10 @@ namespace Cinevi\AlmoxarifadoBundle\Tests\Controller;
 
 use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 
-class FuncaoControllerTest extends RestfulCrudControllerTest
+class ModalidadeControllerTest extends RestfulCrudControllerTest
 {
     // List
-    protected $indexRoute = 's/funcoes';
+    protected $indexRoute = 's/modalidades';
     // Edit
     protected $itemEditFilter = 'a:contains("TesteF")';
     protected $itemEditLink = 'TesteF';

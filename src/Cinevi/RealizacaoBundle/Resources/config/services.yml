@@ -20,6 +20,13 @@ services:
         tags:
             - { name: security.voter }
 
+    cinevi_realizacao_modalidades.access:
+        class: Cinevi\RealizacaoBundle\Authorization\Voter\ModalidadeVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
     cinevi_realizacao_realizacao.form:
         class: Cinevi\RealizacaoBundle\Form\Type\RealizacaoType
         arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker','@security.token_storage','@cinevi_realizacao_realizacao.validation']

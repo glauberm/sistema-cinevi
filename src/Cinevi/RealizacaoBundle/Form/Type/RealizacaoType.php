@@ -33,6 +33,7 @@ class RealizacaoType extends AbstractType
     {
         $userArray = array();
         $professorArray = array();
+        $modalidadeArray = array();
 
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
         $userQB->orderBy('u.username', 'ASC');
@@ -46,6 +47,12 @@ class RealizacaoType extends AbstractType
         $professorQB->orderBy('p.username', 'ASC')->where('p.professor = 1');
         foreach ($professorQB->getQuery()->getResult() as $result) {
             $professorArray[$result->getUsername()] = $result->getId();
+        }
+
+        $modalidadeQB = $this->em->getRepository('CineviRealizacaoBundle:Modalidade')->createQueryBuilder('m');
+        $modalidadeQB->orderBy('m.nome', 'ASC');
+        foreach ($modalidadeQB->getQuery()->getResult() as $result) {
+            $modalidadeArray[$result->getNome()] = $result->getId();
         }
 
         $builder
@@ -73,18 +80,12 @@ class RealizacaoType extends AbstractType
             ))
             ->add('modalidade', ChoiceType::class, array(
                 'label' => 'Modalidade',
-                'choices' => array(
-                    'Livre Iniciativa' => 'Livre Iniciativa',
-                    'Filme de Realização' => 'Filme de Realização',
-                    'Disciplina Obrigatória' => 'Disciplina Obrigatória',
-                    'Disciplina Não-Obrigatória' => 'Disciplina Não-Obrigatória',
-                    'Edital' => 'Edital',
-                    'Outra' => 'Outra',
-                ),
+                'choices' => $modalidadeArray,
+                'invalid_message' => 'Este não é um valor válido.',
                 'choices_as_values' => true,
                 'attr' => array(
-                    'class' => 'select2-select',
                     'placeholder' => 'Selecione uma opção...',
+                    'class' => 'select2-select',
                 ),
             ))
             ->add('professor', ChoiceType::class, array(
@@ -144,6 +145,9 @@ class RealizacaoType extends AbstractType
         ;
         $builder->get('professor')
             ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviSecurityBundle:User'))
+        ;
+        $builder->get('modalidade')
+            ->addModelTransformer(new EntityToIdObjectTransformer($this->em, 'CineviRealizacaoBundle:Modalidade'))
         ;
     }
 

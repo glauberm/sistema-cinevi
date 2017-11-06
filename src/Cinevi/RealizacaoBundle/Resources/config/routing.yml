@@ -21,3 +21,11 @@ funcoes:
 funcoes_csv:
     path:      /csv/funcoes
     defaults:  { _controller: CineviRealizacaoBundle:Funcao:getCsv }
+
+modalidades:
+    type:     rest
+    resource: Cinevi\RealizacaoBundle\Controller\ModalidadeController
+
+modalidades_csv:
+    path:      /csv/funcoes
+    defaults:  { _controller: CineviRealizacaoBundle:Modalidade:getCsv }
