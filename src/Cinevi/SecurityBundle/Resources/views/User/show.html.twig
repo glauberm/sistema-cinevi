@@ -5,34 +5,46 @@
 {% set routeEdit = path('edit_usuarios', { 'id' : item.id }) %}
 
 {% block dtdd %}
-    <div class="row">
-        <div class="col-sm-6"><dt>Nome Completo</dt><dd>{{ item.username }}</dd></div>
-        <div class="col-sm-6"><dt>Email</dt><dd><a href="mailto:{{ item.email }}">{{ item.email }}</a></dd></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6"><dt>Matrícula/SIAPE</dt><dd>{{ item.matricula }}</dd></div>
-        <div class="col-sm-6"><dt>Professor?</dt><dd>{{ item.professor ? 'Sim' : 'Não' }}</dd></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6"><dt>Telefone</dt><dd><a href="tel:{{ item.telefone }}">{{ item.telefone }}</a></dd></div>
-        <div class="col-sm-6"><dt>Ativo?</dt><dd>{{ item.enabled ? 'Sim' : 'Não' }}</dd></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6"><dt>Confirmado?</dt><dd>{{ item.confirmado ? 'Sim' : 'Não' }}</dd>
+    {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+        <div class="row">
+            <div class="col-sm-6"><dt>Nome Completo</dt><dd>{{ item.username }}</dd></div>
+            <div class="col-sm-6"><dt>Email</dt><dd><a href="mailto:{{ item.email }}">{{ item.email }}</a></dd></div>
         </div>
-        <div class="col-sm-6"><dt>Permissão(ões)</dt>
-            {% for role in item.roles %}
-                {% if role == 'ROLE_SUPER_ADMIN' %}
-                    <dd>Administrador</dd>
-                {% elseif role == 'ROLE_ALMOXARIFADO' %}
-                    <dd>Almoxarifado</dd>
-                {% elseif role == 'ROLE_DEPARTAMENTO' %}
-                    <dd>Departamento</dd>
-                {% else %}
-                    <dd>Usuário</dd>
-                {% endif %}
-            {% endfor %}
+        <div class="row">
+            <div class="col-sm-6"><dt>Matrícula/SIAPE</dt><dd>{{ item.matricula }}</dd></div>
+            <div class="col-sm-6"><dt>Telefone</dt><dd><a href="tel:{{ item.telefone }}">{{ item.telefone }}</a></dd></div>
         </div>
-    </div>
-    <dt>Breve Currículo</dt><dd class="inherit">{{ item.breveCurriculo ? item.breveCurriculo : 'Não informado' }}</dd>
+        <div class="row">
+            <div class="col-sm-4"><dt>Professor?</dt><dd>{{ item.professor ? 'Sim' : 'Não' }}</dd></div>
+            <div class="col-sm-4"><dt>Ativo?</dt><dd>{{ item.enabled ? 'Sim' : 'Não' }}</dd></div>
+            <div class="col-sm-4"><dt>Confirmado?</dt><dd>{{ item.confirmado ? 'Sim' : 'Não' }}</dd></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12"><dt>Permissão(ões)</dt>
+                {% for role in item.roles %}
+                    {% if role == 'ROLE_SUPER_ADMIN' %}
+                        <dd>Administrador</dd>
+                    {% elseif role == 'ROLE_ALMOXARIFADO' %}
+                        <dd>Almoxarifado</dd>
+                    {% elseif role == 'ROLE_DEPARTAMENTO' %}
+                        <dd>Departamento</dd>
+                    {% else %}
+                        <dd>Usuário</dd>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <dt>Nome Completo</dt><dd>{{ item.username }}</dd>
+        <div class="row">
+            <div class="col-sm-4"><dt>Professor?</dt><dd>{{ item.professor ? 'Sim' : 'Não' }}</dd></div>
+            <div class="col-sm-4"><dt>Ativo?</dt><dd>{{ item.enabled ? 'Sim' : 'Não' }}</dd></div>
+            <div class="col-sm-4"><dt>Confirmado?</dt><dd>{{ item.confirmado ? 'Sim' : 'Não' }}</dd></div>
+        </div>
+    {% endif %}
+
+    {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+        'dt': 'Breve Currículo',
+        'item': item.breveCurriculo
+    } %}
 {% endblock %}
