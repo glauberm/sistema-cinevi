@@ -28,7 +28,6 @@ class Funcao
     protected $descricao;
 
 
-
     /**
      * Get id
      *

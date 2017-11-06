@@ -14,14 +14,13 @@ services:
         tags:
             - { name: security.voter }
 
-    cinevi.access.almoxarifado_categoria:
+    cinevi_almoxarifado_categoria.access:
         class: Cinevi\AlmoxarifadoBundle\Authorization\Voter\CategoriaVoter
         public: false
         arguments: ['@security.access.decision_manager']
         tags:
             - { name: security.voter }
 
-    # Form Types
     cinevi.almoxarifado.calendar_event_type:
         class: Cinevi\AlmoxarifadoBundle\Form\Type\CalendarEventType
         arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker', '@security.token_storage']
@@ -40,7 +39,6 @@ services:
         tags:
             - { name: form.type, alias: view }
 
-    # Listener
     cinevi.almoxarifado.load_data_listener:
         class: Cinevi\AlmoxarifadoBundle\Listener\LoadDataListener
         arguments: ['@doctrine.orm.entity_manager','@service_container']

@@ -1,0 +1,11 @@
+{% extends 'CineviAdminBundle:Crud:base-show.html.twig' %}
+
+{% set title = item.nome %}
+{% set routeList = path('cget_reservaveis') %}
+{% set routeEdit = path('edit_reservaveis', { 'id': item.id }) %}
+
+{% block dtdd %}
+
+    {% include 'CineviAlmoxarifadoBundle:Equipamento:item.html.twig' %}
+
+{% endblock %}

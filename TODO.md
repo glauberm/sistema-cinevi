@@ -4,12 +4,8 @@
 - Se o número for "2147483647", colocar alerta de que precisa atualizar o número
 - Tabela de Equipamentos na reserva com paginação, total de itens, etc.
 - Deixar todos os "não informado" como text-muted
-- SVG da UFG embaixo com height fixa
 - Checar os vendors js e css (passar para node_modules)
-
-## Depois
-
-- Permissões no CsvAction
+- Aviso ao deletar Categorias de Reserváveis
 
 ## Possibilidades
 

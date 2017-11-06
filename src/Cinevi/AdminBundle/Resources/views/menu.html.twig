@@ -43,11 +43,11 @@
                     <a class="list-group-item {% if app.request.get('_route') == 'get_reservas' or app.request.get('_route') == 'new_reserva' or app.request.get('_route') == 'get_reserva' or app.request.get('_route') == 'edit_reserva'  or app.request.get('_route') == 'post_reserva' or app.request.get('_route') == 'put_reserva' %}active{% endif %}" href="{{ path('get_reservas') }}">
                         {% include 'CineviAdminBundle:SVG:reservas.html.twig' %}Reservas
                     </a>
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_equipamentos' or app.request.get('_route') == 'new_equipamento' or app.request.get('_route') == 'get_equipamento' or app.request.get('_route') == 'edit_equipamento' or app.request.get('_route') == 'post_equipamento' or app.request.get('_route') == 'put_equipamento' %}active{% endif %}" href="{{ path('get_equipamentos') }}">
-                        {% include 'CineviAdminBundle:SVG:equipamentos.html.twig' %}Reserváveis
+                    <a class="list-group-item {% if app.request.get('_route') == 'cget_reservaveis' or app.request.get('_route') == 'new_reservaveis' or app.request.get('_route') == 'get_reservaveis' or app.request.get('_route') == 'edit_reservaveis' or app.request.get('_route') == 'post_reservaveis' or app.request.get('_route') == 'put_reservaveis' %}active{% endif %}" href="{{ path('cget_reservaveis') }}">
+                        {% include 'CineviAdminBundle:SVG:reservaveis.html.twig' %}Reserváveis
                     </a>
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_categorias' or app.request.get('_route') == 'new_categoria' or app.request.get('_route') == 'get_categoria' or app.request.get('_route') == 'edit_categoria' or app.request.get('_route') == 'post_categoria' or app.request.get('_route') == 'put_categoria' %}active{% endif %}" href="{{ path('get_categorias') }}">
-                        {% include 'CineviAdminBundle:SVG:categorias.html.twig' %}Categorias de Reserváveis
+                    <a class="list-group-item {% if app.request.get('_route') == 'cget_categorias-reservaveis' or app.request.get('_route') == 'new_categorias-reservaveis' or app.request.get('_route') == 'get_categorias-reservaveis' or app.request.get('_route') == 'edit_categorias-reservaveis' or app.request.get('_route') == 'post_categorias-reservaveis' or app.request.get('_route') == 'put_categorias-reservaveis' %}active{% endif %}" href="{{ path('cget_categorias-reservaveis') }}">
+                        {% include 'CineviAdminBundle:SVG:categorias-reservaveis.html.twig' %}Categorias de Reserváveis
                     </a>
                 </div>
             </div>

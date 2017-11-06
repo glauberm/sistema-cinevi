@@ -1,8 +1,8 @@
 {% extends 'CineviAdminBundle:Crud:base-list.html.twig' %}
 
-{% set title = 'Categorias de Reserváveis' %}
-{% set routeAdd = path('new_categoria') %}
-{% set routeCsv = path('categorias_csv') %}
+{% set title = 'Reserváveis' %}
+{% set routeAdd = path('new_reservaveis') %}
+{% set routeCsv = path('reservaveis_csv') %}
 
 {% block addAction %}
     {% if is_granted('ROLE_ALMOXARIFADO') %}
@@ -13,11 +13,9 @@
 {% endblock %}
 
 {% block thead %}
-    <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.nome') }}</th>
+    {% include 'CineviAlmoxarifadoBundle:Equipamento:list-thead.html.twig' %}
 {% endblock %}
 
 {% block tbody %}
-    <td>
-        <a href="{{ path('get_categoria', { 'id': item.id }) }}">{{ item.nome }}</a>
-    </td>
+    {% include 'CineviAlmoxarifadoBundle:Equipamento:list-tbody.html.twig' %}
 {% endblock %}

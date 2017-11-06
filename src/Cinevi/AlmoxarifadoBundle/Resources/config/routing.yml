@@ -1,17 +1,17 @@
-equipamentos:
+reservaveis:
     type:     rest
     resource: Cinevi\AlmoxarifadoBundle\Controller\EquipamentoController
 
-equipamentos_csv:
-    path:      /csv/equipamentos
+reservaveis_csv:
+    path:      /csv/reservaveis
     defaults:  { _controller: CineviAlmoxarifadoBundle:Equipamento:getCsv }
 
-categorias:
+categorias-reservaveis:
     type:     rest
     resource: Cinevi\AlmoxarifadoBundle\Controller\CategoriaController
 
-categorias_csv:
-    path:      /csv/categorias
+categorias-reservaveis_csv:
+    path:      /csv/categorias-reservaveis
     defaults:  { _controller: CineviAlmoxarifadoBundle:Categoria:getCsv }
 
 reservas:

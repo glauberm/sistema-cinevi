@@ -4,7 +4,6 @@ namespace Cinevi\RealizacaoBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Form;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Cinevi\AdminBundle\Controller\RestfulCrudController;

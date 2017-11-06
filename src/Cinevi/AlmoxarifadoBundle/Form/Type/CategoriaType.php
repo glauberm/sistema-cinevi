@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CategoriaType extends AbstractType
 {
@@ -18,6 +19,10 @@ class CategoriaType extends AbstractType
                     'class' => 'input-lg'
                 )
             ))
+            ->add('descricao', TextareaType::class, array(
+                'label' => 'Descrição',
+                'required' => false,
+            ))
         ;
     }
 
@@ -25,7 +30,6 @@ class CategoriaType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Cinevi\AlmoxarifadoBundle\Entity\Categoria',
-
         ));
     }
 }

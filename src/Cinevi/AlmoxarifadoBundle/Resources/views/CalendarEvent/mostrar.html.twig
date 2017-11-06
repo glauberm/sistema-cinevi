@@ -32,7 +32,7 @@
                 {% for equipamento in item.equipamentos %}
                     <tr>
                         <td>{{ equipamento.codigo }}</td>
-                        <td><a href="{{ path('get_equipamento', { 'id': item.id }) }}">{{ equipamento.nome }}</a></td>
+                        <td><a href="{{ path('get_reservaveis', { 'params': item.id }) }}">{{ equipamento.nome }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -124,7 +124,6 @@ class EquipamentoType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Cinevi\AlmoxarifadoBundle\Entity\Equipamento',
-
         ));
     }
 }

@@ -5,7 +5,7 @@ namespace Cinevi\AlmoxarifadoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cinevi\AlmoxarifadoBundle\Entity\CategoriaRepository")
  * @ORM\Table(name="almoxarifado_equipamentos_categorias")
  */
 class Categoria
@@ -23,9 +23,15 @@ class Categoria
     protected $nome;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     **/
+    protected $descricao;
+
+    /**
      * @ORM\OneToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Equipamento", cascade={"merge"}, mappedBy="categoria")
      **/
     protected $equipamentos;
+
 
     /**
      * Get id
@@ -99,5 +105,29 @@ class Categoria
     public function getEquipamentos()
     {
         return $this->equipamentos;
+    }
+
+    /**
+     * Set descricao
+     *
+     * @param string $descricao
+     *
+     * @return Categoria
+     */
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+
+        return $this;
+    }
+
+    /**
+     * Get descricao
+     *
+     * @return string
+     */
+    public function getDescricao()
+    {
+        return $this->descricao;
     }
 }

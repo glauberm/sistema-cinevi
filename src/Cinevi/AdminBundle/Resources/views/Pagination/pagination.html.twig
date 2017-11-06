@@ -3,8 +3,10 @@
 </div>
 <div class="clearfix">
     <div class="pull-left text-left csv-counter">
-        {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
-            <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Baixar como tabela</a>
+        {% if routeCsv is defined and (is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO')) %}
+            <div class="navbar-form">
+                <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Baixar como tabela</a>
+            </div>
         {% endif %}
         <div class="navbar-form">
             <small>
