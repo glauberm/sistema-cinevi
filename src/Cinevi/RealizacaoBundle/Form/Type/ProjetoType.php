@@ -6,17 +6,23 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Cinevi\AdminBundle\Form\Transformer\ArrayEntityToArrayIdObjectTransformer;
+use Cinevi\RealizacaoBundle\Validation\ProjetoValidationGroupResolver;
 
 class ProjetoType extends AbstractType
 {
     private $em;
+    private $tokenStorage;
+    private $groupResolver;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, TokenStorageInterface $tokenStorage, ProjetoValidationGroupResolver $groupResolver)
     {
         $this->em = $em;
+        $this->tokenStorage = $tokenStorage;
+        $this->groupResolver = $groupResolver;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -67,6 +73,7 @@ class ProjetoType extends AbstractType
                     'placeholder' => 'Selecione opções...',
                     'class' => 'select2-select',
                 ),
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('producao', ChoiceType::class, array(
                 'label' => 'Produção',
@@ -78,6 +85,7 @@ class ProjetoType extends AbstractType
                     'placeholder' => 'Selecione opções...',
                     'class' => 'select2-select',
                 ),
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('fotografia', ChoiceType::class, array(
                 'label' => 'Direção de Fotografia',
@@ -89,14 +97,17 @@ class ProjetoType extends AbstractType
                     'placeholder' => 'Selecione opções...',
                     'class' => 'select2-select',
                 ),
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('disciplinaFotografia', ChoiceType::class, array(
                 'label' => ' Já cursou(aram) a disciplina de Fotografia e Iluminação?',
                 'choices' => array(
                     'Sim' => '1',
                 ),
+                'multiple' => true,
                 'choices_as_values' => true,
                 'expanded' => true,
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('som', ChoiceType::class, array(
                 'label' => 'Direção de Som',
@@ -108,14 +119,17 @@ class ProjetoType extends AbstractType
                     'class' => 'select2-select',
                     'placeholder' => 'Selecione opções...',
                 ),
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('disciplinaSom', ChoiceType::class, array(
                 'label' => ' Já cursou(aram) a disciplina de Técnica de Som em Cinema e Audiovisual?',
                 'choices' => array(
                     'Sim' => '1',
                 ),
+                'multiple' => true,
                 'choices_as_values' => true,
                 'expanded' => true,
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('arte', ChoiceType::class, array(
                 'label' => 'Direção de Arte',
@@ -127,14 +141,17 @@ class ProjetoType extends AbstractType
                     'placeholder' => 'Selecione opções...',
                     'class' => 'select2-select',
                 ),
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('disciplinaArte', ChoiceType::class, array(
                 'label' => ' Já cursou(aram) a disciplina de Design Visual?',
                 'choices' => array(
                     'Sim' => '1',
                 ),
+                'multiple' => true,
                 'choices_as_values' => true,
                 'expanded' => true,
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
         ;
 
@@ -159,6 +176,7 @@ class ProjetoType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Cinevi\RealizacaoBundle\Entity\Projeto',
+            'validation_groups' => $this->groupResolver,
         ));
     }
 }

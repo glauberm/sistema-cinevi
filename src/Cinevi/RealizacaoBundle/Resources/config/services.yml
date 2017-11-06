@@ -1,6 +1,5 @@
 services:
-    # Voters
-    cinevi.access.realizacao_projeto:
+    cinevi_realizacao_projeto.access:
         class: Cinevi\RealizacaoBundle\Authorization\Voter\ProjetoVoter
         public: false
         arguments: ['@security.access.decision_manager']
@@ -14,23 +13,22 @@ services:
         tags:
             - { name: security.voter }
 
-    cinevi.access.realizacao_funcoesao:
+    cinevi_realizacao_funcoes.access:
         class: Cinevi\RealizacaoBundle\Authorization\Voter\FuncaoVoter
         public: false
         arguments: ['@security.access.decision_manager']
         tags:
             - { name: security.voter }
 
-    # Form Types
-    cinevi.realizacao.realizacao_type:
+    cinevi_realizacao_realizacao.form:
         class: Cinevi\RealizacaoBundle\Form\Type\RealizacaoType
         arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker']
         tags:
             - { name: form.type, alias: view }
 
-    cinevi.realizacao.projeto_type:
+    cinevi_realizacao_projeto.form:
         class: Cinevi\RealizacaoBundle\Form\Type\ProjetoType
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@doctrine.orm.entity_manager','@security.token_storage','@cinevi_realizacao_projeto.validation']
         tags:
             - { name: form.type, alias: view }
 
@@ -40,13 +38,20 @@ services:
         tags:
             - { name: form.type, alias: view }
 
-    cinevi.realizacao.equipe_type:
+    cinevi_realizacao_equipe.form:
         class: Cinevi\RealizacaoBundle\Form\Type\EquipeType
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: form.type, alias: view }
 
-    # Validation Groups
+    cinevi_realizacao_projeto.validation_factory:
+        class: Cinevi\RealizacaoBundle\Validation\ProjetoValidationGroupResolverFactory
+        arguments: ['@security.token_storage']
+
+    cinevi_realizacao_projeto.validation:
+        class: Cinevi\RealizacaoBundle\Validation\ProjetoValidationGroupResolver
+        factory: ['@cinevi_realizacao_projeto.validation_factory', create]
+
     cinevi_realizacao_copia_final.validation_factory:
         class: Cinevi\RealizacaoBundle\Validation\CopiaFinalValidationGroupResolverFactory
         arguments: ['@security.authorization_checker']

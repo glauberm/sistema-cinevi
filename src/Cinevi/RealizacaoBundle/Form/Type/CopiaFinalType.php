@@ -20,6 +20,7 @@ class CopiaFinalType extends AbstractType
 {
     private $em;
     private $authorizationChecker;
+    private $groupResolver;
 
     public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker, CopiaFinalValidationGroupResolver $groupResolver)
     {
