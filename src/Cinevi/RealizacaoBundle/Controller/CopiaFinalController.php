@@ -58,12 +58,9 @@ class CopiaFinalController extends RestfulCrudController
             $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
         }
 
-        $config = $em->getRepository('CineviConfigBundle:Config')->getConfig();
-        $mensagem = 'Criação de cópia final realizada com sucesso!';
-        if($config && $config->getMensagemCopiaFinal()) {
-            $mensagem .= ' '.$config->getMensagemCopiaFinal();
+        if($obj->getConfirmado() == false){
+            $this->changeMessage('Criação de cópia final realizada com sucesso!', $em);
         }
-        $this->get('session')->getFlashBag()->set('success', $mensagem);
 
         return $obj;
     }
@@ -80,7 +77,7 @@ class CopiaFinalController extends RestfulCrudController
         if($this->confirmed == false && $obj->getConfirmado() == true) {
             $subject = 'Confirmação de Cópia Final: '.$obj->getRealizacao()->getTitulo();
             $path = $this->generateUrl('get_copias-finais', array(
-                'id' => $obj->getId()
+                'params' => $obj->getId()
             ), true);
             $template = $this->bundleName.':email-confirmacao';
             $emailsConfirmacao = array(
@@ -92,6 +89,21 @@ class CopiaFinalController extends RestfulCrudController
             }
         }
 
+        if($obj->getConfirmado() == false){
+            $this->changeMessage('Edição de cópia final realizada com sucesso!', $em);
+        }
+
         return $obj;
+    }
+
+    private function changeMessage($message, EntityManager $em)
+    {
+        $config = $em->getRepository('CineviConfigBundle:Config')->getConfig();
+
+        if($config && $config->getMensagemCopiaFinal()) {
+            $message .= ' '.$config->getMensagemCopiaFinal();
+        }
+
+        $this->get('session')->getFlashBag()->set('success', $message);
     }
 }

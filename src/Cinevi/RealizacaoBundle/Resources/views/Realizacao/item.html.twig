@@ -2,19 +2,38 @@
 <dt>Sinopse</dt><dd class="inherit">{{ item.sinopse }}</dd>
 
 <div class="row">
-    <div class="col-sm-4"><dt>Usuário</dt><dd><a href="{{ path('get_usuarios', { 'params' : item.user.id }) }}">{{ item.user.username }}</a></dd></div>
-    <div class="col-sm-4"><dt>Modalidade</dt><dd>{{ item.modalidade }}</dd></div>
-    <div class="col-sm-4"><dt>Professor(a)</dt><dd><a href="{{ path('get_usuarios', { 'params': item.professor.id }) }}">{{ item.professor.username }}</a></dd></div>
-</div>
-<div class="row">
-    <div class="col-sm-6"><dt>Gênero(s)</dt>
-        {% for genero in item.genero %}
-            <dd>{{ genero }}</dd>
-        {% endfor %}
+    <div class="col-sm-4">
+        <dt>Usuário</dt>
+        <dd><a href="{{ path('get_usuarios', { 'params' : item.user.id }) }}">{{ item.user.username }}</a></dd>
     </div>
-    <div class="col-sm-6"><dt>Captação</dt><dd>{{ item.captacao }}</dd></div>
+    <div class="col-sm-4">
+        <dt>Modalidade</dt>
+        <dd>{{ item.modalidade }}</dd>
+    </div>
+    <div class="col-sm-4">
+        <dt>Professor(a)</dt>
+        <dd><a href="{{ path('get_usuarios', { 'params': item.professor.id }) }}">{{ item.professor.username }}</a></dd>
+    </div>
 </div>
 <div class="row">
-    <div class="col-sm-6"><dt>Detalhes da Captação</dt><dd class="inherit">{{ item.detalhesCaptacao ? item.detalhesCaptacao : 'Não Informado'}}</dd></div>
-    <div class="col-sm-6"><dt>Locação(ões)</dt><dd class="inherit">{{ item.locacoes }}</dd></div>
+    <div class="col-sm-6">
+        <dt>Gênero(s)</dt>
+        <dd>{{ item.genero|join(', ') }}</dd>
+    </div>
+    <div class="col-sm-6">
+        <dt>Captação</dt>
+        <dd>{{ item.captacao }}</dd>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+            'dt': 'Detalhes da Captação',
+            'item': item.detalhesCaptacao
+        } %}
+    </div>
+    <div class="col-sm-6">
+        <dt>Locação(ões)</dt>
+        <dd class="inherit">{{ item.locacoes }}</dd>
+    </div>
 </div>

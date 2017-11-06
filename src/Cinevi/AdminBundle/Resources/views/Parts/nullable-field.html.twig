@@ -1,0 +1,23 @@
+<dt>{{ dt }}</dt>
+{% if item is defined and item != null %}
+
+    {% if dd is not defined %}
+        {% set dd = item %}
+    {% endif %}
+
+    {% if link is defined and link != null %}
+        {% if target is defined and target != null %}
+            <a href="{{ link }}" target="{{ target }}"><dd>{{ dd }}</dd></a>
+        {% else %}
+            <a href="{{ link }}"><dd>{{ dd }}</dd></a>
+        {% endif %}
+    {% else %}
+        {% if inherit is defined %}
+            <dd class="inherit">{{ dd }}</dd>
+        {% else %}
+            <dd>{{ dd }}</dd>
+        {% endif %}
+    {% endif %}
+{% else %}
+    <dd class="text-muted inherit">Não informada(o)</dd>
+{% endif %}
