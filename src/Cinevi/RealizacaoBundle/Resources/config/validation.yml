@@ -21,12 +21,15 @@ Cinevi\RealizacaoBundle\Entity\Realizacao:
         genero:
             - NotBlank:
                 message: 'Por favor, informe pelo menos um gênero.'
+                groups: [notProfessor]
         captacao:
             - NotBlank:
                 message: 'Por favor, informe o tipo de captação.'
+                groups: [notProfessor]
         locacoes:
             - NotBlank:
                 message: 'Por favor, informe a(s) locação(ões).'
+                groups: [notProfessor]
 
 Cinevi\RealizacaoBundle\Entity\Projeto:
     properties:
@@ -35,16 +38,19 @@ Cinevi\RealizacaoBundle\Entity\Projeto:
         preProducao:
             - NotBlank:
                 message: 'Por favor, informe a data de pré-produção do projeto.'
+                groups: [notProfessor]
             - Date:
                 message: 'Por favor, informe uma data no formato DD/MM/AAAA.'
         dataProducao:
             - NotBlank:
                 message: 'Por favor, informe a data de produção do projeto.'
+                groups: [notProfessor]
             - Date:
                 message: 'Por favor, informe uma data no formato DD/MM/AAAA.'
         posProducao:
             - NotBlank:
                 message: 'Por favor, informe a data de pós-produção do projeto.'
+                groups: [notProfessor]
             - Date:
                 message: 'Por favor, informe uma data no formato DD/MM/AAAA.'
         direcao:

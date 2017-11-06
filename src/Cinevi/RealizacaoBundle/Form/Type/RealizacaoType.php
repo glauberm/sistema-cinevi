@@ -7,20 +7,26 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
+use Cinevi\RealizacaoBundle\Validation\RealizacaoValidationGroupResolver;
 
 class RealizacaoType extends AbstractType
 {
     private $em;
     private $authorizationChecker;
+    private $tokenStorage;
+    private $groupResolver;
 
-    public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage, RealizacaoValidationGroupResolver $groupResolver)
     {
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
+        $this->tokenStorage = $tokenStorage;
+        $this->groupResolver = $groupResolver;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -106,6 +112,7 @@ class RealizacaoType extends AbstractType
                     'class' => 'select2-select',
                     'placeholder' => 'Selecione opções...',
                 ),
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('captacao', ChoiceType::class, array(
                 'label' => 'Captação',
@@ -120,6 +127,7 @@ class RealizacaoType extends AbstractType
                     'placeholder' => 'Selecione uma opção...',
                     'class' => 'select2-select',
                 ),
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('detalhesCaptacao', TextareaType::class, array(
                 'label' => 'Detalhes da Captação',
@@ -127,6 +135,7 @@ class RealizacaoType extends AbstractType
             ))
             ->add('locacoes', TextareaType::class, array(
                 'label' => 'Locações',
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
         ;
 
@@ -142,6 +151,7 @@ class RealizacaoType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Cinevi\RealizacaoBundle\Entity\Realizacao',
+            'validation_groups' => $this->groupResolver,
         ));
     }
 }

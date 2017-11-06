@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Cinevi\AdminBundle\Form\Transformer\ArrayEntityToArrayIdObjectTransformer;
-use Cinevi\RealizacaoBundle\Validation\ProjetoValidationGroupResolver;
+use Cinevi\RealizacaoBundle\Validation\RealizacaoValidationGroupResolver;
 
 class ProjetoType extends AbstractType
 {
@@ -18,7 +18,7 @@ class ProjetoType extends AbstractType
     private $tokenStorage;
     private $groupResolver;
 
-    public function __construct(EntityManager $em, TokenStorageInterface $tokenStorage, ProjetoValidationGroupResolver $groupResolver)
+    public function __construct(EntityManager $em, TokenStorageInterface $tokenStorage, RealizacaoValidationGroupResolver $groupResolver)
     {
         $this->em = $em;
         $this->tokenStorage = $tokenStorage;
@@ -46,6 +46,7 @@ class ProjetoType extends AbstractType
                 'attr' => array(
                     'class' => 'datepicker',
                 ),
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('dataProducao', DateType::class, array(
                 'label' => 'Produção',
@@ -54,6 +55,7 @@ class ProjetoType extends AbstractType
                 'attr' => array(
                     'class' => 'datepicker',
                 ),
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('posProducao', DateType::class, array(
                 'label' => 'Pós-Produção',
@@ -62,6 +64,7 @@ class ProjetoType extends AbstractType
                 'attr' => array(
                     'class' => 'datepicker',
                 ),
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
             ))
             ->add('direcao', ChoiceType::class, array(
                 'label' => 'Direção',
@@ -104,10 +107,10 @@ class ProjetoType extends AbstractType
                 'choices' => array(
                     'Sim' => '1',
                 ),
-                'multiple' => true,
                 'choices_as_values' => true,
                 'expanded' => true,
-                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor(),
+                'placeholder' => 'Não informado'
             ))
             ->add('som', ChoiceType::class, array(
                 'label' => 'Direção de Som',
@@ -126,10 +129,10 @@ class ProjetoType extends AbstractType
                 'choices' => array(
                     'Sim' => '1',
                 ),
-                'multiple' => true,
                 'choices_as_values' => true,
                 'expanded' => true,
-                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor(),
+                'placeholder' => 'Não informado'
             ))
             ->add('arte', ChoiceType::class, array(
                 'label' => 'Direção de Arte',
@@ -148,10 +151,10 @@ class ProjetoType extends AbstractType
                 'choices' => array(
                     'Sim' => '1',
                 ),
-                'multiple' => true,
                 'choices_as_values' => true,
                 'expanded' => true,
-                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor()
+                'required' => !$this->tokenStorage->getToken()->getUser()->getProfessor(),
+                'placeholder' => 'Não informado'
             ))
         ;
 

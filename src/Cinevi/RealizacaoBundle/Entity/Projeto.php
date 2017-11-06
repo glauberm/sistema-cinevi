@@ -23,17 +23,17 @@ class Projeto
     protected $realizacao;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      **/
     protected $preProducao;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      **/
     protected $dataProducao;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      **/
     protected $posProducao;
 
@@ -56,7 +56,7 @@ class Projeto
     protected $fotografia;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      **/
     protected $disciplinaFotografia;
 
@@ -67,7 +67,7 @@ class Projeto
     protected $som;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      **/
     protected $disciplinaSom;
 
@@ -78,7 +78,7 @@ class Projeto
     protected $arte;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      **/
     protected $disciplinaArte;
 

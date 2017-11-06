@@ -18,10 +18,6 @@ class CopiaFinalValidationGroupResolver
     {
         $groups = array('Default');
 
-        if(!$form->getData()->getId()) {
-            array_push($groups, 'new');
-        }
-
         if($this->authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
             array_push($groups, 'departamento');
         }

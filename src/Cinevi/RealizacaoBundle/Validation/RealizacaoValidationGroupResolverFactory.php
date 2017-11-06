@@ -4,7 +4,7 @@ namespace Cinevi\RealizacaoBundle\Validation;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ProjetoValidationGroupResolverFactory
+class RealizacaoValidationGroupResolverFactory
 {
     private $tokenStorage;
 
@@ -15,8 +15,8 @@ class ProjetoValidationGroupResolverFactory
 
     public function create()
     {
-        $projetoValidationGroupResolver = new ProjetoValidationGroupResolver($this->tokenStorage);
+        $realizacaoValidationGroupResolver = new RealizacaoValidationGroupResolver($this->tokenStorage);
 
-        return $projetoValidationGroupResolver;
+        return $realizacaoValidationGroupResolver;
     }
 }

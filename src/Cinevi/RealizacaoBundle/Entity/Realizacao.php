@@ -43,17 +43,17 @@ class Realizacao
     protected $professor;
 
     /**
-     * @ORM\Column(type="simple_array")
+     * @ORM\Column(type="simple_array", nullable=true)
      **/
     protected $genero;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      **/
     protected $locacoes;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      **/
     protected $captacao;
 

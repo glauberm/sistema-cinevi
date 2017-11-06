@@ -22,13 +22,13 @@ services:
 
     cinevi_realizacao_realizacao.form:
         class: Cinevi\RealizacaoBundle\Form\Type\RealizacaoType
-        arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker']
+        arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker','@security.token_storage','@cinevi_realizacao_realizacao.validation']
         tags:
             - { name: form.type, alias: view }
 
     cinevi_realizacao_projeto.form:
         class: Cinevi\RealizacaoBundle\Form\Type\ProjetoType
-        arguments: ['@doctrine.orm.entity_manager','@security.token_storage','@cinevi_realizacao_projeto.validation']
+        arguments: ['@doctrine.orm.entity_manager','@security.token_storage','@cinevi_realizacao_realizacao.validation']
         tags:
             - { name: form.type, alias: view }
 
@@ -44,13 +44,13 @@ services:
         tags:
             - { name: form.type, alias: view }
 
-    cinevi_realizacao_projeto.validation_factory:
-        class: Cinevi\RealizacaoBundle\Validation\ProjetoValidationGroupResolverFactory
+    cinevi_realizacao_realizacao.validation_factory:
+        class: Cinevi\RealizacaoBundle\Validation\RealizacaoValidationGroupResolverFactory
         arguments: ['@security.token_storage']
 
-    cinevi_realizacao_projeto.validation:
-        class: Cinevi\RealizacaoBundle\Validation\ProjetoValidationGroupResolver
-        factory: ['@cinevi_realizacao_projeto.validation_factory', create]
+    cinevi_realizacao_realizacao.validation:
+        class: Cinevi\RealizacaoBundle\Validation\RealizacaoValidationGroupResolver
+        factory: ['@cinevi_realizacao_realizacao.validation_factory', create]
 
     cinevi_realizacao_copia_final.validation_factory:
         class: Cinevi\RealizacaoBundle\Validation\CopiaFinalValidationGroupResolverFactory

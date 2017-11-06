@@ -5,7 +5,7 @@ namespace Cinevi\RealizacaoBundle\Validation;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ProjetoValidationGroupResolver
+class RealizacaoValidationGroupResolver
 {
     private $tokenStorage;
 
