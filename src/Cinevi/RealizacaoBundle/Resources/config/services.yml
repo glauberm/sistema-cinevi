@@ -14,7 +14,7 @@ services:
         tags:
             - { name: security.voter }
 
-    cinevi.access.realizacao_funcao:
+    cinevi.access.realizacao_funcoesao:
         class: Cinevi\RealizacaoBundle\Authorization\Voter\FuncaoVoter
         public: false
         arguments: ['@security.access.decision_manager']

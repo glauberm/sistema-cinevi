@@ -1,3 +1,5 @@
 <dt>Nome</dt><dd>{{ item.nome }}</dd>
-
-<dt>Descrição</dt><dd class="inherit">{{ item.descricao ? item.descricao : 'Não Informada(o)' }}</dd>
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Descrição',
+    'item': item.descricao
+} %}

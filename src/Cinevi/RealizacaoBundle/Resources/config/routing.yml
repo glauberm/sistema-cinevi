@@ -14,10 +14,10 @@ copias_finais_csv:
     path:      /csv/copias-finais
     defaults:  { _controller: CineviRealizacaoBundle:CopiaFinal:getCsv }
 
-funcs:
+funcoes:
     type:     rest
-    resource: Cinevi\RealizacaoBundle\Controller\FuncController
+    resource: Cinevi\RealizacaoBundle\Controller\FuncaoController
 
-funcs_csv:
-    path:      /csv/funcs
-    defaults:  { _controller: CineviRealizacaoBundle:Func:getCsv }
+funcoes_csv:
+    path:      /csv/funcoes
+    defaults:  { _controller: CineviRealizacaoBundle:Funcao:getCsv }

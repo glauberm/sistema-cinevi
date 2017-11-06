@@ -1,8 +1,8 @@
 {% extends 'CineviAdminBundle:Crud:base-show.html.twig' %}
 
 {% set title = item.nome %}
-{% set routeList = path('get_funcs') %}
-{% set routeEdit = path('edit_func', { 'id': item.id }) %}
+{% set routeList = path('cget_funcoes') %}
+{% set routeEdit = path('edit_funcoes', { 'id': item.id }) %}
 
 {% block dtdd %}
 
