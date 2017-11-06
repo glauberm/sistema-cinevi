@@ -17,12 +17,16 @@
 </div>
 <div class="row">
     <div class="col-sm-6">
-        <dt>Gênero(s)</dt>
-        <dd>{{ item.genero|join(', ') }}</dd>
+        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+            'dt': 'Gênero(s)',
+            'item': item.genero|join(', ')
+        } %}
     </div>
     <div class="col-sm-6">
-        <dt>Captação</dt>
-        <dd>{{ item.captacao }}</dd>
+        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+            'dt': 'Captação',
+            'item': item.captacao
+        } %}
     </div>
 </div>
 <div class="row">
@@ -33,7 +37,9 @@
         } %}
     </div>
     <div class="col-sm-6">
-        <dt>Locação(ões)</dt>
-        <dd class="inherit">{{ item.locacoes }}</dd>
+        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+            'dt': 'Locação(ões)',
+            'item': item.locacoes
+        } %}
     </div>
 </div>

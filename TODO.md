@@ -1,9 +1,7 @@
 # TO-DO
 
 - Nova organização dos controllers
-- Projetos com disciplina e tal
 - Se o número for "2147483647", colocar alerta de que precisa atualizar o número
-- Tirar link para usuário de não tiver permissão para ver usuário
 - Tabela de Equipamentos na reserva com paginação, total de itens, etc.
 - "Não informado" no link para o vídeo na cópia final.
 - Deixar todos os "não informado" como text-muted
