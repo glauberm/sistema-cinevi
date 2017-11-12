@@ -7,23 +7,21 @@ use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 use Cinevi\SecurityBundle\Entity\User;
 use Cinevi\RealizacaoBundle\Entity\Realizacao;
 use Cinevi\RealizacaoBundle\Entity\Projeto;
+use Cinevi\RealizacaoBundle\Entity\Modalidade;
 use Cinevi\AlmoxarifadoBundle\Entity\Categoria;
 use Cinevi\AlmoxarifadoBundle\Entity\Equipamento;
 
 class CalendarEventControllerTest extends RestfulCrudControllerTest
 {
-    // List
     protected $indexRoute = 's/reservas';
-    // Edit
     protected $itemEditFilter = 'a:contains("13/06/2018")';
     protected $itemEditLink = '13/06/2018';
-    // Remove
     protected $itemRemoveLink = "12\/06\/2018";
     protected $itemRemoveFilter = '[value="12/06/2018"]';
-    // Entities
     private $em;
     private $userId;
     private $professorId;
+    private $modalidadeId;
     private $projetoId;
     private $categoriaId;
     private $equipamentoId;
@@ -58,11 +56,14 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
         $professor->setProfessor(true);
         $professor->setRoles(array());
 
+        $modalidade = new Modalidade();
+        $modalidade->setNome('ModalidadeX');
+
         $realizacao = new Realizacao();
         $realizacao->setUser($user);
         $realizacao->setTitulo('RealizacaoX');
         $realizacao->setSinopse('Lorem Ipsum Dolor Sit Amet.');
-        $realizacao->setModalidade('Livre Iniciativa');
+        $realizacao->setModalidade($modalidade);
         $realizacao->setProfessor($professor);
         $realizacao->setGenero(array('Ficção'));
         $realizacao->setCaptacao('Vídeo');
@@ -98,6 +99,7 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
 
         $this->em->persist($user);
         $this->em->persist($professor);
+        $this->em->persist($modalidade);
         $this->em->persist($projeto);
         $this->em->persist($categoria);
         $this->em->persist($equipamento);
@@ -105,6 +107,7 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
 
         $this->userId = $user->getId();
         $this->professorId = $professor->getId();
+        $this->modalidadeId = $modalidade->getId();
         $this->projetoId = $projeto->getId();
         $this->categoriaId = $categoria->getId();
         $this->equipamentoId = $equipamento->getId();
@@ -138,12 +141,14 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
 
         $user = $this->em->getRepository('CineviSecurityBundle:User')->find($this->userId);
         $professor = $this->em->getRepository('CineviSecurityBundle:User')->find($this->professorId);
+        $modalidade = $this->em->getRepository('CineviRealizacaoBundle:Modalidade')->find($this->modalidadeId);
         $projeto = $this->em->getRepository('CineviRealizacaoBundle:Projeto')->find($this->projetoId);
         $categoria = $this->em->getRepository('CineviAlmoxarifadoBundle:Categoria')->find($this->categoriaId);
         $equipamento = $this->em->getRepository('CineviAlmoxarifadoBundle:Equipamento')->find($this->equipamentoId);
 
         $this->em->remove($user);
         $this->em->remove($professor);
+        $this->em->remove($modalidade);
         $this->em->remove($projeto);
         $this->em->remove($categoria);
         $this->em->remove($equipamento);
@@ -151,11 +156,12 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
 
         $this->userId = null;
         $this->professorId = null;
+        $this->modalidadeId = null;
         $this->projetoId = null;
         $this->categoriaId = null;
         $this->equipamentoId = null;
 
         $this->em->close();
-        $this->em = null; // avoid memory leaks
+        $this->em = null;
     }
 }

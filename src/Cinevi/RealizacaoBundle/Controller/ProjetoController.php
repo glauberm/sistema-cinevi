@@ -18,14 +18,14 @@ use Cinevi\RealizacaoBundle\Form\Type\ProjetoType;
  */
 class ProjetoController extends RestfulCrudController implements ClassResourceInterface
 {
+    use MailerTrait;
+
     protected $bundleName = 'CineviRealizacaoBundle:Projeto';
     protected $repositoryName = 'CineviRealizacaoBundle:Projeto';
     protected $className = Projeto::class;
     protected $routeSuffix = 'projetos';
     protected $formClassName = ProjetoType::class;
     protected $paramsKey = 'id';
-
-    use MailerTrait;
 
     protected function postFormPost(Form $form, EntityManager $em) : Form
     {

@@ -17,6 +17,8 @@ use Cinevi\AlmoxarifadoBundle\Form\Type\EquipamentoType;
  */
 class EquipamentoController extends RestfulCrudController implements ClassResourceInterface
 {
+    use MailerTrait;
+
     protected $bundleName = 'CineviAlmoxarifadoBundle:Equipamento';
     protected $repositoryName = 'CineviAlmoxarifadoBundle:Equipamento';
     protected $className = Equipamento::class;
@@ -25,8 +27,6 @@ class EquipamentoController extends RestfulCrudController implements ClassResour
     protected $paramsKey = 'id';
     private $manutencao;
     private $atrasado;
-
-    use MailerTrait;
 
     protected function preFormPut($obj, Form $form, EntityManager $em) : Form
     {

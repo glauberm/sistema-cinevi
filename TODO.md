@@ -1,6 +1,5 @@
 # TO-DO
 
-- Finalizar CalendarEvent
 - Testar tudo
 - Se o número for "2147483647", colocar alerta de que precisa atualizar o número
 - Tabela de Equipamentos na reserva com paginação, total de itens, etc.
@@ -8,14 +7,7 @@
 - Deixar todos os "não informado" como text-muted
 - Checar os vendors js e css (passar para node_modules)
 - Aviso ao deletar Categorias de Reserváveis
-
-
-## Página de Reservas
-- Container-Fluid
-- Reservas seguindo padrão btn-sm (12px, padding 1px 5px)
-- Reservas do dia com bgs do bootstrap
-- Dia atual com azul claro do bg-info
-- Text-tranform: uppercase no mês-ano do calendário
+- Todas as rotas com métodos definidos
 
 ## Possibilidades
 

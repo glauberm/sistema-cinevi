@@ -4,28 +4,23 @@ namespace Cinevi\AdminBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+// exit(var_dump($this->client->getResponse()->getContent()));
+
 abstract class RestfulCrudControllerTest extends WebTestCase
 {
     protected $client;
-    // Login
     protected $username = 'admin';
     protected $password = '12345678';
-    // List
     protected $indexRoute;
-    // Add
     protected $addLink = 'Adicionar';
     protected $addButton = 'Salvar';
-    // Edit
     protected $itemEditFilter;
     protected $itemEditLink;
     protected $editLink = 'Editar';
     protected $editButton = 'Salvar';
-    // Remove
     protected $itemRemoveLink;
     protected $itemRemoveFilter;
     protected $removeButton = 'Remover';
-
-    // exit(var_dump($this->client->getResponse()->getContent()));
 
     public function testCompleteScenario()
     {
@@ -46,7 +41,7 @@ abstract class RestfulCrudControllerTest extends WebTestCase
 
     protected function doLogin($username, $password)
     {
-        $crawler = $this->client->request('GET', '/login');
+        $crawler = $this->client->request('GET', '/entrar');
 
         $form = $crawler->selectButton('_submit')->form(array(
             '_username' => $username,
@@ -55,7 +50,6 @@ abstract class RestfulCrudControllerTest extends WebTestCase
 
         $this->client->submit($form);
 
-        // Checa o login
         $this->assertTrue($this->client->getResponse()->isRedirect());
 
         return $this->client->followRedirect();
@@ -65,7 +59,7 @@ abstract class RestfulCrudControllerTest extends WebTestCase
     {
         $crawler = $this->client->request('GET', '/'.$indexRoute);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Código de status HTTP inesperado para GET /'.$indexRoute);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP code for GET /'.$indexRoute);
 
         return $crawler;
     }

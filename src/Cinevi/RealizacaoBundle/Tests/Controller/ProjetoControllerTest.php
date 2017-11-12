@@ -5,21 +5,19 @@ namespace Cinevi\RealizacaoBundle\Tests\Controller;
 use Doctrine\ORM\EntityManager;
 use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 use Cinevi\SecurityBundle\Entity\User;
+use Cinevi\RealizacaoBundle\Entity\Modalidade;
 
 class ProjetoControllerTest extends RestfulCrudControllerTest
 {
-    // List
     protected $indexRoute = 's/projetos';
-    // Edit
     protected $itemEditFilter = 'a:contains("TesteP")';
     protected $itemEditLink = 'TesteP';
-    // Remove
     protected $itemRemoveLink = 'PEtset';
     protected $itemRemoveFilter = '[value="PEtset"]';
-    // Entities
     private $em;
     private $userId;
     private $professorId;
+    private $modalidadeId;
 
     protected function setUp()
     {
@@ -51,12 +49,17 @@ class ProjetoControllerTest extends RestfulCrudControllerTest
         $professor->setProfessor(true);
         $professor->setRoles(array('ROLE_SUPER_ADMIN'));
 
+        $modalidade = new Modalidade();
+        $modalidade->setNome('ModalidadeX');
+
         $this->em->persist($user);
         $this->em->persist($professor);
+        $this->em->persist($modalidade);
         $this->em->flush();
 
         $this->userId = $user->getId();
         $this->professorId = $professor->getId();
+        $this->modalidadeId = $modalidade->getId();
     }
 
     protected function getAddArrayForm()
@@ -65,7 +68,7 @@ class ProjetoControllerTest extends RestfulCrudControllerTest
             'projeto[realizacao][user]' => $this->userId,
             'projeto[realizacao][titulo]' => 'TesteP',
             'projeto[realizacao][sinopse]' => 'Lorem Ipsum Dolor Sit Amet.',
-            'projeto[realizacao][modalidade]' => 'Livre Iniciativa',
+            'projeto[realizacao][modalidade]' => $this->modalidadeId,
             'projeto[realizacao][professor]' => $this->professorId,
             'projeto[realizacao][genero]' => array('Ficção'),
             'projeto[realizacao][captacao]' => 'Vídeo',
@@ -90,7 +93,7 @@ class ProjetoControllerTest extends RestfulCrudControllerTest
         return array(
             'projeto[realizacao][titulo]' => 'PEtset',
             'projeto[realizacao][sinopse]' => '9Lorem Ipsum Dolor Sit Amet.',
-            'projeto[realizacao][modalidade]' => 'Filme de Realização',
+            'projeto[realizacao][modalidade]' => $this->modalidadeId,
             'projeto[realizacao][professor]' => $this->professorId,
             'projeto[realizacao][genero]' => array('Ficção','Documentário'),
             'projeto[realizacao][captacao]' => 'Película',
@@ -116,15 +119,18 @@ class ProjetoControllerTest extends RestfulCrudControllerTest
 
         $user = $this->em->getRepository('CineviSecurityBundle:User')->find($this->userId);
         $professor = $this->em->getRepository('CineviSecurityBundle:User')->find($this->professorId);
+        $modalidade = $this->em->getRepository('CineviRealizacaoBundle:Modalidade')->find($this->modalidadeId);
 
         $this->em->remove($user);
         $this->em->remove($professor);
+        $this->em->remove($modalidade);
         $this->em->flush();
 
         $this->userId = null;
         $this->professorId = null;
+        $this->modalidadeId = null;
 
         $this->em->close();
-        $this->em = null; // avoid memory leaks
+        $this->em = null;
     }
 }

@@ -1,4 +1,4 @@
 <dt>{{ item.funcao.nome }}</dt>
 {% for user in item.users %}
-    <dd><a href="{{ path('get_usuarios', {id : user.id}) }}">{{ user.username }}</a></dd>
+    <dd><a href="{{ path('get_usuarios', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
 {% endfor %}

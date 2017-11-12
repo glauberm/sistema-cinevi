@@ -16,8 +16,8 @@ class ConfigType extends AbstractType
             ->add('reservasFechadas', ChoiceType::class, array(
                 'label' => 'Apenas professores podem realizar reservas?',
                 'choices' => array(
+                    'Não' => '0',
                     'Sim' => '1',
-                    'Não' => '0'
                 ),
                 'invalid_message' => 'Este não é um valor válido.',
                 'expanded' => true,

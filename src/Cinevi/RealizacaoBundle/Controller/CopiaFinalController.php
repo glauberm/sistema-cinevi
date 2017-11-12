@@ -17,6 +17,8 @@ use Cinevi\RealizacaoBundle\Form\Type\CopiaFinalType;
  */
 class CopiaFinalController extends RestfulCrudController implements ClassResourceInterface
 {
+    use MailerTrait;
+
     protected $bundleName = 'CineviRealizacaoBundle:CopiaFinal';
     protected $repositoryName = 'CineviRealizacaoBundle:CopiaFinal';
     protected $className = CopiaFinal::class;
@@ -24,8 +26,6 @@ class CopiaFinalController extends RestfulCrudController implements ClassResourc
     protected $formClassName = CopiaFinalType::class;
     protected $paramsKey = 'id';
     private $confirmed;
-
-    use MailerTrait;
 
     protected function postPost($obj, EntityManager $em)
     {

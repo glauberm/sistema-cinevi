@@ -2,12 +2,16 @@
 
 namespace Cinevi\AdminBundle\Tests\Controller;
 
-use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ConfigurationControllerTest extends RestfulCrudControllerTest
+class ConfigurationControllerTest extends WebTestCase
 {
-    // List
-    protected $indexRoute = 's/configurations';
+    protected $client;
+    protected $username = 'admin';
+    protected $password = '12345678';
+    protected $indexRoute = 's/configuracoes';
+    protected $editLink = 'Editar';
+    protected $editButton = 'Salvar';
 
     public function testCompleteScenario()
     {
@@ -15,40 +19,38 @@ class ConfigurationControllerTest extends RestfulCrudControllerTest
 
         $crawler = $this->doLogin($this->username, $this->password);
 
-        $crawler = $this->doList($crawler, $this->indexRoute);
-
-        $crawler = $this->doAdd($crawler, $this->addLink, $this->addButton, $this->getAddArrayForm());
-
-        $crawler = $this->doEdit($crawler, $this->itemEditFilter, $this->itemEditLink, $this->editLink, $this->editButton, $this->getEditArrayForm());
-
-        $this->otherScenarios($crawler);
+        $crawler = $this->doEdit($crawler, $this->indexRoute, $this->editLink, $this->editButton, $this->getEditArrayForm());
     }
 
-    protected function getAddArrayForm()
+    protected function doLogin($username, $password)
     {
-        return array(
-            'configuration[reservasFechadas]' => '1',
-        );
+        $crawler = $this->client->request('GET', '/entrar');
+
+        $form = $crawler->selectButton('_submit')->form(array(
+            '_username' => $username,
+            '_password' => $password,
+        ));
+
+        $this->client->submit($form);
+
+        $this->assertTrue($this->client->getResponse()->isRedirect());
+
+        return $this->client->followRedirect();
     }
 
     protected function getEditArrayForm()
     {
         return array(
-            'configuration[reservasFechadas]' => '0',
+            'config[reservasFechadas]' => '1',
         );
     }
 
-    protected function doAdd($crawler, $addLink, $addButton, $addArrayForm)
+    protected function doEdit($crawler, $indexRoute, $editLink, $editButton, $editArrayForm)
     {
-        $form = $crawler->selectButton($addButton)->form($addArrayForm);
+        $crawler = $this->client->request('GET', '/'.$indexRoute);
 
-        $this->client->submit($form);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP code for GET /'.$indexRoute);
 
-        return $this->client->followRedirect();
-    }
-
-    protected function doEdit($crawler, $itemEditFilter, $itemEditLink, $editLink, $editButton, $editArrayForm)
-    {
         $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 
         $form = $crawler->selectButton($editButton)->form($editArrayForm);

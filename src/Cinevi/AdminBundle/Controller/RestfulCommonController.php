@@ -10,17 +10,10 @@ use FOS\RestBundle\View\View;
 abstract class RestfulCommonController extends FOSRestController implements ClassResourceInterface
 {
     protected $bundleName;
-    //protected $configurationType;
 
     protected function getView($data, $template, $templateVar, array $return = [])
     {
         $view = View::create();
-
-        /*$configuration = array(
-            'configuration' => $this->getConfiguration()
-        );
-
-        $return = array_merge($return, $configuration);*/
 
         $view
             ->setData($data)
@@ -48,17 +41,4 @@ abstract class RestfulCommonController extends FOSRestController implements Clas
 
         return $this->createForm($formClass, $obj, $options);
     }
-
-    /*protected function getConfiguration()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $configuration = $em->getRepository('CineviConfigBundle:Configuration')
-            ->findBy(array(
-                'type' => $this->configurationType
-            ))
-        ;
-
-        return $configuration;
-    }*/
 }

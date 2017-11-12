@@ -8,15 +8,11 @@ use Cinevi\AlmoxarifadoBundle\Entity\Categoria;
 
 class EquipamentoControllerTest extends RestfulCrudControllerTest
 {
-    // List
-    protected $indexRoute = 's/equipamentos';
-    // Edit
+    protected $indexRoute = 's/reservaveis';
     protected $itemEditFilter = 'a:contains("TesteE")';
     protected $itemEditLink = 'TesteE';
-    // Remove
     protected $itemRemoveLink = 'EEtset';
     protected $itemRemoveFilter = '[value="EEtset"]';
-    // Entities
     private $em;
     private $categoriaId;
 
@@ -79,6 +75,6 @@ class EquipamentoControllerTest extends RestfulCrudControllerTest
         $this->categoriaId = null;
 
         $this->em->close();
-        $this->em = null; // avoid memory leaks
+        $this->em = null;
     }
 }

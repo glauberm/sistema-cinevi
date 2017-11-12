@@ -18,14 +18,14 @@ use Cinevi\AlmoxarifadoBundle\Form\Type\CalendarEventType;
  */
 class ReservaController extends RestfulCrudController
 {
+    use MailerTrait;
+
     protected $bundleName = 'CineviAlmoxarifadoBundle:CalendarEvent';
     protected $repositoryName = 'CineviAlmoxarifadoBundle:CalendarEvent';
     protected $className = CalendarEvent::class;
     protected $routeSuffix = 'reservas';
     protected $formClassName = CalendarEventType::class;
     protected $paramsKey = 'id';
-
-    use MailerTrait;
 
     protected function postFormPost(Form $form, EntityManager $em) : Form
     {

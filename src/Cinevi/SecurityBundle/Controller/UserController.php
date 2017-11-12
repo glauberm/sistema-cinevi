@@ -17,6 +17,8 @@ use Cinevi\SecurityBundle\Form\Type\UserType;
  */
 class UserController extends RestfulCrudController implements ClassResourceInterface
 {
+    use MailerTrait;
+
     protected $bundleName = 'CineviSecurityBundle:User';
     protected $repositoryName = 'CineviSecurityBundle:User';
     protected $className = User::class;
@@ -24,8 +26,6 @@ class UserController extends RestfulCrudController implements ClassResourceInter
     protected $formClassName = UserType::class;
     protected $paramsKey = 'id';
     private $confirmed;
-
-    use MailerTrait;
 
     protected function preFormPut($obj, Form $form, EntityManager $em) : Form
     {

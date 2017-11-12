@@ -4,6 +4,7 @@ namespace Cinevi\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Form;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
 use Cinevi\AdminBundle\Form\Type\DeleteType;
@@ -20,7 +21,11 @@ abstract class RestfulDeleteController extends RestfulUpdateController implement
 
         $form = $this->getForm($obj, DeleteType::class, 'DELETE');
 
+        $form = $this->preFormDelete($obj, $form, $em);
+
         $form->handleRequest($request);
+
+        $form = $this->postFormDelete($obj, $form, $em);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->remove($obj);
@@ -38,6 +43,16 @@ abstract class RestfulDeleteController extends RestfulUpdateController implement
         }
 
         return $view;
+    }
+
+    protected function preFormDelete($obj, Form $form, EntityManager $em) : Form
+    {
+        return $form;
+    }
+
+    protected function postFormDelete($obj, Form $form, EntityManager $em) : Form
+    {
+        return $form;
     }
 
     protected function postDelete($obj, EntityManager $em)

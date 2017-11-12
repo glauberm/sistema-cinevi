@@ -8,21 +8,19 @@ use Cinevi\SecurityBundle\Entity\User;
 use Cinevi\RealizacaoBundle\Entity\Realizacao;
 use Cinevi\RealizacaoBundle\Entity\Projeto;
 use Cinevi\RealizacaoBundle\Entity\Funcao;
+use Cinevi\RealizacaoBundle\Entity\Modalidade;
 
 class CopiaFinalControllerTest extends RestfulCrudControllerTest
 {
-    // List
     protected $indexRoute = 's/copias-finais';
-    // Edit
     protected $itemEditFilter = 'a:contains("TesteP")';
     protected $itemEditLink = 'TesteP';
-    // Remove
     protected $itemRemoveLink = 'PEtset';
     protected $itemRemoveFilter = '[value="PEtset"]';
-    // Entities
     private $em;
     private $userId;
     private $professorId;
+    private $modalidadeId;
     private $projetoId;
     private $funcaoId;
 
@@ -56,11 +54,14 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
         $professor->setProfessor(true);
         $professor->setRoles(array('ROLE_DEPARTAMENTO'));
 
+        $modalidade = new Modalidade();
+        $modalidade->setNome('ModalidadeX');
+
         $realizacao = new Realizacao();
         $realizacao->setUser($user);
         $realizacao->setTitulo('RealizacaoX');
         $realizacao->setSinopse('Lorem Ipsum Dolor Sit Amet.');
-        $realizacao->setModalidade('Livre Iniciativa');
+        $realizacao->setModalidade($modalidade);
         $realizacao->setProfessor($professor);
         $realizacao->setGenero(array('Ficção'));
         $realizacao->setCaptacao('Vídeo');
@@ -85,12 +86,14 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
 
         $this->em->persist($user);
         $this->em->persist($professor);
+        $this->em->persist($modalidade);
         $this->em->persist($projeto);
         $this->em->persist($funcao);
         $this->em->flush();
 
         $this->userId = $user->getId();
         $this->professorId = $professor->getId();
+        $this->modalidadeId = $modalidade->getId();
         $this->projetoId = $projeto->getId();
         $this->funcaoId = $funcao->getId();
     }
@@ -101,16 +104,13 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
 
         $form = $crawler->selectButton($addButton)->form($addArrayForm);
 
-        // Get the raw values.
         $values = $form->getPhpValues();
 
-        // Add fields to the raw values.
         $values['copia_final']['fichaTecnica']['equipes'][0]['funcao'] = $this->funcaoId;
         $values['copia_final']['fichaTecnica']['equipes'][0]['users'] = array($this->userId);
         $values['copia_final']['fichaTecnica']['equipes'][1]['funcao'] = $this->funcaoId;
         $values['copia_final']['fichaTecnica']['equipes'][1]['users'] = array($this->userId);
 
-        // Submit the form with the existing and new values.
         $this->client->request($form->getMethod(), $form->getUri(), $values, $form->getPhpFiles());
 
         // $this->client->submit($form);
@@ -126,6 +126,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
             'copia_final[realizacao][sinopse]' => 'Lorem Ipsum Dolor Sit Amet.',
             'copia_final[realizacao][modalidade]' => 'Livre Iniciativa',
             'copia_final[realizacao][professor]' => $this->professorId,
+            'copia_final[realizacao][modalidade]' => $this->modalidadeId,
             'copia_final[realizacao][genero]' => array('Ficção'),
             'copia_final[realizacao][captacao]' => 'Vídeo',
             'copia_final[realizacao][detalhesCaptacao]' => 'Lorem Ipsum Dolor Sit Amet.',
@@ -168,18 +169,14 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
 
         $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 
-        // The 2 tags have been added to the collection.
         $this->assertEquals(2, $crawler->filter('#equipes > .to-many-item')->count());
 
         $form = $crawler->selectButton($editButton)->form($editArrayForm);
 
-        // Get the values of the form.
         $values = $form->getPhpValues();
 
-        // Remove the first value
         unset($values['copia_final']['fichaTecnica']['equipes'][0]);
 
-        // Submit the data.
         $this->client->request($form->getMethod(), $form->getUri(), $values, $form->getPhpFiles());
 
         return $this->client->followRedirect();
@@ -192,6 +189,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
             'copia_final[realizacao][sinopse]' => '9Lorem Ipsum Dolor Sit Amet.',
             'copia_final[realizacao][modalidade]' => 'Filme de Realização',
             'copia_final[realizacao][professor]' => $this->professorId,
+            'copia_final[realizacao][modalidade]' => $this->modalidadeId,
             'copia_final[realizacao][genero]' => array('Ficção','Documentário'),
             'copia_final[realizacao][captacao]' => 'Película',
             'copia_final[realizacao][detalhesCaptacao]' => '9Lorem Ipsum Dolor Sit Amet.',
@@ -232,7 +230,6 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
 
         $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 
-        // The tag has been removed.
         $this->assertEquals(1, $crawler->filter('#equipes > .to-many-item')->count());
 
         $this->assertGreaterThan(0, $crawler->filter($itemRemoveFilter)->count(), 'Faltando elemento '.$itemRemoveFilter);
@@ -252,21 +249,24 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
 
         $user = $this->em->getRepository('CineviSecurityBundle:User')->find($this->userId);
         $professor = $this->em->getRepository('CineviSecurityBundle:User')->find($this->professorId);
+        $modalidade = $this->em->getRepository('CineviRealizacaoBundle:Modalidade')->find($this->modalidadeId);
         $projeto = $this->em->getRepository('CineviRealizacaoBundle:Projeto')->find($this->projetoId);
         $funcao = $this->em->getRepository('CineviRealizacaoBundle:Funcao')->find($this->funcaoId);
 
         $this->em->remove($user);
         $this->em->remove($professor);
+        $this->em->remove($modalidade);
         $this->em->remove($projeto);
         $this->em->remove($funcao);
         $this->em->flush();
 
         $this->userId = null;
         $this->professorId = null;
+        $this->modalidadeId = null;
         $this->projetoId = null;
         $this->funcaoId = null;
 
         $this->em->close();
-        $this->em = null; // avoid memory leaks
+        $this->em = null;
     }
 }

@@ -6,15 +6,11 @@ use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 
 class CategoriaControllerTest extends RestfulCrudControllerTest
 {
-    // List
     protected $indexRoute = 's/categorias-reservaveis';
-    // Edit
     protected $itemEditFilter = 'a:contains("TesteC")';
     protected $itemEditLink = 'TesteC';
-    // Remove
     protected $itemRemoveLink = 'CEtset';
     protected $itemRemoveFilter = '[value="CEtset"]';
-
 
     protected function getAddArrayForm()
     {
