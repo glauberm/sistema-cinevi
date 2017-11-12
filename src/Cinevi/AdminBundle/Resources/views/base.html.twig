@@ -53,7 +53,7 @@
         {% endblock %}
 
         <div class="content">
-            <div class="container">
+            <div class="container{% if containerFluid is defined and containerFluid == true %}-fluid{% endif %}">
 
                 <div class="row">
                     <main class="main {% if app.user is not empty and app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}col-md-9 col-md-push-3{% else %}col-xs-12{% endif %}">
