@@ -17,9 +17,12 @@
 - Registrar/Pedir Senha e todos os outros FOSUserBundle que não sejam o login ocupando mais espaço na tela
 - Mais espaço para todos os <textarea> e talvez adicionar o editor WYSIWYG
 - Novos testes
-- Passar tudo para inglês?
+- Passar tudo para inglês? Resolver nome da reserva pelo menos, talvez dos equipamentos?
 - Realizações e reservas no perfil do usuário, realizações e reservas do usuário atual na home
 - Local para enviar mensagens de erro
 - Ações múltiplas de confirmação na tabela dos usuários
 - Máscara de dinheiro e telefone
 - Packagist para o núcleo
+
+## Pergunta
+- Devolução atrasada: manda email avisando, mas não muda nada no formulário

@@ -19,19 +19,30 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
     protected $itemRemoveLink = "12\/06\/2018";
     protected $itemRemoveFilter = '[value="12/06/2018"]';
     private $em;
+    private $router;
+    private $twig;
     private $userId;
     private $professorId;
     private $modalidadeId;
     private $projetoId;
     private $categoriaId;
     private $equipamentoId;
+    private $repositoryName = 'CineviAlmoxarifadoBundle:CalendarEvent';
+    private $bundleName = 'CineviAlmoxarifadoBundle:CalendarEvent';
 
     protected function setUp()
     {
         self::bootKernel();
+
         $this->em = static::$kernel->getContainer()
             ->get('doctrine')
             ->getManager()
+        ;
+        $this->router = static::$kernel->getContainer()
+            ->get('router')
+        ;
+        $this->twig = static::$kernel->getContainer()
+            ->get('twig')
         ;
 
         $user = new User();
@@ -133,6 +144,93 @@ class CalendarEventControllerTest extends RestfulCrudControllerTest
             'calendar_event[endDate]' => '20/06/2018',
             'calendar_event[equipamentos]' => array($this->equipamentoId),
         );
+    }
+
+    protected function doAfterList($crawler)
+    {
+        $crawler = $this->client->click($crawler->selectLink('Cód.')->link());
+        $crawler = $this->client->click($crawler->selectLink('Retirada')->link());
+        $crawler = $this->client->click($crawler->selectLink('Devolução')->link());
+
+        return $crawler;
+    }
+
+    protected function doAfterAdd($crawler)
+    {
+        $mailCollector = $this->client->getProfile()->getCollector('swiftmailer');
+
+        $this->assertEquals(3, $mailCollector->getMessageCount());
+
+        $collectedMessages = $mailCollector->getMessages();
+
+        $obj = $this->em
+            ->getRepository($this->repositoryName)
+            ->findOneBy(array( 'user' => $this->userId ))
+        ;
+
+        $subject = 'Nova Reserva: '.$obj->getTitle();
+        $path = $this->router->generate('get_reservas', array(
+            'params' => $obj->getId(),
+        ), true);
+
+        $message = $collectedMessages[0];
+        $this->assertInstanceOf('Swift_Message', $message);
+        $template = $this->bundleName.':email';
+        $to = 'almoxarifadocinemauff@gmail.com';
+        $this->checkSendMail($this->twig, $obj, $path, $subject, $to, $template, $message);
+
+        $message = $collectedMessages[1];
+        $this->assertInstanceOf('Swift_Message', $message);
+        $template = $this->bundleName.':email-user';
+        $to = $obj->getUser()->getEmail();
+        $this->checkSendMail($this->twig, $obj, $path, $subject, $to, $template, $message);
+
+        $message = $collectedMessages[2];
+        $this->assertInstanceOf('Swift_Message', $message);
+        $template = $this->bundleName.':email-professor';
+        $to = $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail();
+        $this->checkSendMail($this->twig, $obj, $path, $subject, $to, $template, $message);
+
+        return $crawler;
+    }
+
+    protected function doAfterEdit($crawler)
+    {
+        $mailCollector = $this->client->getProfile()->getCollector('swiftmailer');
+
+        $this->assertEquals(3, $mailCollector->getMessageCount());
+
+        $collectedMessages = $mailCollector->getMessages();
+
+        $obj = $this->em
+            ->getRepository($this->repositoryName)
+            ->findOneBy(array( 'user' => $this->userId ))
+        ;
+
+        $subject = 'Edição de Reserva: '.$obj->getTitle();
+        $path = $this->router->generate('get_reservas', array(
+            'params' => $obj->getId(),
+        ), true);
+
+        $message = $collectedMessages[0];
+        $this->assertInstanceOf('Swift_Message', $message);
+        $template = $this->bundleName.':email-edicao';
+        $to = 'almoxarifadocinemauff@gmail.com';
+        $this->checkSendMail($this->twig, $obj, $path, $subject, $to, $template, $message);
+
+        $message = $collectedMessages[1];
+        $this->assertInstanceOf('Swift_Message', $message);
+        $template = $this->bundleName.':email-edicao-user';
+        $to = $obj->getUser()->getEmail();
+        $this->checkSendMail($this->twig, $obj, $path, $subject, $to, $template, $message);
+
+        $message = $collectedMessages[2];
+        $this->assertInstanceOf('Swift_Message', $message);
+        $template = $this->bundleName.':email-edicao-professor';
+        $to = $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail();
+        $this->checkSendMail($this->twig, $obj, $path, $subject, $to, $template, $message);
+
+        return $crawler;
     }
 
     protected function tearDown()

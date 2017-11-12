@@ -61,6 +61,8 @@ abstract class RestfulCrudControllerTest extends WebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP code for GET /'.$indexRoute);
 
+        $crawler = $this->doAfterList($crawler);
+
         return $crawler;
     }
 
@@ -70,7 +72,11 @@ abstract class RestfulCrudControllerTest extends WebTestCase
 
         $form = $crawler->selectButton($addButton)->form($addArrayForm);
 
+        $this->client->enableProfiler();
+
         $this->client->submit($form);
+
+        $crawler = $this->doAfterAdd($crawler);
 
         return $this->client->followRedirect();
     }
@@ -81,11 +87,17 @@ abstract class RestfulCrudControllerTest extends WebTestCase
 
         $crawler = $this->client->click($crawler->selectLink($itemEditLink)->link());
 
+        $crawler = $this->doAfterShow($crawler);
+
         $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 
         $form = $crawler->selectButton($editButton)->form($editArrayForm);
 
+        $this->client->enableProfiler();
+
         $this->client->submit($form);
+
+        $crawler = $this->doAfterEdit($crawler);
 
         return $this->client->followRedirect();
     }
@@ -100,6 +112,10 @@ abstract class RestfulCrudControllerTest extends WebTestCase
 
         $this->client->submit($crawler->selectButton($removeButton)->form());
 
+        $this->client->enableProfiler();
+
+        $crawler = $this->doAfterRemove($crawler);
+
         $crawler = $this->client->followRedirect();
 
         $this->assertNotRegExp('/'.$itemRemoveLink.'/', $this->client->getResponse()->getContent());
@@ -107,18 +123,40 @@ abstract class RestfulCrudControllerTest extends WebTestCase
         return $crawler;
     }
 
-    protected function otherScenarios($crawler)
+    protected function checkSendMail($twig, $obj, $path, $subject, $to, $template, $message)
     {
-        return $crawler;
+        $from = 'contato@cinemauff.com.br';
+
+        $this->assertEquals($subject, $message->getSubject());
+        $this->assertEquals($from, key($message->getFrom()));
+        $this->assertEquals($to, key($message->getTo()));
+        $this->assertEquals(
+            $twig->render(
+                $template.'.html.twig',
+                array(
+                    'item' => $obj,
+                    'url' => $path,
+                    'subject' => $subject,
+                    'to' => $to,
+                )
+            ),
+            $message->getBody()
+        );
     }
 
-    protected function getAddArrayForm()
-    {
-        return;
-    }
+    protected function getAddArrayForm() { return; }
 
-    protected function getEditArrayForm()
-    {
-        return;
-    }
+    protected function getEditArrayForm() { return; }
+
+    protected function doAfterList($crawler) { return $crawler; }
+
+    protected function doAfterAdd($crawler) { return $crawler; }
+
+    protected function doAfterShow($crawler) { return $crawler; }
+
+    protected function doAfterEdit($crawler) { return $crawler; }
+
+    protected function doAfterRemove($crawler) { return $crawler; }
+
+    protected function otherScenarios($crawler) { return $crawler; }
 }

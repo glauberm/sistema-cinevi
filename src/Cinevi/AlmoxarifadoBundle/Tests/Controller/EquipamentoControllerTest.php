@@ -6,6 +6,9 @@ use Doctrine\ORM\EntityManager;
 use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 use Cinevi\AlmoxarifadoBundle\Entity\Categoria;
 
+/**
+ * @TODO: Email tests.
+ */
 class EquipamentoControllerTest extends RestfulCrudControllerTest
 {
     protected $indexRoute = 's/reservaveis';
@@ -54,8 +57,8 @@ class EquipamentoControllerTest extends RestfulCrudControllerTest
             'equipamento[codigo]' => '3.99',
             'equipamento[nome]' => 'EEtset',
             'equipamento[categoria]' => $this->categoriaId,
-            'equipamento[manutencao]' => '0',
-            'equipamento[atrasado]' => '0',
+            'equipamento[manutencao]' => '1',
+            'equipamento[atrasado]' => '1',
             'equipamento[patrimonio]' => '915455758',
             'equipamento[nSerie]' => 'E15455758E',
             'equipamento[acessorios]' => 'ELorem Ipsum Dolor Sit Amet',
@@ -76,5 +79,16 @@ class EquipamentoControllerTest extends RestfulCrudControllerTest
 
         $this->em->close();
         $this->em = null;
+    }
+
+    protected function doAfterList($crawler)
+    {
+        $crawler = $this->client->click($crawler->selectLink('Cód.')->link());
+        $crawler = $this->client->click($crawler->selectLink('Nome')->link());
+        $crawler = $this->client->click($crawler->selectLink('Categoria')->link());
+        $crawler = $this->client->click($crawler->selectLink('Manutenção')->link());
+        $crawler = $this->client->click($crawler->selectLink('Devolução Atrasada?')->link());
+
+        return $crawler;
     }
 }

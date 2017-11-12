@@ -1,6 +1,6 @@
 {% extends 'CineviAdminBundle::email.html.twig' %}
 
-{% block mensagem %}
+{% block message %}
 
 <p>Uma nova reserva acaba de ser registrada por <strong>{{ item.user.username }}</strong> de <strong>{{ item.startDate|date('d/m/Y') }}</strong> a <strong>{{ item.endDate|date('d/m/Y') }}</strong>  para o projeto <strong>{{ item.projeto.realizacao.titulo }}</strong> que tem você como professor responsável.</p>
 
