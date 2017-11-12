@@ -10,14 +10,12 @@
     {{ parent() }}
     <script>
         $('#group-senha').css('display', 'table-cell');
-        $('#button-senha').click(function () {
-            if($(this).hasClass('active')) {
-                $('#password').prop('type', 'password');
-                $('#button-senha').removeClass('active');
-            } else {
-                $('#password').prop('type', 'text');
-                $('#button-senha').addClass('active');
-            }
+        $('#button-senha').on('mousedown', function() {
+            $('#password').prop('type', 'text');
+            $('#button-senha').addClass('active');
+        }).on('mouseup mouseleave', function() {
+            $('#password').prop('type', 'password');
+            $('#button-senha').removeClass('active');
         });
     </script>
 {% endblock %}
