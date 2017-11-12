@@ -43,7 +43,7 @@ class LoadDataListener
                 $equipamentos[] = '['.$equipamento->getCodigo().'] '.$equipamento->getNome();
             }
 
-            $event->setTitle( $reserva->getTitle()." (".$reserva->getUser()->getUsername().") - ".implode(", ", $equipamentos) );
+            $event->setTitle( $reserva->getTitle()." (".$reserva->getUser()->getUsername()."): ".implode(", ", $equipamentos)." - De ". $reserva->getStartDate()->format("d/m/Y") . " a " . $reserva->getEndDate()->format("d/m/Y"));
 
             $event->setStartDate($reserva->getStartDate());
             $event->setEndDate($reserva->getEndDate()->add(new \DateInterval('P1D')));

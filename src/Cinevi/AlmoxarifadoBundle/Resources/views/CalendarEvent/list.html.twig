@@ -117,12 +117,14 @@
                     element.attr("title", event.title),
                     element.attr("data-toggle", "tooltip")
                 },
+                eventAfterAllRender: function() {
+                    $(function () { $('[data-toggle="tooltip"]').tooltip() })
+                },
                 loading: function( isLoading, view ) {
                     if(isLoading) {
                         $("body").append("<div id='overlay-alert' class='overlay-alert'><span class='label label-danger'>Carregando...</span></div>");
                     } else {
                         $("#overlay-alert").remove();
-                        $(function () { $('[data-toggle="tooltip"]').tooltip() })
                     }
                 }
             });

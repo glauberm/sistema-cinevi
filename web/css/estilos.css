@@ -470,49 +470,41 @@ a.pular-para-conteudo:active {
 
 /* FULL CALENDAR */
 .reserva {
-    padding: 2px 6px 2px;
-    font-size: inherit;
-    background-color: #dbdbdb;
-    border: 1px solid #BBB;
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #e6e6e6;
+    border: 1px solid #adadad;
     color: #333;
 }
 
 .reserva:hover,
 .reserva:focus,
 .reserva:active {
-    color: #111;
-    background-color: #d6d6d6;
-}
-
-.reserva-propria {
-    background: #EAD741;
-    border: 1px solid #bbaa1f;
-    color: #3D3A28;
-}
-
-.reserva-propria:hover,
-.reserva-propria:focus,
-.reserva-propria:active {
-    color: #1C1B16;
-    background-color: #decc3a;
+    background-color: #d4d4d4;
+    border-color: #8c8c8c;
+    color: #333;
 }
 
 .fc-basicDay-view .fc-start {
-    background-color: #5cb85c !important;
-    border-color: #3e8f3e !important;
-    color: #283D28 !important;
+    background-color: #D9EDF7 !important;
+    border-color: #ADADAD !important;
+    color: #333 !important;
 }
 
 .fc-basicDay-view .fc-end {
-    background-color: #d9534f !important;
-    border-color: #b92c28 !important;
-    color: #3D2928 !important;
+    background-color: #F2DEDE !important;
+    border-color: #ADADAD !important;
+    color: #333 !important;
 }
 
 .fc-basicDay-view .fc-start.fc-end {
-    background-color: #006886 !important;
-    border-color: #00313f !important;
-    color: #A3E3F4 !important;
+    background-color: #FCF8E3 !important;
+    border-color: #ADADAD !important;
+    color: #333 !important;
+}
+
+.fc-today {
+    background-color: #D9EDF7 !important;
 }
 
 /* SELECT2 */
