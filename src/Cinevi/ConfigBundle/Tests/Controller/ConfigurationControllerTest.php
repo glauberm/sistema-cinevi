@@ -11,7 +11,7 @@ class ConfigurationControllerTest extends WebTestCase
     protected $password = '12345678';
     protected $indexRoute = 's/configuracoes';
     protected $editLink = 'Editar';
-    protected $editButton = 'Salvar';
+    protected $editButton = 'Enviar';
 
     public function testCompleteScenario()
     {

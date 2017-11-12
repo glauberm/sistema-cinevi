@@ -16,11 +16,4 @@ class PublicControllerTest extends WebTestCase
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP code for GET /');
     }
-
-    protected function getEditArrayForm()
-    {
-        return array(
-            'config[reservasFechadas]' => '1',
-        );
-    }
 }

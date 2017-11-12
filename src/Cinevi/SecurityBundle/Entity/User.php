@@ -49,11 +49,22 @@ class User extends BaseUser
      **/
     protected $realizacaos;
 
+    /**
+     * @ORM\Column(type="datetime")
+     **/
+    protected $createdIn;
+
+    /**
+     * @ORM\Column(type="datetime")
+     **/
+    protected $updatedIn;
+
 
     public function __construct()
     {
         parent::__construct();
         // your own logic
+        $this->realizacaos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -243,5 +254,70 @@ class User extends BaseUser
     public function getRealizacaos()
     {
         return $this->realizacaos;
+    }
+
+    /**
+     * Set createdIn
+     *
+     * @param \DateTime $createdIn
+     *
+     * @return User
+     */
+    public function setCreatedIn($createdIn)
+    {
+        $this->createdIn = $createdIn;
+
+        return $this;
+    }
+
+    /**
+     * Get createdIn
+     *
+     * @return \DateTime
+     */
+    public function getCreatedIn()
+    {
+        return $this->createdIn;
+    }
+
+    /**
+     * Set updatedIn
+     *
+     * @param \DateTime $updatedIn
+     *
+     * @return User
+     */
+    public function setUpdatedIn($updatedIn)
+    {
+        $this->updatedIn = $updatedIn;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedIn
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedIn()
+    {
+        return $this->updatedIn;
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setCreatedInValue()
+    {
+        $this->createdIn = new \DateTime();
+    }
+
+    /**
+    * @ORM\PrePersist
+    * @ORM\PreUpdate
+    */
+    public function setUpdatedInValue()
+    {
+        $this->updatedIn = new \DateTime();
     }
 }

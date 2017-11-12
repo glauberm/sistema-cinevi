@@ -13,11 +13,11 @@ abstract class RestfulCrudControllerTest extends WebTestCase
     protected $password = '12345678';
     protected $indexRoute;
     protected $addLink = 'Adicionar';
-    protected $addButton = 'Salvar';
+    protected $addButton = 'Enviar';
     protected $itemEditFilter;
     protected $itemEditLink;
     protected $editLink = 'Editar';
-    protected $editButton = 'Salvar';
+    protected $editButton = 'Enviar';
     protected $itemRemoveLink;
     protected $itemRemoveFilter;
     protected $removeButton = 'Remover';
@@ -36,7 +36,7 @@ abstract class RestfulCrudControllerTest extends WebTestCase
 
         $crawler = $this->doRemove($crawler, $this->editLink, $this->itemRemoveLink, $this->itemRemoveFilter, $this->removeButton);
 
-        $this->otherScenarios($crawler);
+        $crawler = $this->otherScenarios($crawler);
     }
 
     protected function doLogin($username, $password)
@@ -158,5 +158,5 @@ abstract class RestfulCrudControllerTest extends WebTestCase
 
     protected function doAfterRemove($crawler) { return $crawler; }
 
-    protected function otherScenarios($crawler) { return $crawler; }
+    protected function otherScenarios($crawler) { return; }
 }

@@ -48,6 +48,16 @@ class CalendarEvent extends BaseEvent
      **/
     protected $endDate;
 
+    /**
+     * @ORM\Column(type="datetime")
+     **/
+    protected $createdIn;
+
+    /**
+     * @ORM\Column(type="datetime")
+     **/
+    protected $updatedIn;
+
 
     public function __construct($title = null, \DateTime $start = null)
     {
@@ -182,5 +192,70 @@ class CalendarEvent extends BaseEvent
     public function getProjeto()
     {
         return $this->projeto;
+    }
+
+    /**
+     * Set createdIn
+     *
+     * @param \DateTime $createdIn
+     *
+     * @return CalendarEvent
+     */
+    public function setCreatedIn($createdIn)
+    {
+        $this->createdIn = $createdIn;
+
+        return $this;
+    }
+
+    /**
+     * Get createdIn
+     *
+     * @return \DateTime
+     */
+    public function getCreatedIn()
+    {
+        return $this->createdIn;
+    }
+
+    /**
+     * Set updatedIn
+     *
+     * @param \DateTime $updatedIn
+     *
+     * @return CalendarEvent
+     */
+    public function setUpdatedIn($updatedIn)
+    {
+        $this->updatedIn = $updatedIn;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedIn
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedIn()
+    {
+        return $this->updatedIn;
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setCreatedInValue()
+    {
+        $this->createdIn = new \DateTime();
+    }
+
+    /**
+    * @ORM\PrePersist
+    * @ORM\PreUpdate
+    */
+    public function setUpdatedInValue()
+    {
+        $this->updatedIn = new \DateTime();
     }
 }

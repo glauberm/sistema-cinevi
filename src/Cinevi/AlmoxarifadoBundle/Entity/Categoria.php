@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Cinevi\AlmoxarifadoBundle\Entity\CategoriaRepository")
  * @ORM\Table(name="almoxarifado_equipamentos_categorias")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Categoria
 {
@@ -31,6 +32,16 @@ class Categoria
      * @ORM\OneToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Equipamento", cascade={"merge"}, mappedBy="categoria")
      **/
     protected $equipamentos;
+
+    /**
+     * @ORM\Column(type="datetime")
+     **/
+    protected $createdIn;
+
+    /**
+     * @ORM\Column(type="datetime")
+     **/
+    protected $updatedIn;
 
 
     /**
@@ -129,5 +140,70 @@ class Categoria
     public function getDescricao()
     {
         return $this->descricao;
+    }
+
+    /**
+     * Set createdIn
+     *
+     * @param \DateTime $createdIn
+     *
+     * @return Categoria
+     */
+    public function setCreatedIn($createdIn)
+    {
+        $this->createdIn = $createdIn;
+
+        return $this;
+    }
+
+    /**
+     * Get createdIn
+     *
+     * @return \DateTime
+     */
+    public function getCreatedIn()
+    {
+        return $this->createdIn;
+    }
+
+    /**
+     * Set updatedIn
+     *
+     * @param \DateTime $updatedIn
+     *
+     * @return Categoria
+     */
+    public function setUpdatedIn($updatedIn)
+    {
+        $this->updatedIn = $updatedIn;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedIn
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedIn()
+    {
+        return $this->updatedIn;
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setCreatedInValue()
+    {
+        $this->createdIn = new \DateTime();
+    }
+
+    /**
+    * @ORM\PrePersist
+    * @ORM\PreUpdate
+    */
+    public function setUpdatedInValue()
+    {
+        $this->updatedIn = new \DateTime();
     }
 }

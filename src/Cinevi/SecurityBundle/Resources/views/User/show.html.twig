@@ -20,7 +20,7 @@
             <div class="col-sm-4"><dt>Professor?</dt><dd>{{ item.professor ? 'Sim' : 'Não' }}</dd></div>
         </div>
         <div class="row">
-            <div class="col-xs-12"><dt>Permissão(ões)</dt>
+            <div class="col-xs-12"><dt>Permissão(ões) de</dt>
                 {% for role in item.roles %}
                     {% if role == 'ROLE_SUPER_ADMIN' %}
                         <dd>Administrador</dd>
@@ -47,4 +47,8 @@
         'dt': 'Breve Currículo',
         'item': item.breveCurriculo
     } %}
+    <div class="row">
+        <div class="col-sm-6"><dt>Criado em</dt><dd>{{ item.createdIn|date('d/m/Y H:m:s') }}</dd></div>
+        <div class="col-sm-6"><dt>Última atualização em</dt><dd>{{ item.updatedIn|date('d/m/Y H:m:s') }}</dd></div>
+    </div>
 {% endblock %}

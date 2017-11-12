@@ -18,6 +18,10 @@
         <div class="col-sm-6"><dt>Data de Início</dt><dd>{{ item.startDate|date('d/m/Y') }}</dd></div>
         <div class="col-sm-6"><dt>Data de Fim</dt><dd>{{ item.endDate|date('d/m/Y') }}</dd></div>
     </div>
+    <div class="row">
+        <div class="col-sm-6"><dt>Criado em</dt><dd>{{ item.createdIn|date('d/m/Y H:m:s') }}</dd></div>
+        <div class="col-sm-6"><dt>Última atualização em</dt><dd>{{ item.updatedIn|date('d/m/Y H:m:s') }}</dd></div>
+    </div>
 
     <h2 id="reservaveis">Reserváveis</h2>
     <div class="table-responsive">

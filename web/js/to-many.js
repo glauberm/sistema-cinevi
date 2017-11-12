@@ -19,7 +19,7 @@ function addForm($collectionHolder, $newLinkLi)
 
 function addFormDeleteLink($formLi)
 {
-	var $removeForm = $('<div class="text-right"><a class="to-many-remover btn btn-danger btn-sm" href="#">Remover</a></div>');
+	var $removeForm = $('<div class="text-right"><div class="inline-block"><a class="to-many-remover btn btn-danger btn-sm" href="#">Remover</a></div></div>');
 	$formLi.append($removeForm);
 
 	$removeForm.on('click', function(e) {

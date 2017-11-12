@@ -55,4 +55,28 @@ class UserControllerTest extends RestfulCrudControllerTest
 
         return $crawler;
     }
+
+    protected function otherScenarios($crawler)
+    {
+        $crawler = $this->client->request('GET', '/perfil');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP code for GET /perfil');
+
+        $crawler = $this->client->click($crawler->selectLink('Editar')->link());
+
+        $form = $crawler->selectButton('Enviar')->form(
+            array(
+                'fos_user_profile_form[username]' => 'admin',
+                'fos_user_profile_form[email]' => 'glaubercinema7@gmail.com',
+                'fos_user_profile_form[current_password]' => '12345678',
+                'fos_user_profile_form[telefone]' => '6297963685',
+                'fos_user_profile_form[matricula]' => '1545575899',
+                'fos_user_profile_form[breveCurriculo]' => 'Lorem Ipsum Dolor Sit Amet.',
+            )
+        );
+
+        $this->client->submit($form);
+
+        return $this->client->followRedirect();
+    }
 }

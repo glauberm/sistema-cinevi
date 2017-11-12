@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Cinevi\RealizacaoBundle\Entity\CopiaFinalRepository")
  * @ORM\Table(name="realizacao_copias_finais")
+ * @ORM\HasLifecycleCallbacks()
  */
 class CopiaFinal
 {
@@ -141,6 +142,16 @@ class CopiaFinal
      * @ORM\Column(type="boolean")
      **/
     protected $confirmado;
+
+    /**
+     * @ORM\Column(type="datetime")
+     **/
+    protected $createdIn;
+
+    /**
+     * @ORM\Column(type="datetime")
+     **/
+    protected $updatedIn;
 
 
     /**
@@ -726,5 +737,70 @@ class CopiaFinal
     public function getSenhaVideo()
     {
         return $this->senhaVideo;
+    }
+
+    /**
+     * Set createdIn
+     *
+     * @param \DateTime $createdIn
+     *
+     * @return CopiaFinal
+     */
+    public function setCreatedIn($createdIn)
+    {
+        $this->createdIn = $createdIn;
+
+        return $this;
+    }
+
+    /**
+     * Get createdIn
+     *
+     * @return \DateTime
+     */
+    public function getCreatedIn()
+    {
+        return $this->createdIn;
+    }
+
+    /**
+     * Set updatedIn
+     *
+     * @param \DateTime $updatedIn
+     *
+     * @return CopiaFinal
+     */
+    public function setUpdatedIn($updatedIn)
+    {
+        $this->updatedIn = $updatedIn;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedIn
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedIn()
+    {
+        return $this->updatedIn;
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setCreatedInValue()
+    {
+        $this->createdIn = new \DateTime();
+    }
+
+    /**
+    * @ORM\PrePersist
+    * @ORM\PreUpdate
+    */
+    public function setUpdatedInValue()
+    {
+        $this->updatedIn = new \DateTime();
     }
 }
