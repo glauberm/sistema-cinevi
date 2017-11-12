@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Cinevi\AdminBundle\Controller\RestfulCrudController;
-use Cinevi\AdminBundle\Mailer\MailerTrait;
 use Cinevi\RealizacaoBundle\Entity\Funcao;
 use Cinevi\RealizacaoBundle\Form\Type\FuncaoType;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinevi\AdminBundle\Tests\Controller;
+namespace Cinevi\ConfigBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

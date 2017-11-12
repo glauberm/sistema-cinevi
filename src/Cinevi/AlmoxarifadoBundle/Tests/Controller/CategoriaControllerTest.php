@@ -4,9 +4,6 @@ namespace Cinevi\AlmoxarifadoBundle\Tests\Controller;
 
 use Cinevi\AdminBundle\Tests\Controller\RestfulCrudControllerTest;
 
-/**
- * @TODO: Actually update entity in email tests.
- */
 class CategoriaControllerTest extends RestfulCrudControllerTest
 {
     protected $indexRoute = 's/categorias-reservaveis';

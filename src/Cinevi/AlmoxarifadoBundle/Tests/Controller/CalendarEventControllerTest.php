@@ -11,6 +11,10 @@ use Cinevi\RealizacaoBundle\Entity\Modalidade;
 use Cinevi\AlmoxarifadoBundle\Entity\Categoria;
 use Cinevi\AlmoxarifadoBundle\Entity\Equipamento;
 
+/**
+ * @TODO: Actually update entity in email tests.
+ * @TODO: Test repository functions.
+ */
 class CalendarEventControllerTest extends RestfulCrudControllerTest
 {
     protected $indexRoute = 's/reservas';

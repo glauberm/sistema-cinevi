@@ -113,6 +113,15 @@ class ProjetoControllerTest extends RestfulCrudControllerTest
         );
     }
 
+    protected function doAfterList($crawler)
+    {
+        $crawler = $this->client->click($crawler->selectLink('Título')->link());
+        $crawler = $this->client->click($crawler->selectLink('Responsável')->link());
+        $crawler = $this->client->click($crawler->selectLink('Modalidade')->link());
+
+        return $crawler;
+    }
+
     protected function tearDown()
     {
         parent::tearDown();

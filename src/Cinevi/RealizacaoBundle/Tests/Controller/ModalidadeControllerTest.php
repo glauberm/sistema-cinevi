@@ -26,4 +26,11 @@ class ModalidadeControllerTest extends RestfulCrudControllerTest
             'modalidade[nome]' => 'FEtset',
         );
     }
+
+    protected function doAfterList($crawler)
+    {
+        $crawler = $this->client->click($crawler->selectLink('Nome')->link());
+
+        return $crawler;
+    }
 }

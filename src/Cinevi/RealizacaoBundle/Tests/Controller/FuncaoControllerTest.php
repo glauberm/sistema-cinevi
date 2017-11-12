@@ -26,4 +26,11 @@ class FuncaoControllerTest extends RestfulCrudControllerTest
             'funcao[nome]' => 'FEtset',
         );
     }
+
+    protected function doAfterList($crawler)
+    {
+        $crawler = $this->client->click($crawler->selectLink('Nome')->link());
+
+        return $crawler;
+    }
 }

@@ -44,4 +44,15 @@ class UserControllerTest extends RestfulCrudControllerTest
             'user[roles]' => array('ROLE_DEPARTAMENTO'),
         );
     }
+
+    protected function doAfterList($crawler)
+    {
+        $crawler = $this->client->click($crawler->selectLink('Nome Completo')->link());
+        $crawler = $this->client->click($crawler->selectLink('Matrícula/SIAPE')->link());
+        $crawler = $this->client->click($crawler->selectLink('Ativo')->link());
+        $crawler = $this->client->click($crawler->selectLink('Confirmado')->link());
+        $crawler = $this->client->click($crawler->selectLink('Professor')->link());
+
+        return $crawler;
+    }
 }
