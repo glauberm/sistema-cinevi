@@ -31,7 +31,7 @@ class UserVoter extends BaseVoter
 
     protected function edit($obj, $user, TokenInterface $token)
     {
-        if ($this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO')) || ($obj === $user && $user->getConfirmado() === true)) {
+        if ($this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO')) || ($obj === $user)) {
             return true;
         } else {
             return false;

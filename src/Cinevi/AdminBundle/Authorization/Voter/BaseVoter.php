@@ -47,6 +47,10 @@ abstract class BaseVoter extends Voter
             return true;
         }
 
+        if ($user->getConfirmado() != true) {
+            return false;
+        }
+
         switch ($attribute) {
             case self::VIEW:
                 return $this->view($obj, $user, $token);

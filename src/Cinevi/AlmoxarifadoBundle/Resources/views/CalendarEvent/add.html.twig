@@ -1,7 +1,7 @@
 {% extends 'CineviAdminBundle:Crud:base-add.html.twig' %}
 
 {% set title = 'Adicionar Reserva' %}
-{% set routeList = path('get_reservas') %}
+{% set routeList = path('cget_reservas') %}
 
 {% block alerts %}
     {{ parent() }}
@@ -21,7 +21,5 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/cinevi/almoxarifado/calendar-event.js') }}"></script>
-    <script>
-        calendarEventAjax('POST');
-    </script>
+    <script> calendarEventAjax('POST'); </script>
 {% endblock %}

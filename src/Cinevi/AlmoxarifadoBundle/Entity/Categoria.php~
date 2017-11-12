@@ -106,4 +106,28 @@ class Categoria
     {
         return $this->equipamentos;
     }
+
+    /**
+     * Set descricao
+     *
+     * @param string $descricao
+     *
+     * @return Categoria
+     */
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+
+        return $this;
+    }
+
+    /**
+     * Get descricao
+     *
+     * @return string
+     */
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
 }

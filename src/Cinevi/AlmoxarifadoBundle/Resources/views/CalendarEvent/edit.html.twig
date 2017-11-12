@@ -1,7 +1,7 @@
 {% extends 'CineviAdminBundle:Crud:base-edit.html.twig' %}
 
 {% set title = 'Editar Reserva ' ~ item.title %}
-{% set routeList = path('get_reservas') %}
+{% set routeList = path('cget_reservas') %}
 
 {% block form %}
     {% include 'CineviAlmoxarifadoBundle:CalendarEvent:form.html.twig' with {form: editForm}  %}
@@ -10,7 +10,5 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/cinevi/almoxarifado/calendar-event.js') }}"></script>
-    <script>
-        calendarEventAjax('PUT');
-    </script>
+    <script> calendarEventAjax('PUT'); </script>
 {% endblock %}

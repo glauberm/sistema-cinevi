@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 use AncaRebeca\FullCalendarBundle\Model\Event as BaseEvent;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cinevi\AlmoxarifadoBundle\Entity\CalendarEventRepository")
  * @ORM\Table(name="almoxarifado_calendar_events")
  * @ORM\HasLifecycleCallbacks()
  */

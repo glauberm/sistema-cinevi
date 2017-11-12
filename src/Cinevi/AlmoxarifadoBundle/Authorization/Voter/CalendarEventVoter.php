@@ -24,21 +24,13 @@ class CalendarEventVoter extends BaseVoter
 
     protected function create($obj, $user, TokenInterface $token)
     {
-        if ($this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO'))) {
+        if ($this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO')) || $user->getProfessor() === true) {
             return true;
         } else {
-            $config = $this->em->getRepository('CineviAdminBundle:Configuration')
-                ->createQueryBuilder('config')
-                ->getQuery()
-                ->getOneOrNullResult()
-            ;
+            $config = $this->em->getRepository('CineviConfigBundle:Config')->getConfig();
 
             if($config && $config->getReservasFechadas() === true) {
-                if($user->getProfessor() === true) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return false;
             } else {
                 return true;
             }

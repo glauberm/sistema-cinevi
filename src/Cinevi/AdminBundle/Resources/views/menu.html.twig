@@ -40,7 +40,7 @@
             </div>
             <div id="almoxarifado-menu" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-almoxarifado-menu">
                 <div class="list-group">
-                    <a class="list-group-item {% if app.request.get('_route') == 'get_reservas' or app.request.get('_route') == 'new_reserva' or app.request.get('_route') == 'get_reserva' or app.request.get('_route') == 'edit_reserva'  or app.request.get('_route') == 'post_reserva' or app.request.get('_route') == 'put_reserva' %}active{% endif %}" href="{{ path('get_reservas') }}">
+                    <a class="list-group-item {% if app.request.get('_route') == 'cget_reservas' or app.request.get('_route') == 'new_reservas' or app.request.get('_route') == 'get_reservas' or app.request.get('_route') == 'edit_reservas'  or app.request.get('_route') == 'post_reservas' or app.request.get('_route') == 'put_reservas' %}active{% endif %}" href="{{ path('cget_reservas') }}">
                         {% include 'CineviAdminBundle:SVG:reservas.html.twig' %}Reservas
                     </a>
                     <a class="list-group-item {% if app.request.get('_route') == 'cget_reservaveis' or app.request.get('_route') == 'new_reservaveis' or app.request.get('_route') == 'get_reservaveis' or app.request.get('_route') == 'edit_reservaveis' or app.request.get('_route') == 'post_reservaveis' or app.request.get('_route') == 'put_reservaveis' %}active{% endif %}" href="{{ path('cget_reservaveis') }}">

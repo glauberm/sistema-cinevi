@@ -2,7 +2,7 @@
 
 {% set title = 'Reservas' %}
 {% set routeCsv = path('reservas_csv') %}
-{% set routeAdd = path('new_reserva') %}
+{% set routeAdd = path('new_reservas') %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
@@ -44,9 +44,9 @@
                 <tbody>
                     {% for item in pagination %}
                         <tr>
-                            <td><a href="{{ path('get_reserva', { 'id': item.id }) }}">{{ item.title }}</a></td>
-                            <td><a href="{{ path('get_reserva', { 'id': item.id }) }}">{{ item.startDate|date('d/m/Y') }}</a></td>
-                            <td><a href="{{ path('get_reserva', { 'id': item.id }) }}">{{ item.endDate|date('d/m/Y') }}</a></td>
+                            <td><a href="{{ path('get_reservas', { 'params': item.id }) }}">{{ item.title }}</a></td>
+                            <td><a href="{{ path('get_reservas', { 'params': item.id }) }}">{{ item.startDate|date('d/m/Y') }}</a></td>
+                            <td><a href="{{ path('get_reservas', { 'params': item.id }) }}">{{ item.endDate|date('d/m/Y') }}</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -60,7 +60,7 @@
         <div class="clearfix">
             <div class="pull-left text-left csv-counter">
                 {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
-                    <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Exportar .CSV</a>
+                    <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Baixar como tabela</a>
                 {% endif %}
                 <div class="navbar-form"><label><small class="text-muted">Total de Itens: {{ pagination.getTotalItemCount }}</small></label></div>
             </div>
@@ -80,7 +80,7 @@
     <div class="clearfix">
         <div class="pull-left text-left csv-counter">
             {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
-                <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Exportar .CSV</a>
+                <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Baixar como tabela</a>
             {% endif %}
             <div class="navbar-form"><label><small class="text-muted">Total de Itens: {{ pagination.getTotalItemCount }}</small></label></div>
         </div>
@@ -113,11 +113,16 @@
                         }
                     }
                 ],
+                eventRender: function(event, element) {
+                    element.attr("title", event.title),
+                    element.attr("data-toggle", "tooltip")
+                },
                 loading: function( isLoading, view ) {
                     if(isLoading) {
                         $("body").append("<div id='overlay-alert' class='overlay-alert'><span class='label label-danger'>Carregando...</span></div>");
                     } else {
                         $("#overlay-alert").remove();
+                        $(function () { $('[data-toggle="tooltip"]').tooltip() })
                     }
                 }
             });

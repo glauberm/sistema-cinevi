@@ -14,7 +14,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Cinevi\AdminBundle\Form\Transformer\EntityToIdObjectTransformer;
-use Cinevi\AlmoxarifadoBundle\Entity\CalendarEvent;
 
 class CalendarEventType extends AbstractType
 {
@@ -35,7 +34,6 @@ class CalendarEventType extends AbstractType
         $userArray = array();
         $projetoArray = array();
 
-        // Pega os usuários que o usuário atual pode ver
         $userQB = $this->em->getRepository('CineviSecurityBundle:User')->createQueryBuilder('u');
         $userQB->orderBy('u.username', 'ASC');
         foreach ($userQB->getQuery()->getResult() as $result) {
@@ -44,7 +42,6 @@ class CalendarEventType extends AbstractType
             }
         }
 
-        // Pega os projetos que o usuário atual pode ver
         $projetoQB = $this->em->getRepository('CineviRealizacaoBundle:Projeto')->createQueryBuilder('p');
         $projetoQB->orderBy('p.id', 'DESC');
         foreach ($projetoQB->getQuery()->getResult() as $result) {
@@ -92,25 +89,37 @@ class CalendarEventType extends AbstractType
             ))
         ;
 
-        // FORM MODIFIER
         $formModifier = function (FormInterface $form, \DateTime $startDate = null, \DateTime $endDate = null, $id = null) {
-            $equipamentosArray = array();
-            $equipamentosPorCategoriaArray = array();
+            $equipamentosByCategoriaArray = array();
 
-            $equipamentoQB = $this->equipamentosValidos();
+            $equipamentoQB = $this->em
+                ->getRepository('CineviAlmoxarifadoBundle:Equipamento')
+                ->createQueryBuilder('e')->orderBy('e.codigo', 'ASC')
+                ->where('e.manutencao != 1')
+            ;
+            foreach ($equipamentoQB->getQuery()->getResult() as $equipamento) {
+                if (!$equipamento->getUsers()->isEmpty()) {
+                    foreach ($equipamento->getUsers() as $user) {
+                        if ($user !== $this->tokenStorageInterface->getToken()->getUser() || !$this->authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
+                            $equipamentoQB->andWhere('e.id != '.$result->getId());
+                        }
+                    }
+                }
+            }
 
             if (!empty($startDate) && !empty($endDate)) {
-                $equipamentoQB = $this->equipamentosPorData($equipamentoQB, $startDate, $endDate, $id);
+                $reservas = $this->getReservas($startDate, $endDate, $id);
+                $equipamentoQB = $this->validateEquipamentos($startDate, $endDate, $equipamentoQB, $reservas);
             }
 
             foreach ($equipamentoQB->getQuery()->getResult() as $equipamento) {
-                $equipamentosPorCategoriaArray[$equipamento->getCategoria()->getNome()]['['.$equipamento->getCodigo().'] '.$equipamento->getNome()] = $equipamento->getId();
+                $equipamentosByCategoriaArray[$equipamento->getCategoria()->getNome()]['['.$equipamento->getCodigo().'] '.$equipamento->getNome()] = $equipamento->getId();
             }
 
             $form
                 ->add('equipamentos', EquipamentoExtensionType::class, array(
                     'label' => 'Reserváveis Disponíveis',
-                    'choices' => $equipamentosPorCategoriaArray,
+                    'choices' => $equipamentosByCategoriaArray,
                     'invalid_message' => 'Este não é um valor válido.',
                     'multiple' => true,
                     'choices_as_values' => true,
@@ -159,85 +168,33 @@ class CalendarEventType extends AbstractType
         ));
     }
 
-    private function equipamentosValidos()
+    private function getReservas($startDate, $endDate, $id)
     {
-        // Encontre seus equipamentos que não estejam em manutenção
-        $equipamentoQB = $this->em->getRepository('CineviAlmoxarifadoBundle:Equipamento')->createQueryBuilder('e');
-        $equipamentoQB->orderBy('e.codigo', 'ASC')
-            ->where('e.manutencao != 1')
-        ;
+        $reservas = $this->em->getRepository('CineviAlmoxarifadoBundle:CalendarEvent');
 
-        // Para cada equipamento
-        foreach ($equipamentoQB->getQuery()->getResult() as $equipamento) {
-            // Veja se o campo users está vazio
-            if (!$equipamento->getUsers()->isEmpty()) {
-                foreach ($equipamento->getUsers() as $user) {
-                    // Se não estiver, checa se o usuário está entre esses ou tem ROLE_DEPARTAMENTO
-                    if ($user !== $this->tokenStorageInterface->getToken()->getUser() || !$this->authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
-                        // Se não tiver, exclui esse equipamento dos resultados
-                        $equipamentoQB->andWhere('e.id != '.$result->getId());
-                    }
-                }
-            }
+        if(empty($id)) {
+            return $reservas->findAllBetweenDates($startDate, $endDate)
+                ->getQuery()->getResult()
+            ;
+        } else {
+            return $reservas->findAllBetweenDatesButId($startDate, $endDate, $id)
+                ->getQuery()->getResult()
+            ;
         }
-
-        return $equipamentoQB;
     }
 
-    private function equipamentosPorData($equipamentoQB, \DateTime $fStartDate, \DateTime $fEndDate, $id = null)
+    private function validateEquipamentos($startDate, $endDate, $equipamentoQB, $reservas)
     {
-        $interval = new \DateInterval('P1D');
         $fEquipamentos = $equipamentoQB->getQuery()->getResult();
 
-        if (!empty($id)) {
-            $reservas = $this->em->createQueryBuilder();
-            $reservas->select('cv')
-                    ->from('CineviAlmoxarifadoBundle:CalendarEvent', 'cv')
-                    ->where('cv.id != (:id)')
-                    ->setParameter('id', $id);
-
-            $reservas = $reservas->getQuery()->getResult();
-        } else {
-            $reservas = $this->em->getRepository('CineviAlmoxarifadoBundle:CalendarEvent')->findAll();
-        }
-
         if (!empty($fEquipamentos)) {
-            if($fStartDate == $fEndDate) {
-                $cfEndDate = clone $fEndDate;
-                $cfEndDate->add($interval);
-
-                $fPeriod = new \DatePeriod($fStartDate, $interval, $cfEndDate);
-            } else {
-                $fPeriod = new \DatePeriod($fStartDate, $interval, $fEndDate);
-            }
-
-            foreach ($reservas as $reserva) {
-                foreach ($reserva->getEquipamentos() as $rEquipamento) {
-                    foreach ($fEquipamentos as $fEquipamento) {
+            foreach( $reservas as $reserva ) {
+                foreach( $reserva->getEquipamentos() as $rEquipamento ) {
+                    foreach( $fEquipamentos as $fEquipamento ) {
                         if ($rEquipamento == $fEquipamento) {
-                            $rStartDate = $reserva->getStartDate();
-                            $rEndDate = $reserva->getEndDate();
+                            $equipamentoQB->andWhere('e.id != '.$fEquipamento->getId());
 
-                            if($rStartDate == $rEndDate) {
-                                $crEndDate = clone $rEndDate;
-                                $crEndDate->add($interval);
-
-                                $rPeriod = new \DatePeriod($rStartDate, $interval, $crEndDate);
-                            } else {
-                                $rPeriod = new \DatePeriod($rStartDate, $interval, $rEndDate);
-                            }
-
-                            foreach ($rPeriod as $rDay) {
-                                foreach ($fPeriod as $fDay) {
-
-                                    if ($rDay == $fDay) {
-                                        // Se bater, exclui esse equipamento dos resultados
-                                        $equipamentoQB->andWhere('e.id != '.$rEquipamento->getId());
-
-                                        break 3;
-                                    }
-                                }
-                            }
+                            break;
                         }
                     }
                 }

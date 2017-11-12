@@ -1,17 +1,17 @@
 {% extends 'CineviAdminBundle:Crud:base-show.html.twig' %}
 
 {% set title = 'Reserva ' ~ item.title %}
-{% set routeList = path('get_reservas') %}
-{% set routeEdit = path('edit_reserva', { 'id': item.id }) %}
+{% set routeList = path('cget_reservas') %}
+{% set routeEdit = path('edit_reservas', { 'id': item.id }) %}
 
 {% block dtdd %}
     <dt>Código</dt><dd>{{ item.title }}</dd>
 
     <div class="row">
-        <div class="col-sm-6"><dt>Usuário</dt><dd><a href="{{ path('get_usuarios', {id:item.user.id}) }}">{{ item.user.username }}</a></dd></div>
+        <div class="col-sm-6"><dt>Usuário</dt><dd><a href="{{ path('get_usuarios', { 'params' : item.user.id}) }}">{{ item.user.username }}</a></dd></div>
         <div class="col-sm-6">
             <dt>Projeto</dt>
-            <dd><a href="{{ path('get_projeto', {id:item.projeto.id}) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
+            <dd><a href="{{ path('get_projetos', { 'params' : item.projeto.id}) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
         </div>
     </div>
     <div class="row">

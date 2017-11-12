@@ -35,7 +35,7 @@ class CalendarEventCommand extends BaseCommand
 
                 $assunto = 'Retirada de Reserváveis: '.$reserva->getTitle();
 
-                $path = $this->getContainer()->get('router')->generate('get_reserva', array(
+                $path = $this->getContainer()->get('router')->generate('get_reservas', array(
                     'id' => $reserva->getId(),
                 ), true);
 
@@ -48,7 +48,7 @@ class CalendarEventCommand extends BaseCommand
 
                 $assunto = 'Retirada de Reserváveis: '.$reserva->getTitle();
 
-                $path = $this->getContainer()->get('router')->generate('get_reserva', array(
+                $path = $this->getContainer()->get('router')->generate('get_reservas', array(
                     'id' => $reserva->getId(),
                 ), true);
 
@@ -65,7 +65,7 @@ class CalendarEventCommand extends BaseCommand
 
                 $assunto = 'Retirada de Reserváveis: '.$reserva->getTitle();
 
-                $path = $this->getContainer()->get('router')->generate('get_reserva', array(
+                $path = $this->getContainer()->get('router')->generate('get_reservas', array(
                     'id' => $reserva->getId(),
                 ), true);
 
@@ -78,7 +78,7 @@ class CalendarEventCommand extends BaseCommand
 
                 $assunto = 'Retirada de Reserváveis: '.$reserva->getTitle();
 
-                $path = $this->getContainer()->get('router')->generate('get_reserva', array(
+                $path = $this->getContainer()->get('router')->generate('get_reservas', array(
                     'id' => $reserva->getId(),
                 ), true);
 
@@ -98,7 +98,7 @@ class CalendarEventCommand extends BaseCommand
 
                 $assunto = 'Devolução de Reserváveis: '.$reserva->getTitle();
 
-                $path = $this->getContainer()->get('router')->generate('get_reserva', array(
+                $path = $this->getContainer()->get('router')->generate('get_reservas', array(
                     'id' => $reserva->getId(),
                 ), true);
 
@@ -111,7 +111,7 @@ class CalendarEventCommand extends BaseCommand
 
                 $assunto = 'Devolução de Reserváveis: '.$reserva->getTitle();
 
-                $path = $this->getContainer()->get('router')->generate('get_reserva', array(
+                $path = $this->getContainer()->get('router')->generate('get_reservas', array(
                     'id' => $reserva->getId(),
                 ), true);
 
@@ -128,7 +128,7 @@ class CalendarEventCommand extends BaseCommand
 
                 $assunto = 'Devolução de Reserváveis: '.$reserva->getTitle();
 
-                $path = $this->getContainer()->get('router')->generate('get_reserva', array(
+                $path = $this->getContainer()->get('router')->generate('get_reservas', array(
                     'id' => $reserva->getId(),
                 ), true);
 
@@ -141,7 +141,7 @@ class CalendarEventCommand extends BaseCommand
 
                 $assunto = 'Devolução de Reserváveis: '.$reserva->getTitle();
 
-                $path = $this->getContainer()->get('router')->generate('get_reserva', array(
+                $path = $this->getContainer()->get('router')->generate('get_reservas', array(
                     'id' => $reserva->getId(),
                 ), true);
 
