@@ -485,6 +485,19 @@ a.pular-para-conteudo:active {
     color: #333;
 }
 
+.fc-day-grid-event.reserva-propria {
+    background: #EAD741;
+    border: 1px solid #bbaa1f;
+    color: #3D3A28;
+}
+
+.fc-day-grid-event.reserva-propria:hover,
+.fc-day-grid-event.reserva-propria:focus,
+.fc-day-grid-event.reserva-propria:active {
+    color: #1C1B16;
+    background-color: #decc3a;
+}
+
 .fc-basicDay-view .fc-start {
     background-color: #D9EDF7 !important;
     border-color: #ADADAD !important;

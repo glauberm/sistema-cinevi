@@ -4,6 +4,7 @@
 - Testar tudo
 - Se o número for "2147483647", colocar alerta de que precisa atualizar o número
 - Tabela de Equipamentos na reserva com paginação, total de itens, etc.
+- Tabela de Reservas no Equipamento
 - Deixar todos os "não informado" como text-muted
 - Checar os vendors js e css (passar para node_modules)
 - Aviso ao deletar Categorias de Reserváveis
