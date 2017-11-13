@@ -2,7 +2,6 @@
 
 - Se o número for "2147483647", colocar alerta de que precisa atualizar o número
 - Checar os vendors js e css (passar para node_modules)
-- Todas as rotas com métodos definidos
 - Testar comando de receitas
 
 ## Depois
