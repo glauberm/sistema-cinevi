@@ -4,6 +4,7 @@ reservaveis:
 
 reservaveis_csv:
     path:      /csv/reservaveis
+    methods:   [GET]
     defaults:  { _controller: CineviAlmoxarifadoBundle:Equipamento:getCsv }
 
 categorias-reservaveis:
@@ -12,6 +13,7 @@ categorias-reservaveis:
 
 categorias-reservaveis_csv:
     path:      /csv/categorias-reservaveis
+    methods:   [GET]
     defaults:  { _controller: CineviAlmoxarifadoBundle:Categoria:getCsv }
 
 reservas:
@@ -20,4 +22,5 @@ reservas:
 
 reservas_csv:
     path:      /csv/reservas
+    methods:   [GET]
     defaults:  { _controller: CineviAlmoxarifadoBundle:Reserva:getCsv }

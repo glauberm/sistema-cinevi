@@ -4,6 +4,7 @@ projetos:
 
 projetos_csv:
     path:      /csv/projetos
+    methods:   [GET]
     defaults:  { _controller: CineviRealizacaoBundle:Projeto:getCsv }
 
 copias_finais:
@@ -12,6 +13,7 @@ copias_finais:
 
 copias_finais_csv:
     path:      /csv/copias-finais
+    methods:   [GET]
     defaults:  { _controller: CineviRealizacaoBundle:CopiaFinal:getCsv }
 
 funcoes:
@@ -20,6 +22,7 @@ funcoes:
 
 funcoes_csv:
     path:      /csv/funcoes
+    methods:   [GET]
     defaults:  { _controller: CineviRealizacaoBundle:Funcao:getCsv }
 
 modalidades:
@@ -28,4 +31,5 @@ modalidades:
 
 modalidades_csv:
     path:      /csv/funcoes
+    methods:   [GET]
     defaults:  { _controller: CineviRealizacaoBundle:Modalidade:getCsv }
