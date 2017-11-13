@@ -117,18 +117,18 @@
     </div>
     <div class="col-sm-6">
         {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
-            'dt': 'Equipamentos de Captação de Som',
-            'item': item.captacaoSom
-        } %}
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
             'dt': 'Software de Edição',
             'item': item.softwareEdicao|join(', ')
         } %}
     </div>
+</div>
+<div class="row">
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Equipamentos de Captação de Som',
+    'item': item.captacaoSom
+} %}
+</div>
+<div class="row">
     <div class="col-sm-6">
         {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
             'dt': 'Orçamento',
@@ -136,21 +136,17 @@
             'dd': 'R$ ' ~ item.orcamento
         } %}
     </div>
-</div>
-<div class="row">
     <div class="col-sm-6">
         {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
             'dt': 'Fontes de Financiamento',
             'item': item.fontesFinanciamento|join(', ')
         } %}
     </div>
-    <div class="col-sm-6">
-        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
-            'dt': 'Apoiadores',
-            'item': item.apoiadores
-        } %}
-    </div>
 </div>
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Apoiadores',
+    'item': item.apoiadores
+} %}
 {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
     'dt': 'Foi feito DCP?',
     'item': item.dcp

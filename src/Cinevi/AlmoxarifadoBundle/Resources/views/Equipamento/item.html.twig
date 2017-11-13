@@ -20,22 +20,16 @@
         } %}
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
-            'dt': 'Acessórios',
-            'item': item.acessorios,
-            'inherit': true
-        } %}
-    </div>
-    <div class="col-md-6">
-        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
-            'dt': 'Observações',
-            'item': item.obs,
-            'inherit': true
-        } %}
-    </div>
-</div>
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Acessórios',
+    'item': item.acessorios,
+    'inherit': true
+} %}
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Observações',
+    'item': item.obs,
+    'inherit': true
+} %}
 <div class="row">
     <div class="col-md-6"><dt>Em Manutenção?</dt><dd>{{ item.manutencao ? 'Sim' : 'Não' }}</dd></div>
     <div class="col-md-6"><dt>Devolução Atrasada?</dt><dd>{{ item.atrasado ? 'Sim' : 'Não' }}</dd></div>

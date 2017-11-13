@@ -74,9 +74,6 @@ class RealizacaoType extends AbstractType
             ))
             ->add('sinopse', TextareaType::class, array(
                 'label' => 'Sinopse',
-                'attr' => array(
-                    'maxLength' => 255,
-                ),
             ))
             ->add('modalidade', ChoiceType::class, array(
                 'label' => 'Modalidade',

@@ -7,11 +7,7 @@
     {% endfor %}
 </div>
 
-<div class="row">
-    <div class="col-sm-6">{{ form_row(form.elenco) }}</div>
-    <div class="col-sm-6">{{ form_row(form.outrasInformacoes) }}</div>
-</div>
-<div class="row">
-    <div class="col-sm-6">{{ form_row(form.festivais) }}</div>
-    <div class="col-sm-6">{{ form_row(form.premios) }}</div>
-</div>
+{{ form_row(form.elenco) }}
+{{ form_row(form.outrasInformacoes) }}
+{{ form_row(form.festivais) }}
+{{ form_row(form.premios) }}

@@ -28,18 +28,16 @@
     <div class="col-sm-6">{{ form_row(form.suporteMatrizDigital) }}</div>
 </div>
 <div class="row">
-    <div class="col-sm-4">{{ form_row(form.camera) }}</div>
-    <div class="col-sm-4">{{ form_row(form.captacaoSom) }}</div>
-    <div class="col-sm-4">{{ form_row(form.softwareEdicao) }}</div>
+    <div class="col-sm-6">{{ form_row(form.camera) }}</div>
+    <div class="col-sm-6">{{ form_row(form.softwareEdicao) }}</div>
 </div>
+{{ form_row(form.captacaoSom) }}
 <div class="row">
     <div class="col-sm-6">{{ form_row(form.orcamento) }}</div>
     <div class="col-sm-6">{{ form_row(form.fontesFinanciamento) }}</div>
 </div>
-<div class="row">
-    <div class="col-sm-6">{{ form_row(form.apoiadores) }}</div>
-    <div class="col-sm-6">{{ form_row(form.dcp) }}</div>
-</div>
+{{ form_row(form.apoiadores) }}
+{{ form_row(form.dcp) }}
 
 <fieldset>
     <legend><a id="Ficha Técnica" href="#Ficha Técnica">Ficha Técnica</a></legend>

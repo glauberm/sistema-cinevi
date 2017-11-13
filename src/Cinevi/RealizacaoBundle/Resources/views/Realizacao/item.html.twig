@@ -29,17 +29,11 @@
         } %}
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-6">
-        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
-            'dt': 'Detalhes da Captação',
-            'item': item.detalhesCaptacao
-        } %}
-    </div>
-    <div class="col-sm-6">
-        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
-            'dt': 'Locação(ões)',
-            'item': item.locacoes
-        } %}
-    </div>
-</div>
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Detalhes da Captação',
+    'item': item.detalhesCaptacao
+} %}
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Locação(ões)',
+    'item': item.locacoes
+} %}

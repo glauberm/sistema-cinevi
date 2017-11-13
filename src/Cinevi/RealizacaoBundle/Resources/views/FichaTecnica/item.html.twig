@@ -2,31 +2,19 @@
     {% include 'CineviRealizacaoBundle:Equipe:item.html.twig' with {item: equipe} %}
 {% endfor %}
 
-<div class="row">
-    <div class="col-sm-6">
-        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
-            'dt': 'Elenco',
-            'item': item.elenco
-        } %}
-    </div>
-    <div class="col-sm-6">
-        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
-            'dt': 'Outras Informações',
-            'item': item.outrasInformacoes
-        } %}
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
-            'dt': 'Participações em Festivais e Mostras',
-            'item': item.festivais
-        } %}
-    </div>
-    <div class="col-sm-6">
-        {% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
-            'dt': 'Prêmios',
-            'item': item.premios
-        } %}
-    </div>
-</div>
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Elenco',
+    'item': item.elenco
+} %}
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Outras Informações',
+    'item': item.outrasInformacoes
+} %}
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Participações em Festivais e Mostras',
+    'item': item.festivais
+} %}
+{% include 'CineviAdminBundle:Parts:nullable-field.html.twig' with {
+    'dt': 'Prêmios',
+    'item': item.premios
+} %}
