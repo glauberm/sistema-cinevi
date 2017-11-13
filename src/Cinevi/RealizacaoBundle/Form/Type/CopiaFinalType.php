@@ -277,6 +277,10 @@ class CopiaFinalType extends AbstractType
             ->add('orcamento', MoneyType::class, array(
     		    'currency' => 'BRL',
                 'scale' => 2,
+                'grouping' => true,
+                'attr' => array(
+                    'class' => 'input-money',
+                ),
                 'required' => false,
     	    ))
             ->add('fontesFinanciamento', ChoiceType::class, array(
