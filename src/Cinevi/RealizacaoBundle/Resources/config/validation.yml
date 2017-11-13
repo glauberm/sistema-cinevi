@@ -102,14 +102,6 @@ Cinevi\RealizacaoBundle\Entity\CopiaFinal:
         linkVideo:
             - Url:
                 message: Por favor, informe um link válido.
-        duracao:
-            - Type:
-                type: integer
-                message: Por favor, informe apenas números.
-        taxaBits:
-            - Type:
-                type: integer
-                message: Por favor, informe apenas números.
         confirmado:
             - NotNull:
                 message: 'Por favor, informe se os dados do usuários foram confirmados ou não.'

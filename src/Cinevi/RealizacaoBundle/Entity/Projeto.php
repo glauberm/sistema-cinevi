@@ -84,7 +84,7 @@ class Projeto
     protected $disciplinaArte;
 
     /**
-     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\CopiaFinal", cascade={"merge"}, mappedBy="projeto")
+     * @ORM\OneToOne(targetEntity="Cinevi\RealizacaoBundle\Entity\CopiaFinal", cascade={"merge", "remove"}, mappedBy="projeto")
      **/
     protected $copiaFinal;
 

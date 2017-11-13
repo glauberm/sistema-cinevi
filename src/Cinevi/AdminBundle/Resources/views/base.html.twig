@@ -9,6 +9,8 @@
         <meta name="subject" content="Todos os serviços do departamento qualquer lugar." />
         <meta name="robots" content="noindex, nofollow" />
         <meta name="googlebot" content="noindex, nofollow" />
+        <link rel="author" href="{{ asset('humans.txt') }}">
+        <link href="{{ asset('manifest.json') }}" rel="manifest">
         {% block stylesheets %}
             <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('vendor/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet" type="text/css" />

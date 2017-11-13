@@ -113,8 +113,6 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
 
         $this->client->request($form->getMethod(), $form->getUri(), $values, $form->getPhpFiles());
 
-        // $this->client->submit($form);
-
         return $this->client->followRedirect();
     }
 
@@ -137,11 +135,11 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
             'copia_final[cromia]' => 'P&B',
             'copia_final[proporcao]' => 'Padrão HD - 16:9',
             'copia_final[formato]' => 'Vídeo',
-            'copia_final[duracao]' => 120,
+            'copia_final[duracao]' => '120',
             'copia_final[formatoDigitalNativo]' => 'Prores',
             'copia_final[codec]' => 'H.264',
             'copia_final[container]' => 'DNG',
-            'copia_final[taxaBits]' => 64,
+            'copia_final[taxaBits]' => '64',
             'copia_final[velocidade]' => '24 fps',
             'copia_final[som]' => 'Mono',
             'copia_final[resolucaoAudioDigital]' => '24 bits',
@@ -149,7 +147,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
             'copia_final[camera]' => 'Canon 5D Mark II',
             'copia_final[captacaoSom]' => 'Lorem, Ipsum e Dolor.',
             'copia_final[softwareEdicao]' => array('Adobe Premiere', 'Sony Vegas'),
-            'copia_final[orcamento]' => '3999,99',
+            'copia_final[orcamento]' => '3,999.99',
             'copia_final[fontesFinanciamento]' => array('Recursos Próprios', 'Edital'),
             'copia_final[apoiadores]' => 'Lorem, Ipsum e Dolor.',
             'copia_final[dcp]' => '1',
@@ -200,11 +198,11 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
             'copia_final[cromia]' => 'P&B',
             'copia_final[proporcao]' => 'Scope - 2,39:1',
             'copia_final[formato]' => 'Película',
-            'copia_final[duracao]' => 90,
+            'copia_final[duracao]' => '90',
             'copia_final[formatoDigitalNativo]' => 'AVCHD',
             'copia_final[codec]' => 'Prores',
             'copia_final[container]' => 'MOV',
-            'copia_final[taxaBits]' => 32,
+            'copia_final[taxaBits]' => '32',
             'copia_final[velocidade]' => '29.97 fps',
             'copia_final[som]' => 'Estéreo',
             'copia_final[resolucaoAudioDigital]' => '16 bits',
@@ -212,7 +210,7 @@ class CopiaFinalControllerTest extends RestfulCrudControllerTest
             'copia_final[camera]' => 'Canon 5D Mark III',
             'copia_final[captacaoSom]' => '9Lorem, Ipsum e Dolor.',
             'copia_final[softwareEdicao]' => array('Adobe Premiere'),
-            'copia_final[orcamento]' => '4999,99',
+            'copia_final[orcamento]' => '4,999.99',
             'copia_final[fontesFinanciamento]' => array('Recursos Próprios'),
             'copia_final[apoiadores]' => '9Lorem, Ipsum e Dolor.',
             'copia_final[dcp]' => '0',

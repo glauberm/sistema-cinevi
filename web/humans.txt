@@ -8,4 +8,4 @@
 # TECHNOLOGY COLOPHON
 
     CSS3, HTML5
-    Apache Server Configs, Symfony, jQuery, Bootstrap
+    Apache Server Configs, Doctrine, Symfony, Twig, jQuery, Bootstrap
