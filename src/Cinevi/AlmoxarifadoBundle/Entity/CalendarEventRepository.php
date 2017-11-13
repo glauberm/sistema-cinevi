@@ -45,4 +45,13 @@ class CalendarEventRepository extends CrudRepository
             ->setParameter('id', $id)
         ;
     }
+
+    public function listWhereEquipamentoIs($qb, $id, $builderName = 'item')
+    {
+        return $qb
+            ->innerJoin($builderName.'.equipamentos', $builderName.'e')
+            ->where($builderName.'e.id = :id')
+            ->setParameter('id', $id)
+        ;
+    }
 }

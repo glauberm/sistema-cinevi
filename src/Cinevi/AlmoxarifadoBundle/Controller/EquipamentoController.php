@@ -28,6 +28,22 @@ class EquipamentoController extends RestfulCrudController implements ClassResour
     private $manutencao;
     private $atrasado;
 
+    protected function preGet(Request $request, EntityManager $em, $obj, array $return = []) : array
+    {
+        $r = $em->getRepository('CineviAlmoxarifadoBundle:CalendarEvent');
+
+        $qb = $r->list('reserva');
+        $qb = $this->list($request, $em, $qb, 'reserva');
+
+        $qb = $r->listWhereEquipamentoIs($qb, $obj->getId(), 'reserva');
+
+        $pagination = $this->getPagination($request, $qb);
+
+        $return['pagination'] = $pagination;
+
+        return $return;
+    }
+
     protected function preFormPut($obj, Form $form, EntityManager $em) : Form
     {
         $this->manutencao = $obj->getManutencao();

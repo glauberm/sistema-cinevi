@@ -23,24 +23,28 @@
         <div class="col-sm-6"><dt>Última atualização em</dt><dd>{{ item.updatedIn|date('d/m/Y H:m:s') }}</dd></div>
     </div>
 
-    <h2 id="reservaveis">Reserváveis</h2>
+
+    <h2 id="reservaveis" class="h3"><a href="#reservaveis">Reserváveis</a></h2>
+
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Cód.</th>
-                    <th>Reservável</th>
+                    {% include 'CineviAlmoxarifadoBundle:Equipamento:list-thead.html.twig' with { builderName: 'equipamento' } %}
                 </tr>
             </thead>
             <tbody>
-                {% for equipamento in item.equipamentos %}
+                {% for item in pagination %}
                     <tr>
-                        <td>{{ equipamento.codigo }}</td>
-                        <td><a href="{{ path('get_reservaveis', { 'params': item.id }) }}">{{ equipamento.nome }}</a></td>
+                        {% include 'CineviAlmoxarifadoBundle:Equipamento:list-tbody.html.twig' %}
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+
+    {% block blockPagination %}
+        {% include 'CineviAdminBundle:Pagination:pagination.html.twig' with { name: 'numResultados' } %}
+    {% endblock %}
 
 {% endblock %}

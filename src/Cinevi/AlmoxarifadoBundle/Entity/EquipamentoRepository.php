@@ -22,4 +22,13 @@ class EquipamentoRepository extends CrudRepository
             ->setParameter('id', $id)
         ;
     }
+
+    public function listWhereReservaIs($qb, $id, $builderName = 'item')
+    {
+        return $qb
+            ->innerJoin($builderName.'.calendarEvents', $builderName.'r')
+            ->where($builderName.'r.id = :id')
+            ->setParameter('id', $id)
+        ;
+    }
 }

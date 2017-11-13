@@ -27,6 +27,22 @@ class ReservaController extends RestfulCrudController
     protected $formClassName = CalendarEventType::class;
     protected $paramsKey = 'id';
 
+    protected function preGet(Request $request, EntityManager $em, $obj, array $return = []) : array
+    {
+        $r = $em->getRepository('CineviAlmoxarifadoBundle:Equipamento');
+
+        $qb = $r->list('equipamento');
+        $qb = $this->list($request, $em, $qb, 'equipamento');
+
+        $qb = $r->listWhereReservaIs($qb, $obj->getId(), 'equipamento');
+
+        $pagination = $this->getPagination($request, $qb);
+
+        $return['pagination'] = $pagination;
+
+        return $return;
+    }
+
     protected function postFormPost(Form $form, EntityManager $em) : Form
     {
         $startDate = $form->get('startDate')->getData();
