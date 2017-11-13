@@ -1,6 +1,5 @@
 # TO-DO
 
-- Registrar/Pedir Senha e todos os outros FOSUserBundle que não sejam o login ocupando mais espaço na tela
 - Mais espaço para todos os <textarea>
 - Realizações e reservas no perfil do usuário, realizações e reservas do usuário atual na home
 - Máscara de dinheiro e telefone
