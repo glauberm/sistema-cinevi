@@ -35,7 +35,7 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form_themes: ['bootstrap_3_layout_extended.html.twig']
+    form_themes: ['bootstrap_3_layout.html.twig']
 
 # Doctrine Configuration
 doctrine:
@@ -95,9 +95,14 @@ fos_user:
         retry_ttl: 900
         email:
             template:  CineviSecurityBundle:Resetting:email.html.twig
+        form:
+            validation_groups: [ResetPassword]
     profile:
         form:
             type: Cinevi\SecurityBundle\Form\Type\ProfileType
+    change_password:
+        form:
+            validation_groups: [ChangePassword]
 
 # FOSRestBundle Configuration
 fos_rest:

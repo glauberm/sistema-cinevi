@@ -1,6 +1,13 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+<h1 class="page-header text-primary">Esqueci minha senha</h1>
+
 {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset', 'novalidate': 'novalidate' } }) }}
-    {{ form_widget(form) }}
-    <input type="submit" class="btn btn-lg btn-primary btn-block" value="{{ 'resetting.reset.submit'|trans }}" />
+    <div class="row">
+        <div class="col-sm-6">{{ form_row(form.plainPassword.first) }}</div>
+        <div class="col-sm-6">{{ form_row(form.plainPassword.second) }}</div>
+    </div>
+    {{ form_rest(form) }}
+    <br/>
+    <input type="submit" class="btn btn-lg btn-warning" value="{{ 'resetting.reset.submit'|trans }}" />
 {{ form_end(form) }}

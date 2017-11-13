@@ -356,15 +356,6 @@ a.pular-para-conteudo:active {
 }
 
 /* SECURITY */
-.body-security .input-group-addon {
-    background-color: #decc3a;
-    border-color: #b3a21e;
-}
-
-.body-security .form-control {
-    border-color: #b3a21e;
-}
-
 .header-security .logo {
     display: block;
 }
@@ -388,6 +379,15 @@ a.pular-para-conteudo:active {
     background: linear-gradient(to bottom, #decc3a 0%,#ead741 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#decc3a', endColorstr='#ead741',GradientType=0 );
     color: #3D3A28;
+}
+
+.login-form .input-group-addon {
+    background-color: #decc3a;
+    border-color: #b3a21e;
+}
+
+.login-form .form-control {
+    border-color: #b3a21e;
 }
 
 /* PUBLIC */

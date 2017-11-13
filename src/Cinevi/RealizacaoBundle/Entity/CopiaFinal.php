@@ -59,7 +59,7 @@ class CopiaFinal
     protected $container;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      **/
     protected $taxaBits;
 
@@ -119,7 +119,7 @@ class CopiaFinal
     protected $apoiadores;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      **/
     protected $duracao;
 
@@ -305,7 +305,7 @@ class CopiaFinal
     /**
      * Set taxaBits
      *
-     * @param integer $taxaBits
+     * @param string $taxaBits
      * @return CopiaFinal
      */
     public function setTaxaBits($taxaBits)
@@ -318,7 +318,7 @@ class CopiaFinal
     /**
      * Get taxaBits
      *
-     * @return integer
+     * @return string
      */
     public function getTaxaBits()
     {
@@ -581,7 +581,7 @@ class CopiaFinal
     /**
      * Set duracao
      *
-     * @param integer $duracao
+     * @param string $duracao
      * @return CopiaFinal
      */
     public function setDuracao($duracao)
@@ -594,7 +594,7 @@ class CopiaFinal
     /**
      * Get duracao
      *
-     * @return integer
+     * @return string
      */
     public function getDuracao()
     {

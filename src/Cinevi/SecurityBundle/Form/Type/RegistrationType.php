@@ -4,6 +4,7 @@ namespace Cinevi\SecurityBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
@@ -18,7 +19,7 @@ class RegistrationType extends AbstractType
                     'class' => 'input-number'
                 )
             ))
-            ->add('telefone', IntegerType::class, array(
+            ->add('telefone', TextType::class, array(
                 'label' => 'Telefone',
                 'attr' => array(
                     'class' => 'input-tel',

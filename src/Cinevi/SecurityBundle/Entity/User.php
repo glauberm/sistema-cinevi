@@ -25,7 +25,7 @@ class User extends BaseUser
     protected $telefone;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      **/
     protected $matricula;
 
@@ -70,7 +70,7 @@ class User extends BaseUser
     /**
      * Set telefone
      *
-     * @param integer $telefone
+     * @param string $telefone
      * @return User
      */
     public function setTelefone($telefone)
@@ -83,7 +83,7 @@ class User extends BaseUser
     /**
      * Get telefone
      *
-     * @return integer
+     * @return string
      */
     public function getTelefone()
     {
@@ -93,7 +93,7 @@ class User extends BaseUser
     /**
      * Set matricula
      *
-     * @param integer $matricula
+     * @param string $matricula
      * @return User
      */
     public function setMatricula($matricula)
@@ -106,7 +106,7 @@ class User extends BaseUser
     /**
      * Get matricula
      *
-     * @return integer
+     * @return string
      */
     public function getMatricula()
     {
@@ -136,6 +136,28 @@ class User extends BaseUser
         return $this->confirmado;
     }
 
+    /**
+     * Set professor
+     *
+     * @param boolean $professor
+     * @return User
+     */
+    public function setProfessor($professor)
+    {
+        $this->professor = $professor;
+
+        return $this;
+    }
+
+    /**
+     * Get professor
+     *
+     * @return boolean
+     */
+    public function getProfessor()
+    {
+        return $this->professor;
+    }
 
     /**
     * @ORM\PrePersist
@@ -175,29 +197,6 @@ class User extends BaseUser
         if(!$this->getProfessor()) {
             $this->professor = false;
         }
-    }
-
-    /**
-     * Set professor
-     *
-     * @param integer $professor
-     * @return User
-     */
-    public function setProfessor($professor)
-    {
-        $this->professor = $professor;
-
-        return $this;
-    }
-
-    /**
-     * Get professor
-     *
-     * @return integer
-     */
-    public function getProfessor()
-    {
-        return $this->professor;
     }
 
     /**

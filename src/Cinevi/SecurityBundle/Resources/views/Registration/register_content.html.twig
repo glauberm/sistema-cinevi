@@ -1,8 +1,20 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+<h1 class="page-header text-primary">Cadastre-se</h1>
+
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register', 'novalidate': 'novalidate'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" class="btn btn-primary btn-block btn-lg" value="{{ 'registration.submit'|trans }}" />
+    {{ form_row(form.username) }}
+    <div class="row">
+        <div class="col-sm-4">{{ form_row(form.email) }}</div>
+        <div class="col-sm-4">{{ form_row(form.plainPassword.first) }}</div>
+        <div class="col-sm-4">{{ form_row(form.plainPassword.second) }}</div>
     </div>
+    <div class="row">
+        <div class="col-sm-6">{{ form_row(form.telefone) }}</div>
+        <div class="col-sm-6">{{ form_row(form.matricula) }}</div>
+    </div>
+    {{ form_row(form.breveCurriculo) }}
+    {{ form_rest(form) }}
+    <br/>
+    <input type="submit" class="btn btn-warning btn-lg" value="{{ 'registration.submit'|trans }}" />
 {{ form_end(form) }}

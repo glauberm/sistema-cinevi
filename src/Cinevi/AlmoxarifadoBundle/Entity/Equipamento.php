@@ -34,7 +34,7 @@ class Equipamento
     protected $nome;
 
     /**
-     * @ORM\Column(type="integer", nullable=true, unique=true)
+     * @ORM\Column(type="string", nullable=true, unique=true)
      **/
     protected $patrimonio;
 
@@ -143,7 +143,7 @@ class Equipamento
     /**
      * Set patrimonio
      *
-     * @param integer $patrimonio
+     * @param string $patrimonio
      * @return Equipamento
      */
     public function setPatrimonio($patrimonio)
@@ -156,7 +156,7 @@ class Equipamento
     /**
      * Get patrimonio
      *
-     * @return integer
+     * @return string
      */
     public function getPatrimonio()
     {

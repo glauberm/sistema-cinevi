@@ -1,7 +1,11 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+{% set headerPublic = true %}
+
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email})|nl2br }}</p>
+    <h1 class="page-header text-primary">Verifique seu e-mail</h1>
+
+    <p class="lead">{{ 'registration.check_email'|trans({'%email%': user.email})|nl2br }}</p>
 {% endblock fos_user_content %}

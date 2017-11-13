@@ -3,12 +3,13 @@
 {% set title = 'Meu Perfil' %}
 {% set routeList = path('fos_user_profile_show') %}
 
-{% block blockConfiguration %}{% endblock %}
-
 {% block mainActions %}
     <a class="navbar-brand btn btn-link" href="{{ routeList }}">
         {% include 'CineviAdminBundle:SVG:voltar.html.twig' %}
     </a>
+    <div class="navbar-form navbar-nav">
+        <a class="btn btn-info" href="{{ path('fos_user_change_password') }}">{% include 'CineviAdminBundle:SVG:editar.html.twig' %}<span class="hidden-xs">Mudar minha senha</span></a>
+    </div>
 {% endblock %}
 
 {% block body %}
