@@ -1,0 +1,3 @@
+<td><a href="{{ path('get_reservas', { 'params': item.id }) }}">{{ item.title }}</a></td>
+<td><a href="{{ path('get_reservas', { 'params': item.id }) }}">{{ item.startDate|date('d/m/Y') }}</a></td>
+<td><a href="{{ path('get_reservas', { 'params': item.id }) }}">{{ item.endDate|date('d/m/Y') }}</a></td>

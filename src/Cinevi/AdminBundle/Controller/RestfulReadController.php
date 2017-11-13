@@ -21,13 +21,13 @@ abstract class RestfulReadController extends RestfulCommonController implements 
 
         $repository = $em->getRepository($this->repositoryName);
 
-        $qb = $repository->list('item');
-        $qb = $this->list($request, $em, $qb, 'item');
+        $qb = $repository->list();
+        $qb = $this->list($request, $em, $qb);
 
         $return = [];
         $return = $this->preCget($request, $em, $return);
 
-        $pagination = $this->getPagination($request, $qb, 'numResultados');
+        $pagination = $this->getPagination($request, $qb);
 
         $view = $this->getView($pagination, $this->listTemplate, 'pagination', $return);
 
@@ -61,8 +61,8 @@ abstract class RestfulReadController extends RestfulCommonController implements 
 
         $repository = $em->getRepository($this->bundleName);
 
-        $qb = $repository->list('item');
-        $qb = $this->list($request, $em, $qb, 'item');
+        $qb = $repository->list();
+        $qb = $this->list($request, $em, $qb);
 
         $itens = $repository->getCsv($qb);
 
@@ -77,7 +77,7 @@ abstract class RestfulReadController extends RestfulCommonController implements 
         return new CsvResponse($this->routeSuffix, $arrayResult);
     }
 
-    protected function list(Request $request, EntityManager $em, $qb, $builderName)
+    protected function list(Request $request, EntityManager $em, $qb, $builderName = 'item')
     {
         $checker = $this->get('security.authorization_checker');
 
@@ -92,11 +92,11 @@ abstract class RestfulReadController extends RestfulCommonController implements 
         return $qb;
     }
 
-    protected function getPagination(Request $request, $qb, $getVarNumResults)
+    protected function getPagination(Request $request, $qb, $getVar = null)
     {
         $paginator = $this->get('knp_paginator');
 
-        $numResults = $request->query->get($getVarNumResults) ? $request->query->get($getVarNumResults) : 10;
+        $numResults = $request->query->get('numResultados'.$getVar) ? $request->query->get('numResultados'.$getVar) : 10;
 
         $pagination = $paginator->paginate(
             $qb,
@@ -104,6 +104,9 @@ abstract class RestfulReadController extends RestfulCommonController implements 
             $numResults,
             array(
                 'wrap-queries' => true,
+                'pageParameterName' => 'page'.$getVar,
+                'sortFieldParameterName' => 'sort'.$getVar,
+                'sortDirectionParameterName' => 'direction'.$getVar,
             )
         );
 

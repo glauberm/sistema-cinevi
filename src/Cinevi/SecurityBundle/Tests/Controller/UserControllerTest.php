@@ -58,7 +58,7 @@ class UserControllerTest extends RestfulCrudControllerTest
 
     protected function otherScenarios($crawler)
     {
-        $crawler = $this->client->request('GET', '/perfil');
+        $crawler = $this->client->request('GET', '/');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP code for GET /perfil');
 

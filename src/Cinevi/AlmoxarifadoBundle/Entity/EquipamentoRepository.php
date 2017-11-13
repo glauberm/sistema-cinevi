@@ -10,8 +10,16 @@ class EquipamentoRepository extends CrudRepository
     {
         return $this
             ->createQueryBuilder($builderName)
-            ->join($builderName.'.categoria', 'c')
+            ->innerJoin($builderName.'.categoria', $builderName.'c')
             ->orderBy($builderName.'.id', 'DESC')
+        ;
+    }
+
+    public function listWhereCategoriaIs($qb, $id, $builderName = 'item')
+    {
+        return $qb
+            ->where($builderName.'.categoria = :id')
+            ->setParameter('id', $id)
         ;
     }
 }

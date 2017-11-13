@@ -7,6 +7,7 @@
 - Checar os vendors js e css (passar para node_modules)
 - Aviso ao deletar Categorias de Reserváveis
 - Todas as rotas com métodos definidos
+- Testar comando de receitas
 
 ## Depois
 - Novos testes, Testar tudo

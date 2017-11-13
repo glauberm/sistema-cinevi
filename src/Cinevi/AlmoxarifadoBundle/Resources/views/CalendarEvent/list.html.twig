@@ -37,25 +37,17 @@
             <table class="table table-striped table-hovered">
                 <thead>
                     <tr>
-                        <th>{{ knp_pagination_sortable(pagination, 'Cód.', 'item.title') }}</th>
-                        <th>{{ knp_pagination_sortable(pagination, 'Retirada', 'item.startDate') }}</th>
-                        <th>{{ knp_pagination_sortable(pagination, 'Devolução', 'item.endDate') }}</th>
+                        {% include 'CineviAlmoxarifadoBundle:CalendarEvent:list-thead.html.twig' with { builderName: 'item'} %}
                     </tr>
                 </thead>
                 <tbody>
                     {% for item in pagination %}
                         <tr>
-                            <td><a href="{{ path('get_reservas', { 'params': item.id }) }}">{{ item.title }}</a></td>
-                            <td><a href="{{ path('get_reservas', { 'params': item.id }) }}">{{ item.startDate|date('d/m/Y') }}</a></td>
-                            <td><a href="{{ path('get_reservas', { 'params': item.id }) }}">{{ item.endDate|date('d/m/Y') }}</a></td>
+                            {% include 'CineviAlmoxarifadoBundle:CalendarEvent:list-tbody.html.twig' %}
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
-
-        <div class="text-center">
-            {{ knp_pagination_render(pagination) }}
         </div>
 
         {% block blockPagination %}

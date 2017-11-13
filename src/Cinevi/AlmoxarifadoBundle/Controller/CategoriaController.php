@@ -25,12 +25,14 @@ class CategoriaController extends RestfulCrudController implements ClassResource
 
     protected function preGet(Request $request, EntityManager $em, $obj, array $return = []) : array
     {
-        $repository = $em->getRepository('CineviAlmoxarifadoBundle:Equipamento');
+        $r = $em->getRepository('CineviAlmoxarifadoBundle:Equipamento');
 
-        $qb = $repository->list('item');
-        $qb = $this->list($request, $em, $qb, 'item');
+        $qb = $r->list('equipamento');
+        $qb = $this->list($request, $em, $qb, 'equipamento');
 
-        $pagination = $this->getPagination($request, $qb, 'numResultados');
+        $qb = $r->listWhereCategoriaIs($qb, $obj->getId(), 'equipamento');
+
+        $pagination = $this->getPagination($request, $qb);
 
         $return['pagination'] = $pagination;
 

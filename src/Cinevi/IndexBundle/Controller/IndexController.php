@@ -11,10 +11,6 @@ class IndexController extends FOSRestController implements ClassResourceInterfac
 {
     public function indexAction()
     {
-        $view = View::create();
-
-        $view->setTemplate('CineviIndexBundle::index.html.twig');
-
-        return $view;
+        return $this->redirect($this->generateUrl('fos_user_profile_show'));
     }
 }

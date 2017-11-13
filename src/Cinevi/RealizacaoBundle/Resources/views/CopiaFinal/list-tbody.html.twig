@@ -1,0 +1,9 @@
+<td>
+    <a href="{{ path('get_copias-finais', { 'params': item.id }) }}">{{ item.realizacao.titulo }}</a>
+</td>
+<td>
+    <a href="{{ path('get_usuarios', { 'params': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
+</td>
+<td>
+    <a href="{{ path('get_modalidades', { 'params': item.realizacao.modalidade.id }) }}">{{ item.realizacao.modalidade.nome }}</a>
+</td>

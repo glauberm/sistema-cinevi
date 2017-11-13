@@ -10,10 +10,18 @@ class ProjetoRepository extends CrudRepository
     {
         return $this
             ->createQueryBuilder($builderName)
-            ->join($builderName.'.realizacao', 'r')
-            ->leftJoin('r.user', 'u')
-            ->leftJoin('r.modalidade', 'm')
+            ->innerJoin($builderName.'.realizacao', $builderName.'r')
+            ->innerJoin($builderName.'r.user', $builderName.'u')
+            ->innerJoin($builderName.'r.modalidade', $builderName.'m')
             ->orderBy($builderName.'.id', 'DESC')
+        ;
+    }
+
+    public function listWhereUserIs($qb, $id, $builderName = 'item')
+    {
+        return $qb
+            ->where($builderName.'r.user = :id')
+            ->setParameter('id', $id)
         ;
     }
 }

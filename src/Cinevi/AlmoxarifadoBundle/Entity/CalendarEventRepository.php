@@ -37,4 +37,12 @@ class CalendarEventRepository extends CrudRepository
 
         return $reservas;
     }
+
+    public function listWhereUserIs($qb, $id, $builderName = 'item')
+    {
+        return $qb
+            ->where($builderName.'.user = :id')
+            ->setParameter('id', $id)
+        ;
+    }
 }

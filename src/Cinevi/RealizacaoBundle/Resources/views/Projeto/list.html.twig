@@ -11,19 +11,9 @@
 {% endblock %}
 
 {% block thead %}
-    <th>{{ knp_pagination_sortable(pagination, 'Título', 'r.titulo') }}</th>
-    <th>{{ knp_pagination_sortable(pagination, 'Responsável', 'u.username') }}</th>
-    <th>{{ knp_pagination_sortable(pagination, 'Modalidade', 'm.nome') }}</th>
+    {% include 'CineviRealizacaoBundle:Projeto:list-thead.html.twig' with { builderName: 'item'} %}
 {% endblock %}
 
 {% block tbody %}
-    <td>
-        <a href="{{ path('get_projetos', { 'params': item.id }) }}">{{ item.realizacao.titulo }}</a>
-    </td>
-    <td>
-        <a href="{{ path('get_usuarios', { 'params': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
-    </td>
-    <td>
-        <a href="{{ path('get_modalidades', { 'params': item.realizacao.modalidade.id }) }}">{{ item.realizacao.modalidade.nome }}</a>
-    </td>
+    {% include 'CineviRealizacaoBundle:Projeto:list-tbody.html.twig' %}
 {% endblock %}

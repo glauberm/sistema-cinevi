@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block thead %}
-    {% include 'CineviAlmoxarifadoBundle:Equipamento:list-thead.html.twig' %}
+    {% include 'CineviAlmoxarifadoBundle:Equipamento:list-thead.html.twig' with { builderName: 'item'} %}
 {% endblock %}
 
 {% block tbody %}

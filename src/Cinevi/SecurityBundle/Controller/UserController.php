@@ -27,6 +27,34 @@ class UserController extends RestfulCrudController implements ClassResourceInter
     protected $paramsKey = 'id';
     private $confirmed;
 
+    protected function preGet(Request $request, EntityManager $em, $obj, array $return = []) : array
+    {
+        $rReserva = $em->getRepository('CineviAlmoxarifadoBundle:CalendarEvent');
+        $rProjeto = $em->getRepository('CineviRealizacaoBundle:Projeto');
+        $rCopiaFinal = $em->getRepository('CineviRealizacaoBundle:CopiaFinal');
+
+        $qbReserva = $rReserva->list('reserva');
+        $qbReserva = $this->list($request, $em, $qbReserva, 'reserva');
+        $qbProjeto = $rProjeto->list('projeto');
+        $qbProjeto = $this->list($request, $em, $qbProjeto, 'projeto');
+        $qbCopiaFinal = $rCopiaFinal->list('copiaFinal');
+        $qbCopiaFinal = $this->list($request, $em, $qbCopiaFinal, 'copiaFinal');
+
+        $qbReserva = $rReserva->listWhereUserIs($qbReserva, $obj->getId(), 'reserva');
+        $qbProjeto = $rProjeto->listWhereUserIs($qbProjeto, $obj->getId(), 'projeto');
+        $qbCopiaFinal = $rCopiaFinal->listWhereUserIs($qbCopiaFinal, $obj->getId(), 'copiaFinal');
+
+        $paginationReserva = $this->getPagination($request, $qbReserva, 'Reserva');
+        $paginationProjeto = $this->getPagination($request, $qbProjeto, 'Projeto');
+        $paginationCopiaFinal = $this->getPagination($request, $qbCopiaFinal, 'CopiaFinal');
+
+        $return['paginationReserva'] = $paginationReserva;
+        $return['paginationProjeto'] = $paginationProjeto;
+        $return['paginationCopiaFinal'] = $paginationCopiaFinal;
+
+        return $return;
+    }
+
     protected function preFormPut($obj, Form $form, EntityManager $em) : Form
     {
         $this->confirmed = $obj->getConfirmado();
