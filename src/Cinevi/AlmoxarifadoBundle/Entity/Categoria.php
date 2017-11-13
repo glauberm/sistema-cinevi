@@ -29,7 +29,7 @@ class Categoria
     protected $descricao;
 
     /**
-     * @ORM\OneToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Equipamento", cascade={"merge"}, mappedBy="categoria")
+     * @ORM\OneToMany(targetEntity="Cinevi\AlmoxarifadoBundle\Entity\Equipamento", cascade={"merge", "remove"}, mappedBy="categoria")
      **/
     protected $equipamentos;
 
