@@ -13,11 +13,19 @@ class CalendarEventRepository extends CrudRepository
         $reservas = $qb
             ->where($qb->expr()->andX(
                 $qb->expr()->lte($builderName.'.startDate', ':startDate'),
-                $qb->expr()->gte($builderName.'.endDate', ':endDate')
+                $qb->expr()->gt($builderName.'.endDate', ':endDate')
             ))
             ->orWhere($qb->expr()->andX(
-                $qb->expr()->gte($builderName.'.endDate', ':startDate'),
-                $qb->expr()->lte($builderName.'.startDate', ':endDate')
+                $qb->expr()->gt($builderName.'.endDate', ':startDate'),
+                $qb->expr()->lt($builderName.'.startDate', ':endDate')
+            ))
+            ->orWhere($qb->expr()->andX(
+                $qb->expr()->eq($builderName.'.startDate', ':startDate'),
+                $qb->expr()->eq($builderName.'.endDate', ':startDate')
+            ))
+            ->orWhere($qb->expr()->andX(
+                $qb->expr()->eq($builderName.'.startDate', ':endDate'),
+                $qb->expr()->eq($builderName.'.endDate', ':endDate')
             ))
             ->setParameter('startDate', $startDate, \Doctrine\DBAL\Types\Type::DATETIME)
             ->setParameter('endDate', $endDate, \Doctrine\DBAL\Types\Type::DATETIME)

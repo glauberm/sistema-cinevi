@@ -107,6 +107,7 @@ abstract class RestfulReadController extends RestfulCommonController implements 
                 'pageParameterName' => 'page'.$getVar,
                 'sortFieldParameterName' => 'sort'.$getVar,
                 'sortDirectionParameterName' => 'direction'.$getVar,
+                'distinct' => true
             )
         );
 
