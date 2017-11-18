@@ -12,7 +12,7 @@ class CalendarEventRepository extends CrudRepository
 
         $reservas = $qb
             ->where($qb->expr()->andX(
-                $qb->expr()->lte($builderName.'.startDate', ':startDate'),
+                $qb->expr()->lt($builderName.'.startDate', ':startDate'),
                 $qb->expr()->gt($builderName.'.endDate', ':endDate')
             ))
             ->orWhere($qb->expr()->andX(

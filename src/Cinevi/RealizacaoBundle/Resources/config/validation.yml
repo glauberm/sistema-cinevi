@@ -123,12 +123,16 @@ Cinevi\RealizacaoBundle\Entity\Equipe:
                 minMessage: 'Por favor, selecione pelo menos um usuário.'
 
 Cinevi\RealizacaoBundle\Entity\Funcao:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: nome
     properties:
         nome:
             - NotBlank:
                 message: 'Por favor, informe o nome da função (ex.: Direção de Fotografia).'
 
 Cinevi\RealizacaoBundle\Entity\Modalidade:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: nome
     properties:
         nome:
             - NotBlank:
