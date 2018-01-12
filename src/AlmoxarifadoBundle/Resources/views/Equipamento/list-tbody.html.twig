@@ -1,0 +1,9 @@
+<td>{{ item.codigo }}</td>
+<td>
+    <a href="{{ path('almoxarifado_equipamento_show', { 'params': item.id }) }}">{{ item.nome }}</a>
+</td>
+<td>
+    <a href="{{ path('almoxarifado_categoria_show', { 'params': item.categoria.id }) }}">{{ item.categoria.nome }}</a>
+</td>
+<td>{{ item.manutencao ? 'Sim' : 'Não' }}</td>
+<td>{{ item.atrasado ? 'Sim' : 'Não' }}</td>

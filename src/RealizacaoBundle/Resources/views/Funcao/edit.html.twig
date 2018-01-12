@@ -1,0 +1,10 @@
+{% extends 'AdminBundle:Crud:base-edit.html.twig' %}
+
+{% set title = 'Editar ' ~ item.nome %}
+{% set routeList = path('realizacao_funcao_index') %}
+
+{% block form %}
+
+    {% include 'RealizacaoBundle:Funcao:form.html.twig' with {form: edit_form} %}
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'AdminBundle:Crud:base-show.html.twig' %}
+
+{% set title = 'Reserva ' ~ item.title %}
+{% set routeList = path('almoxarifado_reserva_index') %}
+{% set routeEdit = path('almoxarifado_reserva_edit', { 'params': item.id }) %}
+
+{% block dtdd %}
+    <dt>Código</dt><dd>{{ item.title }}</dd>
+
+    <div class="row">
+        <div class="col-sm-6"><dt>Usuário</dt><dd><a href="{{ path('user_user_show', { 'params' : item.user.id}) }}">{{ item.user.username }}</a></dd></div>
+        <div class="col-sm-6">
+            <dt>Projeto</dt>
+            <dd><a href="{{ path('realizacao_projeto_show', { 'params' : item.projeto.id}) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6"><dt>Data de Início</dt><dd>{{ item.startDate|date('d/m/Y') }}</dd></div>
+        <div class="col-sm-6"><dt>Data de Fim</dt><dd>{{ item.endDate|date('d/m/Y') }}</dd></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6"><dt>Criado em</dt><dd>{{ item.createdIn|date('d/m/Y H:m:s') }}</dd></div>
+        <div class="col-sm-6"><dt>Última atualização em</dt><dd>{{ item.updatedIn|date('d/m/Y H:m:s') }}</dd></div>
+    </div>
+
+
+    <h2 id="reservaveis" class="h3"><a href="#reservaveis">Reserváveis</a></h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {% include 'AlmoxarifadoBundle:Equipamento:list-thead.html.twig' with { builderName: 'equipamento' } %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in pagination %}
+                    <tr>
+                        {% include 'AlmoxarifadoBundle:Equipamento:list-tbody.html.twig' %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% block blockPagination %}
+        {% include 'AdminBundle:Pagination:pagination.html.twig' with { name: 'numResultados' } %}
+    {% endblock %}
+
+{% endblock %}

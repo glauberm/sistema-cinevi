@@ -9,7 +9,6 @@ parameters:
     locale: pt-BR
 
 framework:
-    #esi:             ~
     translator:      { fallbacks: [pt_BR, pt-PT] }
     secret:          "%secret%"
     router:
@@ -18,18 +17,17 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
-        # handler_id set to null will use default session handler from php.ini
         handler_id:  ~
         gc_probability: 0
     fragments:       ~
     http_method_override: true
+    assets: ~
 
 # Twig Configuration
 twig:
@@ -47,13 +45,6 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
-
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -70,16 +61,11 @@ swiftmailer:
         type:      file
         path:      "%kernel.root_dir%/spool"
 
-# SensioFrameworkExtra
-sensio_framework_extra:
-    request:
-        converters: true
-
 # FOSUserBundle Configuration
 fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    db_driver: orm
     firewall_name: main
-    user_class: Cinevi\SecurityBundle\Entity\User
+    user_class: UserBundle\Entity\User
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:
@@ -87,54 +73,30 @@ fos_user:
         sender_name:    Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)
     registration:
         form:
-            type: Cinevi\SecurityBundle\Form\Type\RegistrationType
+            type: UserBundle\Form\RegistrationType
         confirmation:
             enabled:   true
-            template:  CineviSecurityBundle:Registration:email.html.twig
+            template: UserBundle:Registration:email.html.twig
     resetting:
         retry_ttl: 900
         email:
-            template:  CineviSecurityBundle:Resetting:email.html.twig
+            template: UserBundle:Resetting:email.html.twig
         form:
             validation_groups: [ResetPassword]
     profile:
         form:
-            type: Cinevi\SecurityBundle\Form\Type\ProfileType
+            type: UserBundle\Form\ProfileType
     change_password:
         form:
             validation_groups: [ChangePassword]
 
-# FOSRestBundle Configuration
-fos_rest:
-    disable_csrf_role: null # Se der erro, mude para ROLE_USER
-    routing_loader:
-        default_format: html
-    allowed_methods_listener: true
-    unauthorized_challenge: "Basic realm=\"Restricted Area\""
-    param_fetcher_listener: true
-    body_listener:
-        array_normalizer: fos_rest.normalizer.camel_keys
-    body_converter:
-        enabled: true
-        validate: true
-        validation_errors_argument: validationErrors # This is the default value
-    format_listener:
-        enabled: true
-        rules:
-            - { path: '^/', priorities: ['html','json','xml','rss'], fallback_format: ~, prefer_extension: true }
-    view:
-        view_response_listener:
-            enabled:              true
-            force:                true
-
-# KnpPaginator Configuration
 knp_paginator:
-    page_range: 5                      # default page range used in pagination control
+    page_range: 5
     default_options:
-        page_name: page                # page query parameter name
-        sort_field_name: sort          # sort field query parameter name
-        sort_direction_name: direction # sort direction query parameter name
-        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+        page_name: pagina
+        sort_field_name: classificacao
+        sort_direction_name: direcao
+        distinct: true
     template:
-        pagination: CineviAdminBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig # sliding pagination controls template
-        sortable: CineviAdminBundle:Pagination:sortable_link.html.twig # sort link template
+        pagination: AdminBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+        sortable: AdminBundle:Pagination:sortable_link.html.twig

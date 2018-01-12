@@ -1,0 +1,11 @@
+{% extends 'AdminBundle:Crud:base-edit.html.twig' %}
+
+{% set title = 'Editar Configurações' %}
+{% set routeList = path('index') %}
+{% set edit_form = form %}
+
+{% block deleteAction %}{% endblock %}
+
+{% block form %}
+    {% include 'ConfigBundle:Config:form.html.twig' %}
+{% endblock %}

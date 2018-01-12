@@ -1,8 +1,0 @@
-{% extends 'CineviAdminBundle:Crud:base-edit.html.twig' %}
-
-{% set title = 'Editar ' ~ item.nome %}
-{% set routeList = path('cget_categorias-reservaveis') %}
-
-{% block form %}
-    {% include 'CineviAlmoxarifadoBundle:Categoria:form.html.twig' with {form: editForm} %}
-{% endblock %}

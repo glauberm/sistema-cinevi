@@ -1,6 +1,6 @@
 {
-    "name": "glauber/almoxarifado",
-    "license": "proprietary",
+    "name": "glauberm/sistema-cinevi",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {
@@ -13,17 +13,16 @@
     },
     "require": {
         "php": ">=5.3.9",
-        "symfony/symfony": "2.8.*",
-        "doctrine/orm": "^2.4.8",
         "doctrine/doctrine-bundle": "~1.4",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~5.0",
-        "sensio/framework-extra-bundle": "^3.0.2",
+        "doctrine/orm": "^2.4.8",
         "incenteev/composer-parameter-handler": "~2.0",
+        "sensio/distribution-bundle": "~4.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "symfony/monolog-bundle": "^3.0.2",
+        "symfony/swiftmailer-bundle": "~2.3,>=2.3.10",
+        "symfony/symfony": "2.8.*",
+        "twig/twig": "^1.0||^2.0",
         "friendsofsymfony/user-bundle": "~2.0",
-        "friendsofsymfony/rest-bundle": "^2.1",
-        "jms/serializer-bundle": "^1.1",
         "ancarebeca/full-calendar-bundle": "2.0.2",
         "knplabs/knp-paginator-bundle": "^2.5",
         "azuyalabs/yasumi": "^1.6"
@@ -49,7 +48,8 @@
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "sort-packages": true
     },
     "extra": {
         "symfony-app-dir": "app",
@@ -57,6 +57,7 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        }
+        },
+        "branch-alias": null
     }
 }

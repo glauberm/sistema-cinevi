@@ -1,0 +1,7 @@
+{% extends 'AdminBundle::email.html.twig' %}
+
+{% block message %}
+
+<p>Uma nova cópia final de título <strong>{{ item.realizacao.titulo }}</strong> acaba de ser registrada por <strong>{{ item.realizacao.user.username }}</strong>.</p><p>Para vê-la, acesse o link abaixo:</p><p><a target='_blank' href='{{ url }}'>{{ url }}</a></p>
+
+{% endblock %}

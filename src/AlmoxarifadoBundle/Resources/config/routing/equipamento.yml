@@ -1,0 +1,29 @@
+almoxarifado_equipamento_index:
+    path:     /
+    defaults: { _controller: "AlmoxarifadoBundle:Equipamento:index" }
+    methods:  GET
+
+almoxarifado_equipamento_show:
+    path:     /{params}/mostrar
+    defaults: { _controller: "AlmoxarifadoBundle:Equipamento:show" }
+    methods:  GET
+
+almoxarifado_equipamento_new:
+    path:     /criar
+    defaults: { _controller: "AlmoxarifadoBundle:Equipamento:new" }
+    methods:  [GET, POST]
+
+almoxarifado_equipamento_edit:
+    path:     /{params}/editar
+    defaults: { _controller: "AlmoxarifadoBundle:Equipamento:edit" }
+    methods:  [GET, POST]
+
+almoxarifado_equipamento_delete:
+    path:     /{id}/remover
+    defaults: { _controller: "AlmoxarifadoBundle:Equipamento:delete" }
+    methods:  DELETE
+
+almoxarifado_equipamento_csv:
+    path:     /csv
+    defaults: { _controller: "AlmoxarifadoBundle:Equipamento:csv" }
+    methods:  DELETE

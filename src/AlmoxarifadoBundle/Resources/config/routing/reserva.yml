@@ -1,0 +1,29 @@
+almoxarifado_reserva_index:
+    path:     /
+    defaults: { _controller: "AlmoxarifadoBundle:Reserva:index" }
+    methods:  GET
+
+almoxarifado_reserva_show:
+    path:     /{params}/mostrar
+    defaults: { _controller: "AlmoxarifadoBundle:Reserva:show" }
+    methods:  GET
+
+almoxarifado_reserva_new:
+    path:     /criar
+    defaults: { _controller: "AlmoxarifadoBundle:Reserva:new" }
+    methods:  [GET, POST]
+
+almoxarifado_reserva_edit:
+    path:     /{params}/editar
+    defaults: { _controller: "AlmoxarifadoBundle:Reserva:edit" }
+    methods:  [GET, POST]
+
+almoxarifado_reserva_delete:
+    path:     /{id}/remover
+    defaults: { _controller: "AlmoxarifadoBundle:Reserva:delete" }
+    methods:  DELETE
+
+almoxarifado_reserva_csv:
+    path:     /csv
+    defaults: { _controller: "AlmoxarifadoBundle:Reserva:csv" }
+    methods:  DELETE

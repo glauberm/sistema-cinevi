@@ -1,0 +1,9 @@
+config_config_show:
+    path:     /
+    defaults: { _controller: "ConfigBundle:Config:show" }
+    methods:  GET
+
+config_config_edit:
+    path:     /editar
+    defaults: { _controller: "ConfigBundle:Config:edit" }
+    methods:  [GET, POST]

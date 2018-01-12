@@ -1,0 +1,39 @@
+services:
+    almoxarifado_calendar_event.access:
+        class: AlmoxarifadoBundle\Security\CalendarEventVoter
+        public: false
+        arguments: ['@security.access.decision_manager','@doctrine.orm.entity_manager']
+        tags:
+            - { name: security.voter }
+
+    almoxarifado_equipamento.access:
+        class: AlmoxarifadoBundle\Security\EquipamentoVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    almoxarifado_categoria.access:
+        class: AlmoxarifadoBundle\Security\CategoriaVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }
+
+    almoxarifado_calendar_event.type:
+        class: AlmoxarifadoBundle\Form\CalendarEventType
+        arguments: ['@doctrine.orm.entity_manager','@security.authorization_checker', '@security.token_storage']
+        tags:
+            - { name: form.type, alias: view }
+
+    almoxarifado_equipamento.type:
+        class: AlmoxarifadoBundle\Form\EquipamentoType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type, alias: view }
+
+    almoxarifado_load_data.listener:
+        class: AlmoxarifadoBundle\Listener\LoadDataListener
+        arguments: ['@doctrine.orm.entity_manager','@service_container']
+        tags:
+            - { name: 'kernel.event_listener', event: 'fullcalendar.set_data', method: loadData }

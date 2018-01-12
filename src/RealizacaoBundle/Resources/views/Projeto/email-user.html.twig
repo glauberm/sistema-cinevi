@@ -1,0 +1,7 @@
+{% extends 'AdminBundle::email.html.twig' %}
+
+{% block message %}
+
+<p>Você registrou um novo projeto de título <strong>{{ item.realizacao.titulo }}</strong>.</p><p>Para vê-lo, acesse o link abaixo:</p><p><a target='_blank' href='{{ url }}'>{{ url }}</a></p>
+
+{% endblock %}

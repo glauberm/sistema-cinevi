@@ -1,0 +1,8 @@
+{% extends 'AdminBundle:Crud:base-add.html.twig' %}
+
+{% set title = 'Adicionar Usuário' %}
+{% set routeList = path('user_user_index') %}
+
+{% block form %}
+    {% include 'UserBundle:User:form-add.html.twig' %}
+{% endblock %}

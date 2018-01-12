@@ -1,0 +1,8 @@
+{% extends 'AdminBundle:Crud:base-add.html.twig' %}
+
+{% set title = 'Adicionar Categoria de Reserváveis' %}
+{% set routeList = path('almoxarifado_categoria_index') %}
+
+{% block form %}
+    {% include 'AlmoxarifadoBundle:Categoria:form.html.twig' %}
+{% endblock %}

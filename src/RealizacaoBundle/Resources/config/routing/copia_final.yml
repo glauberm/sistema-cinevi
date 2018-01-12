@@ -1,0 +1,29 @@
+realizacao_copia_final_index:
+    path:     /
+    defaults: { _controller: "RealizacaoBundle:CopiaFinal:index" }
+    methods:  GET
+
+realizacao_copia_final_show:
+    path:     /{params}/mostrar
+    defaults: { _controller: "RealizacaoBundle:CopiaFinal:show" }
+    methods:  GET
+
+realizacao_copia_final_new:
+    path:     /criar
+    defaults: { _controller: "RealizacaoBundle:CopiaFinal:new" }
+    methods:  [GET, POST]
+
+realizacao_copia_final_edit:
+    path:     /{params}/editar
+    defaults: { _controller: "RealizacaoBundle:CopiaFinal:edit" }
+    methods:  [GET, POST]
+
+realizacao_copia_final_delete:
+    path:     /{id}/remover
+    defaults: { _controller: "RealizacaoBundle:CopiaFinal:delete" }
+    methods:  DELETE
+
+realizacao_copia_final_csv:
+    path:     /csv
+    defaults: { _controller: "RealizacaoBundle:CopiaFinal:csv" }
+    methods:  DELETE

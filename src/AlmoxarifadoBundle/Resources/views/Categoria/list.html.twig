@@ -1,0 +1,23 @@
+{% extends 'AdminBundle:Crud:base-list.html.twig' %}
+
+{% set title = 'Categorias de Reserváveis' %}
+{% set routeAdd = path('almoxarifado_categoria_new') %}
+{% set routeCsv = path('almoxarifado_categoria_csv') %}
+
+{% block addAction %}
+    {% if is_granted('ROLE_ALMOXARIFADO') %}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-success" href="{{ routeAdd }}">{% include 'AdminBundle:SVG:adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block thead %}
+    <th>{{ knp_pagination_sortable(pagination, 'Nome', 'item.nome') }}</th>
+{% endblock %}
+
+{% block tbody %}
+    <td>
+        <a href="{{ path('almoxarifado_categoria_show', { 'params': item.id }) }}">{{ item.nome }}</a>
+    </td>
+{% endblock %}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="pt-BR">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)</title>
+        <meta name="description" content="Cadastre projetos, reserve equipamentos no almoxarifado e muito mais pelo celular, tablet ou qualquer outro dispositivo com acesso à internet. Sistema para alunos, funcionários ou professores do Departamento de Cinema e Vídeo da Universidade Federal Fluminense." />
+        <meta name="subject" content="Todos os serviços do departamento qualquer lugar." />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
+        <link rel="author" href="{{ asset('humans.txt') }}">
+        <link href="{{ asset('manifest.json') }}" rel="manifest">
+        {% block stylesheets %}
+            <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('vendor/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('css/estilos.min.css') }}" rel="stylesheet" type="text/css" />
+            <!--[if gte IE 9]>
+                <style type="text/css">
+                    .header,
+                    .header-public,
+                    .content-security .well {
+                        filter: none;
+                    }
+                </style>
+            <![endif]-->
+        {% endblock %}
+    	<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
+    	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
+    	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}">
+    	<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('apple-icon-76x76.png') }}">
+    	<link rel="apple-touch-icon" sizes="114x114" href="{{ asset('apple-icon-114x114.png') }}">
+    	<link rel="apple-touch-icon" sizes="120x120" href="{{ asset('apple-icon-120x120.png') }}">
+    	<link rel="apple-touch-icon" sizes="144x144" href="{{ asset('apple-icon-144x144.png') }}">
+    	<link rel="apple-touch-icon" sizes="152x152" href="{{ asset('apple-icon-152x152.png') }}">
+    	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-icon-180x180.png') }}">
+    	<link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('android-icon-192x192.png') }}">
+    	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    	<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
+    	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+        <!--[if lt IE 9]>
+            <script src="{{ asset('vendor/html5shiv/js/html5shiv.min.js') }}"></script>
+            <script src="{{ asset('vendor/respond/js/respond.min.js') }}"></script>
+        <![endif]-->
+    </head>
+    <body>
+        {% include 'UserBundle::header-security.html.twig' %}
+
+        <div class="content content-security">
+            <div class="container">
+
+                {% for type, messages in app.session.flashBag.all %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }} alert-dismissal fade in" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                            {{ message|trans({}, 'FOSUserBundle') }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {% block fos_user_content %}
+                {% endblock fos_user_content %}
+
+            </div>
+        </div>
+
+        {% include 'AdminBundle::footer.html.twig' %}
+
+        {% block javascripts %}
+            <script src="{{ asset('vendor/jquery/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('vendor/autosize/js/autosize.min.js') }}"></script>
+            <script> autosize($("textarea.form-control")); </script>
+            <script src="{{ asset('vendor/jquery.mask/jquery.mask.min.js') }}"></script>
+            <script src="{{ asset('js/masks.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

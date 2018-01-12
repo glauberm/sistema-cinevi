@@ -1,0 +1,33 @@
+{% extends 'AdminBundle:Crud:base-show.html.twig' %}
+
+{% set title = item.nome %}
+{% set routeList = path('almoxarifado_categoria_index') %}
+{% set routeEdit = path('almoxarifado_categoria_edit', { 'params': item.id }) %}
+
+{% block dtdd %}
+    {% include 'AlmoxarifadoBundle:Categoria:item.html.twig' %}
+
+    <h2 id="reservaveis" class="h3"><a href="#reservaveis">Reserváveis</a></h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {% include 'AlmoxarifadoBundle:Equipamento:list-thead.html.twig' with { builderName: 'equipamento' } %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in pagination %}
+                    <tr>
+                        {% include 'AlmoxarifadoBundle:Equipamento:list-tbody.html.twig' %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% block blockPagination %}
+        {% include 'AdminBundle:Pagination:pagination.html.twig' with { name: 'numResultados' } %}
+    {% endblock %}
+
+{% endblock %}

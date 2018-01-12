@@ -1,0 +1,53 @@
+AlmoxarifadoBundle\Entity\Categoria:
+    properties:
+        nome:
+            - NotBlank:
+                message: 'Por favor, informe o nome da categoria.'
+
+AlmoxarifadoBundle\Entity\Equipamento:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: codigo
+            message: 'Este código já está em uso.'
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: patrimonio
+            message: 'Este número de patrimônio já está em uso.'
+    properties:
+        categoria:
+            - NotBlank:
+                message: 'Por favor, informe a categoria do reservável.'
+        codigo:
+            - NotBlank:
+                message: 'Por favor, informe o código do reservável.'
+        nome:
+            - NotBlank:
+                message: 'Por favor, informe o nome do reservável.'
+        manutencao:
+            - NotNull:
+                message: 'Por favor, informe se o reservável está ou não em manutenção.'
+        atrasado:
+            - NotNull:
+                message: 'Por favor, informe se o reservável está com a devolução atrasada ou não.'
+
+AlmoxarifadoBundle\Entity\CalendarEvent:
+    properties:
+        user:
+            - NotBlank:
+                message: 'Por favor, informe o responsável pela reserva.'
+        projeto:
+            - NotBlank:
+                message: 'Por favor, informe o projeto.'
+        startDate:
+            - NotBlank:
+                message: 'Por favor, informe a data de início da reserva.'
+            - Date:
+                message: 'Por favor, informe uma data no formato DD/MM/AAAA.'
+        endDate:
+            - NotBlank:
+                message: 'Por favor, informe a data de fim da reserva.'
+            - Date:
+                message: 'Por favor, informe uma data no formato DD/MM/AAAA.'
+        equipamentos:
+            - Count:
+                min: 1
+                minMessage: 'Por favor, selecione pelo menos um item.'

@@ -1,0 +1,14 @@
+{% extends 'AdminBundle:Crud:base-edit.html.twig' %}
+
+{% set title = 'Editar Reserva ' ~ item.title %}
+{% set routeList = path('almoxarifado_reserva_index') %}
+
+{% block form %}
+    {% include 'AlmoxarifadoBundle:CalendarEvent:form.html.twig' with {form: edit_form}  %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/cinevi/almoxarifado/calendar-event.js') }}"></script>
+    <script> calendarEventAjax('PUT'); </script>
+{% endblock %}

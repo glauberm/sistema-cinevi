@@ -1,0 +1,29 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block mainActions %}
+    <a class="navbar-brand btn btn-link" href="{{ routeList }}">
+        {% include 'AdminBundle:SVG:voltar.html.twig' %}
+    </a>
+    {% block editAction %}
+        {% if is_granted('edit', item) or app.user == item %}
+            <div class="navbar-form navbar-nav">
+                <a class="btn btn-info" href="{{ routeEdit }}">{% include 'AdminBundle:SVG:editar.html.twig' %}<span class="hidden-xs">Editar</span></a>
+            </div>
+        {% endif %}
+    {% endblock %}
+    {% block deleteAction %}
+        {% if is_granted('delete', item) %}
+            {{ form_start(delete_form, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
+                <button type="submit" class="btn btn-danger">{% include 'AdminBundle:SVG:remover.html.twig' %}<span class="hidden-xs">Remover</span></button>
+            {{ form_end(delete_form) }}
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    <dl>{% block dtdd %}{% endblock %}</dl>
+
+{% endblock %}

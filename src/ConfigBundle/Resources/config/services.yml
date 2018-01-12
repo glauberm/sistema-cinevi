@@ -1,0 +1,7 @@
+services:
+    config_config.access:
+        class: ConfigBundle\Security\ConfigVoter
+        public: false
+        arguments: ['@security.access.decision_manager']
+        tags:
+            - { name: security.voter }

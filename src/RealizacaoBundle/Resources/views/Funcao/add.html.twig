@@ -1,0 +1,10 @@
+{% extends 'AdminBundle:Crud:base-add.html.twig' %}
+
+{% set title = 'Adicionar Função' %}
+{% set routeList = path('realizacao_funcao_index') %}
+
+{% block form %}
+
+    {% include 'RealizacaoBundle:Funcao:form.html.twig' with {form: form} %}
+
+{% endblock %}

@@ -1,0 +1,9 @@
+<td>
+    <a href="{{ path('realizacao_projeto_show', { 'params': item.id }) }}">{{ item.realizacao.titulo }}</a>
+</td>
+<td>
+    <a href="{{ path('user_user_show', { 'params': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
+</td>
+<td>
+    <a href="{{ path('realizacao_modalidade_show', { 'params': item.realizacao.modalidade.id }) }}">{{ item.realizacao.modalidade.nome }}</a>
+</td>

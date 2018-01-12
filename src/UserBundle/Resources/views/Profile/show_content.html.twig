@@ -1,0 +1,81 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<dl>
+    <div class="row">
+        <div class="col-sm-6"><dt>Nome Completo</dt><dd>{{ user.username }}</dd></div>
+        <div class="col-sm-6"><dt>Email</dt><dd>{{ user.email }}</dd></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6"><dt>Matrícula/SIAPE</dt><dd>{{ user.matricula }}</dd></div>
+        <div class="col-sm-6"><dt>Telefone</dt><dd>{{ user.telefone }}</dd></div>
+    </div>
+    {% include 'AdminBundle:Parts:nullable-field.html.twig' with {
+        'dt': 'Breve Currículo',
+        'item': user.breveCurriculo
+    } %}
+</dl>
+
+<h2 id="reservas" class="h3"><a href="#reservas">Suas reservas</a></h2>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                {% include 'AlmoxarifadoBundle:CalendarEvent:list-thead.html.twig' with { pagination: paginationReserva, builderName: 'reserva' } %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in paginationReserva %}
+                <tr>
+                    {% include 'AlmoxarifadoBundle:CalendarEvent:list-tbody.html.twig' %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include 'AdminBundle:Pagination:pagination.html.twig' with { name: 'numResultadosReserva', pagination: paginationReserva } %}
+
+
+<h2 id="projetos" class="h3"><a href="#projetos">Seus projetos</a></h2>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                {% include 'RealizacaoBundle:Projeto:list-thead.html.twig' with { pagination: paginationProjeto, builderName: 'projeto' } %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in paginationProjeto %}
+                <tr>
+                    {% include 'RealizacaoBundle:Projeto:list-tbody.html.twig' %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include 'AdminBundle:Pagination:pagination.html.twig' with { name: 'numResultadosProjeto', pagination: paginationProjeto } %}
+
+
+<h2 id="copiasFinais" class="h3"><a href="#copiasFinais">Suas cópias finais</a></h2>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                {% include 'RealizacaoBundle:CopiaFinal:list-thead.html.twig' with { pagination: paginationCopiaFinal, builderName: 'copiaFinal' } %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in paginationCopiaFinal %}
+                <tr>
+                    {% include 'RealizacaoBundle:CopiaFinal:list-tbody.html.twig' %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include 'AdminBundle:Pagination:pagination.html.twig' with { name: 'numResultadosCopiaFinal', pagination: paginationCopiaFinal } %}

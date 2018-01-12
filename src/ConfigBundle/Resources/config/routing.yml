@@ -1,0 +1,3 @@
+config_config:
+    resource: "@ConfigBundle/Resources/config/routing/config.yml"
+    prefix:   /configuracoes
