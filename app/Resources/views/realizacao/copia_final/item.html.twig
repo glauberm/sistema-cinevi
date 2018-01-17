@@ -124,7 +124,8 @@
 </div>
 {% include 'admin/parts/nullable_field.html.twig' with {
     'dt': 'Equipamentos de Captação de Som',
-    'item': item.captacaoSom
+    'item': item.captacaoSom,
+    'nl2br' : true
 } %}
 <div class="row">
     <div class="col-sm-6">
@@ -143,7 +144,8 @@
 </div>
 {% include 'admin/parts/nullable_field.html.twig' with {
     'dt': 'Apoiadores',
-    'item': item.apoiadores
+    'item': item.apoiadores,
+    'nl2br' : true
 } %}
 {% include 'admin/parts/nullable_field.html.twig' with {
     'dt': 'Foi feito DCP?',

@@ -11,6 +11,7 @@
     </div>
     {% include 'admin/parts/nullable_field.html.twig' with {
         'dt': 'Breve Currículo',
-        'item': user.breveCurriculo
+        'item': user.breveCurriculo,
+        'nl2br' : true
     } %}
 </dl>

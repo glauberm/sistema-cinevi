@@ -1,9 +1,5 @@
 # TO-DO
 
-- Retirar todos os leads das <dl>
-- Orçamento com erro na produção -- erro na vírgula e ponto (ver http://php.net/manual/en/function.localeconv.php)
-- Erro do Rodrigo Hubert Leme
-- Text break do TextType (nl2br)
 - Locação(ões) no projeto, Breve Currículo na reserva :: com inherited, arrumar a margem dos itens fora de .rows
 - Histórico de Edições
 - Emails de edição com autor da edição

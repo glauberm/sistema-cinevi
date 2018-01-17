@@ -12,7 +12,11 @@
             <a href="{{ link }}"><dd>{{ dd }}</dd></a>
         {% endif %}
     {% else %}
-        <dd>{{ dd }}</dd>
+        {% if nl2br is defined and nl2br == true %}
+            <dd>{{ dd|nl2br }}</dd>
+        {% else %}
+            <dd>{{ dd }}</dd>
+        {% endif %}
     {% endif %}
 {% else %}
     <dd class="text-muted font-style-italic">Não informada(o)</dd>

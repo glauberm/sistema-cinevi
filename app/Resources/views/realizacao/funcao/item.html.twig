@@ -1,7 +1,8 @@
 <dt>Nome</dt><dd>{{ item.nome }}</dd>
 {% include 'admin/parts/nullable_field.html.twig' with {
     'dt': 'Descrição',
-    'item': item.descricao
+    'item': item.descricao,
+    'nl2br' : true
 } %}
 <div class="row">
     <div class="col-sm-6"><dt>Criado em</dt><dd>{{ item.createdIn|date('d/m/Y H:m:s') }}</dd></div>
