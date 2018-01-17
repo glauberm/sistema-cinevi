@@ -2,10 +2,12 @@
 
 namespace App\Controller\Almoxarifado;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormError;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Controller\Admin\AbstractCrudController;
 use App\Entity\Categoria;
 use App\Entity\Equipamento;
@@ -20,12 +22,12 @@ class CategoriaController extends AbstractCrudController
     protected $formClassName = CategoriaType::class;
     protected $paramsKey = 'id';
 
-    protected function preShow(Request $request, EntityManager $em, $obj, array $data = []) : array
+    protected function preShow(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac, PaginatorInterface $paginator, $obj, array $data = []) : array
     {
         $repository = $em->getRepository(Equipamento::class);
-        $qb = $repository->list($this->get('security.authorization_checker'), 'equipamento');
+        $qb = $repository->list($ac, 'equipamento');
         $qb = $repository->listWhereCategoriaIs($qb, $obj->getId(), 'equipamento');
-        $pagination = $this->createPagination($request, $this->get('knp_paginator'), $qb);
+        $pagination = $this->createPagination($request, $paginator, $qb);
         $data['pagination'] = $pagination;
 
         return $data;

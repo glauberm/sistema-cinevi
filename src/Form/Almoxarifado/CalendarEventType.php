@@ -2,7 +2,7 @@
 
 namespace App\Form\Almoxarifado;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,7 +27,7 @@ class CalendarEventType extends AbstractType
     private $tokenStorageInterface;
     private $id;
 
-    public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorageInterface)
+    public function __construct(EntityManagerInterface $em, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorageInterface)
     {
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;

@@ -2,7 +2,7 @@
 
 namespace App\Form\Realizacao;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +25,7 @@ class CopiaFinalType extends AbstractType
     private $authorizationChecker;
     private $groupResolver;
 
-    public function __construct(EntityManager $em, AuthorizationCheckerInterface $authorizationChecker, CopiaFinalValidationGroupResolver $groupResolver)
+    public function __construct(EntityManagerInterface $em, AuthorizationCheckerInterface $authorizationChecker, CopiaFinalValidationGroupResolver $groupResolver)
     {
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;

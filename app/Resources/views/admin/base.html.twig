@@ -74,7 +74,7 @@
                         {% endblock %}
 
                         {% block body %}
-                            <h1 class="page-header" id="conteudo"><a href="#conteudo">{{ title }}</a></h1>
+                            <h1 class="page-header text-primary" id="conteudo">{{ title }}</h1>
 
                             {% block alerts %}
                                 {% for type, messages in app.session.flashBag.all %}

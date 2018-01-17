@@ -2,7 +2,7 @@
 
 namespace App\Form\Realizacao;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +21,7 @@ class ProjetoType extends AbstractType
     private $tokenStorage;
     private $groupResolver;
 
-    public function __construct(EntityManager $em, TokenStorageInterface $tokenStorage, RealizacaoValidationGroupResolver $groupResolver)
+    public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage, RealizacaoValidationGroupResolver $groupResolver)
     {
         $this->em = $em;
         $this->tokenStorage = $tokenStorage;

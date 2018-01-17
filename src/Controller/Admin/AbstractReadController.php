@@ -2,9 +2,10 @@
 
 namespace App\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Knp\Component\Pager\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Http\CsvResponse;
 
 abstract class AbstractReadController extends AbstractCommonController
@@ -13,36 +14,33 @@ abstract class AbstractReadController extends AbstractCommonController
     protected $listTemplate = 'list.html.twig';
     protected $showTemplate = 'show.html.twig';
 
-    public function index(Request $request)
+    public function index(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac, PaginatorInterface $paginator)
     {
-        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository($this->repositoryName);
-        $qb = $repository->list($this->get('security.authorization_checker'));
-        $pagination = $this->createPagination($request, $this->get('knp_paginator'), $qb);
+        $qb = $repository->list($ac);
+        $pagination = $this->createPagination($request, $paginator, $qb);
         $data = ['pagination' => $pagination];
 
         return $this->createView($this->listTemplate, $data);
     }
 
-    public function show(Request $request, $params)
+    public function show(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac, PaginatorInterface $paginator, $params)
     {
-        $em = $this->getDoctrine()->getManager();
         $obj = $em->getRepository($this->repositoryName)->findOneBy([
             $this->paramsKey => $params
         ]);
         $this->denyAccessUnlessGranted('view', $obj);
         $deleteForm = $this->createDeleteForm($obj);
         $data = ['item' => $obj, 'delete_form' => $deleteForm->createView()];
-        $data = $this->preShow($request, $em, $obj, $data);
+        $data = $this->preShow($request, $em, $ac, $paginator, $obj, $data);
 
         return $this->createView($this->showTemplate, $data);
     }
 
-    public function csv(Request $request)
+    public function csv(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac)
     {
-        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository($this->repositoryName);
-        $qb = $repository->list($this->get('security.authorization_checker'));
+        $qb = $repository->list($ac);
         $itens = $repository->getCsv($qb);
         $keys = [];
 
@@ -56,7 +54,7 @@ abstract class AbstractReadController extends AbstractCommonController
         return new CsvResponse($this->canonicalName, $arrayResult);
     }
 
-    protected function createPagination(Request $request, Paginator $paginator, $qb, $var = null)
+    protected function createPagination(Request $request, PaginatorInterface $paginator, $qb, $var = null)
     {
         if($request->query->get('numResultados'.$var)) {
             $numResults = $request->query->get('numResultados'.$var);
@@ -69,16 +67,16 @@ abstract class AbstractReadController extends AbstractCommonController
             $request->query->getInt('page', 1),
             $numResults,
             array(
-                'pageParameterName' => 'pagina'.$var,
-                'sortFieldParameterName' => 'classificacao'.$var,
-                'sortDirectionParameterName' => 'direcao'.$var
+                'pageParameterName' => 'page'.$var,
+                'sortFieldParameterName' => 'sort'.$var,
+                'sortDirectionParameterName' => 'direction'.$var
             )
         );
 
         return $pagination;
     }
 
-    protected function preShow(Request $request, EntityManager $em, $obj, array $data = []) : array
+    protected function preShow(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac, PaginatorInterface $paginator, $obj, array $data = []) : array
     {
         return $data;
     }

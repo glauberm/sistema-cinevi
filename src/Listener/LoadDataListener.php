@@ -2,20 +2,23 @@
 
 namespace App\Listener;
 
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Routing\RouterInterface;
 use AncaRebeca\FullCalendarBundle\Event\CalendarEvent;
 use App\Entity\CalendarEvent as Event;
 
 class LoadDataListener
 {
     private $em;
-    private $container;
+    private $token;
+    private $router;
 
-    public function __construct(EntityManager $em, ContainerInterface $container)
+    public function __construct(EntityManagerInterface $em, TokenStorageInterface $token, RouterInterface $router)
     {
         $this->em = $em;
-        $this->container = $container;
+        $this->token = $token;
+        $this->router = $router;
     }
 
     /**
@@ -31,7 +34,7 @@ class LoadDataListener
 
         $reservas = $this->em->getRepository(Event::class)->findAll();
 
-        $userAtual = $this->container->get('security.token_storage')->getToken()->getUser();
+        $userAtual = $this->token->getToken()->getUser();
 
         foreach($reservas as $reserva)
         {
@@ -48,7 +51,7 @@ class LoadDataListener
             $event->setStartDate($reserva->getStartDate());
             $event->setEndDate($reserva->getEndDate()->add(new \DateInterval('P1D')));
 
-            $url = $this->container->get('router')->generate('almoxarifado_reserva_show', array(
+            $url = $this->router->generate('almoxarifado_reserva_show', array(
                 'params' => $reserva->getId(),
             ));
             $event->setUrl($url);

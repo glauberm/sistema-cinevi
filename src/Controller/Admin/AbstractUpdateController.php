@@ -2,18 +2,20 @@
 
 namespace App\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
+use Swift_Mailer;
+use Twig_Environment;
 use App\Http\CsvResponse;
 
 abstract class AbstractUpdateController extends AbstractCreateController
 {
     protected $editTemplate = 'edit.html.twig';
 
-    public function edit(Request $request, $params)
+    public function edit(Request $request, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig, $params)
     {
-        $em = $this->getDoctrine()->getManager();
         $obj = $em->getRepository($this->repositoryName)->findOneBy([
             $this->paramsKey => $params
         ]);
@@ -27,8 +29,8 @@ abstract class AbstractUpdateController extends AbstractCreateController
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em->merge($obj);
             $em->flush();
-            $this->get('session')->getFlashBag()->set('success', 'Edição de item realizada com sucesso!');
-            $obj = $this->postEdit($obj, $em);
+            $session->getFlashBag()->set('success', 'Edição de item realizada com sucesso!');
+            $obj = $this->postEdit($obj, $em, $session, $mailer, $twig);
 
             return $this->redirectToRoute($this->canonicalName.'_index');
         }
@@ -40,17 +42,17 @@ abstract class AbstractUpdateController extends AbstractCreateController
         ]);
     }
 
-    protected function preFormEdit($obj, Form $form, EntityManager $em) : Form
+    protected function preFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
     {
         return $form;
     }
 
-    protected function postFormEdit($obj, Form $form, EntityManager $em) : Form
+    protected function postFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
     {
         return $form;
     }
 
-    protected function postEdit($obj, EntityManager $em)
+    protected function postEdit($obj, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)
     {
         return;
     }

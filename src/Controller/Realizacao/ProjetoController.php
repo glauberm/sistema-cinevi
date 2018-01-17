@@ -2,11 +2,14 @@
 
 namespace App\Controller\Realizacao;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Swift_Mailer;
+use Twig_Environment;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\Projeto;
@@ -23,21 +26,21 @@ class ProjetoController extends AbstractCrudController
     protected $formClassName = ProjetoType::class;
     protected $paramsKey = 'id';
 
-    protected function postFormNew(Form $form, EntityManager $em) : Form
+    protected function postFormNew(Form $form, EntityManagerInterface $em) : Form
     {
         $form = $this->checkCopiaFinal($form);
 
         return $form;
     }
 
-    protected function postFormEdit($obj, Form $form, EntityManager $em) : Form
+    protected function postFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
     {
         $form = $this->checkCopiaFinal($form, $obj);
 
         return $form;
     }
 
-    protected function postNew($obj, EntityManager $em)
+    protected function postNew($obj, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)
     {
         $subject = 'Novo Projeto: '.$obj->getRealizacao()->getTitulo();
         $path = $this->generateUrl($this->canonicalName.'_show', array(
@@ -52,16 +55,16 @@ class ProjetoController extends AbstractCrudController
         );
         foreach($emails as $email) {
             $to = $email;
-            $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+            $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
         }
 
         $template = $this->templateDir.'/email_user';
         $to = $obj->getRealizacao()->getUser()->getEmail();
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
         $template = $this->templateDir.'/email_professor';
         $to = $obj->getRealizacao()->getProfessor()->getEmail();
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
         $template = $this->templateDir.'/email_equipe';
         $emailsEquipes = array();
@@ -73,7 +76,7 @@ class ProjetoController extends AbstractCrudController
         $emailsEquipes = array_unique($emailsEquipes);
         foreach($emailsEquipes as $email) {
             $to = $email;
-            $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+            $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
         }
     }
 

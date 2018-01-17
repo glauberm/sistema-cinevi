@@ -2,10 +2,15 @@
 
 namespace App\Controller\Almoxarifado;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Swift_Mailer;
+use Twig_Environment;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\Equipamento;
@@ -25,22 +30,22 @@ class EquipamentoController extends AbstractCrudController
     private $manutencao;
     private $atrasado;
 
-    protected function preShow(Request $request, EntityManager $em, $obj, array $data = []) : array
+    protected function preShow(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac, PaginatorInterface $paginator, $obj, array $data = []) : array
     {
         $r = $em->getRepository(CalendarEvent::class);
 
-        $qb = $r->list($this->get('security.authorization_checker'), 'reserva');
+        $qb = $r->list($ac, 'reserva');
 
         $qb = $r->listWhereEquipamentoIs($qb, $obj->getId(), 'reserva');
 
-        $pagination = $this->createPagination($request, $this->get('knp_paginator'), $qb);
+        $pagination = $this->createPagination($request, $paginator, $qb);
 
         $data['pagination'] = $pagination;
 
         return $data;
     }
 
-    protected function preFormEdit($obj, Form $form, EntityManager $em) : Form
+    protected function preFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
     {
         $this->manutencao = $obj->getManutencao();
         $this->atrasado = $obj->getAtrasado();
@@ -48,7 +53,7 @@ class EquipamentoController extends AbstractCrudController
         return $form;
     }
 
-    protected function postEdit($obj, EntityManager $em)
+    protected function postEdit($obj, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)
     {
         if($this->manutencao == false && $obj->getManutencao() == true) {
             $subject = 'Manutenção de Equipamento: '.$obj->getNome();
@@ -59,7 +64,7 @@ class EquipamentoController extends AbstractCrudController
                         'params' => $reserva->getId()
                     ), UrlGeneratorInterface::ABSOLUTE_URL);
                     $to = $reserva->getUser()->getEmail();
-                    $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+                    $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
                 }
             }
         }
@@ -73,7 +78,7 @@ class EquipamentoController extends AbstractCrudController
                         'params' => $reserva->getId()
                     ), UrlGeneratorInterface::ABSOLUTE_URL);
                     $to = $reserva->getUser()->getEmail();
-                    $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+                    $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
                 }
             }
         }

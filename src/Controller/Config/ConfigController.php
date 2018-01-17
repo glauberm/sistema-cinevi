@@ -2,7 +2,8 @@
 
 namespace App\Controller\Config;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\Admin\AbstractCommonController;
 use App\Entity\Config;
@@ -17,9 +18,8 @@ class ConfigController extends AbstractCommonController
     protected $editTemplate = 'edit.html.twig';
     protected $formClassName = ConfigType::class;
 
-    public function show(Request $request)
+    public function show(Request $request, EntityManagerInterface $em)
     {
-        $em = $this->getDoctrine()->getManager();
         $obj = $em->getRepository($this->repositoryName)->getConfig();
         $this->denyAccessUnlessGranted('view', $obj);
 
@@ -28,9 +28,8 @@ class ConfigController extends AbstractCommonController
         ]);
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request, EntityManagerInterface $em, SessionInterface $session)
     {
-        $em = $this->getDoctrine()->getManager();
         $obj = $em->getRepository($this->repositoryName)->getConfig();
         $this->denyAccessUnlessGranted('edit', $obj);
         $form = $this->createForm($this->formClassName, $obj);
@@ -39,7 +38,7 @@ class ConfigController extends AbstractCommonController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->merge($obj);
             $em->flush();
-            $this->get('session')->getFlashBag()->set('success', 'Configurações editadas com sucesso!');
+            $session->getFlashBag()->set('success', 'Configurações editadas com sucesso!');
 
             return $this->redirectToRoute($this->canonicalName.'_show');
         }

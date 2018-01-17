@@ -2,9 +2,12 @@
 
 namespace App\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
+use Swift_Mailer;
+use Twig_Environment;
 
 abstract class AbstractCreateController extends AbstractReadController
 {
@@ -12,11 +15,10 @@ abstract class AbstractCreateController extends AbstractReadController
     protected $formClassName;
     protected $addTemplate = 'add.html.twig';
 
-    public function new(Request $request)
+    public function new(Request $request, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)
     {
         $obj = new $this->className();
         $this->denyAccessUnlessGranted('create', $obj);
-        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm($this->formClassName, $obj);
         $form = $this->preFormNew($form, $em);
         $form->handleRequest($request);
@@ -25,8 +27,8 @@ abstract class AbstractCreateController extends AbstractReadController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($obj);
             $em->flush();
-            $this->get('session')->getFlashBag()->set('success', 'Criação de item realizada com sucesso!');
-            $this->postNew($obj, $em);
+            $session->getFlashBag()->set('success', 'Criação de item realizada com sucesso!');
+            $this->postNew($obj, $em, $session, $mailer, $twig);
 
             return $this->redirectToRoute($this->canonicalName.'_index');
         }
@@ -37,17 +39,17 @@ abstract class AbstractCreateController extends AbstractReadController
         ]);
     }
 
-    protected function preFormNew(Form $form, EntityManager $em) : Form
+    protected function preFormNew(Form $form, EntityManagerInterface $em) : Form
     {
         return $form;
     }
 
-    protected function postFormNew(Form $form, EntityManager $em) : Form
+    protected function postFormNew(Form $form, EntityManagerInterface $em) : Form
     {
         return $form;
     }
 
-    protected function postNew($obj, EntityManager $em)
+    protected function postNew($obj, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)
     {
         return;
     }

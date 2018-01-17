@@ -2,10 +2,13 @@
 
 namespace App\Controller\Realizacao;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Swift_Mailer;
+use Twig_Environment;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\CopiaFinal;
@@ -24,7 +27,7 @@ class CopiaFinalController extends AbstractCrudController
     protected $paramsKey = 'id';
     private $confirmed;
 
-    protected function postNew($obj, EntityManager $em)
+    protected function postNew($obj, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)
     {
         $subject = 'Nova Cópia Final: '.$obj->getRealizacao()->getTitulo();
         $path = $this->generateUrl($this->canonicalName.'_show', array(
@@ -33,15 +36,15 @@ class CopiaFinalController extends AbstractCrudController
 
         $template = $this->templateDir.'/email';
         $to = 'comissaoproducaouff@gmail.com';
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
         $template = $this->templateDir.'/email_user';
         $to = $obj->getRealizacao()->getUser()->getEmail();
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
         $template = $this->templateDir.'/email_professor';
         $to = $obj->getRealizacao()->getProfessor()->getEmail();
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
         $template = $this->templateDir.'/email_equipe';
         $emailsEquipes = array();
@@ -53,22 +56,22 @@ class CopiaFinalController extends AbstractCrudController
         $emailsEquipes = array_unique($emailsEquipes);
         foreach($emailsEquipes as $email) {
             $to = $email;
-            $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+            $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
         }
 
         if($obj->getConfirmado() == false){
-            $this->changeMessage('Criação de cópia final realizada com sucesso!', $em);
+            $this->changeMessage('Criação de cópia final realizada com sucesso!', $em, $session);
         }
     }
 
-    protected function preFormEdit($obj, Form $form, EntityManager $em) : Form
+    protected function preFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
     {
         $this->confirmed = $obj->getConfirmado();
 
         return $form;
     }
 
-    protected function postEdit($obj, EntityManager $em)
+    protected function postEdit($obj, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)
     {
         if($this->confirmed == false && $obj->getConfirmado() == true) {
             $subject = 'Confirmação de Cópia Final: '.$obj->getRealizacao()->getTitulo();
@@ -81,16 +84,16 @@ class CopiaFinalController extends AbstractCrudController
                 $obj->getRealizacao()->getUser()->getEmail()
             );
             foreach($emailsConfirmacao as $emailConfirmacao) {
-                $this->sendMail($this->container, $obj, $path, $subject, $emailConfirmacao, $template);
+                $this->sendMail($mailer, $twig, $obj, $path, $subject, $emailConfirmacao, $template);
             }
         }
 
         if($obj->getConfirmado() == false){
-            $this->changeMessage('Edição de cópia final realizada com sucesso!', $em);
+            $this->changeMessage('Edição de cópia final realizada com sucesso!', $em, $session);
         }
     }
 
-    private function changeMessage($message, EntityManager $em)
+    private function changeMessage($message, EntityManagerInterface $em, SessionInterface $session)
     {
         $config = $em->getRepository(Config::class)->getConfig();
 
@@ -98,6 +101,6 @@ class CopiaFinalController extends AbstractCrudController
             $message .= ' '.$config->getMensagemCopiaFinal();
         }
 
-        $this->get('session')->getFlashBag()->set('success', $message);
+        $session->getFlashBag()->set('success', $message);
     }
 }

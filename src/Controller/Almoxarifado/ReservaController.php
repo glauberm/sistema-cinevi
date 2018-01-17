@@ -2,11 +2,16 @@
 
 namespace App\Controller\Almoxarifado;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Swift_Mailer;
+use Twig_Environment;
 use Yasumi\Yasumi;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
@@ -25,22 +30,22 @@ class ReservaController extends AbstractCrudController
     protected $formClassName = CalendarEventType::class;
     protected $paramsKey = 'id';
 
-    protected function preShow(Request $request, EntityManager $em, $obj, array $data = []) : array
+    protected function preShow(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac, PaginatorInterface $paginator, $obj, array $data = []) : array
     {
         $r = $em->getRepository(Equipamento::class);
 
-        $qb = $r->list($this->get('security.authorization_checker'), 'equipamento');
+        $qb = $r->list($ac, 'equipamento');
 
         $qb = $r->listWhereReservaIs($qb, $obj->getId(), 'equipamento');
 
-        $pagination = $this->createPagination($request, $this->get('knp_paginator'), $qb);
+        $pagination = $this->createPagination($request, $paginator, $qb);
 
         $data['pagination'] = $pagination;
 
         return $data;
     }
 
-    protected function postFormNew(Form $form, EntityManager $em) : Form
+    protected function postFormNew(Form $form, EntityManagerInterface $em) : Form
     {
         $startDate = $form->get('startDate')->getData();
         $endDate = $form->get('endDate')->getData();
@@ -59,7 +64,7 @@ class ReservaController extends AbstractCrudController
         return $form;
     }
 
-    protected function postFormEdit($obj, Form $form, EntityManager $em) : Form
+    protected function postFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
     {
         $startDate = $form->get('startDate')->getData();
         $endDate = $form->get('endDate')->getData();
@@ -78,7 +83,7 @@ class ReservaController extends AbstractCrudController
         return $form;
     }
 
-    protected function postNew($obj, EntityManager $em)
+    protected function postNew($obj, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)
     {
         $subject = 'Nova Reserva: '.$obj->getTitle();
         $path = $this->generateUrl($this->canonicalName.'_show', array(
@@ -87,20 +92,20 @@ class ReservaController extends AbstractCrudController
 
         $template = $this->templateDir.'/email';
         $to = 'almoxarifadocinemauff@gmail.com';
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
         $template = $this->templateDir.'/email_user';
         $to = $obj->getUser()->getEmail();
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
         $template = $this->templateDir.'/email_professor';
         $to = $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail();
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
-        $this->get('session')->getFlashBag()->set('success', 'Criação de reserva realizada com sucesso! Para editar ou excluir sua reserva, clique nela pelo calendário.');
+        $session->getFlashBag()->set('success', 'Criação de reserva realizada com sucesso! Para editar ou excluir sua reserva, clique nela pelo calendário.');
     }
 
-    protected function postEdit($obj, EntityManager $em)
+    protected function postEdit($obj, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)
     {
         $subject = 'Edição de Reserva: '.$obj->getTitle();
         $path = $this->generateUrl($this->canonicalName.'_show', array(
@@ -109,15 +114,15 @@ class ReservaController extends AbstractCrudController
 
         $template = $this->templateDir.'/email_edicao';
         $to = 'almoxarifadocinemauff@gmail.com';
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
         $template = $this->templateDir.'/email_edicao_user';
         $to = $obj->getUser()->getEmail();
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
         $template = $this->templateDir.'/email_edicao_professor';
         $to = $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail();
-        $this->sendMail($this->container, $obj, $path, $subject, $to, $template);
+        $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
         return $obj;
     }

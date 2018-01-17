@@ -2,11 +2,12 @@
 
 namespace App\Mailer;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Swift_Mailer;
+use Twig_Environment;
 
 trait MailerTrait
 {
-    public function sendMail(ContainerInterface $container, $obj, $path, $subject, $to, $template)
+    public function sendMail(Swift_Mailer $mailer, Twig_Environment $twig, $obj, $path, $subject, $to, $template)
     {
         $remetente = 'contato@cinemauff.com.br';
 
@@ -15,7 +16,7 @@ trait MailerTrait
             ->setFrom($remetente)
             ->setTo($to)
             ->setBody(
-                $container->get('twig')->render(
+                $twig->render(
                     $template.'.html.twig',
                     array(
                         'item' => $obj,
@@ -27,7 +28,7 @@ trait MailerTrait
                 'text/html'
             )
             ->addPart(
-                $container->get('twig')->render(
+                $twig->render(
                     $template.'.txt.twig',
                     array(
                         'item' => $obj,
@@ -40,6 +41,6 @@ trait MailerTrait
             )
         ;
 
-        $container->get('mailer')->send($message);
+        $mailer->send($message);
     }
 }
