@@ -1,0 +1,29 @@
+almoxarifado_categoria_index:
+    path:     /
+    controller: App\Controller\Almoxarifado\CategoriaController::index
+    methods:  GET
+
+almoxarifado_categoria_show:
+    path:     /{params}/mostrar
+    controller: App\Controller\Almoxarifado\CategoriaController::show
+    methods:  GET
+
+almoxarifado_categoria_new:
+    path:     /criar
+    controller: App\Controller\Almoxarifado\CategoriaController::new
+    methods:  [GET, POST]
+
+almoxarifado_categoria_edit:
+    path:     /{params}/editar
+    controller: App\Controller\Almoxarifado\CategoriaController::edit
+    methods:  [GET, POST]
+
+almoxarifado_categoria_delete:
+    path:     /{id}/remover
+    controller: App\Controller\Almoxarifado\CategoriaController::delete
+    methods:  DELETE
+
+almoxarifado_categoria_csv:
+    path:     /csv
+    controller: App\Controller\Almoxarifado\CategoriaController::csv
+    methods:  GET

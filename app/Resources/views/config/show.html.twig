@@ -1,0 +1,11 @@
+{% extends 'admin/crud/base_show.html.twig' %}
+
+{% set title = 'Configurações' %}
+{% set routeList = path('index') %}
+{% set routeEdit = path('config_edit') %}
+
+{% block deleteAction %}{% endblock %}
+
+{% block dtdd %}
+    {% include 'config/item.html.twig' %}
+{% endblock %}

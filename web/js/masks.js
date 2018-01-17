@@ -7,7 +7,7 @@ options = {onKeyPress: function(val, e, field, options) {
 };
 
 $('.input-tel').mask(maskBehavior, options);
-$('.input-money').mask("#,##0.00", {reverse: true});
+$('.input-money').mask("#.##0,00", {reverse: true});
 
 $("input[type='number']").siblings("label").after("<small class='text-muted'> (somente números)</small>")
 $("input[type='number']").on("input paste", function() {

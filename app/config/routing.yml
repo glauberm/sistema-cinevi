@@ -1,25 +1,25 @@
-user:
-    resource: "@UserBundle/Resources/config/routing.yml"
-
-index:
-    resource: "@IndexBundle/Resources/config/routing.yml"
+almoxarifado:
+    resource: "Resources/config/almoxarifado/routing.yml"
     prefix: /s
 
 config:
-    resource: "@ConfigBundle/Resources/config/routing.yml"
-    prefix: /s
+    resource: "Resources/config/config/routing.yml"
+    prefix: /s/configuracoes
 
-almoxarifado:
-    resource: "@AlmoxarifadoBundle/Resources/config/routing.yml"
+home:
+    resource: "Resources/config/home/routing.yml"
+
+index:
+    resource: "Resources/config/index/routing.yml"
     prefix: /s
 
 realizacao:
-    resource: "@RealizacaoBundle/Resources/config/routing.yml"
+    resource: "Resources/config/realizacao/routing.yml"
     prefix: /s
+
+user:
+    resource: "Resources/config/user/routing.yml"
 
 ancarebeca_fullcalendar:
     resource: "@FullCalendarBundle/Resources/config/routing.yml"
     prefix: /s
-
-public:
-    resource: "@PublicBundle/Resources/config/public.yml"

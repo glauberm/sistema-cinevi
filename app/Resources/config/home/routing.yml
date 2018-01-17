@@ -1,0 +1,4 @@
+home:
+    path:      /
+    methods:   [GET]
+    controller: App\Controller\Home\HomeController::home

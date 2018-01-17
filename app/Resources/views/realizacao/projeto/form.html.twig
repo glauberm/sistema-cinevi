@@ -1,0 +1,23 @@
+{% include 'realizacao/realizacao/form.html.twig' with {form: form.realizacao} %}
+
+<div class="row">
+    <div class="col-sm-4">{{ form_row(form.preProducao) }}</div>
+    <div class="col-sm-4">{{ form_row(form.dataProducao) }}</div>
+    <div class="col-sm-4">{{ form_row(form.posProducao) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-6">{{ form_row(form.direcao) }}</div>
+    <div class="col-sm-6">{{ form_row(form.producao) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-7">{{ form_row(form.fotografia) }}</div>
+    <div class="col-sm-5">{{ form_row(form.disciplinaFotografia) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-7">{{ form_row(form.som) }}</div>
+    <div class="col-sm-5">{{ form_row(form.disciplinaSom) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-7">{{ form_row(form.arte) }}</div>
+    <div class="col-sm-5">{{ form_row(form.disciplinaArte) }}</div>
+</div>

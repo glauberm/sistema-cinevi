@@ -1,0 +1,15 @@
+realizacao_copia_final:
+    resource: "Resources/config/realizacao/routing/copia_final.yml"
+    prefix:   /copias_finais
+
+realizacao_funcao:
+    resource: "Resources/config/realizacao/routing/funcao.yml"
+    prefix:   /funcoes
+
+realizacao_modalidade:
+    resource: "Resources/config/realizacao/routing/modalidade.yml"
+    prefix:   /modalidades
+
+realizacao_projeto:
+    resource: "Resources/config/realizacao/routing/projeto.yml"
+    prefix:   /projetos

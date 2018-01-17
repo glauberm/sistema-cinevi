@@ -1,0 +1,25 @@
+{% extends 'admin/crud/base_add.html.twig' %}
+
+{% set title = 'Adicionar Reserva' %}
+{% set routeList = path('almoxarifado_reserva_index') %}
+
+{% block alerts %}
+    {{ parent() }}
+
+    {% if not is_granted('create', item) %}
+        <div class="alert alert-warning alert-dismissal fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+            As reservas estão abertas somente para professores no momento. Você não vai conseguir registrar uma reserva. Tente novamente mais tarde.
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block form %}
+    {% include 'almoxarifado/calendar_event/form.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/cinevi/almoxarifado/calendar-event.js') }}"></script>
+    <script> calendarEventAjax(); </script>
+{% endblock %}

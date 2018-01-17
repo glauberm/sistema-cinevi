@@ -1,5 +1,6 @@
 # TO-DO
 
+- Fazer testes para outros emails além do CalendarEvent
 - data_class para ::class
 - Retirar todos os leads das <dl>
 - Orçamento com erro na produção -- erro na vírgula e ponto (ver http://php.net/manual/en/function.localeconv.php)
@@ -12,6 +13,7 @@
 - Ver como fazer para omitir alguns campos do FOSRestBundle (serializer) OU NA REAL TIRAR O FOSRESTBUNDLE COMO UM TODO
 - Sistema de notificações seria demais -- especialmente para avisar das mudanças e mandar as pessoas editarem coisas
 - Confirmação em deletar
+- #conteudo e outras anchors sem link
 
 ## Depois
 

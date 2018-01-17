@@ -2,60 +2,89 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: ../Resources/config/almoxarifado/services.yml }
+    - { resource: ../Resources/config/config/services.yml }
+    - { resource: ../Resources/config/realizacao/services.yml }
+    - { resource: ../Resources/config/user/services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: pt-BR
 
 framework:
-    translator:      { fallbacks: [pt_BR, pt-PT] }
-    secret:          "%secret%"
+    #esi: ~
+    translator: { fallbacks: [pt_BR, pt-PT] }
+    secret: '%secret%'
     router:
-        resource: "%kernel.root_dir%/config/routing.yml"
+        resource: '%kernel.project_dir%/app/config/routing.yml'
         strict_requirements: ~
-    form:            ~
+    form: ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
-    templating:
-        engines: ['twig']
-    default_locale:  "%locale%"
-    trusted_hosts:   ~
-    trusted_proxies: ~
+    # validation: { enabled: true }
+    validation:
+        enabled: true
+        enable_annotations: false
+        mapping:
+          paths:
+            - '%kernel.root_dir%/Resources/config/almoxarifado/validation.yml'
+            - '%kernel.root_dir%/Resources/config/config/validation.yml'
+            - '%kernel.root_dir%/Resources/config/realizacao/validation.yml'
+            - '%kernel.root_dir%/Resources/config/user/validation.yml'
+    #serializer: { enable_annotations: true }
+    default_locale: '%locale%'
+    trusted_hosts: ~
     session:
-        handler_id:  ~
-        gc_probability: 0
-    fragments:       ~
+        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+    fragments: ~
     http_method_override: true
     assets: ~
+    php_errors:
+        log: true
 
 # Twig Configuration
 twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
     form_themes: ['bootstrap_3_layout.html.twig']
 
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_mysql
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #path: '%database_path%'
+
     orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        mappings:
+            App:
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                is_bundle: false
+                prefix: App\Entity
+                alias: App
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport:     "%mailer_transport%"
-    host:          "%mailer_host%"
-    username:      "%mailer_user%"
-    password:      "%mailer_password%"
+    transport: '%mailer_transport%'
+    host: '%mailer_host%'
+    username: '%mailer_user%'
+    password: '%mailer_password%'
     encryption:    ssl
     spool:
         type:      file
@@ -65,7 +94,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: UserBundle\Entity\User
+    user_class: App\Entity\User
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:
@@ -73,23 +102,24 @@ fos_user:
         sender_name:    Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)
     registration:
         form:
-            type: UserBundle\Form\RegistrationType
+            type: App\Form\User\RegistrationType
         confirmation:
             enabled:   true
-            template: UserBundle:Registration:email.html.twig
+            template: '@FOSUser/Registration/email.html.twig'
     resetting:
         retry_ttl: 900
         email:
-            template: UserBundle:Resetting:email.html.twig
+            template: '@FOSUser/Resetting/email.html.twig'
         form:
             validation_groups: [ResetPassword]
     profile:
         form:
-            type: UserBundle\Form\ProfileType
+            type: App\Form\User\ProfileType
     change_password:
         form:
             validation_groups: [ChangePassword]
 
+# KnpPaginator Configuration
 knp_paginator:
     page_range: 5
     default_options:
@@ -98,5 +128,5 @@ knp_paginator:
         sort_direction_name: direcao
         distinct: true
     template:
-        pagination: AdminBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
-        sortable: AdminBundle:Pagination:sortable_link.html.twig
+        pagination: admin/pagination/twitter_bootstrap_v3_pagination.html.twig
+        sortable: admin/pagination/sortable_link.html.twig

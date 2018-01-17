@@ -1,4 +1,0 @@
-public:
-    path:      /
-    methods:   [GET]
-    defaults:  { _controller: PublicBundle:Public:public }

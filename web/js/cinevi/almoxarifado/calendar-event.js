@@ -11,7 +11,7 @@ function calendarEventAjax (method)
 
         $.ajax({
             url : $form.attr('action'),
-            type: method,
+            type: 'POST',
             data : data,
             beforeSend: function() {
                 $("body").append("<div id='overlay-alert' class='overlay-alert'><span class='label label-danger'>Carregando...</span></div>");

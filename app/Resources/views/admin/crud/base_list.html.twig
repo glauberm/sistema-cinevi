@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block mainActions %}
+    <a class="navbar-brand btn btn-link" href="{{ path('index') }}">
+        {% include 'admin/svg/voltar.html.twig' %}
+    </a>
+    {% block addAction %}
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <div class="navbar-form navbar-nav">
+                <a class="btn btn-success" href="{{ routeAdd }}">{% include 'admin/svg/adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+
+{% block maisBotoes %}
+    {% block maisBotoesBlock %}{% endblock %}
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {% block thead %}{% endblock %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in pagination %}
+                    <tr>
+                        {% block tbody %}{% endblock %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% block blockPagination %}
+        {% include 'admin/pagination/pagination.html.twig' with { name: 'numResultados' } %}
+    {% endblock %}
+
+{% endblock %}

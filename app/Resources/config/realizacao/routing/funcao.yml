@@ -1,0 +1,29 @@
+realizacao_funcao_index:
+    path:     /
+    controller: App\Controller\Realizacao\FuncaoController::index
+    methods:  GET
+
+realizacao_funcao_show:
+    path:     /{params}/mostrar
+    controller: App\Controller\Realizacao\FuncaoController::show
+    methods:  GET
+
+realizacao_funcao_new:
+    path:     /criar
+    controller: App\Controller\Realizacao\FuncaoController::new
+    methods:  [GET, POST]
+
+realizacao_funcao_edit:
+    path:     /{params}/editar
+    controller: App\Controller\Realizacao\FuncaoController::edit
+    methods:  [GET, POST]
+
+realizacao_funcao_delete:
+    path:     /{id}/remover
+    controller: App\Controller\Realizacao\FuncaoController::delete
+    methods:  DELETE
+
+realizacao_funcao_csv:
+    path:     /csv
+    controller: App\Controller\Realizacao\FuncaoController::csv
+    methods:  GET

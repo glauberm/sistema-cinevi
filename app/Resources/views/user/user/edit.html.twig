@@ -1,0 +1,8 @@
+{% extends 'admin/crud/base_edit.html.twig' %}
+
+{% set title = 'Editar ' ~ item.username %}
+{% set routeList = path('user_user_index') %}
+
+{% block form %}
+    {% include 'user/user/form.html.twig' with {form: edit_form}  %}
+{% endblock %}

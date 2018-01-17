@@ -1,0 +1,11 @@
+almoxarifado_categoria:
+    resource: "Resources/config/almoxarifado/routing/categoria.yml"
+    prefix:   /categorias_reservaveis
+
+almoxarifado_equipamento:
+    resource: "Resources/config/almoxarifado/routing/equipamento.yml"
+    prefix:   /reservaveis
+
+almoxarifado_reserva:
+    resource: "Resources/config/almoxarifado/routing/reserva.yml"
+    prefix:   /reservas

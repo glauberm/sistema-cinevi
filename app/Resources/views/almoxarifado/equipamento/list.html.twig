@@ -1,0 +1,21 @@
+{% extends 'admin/crud/base_list.html.twig' %}
+
+{% set title = 'Reserváveis' %}
+{% set routeAdd = path('almoxarifado_equipamento_new') %}
+{% set routeCsv = path('almoxarifado_equipamento_csv') %}
+
+{% block addAction %}
+    {% if is_granted('ROLE_ALMOXARIFADO') %}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-success" href="{{ routeAdd }}">{% include 'admin/svg/adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block thead %}
+    {% include 'almoxarifado/equipamento/list_thead.html.twig' with { builderName: 'item'} %}
+{% endblock %}
+
+{% block tbody %}
+    {% include 'almoxarifado/equipamento/list_tbody.html.twig' %}
+{% endblock %}

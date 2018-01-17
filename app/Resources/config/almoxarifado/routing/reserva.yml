@@ -1,0 +1,29 @@
+almoxarifado_reserva_index:
+    path:     /
+    controller: App\Controller\Almoxarifado\ReservaController::index
+    methods:  GET
+
+almoxarifado_reserva_show:
+    path:     /{params}/mostrar
+    controller: App\Controller\Almoxarifado\ReservaController::show
+    methods:  GET
+
+almoxarifado_reserva_new:
+    path:     /criar
+    controller: App\Controller\Almoxarifado\ReservaController::new
+    methods:  [GET, POST]
+
+almoxarifado_reserva_edit:
+    path:     /{params}/editar
+    controller: App\Controller\Almoxarifado\ReservaController::edit
+    methods:  [GET, POST]
+
+almoxarifado_reserva_delete:
+    path:     /{id}/remover
+    controller: App\Controller\Almoxarifado\ReservaController::delete
+    methods:  DELETE
+
+almoxarifado_reserva_csv:
+    path:     /csv
+    controller: App\Controller\Almoxarifado\ReservaController::csv
+    methods:  GET

@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-sm-3 col-md-2"><dt>Cód.</dt><dd>{{ item.codigo }}</dd></div>
+    <div class="col-sm-9 col-md-10"><dt>Nome</dt><dd>{{ item.nome }}</dd></div>
+</div>
+
+<dt>Categoria</dt>
+<dd><a href="{{ path('almoxarifado_categoria_show', { 'params': item.categoria.id }) }}">{{ item.categoria.nome }}</a></dd>
+
+<div class="row">
+    <div class="col-sm-6">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Nº de Patrimônio',
+            'item': item.patrimonio
+        } %}
+    </div>
+    <div class="col-sm-6">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Nº de Série',
+            'item': item.nSerie
+        } %}
+    </div>
+</div>
+{% include 'admin/parts/nullable_field.html.twig' with {
+    'dt': 'Acessórios',
+    'item': item.acessorios,
+    'inherit': true
+} %}
+{% include 'admin/parts/nullable_field.html.twig' with {
+    'dt': 'Observações',
+    'item': item.obs,
+    'inherit': true
+} %}
+<div class="row">
+    <div class="col-md-6"><dt>Em Manutenção?</dt><dd>{{ item.manutencao ? 'Sim' : 'Não' }}</dd></div>
+    <div class="col-md-6"><dt>Devolução Atrasada?</dt><dd>{{ item.atrasado ? 'Sim' : 'Não' }}</dd></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6"><dt>Criado em</dt><dd>{{ item.createdIn|date('d/m/Y H:m:s') }}</dd></div>
+    <div class="col-sm-6"><dt>Última atualização em</dt><dd>{{ item.updatedIn|date('d/m/Y H:m:s') }}</dd></div>
+</div>

@@ -1,0 +1,11 @@
+{% extends 'admin/crud/base_show.html.twig' %}
+
+{% set title = item.nome %}
+{% set routeList = path('realizacao_funcao_index') %}
+{% set routeEdit = path('realizacao_funcao_edit', { 'params': item.id }) %}
+
+{% block dtdd %}
+
+    {% include 'realizacao/funcao/item.html.twig' with {item: item} %}
+
+{% endblock %}

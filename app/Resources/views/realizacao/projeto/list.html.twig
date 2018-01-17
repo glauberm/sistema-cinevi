@@ -1,0 +1,19 @@
+{% extends 'admin/crud/base_list.html.twig' %}
+
+{% set title = 'Projetos' %}
+{% set routeAdd = path('realizacao_projeto_new') %}
+{% set routeCsv = path('realizacao_projeto_csv') %}
+
+{% block addAction %}
+    <div class="navbar-form navbar-nav">
+        <a class="btn btn-success" href="{{ routeAdd }}">{% include 'admin/svg/adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
+    </div>
+{% endblock %}
+
+{% block thead %}
+    {% include 'realizacao/projeto/list_thead.html.twig' with { builderName: 'item'} %}
+{% endblock %}
+
+{% block tbody %}
+    {% include 'realizacao/projeto/list_tbody.html.twig' %}
+{% endblock %}

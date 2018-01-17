@@ -1,0 +1,29 @@
+user_user_index:
+    path:     /
+    controller: App\Controller\User\UserController::index
+    methods:  GET
+
+user_user_show:
+    path:     /{params}/mostrar
+    controller: App\Controller\User\UserController::show
+    methods:  GET
+
+user_user_new:
+    path:     /criar
+    controller: App\Controller\User\UserController::new
+    methods:  [GET, POST]
+
+user_user_edit:
+    path:     /{params}/editar
+    controller: App\Controller\User\UserController::edit
+    methods:  [GET, POST]
+
+user_user_delete:
+    path:     /{id}/remover
+    controller: App\Controller\User\UserController::delete
+    methods:  DELETE
+
+user_user_csv:
+    path:     /csv
+    controller: App\Controller\User\UserController::csv
+    methods:  GET

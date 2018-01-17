@@ -1,0 +1,7 @@
+{% extends 'admin/email.html.twig' %}
+
+{% block message %}
+
+    <p>{{ item.username }}, seu cadastro foi confirmado!</p><p>Para acessar o sistema, acesse o link abaixo:</p><p><a target='_blank' href='{{ url }}'>{{ url }}</a></p>
+
+{% endblock %}

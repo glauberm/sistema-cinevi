@@ -1,0 +1,28 @@
+{% extends 'admin/email.html.twig' %}
+
+{% block message %}
+
+<p>Amanhã é a data de <strong>devolução</strong> da reserva de equipamento/espaço de código <strong>{{ item.title }}</strong> feita por <strong>{{ item.user.username  }}</strong>.</p>
+
+<table border='1' style='border-collapse: collapse; border-spacing: 0; width: 100%; margin-bottom: 20px; font-size: 1rem; color: #333; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;'>
+    <thead>
+        <tr>
+            <th>Cód.</th>
+            <th>Reservável</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for equipamento in item.equipamentos %}
+            <tr>
+                <td>{{ equipamento.codigo }}</td>
+                <td>{{ equipamento.nome }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p>Para vê-la, acesse o link abaixo:</p>
+
+<p><a target='_blank' href='{{ url }}'>{{ url }}</a></p>
+
+{% endblock %}

@@ -1,8 +1,0 @@
-{% extends 'AdminBundle:Crud:base-edit.html.twig' %}
-
-{% set title = 'Editar ' ~ item.nome %}
-{% set routeList = path('almoxarifado_categoria_index') %}
-
-{% block form %}
-    {% include 'AlmoxarifadoBundle:Categoria:form.html.twig' with {form: edit_form} %}
-{% endblock %}

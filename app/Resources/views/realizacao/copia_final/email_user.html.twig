@@ -1,0 +1,7 @@
+{% extends 'admin/email.html.twig' %}
+
+{% block message %}
+
+<p>Você registrou uma nova cópia final de título <strong>{{ item.realizacao.titulo }}</strong>.<br/><br/>Para vê-la, acesse o link abaixo:<br/><br/><a target='_blank' href='{{ url }}'>{{ url }}</a></p>
+
+{% endblock %}

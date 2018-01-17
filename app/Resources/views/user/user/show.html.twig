@@ -1,0 +1,75 @@
+{% extends 'admin/crud/base_show.html.twig' %}
+
+{% set title = item.username %}
+{% set routeList = path('user_user_index') %}
+{% set routeEdit = path('user_user_edit', { 'params': item.id }) %}
+
+{% block dtdd %}
+    {% include 'user/user/item.html.twig' %}
+
+    <h2 id="reservas" class="h3"><a href="#reservas">Reservas</a></h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {% include 'almoxarifado/calendar_event/list_thead.html.twig' with { pagination: paginationReserva, builderName: 'reserva' } %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in paginationReserva %}
+                    <tr>
+                        {% include 'almoxarifado/calendar_event/list_tbody.html.twig' %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'admin/pagination/pagination.html.twig' with { name: 'numResultadosReserva', pagination: paginationReserva } %}
+
+
+    <h2 id="projetos" class="h3"><a href="#projetos">Projetos</a></h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {% include 'realizacao/projeto/list_thead.html.twig' with { pagination: paginationProjeto, builderName: 'projeto' } %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in paginationProjeto %}
+                    <tr>
+                        {% include 'realizacao/projeto/list_tbody.html.twig' %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'admin/pagination/pagination.html.twig' with { name: 'numResultadosProjeto', pagination: paginationProjeto } %}
+
+
+    <h2 id="copiasFinais" class="h3"><a href="#copiasFinais">Cópias Finais</a></h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {% include 'realizacao/copia_final/list_thead.html.twig' with { pagination: paginationCopiaFinal, builderName: 'copiaFinal' } %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in paginationCopiaFinal %}
+                    <tr>
+                        {% include 'realizacao/copia_final/list_tbody.html.twig' %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'admin/pagination/pagination.html.twig' with { name: 'numResultadosCopiaFinal', pagination: paginationCopiaFinal } %}
+
+{% endblock %}

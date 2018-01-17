@@ -1,0 +1,9 @@
+config_show:
+    path:     /
+    controller: App\Controller\Config\ConfigController::show
+    methods:  GET
+
+config_edit:
+    path:     /editar
+    controller: App\Controller\Config\ConfigController::edit
+    methods:  [GET, POST]

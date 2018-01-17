@@ -1,0 +1,8 @@
+{% extends 'admin/crud/base_edit.html.twig' %}
+
+{% set title = 'Editar ' ~ item.nome %}
+{% set routeList = path('almoxarifado_equipamento_index') %}
+
+{% block form %}
+    {% include 'almoxarifado/equipamento/form.html.twig' with {form: edit_form} %}
+{% endblock %}

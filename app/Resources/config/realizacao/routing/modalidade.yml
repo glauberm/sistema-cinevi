@@ -1,0 +1,29 @@
+realizacao_modalidade_index:
+    path:     /
+    controller: App\Controller\Realizacao\ModalidadeController::index
+    methods:  GET
+
+realizacao_modalidade_show:
+    path:     /{params}/mostrar
+    controller: App\Controller\Realizacao\ModalidadeController::show
+    methods:  GET
+
+realizacao_modalidade_new:
+    path:     /criar
+    controller: App\Controller\Realizacao\ModalidadeController::new
+    methods:  [GET, POST]
+
+realizacao_modalidade_edit:
+    path:     /{params}/editar
+    controller: App\Controller\Realizacao\ModalidadeController::edit
+    methods:  [GET, POST]
+
+realizacao_modalidade_delete:
+    path:     /{id}/remover
+    controller: App\Controller\Realizacao\ModalidadeController::delete
+    methods:  DELETE
+
+realizacao_modalidade_csv:
+    path:     /csv
+    controller: App\Controller\Realizacao\ModalidadeController::csv
+    methods:  GET

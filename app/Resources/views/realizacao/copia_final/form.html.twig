@@ -1,0 +1,49 @@
+{% include 'realizacao/realizacao/form.html.twig' with {form: form.realizacao} %}
+
+<div class="row">
+    <div class="col-sm-6">{{ form_row(form.linkVideo) }}</div>
+    <div class="col-sm-6">{{ form_row(form.senhaVideo) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-6">{{ form_row(form.projeto) }}</div>
+    <div class="col-sm-6">{{ form_row(form.cromia) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-4">{{ form_row(form.proporcao) }}</div>
+    <div class="col-sm-4">{{ form_row(form.formato) }}</div>
+    <div class="col-sm-4">{{ form_row(form.duracao) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-4">{{ form_row(form.formatoDigitalNativo) }}</div>
+    <div class="col-sm-4">{{ form_row(form.codec) }}</div>
+    <div class="col-sm-4">{{ form_row(form.container) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-4">{{ form_row(form.taxaBits) }}</div>
+    <div class="col-sm-4">{{ form_row(form.velocidade) }}</div>
+    <div class="col-sm-4">{{ form_row(form.som) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-6">{{ form_row(form.resolucaoAudioDigital) }}</div>
+    <div class="col-sm-6">{{ form_row(form.suporteMatrizDigital) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-6">{{ form_row(form.camera) }}</div>
+    <div class="col-sm-6">{{ form_row(form.softwareEdicao) }}</div>
+</div>
+{{ form_row(form.captacaoSom) }}
+<div class="row">
+    <div class="col-sm-6">{{ form_row(form.orcamento) }}</div>
+    <div class="col-sm-6">{{ form_row(form.fontesFinanciamento) }}</div>
+</div>
+{{ form_row(form.apoiadores) }}
+{{ form_row(form.dcp) }}
+
+<fieldset>
+    <legend><a id="Ficha Técnica" href="#Ficha Técnica">Ficha Técnica</a></legend>
+    {% include 'realizacao/ficha_tecnica/form.html.twig' with {form: form.fichaTecnica} %}
+</fieldset>
+
+{% if is_granted('ROLE_DEPARTAMENTO') %}
+    {{ form_row(form.confirmado) }}
+{% endif %}

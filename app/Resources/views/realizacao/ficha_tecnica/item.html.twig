@@ -1,0 +1,20 @@
+{% for equipe in item.equipes %}
+    {% include 'realizacao/equipe/item.html.twig' with {item: equipe} %}
+{% endfor %}
+
+{% include 'admin/parts/nullable_field.html.twig' with {
+    'dt': 'Elenco',
+    'item': item.elenco
+} %}
+{% include 'admin/parts/nullable_field.html.twig' with {
+    'dt': 'Outras Informações',
+    'item': item.outrasInformacoes
+} %}
+{% include 'admin/parts/nullable_field.html.twig' with {
+    'dt': 'Participações em Festivais e Mostras',
+    'item': item.festivais
+} %}
+{% include 'admin/parts/nullable_field.html.twig' with {
+    'dt': 'Prêmios',
+    'item': item.premios
+} %}

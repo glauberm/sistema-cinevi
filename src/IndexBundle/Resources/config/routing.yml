@@ -1,4 +1,0 @@
-index:
-    path:      /
-    methods:   [GET]
-    defaults:  { _controller: IndexBundle:Index:index }

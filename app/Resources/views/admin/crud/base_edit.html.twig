@@ -1,0 +1,28 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block mainActions %}
+    <a class="navbar-brand btn btn-link" href="{{ routeList }}">
+        {% include 'admin/svg/voltar.html.twig' %}
+    </a>
+    {% block deleteAction %}
+        {% if is_granted('delete', item) %}
+            {{ form_start(delete_form, { 'attr' : { 'class': 'navbar-form navbar-nav' } }) }}
+                <button type="submit" class="btn btn-danger">
+                    {% include 'admin/svg/remover.html.twig' %}<span class="hidden-xs">Remover</span>
+                </button>
+            {{ form_end(delete_form) }}
+        {% endif %}
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    {{ form_start(edit_form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {% block form %}{% endblock %}
+        <br/>
+        <button type="submit" class="btn btn-lg btn-warning">Editar</button>
+    {{ form_end(edit_form) }}
+
+{% endblock %}

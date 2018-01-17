@@ -1,0 +1,37 @@
+{% extends 'admin/crud/base_list.html.twig' %}
+
+{% set title = 'Usuários' %}
+{% set routeAdd = path('user_user_new') %}
+{% set routeCsv = path('user_user_csv') %}
+
+{% block addAction %}
+    {% if is_granted('ROLE_DEPARTAMENTO') %}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-success" href="{{ routeAdd }}">
+                {% include 'admin/svg/adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span>
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block thead %}
+    <th>{{ knp_pagination_sortable(pagination, 'Nome Completo', 'item.username') }}</th>
+    {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+        <th>{{ knp_pagination_sortable(pagination, 'Matrícula/SIAPE', 'item.matricula') }}</th>
+    {% endif %}
+    <th>{{ knp_pagination_sortable(pagination, 'Ativo', 'item.enabled') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Confirmado', 'item.confirmado') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'Professor', 'item.professor') }}</th>
+{% endblock %}
+
+{% block tbody %}
+    <td>
+        <a href="{{ path('user_user_show', { 'params': item.id }) }}">{{ item.username }}</a>
+    </td>
+    {% if is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+        <td>{{ item.matricula }}</td>
+    {% endif %}
+    <td>{{ item.enabled ? 'Sim' : 'Não' }}</td>
+    <td>{{ item.confirmado ? 'Sim' : 'Não' }}</td>
+    <td>{{ item.professor ? 'Sim' : 'Não' }}</td>
+{% endblock %}

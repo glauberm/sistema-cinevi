@@ -1,0 +1,32 @@
+{% extends 'admin/crud/base_show.html.twig' %}
+
+{% set title = item.nome %}
+{% set routeList = path('almoxarifado_equipamento_index') %}
+{% set routeEdit = path('almoxarifado_equipamento_edit', { 'params': item.id }) %}
+
+{% block dtdd %}
+
+    {% include 'almoxarifado/equipamento/item.html.twig' %}
+    
+    <h2 id="reservas" class="h3"><a href="#reservas">Reservas</a></h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {% include 'almoxarifado/calendar_event/list_thead.html.twig' with { builderName: 'reserva' } %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in pagination %}
+                    <tr>
+                        {% include 'almoxarifado/calendar_event/list_tbody.html.twig' %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'admin/pagination/pagination.html.twig' with { name: 'numResultados' } %}
+
+{% endblock %}

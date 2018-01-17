@@ -1,0 +1,29 @@
+realizacao_copia_final_index:
+    path:     /
+    controller: App\Controller\Realizacao\CopiaFinalController::index
+    methods:  GET
+
+realizacao_copia_final_show:
+    path:     /{params}/mostrar
+    controller: App\Controller\Realizacao\CopiaFinalController::show
+    methods:  GET
+
+realizacao_copia_final_new:
+    path:     /criar
+    controller: App\Controller\Realizacao\CopiaFinalController::new
+    methods:  [GET, POST]
+
+realizacao_copia_final_edit:
+    path:     /{params}/editar
+    controller: App\Controller\Realizacao\CopiaFinalController::edit
+    methods:  [GET, POST]
+
+realizacao_copia_final_delete:
+    path:     /{id}/remover
+    controller: App\Controller\Realizacao\CopiaFinalController::delete
+    methods:  DELETE
+
+realizacao_copia_final_csv:
+    path:     /csv
+    controller: App\Controller\Realizacao\CopiaFinalController::csv
+    methods:  GET

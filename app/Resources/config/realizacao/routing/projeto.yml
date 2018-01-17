@@ -1,0 +1,29 @@
+realizacao_projeto_index:
+    path:     /
+    controller: App\Controller\Realizacao\ProjetoController::index
+    methods:  GET
+
+realizacao_projeto_show:
+    path:     /{params}/mostrar
+    controller: App\Controller\Realizacao\ProjetoController::show
+    methods:  GET
+
+realizacao_projeto_new:
+    path:     /criar
+    controller: App\Controller\Realizacao\ProjetoController::new
+    methods:  [GET, POST]
+
+realizacao_projeto_edit:
+    path:     /{params}/editar
+    controller: App\Controller\Realizacao\ProjetoController::edit
+    methods:  [GET, POST]
+
+realizacao_projeto_delete:
+    path:     /{id}/remover
+    controller: App\Controller\Realizacao\ProjetoController::delete
+    methods:  DELETE
+
+realizacao_projeto_csv:
+    path:     /csv
+    controller: App\Controller\Realizacao\ProjetoController::csv
+    methods:  GET
