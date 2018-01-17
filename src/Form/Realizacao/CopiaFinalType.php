@@ -16,6 +16,8 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Validation\Realizacao\CopiaFinalValidationGroupResolver;
+use App\Entity\CopiaFinal;
+use App\Entity\Projeto;
 
 class CopiaFinalType extends AbstractType
 {
@@ -38,7 +40,7 @@ class CopiaFinalType extends AbstractType
             ))
             ->add('projeto', EntityType::class, array(
                 'label' => 'Projeto',
-                'class' => 'App\Entity\Projeto',
+                'class' => Projeto::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getAuthorizedProjetoFieldQB($this->authorizationChecker, 'user');
                 },
@@ -322,7 +324,7 @@ class CopiaFinalType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\CopiaFinal',
+            'data_class' => CopiaFinal::class,
             'validation_groups' => $this->groupResolver,
         ));
     }

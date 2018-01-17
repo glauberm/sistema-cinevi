@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use App\Validation\User\UserValidationGroupResolver;
+use App\Entity\User;
 
 class UserType extends AbstractType
 {
@@ -132,7 +133,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\User',
+            'data_class' => User::class,
             'validation_groups' => $this->groupResolver,
         ));
     }

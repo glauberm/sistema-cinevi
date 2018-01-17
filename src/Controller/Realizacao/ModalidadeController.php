@@ -12,7 +12,7 @@ class ModalidadeController extends AbstractCrudController
 {
     protected $canonicalName = 'realizacao_modalidade';
     protected $templateDir = 'realizacao/modalidade';
-    protected $repositoryName = 'App\Entity\Modalidade';
+    protected $repositoryName = Modalidade::class;
     protected $className = Modalidade::class;
     protected $formClassName = ModalidadeType::class;
     protected $paramsKey = 'id';

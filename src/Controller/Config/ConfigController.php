@@ -5,13 +5,14 @@ namespace App\Controller\Config;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\Admin\AbstractCommonController;
+use App\Entity\Config;
 use App\Form\Config\ConfigType;
 
 class ConfigController extends AbstractCommonController
 {
     protected $canonicalName = 'config';
     protected $templateDir = 'config';
-    protected $repositoryName = 'App\Entity\Config';
+    protected $repositoryName = Config::class;
     protected $showTemplate = 'show.html.twig';
     protected $editTemplate = 'edit.html.twig';
     protected $formClassName = ConfigType::class;

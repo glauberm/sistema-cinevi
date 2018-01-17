@@ -7,6 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use App\Form\Realizacao\EquipeType;
+use App\Entity\Equipe;
+use App\Entity\FichaTecnica;
 
 class FichaTecnicaType extends AbstractType
 {
@@ -18,7 +21,9 @@ class FichaTecnicaType extends AbstractType
                 'entry_type' => EquipeType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'entry_options' => array('data_class' => 'App\Entity\Equipe'),
+                'entry_options' => array(
+                    'data_class' => Equipe::class
+                ),
             ))
             ->add('elenco', TextareaType::class, array(
                 'label' => 'Elenco',
@@ -42,7 +47,7 @@ class FichaTecnicaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\FichaTecnica',
+            'data_class' => FichaTecnica::class,
         ));
     }
 }

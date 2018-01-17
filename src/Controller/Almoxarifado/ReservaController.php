@@ -11,6 +11,7 @@ use Yasumi\Yasumi;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\CalendarEvent;
+use App\Entity\Equipamento;
 use App\Form\Almoxarifado\CalendarEventType;
 
 class ReservaController extends AbstractCrudController
@@ -19,14 +20,14 @@ class ReservaController extends AbstractCrudController
 
     protected $canonicalName = 'almoxarifado_reserva';
     protected $templateDir = 'almoxarifado/calendar_event';
-    protected $repositoryName = 'App\Entity\CalendarEvent';
+    protected $repositoryName = CalendarEvent::class;
     protected $className = CalendarEvent::class;
     protected $formClassName = CalendarEventType::class;
     protected $paramsKey = 'id';
 
     protected function preShow(Request $request, EntityManager $em, $obj, array $data = []) : array
     {
-        $r = $em->getRepository('App\Entity\Equipamento');
+        $r = $em->getRepository(Equipamento::class);
 
         $qb = $r->list($this->get('security.authorization_checker'), 'equipamento');
 

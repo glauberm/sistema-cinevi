@@ -17,7 +17,7 @@ class ConfigCommand extends AbstractCommand
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
 
-        $config = $em->getRepository('App\Entity\Config')->findAll();
+        $config = $em->getRepository(Config::class)->findAll();
 
         if(!$config) {
             $config = new Config();

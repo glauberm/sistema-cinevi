@@ -14,6 +14,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Validation\Realizacao\RealizacaoValidationGroupResolver;
+use App\Entity\Realizacao;
+use App\Entity\User;
+use App\Entity\Modalidade;
 
 class RealizacaoType extends AbstractType
 {
@@ -44,7 +47,7 @@ class RealizacaoType extends AbstractType
             ))
             ->add('user', EntityType::class, array(
     		    'label' => 'Responsável',
-    		    'class' => 'App\Entity\User',
+    		    'class' => User::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getAuthorizedUserFieldQB($this->authorizationChecker, 'user');
                 },
@@ -56,7 +59,7 @@ class RealizacaoType extends AbstractType
     	    ))
             ->add('modalidade', EntityType::class, array(
     		    'label' => 'Modalidade',
-    		    'class' => 'App\Entity\Modalidade',
+    		    'class' => Modalidade::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getModalidadeFieldQB('user');
                 },
@@ -68,7 +71,7 @@ class RealizacaoType extends AbstractType
     	    ))
             ->add('professor', EntityType::class, array(
     		    'label' => 'Professor(a) Orientador(a)',
-    		    'class' => 'App\Entity\User',
+    		    'class' => User::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getProfessorFieldQB('user');
                 },
@@ -122,7 +125,7 @@ class RealizacaoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Realizacao',
+            'data_class' => Realizacao::class,
             'validation_groups' => $this->groupResolver,
         ));
     }

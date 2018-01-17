@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\Equipamento;
+use App\Entity\CalendarEvent;
 use App\Form\Almoxarifado\EquipamentoType;
 
 class EquipamentoController extends AbstractCrudController
@@ -17,7 +18,7 @@ class EquipamentoController extends AbstractCrudController
 
     protected $canonicalName = 'almoxarifado_equipamento';
     protected $templateDir = 'almoxarifado/equipamento';
-    protected $repositoryName = 'App\Entity\Equipamento';
+    protected $repositoryName = Equipamento::class;
     protected $className = Equipamento::class;
     protected $formClassName = EquipamentoType::class;
     protected $paramsKey = 'id';
@@ -26,7 +27,7 @@ class EquipamentoController extends AbstractCrudController
 
     protected function preShow(Request $request, EntityManager $em, $obj, array $data = []) : array
     {
-        $r = $em->getRepository('App\Entity\CalendarEvent');
+        $r = $em->getRepository(CalendarEvent::class);
 
         $qb = $r->list($this->get('security.authorization_checker'), 'reserva');
 

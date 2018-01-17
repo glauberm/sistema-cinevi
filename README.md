@@ -1,4 +1,3 @@
-sistema-cinevi-lts
-==================
+# Sistema do Departamento de Cinema e Vídeo da Universidade Federal Fluminense
 
-A Symfony project created on January 11, 2018, 12:44 pm.
+Cadastre projetos, reserve equipamentos no almoxarifado e muito mais pelo celular, tablet ou qualquer outro dispositivo com acesso à internet. Sistema para alunos, funcionários ou professores do Departamento de Cinema e Vídeo da Universidade Federal Fluminense.

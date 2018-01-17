@@ -18,7 +18,7 @@ class ProjetoController extends AbstractCrudController
 
     protected $canonicalName = 'realizacao_projeto';
     protected $templateDir = 'realizacao/projeto';
-    protected $repositoryName = 'App\Entity\Projeto';
+    protected $repositoryName = Projeto::class;
     protected $className = Projeto::class;
     protected $formClassName = ProjetoType::class;
     protected $paramsKey = 'id';

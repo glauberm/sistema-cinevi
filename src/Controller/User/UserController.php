@@ -9,6 +9,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\User;
+use App\Entity\CalendarEvent;
+use App\Entity\Projeto;
+use App\Entity\CopiaFinal;
 use App\Form\User\UserType;
 
 class UserController extends AbstractCrudController
@@ -17,7 +20,7 @@ class UserController extends AbstractCrudController
 
     protected $canonicalName = 'user_user';
     protected $templateDir = 'user/user';
-    protected $repositoryName = 'App\Entity\User';
+    protected $repositoryName = User::class;
     protected $className = User::class;
     protected $formClassName = UserType::class;
     protected $paramsKey = 'id';
@@ -25,9 +28,9 @@ class UserController extends AbstractCrudController
 
     protected function preShow(Request $request, EntityManager $em, $obj, array $data = []) : array
     {
-        $rReserva = $em->getRepository('App\Entity\CalendarEvent');
-        $rProjeto = $em->getRepository('App\Entity\Projeto');
-        $rCopiaFinal = $em->getRepository('App\Entity\CopiaFinal');
+        $rReserva = $em->getRepository(CalendarEvent::class);
+        $rProjeto = $em->getRepository(Projeto::class);
+        $rCopiaFinal = $em->getRepository(CopiaFinal::class);
 
         $qbReserva = $rReserva->list($this->get('security.authorization_checker'), 'reserva');
         $qbProjeto = $rProjeto->list($this->get('security.authorization_checker'), 'projeto');

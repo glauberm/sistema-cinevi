@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use App\Entity\Categoria;
 
 class CategoriaType extends AbstractType
 {
@@ -29,7 +30,7 @@ class CategoriaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Categoria',
+            'data_class' => Categoria::class,
         ));
     }
 }

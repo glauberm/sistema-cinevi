@@ -1,6 +1,5 @@
 # TO-DO
 
-- Fazer testes para outros emails além do CalendarEvent
 - data_class para ::class
 - Retirar todos os leads das <dl>
 - Orçamento com erro na produção -- erro na vírgula e ponto (ver http://php.net/manual/en/function.localeconv.php)
@@ -20,6 +19,7 @@
 - Checar os vendors js e css: passar para node_modules e gulp
 - Novos testes, Testar tudo
 - Passar tudo para inglês? Resolver nome da reserva pelo menos, talvez dos equipamentos?
+- Fazer testes para outros emails além do CalendarEvent
 
 ## Servidor
 

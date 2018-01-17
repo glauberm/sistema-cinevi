@@ -12,7 +12,7 @@ class FuncaoController extends AbstractCrudController
 {
     protected $canonicalName = 'realizacao_funcao';
     protected $templateDir = 'realizacao/funcao';
-    protected $repositoryName = 'App\Entity\Funcao';
+    protected $repositoryName = Funcao::class;
     protected $className = Funcao::class;
     protected $formClassName = FuncaoType::class;
     protected $paramsKey = 'id';

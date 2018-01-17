@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use App\Security\Admin\AbstractVoter;
 use App\Entity\CalendarEvent;
+use App\Entity\Config;
 
 class CalendarEventVoter extends AbstractVoter
 {
@@ -28,7 +29,7 @@ class CalendarEventVoter extends AbstractVoter
         if ($this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO')) || $user->getProfessor() === true) {
             return true;
         } else {
-            $config = $this->em->getRepository('App\Entity\Config')->getConfig();
+            $config = $this->em->getRepository(Config::class)->getConfig();
 
             if($config && $config->getReservasFechadas() === true) {
                 return false;

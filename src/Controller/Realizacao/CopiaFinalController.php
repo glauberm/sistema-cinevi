@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\CopiaFinal;
+use App\Entity\Config;
 use App\Form\Realizacao\CopiaFinalType;
 
 class CopiaFinalController extends AbstractCrudController
@@ -17,7 +18,7 @@ class CopiaFinalController extends AbstractCrudController
 
     protected $canonicalName = 'realizacao_copia_final';
     protected $templateDir = 'realizacao/copia_final';
-    protected $repositoryName = 'App\Entity\CopiaFinal';
+    protected $repositoryName = CopiaFinal::class;
     protected $className = CopiaFinal::class;
     protected $formClassName = CopiaFinalType::class;
     protected $paramsKey = 'id';
@@ -91,7 +92,7 @@ class CopiaFinalController extends AbstractCrudController
 
     private function changeMessage($message, EntityManager $em)
     {
-        $config = $em->getRepository('App\Entity\Config')->getConfig();
+        $config = $em->getRepository(Config::class)->getConfig();
 
         if($config && $config->getMensagemCopiaFinal()) {
             $message .= ' '.$config->getMensagemCopiaFinal();

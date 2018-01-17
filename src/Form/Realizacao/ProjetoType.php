@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Validation\Realizacao\RealizacaoValidationGroupResolver;
+use App\Entity\Projeto;
+use App\Entity\User;
 
 class ProjetoType extends AbstractType
 {
@@ -61,7 +63,7 @@ class ProjetoType extends AbstractType
             ))
             ->add('direcao', EntityType::class, array(
     		    'label' => 'Direção',
-    		    'class' => 'App\Entity\User',
+    		    'class' => User::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getUserFieldQB('user');
                 },
@@ -75,7 +77,7 @@ class ProjetoType extends AbstractType
     	    ))
             ->add('producao', EntityType::class, array(
                 'label' => 'Produção',
-                'class' => 'App\Entity\User',
+                'class' => User::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getUserFieldQB('user');
                 },
@@ -89,7 +91,7 @@ class ProjetoType extends AbstractType
             ))
             ->add('fotografia', EntityType::class, array(
                 'label' => 'Direção de Fotografia',
-                'class' => 'App\Entity\User',
+                'class' => User::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getUserFieldQB('user');
                 },
@@ -112,7 +114,7 @@ class ProjetoType extends AbstractType
             ))
             ->add('som', EntityType::class, array(
                 'label' => 'Direção de Som',
-                'class' => 'App\Entity\User',
+                'class' => User::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getUserFieldQB('user');
                 },
@@ -135,7 +137,7 @@ class ProjetoType extends AbstractType
             ))
             ->add('arte', EntityType::class, array(
                 'label' => 'Direção de Arte',
-                'class' => 'App\Entity\User',
+                'class' => User::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getUserFieldQB('user');
                 },
@@ -162,7 +164,7 @@ class ProjetoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Projeto',
+            'data_class' => Projeto::class,
             'validation_groups' => $this->groupResolver,
         ));
     }

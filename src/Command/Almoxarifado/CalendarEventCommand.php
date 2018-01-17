@@ -7,6 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Command\Admin\AbstractCommand;
 use App\Mailer\MailerTrait;
+use App\Entity\CalendarEvent;
 
 class CalendarEventCommand extends AbstractCommand
 {
@@ -24,7 +25,7 @@ class CalendarEventCommand extends AbstractCommand
         $hoje->setTime( 0, 0, 0 );
 
         $reservas = $em
-            ->getRepository('App\Entity\CalendarEvent')
+            ->getRepository(CalendarEvent::class)
             ->findAllBetweenDates($hoje, $hoje)
             ->getQuery()->getResult()
         ;

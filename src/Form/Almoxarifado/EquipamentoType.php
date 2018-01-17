@@ -12,6 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Equipamento;
+use App\Entity\Categoria;
+use App\Entity\User;
 
 class EquipamentoType extends AbstractType
 {
@@ -27,7 +30,7 @@ class EquipamentoType extends AbstractType
         $builder
             ->add('categoria', EntityType::class, array(
     		    'label' => 'Categoria',
-    		    'class' => 'App\Entity\Categoria',
+    		    'class' => Categoria::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getCategoriaFieldQB('categoria');
                 },
@@ -86,7 +89,7 @@ class EquipamentoType extends AbstractType
             ))
             ->add('users', EntityType::class, array(
     		    'label' => 'Quais usuários podem reservar este item?',
-    		    'class' => 'App\Entity\User',
+    		    'class' => User::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getUserFieldQB('user');
                 },
@@ -104,7 +107,7 @@ class EquipamentoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Equipamento',
+            'data_class' => Equipamento::class,
         ));
     }
 }

@@ -15,6 +15,10 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\CalendarEvent;
+use App\Entity\User;
+use App\Entity\Projeto;
+use App\Entity\Equipamento;
 
 class CalendarEventType extends AbstractType
 {
@@ -35,7 +39,7 @@ class CalendarEventType extends AbstractType
         $builder
             ->add('user', EntityType::class, array(
                 'label' => 'Responsável',
-                'class' => 'App\Entity\User',
+                'class' => User::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getAuthorizedUserFieldQB($this->authorizationChecker, 'user');
                 },
@@ -47,7 +51,7 @@ class CalendarEventType extends AbstractType
             ))
             ->add('projeto', EntityType::class, array(
                 'label' => 'Projeto',
-                'class' => 'App\Entity\Projeto',
+                'class' => Projeto::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getAuthorizedProjetoFieldQB($this->authorizationChecker, 'user');
                 },
@@ -78,7 +82,7 @@ class CalendarEventType extends AbstractType
         $formModifier = function (FormInterface $form, \DateTime $startDate = null, \DateTime $endDate = null, $id = null) {
 
             $equipamentoQB = $this->em
-                ->getRepository('App\Entity\Equipamento')
+                ->getRepository(Equipamento::class)
                 ->getAuthorizedEquipamentoFieldQB($this->tokenStorageInterface, $this->authorizationChecker, 'equipamento')
             ;
 
@@ -90,7 +94,7 @@ class CalendarEventType extends AbstractType
             $form
                 ->add('equipamentos', EntityType::class, array(
                     'label' => 'Reserváveis Disponíveis',
-                    'class' => 'App\Entity\Equipamento',
+                    'class' => Equipamento::class,
         		    'query_builder' => $equipamentoQB,
         		    'choice_label' => 'getCodigoAndNome',
                     'group_by' => 'getCategoriaByNome',
@@ -129,13 +133,13 @@ class CalendarEventType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\CalendarEvent',
+            'data_class' => CalendarEvent::class,
         ));
     }
 
     private function getReservas($startDate, $endDate, $id)
     {
-        $reservas = $this->em->getRepository('App\Entity\CalendarEvent');
+        $reservas = $this->em->getRepository(CalendarEvent::class);
 
         if(empty($id)) {
             return $reservas->findAllBetweenDates($startDate, $endDate)

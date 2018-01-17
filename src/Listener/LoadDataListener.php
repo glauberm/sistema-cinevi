@@ -29,7 +29,7 @@ class LoadDataListener
         $endDate = $calendarEvent->getEnd();
         $filters = $calendarEvent->getFilters();
 
-        $reservas = $this->em->getRepository('App\Entity\CalendarEvent')->findAll();
+        $reservas = $this->em->getRepository(Event::class)->findAll();
 
         $userAtual = $this->container->get('security.token_storage')->getToken()->getUser();
 
