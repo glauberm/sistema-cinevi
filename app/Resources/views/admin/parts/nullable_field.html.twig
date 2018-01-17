@@ -12,12 +12,8 @@
             <a href="{{ link }}"><dd>{{ dd }}</dd></a>
         {% endif %}
     {% else %}
-        {% if inherit is defined %}
-            <dd class="inherit">{{ dd }}</dd>
-        {% else %}
-            <dd>{{ dd }}</dd>
-        {% endif %}
+        <dd>{{ dd }}</dd>
     {% endif %}
 {% else %}
-    <dd class="text-muted inherit">Não informada(o)</dd>
+    <dd class="text-muted font-style-italic">Não informada(o)</dd>
 {% endif %}

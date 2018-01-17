@@ -22,13 +22,11 @@
 </div>
 {% include 'admin/parts/nullable_field.html.twig' with {
     'dt': 'Acessórios',
-    'item': item.acessorios,
-    'inherit': true
+    'item': item.acessorios
 } %}
 {% include 'admin/parts/nullable_field.html.twig' with {
     'dt': 'Observações',
-    'item': item.obs,
-    'inherit': true
+    'item': item.obs
 } %}
 <div class="row">
     <div class="col-md-6"><dt>Em Manutenção?</dt><dd>{{ item.manutencao ? 'Sim' : 'Não' }}</dd></div>

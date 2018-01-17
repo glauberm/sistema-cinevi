@@ -1,21 +1,4 @@
-/* Put your CSS code in the left column, instead of example, to put or remove unnecessary prefixes. */
-
-.example {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-transition: all .5s;
-    -o-transition: all .5s;
-    transition: all .5s;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    background: -webkit-gradient(linear, left top, left bottom, from(white), to(black));
-    background: -webkit-linear-gradient(top, white, black);
-    background: -o-linear-gradient(top, white, black);
-    background: linear-gradient(to bottom, white, black);
-}html {
+html {
     font-size: 62.5%;
 }
 
@@ -30,7 +13,6 @@ dt {
 }
 
 dd {
-    font-size: 2rem;
     display: inline-block;
 }
 
@@ -115,7 +97,7 @@ a.pular-para-conteudo:active {
 
 /* HEADER */
 .header,
-.header-public {
+.header-home {
     padding: 12px 0 10px;
     border-bottom: 1px solid #bbaa1f;
     background: #ead741;
@@ -167,13 +149,13 @@ a.pular-para-conteudo:active {
 }
 
 .header .menu-topo span,
-.header-public .link-sistema span,
+.header-home .link-sistema span,
 .header-security .link-sistema span {
     margin-left: 2px;
 }
 
 .header .menu-topo svg,
-.header-public .link-sistema svg,
+.header-home .link-sistema svg,
 .header-security .link-sistema svg {
     width: 26px;
     height: 24px;
@@ -186,8 +168,8 @@ a.pular-para-conteudo:active {
 
 .header .menu-topo li a svg g,
 .header .menu-topo li a svg path,
-.header-public .link-sistema svg g,
-.header-public .link-sistema svg path,
+.header-home .link-sistema svg g,
+.header-home .link-sistema svg path,
 .header-security .link-sistema svg g,
 .header-security .link-sistema svg path {
     -webkit-transition: fill 0.3s ease;
@@ -197,8 +179,8 @@ a.pular-para-conteudo:active {
 
 .header .menu-topo .nav > li > a:hover,
 .header .menu-topo .nav > li > a:focus,
-.header-public .link-sistema:hover,
-.header-public .link-sistema:focus,
+.header-home .link-sistema:hover,
+.header-home .link-sistema:focus,
 .header-security .link-sistema:hover,
 .header-security .link-sistema:focus {
     background-color: transparent;
@@ -220,12 +202,12 @@ a.pular-para-conteudo:active {
 .header .menu-topo li a:focus svg path,
 .header .menu-topo li a:active svg g,
 .header .menu-topo li a:active svg path,
-.header-public .link-sistema:hover svg g,
-.header-public .link-sistema:focus svg g,
-.header-public .link-sistema:active svg g,
-.header-public .link-sistema:hover svg path,
-.header-public .link-sistema:focus svg path,
-.header-public .link-sistema:active svg path,
+.header-home .link-sistema:hover svg g,
+.header-home .link-sistema:focus svg g,
+.header-home .link-sistema:active svg g,
+.header-home .link-sistema:hover svg path,
+.header-home .link-sistema:focus svg path,
+.header-home .link-sistema:active svg path,
 .header-security .link-sistema:hover svg g,
 .header-security .link-sistema:focus svg g,
 .header-security .link-sistema:active svg g,
@@ -403,11 +385,11 @@ a.pular-para-conteudo:active {
 }
 
 /* PUBLIC */
-.header-public {
+.header-home {
     padding: 0;
 }
 
-.header-public .link-sistema,
+.header-home .link-sistema,
 .header-security .link-sistema {
     margin: -80px 20px 20px;
     padding: 10px 15px;
@@ -617,7 +599,7 @@ a.pular-para-conteudo:active {
 }
 
 @media (max-width: 540px) {
-    .header-public .link-sistema,
+    .header-home .link-sistema,
     .header-security .link-sistema {
         margin: -20px 0 10px 20px;
         width: 100%;

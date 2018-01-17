@@ -1,6 +1,5 @@
 # TO-DO
 
-- data_class para ::class
 - Retirar todos os leads das <dl>
 - Orçamento com erro na produção -- erro na vírgula e ponto (ver http://php.net/manual/en/function.localeconv.php)
 - Erro do Rodrigo Hubert Leme
