@@ -64,12 +64,16 @@ abstract class AbstractReadController extends AbstractCommonController
 
         $pagination = $paginator->paginate(
             $qb,
-            $request->query->getInt('page', 1),
+            $request->query->getInt('pagina'.$var, 1),
             $numResults,
             array(
-                'pageParameterName' => 'page'.$var,
-                'sortFieldParameterName' => 'sort'.$var,
-                'sortDirectionParameterName' => 'direction'.$var
+                'pageParameterName' => 'pagina'.$var,
+                'sortFieldParameterName' => 'classificacao'.$var,
+                'sortDirectionParameterName' => 'direcao'.$var,
+                'distict' => true,
+                'filterFieldParameterName' => 'filtroCampo'.$var,
+                'filterValueParameterName' => 'filtroValor'.$var,
+                'alias' => $var
             )
         );
 

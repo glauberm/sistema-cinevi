@@ -1,6 +1,5 @@
 # TO-DO
 
-- Paginação múltipla
 - Arrumar a margem dos itens fora de .rows
 - Histórico de Edições ou emails de edição com autor da edição
 - Arrumar CSV
@@ -8,6 +7,9 @@
 - Confirmação em deletar
 - #conteudo e outras anchors sem link
 - Atualizar os Commands?
+- Mudar camelCase para snake_case nos casos que precisam
+- Checar autowiring
+- Melhor jeito de numero de resultados
 
 ## Depois
 

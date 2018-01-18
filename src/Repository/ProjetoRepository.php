@@ -20,7 +20,7 @@ class ProjetoRepository extends AbstractCrudRepository
     public function listWhereUserIs($qb, $id, $builderName = 'item')
     {
         return $qb
-            ->where($builderName.'_realizacao.user = :id')
+            ->where($builderName.'_user = :id')
             ->setParameter('id', $id)
         ;
     }
