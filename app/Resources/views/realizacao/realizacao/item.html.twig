@@ -1,6 +1,13 @@
-<dt>Título</dt><dd>{{ item.titulo }}</dd>
-<dt>Sinopse</dt><dd>{{ item.sinopse|nl2br }}</dd>
-
+<div class="row">
+    <div class="col-xs-12">
+        <dt>Título</dt><dd>{{ item.titulo }}</dd>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <dt>Sinopse</dt><dd>{{ item.sinopse|nl2br }}</dd>
+    </div>
+</div>
 <div class="row">
     <div class="col-sm-4">
         <dt>Usuário</dt>
@@ -29,13 +36,21 @@
         } %}
     </div>
 </div>
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Detalhes da Captação',
-    'item': item.detalhesCaptacao,
-    'nl2br' : true
-} %}
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Locação(ões)',
-    'item': item.locacoes,
-    'nl2br' : true
-} %}
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Detalhes da Captação',
+            'item': item.detalhesCaptacao,
+            'nl2br' : true
+        } %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Locação(ões)',
+            'item': item.locacoes,
+            'nl2br' : true
+        } %}
+    </div>
+</div>

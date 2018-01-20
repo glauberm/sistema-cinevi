@@ -5,7 +5,11 @@
 {% set routeEdit = path('almoxarifado_reserva_edit', { 'params': item.id }) %}
 
 {% block dtdd %}
-    <dt>Código</dt><dd>{{ item.title }}</dd>
+    <div class="row">
+        <div class="col-xs-12">
+            <dt>Código</dt><dd>{{ item.title }}</dd>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-sm-6"><dt>Usuário</dt><dd><a href="{{ path('user_user_show', { 'params' : item.user.id}) }}">{{ item.user.username }}</a></dd></div>
@@ -22,9 +26,10 @@
         <div class="col-sm-6"><dt>Criado em</dt><dd>{{ item.createdIn|date('d/m/Y H:m:s') }}</dd></div>
         <div class="col-sm-6"><dt>Última atualização em</dt><dd>{{ item.updatedIn|date('d/m/Y H:m:s') }}</dd></div>
     </div>
+{% endblock %}
 
-
-    <h2 id="reservaveis" class="h3"><a href="#reservaveis">Reserváveis</a></h2>
+{% block extras %}
+    <h2 id="reservaveis" class="text-primary">Reserváveis</h2>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">

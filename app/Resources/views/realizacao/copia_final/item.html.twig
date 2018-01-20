@@ -122,11 +122,15 @@
         } %}
     </div>
 </div>
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Equipamentos de Captação de Som',
-    'item': item.captacaoSom,
-    'nl2br' : true
-} %}
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Equipamentos de Captação de Som',
+            'item': item.captacaoSom,
+            'nl2br' : true
+        } %}
+    </div>
+</div>
 <div class="row">
     <div class="col-sm-6">
         {% include 'admin/parts/nullable_field.html.twig' with {
@@ -142,15 +146,23 @@
         } %}
     </div>
 </div>
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Apoiadores',
-    'item': item.apoiadores,
-    'nl2br' : true
-} %}
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Foi feito DCP?',
-    'item': item.dcp
-} %}
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Apoiadores',
+            'item': item.apoiadores,
+            'nl2br' : true
+        } %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Foi feito DCP?',
+            'item': item.dcp
+        } %}
+    </div>
+</div>
 <div class="row">
     <div class="col-sm-6"><dt>Criado em</dt><dd>{{ item.createdIn|date('d/m/Y H:m:s') }}</dd></div>
     <div class="col-sm-6"><dt>Última atualização em</dt><dd>{{ item.updatedIn|date('d/m/Y H:m:s') }}</dd></div>

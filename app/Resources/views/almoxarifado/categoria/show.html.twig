@@ -6,8 +6,10 @@
 
 {% block dtdd %}
     {% include 'almoxarifado/categoria/item.html.twig' %}
+{% endblock %}
 
-    <h2 id="reservaveis" class="h3"><a href="#reservaveis">Reserváveis</a></h2>
+{% block extras %}
+    <h2 id="reservaveis" class="text-primary">Reserváveis</h2>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">

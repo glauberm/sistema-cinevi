@@ -3,8 +3,12 @@
     <div class="col-sm-9 col-md-10"><dt>Nome</dt><dd>{{ item.nome }}</dd></div>
 </div>
 
-<dt>Categoria</dt>
-<dd><a href="{{ path('almoxarifado_categoria_show', { 'params': item.categoria.id }) }}">{{ item.categoria.nome }}</a></dd>
+<div class="row">
+    <div class="col-xs-12">
+        <dt>Categoria</dt>
+        <dd><a href="{{ path('almoxarifado_categoria_show', { 'params': item.categoria.id }) }}">{{ item.categoria.nome }}</a></dd>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-sm-6">

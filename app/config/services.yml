@@ -33,3 +33,7 @@ services:
     # App\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+    app.service.listener:
+        class: App\Listener\LoadDataListener
+        tags:
+            - { name: 'kernel.event_listener', event: 'fullcalendar.set_data', method: loadData }

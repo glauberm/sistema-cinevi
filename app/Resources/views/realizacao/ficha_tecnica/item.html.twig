@@ -1,24 +1,43 @@
-{% for equipe in item.equipes %}
-    {% include 'realizacao/equipe/item.html.twig' with {item: equipe} %}
-{% endfor %}
-
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Elenco',
-    'item': item.elenco,
-    'nl2br' : true
-} %}
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Outras Informações',
-    'item': item.outrasInformacoes,
-    'nl2br' : true
-} %}
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Participações em Festivais e Mostras',
-    'item': item.festivais,
-    'nl2br' : true
-} %}
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Prêmios',
-    'item': item.premios,
-    'nl2br' : true
-} %}
+<div class="row">
+    <div class="col-xs-12">
+        {% for equipe in item.equipes %}
+            {% include 'realizacao/equipe/item.html.twig' with {item: equipe} %}
+        {% endfor %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Elenco',
+            'item': item.elenco,
+            'nl2br' : true
+        } %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Outras Informações',
+            'item': item.outrasInformacoes,
+            'nl2br' : true
+        } %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Participações em Festivais e Mostras',
+            'item': item.festivais,
+            'nl2br' : true
+        } %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Prêmios',
+            'item': item.premios,
+            'nl2br' : true
+        } %}
+    </div>
+</div>
