@@ -4,9 +4,6 @@
 - Arrumar CSV
 - SVGs not-inline para a uff e a logo
 - Confirmação em deletar
-- Checar autowiring
-- Melhor jeito de numero de resultados
-- Nº de resultados para nº de linhas
 - Remover service.yml
 
 ## Depois
@@ -20,6 +17,6 @@
 ## Servidor
 
 - Atualizar pacotes
-- Ver questão da timezone
+- Checar questão da timezone
+- Checar questão do number_format
 - Atualizar telefones e modalidades
-- Verificar se as tooltips pararam de se esconder atrás do calendário
