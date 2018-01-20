@@ -20,8 +20,11 @@
                 <small>
                     <label class="text-muted control-label" for="{{ name }}">Nº de linhas</label>
                 </small>
-                <input id="input_{{ name }}" name="{{ name }}" placeholder="10" class="form-control" type="number" {% if app.request.query.get(name) is defined %} value="{{ app.request.query.get(name) }}" {% endif %}>
+                <input id="input_{{ name }}" name="{{ name }}" placeholder="10" class="form-control" type="number" {% if app.request.query.get(name) is defined %} value="{{ app.request.query.get(name) }}" {% endif %}/>
             </div>
+            {% for key,value in app.request.query.all %}
+                <input id="input_{{ key }}" type="hidden" name="{{ key }}" value="{{ value }}"/>
+            {% endfor %}
             <button type="submit" class="btn btn-info btn-sm">OK</button>
         </form>
     </div>

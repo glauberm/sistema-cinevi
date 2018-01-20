@@ -7,6 +7,7 @@
 - Checar autowiring
 - Melhor jeito de numero de resultados
 - Nº de resultados para nº de linhas
+- Remover service.yml
 
 ## Depois
 

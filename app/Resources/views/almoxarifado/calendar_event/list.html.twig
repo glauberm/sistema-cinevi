@@ -49,10 +49,6 @@
                 </tbody>
             </table>
         </div>
-
-        {% block blockPagination %}
-            {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas' } %}
-        {% endblock %}
     </noscript>
 
     <div class="clearfix">
@@ -77,6 +73,9 @@
                         </small>
                         <input id="input_num_linhas" name="num_linhas" placeholder="10" class="form-control" type="number" {% if app.request.query.get('num_linhas') is defined %} value="{{ app.request.query.get('num_linhas') }}" {% endif %}>
                     </div>
+                    {% for key,value in app.request.query.all %}
+                        <input id="input_{{ key }}" type="hidden" name="{{ key }}" value="{{ value }}"/>
+                    {% endfor %}
                     <button type="submit" class="btn btn-info btn-sm">OK</button>
                 </form>
             </div>
@@ -99,7 +98,7 @@
                 defaultView: "month",
                 locale: "pt-br",
                 lazyFetching: true,
-                eventLimit: false, // allow "more" link when too many events
+                eventLimit: false,
                 eventSources: [
                     {
                         url: "{{ path('ancarebeca_full_calendar_load') }}",

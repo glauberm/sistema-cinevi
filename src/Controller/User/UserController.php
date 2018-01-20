@@ -39,11 +39,11 @@ class UserController extends AbstractCrudController
 
         $qbReserva = $rReserva->list($ac, 'reserva');
         $qbProjeto = $rProjeto->list($ac, 'projeto');
-        $qbCopiaFinal = $rCopiaFinal->list($ac, 'copiaFinal');
+        $qbCopiaFinal = $rCopiaFinal->list($ac, 'copia_final');
 
         $qbReserva = $rReserva->listWhereUserIs($qbReserva, $obj->getId(), 'reserva');
         $qbProjeto = $rProjeto->listWhereUserIs($qbProjeto, $obj->getId(), 'projeto');
-        $qbCopiaFinal = $rCopiaFinal->listWhereUserIs($qbCopiaFinal, $obj->getId(), 'copiaFinal');
+        $qbCopiaFinal = $rCopiaFinal->listWhereUserIs($qbCopiaFinal, $obj->getId(), 'copia_final');
 
         $paginationReserva = $this->createPagination($request, $paginator, $qbReserva, '_reserva');
         $paginationProjeto = $this->createPagination($request, $paginator, $qbProjeto, '_projeto');

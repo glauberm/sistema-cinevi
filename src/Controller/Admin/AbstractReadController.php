@@ -56,6 +56,8 @@ abstract class AbstractReadController extends AbstractCommonController
 
     protected function createPagination(Request $request, PaginatorInterface $paginator, $qb, $var = null)
     {
+        // exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($request->query->all()),"</pre>"));
+
         if($request->query->get('num_linhas'.$var)) {
             $numResults = $request->query->get('num_linhas'.$var);
         } else {
