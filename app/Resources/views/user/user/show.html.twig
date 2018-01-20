@@ -28,7 +28,7 @@
         </table>
     </div>
 
-    {% include 'admin/pagination/pagination.html.twig' with { name: 'numResultadosReserva', pagination: paginationReserva } %}
+    {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas_reserva', pagination: paginationReserva } %}
 
 
     <h2 id="projetos" class="text-primary">Projetos</h2>
@@ -50,7 +50,7 @@
         </table>
     </div>
 
-    {% include 'admin/pagination/pagination.html.twig' with { name: 'numResultadosProjeto', pagination: paginationProjeto } %}
+    {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas_projeto', pagination: paginationProjeto } %}
 
 
     <h2 id="copiasFinais" class="text-primary">Cópias Finais</h2>
@@ -59,7 +59,7 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    {% include 'realizacao/copia_final/list_thead.html.twig' with { pagination: paginationCopiaFinal, builderName: 'copiaFinal' } %}
+                    {% include 'realizacao/copia_final/list_thead.html.twig' with { pagination: paginationCopiaFinal, builderName: 'copia_final' } %}
                 </tr>
             </thead>
             <tbody>
@@ -72,6 +72,6 @@
         </table>
     </div>
 
-    {% include 'admin/pagination/pagination.html.twig' with { name: 'numResultadosCopiaFinal', pagination: paginationCopiaFinal } %}
+    {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas_copia_final', pagination: paginationCopiaFinal } %}
 
 {% endblock %}

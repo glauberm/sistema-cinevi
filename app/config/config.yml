@@ -127,8 +127,8 @@ knp_paginator:
         sort_field_name: classificacao  # sort field query parameter name
         sort_direction_name: direcao    # sort direction query parameter name
         distinct: true                  # ensure distinct results, useful when ORM queries are using GROUP BY statements
-        filter_field_name: filtroCampo  # filter field query parameter name
-        filter_value_name: filtroValor  # filter value query paameter name
+        filter_field_name: filtro_campo  # filter field query parameter name
+        filter_value_name: filtro_valor  # filter value query paameter name
     template:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'     # sliding pagination controls template
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template

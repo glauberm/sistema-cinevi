@@ -56,8 +56,8 @@ abstract class AbstractReadController extends AbstractCommonController
 
     protected function createPagination(Request $request, PaginatorInterface $paginator, $qb, $var = null)
     {
-        if($request->query->get('numResultados'.$var)) {
-            $numResults = $request->query->get('numResultados'.$var);
+        if($request->query->get('num_linhas'.$var)) {
+            $numResults = $request->query->get('num_linhas'.$var);
         } else {
             $numResults = 10;
         }
@@ -71,8 +71,8 @@ abstract class AbstractReadController extends AbstractCommonController
                 'sortFieldParameterName' => 'classificacao'.$var,
                 'sortDirectionParameterName' => 'direcao'.$var,
                 'distict' => true,
-                'filterFieldParameterName' => 'filtroCampo'.$var,
-                'filterValueParameterName' => 'filtroValor'.$var,
+                'filterFieldParameterName' => 'filtro_campo'.$var,
+                'filterValueParameterName' => 'filtro_valor'.$var,
                 'alias' => $var
             )
         );

@@ -18,7 +18,7 @@
         <form name="form_{{ name }}" method="get" novalidate="novalidate" class="navbar-form">
             <div class="form-group form-group-sm">
                 <small>
-                    <label class="text-muted control-label" for="{{ name }}">Nº de resultados</label>
+                    <label class="text-muted control-label" for="{{ name }}">Nº de linhas</label>
                 </small>
                 <input id="input_{{ name }}" name="{{ name }}" placeholder="10" class="form-control" type="number" {% if app.request.query.get(name) is defined %} value="{{ app.request.query.get(name) }}" {% endif %}>
             </div>

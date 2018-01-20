@@ -4,9 +4,6 @@
 - Arrumar CSV
 - SVGs not-inline para a uff e a logo
 - Confirmação em deletar
-- #conteudo e outras anchors sem link
-- Atualizar os Commands?
-- Mudar camelCase para snake_case nos casos que precisam
 - Checar autowiring
 - Melhor jeito de numero de resultados
 - Nº de resultados para nº de linhas

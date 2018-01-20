@@ -51,7 +51,7 @@
         </div>
 
         {% block blockPagination %}
-            {% include 'admin/pagination/pagination.html.twig' with { name: 'numResultados' } %}
+            {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas' } %}
         {% endblock %}
     </noscript>
 
@@ -70,12 +70,12 @@
         </div>
         <noscript>
             <div class="pull-right text-right">
-                <form name="form_numResultados" method="get" novalidate="novalidate" class="navbar-form">
+                <form name="form_num_linhas" method="get" novalidate="novalidate" class="navbar-form">
                     <div class="form-group form-group-sm">
                         <small>
-                            <label class="text-muted control-label" for="numResultados">Nº de resultados</label>
+                            <label class="text-muted control-label" for="num_linhas">Nº de linhas</label>
                         </small>
-                        <input id="input_numResultados" name="numResultados" placeholder="10" class="form-control" type="number" {% if app.request.query.get('numResultados') is defined %} value="{{ app.request.query.get('numResultados') }}" {% endif %}>
+                        <input id="input_num_linhas" name="num_linhas" placeholder="10" class="form-control" type="number" {% if app.request.query.get('num_linhas') is defined %} value="{{ app.request.query.get('num_linhas') }}" {% endif %}>
                     </div>
                     <button type="submit" class="btn btn-info btn-sm">OK</button>
                 </form>
