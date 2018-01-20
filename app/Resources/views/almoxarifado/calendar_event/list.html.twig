@@ -87,16 +87,17 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale/pt-br.js') }}"></script>
     <script>
         $(function () {
             $("#calendar-holder").fullCalendar({
                 header: {
                     left: "prev, next",
                     center: "title",
-                    right: "month, basicDay"
+                    right: "month, basicWeek, basicDay"
                 },
                 defaultView: "month",
-                lang: "pt-br",
+                locale: "pt-br",
                 lazyFetching: true,
                 eventLimit: false, // allow "more" link when too many events
                 eventSources: [
@@ -115,7 +116,11 @@
                     element.attr("data-toggle", "tooltip")
                 },
                 eventAfterAllRender: function() {
-                    $(function () { $('[data-toggle="tooltip"]').tooltip() })
+                    $(function () {
+                        $('[data-toggle="tooltip"]').tooltip({
+                            container: 'body'
+                        })
+                    })
                 },
                 loading: function( isLoading, view ) {
                     if(isLoading) {
@@ -127,5 +132,4 @@
             });
         });
     </script>
-    <script src="{{ asset('vendor/fullcalendar/js/lang/pt-br.js') }}"></script>
 {% endblock %}

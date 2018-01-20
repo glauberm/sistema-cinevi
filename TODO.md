@@ -1,9 +1,8 @@
 # TO-DO
 
-- Arrumar a margem dos itens fora de .rows
 - Histórico de Edições ou emails de edição com autor da edição
 - Arrumar CSV
-- Sistema de notificações seria demais -- especialmente para avisar das mudanças e mandar as pessoas editarem coisas
+- SVGs not-inline para a uff e a logo
 - Confirmação em deletar
 - #conteudo e outras anchors sem link
 - Atualizar os Commands?
@@ -18,7 +17,7 @@
 - Novos testes, Testar tudo
 - Passar tudo para inglês? Resolver nome da reserva pelo menos, talvez dos equipamentos?
 - Fazer testes para outros emails além do CalendarEvent
-- SVGs not-inline para a uff e a logo
+- Sistema de notificações seria demais -- especialmente para avisar das mudanças e mandar as pessoas editarem coisas
 
 ## Servidor
 

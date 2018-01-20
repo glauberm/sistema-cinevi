@@ -5,7 +5,6 @@ namespace App\Listener;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Psr\Log\LoggerInterface;
 use AncaRebeca\FullCalendarBundle\Event\CalendarEvent;
 use App\Entity\CalendarEvent as Event;
 
@@ -15,12 +14,11 @@ class LoadDataListener
     private $token;
     private $router;
 
-    public function __construct(EntityManagerInterface $em, TokenStorageInterface $token, RouterInterface $router, LoggerInterface $logger)
+    public function __construct(EntityManagerInterface $em, TokenStorageInterface $token, RouterInterface $router)
     {
         $this->em = $em;
         $this->token = $token;
         $this->router = $router;
-        $this->logger = $logger;
     }
 
     /**
@@ -41,13 +39,7 @@ class LoadDataListener
         {
             $event = new Event();
 
-            $equipamentos = array();
-
-            foreach( $reserva->getEquipamentos() as $equipamento ) {
-                $equipamentos[] = '['.$equipamento->getCodigo().'] '.$equipamento->getNome();
-            }
-
-            $event->setTitle( $reserva->getTitle()." (".$reserva->getUser()->getUsername()."): ".implode(", ", $equipamentos)." - De ". $reserva->getStartDate()->format("d/m/Y") . " a " . $reserva->getEndDate()->format("d/m/Y"));
+            $event->setTitle( $reserva->getTitle()." (".$reserva->getUser()->getUsername().") - De ". $reserva->getStartDate()->format("d/m/Y") . " a " . $reserva->getEndDate()->format("d/m/Y"));
             $event->setStartDate($reserva->getStartDate());
             $event->setEndDate($reserva->getEndDate()->add(new \DateInterval('P1D')));
             $event->setUrl($this->router->generate('almoxarifado_reserva_show', array(
