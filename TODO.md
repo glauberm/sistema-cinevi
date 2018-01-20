@@ -10,6 +10,7 @@
 - Mudar camelCase para snake_case nos casos que precisam
 - Checar autowiring
 - Melhor jeito de numero de resultados
+- Nº de resultados para nº de linhas
 
 ## Depois
 
