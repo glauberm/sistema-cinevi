@@ -41,23 +41,15 @@ abstract class AbstractReadController extends AbstractCommonController
     {
         $repository = $em->getRepository($this->repositoryName);
         $qb = $repository->list($ac);
-        $itens = $repository->getCsv($qb);
-        $keys = [];
+        $arrayResult = $repository->getArrayResult($qb);
 
-        foreach ($itens as $item) {
-            $keys[] = array_keys($item);
-            break;
-        }
-
-        $arrayResult = array_merge($keys, $itens);
+        exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($arrayResult),"</pre>"));
 
         return new CsvResponse($this->canonicalName, $arrayResult);
     }
 
     protected function createPagination(Request $request, PaginatorInterface $paginator, $qb, $var = null)
     {
-        // exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($request->query->all()),"</pre>"));
-
         if($request->query->get('num_linhas'.$var)) {
             $numResults = $request->query->get('num_linhas'.$var);
         } else {

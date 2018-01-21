@@ -43,13 +43,11 @@ class EquipamentoRepository extends AbstractCrudRepository
         $qb = $this->getEquipamentoFieldQB($builderName);
 
         foreach ($qb->getQuery()->getResult() as $result) {
-            //if (!$result->getUsers()->isEmpty()) {
-                foreach ($result->getUsers() as $user) {
-                    if ($user !== $tokenStorageInterface->getToken()->getUser() || !$authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
-                        $qb->andWhere($builderName.'.id != '.$result->getId());
-                    }
+            foreach ($result->getUsers() as $user) {
+                if ($user !== $tokenStorageInterface->getToken()->getUser() || !$authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
+                    $qb->andWhere($builderName.'.id != '.$result->getId());
                 }
-            //}
+            }
         }
 
         return $qb;

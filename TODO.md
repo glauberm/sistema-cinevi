@@ -4,7 +4,8 @@
 - Arrumar CSV
 - SVGs not-inline para a uff e a logo
 - Confirmação em deletar
-- Remover service.yml
+- Link para o "Veja seu perfil completo"
+- mouseOn no Login no mobile
 
 ## Depois
 
@@ -20,3 +21,4 @@
 - Checar questão da timezone
 - Checar questão do number_format
 - Atualizar telefones e modalidades
+- HTTPS
