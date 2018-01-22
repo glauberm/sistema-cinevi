@@ -27,8 +27,14 @@ class CsvResponse extends Response
                 }
                 else if(is_array($lineValue)) {
                     $row[$lineKey] = implode(', ',$lineValue);
+                } else if(is_bool($lineValue)) {
+                    if($lineValue === true) {
+                        $row[$lineKey] = 'Sim';
+                    } else {
+                        $row[$lineKey] = 'Não';
+                    }
                 } else {
-                    $row[$lineKey] = (string)$lineValue;
+                    $row[$lineKey] = trim(strval($lineValue));
                 }
             }
 

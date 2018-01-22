@@ -2,8 +2,6 @@
 
 namespace App\Repository;
 
-use App\Repository\AbstractCrudRepository;
-
 class EquipamentoRepository extends AbstractCrudRepository
 {
     public function list($authorizationChecker, $builderName = 'item')

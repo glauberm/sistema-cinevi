@@ -2,8 +2,6 @@
 
 namespace App\Repository;
 
-use App\Repository\AbstractCrudRepository;
-
 class UserRepository extends AbstractCrudRepository
 {
     public function getUserFieldQB($builderName = 'item')
@@ -31,5 +29,32 @@ class UserRepository extends AbstractCrudRepository
         return $this->getUserFieldQB($builderName)
             ->where($builderName.'.professor = 1')
         ;
+    }
+
+    protected function filterValues($values)
+    {
+        unset($values['usernameCanonical']);
+        unset($values['emailCanonical']);
+        unset($values['salt']);
+        unset($values['password']);
+        unset($values['lastLogin']);
+        unset($values['confirmationToken']);
+        unset($values['passwordRequestedAt']);
+        unset($values['roles']);
+
+        return $values;
+    }
+
+    protected function getReplaceArrayKeys()
+    {
+        return array(
+            'username' => 'Nome',
+            'email' => 'Email',
+            'enabled' => 'Ativo?',
+            'telefone' => 'Telefone',
+            'matricula' => 'Matrícula',
+            'professor' => 'Professor?',
+            'breveCurriculo' => 'Breve Currículo',
+        );
     }
 }

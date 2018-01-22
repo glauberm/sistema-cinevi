@@ -2,12 +2,8 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
-
-abstract class AbstractCrudRepository extends EntityRepository
+abstract class AbstractCrudRepository extends AbstractEntityRepository
 {
-    protected $replaceArrayKeys = array();
-
     public function list($authorizationChecker, $builderName = 'item')
     {
         $qb = $this->createQueryBuilder($builderName);
@@ -21,56 +17,11 @@ abstract class AbstractCrudRepository extends EntityRepository
         return $qb->orderBy($builderName.'.id', 'DESC');
     }
 
-    public function getArrayResult($qb)
+    public function getArrayResultWithKeys($qb)
     {
-        $items = $qb
-            ->getQuery()
-            ->setHint(\Doctrine\ORM\Query::HINT_INCLUDE_META_COLUMNS, true)
-            ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)
-        ;
-
-        $items = $this->filterArrayResult($items);
+        $items = $this->getArrayResult($qb);
         $keys = $this->extractKeys($items);
-        $items = array_merge($keys, $items);
 
-        return $items;
-    }
-
-    protected function sanitizeValues($values)
-    {
-        return $values;
-    }
-
-    private function extractKeys($items)
-    {
-        $keys = array();
-        foreach ($items as $item) {
-            $keys[0] = array_keys($item);
-            $keys[0] = $this->sanitizeKeys($keys[0]);
-            break;
-        }
-
-        return $keys;
-    }
-
-    private function filterArrayResult($items)
-    {
-        foreach ($items as $key => $values) {
-            unset($values['id']);
-            $values = $this->sanitizeValues($values);
-            $items[$key] = $values;
-        }
-
-        return $items;
-    }
-
-    private function sanitizeKeys(array $keys)
-    {
-        foreach ($this->replaceArrayKeys as $searchValue => $replaceValue) {
-            $key = array_search($searchValue, $keys);
-            $keys[$key] = $replaceValue;
-        }
-
-        return $keys;
+        return array_merge($keys, $items);
     }
 }

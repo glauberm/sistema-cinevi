@@ -2,8 +2,6 @@
 
 namespace App\Repository;
 
-use App\Repository\AbstractCrudRepository;
-
 class FuncaoRepository extends AbstractCrudRepository
 {
     public function getFuncaoFieldQB($builderName = 'item')

@@ -2,20 +2,11 @@
 
 namespace App\Repository;
 
-use App\Repository\AbstractCrudRepository;
 use App\Entity\User;
 use App\Entity\Projeto;
 
 class CalendarEventRepository extends AbstractCrudRepository
 {
-    protected $replaceArrayKeys = array(
-        'title' => 'Código',
-        'startDate' => 'Data de Início',
-        'endDate' => 'Data de Fim',
-        'user_id' => 'Usuário',
-        'projeto_id' => 'Projeto',
-    );
-
     public function findAllBetweenDates($startDate, $endDate, $builderName = 'item')
     {
         $qb = $this->createQueryBuilder($builderName);
@@ -69,21 +60,30 @@ class CalendarEventRepository extends AbstractCrudRepository
         ;
     }
 
-    protected function sanitizeValues($values)
+    protected function filterValues($values)
     {
-        $userId = $values['user_id'];
         $user = $this->getEntityManager()
-            ->getRepository(User::class)->find($userId)
+            ->getRepository(User::class)->find($values['user_id'])
         ;
         $values['user_id'] = $user->getUsername();
 
-        $projetoId = $values['projeto_id'];
         $projeto = $this->getEntityManager()
-            ->getRepository(Projeto::class)->find($projetoId)
+            ->getRepository(Projeto::class)->find($values['projeto_id'])
         ;
         $values['projeto_id'] = $projeto->getRealizacao()->getTitulo();
 
 
         return $values;
+    }
+
+    protected function getReplaceArrayKeys()
+    {
+        return array(
+            'title' => 'Código',
+            'startDate' => 'Data de Início',
+            'endDate' => 'Data de Fim',
+            'user_id' => 'Usuário',
+            'projeto_id' => 'Projeto',
+        );
     }
 }

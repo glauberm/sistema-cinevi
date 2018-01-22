@@ -2,10 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    # - { resource: ../Resources/config/almoxarifado/services.yml }
-    # - { resource: ../Resources/config/config/services.yml }
-    # - { resource: ../Resources/config/realizacao/services.yml }
-    # - { resource: ../Resources/config/user/services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -21,7 +17,6 @@ framework:
         strict_requirements: ~
     form: ~
     csrf_protection: ~
-    # validation: { enabled: true }
     validation:
         enabled: true
         enable_annotations: false
@@ -31,7 +26,7 @@ framework:
             - '%kernel.root_dir%/Resources/config/config/validation.yml'
             - '%kernel.root_dir%/Resources/config/realizacao/validation.yml'
             - '%kernel.root_dir%/Resources/config/user/validation.yml'
-    #serializer: { enable_annotations: true }
+    # serializer: { enabled: true }
     default_locale: '%locale%'
     trusted_hosts: ~
     session:
