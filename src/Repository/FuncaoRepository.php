@@ -10,4 +10,12 @@ class FuncaoRepository extends AbstractCrudRepository
             ->orderBy($builderName.'.nome', 'ASC')
         ;
     }
+
+    protected function getReplaceArrayKeys()
+    {
+        return array(
+            'nome' => 'Nome',
+            'descricao' => 'Descrição',
+        );
+    }
 }

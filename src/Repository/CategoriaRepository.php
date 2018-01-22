@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Equipamento;
+
 class CategoriaRepository extends AbstractCrudRepository
 {
     public function getCategoriaFieldQB($builderName = 'item')
@@ -11,11 +13,24 @@ class CategoriaRepository extends AbstractCrudRepository
         ;
     }
 
+    protected function filterValues($values)
+    {
+        $equipamentos = $this->find($values['id'])->getEquipamentos();
+        $equipamentosLabel = array();
+        foreach($equipamentos as $equipamento) {
+            $equipamentosLabel[] = $equipamento->getCodigoAndNome();
+        }
+        $values['equipamentos'] = implode(PHP_EOL, $equipamentosLabel);
+
+        return $values;
+    }
+
     protected function getReplaceArrayKeys()
     {
         return array(
             'nome' => 'Nome',
             'descricao' => 'Descrição',
+            'equipamentos' => 'Equipamentos',
         );
     }
 }

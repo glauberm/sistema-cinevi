@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\Projeto;
+use App\Entity\Equipamento;
 
 class CalendarEventRepository extends AbstractCrudRepository
 {
@@ -72,6 +73,17 @@ class CalendarEventRepository extends AbstractCrudRepository
         ;
         $values['projeto_id'] = $projeto->getRealizacao()->getTitulo();
 
+        $equipamentosArray = array();
+        $equipamentos = $this->find($values['id'])->getEquipamentos();
+        foreach($equipamentos as $equipamento) {
+            $equipamento = $this->getArrayResultById($equipamento->getId(), Equipamento::class, 'equipamento');
+            $equipamentosArray[] = $equipamento[0];
+        }
+
+        $values['equipamentos'] = "";
+        foreach ($equipamentosArray as $equipamento) {
+            $values['equipamentos'] .= '['.$equipamento['codigo'].'] '.$equipamento['nome']. PHP_EOL;
+        }
 
         return $values;
     }
@@ -84,6 +96,7 @@ class CalendarEventRepository extends AbstractCrudRepository
             'endDate' => 'Data de Fim',
             'user_id' => 'Usuário',
             'projeto_id' => 'Projeto',
+            'equipamentos' => 'Equipamentos',
         );
     }
 }

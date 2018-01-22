@@ -43,8 +43,6 @@ abstract class AbstractReadController extends AbstractCommonController
         $qb = $repository->list($ac);
         $arrayResult = $repository->getArrayResultWithKeys($qb);
 
-        // exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($arrayResult),"</pre>"));
-
         return new CsvResponse($this->canonicalName, $arrayResult);
     }
 

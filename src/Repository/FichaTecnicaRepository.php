@@ -9,7 +9,6 @@ class FichaTecnicaRepository extends AbstractEntityRepository
     protected function filterValues($values)
     {
         $equipesArray = array();
-
         $equipes = $this->find($values['id'])->getEquipes();
         foreach($equipes as $equipe) {
             $equipe = $this->getArrayResultById($equipe->getId(), Equipe::class, 'equipe');

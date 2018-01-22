@@ -2,6 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Categoria;
+use App\Entity\CalendarEvent;
+
 class EquipamentoRepository extends AbstractCrudRepository
 {
     public function list($authorizationChecker, $builderName = 'item')
@@ -49,5 +52,30 @@ class EquipamentoRepository extends AbstractCrudRepository
         }
 
         return $qb;
+    }
+
+    protected function filterValues($values)
+    {
+        $categoria = $this->getEntityManager()
+            ->getRepository(Categoria::class)->find($values['categoria_id'])
+        ;
+        $values['categoria_id'] = $categoria->getNome();
+
+        return $values;
+    }
+
+    protected function getReplaceArrayKeys()
+    {
+        return array(
+            'codigo' => 'Cód.',
+            'nome' => 'Nome',
+            'patrimonio' => 'Nº de Patrimônio',
+            'nSerie' => 'Nº de Série',
+            'acessorios' => 'Acessórios',
+            'obs' => 'Observações',
+            'manutencao' => 'Em Manutenção?',
+            'atrasado' => 'Devolução Atrasada?',
+            'categoria_id' => 'Categoria',
+        );
     }
 }

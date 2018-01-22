@@ -1,10 +1,8 @@
 # TO-DO
 
-- Corrigir herança no getArrayResult do AbstractCrudRepository e AbstractEntityRepository
-- Colocar ManyToMany no array
-- Passar CSV pra XML?
 -- Histórico de Edições ou emails de edição com autor da edição
 -- Arrumar CSV
+- Passar pro Serializer CsvEncoder?
 - SVGs not-inline para a uff e a logo
 - Confirmação em deletar
 - Link para o "Veja seu perfil completo"
