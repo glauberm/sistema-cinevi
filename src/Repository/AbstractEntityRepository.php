@@ -59,7 +59,7 @@ abstract class AbstractEntityRepository extends EntityRepository
     {
         foreach ($this->getReplaceArrayKeys() as $searchValue => $replaceValue) {
             $key = array_search($searchValue, $keys);
-            $keys[$key] = mb_strtoupper($replaceValue);
+            $keys[$key] = $replaceValue;
         }
 
         return $keys;

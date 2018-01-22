@@ -21,6 +21,12 @@ class CsvResponse extends Response
         $output = fopen('php://temp', 'r+');
 
         foreach ($data as $row) {
+            if ($row === reset($data)) {
+                foreach ($row as $lineKey => $lineValue) {
+                    $row[$lineKey] = mb_strtoupper($row[$lineKey]);
+                }
+            }
+
             foreach ($row as $lineKey => $lineValue) {
                 if($lineValue instanceof \DateTime) {
                     $row[$lineKey] = $lineValue->format('d/m/Y');
@@ -36,9 +42,9 @@ class CsvResponse extends Response
                 } else {
                     $row[$lineKey] = trim(strval($lineValue));
                 }
+                $row[$lineKey] = mb_convert_encoding($row[$lineKey], 'Windows-1252', 'UTF-8');
             }
-
-            fputcsv($output, $row);
+            fputcsv($output, $row, ';');
         }
         rewind($output);
 
