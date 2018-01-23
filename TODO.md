@@ -1,7 +1,6 @@
 # TO-DO
 
 - Histórico de Edições ou emails de edição com autor da edição
-- Passar pro Serializer CsvEncoder?
 - SVGs not-inline para a uff e a logo
 - Confirmação em deletar
 - Link para o "Veja seu perfil completo"

@@ -37,7 +37,7 @@ abstract class AbstractEntityRepository extends EntityRepository
         foreach ($items as $key => $values) {
             $values = $this->filterValues($values);
             unset($values['id']);
-            $items[$key] = $values;
+            $items[$key] = $this->sanitizeValues($values);
         }
 
         return $items;
@@ -68,5 +68,27 @@ abstract class AbstractEntityRepository extends EntityRepository
     protected function getReplaceArrayKeys()
     {
         return array();
+    }
+
+    protected function sanitizeValues($item)
+    {
+        foreach ($item as $key => $value) {
+            if($value instanceof \DateTime) {
+                $item[$key] = $value->format('d/m/Y');
+            }
+            else if(is_array($value)) {
+                $item[$key] = implode(', ',$value);
+            } else if(is_bool($value)) {
+                if($value === true) {
+                    $item[$key] = 'Sim';
+                } else {
+                    $item[$key] = 'Não';
+                }
+            } else {
+                $item[$key] = trim(strval($value));
+            }
+        }
+
+        return $item;
     }
 }

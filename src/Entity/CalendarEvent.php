@@ -49,14 +49,9 @@ class CalendarEvent extends BaseEvent
     protected $endDate;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
      **/
-    protected $createdIn;
-
-    /**
-     * @ORM\Column(type="datetime")
-     **/
-    protected $updatedIn;
+    protected $historicos;
 
 
     public function __construct($title = null, \DateTime $start = null)
@@ -64,6 +59,7 @@ class CalendarEvent extends BaseEvent
         $this->title = $title;
         $this->startDate = $start;
         $this->equipamentos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->historicos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -95,7 +91,7 @@ class CalendarEvent extends BaseEvent
     public function setTitleValue()
     {
         if(!$this->getTitle()) {
-            $this->title = "#".substr(uniqid(rand(), true), 0, 3).date("H").date("i").date("s").date("d").date("m").date("y");
+            $this->title = "#".mt_rand(0, 999).date("H").date("i").date("s").date("d").date("m").date("y");
         }
     }
 
@@ -195,67 +191,35 @@ class CalendarEvent extends BaseEvent
     }
 
     /**
-     * Set createdIn
+     * Add historicos
      *
-     * @param \DateTime $createdIn
-     *
+     * @param \App\Entity\Historico $historicos
      * @return CalendarEvent
      */
-    public function setCreatedIn($createdIn)
+    public function addHistorico(\App\Entity\Historico $historicos)
     {
-        $this->createdIn = $createdIn;
+        $this->historicos[] = $historicos;
 
         return $this;
     }
 
     /**
-     * Get createdIn
+     * Remove historicos
      *
-     * @return \DateTime
+     * @param \App\Entity\Historico $historicos
      */
-    public function getCreatedIn()
+    public function removeHistorico(\App\Entity\Historico $historicos)
     {
-        return $this->createdIn;
+        $this->historicos->removeElement($historicos);
     }
 
     /**
-     * Set updatedIn
+     * Get historicos
      *
-     * @param \DateTime $updatedIn
-     *
-     * @return CalendarEvent
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setUpdatedIn($updatedIn)
+    public function getHistoricos()
     {
-        $this->updatedIn = $updatedIn;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedIn
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedIn()
-    {
-        return $this->updatedIn;
-    }
-
-    /**
-    * @ORM\PrePersist
-    */
-    public function setCreatedInValue()
-    {
-        $this->createdIn = new \DateTime();
-    }
-
-    /**
-    * @ORM\PrePersist
-    * @ORM\PreUpdate
-    */
-    public function setUpdatedInValue()
-    {
-        $this->updatedIn = new \DateTime();
+        return $this->historicos;
     }
 }

@@ -94,14 +94,9 @@ class Projeto
     protected $calendarEvents;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
      **/
-    protected $createdIn;
-
-    /**
-     * @ORM\Column(type="datetime")
-     **/
-    protected $updatedIn;
+    protected $historicos;
 
 
     /**
@@ -114,6 +109,7 @@ class Projeto
         $this->fotografia = new \Doctrine\Common\Collections\ArrayCollection();
         $this->som = new \Doctrine\Common\Collections\ArrayCollection();
         $this->arte = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->historicos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -486,101 +482,35 @@ class Projeto
     }
 
     /**
-     * Set createdIn
+     * Add historicos
      *
-     * @param \DateTime $createdIn
-     *
+     * @param \App\Entity\Historico $historicos
      * @return Projeto
      */
-    public function setCreatedIn($createdIn)
+    public function addHistorico(\App\Entity\Historico $historicos)
     {
-        $this->createdIn = $createdIn;
+        $this->historicos[] = $historicos;
 
         return $this;
     }
 
     /**
-     * Get createdIn
+     * Remove historicos
      *
-     * @return \DateTime
+     * @param \App\Entity\Historico $historicos
      */
-    public function getCreatedIn()
+    public function removeHistorico(\App\Entity\Historico $historicos)
     {
-        return $this->createdIn;
+        $this->historicos->removeElement($historicos);
     }
 
     /**
-     * Set updatedIn
-     *
-     * @param \DateTime $updatedIn
-     *
-     * @return Projeto
-     */
-    public function setUpdatedIn($updatedIn)
-    {
-        $this->updatedIn = $updatedIn;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedIn
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedIn()
-    {
-        return $this->updatedIn;
-    }
-
-    /**
-    * @ORM\PrePersist
-    */
-    public function setCreatedInValue()
-    {
-        $this->createdIn = new \DateTime();
-    }
-
-    /**
-    * @ORM\PrePersist
-    * @ORM\PreUpdate
-    */
-    public function setUpdatedInValue()
-    {
-        $this->updatedIn = new \DateTime();
-    }
-
-    /**
-     * Add calendarEvent
-     *
-     * @param \App\Entity\CalendarEvent $calendarEvent
-     *
-     * @return Projeto
-     */
-    public function addCalendarEvent(\App\Entity\CalendarEvent $calendarEvent)
-    {
-        $this->calendarEvents[] = $calendarEvent;
-
-        return $this;
-    }
-
-    /**
-     * Remove calendarEvent
-     *
-     * @param \App\Entity\CalendarEvent $calendarEvent
-     */
-    public function removeCalendarEvent(\App\Entity\CalendarEvent $calendarEvent)
-    {
-        $this->calendarEvents->removeElement($calendarEvent);
-    }
-
-    /**
-     * Get calendarEvents
+     * Get historicos
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCalendarEvents()
+    public function getHistoricos()
     {
-        return $this->calendarEvents;
+        return $this->historicos;
     }
 }

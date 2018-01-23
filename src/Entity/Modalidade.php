@@ -29,15 +29,18 @@ class Modalidade
     protected $descricao;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
      **/
-    protected $createdIn;
+    protected $historicos;
+
 
     /**
-     * @ORM\Column(type="datetime")
-     **/
-    protected $updatedIn;
-
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->historicos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -96,67 +99,35 @@ class Modalidade
     }
 
     /**
-     * Set createdIn
+     * Add historicos
      *
-     * @param \DateTime $createdIn
-     *
+     * @param \App\Entity\Historico $historicos
      * @return Modalidade
      */
-    public function setCreatedIn($createdIn)
+    public function addHistorico(\App\Entity\Historico $historicos)
     {
-        $this->createdIn = $createdIn;
+        $this->historicos[] = $historicos;
 
         return $this;
     }
 
     /**
-     * Get createdIn
+     * Remove historicos
      *
-     * @return \DateTime
+     * @param \App\Entity\Historico $historicos
      */
-    public function getCreatedIn()
+    public function removeHistorico(\App\Entity\Historico $historicos)
     {
-        return $this->createdIn;
+        $this->historicos->removeElement($historicos);
     }
 
     /**
-     * Set updatedIn
+     * Get historicos
      *
-     * @param \DateTime $updatedIn
-     *
-     * @return Modalidade
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setUpdatedIn($updatedIn)
+    public function getHistoricos()
     {
-        $this->updatedIn = $updatedIn;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedIn
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedIn()
-    {
-        return $this->updatedIn;
-    }
-
-    /**
-    * @ORM\PrePersist
-    */
-    public function setCreatedInValue()
-    {
-        $this->createdIn = new \DateTime();
-    }
-
-    /**
-    * @ORM\PrePersist
-    * @ORM\PreUpdate
-    */
-    public function setUpdatedInValue()
-    {
-        $this->updatedIn = new \DateTime();
+        return $this->historicos;
     }
 }
