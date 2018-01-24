@@ -93,7 +93,7 @@ abstract class AbstractReadController extends AbstractCommonController
     {
         $historicoRepository = $em->getRepository($this->historicoRepository);
         $historicoQb = $historicoRepository->list($obj);
-        $paginationHistorico = $this->createPagination($request, $paginator, $historicoQb);
+        $paginationHistorico = $this->createPagination($request, $paginator, $historicoQb, '_historico');
         $data['paginationHistorico'] = $paginationHistorico;
 
         return $data;
