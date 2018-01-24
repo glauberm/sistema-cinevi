@@ -27,3 +27,8 @@ almoxarifado_categoria_csv:
     path:     /csv
     controller: App\Controller\Almoxarifado\CategoriaController::csv
     methods:  GET
+
+almoxarifado_categoria_historico:
+    path:     /historico/{id}
+    controller: App\Controller\Almoxarifado\CategoriaController::historico
+    methods:  GET

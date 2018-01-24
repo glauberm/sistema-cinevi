@@ -1,0 +1,10 @@
+{% extends 'admin/crud/base_historico.html.twig' %}
+
+{% set title = 'Versão #' ~ item.versao ~ ' da função ' ~ item.obj.nome %}
+{% set routeList = path('user_user_show', { 'params': item.obj.id }) %}
+
+{% block data %}
+
+    {% include 'user/user/item.html.twig' with { item: item.data } %}
+
+{% endblock %}

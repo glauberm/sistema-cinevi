@@ -14,6 +14,7 @@ use Twig_Environment;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\User;
+use App\Entity\UserHistorico;
 use App\Entity\CalendarEvent;
 use App\Entity\Projeto;
 use App\Entity\CopiaFinal;
@@ -26,6 +27,7 @@ class UserController extends AbstractCrudController
     protected $canonicalName = 'user_user';
     protected $templateDir = 'user/user';
     protected $repositoryName = User::class;
+    protected $historicoRepository = UserHistorico::class;
     protected $className = User::class;
     protected $formClassName = UserType::class;
     protected $paramsKey = 'id';

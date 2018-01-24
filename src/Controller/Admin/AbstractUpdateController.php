@@ -28,10 +28,8 @@ abstract class AbstractUpdateController extends AbstractCreateController
         $editForm = $this->postFormEdit($obj, $editForm, $em);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $arrayResult = $repository->getArrayResultByIdWithKeys($obj->getId(), $this->repositoryName);
-            $historico = $this->createHistorico($arrayResult, $tokenStorageInterface, $em);
-            $obj->addHistorico($historico);
-            // exit(var_dump("<pre>",\Doctrine\Common\Util\Debug::dump($arrayResult),"</pre>"));
+            $arrayResult = $repository->getArrayResultById($obj->getId(), $this->repositoryName);
+            $obj = $this->createHistorico($obj, $arrayResult, $tokenStorageInterface, $em);
             $em->merge($obj);
             $em->flush();
             $session->getFlashBag()->set('success', 'Edição de item realizada com sucesso!');
@@ -62,10 +60,12 @@ abstract class AbstractUpdateController extends AbstractCreateController
         return;
     }
 
-    private function createHistorico(array $data, TokenStorageInterface $tokenStorageInterface, EntityManagerInterface $em)
+    private function createHistorico($obj, array $data, TokenStorageInterface $tokenStorageInterface, EntityManagerInterface $em)
     {
-        $historicoRepository = $em->getRepository(Historico::class);
+        $historicoRepository = $em->getRepository($this->historicoRepository);
+        $historico = $historicoRepository->buildHistorico($obj, $data, new $this->historicoRepository(), $tokenStorageInterface);
+        $obj->addHistorico($historico);
 
-        return $historicoRepository->buildHistorico($data, $tokenStorageInterface);
+        return $obj;
     }
 }

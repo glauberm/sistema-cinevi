@@ -28,4 +28,35 @@
 
     {% block extras %}{% endblock %}
 
+    {% block historico %}
+
+        <h2 id="historico" class="text-primary">Versões Anteriores</h2>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ knp_pagination_sortable(paginationHistorico, 'Versão', 'historico.versao') }}</th>
+                        <th>{{ knp_pagination_sortable(paginationHistorico, 'Data e hora do registro', 'historico.createdIn') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in paginationHistorico %}
+                        <tr>
+                            <td>
+                                <a href="{{ path(routeHistoricoName, { 'id': item.id }) }}">
+                                    #{{ item.versao }}
+                                </a>
+                            </td>
+                            <td>{{ item.createdIn|date('d/m/Y H:i:s') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas_historico', pagination: paginationHistorico } %}
+
+    {% endblock %}
+
 {% endblock %}

@@ -3,9 +3,10 @@
 {% set title = item.nome %}
 {% set routeList = path('realizacao_modalidade_index') %}
 {% set routeEdit = path('realizacao_modalidade_edit', { 'params': item.id }) %}
+{% set routeHistoricoName = 'realizacao_modalidade_historico' %}
 
 {% block dtdd %}
 
-    {% include 'realizacao/modalidade/item.html.twig' with {item: item} %}
+    {% include 'realizacao/modalidade/item.html.twig' %}
 
 {% endblock %}

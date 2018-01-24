@@ -49,7 +49,7 @@ class CalendarEvent extends BaseEvent
     protected $endDate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\CalendarEventHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
 
@@ -193,10 +193,10 @@ class CalendarEvent extends BaseEvent
     /**
      * Add historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\CalendarEventHistorico $historicos
      * @return CalendarEvent
      */
-    public function addHistorico(\App\Entity\Historico $historicos)
+    public function addHistorico(\App\Entity\CalendarEventHistorico $historicos)
     {
         $this->historicos[] = $historicos;
 
@@ -206,9 +206,9 @@ class CalendarEvent extends BaseEvent
     /**
      * Remove historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\CalendarEventHistorico $historicos
      */
-    public function removeHistorico(\App\Entity\Historico $historicos)
+    public function removeHistorico(\App\Entity\CalendarEventHistorico $historicos)
     {
         $this->historicos->removeElement($historicos);
     }

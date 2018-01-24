@@ -27,3 +27,8 @@ user_user_csv:
     path:     /csv
     controller: App\Controller\User\UserController::csv
     methods:  GET
+
+user_user_historico:
+    path:     /historico/{id}
+    controller: App\Controller\User\UserController::historico
+    methods:  GET

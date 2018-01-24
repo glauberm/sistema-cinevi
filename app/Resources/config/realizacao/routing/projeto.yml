@@ -27,3 +27,8 @@ realizacao_projeto_csv:
     path:     /csv
     controller: App\Controller\Realizacao\ProjetoController::csv
     methods:  GET
+
+realizacao_projeto_historico:
+    path:     /historico/{id}
+    controller: App\Controller\Realizacao\ProjetoController::historico
+    methods:  GET

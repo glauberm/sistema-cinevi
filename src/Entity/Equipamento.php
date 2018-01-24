@@ -73,7 +73,7 @@ class Equipamento
     protected $calendarEvents;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\EquipamentoHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
 
@@ -393,10 +393,10 @@ class Equipamento
     /**
      * Add historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\EquipamentoHistorico $historicos
      * @return Equipamento
      */
-    public function addHistorico(\App\Entity\Historico $historicos)
+    public function addHistorico(\App\Entity\EquipamentoHistorico $historicos)
     {
         $this->historicos[] = $historicos;
 
@@ -406,9 +406,9 @@ class Equipamento
     /**
      * Remove historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\EquipamentoHistorico $historicos
      */
-    public function removeHistorico(\App\Entity\Historico $historicos)
+    public function removeHistorico(\App\Entity\EquipamentoHistorico $historicos)
     {
         $this->historicos->removeElement($historicos);
     }

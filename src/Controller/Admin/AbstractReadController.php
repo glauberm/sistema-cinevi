@@ -11,6 +11,7 @@ use App\Http\CsvResponse;
 abstract class AbstractReadController extends AbstractCommonController
 {
     protected $repositoryName;
+    protected $historicoRepository;
     protected $listTemplate = 'list.html.twig';
     protected $showTemplate = 'show.html.twig';
 
@@ -32,18 +33,29 @@ abstract class AbstractReadController extends AbstractCommonController
         $this->denyAccessUnlessGranted('view', $obj);
         $deleteForm = $this->createDeleteForm($obj);
         $data = ['item' => $obj, 'delete_form' => $deleteForm->createView()];
+        $data = $this->showHistorico($request, $em, $paginator, $obj, $data);
         $data = $this->preShow($request, $em, $ac, $paginator, $obj, $data);
 
         return $this->createView($this->showTemplate, $data);
     }
 
-    public function csv(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac)
+    public function csv(EntityManagerInterface $em, AuthorizationCheckerInterface $ac)
     {
         $repository = $em->getRepository($this->repositoryName);
         $qb = $repository->list($ac);
         $arrayResult = $repository->getArrayResultWithKeys($qb);
 
         return new CsvResponse($this->canonicalName, $arrayResult);
+    }
+
+    public function historico(EntityManagerInterface $em, $id)
+    {
+        $historico = $em->getRepository($this->historicoRepository)->find($id);
+        $this->denyAccessUnlessGranted('view', $historico);
+
+        return $this->createView('historico.html.twig', [
+            'item' => $historico
+        ]);
     }
 
     protected function createPagination(Request $request, PaginatorInterface $paginator, $qb, $var = null)
@@ -74,6 +86,16 @@ abstract class AbstractReadController extends AbstractCommonController
 
     protected function preShow(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac, PaginatorInterface $paginator, $obj, array $data = []) : array
     {
+        return $data;
+    }
+
+    protected function showHistorico(Request $request, EntityManagerInterface $em, PaginatorInterface $paginator, $obj, array $data = []) : array
+    {
+        $historicoRepository = $em->getRepository($this->historicoRepository);
+        $historicoQb = $historicoRepository->list($obj);
+        $paginationHistorico = $this->createPagination($request, $paginator, $historicoQb);
+        $data['paginationHistorico'] = $paginationHistorico;
+
         return $data;
     }
 }

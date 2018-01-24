@@ -35,7 +35,7 @@ class Categoria
     protected $equipamentos;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\CategoriaHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
 
@@ -142,10 +142,10 @@ class Categoria
     /**
      * Add historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\CategoriaHistorico $historicos
      * @return Categoria
      */
-    public function addHistorico(\App\Entity\Historico $historicos)
+    public function addHistorico(\App\Entity\CategoriaHistorico $historicos)
     {
         $this->historicos[] = $historicos;
 
@@ -155,9 +155,9 @@ class Categoria
     /**
      * Remove historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\CategoriaHistorico $historicos
      */
-    public function removeHistorico(\App\Entity\Historico $historicos)
+    public function removeHistorico(\App\Entity\CategoriaHistorico $historicos)
     {
         $this->historicos->removeElement($historicos);
     }

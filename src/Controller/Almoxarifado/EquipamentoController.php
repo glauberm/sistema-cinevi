@@ -14,6 +14,7 @@ use Twig_Environment;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\Equipamento;
+use App\Entity\EquipamentoHistorico;
 use App\Entity\CalendarEvent;
 use App\Form\Almoxarifado\EquipamentoType;
 
@@ -24,6 +25,7 @@ class EquipamentoController extends AbstractCrudController
     protected $canonicalName = 'almoxarifado_equipamento';
     protected $templateDir = 'almoxarifado/equipamento';
     protected $repositoryName = Equipamento::class;
+    protected $historicoRepository = EquipamentoHistorico::class;
     protected $className = Equipamento::class;
     protected $formClassName = EquipamentoType::class;
     protected $paramsKey = 'id';

@@ -13,6 +13,7 @@ use Twig_Environment;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\Projeto;
+use App\Entity\ProjetoHistorico;
 use App\Form\Realizacao\ProjetoType;
 
 class ProjetoController extends AbstractCrudController
@@ -22,6 +23,7 @@ class ProjetoController extends AbstractCrudController
     protected $canonicalName = 'realizacao_projeto';
     protected $templateDir = 'realizacao/projeto';
     protected $repositoryName = Projeto::class;
+    protected $historicoRepository = ProjetoHistorico::class;
     protected $className = Projeto::class;
     protected $formClassName = ProjetoType::class;
     protected $paramsKey = 'id';

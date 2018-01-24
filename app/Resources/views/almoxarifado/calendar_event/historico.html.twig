@@ -1,0 +1,10 @@
+{% extends 'admin/crud/base_historico.html.twig' %}
+
+{% set title = 'Versão #' ~ item.versao ~ ' da reserva ' ~ item.obj.title %}
+{% set routeList = path('almoxarifado_calendar_event_show', { 'params': item.obj.id }) %}
+
+{% block data %}
+
+    {% include 'almoxarifado/calendar_event/item.html.twig' with { item: item.data } %}
+
+{% endblock %}

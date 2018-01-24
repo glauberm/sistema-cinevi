@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormError;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Controller\Admin\AbstractCrudController;
 use App\Entity\Categoria;
+use App\Entity\CategoriaHistorico;
 use App\Entity\Equipamento;
 use App\Form\Almoxarifado\CategoriaType;
 
@@ -18,6 +19,7 @@ class CategoriaController extends AbstractCrudController
     protected $canonicalName = 'almoxarifado_categoria';
     protected $templateDir = 'almoxarifado/categoria';
     protected $repositoryName = Categoria::class;
+    protected $historicoRepository = CategoriaHistorico::class;
     protected $className = Categoria::class;
     protected $formClassName = CategoriaType::class;
     protected $paramsKey = 'id';

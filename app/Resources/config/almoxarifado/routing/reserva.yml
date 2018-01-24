@@ -27,3 +27,8 @@ almoxarifado_reserva_csv:
     path:     /csv
     controller: App\Controller\Almoxarifado\ReservaController::csv
     methods:  GET
+
+almoxarifado_reserva_historico:
+    path:     /historico/{id}
+    controller: App\Controller\Almoxarifado\ReservaController::historico
+    methods:  GET

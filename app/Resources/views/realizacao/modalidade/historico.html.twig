@@ -1,0 +1,10 @@
+{% extends 'admin/crud/base_historico.html.twig' %}
+
+{% set title = 'Versão #' ~ item.versao ~ ' da modalidade ' ~ item.obj.nome %}
+{% set routeList = path('realizacao_modalidade_show', { 'params': item.obj.id }) %}
+
+{% block data %}
+
+    {% include 'realizacao/modalidade/item.html.twig' with { item: item.data } %}
+
+{% endblock %}

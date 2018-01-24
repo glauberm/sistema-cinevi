@@ -143,7 +143,7 @@ class CopiaFinal
     protected $confirmado = 0;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\CopiaFinalHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
 
@@ -744,10 +744,10 @@ class CopiaFinal
     /**
      * Add historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\CopiaFinalHistorico $historicos
      * @return CopiaFinal
      */
-    public function addHistorico(\App\Entity\Historico $historicos)
+    public function addHistorico(\App\Entity\CopiaFinalHistorico $historicos)
     {
         $this->historicos[] = $historicos;
 
@@ -757,9 +757,9 @@ class CopiaFinal
     /**
      * Remove historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\CopiaFinalHistorico $historicos
      */
-    public function removeHistorico(\App\Entity\Historico $historicos)
+    public function removeHistorico(\App\Entity\CopiaFinalHistorico $historicos)
     {
         $this->historicos->removeElement($historicos);
     }

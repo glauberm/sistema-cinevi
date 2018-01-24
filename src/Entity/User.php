@@ -50,7 +50,7 @@ class User extends BaseUser
     protected $realizacaos;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\UserHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
 
@@ -253,10 +253,10 @@ class User extends BaseUser
     /**
      * Add historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\UserHistorico $historicos
      * @return User
      */
-    public function addHistorico(\App\Entity\Historico $historicos)
+    public function addHistorico(\App\Entity\UserHistorico $historicos)
     {
         $this->historicos[] = $historicos;
 
@@ -266,9 +266,9 @@ class User extends BaseUser
     /**
      * Remove historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\UserHistorico $historicos
      */
-    public function removeHistorico(\App\Entity\Historico $historicos)
+    public function removeHistorico(\App\Entity\UserHistorico $historicos)
     {
         $this->historicos->removeElement($historicos);
     }

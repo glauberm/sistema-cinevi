@@ -28,7 +28,7 @@ class Funcao
     protected $descricao;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\FuncaoHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
 
@@ -100,10 +100,10 @@ class Funcao
     /**
      * Add historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\FuncaoHistorico $historicos
      * @return Funcao
      */
-    public function addHistorico(\App\Entity\Historico $historicos)
+    public function addHistorico(\App\Entity\FuncaoHistorico $historicos)
     {
         $this->historicos[] = $historicos;
 
@@ -113,9 +113,9 @@ class Funcao
     /**
      * Remove historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\FuncaoHistorico $historicos
      */
-    public function removeHistorico(\App\Entity\Historico $historicos)
+    public function removeHistorico(\App\Entity\FuncaoHistorico $historicos)
     {
         $this->historicos->removeElement($historicos);
     }

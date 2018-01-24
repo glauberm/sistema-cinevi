@@ -24,12 +24,4 @@ abstract class AbstractCrudRepository extends AbstractEntityRepository
 
         return array_merge($keys, $items);
     }
-
-    public function getArrayResultByIdWithKeys($id, $className, $builderName = 'item')
-    {
-        $item = $this->getArrayResultById($id, $className, $builderName);
-        $keys = $this->extractKeys($item);
-
-        return array_merge($keys, $item);
-    }
 }

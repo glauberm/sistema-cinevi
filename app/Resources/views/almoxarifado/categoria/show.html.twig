@@ -3,6 +3,7 @@
 {% set title = item.nome %}
 {% set routeList = path('almoxarifado_categoria_index') %}
 {% set routeEdit = path('almoxarifado_categoria_edit', { 'params': item.id }) %}
+{% set routeHistoricoName = 'almoxarifado_categoria_historico' %}
 
 {% block dtdd %}
     {% include 'almoxarifado/categoria/item.html.twig' %}

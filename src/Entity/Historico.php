@@ -5,17 +5,14 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\HistoricoRepository")
- * @ORM\Table(name="historicos")
+ * @ORM\MappedSuperclass
  */
 class Historico
 {
     /**
-     * @ORM\Id
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+     **/
+    protected $versao;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"merge"})
@@ -34,13 +31,26 @@ class Historico
 
 
     /**
-     * Get id
+     * Set versao
+     *
+     * @param integer $versao
+     * @return Historico
+     */
+    public function setVersao($versao)
+    {
+        $this->versao = $versao;
+
+        return $this;
+    }
+
+    /**
+     * Get versao
      *
      * @return integer
      */
-    public function getId()
+    public function getVersao()
     {
-        return $this->id;
+        return $this->versao;
     }
 
     /**

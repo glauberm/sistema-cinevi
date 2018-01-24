@@ -29,7 +29,7 @@ class Modalidade
     protected $descricao;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\ModalidadeHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
 
@@ -101,10 +101,10 @@ class Modalidade
     /**
      * Add historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\ModalidadeHistorico $historicos
      * @return Modalidade
      */
-    public function addHistorico(\App\Entity\Historico $historicos)
+    public function addHistorico(\App\Entity\ModalidadeHistorico $historicos)
     {
         $this->historicos[] = $historicos;
 
@@ -114,9 +114,9 @@ class Modalidade
     /**
      * Remove historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\ModalidadeHistorico $historicos
      */
-    public function removeHistorico(\App\Entity\Historico $historicos)
+    public function removeHistorico(\App\Entity\ModalidadeHistorico $historicos)
     {
         $this->historicos->removeElement($historicos);
     }

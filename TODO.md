@@ -1,6 +1,7 @@
 # TO-DO
 
-- Histórico de Edições ou emails de edição com autor da edição
+- Autor e data-e-hora para a versão atual e não a próxima
+
 - SVGs not-inline para a uff e a logo
 - Confirmação em deletar
 - Link para o "Veja seu perfil completo"

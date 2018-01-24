@@ -1,0 +1,39 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block mainActions %}
+    <a class="navbar-brand btn btn-link" href="{{ routeList }}">
+        {% include 'admin/svg/voltar.html.twig' %}
+    </a>
+{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    <dl>
+        <div class="row">
+            <div class="col-xs-12">
+                <dt>Versão</dt>
+                <dd>#{{ item.versao }}</dd>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <dt>Alteração para a próxima versão feita por</dt>
+                <dd>
+                    <a href="{{ path('user_user_show', { 'params': item.user.id }) }}">{{ item.user.username }}</a>
+                </dd>
+            </div>
+            <div class="col-sm-6">
+                <dt>Data e hora da alteração para a próxima versão</dt>
+                <dd>{{ item.createdIn|date('d/m/Y H:i:s') }}</dd>
+            </div>
+        </div>
+
+        <hr/>
+
+        {% block data %}{% endblock %}
+    </dl>
+
+{% endblock %}

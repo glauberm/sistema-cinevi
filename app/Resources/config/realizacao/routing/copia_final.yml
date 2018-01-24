@@ -27,3 +27,8 @@ realizacao_copia_final_csv:
     path:     /csv
     controller: App\Controller\Realizacao\CopiaFinalController::csv
     methods:  GET
+
+realizacao_copia_final_historico:
+    path:     /historico/{id}
+    controller: App\Controller\Realizacao\CopiaFinalController::historico
+    methods:  GET

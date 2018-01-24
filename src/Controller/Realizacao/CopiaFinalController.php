@@ -12,6 +12,7 @@ use Twig_Environment;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\CopiaFinal;
+use App\Entity\CopiaFinalHistorico;
 use App\Entity\Config;
 use App\Form\Realizacao\CopiaFinalType;
 
@@ -22,6 +23,7 @@ class CopiaFinalController extends AbstractCrudController
     protected $canonicalName = 'realizacao_copia_final';
     protected $templateDir = 'realizacao/copia_final';
     protected $repositoryName = CopiaFinal::class;
+    protected $historicoRepository = CopiaFinalHistorico::class;
     protected $className = CopiaFinal::class;
     protected $formClassName = CopiaFinalType::class;
     protected $paramsKey = 'id';

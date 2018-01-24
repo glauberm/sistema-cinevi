@@ -94,7 +94,7 @@ class Projeto
     protected $calendarEvents;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Historico", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\ProjetoHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
 
@@ -484,10 +484,10 @@ class Projeto
     /**
      * Add historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\ProjetoHistorico $historicos
      * @return Projeto
      */
-    public function addHistorico(\App\Entity\Historico $historicos)
+    public function addHistorico(\App\Entity\ProjetoHistorico $historicos)
     {
         $this->historicos[] = $historicos;
 
@@ -497,9 +497,9 @@ class Projeto
     /**
      * Remove historicos
      *
-     * @param \App\Entity\Historico $historicos
+     * @param \App\Entity\ProjetoHistorico $historicos
      */
-    public function removeHistorico(\App\Entity\Historico $historicos)
+    public function removeHistorico(\App\Entity\ProjetoHistorico $historicos)
     {
         $this->historicos->removeElement($historicos);
     }

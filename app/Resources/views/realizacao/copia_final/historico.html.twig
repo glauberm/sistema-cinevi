@@ -1,0 +1,10 @@
+{% extends 'admin/crud/base_historico.html.twig' %}
+
+{% set title = 'Versão #' ~ item.versao ~ ' da cópia final ' ~ item.obj.nome %}
+{% set routeList = path('realizacao_copia_final_show', { 'params': item.obj.id }) %}
+
+{% block data %}
+
+    {% include 'realizacao/copia_final/item.html.twig' with { item: item.data } %}
+
+{% endblock %}

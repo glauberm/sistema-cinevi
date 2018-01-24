@@ -3,6 +3,7 @@
 {% set title = 'Reserva ' ~ item.title %}
 {% set routeList = path('almoxarifado_reserva_index') %}
 {% set routeEdit = path('almoxarifado_reserva_edit', { 'params': item.id }) %}
+{% set routeHistoricoName = 'almoxarifado_reserva_historico' %}
 
 {% block dtdd %}
     <div class="row">

@@ -27,3 +27,8 @@ almoxarifado_equipamento_csv:
     path:     /csv
     controller: App\Controller\Almoxarifado\EquipamentoController::csv
     methods:  GET
+
+almoxarifado_equipamento_historico:
+    path:     /historico/{id}
+    controller: App\Controller\Almoxarifado\EquipamentoController::historico
+    methods:  GET

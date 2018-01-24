@@ -1,7 +1,0 @@
-services:
-    config.access:
-        class: App\Security\Config\ConfigVoter
-        public: false
-        arguments: ['@security.access.decision_manager']
-        tags:
-            - { name: security.voter }

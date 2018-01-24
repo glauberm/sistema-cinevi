@@ -16,6 +16,7 @@ use Yasumi\Yasumi;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\CalendarEvent;
+use App\Entity\CalendarEventHistorico;
 use App\Entity\Equipamento;
 use App\Form\Almoxarifado\CalendarEventType;
 
@@ -26,6 +27,7 @@ class ReservaController extends AbstractCrudController
     protected $canonicalName = 'almoxarifado_reserva';
     protected $templateDir = 'almoxarifado/calendar_event';
     protected $repositoryName = CalendarEvent::class;
+    protected $historicoRepository = CalendarEventHistorico::class;
     protected $className = CalendarEvent::class;
     protected $formClassName = CalendarEventType::class;
     protected $paramsKey = 'id';
