@@ -26,4 +26,9 @@ class HistoricoRepository extends EntityRepository
             ->orderBy($builderName.'.versao', 'DESC')
         ;
     }
+
+    /*private function transformData(array $data)
+    {
+        $keys =
+    }*/
 }

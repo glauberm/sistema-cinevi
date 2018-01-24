@@ -8,10 +8,6 @@ a {
     transition: color 0.3s ease;
 }
 
-dt {
-    margin-top: 1.5rem;
-}
-
 dd {
     display: inline-block;
 }
@@ -22,7 +18,7 @@ dl div dd:after {
 
 dd:only-of-type,
 dd:last-of-type {
-    margin-bottom: 1.25rem;
+    margin-bottom: 25px;
 }
 
 dd:only-of-type:after,
@@ -40,6 +36,10 @@ dd:last-of-type:after {
 
 .width-auto {
     width: auto;
+}
+
+.font-style-italic {
+    font-style: italic;
 }
 
 legend {

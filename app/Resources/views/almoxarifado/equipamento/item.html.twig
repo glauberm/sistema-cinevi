@@ -24,16 +24,27 @@
         } %}
     </div>
 </div>
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Acessórios',
-    'item': item.acessorios,
-    'nl2br' : true
-} %}
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Observações',
-    'item': item.obs,
-    'nl2br' : true
-} %}
+
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Acessórios',
+            'item': item.acessorios,
+            'nl2br' : true
+        } %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Observações',
+            'item': item.obs,
+            'nl2br' : true
+        } %}
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-6"><dt>Em Manutenção?</dt><dd>{{ item.manutencao ? 'Sim' : 'Não' }}</dd></div>
     <div class="col-md-6"><dt>Devolução Atrasada?</dt><dd>{{ item.atrasado ? 'Sim' : 'Não' }}</dd></div>

@@ -33,6 +33,15 @@
 
         <hr/>
 
+        {% for key, value in item.data %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <dt>{{ key }}</dt>
+                    <dd>{{ value }}</dd>
+                </div>
+            </div>
+        {% endfor %}
+
         {% block data %}{% endblock %}
     </dl>
 
