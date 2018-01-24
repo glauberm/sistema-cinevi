@@ -16,6 +16,8 @@ class FuncaoRepository extends AbstractCrudRepository
         return array(
             'nome' => 'Nome',
             'descricao' => 'Descrição',
+            'createdIn' => 'Data e hora desta versão',
+            'autor_id' => 'Autor(a) desta versão',
         );
     }
 }

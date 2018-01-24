@@ -7,13 +7,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class HistoricoRepository extends EntityRepository
 {
-    public function buildHistorico($obj, $data, $historico, TokenStorageInterface $tokenStorageInterface)
+    public function buildHistorico($obj, $data, $historico)
     {
         $historico->setObj($obj);
         $historico->setVersao($obj->getHistoricos()->count()+1);
-        $historico->setUser($tokenStorageInterface->getToken()->getUser());
-        $historico->setCreatedIn(new \DateTime());
-        $historico->setData($data[0]);
+        $historico->setData($this->transformData($data));
 
         return $historico;
     }
@@ -27,8 +25,18 @@ class HistoricoRepository extends EntityRepository
         ;
     }
 
-    /*private function transformData(array $data)
+    private function transformData(array $data)
     {
-        $keys =
-    }*/
+        $keys = array_values($data[0]);
+        $values = array_values($data[1]);
+
+        for ($i=0; $i < count($keys); $i++) {
+            $data[$keys[$i]] = $values[$i];
+        }
+
+        unset($data[0]);
+        unset($data[1]);
+
+        return $data;
+    }
 }

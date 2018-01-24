@@ -24,7 +24,13 @@
 
     {{ parent() }}
 
-    <dl>{% block dtdd %}{% endblock %}</dl>
+    <dl>
+        {% block dtdd %}{% endblock %}
+
+        {% if is_granted('ROLE_DEPARTAMENTO', item) or  is_granted('ROLE_ALMOXARIFADO', item) %}
+            {% include 'admin/parts/info_versao.html.twig' %}
+        {% endif %}
+    </dl>
 
     {% block extras %}{% endblock %}
 
@@ -36,8 +42,8 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>{{ knp_pagination_sortable(paginationHistorico, 'Versão', 'historico.versao') }}</th>
-                        <th>{{ knp_pagination_sortable(paginationHistorico, 'Data e hora do registro', 'historico.createdIn') }}</th>
+                        <th>{{ knp_pagination_sortable(paginationHistorico, 'Nº da versão', 'historico.versao') }}</th>
+                        <th>{{ knp_pagination_sortable(paginationHistorico, 'Data e hora desta versão', 'historico.versao') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +54,7 @@
                                     #{{ item.versao }}
                                 </a>
                             </td>
-                            <td>{{ item.createdIn|date('d/m/Y H:i:s') }}</td>
+                            <td>{{ attribute(item.data, 'Data e hora desta versão') }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="realizacao_projetos")
  * @ORM\HasLifecycleCallbacks()
  */
-class Projeto
+class Projeto extends Base
 {
     /**
      * @ORM\Id

@@ -28,8 +28,10 @@ abstract class AbstractUpdateController extends AbstractCreateController
         $editForm = $this->postFormEdit($obj, $editForm, $em);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $arrayResult = $repository->getArrayResultById($obj->getId(), $this->repositoryName);
-            $obj = $this->createHistorico($obj, $arrayResult, $tokenStorageInterface, $em);
+            $arrayResult = $repository->getArrayResultByIdWithKeys($obj->getId(), $this->repositoryName);
+            $obj = $this->createHistorico($obj, $arrayResult, $em);
+            $obj->setAutor($tokenStorageInterface->getToken()->getUser());
+            $obj->setCreatedIn(new \DateTime());
             $em->merge($obj);
             $em->flush();
             $session->getFlashBag()->set('success', 'Edição de item realizada com sucesso!');
@@ -60,10 +62,10 @@ abstract class AbstractUpdateController extends AbstractCreateController
         return;
     }
 
-    private function createHistorico($obj, array $data, TokenStorageInterface $tokenStorageInterface, EntityManagerInterface $em)
+    private function createHistorico($obj, array $data, EntityManagerInterface $em)
     {
         $historicoRepository = $em->getRepository($this->historicoRepository);
-        $historico = $historicoRepository->buildHistorico($obj, $data, new $this->historicoRepository(), $tokenStorageInterface);
+        $historico = $historicoRepository->buildHistorico($obj, $data, new $this->historicoRepository());
         $obj->addHistorico($historico);
 
         return $obj;

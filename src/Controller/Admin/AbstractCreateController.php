@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use Swift_Mailer;
@@ -15,7 +16,7 @@ abstract class AbstractCreateController extends AbstractReadController
     protected $formClassName;
     protected $addTemplate = 'add.html.twig';
 
-    public function new(Request $request, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)
+    public function new(Request $request, EntityManagerInterface $em, SessionInterface $session, TokenStorageInterface $tokenStorageInterface, Swift_Mailer $mailer, Twig_Environment $twig)
     {
         $obj = new $this->className();
         $this->denyAccessUnlessGranted('create', $obj);
@@ -25,6 +26,8 @@ abstract class AbstractCreateController extends AbstractReadController
         $form = $this->postFormNew($form, $em);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $obj->setAutor($tokenStorageInterface->getToken()->getUser());
+            $obj->setCreatedIn(new \DateTime());
             $em->persist($obj);
             $em->flush();
             $session->getFlashBag()->set('success', 'Criação de item realizada com sucesso!');

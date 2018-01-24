@@ -55,6 +55,8 @@ class UserRepository extends AbstractCrudRepository
             'matricula' => 'Matrícula',
             'professor' => 'Professor?',
             'breveCurriculo' => 'Breve Currículo',
+            'createdIn' => 'Data e hora desta versão',
+            'autor_id' => 'Autor(a) desta versão',
         );
     }
 }

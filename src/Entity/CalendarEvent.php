@@ -49,6 +49,16 @@ class CalendarEvent extends BaseEvent
     protected $endDate;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"merge"})
+     **/
+    protected $autor;
+
+    /**
+     * @ORM\Column(type="datetime")
+     **/
+    protected $createdIn;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\CalendarEventHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
@@ -188,6 +198,52 @@ class CalendarEvent extends BaseEvent
     public function getProjeto()
     {
         return $this->projeto;
+    }
+
+    /**
+     * Set autor
+     *
+     * @param \App\Entity\User $autor
+     * @return CalendarEvent
+     */
+    public function setAutor(\App\Entity\User $autor = null)
+    {
+        $this->autor = $autor;
+
+        return $this;
+    }
+
+    /**
+     * Get autor
+     *
+     * @return \App\Entity\User
+     */
+    public function getAutor()
+    {
+        return $this->autor;
+    }
+
+    /**
+     * Set createdIn
+     *
+     * @param \DateTime $createdIn
+     * @return CalendarEvent
+     */
+    public function setCreatedIn($createdIn)
+    {
+        $this->createdIn = $createdIn;
+
+        return $this;
+    }
+
+    /**
+     * Get createdIn
+     *
+     * @return \DateTime
+     */
+    public function getCreatedIn()
+    {
+        return $this->createdIn;
     }
 
     /**

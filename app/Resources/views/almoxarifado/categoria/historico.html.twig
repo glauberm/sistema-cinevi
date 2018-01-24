@@ -2,9 +2,3 @@
 
 {% set title = 'Versão #' ~ item.versao ~ ' da categoria ' ~ item.obj.nome %}
 {% set routeList = path('almoxarifado_categoria_show', { 'params': item.obj.id }) %}
-
-{% block data %}
-
-    {% include 'almoxarifado/categoria/item.html.twig' with { item: item.data } %}
-
-{% endblock %}

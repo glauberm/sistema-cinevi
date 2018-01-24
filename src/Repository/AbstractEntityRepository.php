@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use App\Entity\User;
 
 abstract class AbstractEntityRepository extends EntityRepository
 {
@@ -36,6 +37,7 @@ abstract class AbstractEntityRepository extends EntityRepository
     {
         foreach ($items as $key => $values) {
             $values = $this->filterValues($values);
+            $values = $this->getAutor($values);
             unset($values['id']);
             $items[$key] = $this->sanitizeValues($values);
         }
@@ -74,7 +76,7 @@ abstract class AbstractEntityRepository extends EntityRepository
     {
         foreach ($item as $key => $value) {
             if($value instanceof \DateTime) {
-                $item[$key] = $value->format('d/m/Y');
+                $item[$key] = $value->format('d/m/Y H:i:s');
             }
             else if(is_array($value)) {
                 $item[$key] = implode(', ',$value);
@@ -90,5 +92,17 @@ abstract class AbstractEntityRepository extends EntityRepository
         }
 
         return $item;
+    }
+
+    private function getAutor(array $values)
+    {
+        if($values['autor_id']) {
+            $autor = $this->getEntityManager()
+                ->getRepository(User::class)->find($values['autor_id'])
+            ;
+            $values['autor_id'] = $autor->getUsername();
+        }
+
+        return $values;
     }
 }

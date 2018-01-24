@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\CopiaFinalRepository")
  * @ORM\Table(name="realizacao_copias_finais")
  */
-class CopiaFinal
+class CopiaFinal extends Base
 {
     /**
      * @ORM\Id

@@ -39,6 +39,8 @@ class RealizacaoRepository extends AbstractEntityRepository
             'user_id' => 'Usuário',
             'modalidade_id' => 'Modalidade',
             'professor_id' => 'Professor(a)',
+            'createdIn' => 'Data e hora desta versão',
+            'autor_id' => 'Autor(a) desta versão',
         );
     }
 }

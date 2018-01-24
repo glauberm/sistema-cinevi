@@ -97,6 +97,8 @@ class CalendarEventRepository extends AbstractCrudRepository
             'user_id' => 'Usuário',
             'projeto_id' => 'Projeto',
             'equipamentos' => 'Equipamentos',
+            'createdIn' => 'Data e hora desta versão',
+            'autor_id' => 'Autor(a) desta versão',
         );
     }
 }

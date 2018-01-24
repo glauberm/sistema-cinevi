@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\CategoriaRepository")
  * @ORM\Table(name="almoxarifado_equipamentos_categorias")
  */
-class Categoria
+class Categoria extends Base
 {
     /**
      * @ORM\Id

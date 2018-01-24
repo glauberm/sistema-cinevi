@@ -79,7 +79,9 @@ class CopiaFinalRepository extends AbstractCrudRepository
             'linkVideo' => 'Link para o vídeo',
             'senhaVideo' => 'Senha do vídeo',
             'confirmado' => 'Confirmado',
-            'projeto_id' => 'Projeto'
+            'projeto_id' => 'Projeto',
+            'createdIn' => 'Data e hora desta versão',
+            'autor_id' => 'Autor(a) desta versão',
         );
 
         $fichaTecnicaArrayKeys = $this->getEntityManager()

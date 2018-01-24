@@ -98,9 +98,9 @@ class ProjetoRepository extends AbstractCrudRepository
         ;
 
         $projetoArrayKeys = array(
-            'preProducao' => 'Pré-produção',
-            'dataProducao' => 'Produção',
-            'posProducao' => 'Pós-produção',
+            'preProducao' => 'Data de Pré-produção',
+            'dataProducao' => 'Data de Produção',
+            'posProducao' => 'Data de Pós-produção',
             'direcao' => 'Direção',
             'producao' => 'Produção',
             'disciplinaFotografia' => 'Já cursou(aram) a disciplina de Fotografia e Iluminação?',
@@ -108,7 +108,9 @@ class ProjetoRepository extends AbstractCrudRepository
             'disciplinaArte' => 'Já cursou(aram) a disciplina de Design Visual?',
             'fotografia' => 'Direção de Fotografia',
             'som' => 'Direção de Som',
-            'arte' => 'Direção de Arte'
+            'arte' => 'Direção de Arte',
+            'createdIn' => 'Data e hora desta versão',
+            'autor_id' => 'Autor(a) desta versão',
         );
 
         return array_merge($realizacaoArrayKeys, $projetoArrayKeys);

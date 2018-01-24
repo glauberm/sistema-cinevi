@@ -50,6 +50,16 @@ class User extends BaseUser
     protected $realizacaos;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"merge"})
+     **/
+    protected $autor;
+
+    /**
+     * @ORM\Column(type="datetime")
+     **/
+    protected $createdIn;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\UserHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
@@ -248,6 +258,52 @@ class User extends BaseUser
     public function getRealizacaos()
     {
         return $this->realizacaos;
+    }
+
+    /**
+     * Set autor
+     *
+     * @param \App\Entity\User $autor
+     * @return User
+     */
+    public function setAutor(\App\Entity\User $autor = null)
+    {
+        $this->autor = $autor;
+
+        return $this;
+    }
+
+    /**
+     * Get autor
+     *
+     * @return \App\Entity\User
+     */
+    public function getAutor()
+    {
+        return $this->autor;
+    }
+
+    /**
+     * Set createdIn
+     *
+     * @param \DateTime $createdIn
+     * @return User
+     */
+    public function setCreatedIn($createdIn)
+    {
+        $this->createdIn = $createdIn;
+
+        return $this;
+    }
+
+    /**
+     * Get createdIn
+     *
+     * @return \DateTime
+     */
+    public function getCreatedIn()
+    {
+        return $this->createdIn;
     }
 
     /**

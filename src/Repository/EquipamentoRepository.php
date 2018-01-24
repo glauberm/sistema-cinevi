@@ -76,6 +76,8 @@ class EquipamentoRepository extends AbstractCrudRepository
             'manutencao' => 'Em Manutenção?',
             'atrasado' => 'Devolução Atrasada?',
             'categoria_id' => 'Categoria',
+            'createdIn' => 'Data e hora desta versão',
+            'autor_id' => 'Autor(a) desta versão',
         );
     }
 }

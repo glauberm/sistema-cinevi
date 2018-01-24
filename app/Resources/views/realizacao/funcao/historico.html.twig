@@ -2,9 +2,3 @@
 
 {% set title = 'Versão #' ~ item.versao ~ ' da função ' ~ item.obj.nome %}
 {% set routeList = path('realizacao_funcao_show', { 'params': item.obj.id }) %}
-
-{% block data %}
-
-    {% include 'realizacao/funcao/item.html.twig' with { item: item.data } %}
-
-{% endblock %}

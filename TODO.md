@@ -1,8 +1,5 @@
 # TO-DO
 
-- Autor e data-e-hora para a versão atual e não a próxima
-- Visualização direta dos dados do histórico
-
 - Modal de confirmação ao deletar
 - Modal com opções de codificação e separador para o csv
 

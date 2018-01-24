@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\EquipamentoRepository")
  * @ORM\Table(name="almoxarifado_equipamentos")
  */
-class Equipamento
+class Equipamento extends Base
 {
     /**
      * @ORM\Id
