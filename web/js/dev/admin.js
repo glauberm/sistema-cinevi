@@ -1,7 +1,9 @@
-ascDescCaller();
-select2Caller();
-dateTimePickerCaller();
-autosizeCaller();
+$(document).ready(function() {
+    ascDescCaller();
+    select2Caller();
+    dateTimePickerCaller();
+    autosizeCaller();
+});
 
 // ASC E DESC
 function ascDescCaller ()

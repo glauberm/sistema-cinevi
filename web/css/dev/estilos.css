@@ -425,10 +425,6 @@ a.pular-para-conteudo:active {
     fill: #3D3A28;
 }
 
-.input-group-btn-security {
-    display: none;
-}
-
 /* BOOTSTRAP */
 .navbar-form {
     border-top: 0 none;
