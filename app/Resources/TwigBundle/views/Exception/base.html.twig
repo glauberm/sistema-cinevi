@@ -4,17 +4,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{% if title is defined %}{{ title }} – {% endif %}Departamento de Cinema e Vídeo da UFF</title>
-        {% block stylesheets %}
-            <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('vendor/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('css/estilos.css') }}" rel="stylesheet" type="text/css" />
-        {% endblock %}
-        <meta name="description" content="Cadastre seus projetos, reserve equipamentos no almoxarifado e muito mais pelo seu celular, tablet ou qualquer outro dispositivo." />
-        <meta name="robots" content="index, nofollow" />
-        <meta name="googlebot" content="index, nofollow" />
+        <title>{% if title is defined %}{{ title }} - {% endif %}Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)</title>
+        <meta name="description" content="Cadastre projetos, reserve equipamentos no almoxarifado e muito mais pelo celular, tablet ou qualquer outro dispositivo com acesso à internet. Sistema para alunos, funcionários ou professores do Departamento de Cinema e Vídeo da Universidade Federal Fluminense." />
         <meta name="subject" content="Todos os serviços do departamento qualquer lugar." />
-        <!-- FAVICONS -->
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
+        <link rel="author" href="{{ asset('humans.txt') }}">
+        <link href="{{ asset('manifest.json') }}" rel="manifest">
+        {% block stylesheets %}
+            <link href="{{ asset('css/prod/main-55ed9e4aa8.min.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
     	<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
     	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
     	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}">

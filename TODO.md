@@ -2,7 +2,6 @@
 
 ## Depois
 
-- Checar os vendors js e css: passar para node_modules e gulp
 - Novos testes, Testar tudo, Fazer testes para outros emails além do CalendarEvent
 
 ## Servidor

@@ -17,14 +17,13 @@ gulp.task('clean', function () {
 gulp.task('styles', function () {
     return gulp
         .src([
-            './node_modules/bootstrap/dist/css/bootstrap.min.css',
-            './node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+            './web/css/dev/bootstrap.min.css',
+            './web/css/dev/bootstrap-theme.min.css',
             './node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
             './node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
             './web/bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css',
             './web/css/dev/estilos.css'
         ])
-        .pipe(less())
         .pipe(minifyCSS())
         .pipe(concat('main.min.css'))
         .pipe(rev())

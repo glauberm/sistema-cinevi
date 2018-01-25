@@ -18,3 +18,7 @@
 /web/bundles/
 /node_modules
 /node_modules/*
+/web/css/prod
+/web/css/prod/*
+/web/js/prod
+/web/js/prod/*

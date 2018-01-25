@@ -6,7 +6,6 @@
 {% set containerFluid = true %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
     <link rel="stylesheet" media="print" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.print.css') }}" />
     {{ parent() }}
 {% endblock %}
@@ -83,8 +82,6 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale/pt-br.js') }}"></script>
     <script>
         $(function () {
             $("#calendar-holder").fullCalendar({

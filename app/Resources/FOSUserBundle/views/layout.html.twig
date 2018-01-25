@@ -12,18 +12,7 @@
         <link rel="author" href="{{ asset('humans.txt') }}">
         <link href="{{ asset('manifest.json') }}" rel="manifest">
         {% block stylesheets %}
-            <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('vendor/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet" type="text/css" />
-            <link href="{{ asset('css/estilos.css') }}" rel="stylesheet" type="text/css" />
-            <!--[if gte IE 9]>
-                <style type="text/css">
-                    .header,
-                    .header-public,
-                    .content-security .well {
-                        filter: none;
-                    }
-                </style>
-            <![endif]-->
+            <link href="{{ asset('css/prod/main-55ed9e4aa8.min.css') }}" rel="stylesheet" type="text/css" />
         {% endblock %}
     	<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
     	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
@@ -71,12 +60,7 @@
         {% include 'admin/footer.html.twig' %}
 
         {% block javascripts %}
-            <script src="{{ asset('vendor/jquery/js/jquery.min.js') }}"></script>
-            <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('vendor/autosize/js/autosize.min.js') }}"></script>
-            <script> autosize($("textarea.form-control")); </script>
-            <script src="{{ asset('vendor/jquery.mask/jquery.mask.min.js') }}"></script>
-            <script src="{{ asset('js/masks.js') }}"></script>
+            <script src="{{ asset('js/prod/main-122784fd91.min.js') }}"></script>
         {% endblock %}
     </body>
 </html>
