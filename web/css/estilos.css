@@ -128,9 +128,10 @@ a.pular-para-conteudo:active {
     top: 2px;
 }
 
-.header .logo svg  {
+.header .logo img  {
     max-width: 175px;
     max-height: 34px;
+    margin-bottom: 5px;
 }
 
 /* CONTENT */
@@ -310,6 +311,19 @@ a.pular-para-conteudo:active {
     padding: 6px 8px;
 }
 
+.main .navbar-brand svg polygon {
+    fill: #777;
+    -webkit-transition: fill 0.3s ease;
+    -o-transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
+}
+
+.main .navbar-brand:hover svg polygon,
+.main .navbar-brand:focus svg polygon,
+.main .navbar-brand:active svg polygon {
+    fill: #555;
+}
+
 /* ÍCONES */
 .aside .panel-main .icone-voltar {
     -webkit-transition: transform 0.3s ease;
@@ -355,9 +369,10 @@ a.pular-para-conteudo:active {
     display: block;
 }
 
-.header-security .logo svg {
+.header-security .logo img {
     max-width: 226px;
     max-height: 44px;
+    margin-bottom: 5px;
 }
 
 .content-security {

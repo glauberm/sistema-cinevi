@@ -4,7 +4,6 @@
 
 - mouseOn no Login no mobile
 - label_previous e label_next
-- SVGs not-inline para a uff e a logo
 
 ## Depois
 
