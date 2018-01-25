@@ -30,7 +30,7 @@
     	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
     </head>
     <body>
-        {% include 'CineviAdminBundle::header-security.html.twig' %}
+        {% include 'admin/header_security.html.twig' %}
 
         <main class="container container-error">
             <div class="jumbotron text-center">
@@ -42,6 +42,6 @@
             <p class="text-center"><a href="{{ path('index') }}">Voltar</a></p>
         </main>
 
-        {% include 'CineviAdminBundle::footer.html.twig' %}
+        {% include 'admin/footer.html.twig' %}
     </body>
 </html>

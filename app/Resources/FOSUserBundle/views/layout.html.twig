@@ -44,7 +44,11 @@
         <![endif]-->
     </head>
     <body>
-        {% include 'user/header_security.html.twig' %}
+        {% if headerSecurity is defined and headerSecurity == true %}
+            {% include 'admin/header_security.html.twig' %}
+        {% else %}
+            {% include 'admin/header_home.html.twig' %}
+        {% endif %}
 
         <div class="content content-security">
             <div class="container">

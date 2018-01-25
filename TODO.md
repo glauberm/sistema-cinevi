@@ -3,7 +3,6 @@
 - Link para o "Veja seu perfil completo"
 
 - mouseOn no Login no mobile
-- label_previous e label_next
 
 ## Depois
 
