@@ -23,6 +23,12 @@
 
 {% block body %}
     {{ parent() }}
+
+    <div class="alert alert-info alert-dismissal fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+        Para ver suas reservas, projetos, cópias finais e informações adicionais, visite a <a class="alert-link" href="{{ path('user_user_show', { 'params': user.id }) }}">sua página de usuário</a>.
+    </div>
+
     {% include "@FOSUser/Profile/show_content.html.twig" %}
 
     <div class="modal fade" id="ajudaModal" tabindex="-1" role="dialog" aria-labelledby="ajudaModalLabel">
@@ -40,7 +46,7 @@
                     <p>Para realizar reservas para um projeto já cadastrado, clique em <strong><a href="{{ path('almoxarifado_reserva_index') }}">Reservas</a></strong>, no menu <strong>Almoxarifado</strong>, e depois em <strong>Adicionar</strong> para então preencher as datas de retirada e devolução e incluir os reserváveis desejados. Após enviar, você poderá visualizar sua reserva no calendário.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{% include 'admin/svg/cancelar.html.twig' %}Fechar</button>
                 </div>
             </div>
         </div>

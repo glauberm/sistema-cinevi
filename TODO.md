@@ -1,9 +1,5 @@
 # TO-DO
 
-- Link para o "Veja seu perfil completo"
-
-- mouseOn no Login no mobile
-
 ## Depois
 
 - Checar os vendors js e css: passar para node_modules e gulp
@@ -12,7 +8,6 @@
 
 ## Servidor
 
-- Atualizar pacotes
 - Checar questão da timezone
 - Checar questão do number_format
 - Atualizar telefones e modalidades?

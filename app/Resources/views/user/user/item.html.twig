@@ -28,7 +28,11 @@
         </div>
     </div>
 {% else %}
-    <dt>Nome Completo</dt><dd>{{ item.username }}</dd>
+    <div class="row">
+        <div class="col-xs-12">
+            <dt>Nome Completo</dt><dd>{{ item.username }}</dd>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-4"><dt>Professor?</dt><dd>{{ item.professor ? 'Sim' : 'Não' }}</dd></div>
         <div class="col-sm-4"><dt>Ativo?</dt><dd>{{ item.enabled ? 'Sim' : 'Não' }}</dd></div>
