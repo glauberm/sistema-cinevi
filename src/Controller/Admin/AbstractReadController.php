@@ -39,13 +39,13 @@ abstract class AbstractReadController extends AbstractCommonController
         return $this->createView($this->showTemplate, $data);
     }
 
-    public function csv(EntityManagerInterface $em, AuthorizationCheckerInterface $ac)
+    public function csv(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac)
     {
         $repository = $em->getRepository($this->repositoryName);
         $qb = $repository->list($ac);
         $arrayResult = $repository->getArrayResultWithKeys($qb);
 
-        return new CsvResponse($this->canonicalName, $arrayResult);
+        return new CsvResponse($request, $this->canonicalName, $arrayResult);
     }
 
     public function historico(EntityManagerInterface $em, $id)

@@ -1,8 +1,5 @@
 # TO-DO
 
-- Modal de confirmação ao deletar
-- Modal com opções de codificação e separador para o csv
-
 - Link para o "Veja seu perfil completo"
 
 - mouseOn no Login no mobile

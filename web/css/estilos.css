@@ -290,6 +290,17 @@ a.pular-para-conteudo:active {
     height: 18px;
 }
 
+.btn-default svg,
+.btn-primary svg,
+.btn-success svg,
+.btn-warning svg,
+.btn-danger svg,
+.btn-info svg {
+    margin-bottom: -4px;
+    -webkit-filter: drop-shadow( 0 -1px 0 rgba(0,0,0,0.2) );
+            filter: drop-shadow( 0 -1px 0 rgba(0,0,0,0.2) );
+}
+
 .main .navbar .btn-default,
 .main .navbar .btn-primary,
 .main .navbar .btn-success,
@@ -297,17 +308,6 @@ a.pular-para-conteudo:active {
 .main .navbar .btn-danger,
 .main .navbar .btn-info {
     padding: 6px 8px;
-}
-
-.main .navbar .btn-default svg,
-.main .navbar .btn-primary svg,
-.main .navbar .btn-success svg,
-.main .navbar .btn-warning svg,
-.main .navbar .btn-danger svg,
-.main .navbar .btn-info svg {
-    margin-bottom: -4px;
-    -webkit-filter: drop-shadow( 0 -1px 0 rgba(0,0,0,0.2) );
-            filter: drop-shadow( 0 -1px 0 rgba(0,0,0,0.2) );
 }
 
 /* ÍCONES */
@@ -454,6 +454,15 @@ a.pular-para-conteudo:active {
     margin-top: 10px;
 }
 
+.modal-footer {
+    padding-bottom: 5px;
+}
+
+.modal-footer .btn,
+.modal-footer .btn+.btn {
+    margin-bottom: 10px;
+}
+
 /* DATETIMEPICKER */
 .datepicker-left:before {
     content: "«";
@@ -554,6 +563,17 @@ a.pular-para-conteudo:active {
         margin-top: 0;
     }
 
+    .btn-default svg,
+    .btn-primary svg,
+    .btn-success svg,
+    .btn-warning svg,
+    .btn-danger svg,
+    .btn-info svg {
+        margin-right: 3px;
+        -webkit-filter: drop-shadow( 0 -1px 0 rgba(0,0,0,0.2) );
+                filter: drop-shadow( 0 -1px 0 rgba(0,0,0,0.2) );
+    }
+
     .main .navbar .btn-default,
     .main .navbar .btn-primary,
     .main .navbar .btn-success,
@@ -561,17 +581,6 @@ a.pular-para-conteudo:active {
     .main .navbar .btn-danger,
     .main .navbar .btn-info {
         padding: 6px 10px;
-    }
-
-    .main .navbar .btn-default svg,
-    .main .navbar .btn-primary svg,
-    .main .navbar .btn-success svg,
-    .main .navbar .btn-warning svg,
-    .main .navbar .btn-danger svg,
-    .main .navbar .btn-info svg {
-        margin-right: 3px;
-        -webkit-filter: drop-shadow( 0 -1px 0 rgba(0,0,0,0.2) );
-                filter: drop-shadow( 0 -1px 0 rgba(0,0,0,0.2) );
     }
 }
 

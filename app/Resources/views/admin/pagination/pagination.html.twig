@@ -4,9 +4,7 @@
 <div class="clearfix">
     <div class="pull-left text-left csv-counter">
         {% if routeCsv is defined and (is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO')) %}
-            <div class="navbar-form">
-                <a target="_blank" href="{{ routeCsv }}" class="btn btn-info btn-sm">Baixar como tabela</a>
-            </div>
+            {% include 'admin/parts/csv.html.twig' %}
         {% endif %}
         <div class="navbar-form">
             <small>

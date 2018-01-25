@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CsvResponse extends Response
@@ -9,15 +10,15 @@ class CsvResponse extends Response
     private $data;
     private $filename;
 
-    public function __construct($filename, $data = array(), $status = 200, $headers = array())
+    public function __construct(Request $request, $filename, $data = array(), $status = 200, $headers = array())
     {
         parent::__construct('', $status, $headers);
         $this->filename = $filename.'_'.md5(uniqid(rand(), true)).'.csv';
-        $this->encode($data);
+        $this->encode($request, $data);
         $this->serve();
     }
 
-    private function encode(array $data)
+    private function encode(Request $request, array $data)
     {
         $handle = fopen('php://temp', 'w+');
 
@@ -28,9 +29,16 @@ class CsvResponse extends Response
                 }
             }
             foreach ($row as $lineKey => $lineValue) {
-                $row[$lineKey] = mb_convert_encoding($row[$lineKey], 'Windows-1252', 'UTF-8');
+                if($request->query->get('codificacao') && $request->query->get('codificacao') == 'windows1252') {
+                    $row[$lineKey] = mb_convert_encoding($row[$lineKey], 'Windows-1252', 'UTF-8');
+                }
             }
-            fputcsv($handle, $row, ';');
+            if($request->query->get('separador') && $request->query->get('separador') == 'ponto_e_virgula') {
+                fputcsv($handle, $row, ';');
+            } else {
+                fputcsv($handle, $row);
+            }
+
         }
         rewind($handle);
 
