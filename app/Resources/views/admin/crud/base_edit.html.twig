@@ -6,11 +6,7 @@
     </a>
     {% block deleteAction %}
         {% if is_granted('delete', item) %}
-            {{ form_start(delete_form, { 'attr' : { 'class': 'navbar-form navbar-nav' } }) }}
-                <button type="submit" class="btn btn-danger">
-                    {% include 'admin/svg/remover.html.twig' %}<span class="hidden-xs">Remover</span>
-                </button>
-            {{ form_end(delete_form) }}
+            {% include 'admin/parts/delete.html.twig' %}
         {% endif %}
     {% endblock %}
 {% endblock %}

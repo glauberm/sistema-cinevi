@@ -13,9 +13,7 @@
     {% endblock %}
     {% block deleteAction %}
         {% if is_granted('delete', item) %}
-            {{ form_start(delete_form, { 'attr' : { 'class': 'navbar-form navbar-left' } }) }}
-                <button type="submit" class="btn btn-danger">{% include 'admin/svg/remover.html.twig' %}<span class="hidden-xs">Remover</span></button>
-            {{ form_end(delete_form) }}
+            {% include 'admin/parts/delete.html.twig' %}
         {% endif %}
     {% endblock %}
 {% endblock %}
@@ -24,7 +22,7 @@
 
     {{ parent() }}
 
-    <dl>
+    <dl class="main-dl">
         {% block dtdd %}{% endblock %}
 
         {% if is_granted('ROLE_DEPARTAMENTO', item) or  is_granted('ROLE_ALMOXARIFADO', item) %}

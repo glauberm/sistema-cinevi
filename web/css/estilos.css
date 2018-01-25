@@ -10,6 +10,7 @@ a {
 
 dd {
     display: inline-block;
+    font-size: 16px;
 }
 
 dl div dd:after {
@@ -342,7 +343,7 @@ a.pular-para-conteudo:active {
 
 /* FOOTER */
 .footer {
-    padding-bottom: 2rem;
+    padding-bottom: 20px;
 }
 
 .footer p {
