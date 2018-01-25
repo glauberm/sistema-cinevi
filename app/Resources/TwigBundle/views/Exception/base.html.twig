@@ -30,16 +30,13 @@
     	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
     </head>
     <body>
-        {% include 'admin/header_security.html.twig' %}
+        {% include 'admin/header_home.html.twig' %}
 
         <main class="container container-error">
             <div class="jumbotron text-center">
-                <h1>{{ title }}
-                <br/>
-                <small>{{ mensagem }}</small></h1>
-                <p>Código do erro: {{ codigo }}</p>
+                <h1>{{ title }}</h1>
+                <p>{{ mensagem }}</p>
             </div>
-            <p class="text-center"><a href="{{ path('index') }}">Voltar</a></p>
         </main>
 
         {% include 'admin/footer.html.twig' %}

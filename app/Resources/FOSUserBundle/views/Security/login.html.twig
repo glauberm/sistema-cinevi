@@ -7,17 +7,3 @@
 {% endblock fos_user_content %}
 
 {% block voltar %}{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        $('#group-senha').css('display', 'table-cell');
-        $('#button-senha').on('mousedown', function() {
-            $('#password').prop('type', 'text');
-            $('#button-senha').addClass('active');
-        }).on('mouseup mouseleave', function() {
-            $('#password').prop('type', 'password');
-            $('#button-senha').removeClass('active');
-        });
-    </script>
-{% endblock %}

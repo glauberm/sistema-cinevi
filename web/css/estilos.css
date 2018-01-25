@@ -411,15 +411,6 @@ a.pular-para-conteudo:active {
     padding: 10px 15px;
 }
 
-/* ERROR */
-.container-error .jumbotron {
-    margin-bottom: 60px;
-}
-
-.container-error .jumbotron br {
-    margin: 0 0 30px;
-}
-
 /* LOGIN */
 .well .page-header {
     margin-top: 0;
