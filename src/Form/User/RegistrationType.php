@@ -37,9 +37,4 @@ class RegistrationType extends AbstractType
     {
         return RegistrationFormType::class;
     }
-
-    // public function getName()
-    // {
-    //     return 'security_registration';
-    // }
 }

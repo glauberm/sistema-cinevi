@@ -45,7 +45,7 @@ class EquipamentoRepository extends AbstractCrudRepository
 
         foreach ($qb->getQuery()->getResult() as $result) {
             foreach ($result->getUsers() as $user) {
-                if ($user !== $tokenStorageInterface->getToken()->getUser() || !$authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
+                if ($user !== $tokenStorageInterface->getToken()->getUser() && !$authorizationChecker->isGranted('ROLE_DEPARTAMENTO')) {
                     $qb->andWhere($builderName.'.id != '.$result->getId());
                 }
             }

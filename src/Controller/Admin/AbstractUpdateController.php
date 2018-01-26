@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use Swift_Mailer;
@@ -15,18 +16,18 @@ abstract class AbstractUpdateController extends AbstractCreateController
 {
     protected $editTemplate = 'edit.html.twig';
 
-    public function edit(Request $request, EntityManagerInterface $em, SessionInterface $session, TokenStorageInterface $tokenStorageInterface, Swift_Mailer $mailer, Twig_Environment $twig, $params)
+    public function edit(Request $request, EntityManagerInterface $em, SessionInterface $session, AuthorizationCheckerInterface $ac, TokenStorageInterface $tokenStorageInterface, Swift_Mailer $mailer, Twig_Environment $twig, $params)
     {
         $repository = $em->getRepository($this->repositoryName);
         $obj = $repository->findOneBy([ $this->paramsKey => $params ]);
-        $this->denyAccessUnlessGranted('edit', $obj);
         $deleteForm = $this->createDeleteForm($obj);
         $editForm = $this->createForm($this->formClassName, $obj);
         $editForm = $this->preFormEdit($obj, $editForm, $em);
         $editForm->handleRequest($request);
-        $editForm = $this->postFormEdit($obj, $editForm, $em);
+        $editForm = $this->postFormEdit($obj, $editForm, $em, $ac);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->denyAccessUnlessGranted('edit', $obj);
             $arrayResult = $repository->getArrayResultByIdWithKeys($obj->getId(), $this->repositoryName);
             $obj = $this->createHistorico($obj, $arrayResult, $em);
             $obj->setAutor($tokenStorageInterface->getToken()->getUser());
@@ -51,7 +52,7 @@ abstract class AbstractUpdateController extends AbstractCreateController
         return $form;
     }
 
-    protected function postFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
+    protected function postFormEdit($obj, Form $form, EntityManagerInterface $em, AuthorizationCheckerInterface $ac) : Form
     {
         return $form;
     }

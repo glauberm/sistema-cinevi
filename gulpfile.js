@@ -46,11 +46,7 @@ gulp.task('scripts', function () {
             './node_modules/jquery-mask-plugin/dist/jquery.mask.min.js',
             './web/bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js',
             './web/bundles/fullcalendar/js/fullcalendar/locale/pt-br.js',
-            './web/js/dev/masks.js',
-            './web/js/dev/admin.js',
-            './web/js/dev/almoxarifado/calendar-event.js',
-            './web/js/dev/to-many.js',
-            './web/js/dev/realizacao/ficha-tecnica/equipe.js'
+            './web/js/dev/admin.js'
         ])
         .pipe(babel())
         .pipe(uglify())

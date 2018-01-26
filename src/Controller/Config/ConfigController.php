@@ -31,11 +31,11 @@ class ConfigController extends AbstractCommonController
     public function edit(Request $request, EntityManagerInterface $em, SessionInterface $session)
     {
         $obj = $em->getRepository($this->repositoryName)->getConfig();
-        $this->denyAccessUnlessGranted('edit', $obj);
         $form = $this->createForm($this->formClassName, $obj);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->denyAccessUnlessGranted('edit', $obj);
             $em->merge($obj);
             $em->flush();
             $session->getFlashBag()->set('success', 'Configurações editadas com sucesso!');

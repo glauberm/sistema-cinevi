@@ -3,6 +3,7 @@
 namespace App\Controller\Realizacao;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
@@ -28,16 +29,16 @@ class ProjetoController extends AbstractCrudController
     protected $formClassName = ProjetoType::class;
     protected $paramsKey = 'id';
 
-    protected function postFormNew(Form $form, EntityManagerInterface $em) : Form
+    protected function postFormNew(Form $form, EntityManagerInterface $em, AuthorizationCheckerInterface $ac) : Form
     {
-        $form = $this->checkCopiaFinal($form);
+        $form = $this->checkCopiaFinal($form, $ac);
 
         return $form;
     }
 
-    protected function postFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
+    protected function postFormEdit($obj, Form $form, EntityManagerInterface $em, AuthorizationCheckerInterface $ac) : Form
     {
-        $form = $this->checkCopiaFinal($form, $obj);
+        $form = $this->checkCopiaFinal($form, $ac, $obj);
 
         return $form;
     }
@@ -82,11 +83,11 @@ class ProjetoController extends AbstractCrudController
         }
     }
 
-    private function checkCopiaFinal(Form $form, $obj = null)
+    private function checkCopiaFinal(Form $form, AuthorizationCheckerInterface $ac, $obj = null)
     {
         $user = $form->get('realizacao')->get('user')->getData();
 
-        if(!empty($user) && ($user->getProfessor() !== true || !$this->isGranted('ROLE_DEPARTAMENTO'))) {
+        if(!empty($user) && ($user->getProfessor() !== true || $ac->isGranted('ROLE_DEPARTAMENTO'))) {
             $projetosArray = array();
             foreach($user->getRealizacaos() as $realizacao) {
                 if($realizacao->getProjeto()) {

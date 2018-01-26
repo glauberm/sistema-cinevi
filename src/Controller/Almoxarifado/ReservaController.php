@@ -47,7 +47,7 @@ class ReservaController extends AbstractCrudController
         return $data;
     }
 
-    protected function postFormNew(Form $form, EntityManagerInterface $em) : Form
+    protected function postFormNew(Form $form, EntityManagerInterface $em, AuthorizationCheckerInterface $ac) : Form
     {
         $startDate = $form->get('startDate')->getData();
         $endDate = $form->get('endDate')->getData();
@@ -66,7 +66,7 @@ class ReservaController extends AbstractCrudController
         return $form;
     }
 
-    protected function postFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
+    protected function postFormEdit($obj, Form $form, EntityManagerInterface $em, AuthorizationCheckerInterface $ac) : Form
     {
         $startDate = $form->get('startDate')->getData();
         $endDate = $form->get('endDate')->getData();

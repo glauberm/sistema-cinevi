@@ -54,7 +54,6 @@ class UserType extends AbstractType
                 'label' => 'Breve Currículo',
                 'required' => false,
             ))
-            // Chama o método onPreSetData()
             ->addEventListener(
                 FormEvents::PRE_SET_DATA,
                 array($this, 'onPreSetData')
@@ -107,7 +106,6 @@ class UserType extends AbstractType
         }
     }
 
-    // Muda o formulário antes dele ser chamado
     public function onPreSetData(FormEvent $event)
     {
         $user = $event->getData();

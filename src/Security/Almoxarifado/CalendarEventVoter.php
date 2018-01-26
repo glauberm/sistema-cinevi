@@ -26,7 +26,7 @@ class CalendarEventVoter extends AbstractVoter
 
     protected function create($obj, $user, TokenInterface $token)
     {
-        if ($this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO')) || $user->getProfessor() === true) {
+        if ($this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO')) || $this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO')) || $user->getProfessor() === true) {
             return true;
         } else {
             $config = $this->em->getRepository(Config::class)->getConfig();

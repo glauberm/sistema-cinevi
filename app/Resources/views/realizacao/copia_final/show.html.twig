@@ -11,7 +11,7 @@
     {% if (app.user is defined and app.user == item.realizacao.user) and (item.confirmado is not defined or item.confirmado != true) and (configuration is defined and configuration.mensagemCopiaFinal is defined and configuration.mensagemCopiaFinal is not empty) %}
         <div class="alert alert-danger alert-dismissal fade in" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-            {{ configuration.mensagemCopiaFinal }}
+            {{ configuration.mensagemCopiaFinal|nl2br }}
         </div>
     {% endif %}
 {% endblock %}

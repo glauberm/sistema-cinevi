@@ -17,8 +17,3 @@
 {% block form %}
     {% include 'almoxarifado/calendar_event/form.html.twig' %}
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script> calendarEventAjax(); </script>
-{% endblock %}

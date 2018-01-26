@@ -6,8 +6,3 @@
 {% block form %}
     {% include 'almoxarifado/calendar_event/form.html.twig' with {form: edit_form}  %}
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script> calendarEventAjax(); </script>
-{% endblock %}

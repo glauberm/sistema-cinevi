@@ -37,9 +37,4 @@ class ProfileType extends AbstractType
     {
         return ProfileFormType::class;
     }
-
-    // public function getName()
-    // {
-    //     return 'security_profile';
-    // }
 }
