@@ -27,6 +27,14 @@ class CopiaFinalRepository extends AbstractCrudRepository
         ;
     }
 
+    public function listWhereModalidadeIs($qb, $id, $builderName = 'item')
+    {
+        return $qb
+            ->where($builderName.'_realizacao.modalidade = :id')
+            ->setParameter('id', $id)
+        ;
+    }
+
     protected function filterValues($values)
     {
         $realizacao = $this->getArrayResultById($values['realizacao_id'], Realizacao::class, 'realizacao');

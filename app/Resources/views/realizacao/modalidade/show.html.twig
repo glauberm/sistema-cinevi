@@ -10,3 +10,49 @@
     {% include 'realizacao/modalidade/item.html.twig' %}
 
 {% endblock %}
+
+{% block extras %}
+    <h2 id="projetos" class="text-primary">Projetos</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {% include 'realizacao/projeto/list_thead.html.twig' with { pagination: paginationProjeto, builderName: 'projeto' } %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in paginationProjeto %}
+                    <tr>
+                        {% include 'realizacao/projeto/list_tbody.html.twig' %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas_projeto', pagination: paginationProjeto } %}
+
+
+    <h2 id="copiasFinais" class="text-primary">Cópias Finais</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {% include 'realizacao/copia_final/list_thead.html.twig' with { pagination: paginationCopiaFinal, builderName: 'copia_final' } %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in paginationCopiaFinal %}
+                    <tr>
+                        {% include 'realizacao/copia_final/list_tbody.html.twig' %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas_copia_final', pagination: paginationCopiaFinal } %}
+
+{% endblock %}

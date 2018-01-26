@@ -33,7 +33,7 @@ class Realizacao
     protected $sinopse;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Modalidade", cascade={"merge"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Modalidade", cascade={"merge"}, inversedBy="realizacaos")
      **/
     protected $modalidade;
 

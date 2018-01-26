@@ -29,6 +29,11 @@ class Modalidade extends Base
     protected $descricao;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Realizacao", cascade={"merge", "remove"}, mappedBy="modalidade")
+     **/
+    protected $realizacaos;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\ModalidadeHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
@@ -39,6 +44,7 @@ class Modalidade extends Base
      */
     public function __construct()
     {
+        $this->realizacaos = new \Doctrine\Common\Collections\ArrayCollection();
         $this->historicos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -96,6 +102,39 @@ class Modalidade extends Base
     public function getDescricao()
     {
         return $this->descricao;
+    }
+
+    /**
+     * Add realizacaos
+     *
+     * @param \App\Entity\Realizacao $realizacaos
+     * @return Modalidade
+     */
+    public function addRealizacao(\App\Entity\Realizacao $realizacaos)
+    {
+        $this->realizacaos[] = $realizacaos;
+
+        return $this;
+    }
+
+    /**
+     * Remove realizacaos
+     *
+     * @param \App\Entity\Realizacao $realizacaos
+     */
+    public function removeRealizacao(\App\Entity\Realizacao $realizacaos)
+    {
+        $this->realizacaos->removeElement($realizacaos);
+    }
+
+    /**
+     * Get realizacaos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRealizacaos()
+    {
+        return $this->realizacaos;
     }
 
     /**
