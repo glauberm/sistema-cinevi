@@ -148,20 +148,20 @@ class ReservaController extends AbstractCrudController
     {
         if(!empty($startDate)) {
             $startDateYear = $startDate->format('Y');
-            $holidaysByYear = Yasumi::create('Brazil', $startDateYear);
-            foreach($holidaysByYear->getHolidayDates() as $holiday) {
+            $holidaysByYear = Yasumi::create('Brazil', $startDateYear, 'pt_BR');
+            foreach($holidaysByYear->getHolidays() as $holiday) {
                 if($holiday == $startDate->format('Y-m-d')) {
-                    $form->get('startDate')->addError(new FormError('A data de retirada não pode cair em um feriado.'));
+                    $form->get('startDate')->addError(new FormError('A data de retirada não pode cair no feriado de ' . $holiday->getName() . '.'));
                 }
             }
         }
 
         if(!empty($endDate)) {
             $endDateYear = $endDate->format('Y');
-            $holidaysByYear = Yasumi::create('Brazil', $endDateYear);
-            foreach($holidaysByYear->getHolidayDates() as $holiday) {
+            $holidaysByYear = Yasumi::create('Brazil', $endDateYear, 'pt_BR');
+            foreach($holidaysByYear->getHolidays() as $holiday) {
                 if($holiday == $endDate->format('Y-m-d')) {
-                    $form->get('endDate')->addError(new FormError('A data de devolução não pode cair em um feriado.'));
+                    $form->get('endDate')->addError(new FormError('A data de devolução não pode cair no feriado de ' . $holiday->getName() . '.'));
                 }
             }
         }
