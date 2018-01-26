@@ -18,7 +18,7 @@ class Equipe
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Funcao", cascade={"merge"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Funcao", cascade={"merge"}, inversedBy="equipes")
      **/
     protected $funcao;
 

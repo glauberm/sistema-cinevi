@@ -28,6 +28,11 @@ class Funcao extends Base
     protected $descricao;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Equipe", cascade={"merge", "remove"}, mappedBy="funcao")
+     **/
+    protected $equipes;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\FuncaoHistorico", cascade={"persist", "remove"})
      **/
     protected $historicos;
@@ -38,6 +43,7 @@ class Funcao extends Base
      */
     public function __construct()
     {
+        $this->equipes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->historicos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -95,6 +101,39 @@ class Funcao extends Base
     public function getDescricao()
     {
         return $this->descricao;
+    }
+
+    /**
+     * Add equipes
+     *
+     * @param \App\Entity\Equipe $equipes
+     * @return Funcao
+     */
+    public function addEquipes(\App\Entity\Equipe $equipes)
+    {
+        $this->equipes[] = $equipes;
+
+        return $this;
+    }
+
+    /**
+     * Remove equipes
+     *
+     * @param \App\Entity\Equipe $equipes
+     */
+    public function removeEquipes(\App\Entity\Equipe $equipes)
+    {
+        $this->equipes->removeElement($equipes);
+    }
+
+    /**
+     * Get equipes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEquipes()
+    {
+        return $this->equipes;
     }
 
     /**

@@ -2,11 +2,14 @@
 
 namespace App\Controller\Realizacao;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Controller\Admin\AbstractCrudController;
 use App\Entity\Funcao;
 use App\Entity\FuncaoHistorico;
+use App\Entity\Equipe;
 use App\Form\Realizacao\FuncaoType;
 
 class FuncaoController extends AbstractCrudController

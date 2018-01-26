@@ -5,8 +5,6 @@ namespace App\Controller\Almoxarifado;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormError;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Controller\Admin\AbstractCrudController;
 use App\Entity\Categoria;
