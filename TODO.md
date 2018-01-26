@@ -4,7 +4,9 @@
 
 ## Depois
 
--- Fazer os dois lados das relações e testar a remoção e tal
+- Listagem de usuários/cópias finais por função
+- Listagem de funções desempenhadas (contando as fixas do projeto) na página de usuário
+- Menos redundância no base,public,layout.html.twig
 
 ## Servidor
 

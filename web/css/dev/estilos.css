@@ -425,6 +425,13 @@ a.pular-para-conteudo:active {
     fill: #3D3A28;
 }
 
+/* EMBED */
+.senha-video {
+    display: block;
+    padding: 15px;
+    background-color: #F9F9F9;
+}
+
 /* BOOTSTRAP */
 .navbar-form {
     border-top: 0 none;

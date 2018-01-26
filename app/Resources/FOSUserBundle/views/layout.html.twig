@@ -12,7 +12,7 @@
         <link rel="author" href="{{ asset('humans.txt') }}">
         <link href="{{ asset('manifest.json') }}" rel="manifest">
         {% block stylesheets %}
-            <link href="{{ asset('css/prod/main-60d81ee7d1.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('css/prod/main-57f3fe6811.min.css') }}" rel="stylesheet" type="text/css" />
         {% endblock %}
     	<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
     	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
@@ -27,10 +27,6 @@
     	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
     	<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
     	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
-        <!--[if lt IE 9]>
-            <script src="{{ asset('vendor/html5shiv/js/html5shiv.min.js') }}"></script>
-            <script src="{{ asset('vendor/respond/js/respond.min.js') }}"></script>
-        <![endif]-->
     </head>
     <body>
         {% if headerSecurity is defined and headerSecurity == true %}
@@ -60,7 +56,7 @@
         {% include 'admin/footer.html.twig' %}
 
         {% block javascripts %}
-            <script src="{{ asset('js/prod/main-557fec74b9.min.js') }}"></script>
+            <script src="{{ asset('js/prod/main-d5ca2f8b49.min.js') }}"></script>
         {% endblock %}
     </body>
 </html>

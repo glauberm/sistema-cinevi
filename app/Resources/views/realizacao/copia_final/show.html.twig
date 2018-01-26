@@ -21,3 +21,28 @@
     {% include 'realizacao/copia_final/item.html.twig' %}
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function() {
+            {% if item.linkVideo is defined and item.linkVideo is not empty %}
+                var parsedVideo = parseVideo('{{ item.linkVideo }}');
+
+                if (parsedVideo.type == 'vimeo' || parsedVideo.type == 'youtube') {
+                    {% if item.senhaVideo is defined and item.senhaVideo is not empty %}
+                        var senha = '{{ item.senhaVideo }}';
+                    {% else %}
+                        var senha = null;
+                    {% endif %}
+
+                    $('.main-dl').before( buildEmbed(parsedVideo.type, parsedVideo.id, senha) );
+                } else {
+                    return false;
+                }
+
+            {% endif %}
+        });
+    </script>
+{% endblock %}
