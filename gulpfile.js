@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var del = require('del');
-var less = require('gulp-less');
 var minifyCSS = require('gulp-csso');
 var concat = require('gulp-concat');
 var rev = require('gulp-rev');
@@ -19,6 +18,7 @@ gulp.task('styles', function () {
         .src([
             './web/css/dev/bootstrap.min.css',
             './web/css/dev/bootstrap-theme.min.css',
+            './node_modules/select2/dist/css/select2.min.css',
             './node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
             './node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
             './web/bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css',
@@ -39,18 +39,18 @@ gulp.task('scripts', function () {
             './node_modules/select2/dist/js/i18n/pt-BR.js',
             './node_modules/moment/min/moment.min.js',
             './node_modules/moment/locale/pt-br.js',
-            './node_modules/bootstrap/dist/js/bootstrap.min.js',
+            './web/js/dev/bootstrap.min.js',
             './node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
             './node_modules/responsive-toolkit/dist/bootstrap-toolkit.min.js',
             './node_modules/autosize/dist/autosize.min.js',
             './node_modules/jquery-mask-plugin/dist/jquery.mask.min.js',
             './web/bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js',
-            'web/bundles/fullcalendar/js/fullcalendar/locale/pt-br.js',
+            './web/bundles/fullcalendar/js/fullcalendar/locale/pt-br.js',
             './web/js/dev/masks.js',
             './web/js/dev/admin.js',
             './web/js/dev/almoxarifado/calendar-event.js',
             './web/js/dev/to-many.js',
-            './web/js/dev/almoxarifado/ficha-tecnica/equipe.js'
+            './web/js/dev/realizacao/ficha-tecnica/equipe.js'
         ])
         .pipe(babel())
         .pipe(uglify())

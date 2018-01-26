@@ -49,7 +49,7 @@ class ProjetoRepository extends AbstractCrudRepository
     protected function filterValues($values)
     {
         $realizacao = $this->getArrayResultById($values['realizacao_id'], Realizacao::class, 'realizacao');
-        $values = array_merge($realizacao[0], $values);
+        if(!empty($realizacao)) $values = array_merge($realizacao[0], $values);
         unset($values['realizacao_id']);
 
         $usersDirecao = $this->find($values['id'])->getDirecao();

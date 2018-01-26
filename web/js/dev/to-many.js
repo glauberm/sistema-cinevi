@@ -1,4 +1,3 @@
-/* Funções de adicionar prototype em relações -toMany */
 function addForm($collectionHolder, $newLinkLi)
 {
 	var prototype = $collectionHolder.data('prototype');
@@ -19,13 +18,11 @@ function addForm($collectionHolder, $newLinkLi)
 
 function addFormDeleteLink($formLi)
 {
-	var $removeForm = $('<div class="text-right"><div class="inline-block"><a class="to-many-remover btn btn-danger btn-sm" href="#">Remover</a></div></div>');
+	var $removeForm = $('<div class="pull-right"><div class="inline-block"><a class="to-many-remover btn btn-danger btn-sm" href="#">Remover</a></div></div>');
 	$formLi.append($removeForm);
 
 	$removeForm.on('click', function(e) {
-		// prevent the link from creating a "#" on the URL
 		e.preventDefault();
-		// remove the li for the tag form
 		$formLi.fadeOut(300, function() { $formLi.remove() });
 	});
 }

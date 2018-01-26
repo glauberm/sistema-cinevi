@@ -41,7 +41,7 @@ class CalendarEventVoter extends AbstractVoter
 
     protected function edit($obj, $user, TokenInterface $token)
     {
-        if (($this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO'))) || ($obj->getUser() === $user)) {
+        if ($this->decisionManager->decide($token, array('ROLE_ALMOXARIFADO')) || $this->decisionManager->decide($token, array('ROLE_DEPARTAMENTO')) || ($obj->getUser() === $user)) {
             return true;
         } else {
             return false;

@@ -30,7 +30,7 @@ class CopiaFinalRepository extends AbstractCrudRepository
     protected function filterValues($values)
     {
         $realizacao = $this->getArrayResultById($values['realizacao_id'], Realizacao::class, 'realizacao');
-        $values = array_merge($realizacao[0], $values);
+        if(!empty($realizacao)) $values = array_merge($realizacao[0], $values);
         unset($values['realizacao_id']);
 
         if($values['projeto_id']) {
@@ -43,7 +43,7 @@ class CopiaFinalRepository extends AbstractCrudRepository
         }
 
         $fichaTecnica = $this->getArrayResultById($values['ficha_tecnica_id'], FichaTecnica::class, 'ficha_tecnica');
-        $values = array_merge($values, $fichaTecnica[0]);
+        if(!empty($fichaTecnica)) $values = array_merge($values, $fichaTecnica[0]);
         unset($values['ficha_tecnica_id']);
 
         return $values;

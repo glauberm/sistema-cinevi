@@ -12,7 +12,7 @@ class FichaTecnicaRepository extends AbstractEntityRepository
         $equipes = $this->find($values['id'])->getEquipes();
         foreach($equipes as $equipe) {
             $equipe = $this->getArrayResultById($equipe->getId(), Equipe::class, 'equipe');
-            $equipesArray[] = $equipe[0];
+            if(!empty($equipe)) $equipesArray[] = $equipe[0];
         }
 
         $values['ficha_tecnica'] = "";

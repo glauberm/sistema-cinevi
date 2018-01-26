@@ -21,9 +21,11 @@ abstract class AbstractEntityRepository extends EntityRepository
     public function getArrayResultById($id, $className, $builderName = 'item')
     {
         $repository = $this->getEntityManager()->getRepository($className);
-        $qb = $repository->createQueryBuilder($builderName)
-            ->where($builderName.'.id = '.$id)
-        ;
+        $qb = $repository->createQueryBuilder($builderName);
+
+        if(!empty($id)) {
+            $qb->where($builderName.'.id = '.$id);
+        }
 
         return $repository->getArrayResult($qb);
     }
@@ -96,7 +98,7 @@ abstract class AbstractEntityRepository extends EntityRepository
 
     private function getAutor(array $values)
     {
-        if($values['autor_id']) {
+        if(!empty($values['autor_id'])) {
             $autor = $this->getEntityManager()
                 ->getRepository(User::class)->find($values['autor_id'])
             ;

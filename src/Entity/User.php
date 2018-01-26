@@ -165,46 +165,6 @@ class User extends BaseUser
     }
 
     /**
-    * @ORM\PrePersist
-    */
-    public function setTelefoneValue()
-    {
-        if(!$this->getTelefone()) {
-            $this->telefone = 0;
-        }
-    }
-
-    /**
-    * @ORM\PrePersist
-    */
-    public function setMatriculaValue()
-    {
-        if(!$this->getMatricula()) {
-            $this->matricula = 0;
-        }
-    }
-
-    /**
-    * @ORM\PrePersist
-    */
-    public function setConfirmadoValue()
-    {
-        if(!$this->getConfirmado()) {
-            $this->confirmado = false;
-        }
-    }
-
-    /**
-    * @ORM\PrePersist
-    */
-    public function setProfessorValue()
-    {
-        if(!$this->getProfessor()) {
-            $this->professor = false;
-        }
-    }
-
-    /**
      * Set breveCurriculo
      *
      * @param string $breveCurriculo
@@ -337,5 +297,55 @@ class User extends BaseUser
     public function getHistoricos()
     {
         return $this->historicos;
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setTelefoneValue()
+    {
+        if(!$this->getTelefone()) {
+            $this->telefone = 0;
+        }
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setMatriculaValue()
+    {
+        if(!$this->getMatricula()) {
+            $this->matricula = 0;
+        }
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setConfirmadoValue()
+    {
+        if(!$this->getConfirmado()) {
+            $this->confirmado = false;
+        }
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setProfessorValue()
+    {
+        if(!$this->getProfessor()) {
+            $this->professor = false;
+        }
+    }
+
+    /**
+    * @ORM\PrePersist
+    */
+    public function setCreatedInValue()
+    {
+        if(!$this->getCreatedIn()) {
+            $this->createdIn = new \DateTime();
+        }
     }
 }

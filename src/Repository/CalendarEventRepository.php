@@ -77,7 +77,7 @@ class CalendarEventRepository extends AbstractCrudRepository
         $equipamentos = $this->find($values['id'])->getEquipamentos();
         foreach($equipamentos as $equipamento) {
             $equipamento = $this->getArrayResultById($equipamento->getId(), Equipamento::class, 'equipamento');
-            $equipamentosArray[] = $equipamento[0];
+            if(!empty($equipamento)) $equipamentosArray[] = $equipamento[0];
         }
 
         $values['equipamentos'] = "";
