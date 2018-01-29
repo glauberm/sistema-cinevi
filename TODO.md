@@ -10,5 +10,4 @@
 
 - Checar questão da timezone
 - Checar questão do number_format
-- Atualizar telefones e modalidades?
 - HTTPS
