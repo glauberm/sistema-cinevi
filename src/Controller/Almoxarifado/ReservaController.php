@@ -104,7 +104,7 @@ class ReservaController extends AbstractCrudController
         $to = $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail();
         $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
 
-        $session->getFlashBag()->set('success', 'Criação de reserva realizada com sucesso! Para editar ou excluir sua reserva, clique nela pelo calendário.');
+        // $session->getFlashBag()->set('success', 'Criação de reserva realizada com sucesso! Para editar ou remover sua reserva, clique nela pelo calendário.');
     }
 
     protected function postEdit($obj, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)

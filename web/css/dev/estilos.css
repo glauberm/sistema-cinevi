@@ -67,6 +67,7 @@ textarea.form-control {
     width: 100%;
     text-align: center;
     z-index: 30;
+    font-size: 125%;
 }
 
 .overlay-alert span,
@@ -430,6 +431,7 @@ a.pular-para-conteudo:active {
     display: block;
     padding: 15px;
     background-color: #F9F9F9;
+    font-style: italic;
 }
 
 /* BOOTSTRAP */
@@ -590,6 +592,20 @@ a.pular-para-conteudo:active {
     .main .navbar .btn-danger,
     .main .navbar .btn-info {
         padding: 6px 10px;
+    }
+}
+
+@media(max-width: 767px)
+{
+    .fc-toolbar.fc-header-toolbar .fc-center {
+        display: block;
+        width: 100%;
+    }
+
+    .fc-toolbar.fc-header-toolbar .fc-center h2 {
+        display: block;
+        width: 100%;
+        margin-top: 0.5em;
     }
 }
 

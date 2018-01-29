@@ -90,13 +90,14 @@ class ProjetoController extends AbstractCrudController
         if(!empty($user) && ($user->getProfessor() !== true || $ac->isGranted('ROLE_DEPARTAMENTO'))) {
             $projetosArray = array();
             foreach($user->getRealizacaos() as $realizacao) {
-                if($realizacao->getProjeto()) {
+                if($realizacao->getProjeto() && $realizacao->getProjeto() instanceof $this->className) {
                     $projetosArray[] = $realizacao->getProjeto();
                 }
             }
+
             foreach($projetosArray as $projeto) {
                 if($projeto != $obj && !$projeto->getCopiaFinal()) {
-                    $message = 'Para registrar um novo projeto com este responsável, é preciso registrar a cópia final do seu projeto '.$realizacao->getTitulo().'.';
+                    $message = 'Para registrar um novo projeto com este responsável, é preciso registrar a cópia final do seu projeto '.$projeto->getRealizacao()->getTitulo().'.';
                     $form->get('realizacao')->get('user')->addError(new FormError($message));
                 }
             }
