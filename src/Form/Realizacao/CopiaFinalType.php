@@ -47,8 +47,7 @@ class CopiaFinalType extends AbstractType
     		    'choice_label' => 'getTitulo',
                 'attr' => array(
                     'class' => 'select2-select',
-                    'placeholder' => 'Outro',
-                    'required' => true,
+                    'placeholder' => 'Outro'
                 ),
                 'required' => false,
             ))
