@@ -10,7 +10,7 @@ use App\Entity\Modalidade;
 class ProjetoControllerTest extends AbstractCrudControllerTest
 {
     protected $indexRoute = 's/projetos';
-    protected $itemEditFilter = 'a:contains("TesteP")';
+    protected $itemEditFilter = 'h1:contains("TesteP")';
     protected $itemEditLink = 'TesteP';
     protected $itemRemoveLink = 'PEtset';
     protected $itemRemoveFilter = '[value="PEtset"]';

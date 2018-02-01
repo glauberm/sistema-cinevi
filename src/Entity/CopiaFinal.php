@@ -24,6 +24,7 @@ class CopiaFinal extends Base
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Projeto", cascade={"merge"}, inversedBy="copiaFinal")
+     * @ORM\JoinColumn(name="modalidade_id", referencedColumnName="id", onDelete="SET NULL")
      **/
     protected $projeto;
 

@@ -4,6 +4,7 @@
 {% set routeList = path('realizacao_funcao_index') %}
 {% set routeEdit = path('realizacao_funcao_edit', { 'params': item.id }) %}
 {% set routeHistoricoName = 'realizacao_funcao_historico' %}
+{% set textoRemocao = 'Ao remover uma função, você também removerá todas as equipes associadas a ela.'%}
 
 {% block dtdd %}
     {% include 'realizacao/funcao/item.html.twig' %}

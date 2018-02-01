@@ -2,6 +2,7 @@
 
 {% set title = 'Editar ' ~ item.username %}
 {% set routeList = path('user_user_index') %}
+{% set textoRemocao = 'Ao remover um usuário, você também removerá informações associadas a ele como seus projetos, reservas e cópias finais.'%}
 
 {% block form %}
     {% include 'user/user/form.html.twig' with {form: edit_form}  %}

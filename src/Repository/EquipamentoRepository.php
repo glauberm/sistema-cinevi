@@ -11,7 +11,7 @@ class EquipamentoRepository extends AbstractCrudRepository
     {
         $qb = parent::list($authorizationChecker, $builderName);
 
-        return $qb->innerJoin($builderName.'.categoria', $builderName.'_categoria');
+        return $qb->leftJoin($builderName.'.categoria', $builderName.'_categoria');
     }
 
     public function listWhereCategoriaIs($qb, $id, $builderName = 'item')
@@ -25,7 +25,7 @@ class EquipamentoRepository extends AbstractCrudRepository
     public function listWhereReservaIs($qb, $id, $builderName = 'item')
     {
         return $qb
-            ->innerJoin($builderName.'.calendarEvents', $builderName.'_calendarEvents')
+            ->leftJoin($builderName.'.calendarEvents', $builderName.'_calendarEvents')
             ->where($builderName.'_calendarEvents.id = :id')
             ->setParameter('id', $id)
         ;
@@ -56,10 +56,12 @@ class EquipamentoRepository extends AbstractCrudRepository
 
     protected function filterValues($values)
     {
-        $categoria = $this->getEntityManager()
-            ->getRepository(Categoria::class)->find($values['categoria_id'])
-        ;
-        $values['categoria_id'] = $categoria->getNome();
+        if($values['categoria_id']) {
+            $categoria = $this->getEntityManager()
+                ->getRepository(Categoria::class)->find($values['categoria_id'])
+            ;
+            $values['categoria_id'] = $categoria->getNome();
+        }
 
         return $values;
     }

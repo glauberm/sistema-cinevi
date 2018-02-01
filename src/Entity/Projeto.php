@@ -39,19 +39,19 @@ class Projeto extends Base
     protected $posProducao;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", cascade={"merge"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", cascade={"merge"}, inversedBy="direcaoProjetos")
      * @ORM\JoinTable(name="realizacao_projetos_direcao")
      **/
     protected $direcao;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", cascade={"merge"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", cascade={"merge"}, inversedBy="producaoProjetos")
      * @ORM\JoinTable(name="realizacao_projetos_producao")
      **/
     protected $producao;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", cascade={"merge"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", cascade={"merge"}, inversedBy="fotografiaProjetos")
      * @ORM\JoinTable(name="realizacao_projetos_fotografia")
      **/
     protected $fotografia;
@@ -62,7 +62,7 @@ class Projeto extends Base
     protected $disciplinaFotografia;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", cascade={"merge"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", cascade={"merge"}, inversedBy="somProjetos")
      * @ORM\JoinTable(name="realizacao_projetos_som")
      **/
     protected $som;
@@ -73,8 +73,8 @@ class Projeto extends Base
     protected $disciplinaSom;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", cascade={"merge"})
-      * @ORM\JoinTable(name="realizacao_projetos_arte")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", cascade={"merge"}, inversedBy="arteProjetos")
+     * @ORM\JoinTable(name="realizacao_projetos_arte")
      **/
     protected $arte;
 
@@ -84,12 +84,12 @@ class Projeto extends Base
     protected $disciplinaArte;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\CopiaFinal", cascade={"merge", "remove"}, mappedBy="projeto")
+     * @ORM\OneToOne(targetEntity="App\Entity\CopiaFinal", cascade={"merge"}, mappedBy="projeto")
      **/
     protected $copiaFinal;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CalendarEvent", cascade={"merge", "remove"}, mappedBy="projeto")
+     * @ORM\OneToMany(targetEntity="App\Entity\CalendarEvent", cascade={"merge"}, mappedBy="projeto")
      **/
     protected $calendarEvents;
 
@@ -479,6 +479,39 @@ class Projeto extends Base
     public function getCopiaFinal()
     {
         return $this->copiaFinal;
+    }
+
+    /**
+     * Add calendarEvents
+     *
+     * @param \App\Entity\CalendarEvent $calendarEvents
+     * @return Projeto
+     */
+    public function addCalendarEvent(\App\Entity\CalendarEvent $calendarEvents)
+    {
+        $this->calendarEvents[] = $calendarEvents;
+
+        return $this;
+    }
+
+    /**
+     * Remove calendarEvents
+     *
+     * @param \App\Entity\CalendarEvent $calendarEvents
+     */
+    public function removeCalendarEvent(\App\Entity\CalendarEvent $calendarEvents)
+    {
+        $this->calendarEvents->removeElement($calendarEvents);
+    }
+
+    /**
+     * Get calendarEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCalendarEvents()
+    {
+        return $this->calendarEvents;
     }
 
     /**

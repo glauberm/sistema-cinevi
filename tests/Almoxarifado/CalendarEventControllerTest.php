@@ -19,7 +19,7 @@ use App\Entity\Equipamento;
 class CalendarEventControllerTest extends AbstractCrudControllerTest
 {
     protected $indexRoute = 's/reservas';
-    protected $itemEditFilter = 'a:contains("13/06/2018")';
+    protected $itemEditFilter = 'dd:contains("13/06/2018")';
     protected $itemEditLink = '13/06/2018';
     protected $itemRemoveLink = "12\/06\/2018";
     protected $itemRemoveFilter = '[value="12/06/2018"]';

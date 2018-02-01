@@ -85,10 +85,6 @@ abstract class AbstractCrudControllerTest extends WebTestCase
     {
         $this->assertGreaterThan(0, $crawler->filter($itemEditFilter)->count(), 'Faltando elemento '.$itemEditFilter);
 
-        $crawler = $this->client->click($crawler->selectLink($itemEditLink)->link());
-
-        $crawler = $this->doAfterShow($crawler);
-
         $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 
         $form = $crawler->selectButton($editButton)->form($editArrayForm);
@@ -104,8 +100,6 @@ abstract class AbstractCrudControllerTest extends WebTestCase
 
     protected function doRemove($crawler, $editLink, $itemRemoveLink, $itemRemoveFilter, $removeButton)
     {
-        $crawler = $this->client->click($crawler->selectLink(stripslashes($itemRemoveLink))->link());
-
         $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 
         $this->assertGreaterThan(0, $crawler->filter($itemRemoveFilter)->count(), 'Faltando elemento '.$itemRemoveFilter);

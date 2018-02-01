@@ -35,9 +35,11 @@ abstract class AbstractUpdateController extends AbstractCreateController
             $em->merge($obj);
             $em->flush();
             $session->getFlashBag()->set('success', 'Edição de item realizada com sucesso!');
-            $obj = $this->postEdit($obj, $em, $session, $mailer, $twig);
+            $this->postEdit($obj, $em, $session, $mailer, $twig);
 
-            return $this->redirectToRoute($this->canonicalName.'_index');
+            return $this->redirectToRoute($this->canonicalName.'_show', array(
+                'params' => $obj->getId()
+            ));
         }
 
         return $this->createView($this->editTemplate, [

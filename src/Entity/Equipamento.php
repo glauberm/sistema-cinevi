@@ -298,7 +298,11 @@ class Equipamento extends Base
      */
     public function getCategoriaByNome()
     {
-        return $this->getCategoria()->getNome();
+        if($this->getCategoria()) {
+            return $this->getCategoria()->getNome();
+        } else {
+            return 'Sem Categoria';
+        }
     }
 
     /**

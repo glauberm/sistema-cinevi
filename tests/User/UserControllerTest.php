@@ -7,7 +7,7 @@ use App\Tests\Admin\AbstractCrudControllerTest;
 class UserControllerTest extends AbstractCrudControllerTest
 {
     protected $indexRoute = 's/usuarios';
-    protected $itemEditFilter = 'a:contains("TesteU")';
+    protected $itemEditFilter = 'h1:contains("TesteU")';
     protected $itemEditLink = 'TesteU';
     protected $itemRemoveLink = 'UEtset';
     protected $itemRemoveFilter = '[value="UEtset"]';

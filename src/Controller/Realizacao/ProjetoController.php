@@ -9,12 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Swift_Mailer;
 use Twig_Environment;
 use App\Controller\Admin\AbstractCrudController;
 use App\Mailer\MailerTrait;
 use App\Entity\Projeto;
 use App\Entity\ProjetoHistorico;
+use App\Entity\CalendarEvent;
 use App\Form\Realizacao\ProjetoType;
 
 class ProjetoController extends AbstractCrudController
@@ -28,6 +30,17 @@ class ProjetoController extends AbstractCrudController
     protected $className = Projeto::class;
     protected $formClassName = ProjetoType::class;
     protected $paramsKey = 'id';
+
+    protected function preShow(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac, PaginatorInterface $paginator, $obj, array $data = []) : array
+    {
+        $repository = $em->getRepository(CalendarEvent::class);
+        $qb = $repository->list($ac, 'reserva');
+        $qb = $repository->listWhereProjetoIs($qb, $obj->getId(), 'reserva');
+        $pagination = $this->createPagination($request, $paginator, $qb);
+        $data['pagination'] = $pagination;
+
+        return $data;
+    }
 
     protected function postFormNew(Form $form, EntityManagerInterface $em, AuthorizationCheckerInterface $ac) : Form
     {
@@ -87,7 +100,7 @@ class ProjetoController extends AbstractCrudController
     {
         $user = $form->get('realizacao')->get('user')->getData();
 
-        if(!empty($user) && ($user->getProfessor() !== true || $ac->isGranted('ROLE_DEPARTAMENTO'))) {
+        if(!empty($user) && ($user->getProfessor() !== true && !$ac->isGranted('ROLE_DEPARTAMENTO'))) {
             $projetosArray = array();
             foreach($user->getRealizacaos() as $realizacao) {
                 if($realizacao->getProjeto() && $realizacao->getProjeto() instanceof $this->className) {

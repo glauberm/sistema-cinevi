@@ -34,7 +34,9 @@ abstract class AbstractCreateController extends AbstractReadController
             $session->getFlashBag()->set('success', 'Criação de item realizada com sucesso!');
             $this->postNew($obj, $em, $session, $mailer, $twig);
 
-            return $this->redirectToRoute($this->canonicalName.'_index');
+            return $this->redirectToRoute($this->canonicalName.'_show', array(
+                'params' => $obj->getId()
+            ));
         }
 
         return $this->createView($this->addTemplate, [

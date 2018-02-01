@@ -11,16 +11,16 @@ class ProjetoRepository extends AbstractCrudRepository
         $qb = parent::list($authorizationChecker, $builderName);
 
         return $qb
-            ->innerJoin($builderName.'.realizacao', $builderName.'_realizacao')
-            ->innerJoin($builderName.'_realizacao.user', $builderName.'_user')
-            ->innerJoin($builderName.'_realizacao.modalidade', $builderName.'_modalidade')
+            ->leftJoin($builderName.'.realizacao', $builderName.'_realizacao')
+            ->leftJoin($builderName.'_realizacao.user', $builderName.'_user')
+            ->leftJoin($builderName.'_realizacao.modalidade', $builderName.'_modalidade')
         ;
     }
 
     public function listWhereUserIs($qb, $id, $builderName = 'item')
     {
         return $qb
-            ->where($builderName.'_realizacao.user = :id')
+            ->where($builderName.'_user.id = :id')
             ->setParameter('id', $id)
         ;
     }
@@ -36,7 +36,7 @@ class ProjetoRepository extends AbstractCrudRepository
     public function getProjetoFieldQB($builderName = 'item')
     {
         return $this->createQueryBuilder($builderName)
-            ->innerJoin($builderName.'.realizacao', $builderName.'_realizacao')
+            ->leftJoin($builderName.'.realizacao', $builderName.'_realizacao')
             ->orderBy($builderName.'_realizacao.titulo', 'ASC')
         ;
     }

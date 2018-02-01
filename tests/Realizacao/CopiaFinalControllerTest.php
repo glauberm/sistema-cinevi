@@ -13,7 +13,7 @@ use App\Entity\Modalidade;
 class CopiaFinalControllerTest extends AbstractCrudControllerTest
 {
     protected $indexRoute = 's/copias_finais';
-    protected $itemEditFilter = 'a:contains("TesteP")';
+    protected $itemEditFilter = 'h1:contains("TesteP")';
     protected $itemEditLink = 'TesteP';
     protected $itemRemoveLink = 'PEtset';
     protected $itemRemoveFilter = '[value="PEtset"]';
@@ -179,8 +179,6 @@ class CopiaFinalControllerTest extends AbstractCrudControllerTest
     {
         $this->assertGreaterThan(0, $crawler->filter($itemEditFilter)->count(), 'Faltando elemento '.$itemEditFilter);
 
-        $crawler = $this->client->click($crawler->selectLink($itemEditLink)->link());
-
         $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 
         $this->assertEquals(2, $crawler->filter('#equipes > .to-many-item')->count());
@@ -240,8 +238,6 @@ class CopiaFinalControllerTest extends AbstractCrudControllerTest
 
     protected function doRemove($crawler, $editLink, $itemRemoveLink, $itemRemoveFilter, $removeButton)
     {
-        $crawler = $this->client->click($crawler->selectLink($itemRemoveLink)->link());
-
         $crawler = $this->client->click($crawler->selectLink($editLink)->link());
 
         $this->assertEquals(1, $crawler->filter('#equipes > .to-many-item')->count());

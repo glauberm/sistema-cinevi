@@ -13,7 +13,7 @@ use App\Entity\User;
 class EquipamentoControllerTest extends AbstractCrudControllerTest
 {
     protected $indexRoute = 's/reservaveis';
-    protected $itemEditFilter = 'a:contains("TesteE")';
+    protected $itemEditFilter = 'h1:contains("TesteE")';
     protected $itemEditLink = 'TesteE';
     protected $itemRemoveLink = 'EEtset';
     protected $itemRemoveFilter = '[value="EEtset"]';

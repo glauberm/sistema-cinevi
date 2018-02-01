@@ -50,6 +50,36 @@ class User extends BaseUser
     protected $realizacaos;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CalendarEvent", cascade={"merge", "remove"}, mappedBy="user")
+     **/
+    protected $calendarEvents;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Projeto", cascade={"merge"}, mappedBy="direcao")
+     **/
+    protected $direcaoProjetos;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Projeto", cascade={"merge"}, mappedBy="producao")
+     **/
+    protected $producaoProjetos;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Projeto", cascade={"merge"}, mappedBy="fotografia")
+     **/
+    protected $fotografiaProjetos;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Projeto", cascade={"merge"}, mappedBy="som")
+     **/
+    protected $somProjetos;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Projeto", cascade={"merge"}, mappedBy="arte")
+     **/
+    protected $arteProjetos;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"merge"})
      **/
     protected $autor;
@@ -69,6 +99,12 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->realizacaos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->calendarEvents = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->direcaoProjetos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->producaoProjetos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->fotografiaProjetos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->somProjetos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->arteProjetos = new \Doctrine\Common\Collections\ArrayCollection();
         $this->historicos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -221,6 +257,39 @@ class User extends BaseUser
     }
 
     /**
+     * Add calendarEvents
+     *
+     * @param \App\Entity\CalendarEvent $calendarEvents
+     * @return User
+     */
+    public function addCalendarEvent(\App\Entity\CalendarEvent $calendarEvents)
+    {
+        $this->calendarEvents[] = $calendarEvents;
+
+        return $this;
+    }
+
+    /**
+     * Remove calendarEvents
+     *
+     * @param \App\Entity\CalendarEvent $calendarEvents
+     */
+    public function removeCalendarEvent(\App\Entity\CalendarEvent $calendarEvents)
+    {
+        $this->calendarEvents->removeElement($calendarEvents);
+    }
+
+    /**
+     * Get calendarEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCalendarEvents()
+    {
+        return $this->calendarEvents;
+    }
+
+    /**
      * Set autor
      *
      * @param \App\Entity\User $autor
@@ -297,6 +366,171 @@ class User extends BaseUser
     public function getHistoricos()
     {
         return $this->historicos;
+    }
+
+    /**
+     * Add direcaoProjetos
+     *
+     * @param \App\Entity\Projeto $direcaoProjetos
+     * @return User
+     */
+    public function addDirecaoProjeto(\App\Entity\Projeto $direcaoProjetos)
+    {
+        $this->$direcaoProjetos[] = $$direcaoProjetos;
+
+        return $this;
+    }
+
+    /**
+     * Remove direcaoProjetos
+     *
+     * @param \App\Entity\Projeto $direcaoProjetos
+     */
+    public function removeDirecaoProjeto(\App\Entity\Projeto $direcaoProjetos)
+    {
+        $this->direcaoProjetos->removeElement($direcaoProjetos);
+    }
+
+    /**
+     * Get direcaoProjetos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDirecaoProjetos()
+    {
+        return $this->direcaoProjetos;
+    }
+
+    /**
+     * Add producaoProjetos
+     *
+     * @param \App\Entity\Projeto $producaoProjetos
+     * @return User
+     */
+    public function addProducaoProjeto(\App\Entity\Projeto $producaoProjetos)
+    {
+        $this->$producaoProjetos[] = $$producaoProjetos;
+
+        return $this;
+    }
+
+    /**
+     * Remove producaoProjetos
+     *
+     * @param \App\Entity\Projeto $producaoProjetos
+     */
+    public function removeProducaoProjeto(\App\Entity\Projeto $producaoProjetos)
+    {
+        $this->producaoProjetos->removeElement($producaoProjetos);
+    }
+
+    /**
+     * Get producaoProjetos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducaoProjetos()
+    {
+        return $this->producaoProjetos;
+    }
+
+    /**
+     * Add fotografiaProjetos
+     *
+     * @param \App\Entity\Projeto $fotografiaProjetos
+     * @return User
+     */
+    public function addFotografiaProjeto(\App\Entity\Projeto $fotografiaProjetos)
+    {
+        $this->$fotografiaProjetos[] = $$fotografiaProjetos;
+
+        return $this;
+    }
+
+    /**
+     * Remove fotografiaProjetos
+     *
+     * @param \App\Entity\Projeto $fotografiaProjetos
+     */
+    public function removeFotografiaProjeto(\App\Entity\Projeto $fotografiaProjetos)
+    {
+        $this->fotografiaProjetos->removeElement($fotografiaProjetos);
+    }
+
+    /**
+     * Get fotografiaProjetos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFotografiaProjetos()
+    {
+        return $this->fotografiaProjetos;
+    }
+
+    /**
+     * Add somProjetos
+     *
+     * @param \App\Entity\Projeto $somProjetos
+     * @return User
+     */
+    public function addSomProjeto(\App\Entity\Projeto $somProjetos)
+    {
+        $this->$somProjetos[] = $$somProjetos;
+
+        return $this;
+    }
+
+    /**
+     * Remove somProjetos
+     *
+     * @param \App\Entity\Projeto $somProjetos
+     */
+    public function removeSomProjeto(\App\Entity\Projeto $somProjetos)
+    {
+        $this->somProjetos->removeElement($somProjetos);
+    }
+
+    /**
+     * Get somProjetos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSomProjetos()
+    {
+        return $this->somProjetos;
+    }
+
+    /**
+     * Add arteProjetos
+     *
+     * @param \App\Entity\Projeto $arteProjetos
+     * @return User
+     */
+    public function addArteProjeto(\App\Entity\Projeto $arteProjetos)
+    {
+        $this->$arteProjetos[] = $$arteProjetos;
+
+        return $this;
+    }
+
+    /**
+     * Remove arteProjetos
+     *
+     * @param \App\Entity\Projeto $arteProjetos
+     */
+    public function removeArteProjeto(\App\Entity\Projeto $arteProjetos)
+    {
+        $this->arteProjetos->removeElement($arteProjetos);
+    }
+
+    /**
+     * Get arteProjetos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArteProjetos()
+    {
+        return $this->arteProjetos;
     }
 
     /**

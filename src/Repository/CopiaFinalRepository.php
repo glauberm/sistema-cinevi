@@ -13,9 +13,9 @@ class CopiaFinalRepository extends AbstractCrudRepository
         $qb = parent::list($authorizationChecker, $builderName);
 
         return $qb
-            ->innerJoin($builderName.'.realizacao', $builderName.'_realizacao')
-            ->innerJoin($builderName.'_realizacao.user', $builderName.'_user')
-            ->innerJoin($builderName.'_realizacao.modalidade', $builderName.'_modalidade')
+            ->leftJoin($builderName.'.realizacao', $builderName.'_realizacao')
+            ->leftJoin($builderName.'_realizacao.user', $builderName.'_user')
+            ->leftJoin($builderName.'_realizacao.modalidade', $builderName.'_modalidade')
         ;
     }
 

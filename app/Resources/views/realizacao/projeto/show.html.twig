@@ -4,9 +4,36 @@
 {% set routeList = path('realizacao_projeto_index') %}
 {% set routeEdit = path('realizacao_projeto_edit', { 'params': item.id }) %}
 {% set routeHistoricoName = 'realizacao_projeto_historico' %}
+{% set textoRemocao = 'Ao remover um projeto, você também removerá as reservas associadas a ele.'%}
 
 {% block dtdd %}
 
     {% include 'realizacao/projeto/item.html.twig' %}
+
+{% endblock %}
+
+{% block extras %}
+    <h2 id="reservas" class="text-primary">Reservas</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {% include 'almoxarifado/calendar_event/list_thead.html.twig' with { builderName: 'reserva' } %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in pagination %}
+                    <tr>
+                        {% include 'almoxarifado/calendar_event/list_tbody.html.twig' %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% block blockPagination %}
+        {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas' } %}
+    {% endblock %}
 
 {% endblock %}

@@ -31,6 +31,8 @@ class ReservaController extends AbstractCrudController
     protected $className = CalendarEvent::class;
     protected $formClassName = CalendarEventType::class;
     protected $paramsKey = 'id';
+    private $startDate;
+    private $endDate;
 
     protected function preShow(Request $request, EntityManagerInterface $em, AuthorizationCheckerInterface $ac, PaginatorInterface $paginator, $obj, array $data = []) : array
     {
@@ -66,14 +68,24 @@ class ReservaController extends AbstractCrudController
         return $form;
     }
 
+    protected function preFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
+    {
+        $this->startDate = $obj->getStartDate();
+        $this->endDate = $obj->getEndDate();
+
+        return $form;
+    }
+
     protected function postFormEdit($obj, Form $form, EntityManagerInterface $em, AuthorizationCheckerInterface $ac) : Form
     {
         $startDate = $form->get('startDate')->getData();
         $endDate = $form->get('endDate')->getData();
 
-        $form = $this->validateWeekend($startDate, $endDate, $form);
-        $form = $this->validateHoliday($startDate, $endDate, $form);
-        $form = $this->validateInterval($startDate, $endDate, $form);
+        if($startDate != $this->startDate || $endDate != $this->endDate) {
+            $form = $this->validateWeekend($startDate, $endDate, $form);
+            $form = $this->validateHoliday($startDate, $endDate, $form);
+            $form = $this->validateInterval($startDate, $endDate, $form);
+        }
 
         $reservas = $em->getRepository($this->repositoryName)
             ->findAllBetweenDatesButId($startDate, $endDate, $obj->getId())
@@ -103,8 +115,6 @@ class ReservaController extends AbstractCrudController
         $template = $this->templateDir.'/email_professor';
         $to = $obj->getProjeto()->getRealizacao()->getProfessor()->getEmail();
         $this->sendMail($mailer, $twig, $obj, $path, $subject, $to, $template);
-
-        // $session->getFlashBag()->set('success', 'Criação de reserva realizada com sucesso! Para editar ou remover sua reserva, clique nela pelo calendário.');
     }
 
     protected function postEdit($obj, EntityManagerInterface $em, SessionInterface $session, Swift_Mailer $mailer, Twig_Environment $twig)

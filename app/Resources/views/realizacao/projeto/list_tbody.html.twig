@@ -5,5 +5,9 @@
     <a href="{{ path('user_user_show', { 'params': item.realizacao.user.id }) }}">{{ item.realizacao.user.username }}</a>
 </td>
 <td>
-    <a href="{{ path('realizacao_modalidade_show', { 'params': item.realizacao.modalidade.id }) }}">{{ item.realizacao.modalidade.nome }}</a>
+    {% if item.realizacao.modalidade is defined and item.realizacao.modalidade is not empty %}
+        <a href="{{ path('realizacao_modalidade_show', { 'params': item.realizacao.modalidade.id }) }}">{{ item.realizacao.modalidade.nome }}</a>
+    {% else %}
+        <span class="text-muted font-style-italic">Removida(o)</span>
+    {% endif %}
 </td>

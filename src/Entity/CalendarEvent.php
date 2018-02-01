@@ -24,12 +24,13 @@ class CalendarEvent extends BaseEvent
     protected $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"merge"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"merge"}, inversedBy="calendarEvents")
      **/
     protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Projeto", cascade={"merge"}, inversedBy="calendarEvents")
+     * @ORM\JoinColumn(name="modalidade_id", referencedColumnName="id", onDelete="SET NULL")
      **/
     protected $projeto;
 

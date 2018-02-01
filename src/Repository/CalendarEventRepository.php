@@ -55,8 +55,16 @@ class CalendarEventRepository extends AbstractCrudRepository
     public function listWhereEquipamentoIs($qb, $id, $builderName = 'item')
     {
         return $qb
-            ->innerJoin($builderName.'.equipamentos', $builderName.'_equipamentos')
+            ->leftJoin($builderName.'.equipamentos', $builderName.'_equipamentos')
             ->where($builderName.'_equipamentos.id = :id')
+            ->setParameter('id', $id)
+        ;
+    }
+
+    public function listWhereProjetoIs($qb, $id, $builderName = 'item')
+    {
+        return $qb
+            ->where($builderName.'.projeto = :id')
             ->setParameter('id', $id)
         ;
     }

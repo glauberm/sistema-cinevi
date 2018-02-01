@@ -7,7 +7,7 @@ use App\Tests\Admin\AbstractCrudControllerTest;
 class CategoriaControllerTest extends AbstractCrudControllerTest
 {
     protected $indexRoute = 's/categorias_reservaveis';
-    protected $itemEditFilter = 'a:contains("TesteC")';
+    protected $itemEditFilter = 'h1:contains("TesteC")';
     protected $itemEditLink = 'TesteC';
     protected $itemRemoveLink = 'CEtset';
     protected $itemRemoveFilter = '[value="CEtset"]';

@@ -7,6 +7,7 @@ class UserRepository extends AbstractCrudRepository
     public function getUserFieldQB($builderName = 'item')
     {
         return $this->createQueryBuilder($builderName)
+            ->where($builderName.'.id != 1')
             ->orderBy($builderName.'.username', 'ASC')
         ;
     }

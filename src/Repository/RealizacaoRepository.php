@@ -14,15 +14,19 @@ class RealizacaoRepository extends AbstractEntityRepository
         ;
         $values['user_id'] = $user->getUsername();
 
-        $modalidade = $this->getEntityManager()
-            ->getRepository(Modalidade::class)->find($values['modalidade_id'])
-        ;
-        $values['modalidade_id'] = $modalidade->getNome();
+        if($values['modalidade_id']) {
+            $modalidade = $this->getEntityManager()
+                ->getRepository(Modalidade::class)->find($values['modalidade_id'])
+            ;
+            $values['modalidade_id'] = $modalidade->getNome();
+        }
 
-        $professor = $this->getEntityManager()
-            ->getRepository(User::class)->find($values['professor_id'])
-        ;
-        $values['professor_id'] = $professor->getUsername();
+        if($values['professor_id']) {
+            $professor = $this->getEntityManager()
+                ->getRepository(User::class)->find($values['professor_id'])
+            ;
+            $values['professor_id'] = $professor->getUsername();
+        }
 
         return $values;
     }

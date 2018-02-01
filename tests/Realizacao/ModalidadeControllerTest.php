@@ -7,7 +7,7 @@ use App\Tests\Admin\AbstractCrudControllerTest;
 class ModalidadeControllerTest extends AbstractCrudControllerTest
 {
     protected $indexRoute = 's/modalidades';
-    protected $itemEditFilter = 'a:contains("TesteF")';
+    protected $itemEditFilter = 'h1:contains("TesteF")';
     protected $itemEditLink = 'TesteF';
     protected $itemRemoveLink = 'FEtset';
     protected $itemRemoveFilter = '[value="FEtset"]';

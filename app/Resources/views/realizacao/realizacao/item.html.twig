@@ -15,11 +15,20 @@
     </div>
     <div class="col-sm-4">
         <dt>Modalidade</dt>
-        <dd><a href="{{ path('realizacao_modalidade_show', { 'params': item.modalidade.id }) }}">{{ item.modalidade.nome }}</a></dd>
+        {% if item.modalidade is defined and item.modalidade != null %}
+            <dd><a href="{{ path('realizacao_modalidade_show', { 'params': item.modalidade.id }) }}">{{ item.modalidade.nome }}</a></dd>
+        {% else %}
+            <dd class="text-muted font-style-italic">Removida(o)</dd>
+        {% endif %}
     </div>
     <div class="col-sm-4">
         <dt>Professor(a)</dt>
-        <dd><a href="{{ path('user_user_show', { 'params': item.professor.id }) }}">{{ item.professor.username }}</a></dd>
+        {% if item.professor is defined and item.professor != null %}
+            <dd><a href="{{ path('user_user_show', { 'params': item.professor.id }) }}">{{ item.professor.username }}</a></dd>
+        {% else %}
+            <dd class="text-muted font-style-italic">Removida(o)</dd>
+        {% endif %}
+
     </div>
 </div>
 <div class="row">

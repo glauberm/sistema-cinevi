@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoriaRepository")
@@ -20,7 +19,6 @@ class Categoria extends Base
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Por favor, informe o nome da categoria.")
      **/
     protected $nome;
 
@@ -30,7 +28,7 @@ class Categoria extends Base
     protected $descricao;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Equipamento", cascade={"merge", "remove"}, mappedBy="categoria")
+     * @ORM\OneToMany(targetEntity="App\Entity\Equipamento", cascade={"merge"}, mappedBy="categoria")
      **/
     protected $equipamentos;
 

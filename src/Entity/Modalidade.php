@@ -29,7 +29,7 @@ class Modalidade extends Base
     protected $descricao;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Realizacao", cascade={"merge", "remove"}, mappedBy="modalidade")
+     * @ORM\OneToMany(targetEntity="App\Entity\Realizacao", cascade={"merge"}, mappedBy="modalidade")
      **/
     protected $realizacaos;
 

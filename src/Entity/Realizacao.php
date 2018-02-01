@@ -34,11 +34,13 @@ class Realizacao
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Modalidade", cascade={"merge"}, inversedBy="realizacaos")
+     * @ORM\JoinColumn(name="modalidade_id", referencedColumnName="id", onDelete="SET NULL")
      **/
     protected $modalidade;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"merge"})
+     * @ORM\JoinColumn(name="professor_id", referencedColumnName="id", onDelete="SET NULL")
      **/
     protected $professor;
 
@@ -63,12 +65,12 @@ class Realizacao
     protected $detalhesCaptacao;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Projeto", cascade={"persist","merge", "remove"}, mappedBy="realizacao")
+     * @ORM\OneToOne(targetEntity="App\Entity\Projeto", cascade={"persist", "merge", "remove"}, mappedBy="realizacao")
      **/
     protected $projeto;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\CopiaFinal", cascade={"persist","merge", "remove"}, mappedBy="realizacao")
+     * @ORM\OneToOne(targetEntity="App\Entity\CopiaFinal", cascade={"persist", "merge", "remove"}, mappedBy="realizacao")
      **/
     protected $copiaFinal;
 

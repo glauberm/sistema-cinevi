@@ -4,6 +4,7 @@
 {% set routeList = path('user_user_index') %}
 {% set routeEdit = path('user_user_edit', { 'params': item.id }) %}
 {% set routeHistoricoName = 'user_user_historico' %}
+{% set textoRemocao = 'Ao remover um usuário, você também removerá informações associadas a ele como seus projetos, reservas e cópias finais.'%}
 
 {% block dtdd %}
     {% include 'user/user/item.html.twig' %}

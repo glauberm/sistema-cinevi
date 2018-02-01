@@ -12,6 +12,9 @@
                 <h4 class="modal-title" id="modalRemoverLabel">Remover item</h4>
             </div>
             <div class="modal-body">
+                {% if textoRemocao is defined and textoRemocao is not empty %}
+                    <p>{{ textoRemocao }}</p>
+                {% endif %}
                 <p>Deseja realmente remover este item? Essa ação não poderá ser desfeita.</p>
             </div>
             <div class="modal-footer">

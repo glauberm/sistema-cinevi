@@ -1,58 +1,108 @@
 {% include 'realizacao/realizacao/item.html.twig' with {item: item.realizacao} %}
 
 <div class="row">
-    <div class="col-sm-4"><dt>Pré-produção</dt><dd>{{ item.preProducao|date('d/m/Y') }}</dd></div>
-    <div class="col-sm-4"><dt>Produção</dt><dd>{{ item.dataProducao|date('d/m/Y') }}</dd></div>
-    <div class="col-sm-4"><dt>Pós-produção</dt><dd>{{ item.posProducao|date('d/m/Y') }}</dd></div>
+    <div class="col-sm-4">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Pré-produção',
+            'item': item.preProducao,
+            'dd': item.preProducao|date('d/m/Y')
+        } %}
+    </div>
+    <div class="col-sm-4">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Produção',
+            'item': item.dataProducao,
+            'dd': item.dataProducao|date('d/m/Y')
+        } %}
+    </div>
+    <div class="col-sm-4">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Pós-produção',
+            'item': item.posProducao,
+            'dd': item.posProducao|date('d/m/Y')
+        } %}
+    </div>
 </div>
 
 <div class="row">
     <div class="col-sm-6">
         <dt>Direção</dt>
-        {% for user in item.direcao %}
-            <dd><a href="{{ path('user_user_show', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
-        {% endfor %}
+        {% if item.direcao is defined and item.direcao is not empty %}
+            {% for user in item.direcao %}
+                <dd><a href="{{ path('user_user_show', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
+            {% endfor %}
+        {% else %}
+            <dd class="text-muted font-style-italic">Removida(o) ou Não informada(o)</dd>
+        {% endif %}
     </div>
     <div class="col-sm-6">
         <dt>Produção</dt>
-        {% for user in item.producao %}
-            <dd><a href="{{ path('user_user_show', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
-        {% endfor %}
+        {% if item.producao is defined and item.producao is not empty %}
+            {% for user in item.producao %}
+                <dd><a href="{{ path('user_user_show', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
+            {% endfor %}
+        {% else %}
+            <dd class="text-muted font-style-italic">Removida(o) ou Não informada(o)</dd>
+        {% endif %}
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-6">
         <dt>Direção de Fotografia</dt>
-        {% for user in item.fotografia %}
-            <dd><a href="{{ path('user_user_show', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
-        {% endfor %}
+        {% if item.fotografia is defined and item.fotografia is not empty %}
+            {% for user in item.fotografia %}
+                <dd><a href="{{ path('user_user_show', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
+            {% endfor %}
+        {% else %}
+            <dd class="text-muted font-style-italic">Removida(o) ou Não informada(o)</dd>
+        {% endif %}
     </div>
     <div class="col-sm-6">
-        <dt>Já cursou(aram) a disciplina de Fotografia e Iluminação?</dt><dd>{{ item.disciplinaFotografia ? 'Sim' : 'Não' }}</dd>
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Já cursou(aram) a disciplina de Fotografia e Iluminação?',
+            'item': item.disciplinaFotografia,
+            'dd': item.disciplinaFotografia ? 'Sim' : 'Não'
+        } %}
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-6">
         <dt>Direção de Som</dt>
-        {% for user in item.som %}
-            <dd><a href="{{ path('user_user_show', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
-        {% endfor %}
+        {% if item.som is defined and item.som is not empty %}
+            {% for user in item.som %}
+                <dd><a href="{{ path('user_user_show', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
+            {% endfor %}
+        {% else %}
+            <dd class="text-muted font-style-italic">Removida(o) ou Não informada(o)</dd>
+        {% endif %}
     </div>
     <div class="col-sm-6">
-        <dt>Já cursou(aram) a disciplina de Técnica de Som em Cinema e Audiovisual?</dt><dd>{{ item.disciplinaSom ? 'Sim' : 'Não' }}</dd>
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Já cursou(aram) a disciplina de Técnica de Som em Cinema e Audiovisual?',
+            'item': item.disciplinaSom,
+            'dd': item.disciplinaSom ? 'Sim' : 'Não'
+        } %}
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-6">
         <dt>Direção de Arte</dt>
-        {% for user in item.arte %}
-            <dd><a href="{{ path('user_user_show', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
-        {% endfor %}
+        {% if item.arte is defined and item.arte is not empty %}
+            {% for user in item.arte %}
+                <dd><a href="{{ path('user_user_show', { 'params' : user.id }) }}">{{ user.username }}</a></dd>
+            {% endfor %}
+        {% else %}
+            <dd class="text-muted font-style-italic">Removida(o) ou Não informada(o)</dd>
+        {% endif %}
     </div>
     <div class="col-sm-6">
-        <dt>Já cursou(aram) a disciplina de Design Visual?</dt><dd>{{ item.disciplinaArte ? 'Sim' : 'Não' }}</dd>
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Já cursou(aram) a disciplina de Design Visual?',
+            'item': item.disciplinaArte,
+            'dd': item.disciplinaArte ? 'Sim' : 'Não'
+        } %}
     </div>
 </div>
