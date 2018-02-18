@@ -1,7 +1,6 @@
 # TO-DO
 
-- Retirar itemEditLink e itemRemoveLink dos testes
-- Excluir projeto não exclui reserva
+- Ver porque os testes estão dando erro
 
 ## Depois
 
