@@ -71,15 +71,19 @@ class CalendarEventRepository extends AbstractCrudRepository
 
     protected function filterValues($values)
     {
-        $user = $this->getEntityManager()
-            ->getRepository(User::class)->find($values['user_id'])
-        ;
-        $values['user_id'] = $user->getUsername();
+        if(!empty($values['user_id'])) {
+            $user = $this->getEntityManager()
+                ->getRepository(User::class)->find($values['user_id'])
+            ;
+            $values['user_id'] = $user->getUsername();
+        }
 
-        $projeto = $this->getEntityManager()
-            ->getRepository(Projeto::class)->find($values['projeto_id'])
-        ;
-        $values['projeto_id'] = $projeto->getRealizacao()->getTitulo();
+        if(!empty($values['projeto_id'])) {
+            $projeto = $this->getEntityManager()
+                ->getRepository(Projeto::class)->find($values['projeto_id'])
+            ;
+            $values['projeto_id'] = $projeto->getRealizacao()->getTitulo();
+        }
 
         $equipamentosArray = array();
         $equipamentos = $this->find($values['id'])->getEquipamentos();

@@ -9,7 +9,7 @@
         {% if item.categoria is defined and item.categoria != null %}
             <dd><a href="{{ path('almoxarifado_categoria_show', { 'params': item.categoria.id }) }}">{{ item.categoria.nome }}</a></dd>
         {% else %}
-            <dd class="text-muted font-style-italic">Removida(o)</dd>
+            <dd class="text-muted font-style-italic">Removido</dd>
         {% endif %}
     </div>
 </div>

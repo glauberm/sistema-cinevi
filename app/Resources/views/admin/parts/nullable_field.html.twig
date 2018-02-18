@@ -15,9 +15,17 @@
         {% if nl2br is defined and nl2br == true %}
             <dd>{{ dd|nl2br }}</dd>
         {% else %}
-            <dd>{{ dd }}</dd>
+            {% if bool is defined and bool == true %}
+                {% if dd == true %}
+                    <dd>Sim</dd>
+                {% else %}
+                    <dd>Não</dd>
+                {% endif %}
+            {% else %}
+                <dd>{{ dd }}</dd>
+            {% endif %}
         {% endif %}
     {% endif %}
 {% else %}
-    <dd class="text-muted font-style-italic">Não informada(o)</dd>
+    <dd class="text-muted font-style-italic">Não informado</dd>
 {% endif %}

@@ -56,7 +56,7 @@ class EquipamentoRepository extends AbstractCrudRepository
 
     protected function filterValues($values)
     {
-        if($values['categoria_id']) {
+        if(!empty($values['categoria_id'])) {
             $categoria = $this->getEntityManager()
                 ->getRepository(Categoria::class)->find($values['categoria_id'])
             ;

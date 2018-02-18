@@ -19,7 +19,7 @@
             {% if item.projeto is defined and item.projeto != null %}
                 <dd><a href="{{ path('realizacao_projeto_show', { 'params' : item.projeto.id}) }}">{{ item.projeto.realizacao.titulo }}</a></dd>
             {% else %}
-                <dd class="text-muted font-style-italic">Removida(o)</dd>
+                <dd class="text-muted font-style-italic">Removido</dd>
             {% endif %}
         </div>
     </div>

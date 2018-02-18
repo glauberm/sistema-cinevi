@@ -44,18 +44,20 @@ class CalendarEventCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $hoje = new \DateTime();
-        $hoje->setTime( 0, 0, 0 );
+        $hojeComeco = new \DateTime();
+        $hojeFim = new \DateTime();
+        $hojeComeco->setTime( 0, 0, 0 );
+        $hojeFim->setTime( 23, 59, 59 );
 
         $reservas = $this->em
             ->getRepository(CalendarEvent::class)
-            ->findAllBetweenDates($hoje, $hoje)
+            ->findAllBetweenDates($hojeComeco, $hojeFim)
             ->getQuery()->getResult()
         ;
 
         foreach($reservas as $reserva) {
 
-            $diffStartDate = $hoje->diff($reserva->getStartDate());
+            $diffStartDate = $hojeComeco->diff($reserva->getStartDate());
             $intervalStartDate = (int)$diffStartDate->format("%r%a");
 
             if($intervalStartDate == 0) {
@@ -97,7 +99,7 @@ class CalendarEventCommand extends Command
                 $output->writeln('Foram enviados emails avisando sobre a retirada da reserva '.$reserva->getTitle().' amanhã.');
             }
 
-            $diffEndDate = $hoje->diff($reserva->getEndDate());
+            $diffEndDate = $hojeComeco->diff($reserva->getEndDate());
             $intervalEndDate = (int)$diffEndDate->format("%r%a");
 
             if($intervalEndDate == 0) {

@@ -8,6 +8,6 @@
     {% if item.realizacao.modalidade is defined and item.realizacao.modalidade is not empty %}
         <a href="{{ path('realizacao_modalidade_show', { 'params': item.realizacao.modalidade.id }) }}">{{ item.realizacao.modalidade.nome }}</a>
     {% else %}
-        <span class="text-muted font-style-italic">Removida(o)</span>
+        <span class="text-muted font-style-italic">Removido</span>
     {% endif %}
 </td>

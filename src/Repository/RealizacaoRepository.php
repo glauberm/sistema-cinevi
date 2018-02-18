@@ -9,19 +9,21 @@ class RealizacaoRepository extends AbstractEntityRepository
 {
     protected function filterValues($values)
     {
-        $user = $this->getEntityManager()
-            ->getRepository(User::class)->find($values['user_id'])
-        ;
-        $values['user_id'] = $user->getUsername();
+        if(!empty($values['user_id'])) {
+            $user = $this->getEntityManager()
+                ->getRepository(User::class)->find($values['user_id'])
+            ;
+            $values['user_id'] = $user->getUsername();
+        }
 
-        if($values['modalidade_id']) {
+        if(!empty($values['modalidade_id'])) {
             $modalidade = $this->getEntityManager()
                 ->getRepository(Modalidade::class)->find($values['modalidade_id'])
             ;
             $values['modalidade_id'] = $modalidade->getNome();
         }
 
-        if($values['professor_id']) {
+        if(!empty($values['professor_id'])) {
             $professor = $this->getEntityManager()
                 ->getRepository(User::class)->find($values['professor_id'])
             ;

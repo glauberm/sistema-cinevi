@@ -41,7 +41,7 @@ class CopiaFinalRepository extends AbstractCrudRepository
         if(!empty($realizacao)) $values = array_merge($realizacao[0], $values);
         unset($values['realizacao_id']);
 
-        if($values['projeto_id']) {
+        if(!empty($values['projeto_id'])) {
             $projeto = $this->getEntityManager()
                 ->getRepository(Projeto::class)->find($values['projeto_id'])
             ;

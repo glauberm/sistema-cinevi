@@ -6,7 +6,7 @@
     {% if item.categoria is defined and item.categoria != null %}
         <a href="{{ path('almoxarifado_categoria_show', { 'params': item.categoria.id }) }}">{{ item.categoria.nome }}</a>
     {% else %}
-        <span class="text-muted font-style-italic">Removida(o)</span>
+        <span class="text-muted font-style-italic">Removido</span>
     {% endif %}
 </td>
 <td>{{ item.manutencao ? 'Sim' : 'Não' }}</td>
