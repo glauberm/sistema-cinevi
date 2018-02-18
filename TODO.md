@@ -1,5 +1,7 @@
 # TO-DO
 
+- Ver timezone no servidor
+
 ## Futuro
 
 - Busca
