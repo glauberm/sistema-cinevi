@@ -28,7 +28,7 @@ class Categoria extends Base
     protected $descricao;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Equipamento", cascade={"merge"}, mappedBy="categoria")
+     * @ORM\OneToMany(targetEntity="App\Entity\Equipamento", cascade={"merge", "remove"}, mappedBy="categoria")
      **/
     protected $equipamentos;
 

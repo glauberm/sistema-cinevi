@@ -4,7 +4,7 @@
 {% set routeList = path('almoxarifado_categoria_index') %}
 {% set routeEdit = path('almoxarifado_categoria_edit', { 'params': item.id }) %}
 {% set routeHistoricoName = 'almoxarifado_categoria_historico' %}
-{% set textoRemocao = 'Ao remover uma categoria de reserváveis, você deixará todos os reserváveis associados a ela sem essa informação.'%}
+{% set textoRemocao = 'Ao remover uma categoria de reserváveis, você removerá todos os reserváveis associados a ela.'%}
 
 {% block dtdd %}
     {% include 'almoxarifado/categoria/item.html.twig' %}

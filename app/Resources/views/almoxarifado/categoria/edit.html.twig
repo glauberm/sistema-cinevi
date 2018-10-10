@@ -2,7 +2,7 @@
 
 {% set title = 'Editar ' ~ item.nome %}
 {% set routeList = path('almoxarifado_categoria_index') %}
-{% set textoRemocao = 'Ao remover uma categoria de reserváveis, você deixará todos os reserváveis associados a ela sem essa informação.'%}
+{% set textoRemocao = 'Ao remover uma categoria de reserváveis, você removerá todos os reserváveis associados a ela.'%}
 
 {% block form %}
     {% include 'almoxarifado/categoria/form.html.twig' with {form: edit_form} %}
