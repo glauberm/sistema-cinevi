@@ -168,6 +168,7 @@ class CalendarEvent extends BaseEvent
     public function setStartDate(\DateTime $startDate = null)
     {
         $this->startDate = $startDate;
+        $this->startDate->setTime( 0, 0, 0 );
     }
 
     /**
@@ -176,6 +177,7 @@ class CalendarEvent extends BaseEvent
     public function setEndDate(\DateTime $endDate = null)
     {
         $this->endDate = $endDate;
+        $this->endDate->setTime( 23, 59, 59 );
     }
 
     /**

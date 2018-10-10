@@ -1,10 +1,7 @@
-<div class="row">
-    <div class="col-xs-12">
-        {% for equipe in item.equipes %}
-            {% include 'realizacao/equipe/item.html.twig' with {item: equipe} %}
-        {% endfor %}
-    </div>
-</div>
+{% for equipe in item.equipes %}
+    {% include 'realizacao/equipe/item.html.twig' with {item: equipe} %}
+{% endfor %}
+
 <div class="row">
     <div class="col-xs-12">
         {% include 'admin/parts/nullable_field.html.twig' with {

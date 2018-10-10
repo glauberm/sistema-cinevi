@@ -1,115 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html dir="ltr" lang="pt-BR">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="theme-color" content="#ecd000">
+        <link href="{{ asset('manifest.json') }}" rel="manifest">
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
         <title>{% if title is defined %}{{ title }} - {% endif %}Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)</title>
         <meta name="description" content="Cadastre projetos, reserve equipamentos no almoxarifado e muito mais pelo celular, tablet ou qualquer outro dispositivo com acesso à internet. Sistema para alunos, funcionários ou professores do Departamento de Cinema e Vídeo da Universidade Federal Fluminense." />
-        <meta name="subject" content="Todos os serviços do departamento qualquer lugar." />
-        <meta name="robots" content="noindex, nofollow" />
-        <meta name="googlebot" content="noindex, nofollow" />
-        <link rel="author" href="{{ asset('humans.txt') }}">
-        <link href="{{ asset('manifest.json') }}" rel="manifest">
-        {% block stylesheets %}
-            <link href="{{ asset('css/prod/main-756e48128b.min.css') }}" rel="stylesheet" type="text/css" />
+        {% block robots %}
+            <meta name="robots" content="noindex, nofollow" />
+            <meta name="googlebot" content="noindex, nofollow" />
         {% endblock %}
-    	<link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
-    	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
-    	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}">
-    	<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('apple-icon-76x76.png') }}">
-    	<link rel="apple-touch-icon" sizes="114x114" href="{{ asset('apple-icon-114x114.png') }}">
-    	<link rel="apple-touch-icon" sizes="120x120" href="{{ asset('apple-icon-120x120.png') }}">
-    	<link rel="apple-touch-icon" sizes="144x144" href="{{ asset('apple-icon-144x144.png') }}">
-    	<link rel="apple-touch-icon" sizes="152x152" href="{{ asset('apple-icon-152x152.png') }}">
-    	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-icon-180x180.png') }}">
-    	<link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('android-icon-192x192.png') }}">
-    	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-    	<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
-    	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+        {% block stylesheets %}
+            <link href="{{ asset('css/prod/main.min.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
     </head>
     <body>
+        {% block content %}
 
-        <a class="overlay-alert pular-para-conteudo" href="#conteudo"><span class="label label-primary">Pular para Conteúdo</span></a>
+            {% block header %}
+                {% include 'admin/header.html.twig' %}
+            {% endblock %}
 
-        {% block header %}
-            {% include 'admin/header.html.twig' %}
-        {% endblock %}
+            <div class="content">
+                <div class="container{% if containerFluid is defined and containerFluid == true %}-fluid{% endif %}">
 
-        <div class="content">
-            <div class="container{% if containerFluid is defined and containerFluid == true %}-fluid{% endif %}">
+                    <div class="row">
+                        <main class="main {% if app.user is not empty and app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}col-md-9 col-md-push-3{% else %}col-xs-12{% endif %}">
 
-                <div class="row">
-                    <main class="main {% if app.user is not empty and app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}col-md-9 col-md-push-3{% else %}col-xs-12{% endif %}">
-
-                        {% block navbar %}
-                            <nav class="navbar navbar-default">
-                                <div class="container-fluid">
-                                    <div class="navbar-header">
-                                        {% block maisActionsButton %}{% endblock %}
-                                        {% block mainActions %}{% endblock %}
-                                    </div>
-
-                                    {% block maisActions %}{% endblock %}
-                                </div>
-                            </nav>
-                        {% endblock %}
-
-                        {% block body %}
-                            <h1 class="page-header text-primary" id="conteudo">{{ title }}</h1>
-
-                            {% block alerts %}
-                                {% for type, messages in app.session.flashBag.all %}
-                                    {% for message in messages %}
-                                        <div class="alert alert-{{ type }} alert-dismissal fade in" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                            {{ message|trans({}, 'FOSUserBundle') }}
+                            {% block navbar %}
+                                <nav class="navbar navbar-default">
+                                    <div class="container-fluid">
+                                        <div class="navbar-header">
+                                            {% block maisActionsButton %}{% endblock %}
+                                            {% block mainActions %}{% endblock %}
                                         </div>
-                                    {% endfor %}
-                                {% endfor %}
 
-                                {% if app.user.confirmado is not defined or app.user.confirmado != true %}
-                                    <div class="alert alert-warning alert-dismissal fade in" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                        Seus dados ainda não foram confirmados. Até lá, você não poderá realizar ações no sistema. <a href="{{ path('fos_user_profile_edit', {user:app.user}) }}" class="alert-link">Edite o seu perfil</a> com nome, matrícula e telefone corretos e você receberá um email assim que seu cadastro for confirmado. Caso você não receba este email, entre em contato com o departamento.
+                                        {% block maisActions %}{% endblock %}
                                     </div>
-                                {% endif %}
-
-                                {% if form is defined and form.vars is defined and not form.vars.valid %}
-                                    <div class="alert alert-danger alert-dismissal fade in" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                        Existem erros no formulário. Cheque os campos e tente novamente.
-                                    </div>
-                                {% endif %}
-
-                                {% if is_granted('ROLE_SUPER_ADMIN') and configuration is defined and configuration is empty %}
-                                    <div class="alert alert-warning alert-dismissal fade in" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                                        As configurações ainda não foram criadas. <a href="{{ path('get_configurations') }}" class="alert-link">Crie-as</a> para controlar o funcionamento do sistema.
-                                    </div>
-                                {% endif %}
+                                </nav>
                             {% endblock %}
-                        {% endblock %}
-                    </main>
 
-                    {% if app.user is not empty and app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
-                        {% block mainMenu %}
-                            <aside class="aside col-md-3 col-md-pull-9">
-                                {% include 'admin/menu.html.twig' %}
-                            </aside>
-                        {% endblock %}
-                    {% endif %}
+                            {% block body %}
+                                <h1 class="page-header title-primary">{{ title }}</h1>
 
+                                {% block alerts %}
+                                    {% for type, messages in app.session.flashBag.all %}
+                                        {% for message in messages %}
+                                            <div class="alert alert-{{ type }} alert-dismissal fade in" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                                                {{ message|trans({}, 'FOSUserBundle') }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+
+                                    {% if app.user.confirmado is not defined or app.user.confirmado != true %}
+                                        <div class="alert alert-warning alert-dismissal fade in" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                                            Seus dados ainda não foram confirmados. Até lá, você não poderá realizar ações no sistema. <a href="{{ path('fos_user_profile_edit', {user:app.user}) }}" class="alert-link">Edite o seu perfil</a> com nome, matrícula e telefone corretos e você receberá um email assim que seu cadastro for confirmado. Caso você não receba este email, entre em contato com o departamento.
+                                        </div>
+                                    {% endif %}
+
+                                    {% if form is defined and form.vars is defined and not form.vars.valid %}
+                                        <div class="alert alert-danger alert-dismissal fade in" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                                            Existem erros no formulário. Cheque os campos e tente novamente.
+                                        </div>
+                                    {% endif %}
+
+                                    {% if is_granted('ROLE_SUPER_ADMIN') and configuration is defined and configuration is empty %}
+                                        <div class="alert alert-warning alert-dismissal fade in" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                                            As configurações ainda não foram criadas. <a href="{{ path('get_configurations') }}" class="alert-link">Crie-as</a> para controlar o funcionamento do sistema.
+                                        </div>
+                                    {% endif %}
+                                {% endblock %}
+                            {% endblock %}
+                        </main>
+
+                        {% if app.user is not empty and app.user.confirmado == true or is_granted('ROLE_DEPARTAMENTO') or is_granted('ROLE_ALMOXARIFADO') %}
+                            {% block mainMenu %}
+                                <aside class="aside col-md-3 col-md-pull-9">
+                                    {% include 'admin/menu.html.twig' %}
+                                </aside>
+                            {% endblock %}
+                        {% endif %}
+
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endblock %}
 
         {% block footer %}
             {% include 'admin/footer.html.twig' %}
         {% endblock %}
 
         {% block javascripts %}
-            <script src="{{ asset('js/prod/main-35c5f28ddc.min.js') }}"></script>
+            <script src="{{ asset('js/prod/main.min.js') }}"></script>
         {% endblock %}
     </body>
 </html>

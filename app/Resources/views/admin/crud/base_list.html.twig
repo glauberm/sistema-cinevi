@@ -5,11 +5,9 @@
         {% include 'admin/svg/voltar.html.twig' %}
     </a>
     {% block addAction %}
-        {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <div class="navbar-form navbar-nav">
-                <a class="btn btn-success" href="{{ routeAdd }}">{% include 'admin/svg/adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
-            </div>
-        {% endif %}
+        <div class="navbar-form navbar-nav">
+            <a class="btn btn-success" href="{{ routeAdd }}">{% include 'admin/svg/adicionar.html.twig' %}<span class="hidden-xs">Adicionar</span></a>
+        </div>
     {% endblock %}
 {% endblock %}
 

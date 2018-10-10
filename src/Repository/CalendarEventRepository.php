@@ -85,6 +85,8 @@ class CalendarEventRepository extends AbstractCrudRepository
             $values['projeto_id'] = $projeto->getRealizacao()->getTitulo();
         }
 
+        unset($values['modalidade_id']);
+
         $equipamentosArray = array();
         $equipamentos = $this->find($values['id'])->getEquipamentos();
         foreach($equipamentos as $equipamento) {
@@ -104,8 +106,8 @@ class CalendarEventRepository extends AbstractCrudRepository
     {
         return array(
             'title' => 'Código',
-            'startDate' => 'Data de Início',
-            'endDate' => 'Data de Fim',
+            'startDate' => 'Data de Retirada',
+            'endDate' => 'Data de Retirada',
             'user_id' => 'Usuário',
             'projeto_id' => 'Projeto',
             'equipamentos' => 'Equipamentos',

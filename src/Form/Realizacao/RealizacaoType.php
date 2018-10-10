@@ -70,7 +70,7 @@ class RealizacaoType extends AbstractType
                 ),
     	    ))
             ->add('professor', EntityType::class, array(
-    		    'label' => 'Professor(a) Orientador(a)',
+    		    'label' => 'Professor Orientador',
     		    'class' => User::class,
     		    'query_builder' => function (EntityRepository $er) {
                     return $er->getProfessorFieldQB('user');

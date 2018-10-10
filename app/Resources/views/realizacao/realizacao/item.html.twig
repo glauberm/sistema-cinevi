@@ -22,7 +22,7 @@
         {% endif %}
     </div>
     <div class="col-sm-4">
-        <dt>Professor(a)</dt>
+        <dt>Professor</dt>
         {% if item.professor is defined and item.professor != null %}
             <dd><a href="{{ path('user_user_show', { 'params': item.professor.id }) }}">{{ item.professor.username }}</a></dd>
         {% else %}

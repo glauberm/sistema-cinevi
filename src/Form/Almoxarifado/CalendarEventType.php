@@ -93,7 +93,7 @@ class CalendarEventType extends AbstractType
 
             $form
                 ->add('equipamentos', EntityType::class, array(
-                    'label' => 'Reserváveis Disponíveis',
+                    'label' => 'Reserváveis',
                     'class' => Equipamento::class,
         		    'query_builder' => $equipamentoQB,
         		    'choice_label' => 'getCodigoAndNome',

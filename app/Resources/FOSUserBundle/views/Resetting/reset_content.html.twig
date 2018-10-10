@@ -1,6 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<h1 class="page-header text-primary">Esqueci minha senha</h1>
+<h1 class="page-header title-primary">Esqueci minha senha</h1>
 
 {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset', 'novalidate': 'novalidate' } }) }}
     <div class="row">

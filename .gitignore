@@ -16,5 +16,6 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+/web/css/prod/
+/web/js/prod/
 /node_modules
-/node_modules/*

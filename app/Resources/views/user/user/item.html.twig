@@ -40,8 +40,12 @@
     </div>
 {% endif %}
 
-{% include 'admin/parts/nullable_field.html.twig' with {
-    'dt': 'Breve Currículo',
-    'item': item.breveCurriculo,
-    'nl2br' : true
-} %}
+<div class="row">
+    <div class="col-xs-12">
+        {% include 'admin/parts/nullable_field.html.twig' with {
+            'dt': 'Breve Currículo',
+            'item': item.breveCurriculo,
+            'nl2br' : true
+        } %}
+    </div>
+</div>

@@ -68,24 +68,14 @@ class ReservaController extends AbstractCrudController
         return $form;
     }
 
-    protected function preFormEdit($obj, Form $form, EntityManagerInterface $em) : Form
-    {
-        $this->startDate = $obj->getStartDate();
-        $this->endDate = $obj->getEndDate();
-
-        return $form;
-    }
-
     protected function postFormEdit($obj, Form $form, EntityManagerInterface $em, AuthorizationCheckerInterface $ac) : Form
     {
         $startDate = $form->get('startDate')->getData();
         $endDate = $form->get('endDate')->getData();
 
-        if($startDate != $this->startDate || $endDate != $this->endDate) {
-            $form = $this->validateWeekend($startDate, $endDate, $form);
-            $form = $this->validateHoliday($startDate, $endDate, $form);
-            $form = $this->validateInterval($startDate, $endDate, $form);
-        }
+        $form = $this->validateWeekend($startDate, $endDate, $form);
+        $form = $this->validateHoliday($startDate, $endDate, $form);
+        $form = $this->validateInterval($startDate, $endDate, $form);
 
         $reservas = $em->getRepository($this->repositoryName)
             ->findAllBetweenDatesButId($startDate, $endDate, $obj->getId())
@@ -186,7 +176,7 @@ class ReservaController extends AbstractCrudController
             $diffStartDate = $hoje->diff($startDate);
             $intervalStartDate = (int)$diffStartDate->format("%r%a");
             if($intervalStartDate < 3) {
-                $mensagemStartDate = 'As reservas precisam ser feitas com certa antecedência. O dia mais próximo no qual você pode marcar uma retirada é '.$hoje->add(new \DateInterval('P4D'))->format('d/m/Y').'.';
+                $mensagemStartDate = 'As reservas precisam ser feitas ou editadas com antecedência mínima de 3 dias.';
 
                 $form->get('startDate')->addError(new FormError($mensagemStartDate));
             }
@@ -196,7 +186,7 @@ class ReservaController extends AbstractCrudController
                 $diffEndDate = $startDate->diff($endDate);
                 $intervalEndDate = (int)$diffEndDate->format("%r%a");
                 if($intervalEndDate < 0) {
-                    $mensagemEndDate = 'As devoluções precisam ser feitas algum tempo depois da retirada. O dia mais próximo no qual você pode marcar uma devolução para esta data de retirada é '.$startDate->format('d/m/Y').'.';
+                    $mensagemEndDate = 'As devoluções precisam ser feitas no dia da retirada ou após.';
 
                     $form->get('endDate')->addError(new FormError($mensagemEndDate));
                 }

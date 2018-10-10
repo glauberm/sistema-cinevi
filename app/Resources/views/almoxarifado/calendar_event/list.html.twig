@@ -66,7 +66,7 @@
                 <form name="form_num_linhas" method="get" novalidate="novalidate" class="navbar-form">
                     <div class="form-group form-group-sm">
                         <small>
-                            <label class="text-muted control-label" for="num_linhas">Nº de linhas</label>
+                            <label class="text-muted" for="num_linhas">Nº de linhas</label>
                         </small>
                         <input id="input_num_linhas" name="num_linhas" placeholder="10" class="form-control" type="number" {% if app.request.query.get('num_linhas') is defined %} value="{{ app.request.query.get('num_linhas') }}" {% endif %}>
                     </div>
@@ -85,48 +85,58 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        $(document).ready(function() {
-            $("#calendar-holder").fullCalendar({
-                header: {
-                    left: "prev, next",
-                    center: "title",
-                    right: "month, basicWeek, basicDay"
-                },
-                height: "auto",
-                defaultView: "month",
-                locale: "pt-br",
-                lazyFetching: true,
-                eventLimit: false,
-                eventSources: [
-                    {
-                        url: "{{ path('ancarebeca_full_calendar_load') }}",
-                        type: "POST",
-                        data: {},
-                        error: function(xhr, status, error) {
-                            var err = eval("(" + xhr.responseText + ")");
-                            console.log(err.Message);
+        (function ($, viewport) {
+            $(document).ready(function() {
+                if(viewport.is(">sm")) {
+                    var view = "month";
+                } else if(viewport.is("sm")) {
+                    var view = "basicWeek";
+                } else {
+                    var view = "basicDay";
+                }
+                
+                $("#calendar-holder").fullCalendar({
+                    header: {
+                        left: "prev, next",
+                        center: "title",
+                        right: "month, basicWeek, basicDay"
+                    },
+                    height: "auto",
+                    defaultView: view,
+                    locale: "pt-br",
+                    lazyFetching: true,
+                    eventLimit: false,
+                    eventSources: [
+                        {
+                            url: "{{ path('ancarebeca_full_calendar_load') }}",
+                            type: "POST",
+                            data: {},
+                            error: function(xhr, status, error) {
+                                var err = eval("(" + xhr.responseText + ")");
+                                console.log(err.Message);
+                            }
+                        }
+                    ],
+                    eventRender: function(event, element) {
+                        element.attr("title", event.title),
+                        element.attr("data-toggle", "tooltip")
+                    },
+                    eventAfterAllRender: function() {
+                        $(function () {
+                            $('[data-toggle="tooltip"]').tooltip({
+                                container: 'body'
+                            })
+                        })
+                    },
+                    loading: function( isLoading, view ) {
+                        if(isLoading) {
+                            $("body").append(overlayAlert());
+                        } else {
+                            $("#overlay-alert").remove();
                         }
                     }
-                ],
-                eventRender: function(event, element) {
-                    element.attr("title", event.title),
-                    element.attr("data-toggle", "tooltip")
-                },
-                eventAfterAllRender: function() {
-                    $(function () {
-                        $('[data-toggle="tooltip"]').tooltip({
-                            container: 'body'
-                        })
-                    })
-                },
-                loading: function( isLoading, view ) {
-                    if(isLoading) {
-                        $("body").append("<div id='overlay-alert' class='overlay-alert'><span class='label label-danger'>Carregando...</span></div>");
-                    } else {
-                        $("#overlay-alert").remove();
-                    }
-                }
+                });
             });
-        });
+        })(jQuery, ResponsiveBootstrapToolkit);
     </script>
 {% endblock %}

@@ -89,7 +89,7 @@ class CopiaFinalRepository extends AbstractCrudRepository
             'confirmado' => 'Confirmado',
             'projeto_id' => 'Projeto',
             'createdIn' => 'Data e hora desta versão',
-            'autor_id' => 'Autor(a) desta versão',
+            'autor_id' => 'Autor desta versão',
         );
 
         $fichaTecnicaArrayKeys = $this->getEntityManager()

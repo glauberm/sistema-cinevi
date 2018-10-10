@@ -35,7 +35,7 @@ App\Entity\User:
                 groups: [departamento]
         professor:
             - NotNull:
-                message: 'Por favor, informe se o usuário é ou não um(a) professor(a).'
+                message: 'Por favor, informe se o usuário é ou não um professor.'
                 groups: [departamento]
         roles:
             - Choice:

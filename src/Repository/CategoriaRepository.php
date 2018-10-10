@@ -32,7 +32,7 @@ class CategoriaRepository extends AbstractCrudRepository
             'descricao' => 'Descrição',
             'equipamentos' => 'Equipamentos',
             'createdIn' => 'Data e hora desta versão',
-            'autor_id' => 'Autor(a) desta versão',
+            'autor_id' => 'Autor desta versão',
         );
     }
 }

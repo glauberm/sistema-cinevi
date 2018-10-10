@@ -3,7 +3,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <h1 class="page-header text-primary">Bem-vinda(o), {{ user.username }}!</h1>
+    <h1 class="page-header title-primary">Bem-vinda(o), {{ user.username }}!</h1>
     <p class="lead">{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
     {% if targetUrl %}
     <br/>

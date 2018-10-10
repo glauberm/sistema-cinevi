@@ -17,7 +17,7 @@ App\Entity\Realizacao:
                 message: 'Por favor, informe a modalidade.'
         professor:
             - NotBlank:
-                message: 'Por favor, informe o(a) professor(a) orientador.'
+                message: 'Por favor, informe o professor orientador.'
         genero:
             - NotBlank:
                 message: 'Por favor, informe pelo menos um gênero.'

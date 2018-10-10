@@ -4,7 +4,7 @@
         <dd>{{ item.createdIn|date('d/m/Y H:i:s') }}</dd>
     </div>
     <div class="col-sm-6">
-        <dt>Autor(a) desta versão</dt>
+        <dt>Autor desta versão</dt>
         {% if item.autor is defined and item.autor != null %}
             <dd><a href="{{ path('user_user_show', { 'params': item.autor.id }) }}">{{ item.autor.username }}</a></dd>
         {% else %}

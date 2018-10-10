@@ -5,6 +5,7 @@ var concat = require('gulp-concat');
 var rev = require('gulp-rev');
 var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
+var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('clean', function () {
     return del([
@@ -24,9 +25,10 @@ gulp.task('styles', function () {
             './web/bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css',
             './web/css/dev/estilos.css'
         ])
+        .pipe(autoprefixer())
         .pipe(minifyCSS())
         .pipe(concat('main.min.css'))
-        .pipe(rev())
+        // .pipe(rev())
         .pipe(gulp.dest('./web/css/prod/'))
     ;
 });
@@ -51,7 +53,7 @@ gulp.task('scripts', function () {
         .pipe(babel())
         .pipe(uglify())
         .pipe(concat('main.min.js'))
-        .pipe(rev())
+        // .pipe(rev())
         .pipe(gulp.dest('./web/js/prod/'))
     ;
 });

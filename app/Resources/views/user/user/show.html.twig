@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block extras %}
-    <h2 id="reservas" class="text-primary">Reservas</h2>
+    <h2 id="reservas" class="title-primary">Reservas</h2>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -33,7 +33,7 @@
     {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas_reserva', pagination: paginationReserva } %}
 
 
-    <h2 id="projetos" class="text-primary">Projetos</h2>
+    <h2 id="projetos" class="title-primary">Projetos</h2>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -55,7 +55,7 @@
     {% include 'admin/pagination/pagination.html.twig' with { name: 'num_linhas_projeto', pagination: paginationProjeto } %}
 
 
-    <h2 id="copiasFinais" class="text-primary">Cópias Finais</h2>
+    <h2 id="copiasFinais" class="title-primary">Cópias Finais</h2>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">

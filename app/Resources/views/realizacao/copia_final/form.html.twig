@@ -9,28 +9,30 @@
     <div class="col-sm-6">{{ form_row(form.cromia) }}</div>
 </div>
 <div class="row">
-    <div class="col-sm-4">{{ form_row(form.proporcao) }}</div>
-    <div class="col-sm-4">{{ form_row(form.formato) }}</div>
-    <div class="col-sm-4">{{ form_row(form.duracao) }}</div>
+    <div class="col-sm-6">{{ form_row(form.proporcao) }}</div>
+    <div class="col-sm-6">{{ form_row(form.formato) }}</div>
 </div>
 <div class="row">
-    <div class="col-sm-4">{{ form_row(form.formatoDigitalNativo) }}</div>
-    <div class="col-sm-4">{{ form_row(form.codec) }}</div>
-    <div class="col-sm-4">{{ form_row(form.container) }}</div>
+    <div class="col-sm-6">{{ form_row(form.duracao) }}</div>
+    <div class="col-sm-6">{{ form_row(form.formatoDigitalNativo) }}</div>
 </div>
 <div class="row">
-    <div class="col-sm-4">{{ form_row(form.taxaBits) }}</div>
-    <div class="col-sm-4">{{ form_row(form.velocidade) }}</div>
-    <div class="col-sm-4">{{ form_row(form.som) }}</div>
+    <div class="col-sm-6">{{ form_row(form.codec) }}</div>
+    <div class="col-sm-6">{{ form_row(form.container) }}</div>
 </div>
 <div class="row">
+    <div class="col-sm-6">{{ form_row(form.taxaBits) }}</div>
+    <div class="col-sm-6">{{ form_row(form.velocidade) }}</div>
+</div>
+<div class="row">
+    <div class="col-sm-6">{{ form_row(form.som) }}</div>
     <div class="col-sm-6">{{ form_row(form.resolucaoAudioDigital) }}</div>
-    <div class="col-sm-6">{{ form_row(form.suporteMatrizDigital) }}</div>
 </div>
 <div class="row">
+    <div class="col-sm-6">{{ form_row(form.suporteMatrizDigital) }}</div>
     <div class="col-sm-6">{{ form_row(form.camera) }}</div>
-    <div class="col-sm-6">{{ form_row(form.softwareEdicao) }}</div>
 </div>
+{{ form_row(form.softwareEdicao) }}
 {{ form_row(form.captacaoSom) }}
 <div class="row">
     <div class="col-sm-6">{{ form_row(form.orcamento) }}</div>

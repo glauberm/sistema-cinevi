@@ -118,7 +118,7 @@ class ProjetoRepository extends AbstractCrudRepository
             'som' => 'Direção de Som',
             'arte' => 'Direção de Arte',
             'createdIn' => 'Data e hora desta versão',
-            'autor_id' => 'Autor(a) desta versão',
+            'autor_id' => 'Autor desta versão',
         );
 
         return array_merge($realizacaoArrayKeys, $projetoArrayKeys);

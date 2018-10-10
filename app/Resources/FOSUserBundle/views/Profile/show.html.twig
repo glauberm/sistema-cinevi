@@ -5,7 +5,7 @@
 {% set routeEdit = path('fos_user_profile_edit') %}
 
 {% block mainActions %}
-    <a class="navbar-brand btn btn-link" href="{{ routeList }}">
+    <a class="navbar-brand btn btn-link" href="{{ routeList }}" title="Voltar">
         {% include 'admin/svg/voltar.html.twig' %}
     </a>
     {% if is_granted('edit', user) or app.user == user %}
