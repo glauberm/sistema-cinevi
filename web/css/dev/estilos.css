@@ -49,6 +49,10 @@ legend {
     color: #004052;
 }
 
+.jumbotron h1 {
+    color: #004052;
+}
+
 .jumbotron p {
     margin-top: 30px;
     font-weight: 400;
@@ -547,14 +551,6 @@ textarea.form-control {
 }
 
 /* SELECT2 */
-
-.select2-container--bootstrap .select2-selection--multiple .select2-selection__rendered {
-    padding-bottom: 5px;
-}
-
-.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
-    padding: 3px 6px;
-}
 
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove {
     font-size: 18px;

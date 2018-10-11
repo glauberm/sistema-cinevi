@@ -19,10 +19,10 @@ use App\Entity\Equipamento;
 class CalendarEventControllerTest extends AbstractCrudControllerTest
 {
     protected $indexRoute = 's/reservas';
-    protected $itemEditFilter = 'dd:contains("13/06/2018")';
-    protected $itemEditLink = '13/06/2018';
-    protected $itemRemoveLink = "12\/06\/2018";
-    protected $itemRemoveFilter = '[value="12/06/2018"]';
+    protected $itemEditFilter = 'dd:contains("13/06/2021")';
+    protected $itemEditLink = '13/06/2021';
+    protected $itemRemoveLink = "12\/06\/2021";
+    protected $itemRemoveFilter = '[value="12/06/2021"]';
     private $em;
     private $router;
     private $twig;
@@ -151,8 +151,8 @@ class CalendarEventControllerTest extends AbstractCrudControllerTest
         return array(
             'calendar_event[user]' => $this->userId,
             'calendar_event[projeto]' => $this->projetoId,
-            'calendar_event[startDate]' => '13/06/2018',
-            'calendar_event[endDate]' => '19/06/2018',
+            'calendar_event[startDate]' => '13/06/2021',
+            'calendar_event[endDate]' => '19/06/2021',
             'calendar_event[equipamentos]' => array($this->equipamentoId),
         );
     }
@@ -162,8 +162,8 @@ class CalendarEventControllerTest extends AbstractCrudControllerTest
         return array(
             'calendar_event[user]' => $this->userId,
             'calendar_event[projeto]' => $this->projetoId,
-            'calendar_event[startDate]' => '12/06/2018',
-            'calendar_event[endDate]' => '20/06/2018',
+            'calendar_event[startDate]' => '12/06/2021',
+            'calendar_event[endDate]' => '20/06/2021',
             'calendar_event[equipamentos]' => array($this->equipamentoId),
         );
     }
@@ -180,6 +180,8 @@ class CalendarEventControllerTest extends AbstractCrudControllerTest
     protected function doAfterAdd($crawler)
     {
         $mailCollector = $this->client->getProfile()->getCollector('swiftmailer');
+
+        // exit(var_dump($this->client->getResponse()->getContent()));
 
         $this->assertEquals(3, $mailCollector->getMessageCount());
 

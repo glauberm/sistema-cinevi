@@ -167,8 +167,10 @@ class CalendarEvent extends BaseEvent
      */
     public function setStartDate(\DateTime $startDate = null)
     {
+        if($startDate) {
+            $startDate->setTime( 0, 0, 0 );
+        }
         $this->startDate = $startDate;
-        $this->startDate->setTime( 0, 0, 0 );
     }
 
     /**
@@ -176,8 +178,10 @@ class CalendarEvent extends BaseEvent
      */
     public function setEndDate(\DateTime $endDate = null)
     {
+        if($endDate) {
+            $endDate->setTime( 23, 59, 59 );
+        }
         $this->endDate = $endDate;
-        $this->endDate->setTime( 23, 59, 59 );
     }
 
     /**

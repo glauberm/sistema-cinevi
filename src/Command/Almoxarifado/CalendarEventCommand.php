@@ -77,7 +77,7 @@ class CalendarEventCommand extends Command
                 $to = $reserva->getUser()->getEmail();
                 $this->sendMail($this->mailer, $this->twig, $reserva, $path, $subject, $to, $template);
 
-                $output->writeln('Foram enviados emails avisando sobre a retirada da reserva '.$reserva->getTitle().' hoje.');
+                $output->writeln('Serão enviados emails avisando sobre a retirada da reserva '.$reserva->getTitle().' hoje.');
             }
 
             if($intervalStartDate == 1) {
@@ -96,7 +96,7 @@ class CalendarEventCommand extends Command
                 ), UrlGeneratorInterface::ABSOLUTE_URL);
                 $to = $reserva->getUser()->getEmail();
                 $this->sendMail($this->mailer, $this->twig, $reserva, $path, $subject, $to, $template);
-                $output->writeln('Foram enviados emails avisando sobre a retirada da reserva '.$reserva->getTitle().' amanhã.');
+                $output->writeln('Serão enviados emails avisando sobre a retirada da reserva '.$reserva->getTitle().' amanhã.');
             }
 
             $diffEndDate = $hojeComeco->diff($reserva->getEndDate());
@@ -118,7 +118,7 @@ class CalendarEventCommand extends Command
                 ), UrlGeneratorInterface::ABSOLUTE_URL);
                 $to = $reserva->getUser()->getEmail();
                 $this->sendMail($this->mailer, $this->twig, $reserva, $path, $subject, $to, $template);
-                $output->writeln('Foram enviados emails avisando sobre a devolução da reserva '.$reserva->getTitle().' hoje.');
+                $output->writeln('Serão enviados emails avisando sobre a devolução da reserva '.$reserva->getTitle().' hoje.');
             }
 
             if($intervalEndDate == 1) {
@@ -137,7 +137,7 @@ class CalendarEventCommand extends Command
                 ), UrlGeneratorInterface::ABSOLUTE_URL);
                 $to = $reserva->getUser()->getEmail();
                 $this->sendMail($this->mailer, $this->twig, $reserva, $path, $subject, $to, $template);
-                $output->writeln('Foram enviados emails avisando sobre a devolução da reserva '.$reserva->getTitle().' amanhã.');
+                $output->writeln('Serão enviados emails avisando sobre a devolução da reserva '.$reserva->getTitle().' amanhã.');
             }
         }
 
