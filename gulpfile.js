@@ -28,7 +28,7 @@ gulp.task('styles', function () {
         .pipe(autoprefixer())
         .pipe(minifyCSS())
         .pipe(concat('main.min.css'))
-        // .pipe(rev())
+        .pipe(rev())
         .pipe(gulp.dest('./web/css/prod/'))
     ;
 });
@@ -53,7 +53,7 @@ gulp.task('scripts', function () {
         .pipe(babel())
         .pipe(uglify())
         .pipe(concat('main.min.js'))
-        // .pipe(rev())
+        .pipe(rev())
         .pipe(gulp.dest('./web/js/prod/'))
     ;
 });
