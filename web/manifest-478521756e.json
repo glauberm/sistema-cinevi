@@ -1,6 +1,6 @@
 {
     "short_name": "Departamento de Cinema e Vídeo",
-    "name": "Departamento de Cinema e Vídeo da Universidade Federal Fluminense (UFF)",
+    "name": "Departamento de Cinema e Vídeo da Universidade Federal Fluminense",
     "description": "Cadastre projetos, reserve equipamentos no almoxarifado e muito mais pelo celular, tablet ou qualquer outro dispositivo com acesso à internet. Sistema para alunos, funcionários ou professores do Departamento de Cinema e Vídeo da Universidade Federal Fluminense.",
     "icons": [
         {
@@ -9,7 +9,7 @@
             "type": "image/x-icon"
         }
     ],
-    "start_url": "./app.php",
+    "start_url": "./",
     "display": "standalone",
     "theme_color": "#ECD117",
     "background_color": "#FFFFFF"

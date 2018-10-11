@@ -57,8 +57,3 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest('./web/js/prod/'))
     ;
 });
-
-gulp.task('build', [
-    'styles',
-    'scripts'
-]);
