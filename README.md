@@ -7,7 +7,7 @@ O sistema é uma aplicação Symfony (3.4) monolítica. O front-end usa jQuery (
 Clone o projeto e então instale as dependências com o seguinte comando:
 
 ```[bash]
-composer install -vvv && npm install
+composer install && npm install
 ```
 
 Depois, crie um usuário administrador:
