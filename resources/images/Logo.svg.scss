@@ -1,0 +1,12 @@
+.Logo {
+    height: 3rem;
+
+    &__primary {
+        fill: $primary;
+    }
+
+    &__secundary {
+        fill: $secondary;
+        stroke: $secondary;
+    }
+}

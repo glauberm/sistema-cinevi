@@ -1,0 +1,26 @@
+import React from 'react';
+
+import SecureLayout from '../../layouts/SecureLayout';
+import ProductionRoleVersionCollection from '../../collections/ProductionRole/ProductionRoleVersionCollection';
+
+export default function ProductionRoleVersionIndexPage(props) {
+    const { id } = props.match.params;
+
+    return (
+        <SecureLayout
+            title="Histórico de grupo de trabalho"
+            tabs={[
+                { linkTo: `/grupos-de-trabalho/${id}`, text: 'Editar' },
+                { linkTo: `/grupos-de-trabalho/${id}/historico`, text: 'Histórico' },
+            ]}
+        >
+            <div className="box">
+                <ProductionRoleVersionCollection
+                    id={id}
+                    request="listUserRevisions"
+                    linkToPrefix="grupos-de-trabalho"
+                />
+            </div>
+        </SecureLayout>
+    );
+}

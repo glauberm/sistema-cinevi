@@ -1,0 +1,18 @@
+import React, { useState } from 'react';
+
+import { paginateVersions } from '../../requests/production-role';
+import VersionCollection from '../Version/VersionCollection';
+
+export default function ProductionRoleVersionCollection(props) {
+    const [data, setData] = useState(false);
+    const [links, setLinks] = useState(false);
+    const [meta, setMeta] = useState(false);
+
+    const paginate = (page) => {
+        paginateVersions(this, props.id, page);
+    };
+
+    return (
+        <VersionCollection paginate={paginate} data={data} links={links} meta={meta} linkToPrefix="production-role" />
+    );
+}

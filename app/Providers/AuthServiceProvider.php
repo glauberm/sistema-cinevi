@@ -2,20 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The model to policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
-    protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-    ];
-
     /**
      * Register any authentication / authorization services.
      *
@@ -23,8 +15,28 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
+        Gate::define('isAdmin', function (User $user) {
+            if (!\is_array($user->roles)) {
+                throw new \TypeError('Os papéis do usuário não são um array.');
+            }
 
-        //
+            return \in_array('admin', $user->roles, true);
+        });
+
+        Gate::define('isDepartment', function ($user) {
+            if (!\is_array($user->roles)) {
+                throw new \TypeError('Os papéis do usuário não são um array.');
+            }
+
+            return \in_array('department', $user->roles, true);
+        });
+
+        Gate::define('isWarehouse', function ($user) {
+            if (!\is_array($user->roles)) {
+                throw new \TypeError('Os papéis do usuário não são um array.');
+            }
+
+            return \in_array('warehouse', $user->roles, true);
+        });
     }
 }

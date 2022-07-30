@@ -1,52 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
-use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * The path to the "home" route for your application.
-     *
-     * Typically, users are redirected here after authentication.
-     *
-     * @var string
-     */
-    public const HOME = '/home';
-
-    /**
-     * Define your route model bindings, pattern filters, and other route configuration.
+     * Define the routes for the application.
      *
      * @return void
      */
-    public function boot()
+    public function map()
     {
-        $this->configureRateLimiting();
-
-        $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
-
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+        Route::group(['middleware' => 'api', 'prefix' => 'api'], function ($router) {
+            require base_path('routes/api/health-check.php');
+            require base_path('routes/api/authentication.php');
+            require base_path('routes/api/production-role.php');
         });
-    }
 
-    /**
-     * Configure the rate limiters for the application.
-     *
-     * @return void
-     */
-    protected function configureRateLimiting()
-    {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        Route::group(['middleware' => 'web'], function ($router) {
+            require base_path('routes/web/root.php');
         });
     }
 }

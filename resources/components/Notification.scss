@@ -1,0 +1,37 @@
+@keyframes Notification__slide-down {
+    from {
+        transform: translateY(-1rem) translateZ(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) translateZ(0);
+        opacity: 1;
+    }
+}
+
+@keyframes Notification__slide-top {
+    from {
+        transform: translateY(0) translateZ(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-1rem) translateZ(0);
+        opacity: 0;
+    }
+}
+
+.Notification {
+    margin: 0.5rem 0 1rem;
+    animation-duration: 0.25s;
+    animation-fill-mode: forwards;
+
+    &--active {
+        animation-name: Notification__slide-down;
+        animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    &--slide-out {
+        animation-name: Notification__slide-top;
+        animation-timing-function: cubic-bezier(0.36, 0, 0.66, -0.56);
+    }
+}
