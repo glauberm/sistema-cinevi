@@ -1,7 +1,9 @@
 import React from 'react';
 
+import Button from '../Button';
+
 export default function Pagination(props) {
-    const { links, meta, paginate } = props;
+    const { links, meta, paginate, isLoading } = props;
 
     return (
         <nav className="d-flex align-items-start justify-content-between">
@@ -9,22 +11,24 @@ export default function Pagination(props) {
 
             {links && (
                 <div>
-                    <button
+                    <Button
                         type="button"
-                        className="btn btn-secondary btn-sm mx-2"
+                        className="btn-secondary btn-sm mx-2"
                         disabled={!links.prev}
                         onClick={() => paginate(meta.current_page - 1)}
+                        isLoading={isLoading}
                     >
                         Anterior
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         type="button"
-                        className="btn btn-secondary btn-sm mx-2"
+                        className="btn-secondary btn-sm mx-2"
                         disabled={!links.next}
                         onClick={() => paginate(meta.current_page + 1)}
+                        isLoading={isLoading}
                     >
                         Próxima
-                    </button>
+                    </Button>
                 </div>
             )}
         </nav>

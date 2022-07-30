@@ -14,7 +14,11 @@ const REBOOT_MESSAGE = 'A sua chave de autenticação precisa ser renovada. Por 
  * @param {boolean} isAuthenticated
  */
 export function setAuthenticated(isAuthenticated: boolean) {
-    localStorage.setItem(IS_AUTHENTICATED_KEY, isAuthenticated === true ? '1' : '0');
+    if (isAuthenticated === true) {
+        localStorage.setItem(IS_AUTHENTICATED_KEY, '1');
+    } else {
+        localStorage.removeItem(IS_AUTHENTICATED_KEY);
+    }
 }
 
 /**
@@ -36,7 +40,11 @@ export function reboot(url: string) {
     const urlParams = new URLSearchParams();
 
     urlParams.append('redirecionar_para', url);
+
     sessionStorage.setItem(REBOOTED_KEY, '1');
+
+    setAuthenticated(false);
+
     window.location.href = `${authentication.login.path}?${urlParams}`;
 }
 
@@ -49,6 +57,7 @@ export function reboot(url: string) {
 export function isRebooted(notifications: NotificationsContextInterface) {
     if (sessionStorage.getItem(REBOOTED_KEY) !== null) {
         notifications.add(REBOOT_MESSAGE, 'info');
+
         sessionStorage.removeItem(REBOOTED_KEY);
     }
 }

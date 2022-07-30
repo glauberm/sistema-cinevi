@@ -29,7 +29,7 @@ export default function PaginatedTable(props) {
             return (
                 <>
                     <Table data={data}>{children}</Table>
-                    <Pagination links={links} meta={meta} paginate={paginate} />
+                    <Pagination links={links} meta={meta} paginate={paginate} isLoading={isLoading} />
                 </>
             );
         } else {

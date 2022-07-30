@@ -16,7 +16,7 @@ const initialValues = {
 
 const validationSchema = Yup.object({
     title: Yup.string().required('Campo obrigatório'),
-    description: Yup.string(),
+    description: Yup.string().nullable(),
 });
 
 export default function ProductionRoleCreateOrUpdateForm(props) {
@@ -37,7 +37,7 @@ export default function ProductionRoleCreateOrUpdateForm(props) {
     useEffect(() => {
         if (props.id) {
             // if (showRequest === 'revision') {
-            //     showRevision(this, id);
+            //     showRevision(id);
             // } else {
             show(notifications, setValues, setLoading, props.id);
             // }

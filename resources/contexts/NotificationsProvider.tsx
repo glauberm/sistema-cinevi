@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { createContext, ReactElement, useState } from 'react';
 
 import Notification from '../components/Notification';
 
@@ -7,7 +7,7 @@ export interface NotificationsContextInterface {
     remove: (id: number) => void;
 }
 
-export const NotificationsContext = React.createContext<NotificationsContextInterface | undefined>(undefined);
+export const NotificationsContext = createContext<NotificationsContextInterface | undefined>(undefined);
 
 interface NotificationInterface {
     id: number;

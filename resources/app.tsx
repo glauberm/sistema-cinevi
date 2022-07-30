@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import NotificationsProvider from './contexts/NotificationsProvider';
+import DialogsProvider from './contexts/DialogsProvider';
 import Router from './routes/Router';
 
 const rootElement = document.getElementById('root');
@@ -17,7 +18,9 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <NotificationsProvider>
-                <Router />
+                <DialogsProvider>
+                    <Router />
+                </DialogsProvider>
             </NotificationsProvider>
         </BrowserRouter>
     </React.StrictMode>

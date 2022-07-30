@@ -1,0 +1,9 @@
+.DialogsProvider {
+    position: relative;
+    z-index: 2000;
+}
+
+.modal-open {
+    overflow: hidden;
+    padding-right: 0;
+}

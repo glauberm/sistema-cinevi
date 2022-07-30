@@ -9,6 +9,7 @@ use App\Http\Resources\ProductionRole;
 use App\Services\CrudServiceInterface;
 use App\Services\HasVersionsServiceInterface;
 use App\Services\ProductionRoleService;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 
@@ -23,6 +24,8 @@ class ProductionRoleController extends Controller implements CrudControllerInter
     public function __construct(ProductionRoleService $service)
     {
         $this->service = $service;
+
+        $this->middleware(Authenticate::class . ':sanctum');
     }
 
     /**
