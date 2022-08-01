@@ -16,7 +16,9 @@ export const secureRoutes = [
 
 export const publicRoutes = [
     authentication.login,
-    // authentication.requestForgotPassword,
+    authentication.register,
+    authentication.requestReset,
+    // authentication.requestResetPassword,
     // authentication.resetPassword,
     misc.notFound,
 ];

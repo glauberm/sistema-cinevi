@@ -68,6 +68,8 @@ trait CrudTestTrait
      */
     public function testUpdate(): void
     {
+        Sanctum::actingAs(User::factory()->createOne());
+
         $model = $this->modelClass::factory()->create();
 
         $response = $this->json('PUT', "{$this->baseApiUrl}/{$model->id}/editar", $this->updateRequest);
@@ -94,7 +96,7 @@ trait CrudTestTrait
 
         $model = $this->modelClass::factory()->create();
 
-        $this->json('DELETE', "{$this->baseApiUrl}/{$model->id}/remover");
+        $response = $this->json('DELETE', "{$this->baseApiUrl}/{$model->id}/remover");
 
         $response = $this->json('GET', "{$this->baseApiUrl}/{$model->id}");
 

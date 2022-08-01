@@ -25,4 +25,5 @@ mix.copy('resources/fonts/GillSansNova-Bold.woff2', 'public_html/fonts/GillSansN
 
 mix.copy('resources/images/favicon.ico', 'public_html/favicon.ico')
     .copy('resources/images/favicon.svg', 'public_html/images/favicon.svg')
+    .copy('resources/images/favicon.png', 'public_html/images/favicon.png')
     .version();

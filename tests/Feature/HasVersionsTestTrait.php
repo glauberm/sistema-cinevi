@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Laravel\Sanctum\Sanctum;
+
 trait HasVersionsTestTrait
 {
     /**
@@ -13,6 +16,8 @@ trait HasVersionsTestTrait
      */
     public function testPaginateVersions(): void
     {
+        Sanctum::actingAs(User::factory()->createOne());
+
         $model = $this->modelClass::factory()->create();
 
         $this->json('PUT', "{$this->baseApiUrl}/{$model->id}/editar", $this->updateRequest);

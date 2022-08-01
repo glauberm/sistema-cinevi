@@ -20,10 +20,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string        $identifier
  * @property bool          $is_confirmed
  * @property bool          $is_professor
- * @property string        $brief_resume
  * @property string|array  $roles
  */
-
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -34,7 +32,7 @@ class User extends Authenticatable
      * @var array<string>
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'identifier', 'is_confirmed', 'is_professor', 'brief_resume', 'roles'
+        'name', 'email', 'password', 'phone', 'identifier', 'is_confirmed', 'is_professor', 'roles',
     ];
 
     /**
@@ -57,36 +55,40 @@ class User extends Authenticatable
      */
     public function roles(): Attribute
     {
-        return Attribute::make(get: [$this, 'jsonDecode']);
+        return Attribute::make(get: [$this, 'jsonDecode'], set: [$this, 'jsonEncode']);
     }
 
     /**
-     * @param  string    $value
+     * @param  string  $value
      * @return string[]
      */
     protected function jsonDecode(string $value): array
     {
         $array = \json_decode($value, true);
 
-        if (!\is_array($array)) {
+        if (! \is_array($array)) {
             throw new \JsonException('Erro ao decodificar JSON');
         }
 
         return $array;
     }
 
-    // /**
-    //  * @param  string[]  $value
-    //  * @return string
-    //  */
-    // protected function jsonEncode(array $value): string
-    // {
-    //     $string = \json_encode($value);
+    /**
+     * @param  string[]|string  $value
+     * @return string
+     */
+    protected function jsonEncode(string|array $value): string
+    {
+        if (\is_string($value)) {
+            return $value;
+        }
 
-    //     if (!\is_string($string)) {
-    //         throw new \JsonException('Erro ao codificar JSON');
-    //     }
+        $string = \json_encode($value);
 
-    //     return $string;
-    // }
+        if (! \is_string($string)) {
+            throw new \JsonException('Erro ao codificar JSON');
+        }
+
+        return $string;
+    }
 }

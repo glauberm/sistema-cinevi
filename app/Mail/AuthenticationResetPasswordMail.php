@@ -35,7 +35,7 @@ class AuthenticationResetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->from('naoresponda@cdts.fiocruz.br', 'Portal CDTS')
+        return $this->from('nao-responda@cinemauff.com.br', 'Departamento de Cinema e Vídeo da UFF')
             ->subject($this->title)
             ->view('emails/authentication-reset-password')
             ->text('emails/authentication-reset-password-plain');

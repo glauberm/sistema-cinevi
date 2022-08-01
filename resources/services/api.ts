@@ -70,7 +70,7 @@ export function handleError(error: AxiosError) {
 
                 return 'Há erros no formulário.';
             case 401:
-                if (error.config.url !== authentication.login.path) {
+                if (error.config.url === authentication.login.path) {
                     return 'O e-mail ou senha estão incorretos.';
                 }
 

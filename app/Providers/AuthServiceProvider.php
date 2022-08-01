@@ -23,6 +23,10 @@ class AuthServiceProvider extends ServiceProvider
             return \in_array('admin', $user->roles, true);
         });
 
+        Gate::define('isNotUser', function (User $user, User $userModel) {
+            return $user != $userModel;
+        });
+
         Gate::define('isDepartment', function ($user) {
             if (!\is_array($user->roles)) {
                 throw new \TypeError('Os papéis do usuário não são um array.');

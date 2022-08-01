@@ -1,9 +1,40 @@
+## 01/08
+
 -   Finalizar partes de Auth
--   Usuários
+    -- Usuário não confirmado? Mostrar mensagem de confirmação
+    -- Mostrar PasswordHelper
+
+## 02/08
+
+-   Usuários no front
+
+## 03/08
+
 -   Modalidades
+
+## 04/08
+
 -   Reserváveis
+
+## 05/08
+
 -   Categorias de Reserváveis
+
+## 06/08
+
 -   Projetos
+
+## 07/08
+
 -   Cópias Finais
+
+## 08/08
+
 -   Reservas
+
+## Depois
+
+-   Lógicas de Negócio
+-   Permissões
 -   Configurações
+-   Migração de dados

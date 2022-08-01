@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { login } from '../../requests/authentication';
-import authentication from '../../routes/authentication';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
 import Form from '../../components/Forms/Form';
 import Field from '../../components/Forms/Field';
@@ -12,21 +11,26 @@ import Button from '../../components/Button';
 
 const initialValues = {
     email: '',
+    phone: '',
+    identifier: '',
     password: '',
 };
 
 const validationSchema = Yup.object({
     email: Yup.string().required('Campo obrigatório').email('Endereço de e-mail inválido'),
-    password: Yup.string().required('Campo obrigatório'),
+    phone: Yup.string().required('Campo obrigatório'),
+    identifier: Yup.string().required('Campo obrigatório'),
+    password: Yup.string().required('Campo obrigatório').min(8, 'A senha deve ter no mínimo 8 caracteres'),
 });
 
-export default function AuthenticationLoginForm(props) {
+export default function AuthenticationRegisterForm(props) {
     const [isLoading, setLoading] = useState(false);
     const notifications = useContext(NotificationsContext);
     const navigate = useNavigate();
 
     const onSubmit = (values) => {
-        login(values, notifications, navigate, setLoading);
+        // login(values, notifications, navigate, setLoading);
+        notifications.add('Os cadastros estão fechados no momento.', 'warning');
     };
 
     return (
@@ -41,6 +45,14 @@ export default function AuthenticationLoginForm(props) {
                         errors={errors.email}
                         touched={touched.email}
                     />
+                    <Field name="phone" label="Telefone" type="tel" errors={errors.phone} touched={touched.phone} />
+                    <Field
+                        name="identifier"
+                        label="Matrícula ou SIAPE"
+                        type="text"
+                        errors={errors.identifier}
+                        touched={touched.identifier}
+                    />
                     <Field
                         name="password"
                         label="Senha"
@@ -50,14 +62,8 @@ export default function AuthenticationLoginForm(props) {
                     />
                     <div className="d-grid gap-2">
                         <Button type="submit" className="btn btn-lg btn-primary" isLoading={isLoading}>
-                            Entrar
+                            Cadastrar
                         </Button>
-                    </div>
-                    <hr />
-                    <div className="text-center">
-                        <Link to={authentication.requestReset.path} className="btn btn-link">
-                            Recuperação de senha
-                        </Link>
                     </div>
                 </Form>
             )}

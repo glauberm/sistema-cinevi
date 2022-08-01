@@ -17,13 +17,14 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         Route::group(['middleware' => 'api', 'prefix' => 'api'], function ($router) {
-            require base_path('routes/api/health-check.php');
-            require base_path('routes/api/authentication.php');
-            require base_path('routes/api/production-role.php');
+            require base_path('routes/health-check.php');
+            require base_path('routes/authentication.php');
+            require base_path('routes/user.php');
+            require base_path('routes/production-role.php');
         });
 
         Route::group(['middleware' => 'web'], function ($router) {
-            require base_path('routes/web/root.php');
+            require base_path('routes/root.php');
         });
     }
 }

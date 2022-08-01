@@ -3,7 +3,7 @@ import React, { createContext, ReactElement, useState } from 'react';
 import Notification from '../components/Notification';
 
 export interface NotificationsContextInterface {
-    add: (content: string, status: string) => void;
+    add: (content: string, status?: string) => void;
     remove: (id: number) => void;
 }
 

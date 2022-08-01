@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import PublicLayout from './PublicLayout';
+import BaseLayout from './BaseLayout';
 import Navigation from '../components/Navigation';
 
 export default function SecureLayout(props) {
@@ -26,7 +26,7 @@ export default function SecureLayout(props) {
     };
 
     return (
-        <PublicLayout>
+        <BaseLayout>
             <div className="row">
                 <div className="col-lg-3">
                     <Navigation />
@@ -35,6 +35,6 @@ export default function SecureLayout(props) {
                     <div className="h-100 p-5 mb-5 bg-white rounded-3">{props.children}</div>
                 </div>
             </div>
-        </PublicLayout>
+        </BaseLayout>
     );
 }

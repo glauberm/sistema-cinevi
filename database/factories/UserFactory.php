@@ -24,8 +24,7 @@ class UserFactory extends Factory
             'identifier' => $this->faker->randomNumber(),
             'is_confirmed' => $this->faker->boolean(),
             'is_professor' => $this->faker->boolean(),
-            'brief_resume' => $this->faker->text(),
-            'roles' => \json_encode(['user'])
+            'roles' => \json_encode(['user']),
         ];
     }
 }
