@@ -17,7 +17,7 @@ class ProductionRoleFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->name(),
+            'title' => $this->faker->word(),
             'description' => $this->faker->text(),
         ];
     }

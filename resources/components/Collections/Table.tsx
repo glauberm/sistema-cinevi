@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Table(props) {
+export default function (props) {
     const { data, children } = props;
 
     return (

@@ -1,8 +1,7 @@
-import dayjs from 'dayjs';
-import isLeapYear from 'dayjs/plugin/isLeapYear';
-import 'dayjs/locale/pt-br';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
-dayjs.locale('pt-br');
+moment.locale('pt-br');
 
 /**
  * Constrói um objeto de Data através de uma string.
@@ -10,8 +9,8 @@ dayjs.locale('pt-br');
  * @param {string} datetime
  * @returns Date
  */
-function buildDateObj(datetime) {
-    return dayjs(datetime).toDate();
+function buildDateObj(datetime: string): Date {
+    return moment(datetime).toDate();
 }
 
 /**
@@ -21,7 +20,7 @@ function buildDateObj(datetime) {
  * @param {string} datetime
  * @returns string
  */
-export function getDate(datetime) {
+export function getDate(datetime: string): string {
     const datetimeObj = buildDateObj(datetime);
 
     const date = `0${datetimeObj.getDate()}`.slice(-2);
@@ -38,7 +37,7 @@ export function getDate(datetime) {
  * @param {string} datetime
  * @returns string
  */
-export function getTime(datetime) {
+export function getTime(datetime: string): string {
     const datetimeObj = buildDateObj(datetime);
 
     const hours = `0${datetimeObj.getHours()}`.slice(-2);
@@ -55,6 +54,6 @@ export function getTime(datetime) {
  * @param {string} datetime
  * @returns string
  */
-export function getDatetime(datetime) {
+export function getDatetime(datetime: string): string {
     return `${getDate(datetime)} ${getTime(datetime)}`;
 }

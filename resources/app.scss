@@ -1,16 +1,18 @@
 @charset 'utf-8';
 
 @import './styles/variables';
-@import './styles/fonts';
 
-@import '~bootstrap/scss/bootstrap';
+@import '~react-datetime/css/react-datetime.css';
+
+// @import '~bootstrap/scss/bootstrap';
 
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/maps';
 @import '~bootstrap/scss/mixins';
-@import '~bootstrap/scss/utilities';
-
 @import '~bootstrap/scss/root';
+
+@import '~bootstrap/scss/utilities';
 @import '~bootstrap/scss/reboot';
 @import '~bootstrap/scss/type';
 // @import '~bootstrap/scss/images';
@@ -29,13 +31,12 @@
 // @import '~bootstrap/scss/breadcrumb';
 @import '~bootstrap/scss/pagination';
 @import '~bootstrap/scss/badge';
-// @import '~bootstrap/scss/breadcrumb';
 @import '~bootstrap/scss/alert';
 // @import '~bootstrap/scss/progress';
 @import '~bootstrap/scss/list-group';
 @import '~bootstrap/scss/close';
 // @import '~bootstrap/scss/toasts';
-// @import '~bootstrap/scss/modal';
+@import '~bootstrap/scss/modal';
 // @import '~bootstrap/scss/tooltip';
 // @import '~bootstrap/scss/popover';
 // @import '~bootstrap/scss/carousel';
@@ -45,7 +46,7 @@
 
 @import '~bootstrap/scss/helpers';
 
-// @import '~bootstrap/scss/utilities/api';
+@import '~bootstrap/scss/utilities/api';
 
 @import './styles/global';
 

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Mail\AuthenticationFinalizeRegistrationMail;
 use App\Mail\AuthenticationResetPasswordMail;
+use App\Mail\AuthenticationUpdateEmailMail;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
@@ -79,6 +81,61 @@ class AuthenticationTest extends TestCase
     }
 
     /**
+     * Testa o envio da requisição de cadastro.
+     *
+     * @return void
+     */
+    public function testRegister()
+    {
+        Mail::fake();
+
+        $email = 'glauber@cinemauff.com.br';
+
+        $response = $this->post('api/cadastro', [
+            'name' => 'Glauber Mota',
+            'email' => $email,
+            'password' => 'Gl@uber7!',
+            'phone' => '(21) 99796-3685',
+            'identifier' => '1345024',
+        ]);
+
+        Mail::assertQueued(
+            AuthenticationFinalizeRegistrationMail::class,
+            function (AuthenticationFinalizeRegistrationMail $mail) use ($email) {
+                return $mail->hasTo($email);
+            }
+        );
+
+        Mail::assertQueued(AuthenticationFinalizeRegistrationMail::class, 1);
+
+        $response->assertOk();
+    }
+
+    /**
+     * Testa a redefinição de senha.
+     *
+     * @return void
+     */
+    public function testFinalizeRegistration()
+    {
+        $user = User::factory()->state(['is_enabled' => false])->createOne();
+
+        $url = URL::temporarySignedRoute(
+            'authentication.finalize_registration',
+            now()->addMinutes(60),
+            ['id' => $user->id]
+        );
+
+        Sanctum::actingAs($user);
+
+        $response = $this->put($url);
+
+        $response->assertOk();
+
+        $this->assertDatabaseHas('users', ['id' => $user->id, 'is_enabled' => true]);
+    }
+
+    /**
      * Testa o envio da requisição de redefinição de senha.
      *
      * @return void
@@ -123,11 +180,83 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->createOne();
 
-        $url = URL::temporarySignedRoute('authentication.reset_password', now()->addMinutes(30), ['id' => $user->id]);
+        $url = URL::temporarySignedRoute('authentication.reset_password', now()->addMinutes(60), ['id' => $user->id]);
 
-        $response = $this->post($url, [
+        $response = $this->put($url, [
             'password' => 'Gl@uber7!',
             'password_confirmation' => 'Gl@uber7!',
+        ]);
+
+        $response->assertOk();
+    }
+
+    /**
+     * Testa o envio da requisição de atualização de e-mail.
+     *
+     * @return void
+     */
+    public function testRequestUpdateEmail()
+    {
+        Mail::fake();
+
+        $user = User::factory()->createOne();
+
+        Sanctum::actingAs($user);
+
+        $response = $this->post('api/solicitar-atualizar-email', [
+            'email' => $user->email,
+            'email_confirmation' => $user->email,
+            'password' => 'Gl@uber7!',
+        ]);
+
+        Mail::assertQueued(AuthenticationUpdateEmailMail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
+
+        Mail::assertQueued(AuthenticationUpdateEmailMail::class, 1);
+
+        $response->assertOk();
+    }
+
+    /**
+     * Testa a atualização de email.
+     *
+     * @return void
+     */
+    public function testUpdateEmail()
+    {
+        $user = User::factory()->createOne();
+
+        $url = URL::temporarySignedRoute(
+            'authentication.update_email',
+            now()->addMinutes(60),
+            ['id' => $user->id, 'email' => $user->email]
+        );
+
+        Sanctum::actingAs($user);
+
+        $response = $this->put($url);
+
+        $response->assertOk();
+
+        $this->assertDatabaseHas('users', ['id' => $user->id, 'email' => $user->email]);
+    }
+
+    /**
+     * Testa a atualização de senha.
+     *
+     * @return void
+     */
+    public function testUpdatePassword()
+    {
+        $user = User::factory()->createOne();
+
+        Sanctum::actingAs($user);
+
+        $response = $this->put('api/atualizar-senha', [
+            'password' => 'Gl@uber7!',
+            'new_password' => '7Gl@uber!',
+            'new_password_confirmation' => '7Gl@uber!',
         ]);
 
         $response->assertOk();

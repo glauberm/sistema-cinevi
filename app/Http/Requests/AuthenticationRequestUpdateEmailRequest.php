@@ -7,24 +7,27 @@ namespace App\Http\Requests;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticationRequestUpdateEmailRequest extends FormRequest
 {
     /**
-     * @inheritDoc
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
-        $user = Auth::user();
+        $currentUser = $this->user();
 
-        if ($user === null) {
-            throw new AuthorizationException('O usuário não foi encontrado.');
+        if (\is_null($currentUser)) {
+            return false;
         }
 
-        return Auth::attempt([
-            'email' => $user->email,
-            'password' => $this->input('password'),
-        ]);
+        /** @var string $password */
+        $password = $this->input('password');
+
+        return Hash::check($password, $currentUser->password);
     }
 
     /**
@@ -47,7 +50,7 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
                 'email',
                 'max:180',
                 'confirmed',
-                'unique:users,email,' . $user->id,
+                'unique:users,email,'.$user->id,
             ],
             'password' => ['required', 'string', 'min:8'],
         ];
@@ -74,7 +77,7 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected function failedAuthorization()
     {

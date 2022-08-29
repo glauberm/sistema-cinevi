@@ -91,7 +91,7 @@ trait CrudTestTrait
     public function testRemove(): void
     {
         Sanctum::actingAs(User::factory()
-            ->state(['roles' => \json_encode(['admin'])])
+            ->state(['roles' => \json_encode(['user', 'admin'])])
             ->createOne());
 
         $model = $this->modelClass::factory()->create();

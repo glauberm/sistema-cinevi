@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { DialogsContext } from '../contexts/DialogsProvider';
 import Button from '../components/Button';
 
-export default function RemoveForm(props) {
+export default function (props) {
     const { isLoading, onSubmit } = props;
 
     const dialogs = useContext(DialogsContext);
@@ -29,8 +29,10 @@ export default function RemoveForm(props) {
     };
 
     return (
-        <Button type="button" onClick={onClickFn} className="btn-outline-danger" isLoading={isLoading}>
-            Remover
-        </Button>
+        <div className="text-center">
+            <Button type="button" onClick={onClickFn} className="btn-outline-danger" isLoading={isLoading}>
+                Remover
+            </Button>
+        </div>
     );
 }

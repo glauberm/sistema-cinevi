@@ -2,8 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Bookable;
+use App\Models\BookableCategory;
+use App\Models\Booking;
+use App\Models\FinalCopy;
+use App\Models\ProductionCategory;
 use App\Models\ProductionRole;
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,10 +21,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->state(['roles' => \json_encode(['admin'])])->createOne();
-
-        User::factory(10)->create();
-
+        User::factory()->state(['roles' => \json_encode(['user', 'admin'])])->createOne();
+        User::factory(30)->create();
+        ProductionCategory::factory(31)->create();
         ProductionRole::factory(31)->create();
+        // Project::factory(31)->create();
+        // FinalCopy::factory(31)->create();
+        BookableCategory::factory(31)->create();
+        // Bookable::factory(31)->create();
+        // Booking::factory(31)->create();
     }
 }

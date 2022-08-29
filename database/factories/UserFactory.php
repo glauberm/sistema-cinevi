@@ -21,9 +21,9 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'password' => 'Gl@uber7!',
             'phone' => $this->faker->phoneNumber(),
-            'identifier' => $this->faker->randomNumber(),
+            'identifier' => $this->faker->randomNumber(7, true),
+            'is_enabled' => $this->faker->boolean(),
             'is_confirmed' => $this->faker->boolean(),
-            'is_professor' => $this->faker->boolean(),
             'roles' => \json_encode(['user']),
         ];
     }

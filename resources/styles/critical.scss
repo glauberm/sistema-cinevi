@@ -70,14 +70,46 @@
     }
 }
 
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html {
+    height: 100%;
+    touch-action: manipulation;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    height: 100%;
+}
+
+#loading,
+#noscript {
+    z-index: 10000;
+}
+
 #loading {
     display: flex;
     width: 100vw;
     height: 100vh;
     position: absolute;
     top: 0;
+    left: 0;
     align-items: center;
     justify-content: center;
+    padding: 3rem;
     background-color: #f8f9fa;
 }
 

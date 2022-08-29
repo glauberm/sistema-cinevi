@@ -2,7 +2,15 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import authentication from '../routes/authentication';
+import user from '../routes/user';
+import booking from '../routes/booking';
+import bookable from '../routes/bookable';
+import bookableCategory from '../routes/bookable-category';
+import project from '../routes/project';
+import finalCopy from '../routes/final-copy';
 import productionRole from '../routes/production-role';
+import productionCategory from '../routes/production-category';
+import misc from '../routes/misc';
 
 const menuItems = [
     {
@@ -22,11 +30,11 @@ const menuItems = [
         label: 'Sistema',
         links: [
             {
-                to: '/usuarios',
+                to: user.index.path,
                 text: 'Usuários',
             },
             {
-                to: '/configuracoes',
+                to: misc.configuration.path,
                 text: 'Configurações',
             },
         ],
@@ -35,15 +43,15 @@ const menuItems = [
         label: 'Almoxarifado',
         links: [
             {
-                to: '/reservas',
+                to: booking.index.path,
                 text: 'Reservas',
             },
             {
-                to: '/reservaveis',
+                to: bookable.index.path,
                 text: 'Reserváveis',
             },
             {
-                to: '/categorias',
+                to: bookableCategory.index.path,
                 text: 'Categorias',
             },
         ],
@@ -52,11 +60,11 @@ const menuItems = [
         label: 'Realização',
         links: [
             {
-                to: '/projetos',
+                to: project.index.path,
                 text: 'Projetos',
             },
             {
-                to: '/copias-finais',
+                to: finalCopy.index.path,
                 text: 'Cópias Finais',
             },
             {
@@ -64,14 +72,14 @@ const menuItems = [
                 text: 'Funções',
             },
             {
-                to: 'modalidades',
+                to: productionCategory.index.path,
                 text: 'Modalidades',
             },
         ],
     },
 ];
 
-export default function Navigation() {
+export default function () {
     return (
         <nav className="mb-5">
             {menuItems.map((item, key) => (

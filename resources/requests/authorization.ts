@@ -1,14 +1,6 @@
 import api, { handleError } from '../services/api';
 
-/**
- * Verifica se o usuário autenticado atende a certos parâmetros (gates).
- *
- * @param {*} component
- * @param {string} gate
- * @param {number|null} userId
- * @param {string|null} stateKey
- */
-export default function authorize(notifications, setAuthorized, gate, userId = null) {
+export default function (notifications, setAuthorized, gate, userId = null) {
     api.get('/usuario-autenticado')
         .then((response) => {
             const authenticatedUser = response.data.data;

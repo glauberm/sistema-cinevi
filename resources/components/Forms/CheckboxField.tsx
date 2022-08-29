@@ -4,11 +4,12 @@ import { FastField as FormikFastField } from 'formik';
 
 import Checkbox from './Checkbox';
 
-export default function CheckboxField(props) {
+export default function (props) {
     const { name, label, errors, touched, isFastField } = props;
 
     const componentFn = ({ field, form }) => (
         <Checkbox
+            id={field.name}
             label={label}
             name={field.name}
             value={field.value}

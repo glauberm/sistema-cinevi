@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -32,7 +31,9 @@ class Handler extends ExceptionHandler
      *
      * @var array<int, string>
      */
-    protected $dontFlash = ['current_password', 'password', 'password_confirmation'];
+    protected $dontFlash = [
+        'current_password', 'password', 'password_confirmation', 'new_password', 'new_password_confirmation',
+    ];
 
     /**
      * Register the exception handling callbacks for the application.
@@ -41,8 +42,6 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        //
     }
 }

@@ -5,7 +5,7 @@ import ProductionRoleCreateOrUpdateForm from '../../forms/ProductionRole/Product
 import ProductionRoleRemoveForm from '../../forms/ProductionRole/ProductionRoleRemoveForm';
 import Title from '../../components/Title';
 
-export default function ProductionRoleUpdatePage() {
+export default function () {
     const params = useParams();
 
     return (

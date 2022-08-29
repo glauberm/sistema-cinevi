@@ -6,7 +6,7 @@ import authorize from '../../requests/authorization';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
 import RemoveForm from '../RemoveForm';
 
-export default function ProductionRoleRemoveForm(props) {
+export default function (props) {
     const [isLoading, setLoading] = useState(false);
     const [isAuthorized, setAuthorized] = useState(false);
 

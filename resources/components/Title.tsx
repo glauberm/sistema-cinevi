@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Title(props) {
+export default function (props) {
     return (
         <h1 className="display-6 mb-4 fw-bold text-primary">
             {props.children}

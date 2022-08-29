@@ -1,10 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { getDate, getTime } from '../../services/datetime';
 import PaginatedList from '../../components/Collections/PaginatedList';
 
-export default function RevisionCollection(props) {
+export default function (props) {
     const { paginate, data, links, meta, linkToPrefix } = props;
 
     return (

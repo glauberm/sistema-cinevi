@@ -18,9 +18,7 @@ mix.sass('resources/app.scss', 'css').sass('resources/styles/critical.scss', 'cs
 mix.ts('resources/app.tsx', 'js').react().version();
 
 mix.copy('resources/fonts/GillSansNova-Bold.woff2', 'public_html/fonts/GillSansNova-Bold.woff2')
-    .copy('resources/fonts/GillSansNova-BoldItalic.woff2', 'public_html/fonts/GillSansNova-BoldItalic.woff2')
     .copy('resources/fonts/GillSansNova-Medium.woff2', 'public_html/fonts/GillSansNova-Medium.woff2')
-    .copy('resources/fonts/GillSansNova-MediumItalic.woff2', 'public_html/fonts/GillSansNova-MediumItalic.woff2')
     .version();
 
 mix.copy('resources/images/favicon.ico', 'public_html/favicon.ico')

@@ -26,8 +26,8 @@ class UserTest extends TestCase implements CrudTestInterface, HasVersionsTestInt
         'password' => 'Gl@uber7!',
         'phone' => '(00) 71485-03148',
         'identifier' => '1304856',
-        'is_confirmed' => false,
-        'is_professor' => true,
+        'is_enabled' => true,
+        'is_confirmed' => true,
         'roles' => ['user'],
     ];
 
@@ -43,8 +43,8 @@ class UserTest extends TestCase implements CrudTestInterface, HasVersionsTestInt
         'password' => '7Gl@uber!',
         'phone' => '(01) 71485-03148',
         'identifier' => '991304856',
-        'is_confirmed' => true,
-        'is_professor' => false,
+        'is_enabled' => false,
+        'is_confirmed' => false,
         'roles' => ['user', 'admin'],
     ];
 
@@ -56,7 +56,7 @@ class UserTest extends TestCase implements CrudTestInterface, HasVersionsTestInt
     public function testCreate(): void
     {
         Sanctum::actingAs(User::factory()
-            ->state(['roles' => \json_encode(['admin'])])
+            ->state(['roles' => \json_encode(['user', 'admin'])])
             ->createOne());
 
         $response = $this->json('POST', "{$this->baseApiUrl}/adicionar", $this->createRequest);
@@ -78,7 +78,7 @@ class UserTest extends TestCase implements CrudTestInterface, HasVersionsTestInt
     public function testPaginate(): void
     {
         Sanctum::actingAs(User::factory()
-            ->state(['roles' => \json_encode(['admin'])])
+            ->state(['roles' => \json_encode(['user', 'admin'])])
             ->createOne());
 
         $model = $this->modelClass::factory()->create();
@@ -96,7 +96,7 @@ class UserTest extends TestCase implements CrudTestInterface, HasVersionsTestInt
     public function testUpdate(): void
     {
         Sanctum::actingAs(User::factory()
-            ->state(['roles' => \json_encode(['admin'])])
+            ->state(['roles' => \json_encode(['user', 'admin'])])
             ->createOne());
 
         $model = $this->modelClass::factory()->create();

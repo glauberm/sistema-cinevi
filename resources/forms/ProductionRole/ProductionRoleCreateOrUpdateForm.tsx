@@ -19,7 +19,7 @@ const validationSchema = Yup.object({
     description: Yup.string().nullable(),
 });
 
-export default function ProductionRoleCreateOrUpdateForm(props) {
+export default function (props) {
     const [isLoading, setLoading] = useState(false);
     const [values, setValues] = useState(initialValues);
 
@@ -56,10 +56,9 @@ export default function ProductionRoleCreateOrUpdateForm(props) {
                         touched={touched.title}
                     />
                     <Field
-                        as="textarea"
                         name="description"
                         label="Descrição"
-                        type="text"
+                        as="textarea"
                         errors={errors.description}
                         touched={touched.description}
                     />

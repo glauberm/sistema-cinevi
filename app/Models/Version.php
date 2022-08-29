@@ -16,8 +16,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string                      $user_ip
  * @property string                      $user_agent
  * @property string                      $user_string
- * @property Carbon|string               $created_at
- * @property Carbon|string               $updated_at
+ * @property Carbon                      $created_at
+ * @property Carbon                      $updated_at
  * @property User                        $user
  */
 class Version extends Model

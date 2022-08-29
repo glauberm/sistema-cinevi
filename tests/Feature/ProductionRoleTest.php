@@ -31,10 +31,12 @@ class ProductionRoleTest extends TestCase implements CrudTestInterface, HasVersi
     /** @var array<string, string> */
     protected array $updateRequest = [
         'title' => 'Consectur Lorem Ipsum Dolor Sit Amet',
+        'description' => 'Lorem Ipsum Dolor Sit Amet',
     ];
 
     /** @var array<string, string> */
     protected array $updateDatabaseFields = [
         'title' => 'Consectur Lorem Ipsum Dolor Sit Amet',
+        'description' => 'Lorem Ipsum Dolor Sit Amet',
     ];
 }

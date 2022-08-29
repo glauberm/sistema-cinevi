@@ -19,7 +19,7 @@ interface NotificationProviderProps {
     children: ReactElement;
 }
 
-export default function NotificationsProvider(props: NotificationProviderProps) {
+export default function (props: NotificationProviderProps) {
     const [id, setId] = useState<number>(0);
     const [notifications, setNotifications] = useState<NotificationInterface[]>([]);
 

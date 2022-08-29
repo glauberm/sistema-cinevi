@@ -16,31 +16,37 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         Gate::define('isAdmin', function (User $user) {
-            if (!\is_array($user->roles)) {
+            $roles = $user->roles;
+
+            if (\is_string($roles)) {
                 throw new \TypeError('Os papéis do usuário não são um array.');
             }
 
-            return \in_array('admin', $user->roles, true);
+            return \in_array('admin', $roles, true);
         });
 
         Gate::define('isNotUser', function (User $user, User $userModel) {
-            return $user != $userModel;
+            return $user !== $userModel;
         });
 
         Gate::define('isDepartment', function ($user) {
-            if (!\is_array($user->roles)) {
+            $roles = $user->roles;
+
+            if (\is_string($roles)) {
                 throw new \TypeError('Os papéis do usuário não são um array.');
             }
 
-            return \in_array('department', $user->roles, true);
+            return \in_array('department', $roles, true);
         });
 
         Gate::define('isWarehouse', function ($user) {
-            if (!\is_array($user->roles)) {
+            $roles = $user->roles;
+
+            if (\is_string($roles)) {
                 throw new \TypeError('Os papéis do usuário não são um array.');
             }
 
-            return \in_array('warehouse', $user->roles, true);
+            return \in_array('warehouse', $roles, true);
         });
     }
 }

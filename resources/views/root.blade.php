@@ -13,26 +13,40 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="robots" content="noindex, nofollow" />
-        <meta name="googlebot" content="noindex, nofollow" />
-
-        <link href="/" rel="preconnect" crossorigin>
+        <title>Departamento de Cinema e Vídeo da UFF</title>
+        <meta name="description" content="Cadastre projetos, reserve equipamentos no almoxarifado e muito mais pelo celular, tablet ou qualquer outro dispositivo com acesso à internet. Sistema para alunos, funcionários ou professores do Departamento de Cinema e Vídeo da Universidade Federal Fluminense.">
 
         <link rel="icon" href="{{ asset(mix('favicon.ico')) }}" />
         <link rel="icon" href="{{ asset(mix('images/favicon.svg')) }}" type="image/svg+xml" />
 
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
+
         <link href="{{ asset(mix('/fonts/GillSansNova-Medium.woff2')) }}" rel="preload" type="font/woff2" as="font" crossorigin>
         <link href="{{ asset(mix('/fonts/GillSansNova-Bold.woff2')) }}" rel="preload" type="font/woff2" as="font" crossorigin>
-        <link href="{{ asset(mix('/fonts/GillSansNova-MediumItalic.woff2')) }}" rel="preload" type="font/woff2" as="font" crossorigin>
-        <link href="{{ asset(mix('/fonts/GillSansNova-BoldItalic.woff2')) }}" rel="preload" type="font/woff2" as="font" crossorigin>
-        
-        <link href="{{ asset(mix('/css/app.css')) }}" rel="stylesheet">
-        
-        <script async defer src="{{ mix('/js/app.js') }}"></script>
+
+        <link rel="preload" href="{{ asset(mix('/css/app.css')) }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="{{ asset(mix('/css/app.css')) }}"></noscript>
 
         <style>
+            @font-face {
+                font-family: 'Gill Sans Nova';
+                src: url("{{ asset(mix('/fonts/GillSansNova-Medium.woff2')) }}") format('woff2');
+                font-weight: 400;
+                font-style: normal;
+            }
+            
+            @font-face {
+                font-family: 'Gill Sans Nova';
+                src: url("{{ asset(mix('/fonts/GillSansNova-Bold.woff2')) }}") format('woff2');
+                font-weight: 700;
+                font-style: normal;
+            }
+
             @php(readfile(public_path('/css/critical.css')));
         </style>
+        
+        <script async defer src="{{ mix('/js/app.js') }}"></script>      
 
         @yield('head')
     </head>

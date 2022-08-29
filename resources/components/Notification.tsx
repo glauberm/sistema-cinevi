@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function Notification(props) {
+export default function (props) {
     const { status, handleDismiss, content } = props;
     const [isActive, setActive] = useState(true);
     const [isSlidingOut, setSlidingOut] = useState(false);

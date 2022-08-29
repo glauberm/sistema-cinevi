@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Mail;
 
-use Illuminate\Mail\Mailable;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailable;
 
 class AuthenticationUpdateEmailMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
 
     public string $url;
 
@@ -25,7 +24,7 @@ class AuthenticationUpdateEmailMail extends Mailable
      */
     public function __construct(string $url)
     {
-        $this->url = env('CLIENT_URL', 'http://localhost:3000') . '/atualizar-email?url=' . \rawurlencode($url);
+        $this->url = \env('APP_URL').'/atualizar-email?url='.\rawurlencode($url);
     }
 
     /**
@@ -35,7 +34,13 @@ class AuthenticationUpdateEmailMail extends Mailable
      */
     public function build()
     {
-        return $this->from('nao-responda@cinemauff.com.br', 'Departamento de Cinema e Vídeo da UFF')
+        /** @var string $name */
+        $name = env('MAIL_FROM_NAME');
+
+        /** @var string $address */
+        $address = env('MAIL_FROM_ADDRESS');
+
+        return $this->from($name, $address)
             ->subject($this->title)
             ->view('emails/authentication-update-email')
             ->text('emails/authentication-update-email-plain');

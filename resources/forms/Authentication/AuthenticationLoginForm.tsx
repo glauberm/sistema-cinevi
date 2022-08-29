@@ -20,7 +20,7 @@ const validationSchema = Yup.object({
     password: Yup.string().required('Campo obrigatório'),
 });
 
-export default function AuthenticationLoginForm(props) {
+export default function (props) {
     const [isLoading, setLoading] = useState(false);
     const notifications = useContext(NotificationsContext);
     const navigate = useNavigate();

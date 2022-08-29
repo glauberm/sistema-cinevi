@@ -7,24 +7,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property int           $id
- * @property string        $name
- * @property string        $email
- * @property string        $password
- * @property string        $phone
- * @property string        $identifier
- * @property bool          $is_confirmed
- * @property bool          $is_professor
- * @property string|array  $roles
+ * @property int                $id
+ * @property string             $name
+ * @property string             $email
+ * @property string             $password
+ * @property string             $phone
+ * @property string             $identifier
+ * @property bool               $is_enabled
+ * @property bool               $is_confirmed
+ * @property string|array       $roles
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory;
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +38,14 @@ class User extends Authenticatable
      * @var array<string>
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'identifier', 'is_confirmed', 'is_professor', 'roles',
+        'name',
+        'email',
+        'password',
+        'phone',
+        'identifier',
+        'is_enabled',
+        'is_confirmed',
+        'roles',
     ];
 
     /**
@@ -40,7 +53,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
 
     /**
      * @return Attribute<callable, callable>
@@ -55,18 +71,18 @@ class User extends Authenticatable
      */
     public function roles(): Attribute
     {
-        return Attribute::make(get: [$this, 'jsonDecode'], set: [$this, 'jsonEncode']);
+        return Attribute::make(get: [$this, 'getRoles'], set: [$this, 'setRoles']);
     }
 
     /**
-     * @param  string  $value
+     * @param  string    $value
      * @return string[]
      */
-    protected function jsonDecode(string $value): array
+    protected function getRoles(string $value): array
     {
         $array = \json_decode($value, true);
 
-        if (! \is_array($array)) {
+        if (!\is_array($array)) {
             throw new \JsonException('Erro ao decodificar JSON');
         }
 
@@ -74,10 +90,10 @@ class User extends Authenticatable
     }
 
     /**
-     * @param  string[]|string  $value
+     * @param  string[]|string $value
      * @return string
      */
-    protected function jsonEncode(string|array $value): string
+    protected function setRoles(array|string $value): string
     {
         if (\is_string($value)) {
             return $value;
@@ -85,7 +101,7 @@ class User extends Authenticatable
 
         $string = \json_encode($value);
 
-        if (! \is_string($string)) {
+        if (!\is_string($string)) {
             throw new \JsonException('Erro ao codificar JSON');
         }
 

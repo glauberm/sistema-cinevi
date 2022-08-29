@@ -6,7 +6,7 @@ import Pagination from '../../components/Collections/Pagination';
 import Spinner from '../Spinner';
 import Message from '../Message';
 
-export default function PaginatedTable(props) {
+export default function (props) {
     const { paginateFn, children } = props;
 
     const [data, setData] = useState(null);

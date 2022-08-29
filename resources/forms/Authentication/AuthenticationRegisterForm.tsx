@@ -23,7 +23,7 @@ const validationSchema = Yup.object({
     password: Yup.string().required('Campo obrigatório').min(8, 'A senha deve ter no mínimo 8 caracteres'),
 });
 
-export default function AuthenticationRegisterForm(props) {
+export default function (props) {
     const [isLoading, setLoading] = useState(false);
     const notifications = useContext(NotificationsContext);
     const navigate = useNavigate();
@@ -37,6 +37,14 @@ export default function AuthenticationRegisterForm(props) {
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             {({ errors, touched }) => (
                 <Form>
+                    <Field
+                        name="name"
+                        label="Nome completo"
+                        type="text"
+                        autoComplete="name"
+                        errors={errors.name}
+                        touched={touched.name}
+                    />
                     <Field
                         name="email"
                         label="E-mail"

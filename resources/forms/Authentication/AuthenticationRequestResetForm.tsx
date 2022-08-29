@@ -17,7 +17,7 @@ const validationSchema = Yup.object({
     email: Yup.string().required('Campo obrigatório').email('Endereço de e-mail inválido'),
 });
 
-export default function AuthenticationRequestResetForm(props) {
+export default function (props) {
     const [isLoading, setLoading] = useState(false);
     const notifications = useContext(NotificationsContext);
     const navigate = useNavigate();

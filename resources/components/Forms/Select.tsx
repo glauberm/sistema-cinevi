@@ -1,27 +1,22 @@
 import React from 'react';
+import Select from 'react-select';
 
-export default function Select(props) {
-    const { name, label, labelHidden, value, defaultValue, onChange, errors, touched, children, isLoading } = props;
+export default function (props) {
+    const { isMulti, options } = props.field;
 
     return (
-        <div className="field">
-            <label htmlFor={name} className={`label${labelHidden ? ' is-sr-only' : ''}`}>
-                {label}
-            </label>
-            <div className="control">
-                <div className="select">
-                    <select
-                        id={name}
-                        name={name}
-                        value={value || defaultValue}
-                        onChange={onChange}
-                        className={`input ${errors && touched ? 'is-danger' : ''} ${isLoading ? 'is-loading' : ''}`}
-                    >
-                        {children}
-                    </select>
-                </div>
-                {errors && touched && <div className="help is-danger">{errors}</div>}
-            </div>
-        </div>
+        <Select
+            placeholder={Boolean(isMulti) ? 'Selecione opções' : 'Selecione uma opção'}
+            options={options}
+            isMulti={isMulti}
+            noOptionsMessage={() => 'Nenhum resultado'}
+            styles={{
+                noOptionsMessage: (provided, state) => ({
+                    ...provided,
+                    paddingTop: '3rem',
+                    paddingBottom: '3rem',
+                }),
+            }}
+        />
     );
 }

@@ -28,14 +28,11 @@ class Version extends JsonResource
             'user_agent' => $this->resource->user_agent,
             'user_ip' => $this->resource->user_ip,
             'payload' => $this->resource->payload,
-            /** @phpstan-ignore-next-line */
             'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
         ];
     }
 
     /**
-     * Retorna o recurso do usuário ou a string de usuário da versão caso não encontre o usuário.
-     *
      * @return JsonResource|string
      */
     public function getUser(): JsonResource|string

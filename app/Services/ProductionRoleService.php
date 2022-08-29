@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Events\ProductionRoleRegisterVersionEvent;
+use App\Events\ProductionRoleVersionEvent;
 use App\Models\ProductionRole;
 
 class ProductionRoleService implements CrudServiceInterface, HasVersionsServiceInterface
@@ -16,7 +16,7 @@ class ProductionRoleService implements CrudServiceInterface, HasVersionsServiceI
 
     protected string $modelClass = ProductionRole::class;
 
-    protected string $modelRegisterVersionEventClass = ProductionRoleRegisterVersionEvent::class;
+    protected string $modelVersionEventClass = ProductionRoleVersionEvent::class;
 
     protected string $modelVersionTableName = 'production_roles_versions';
 

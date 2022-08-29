@@ -8,7 +8,7 @@ interface BaseLayoutProps {
     children: ReactElement;
 }
 
-export default function BaseLayout(props: BaseLayoutProps) {
+export default function (props: BaseLayoutProps) {
     useEffect(() => {
         const loading = document.getElementById('loading');
 

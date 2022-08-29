@@ -15,7 +15,7 @@ class UserCreateOrUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'name' => ['required', 'string', 'max:180', 'unique:users,name'],
             'email' => ['required', 'string', 'email', 'max:180', 'unique:users,email'],
             'password' => [
@@ -24,15 +24,21 @@ class UserCreateOrUpdateRequest extends FormRequest
                 'min:8',
                 'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).*$/',
             ],
-            'phone' => ['required', 'string', 'max:180'],
-            'identifier' => ['required', 'string', 'max:180', 'unique:users,identifier'],
+            'phone' => [
+                'required',
+                'string',
+                'regex:/\(\d{2}\)\s(\d{5}|\d{4})-\d{4}/',
+            ],
+            'identifier' => [
+                'required',
+                'string',
+                'unique:users,identifier',
+                'regex:/^[0-9]*$/',
+            ],
             'is_confirmed' => ['required', 'boolean'],
-            'is_professor' => ['required', 'boolean'],
             'roles' => ['array', 'required'],
             'roles.*' => ['string', 'required'],
         ];
-
-        return $rules;
     }
 
     /**
@@ -53,10 +59,18 @@ class UserCreateOrUpdateRequest extends FormRequest
             'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
             'password.confirmed' => 'As senhas informadas não coincidem.',
             'password.regex' => 'A senha deve conter maiúsculas e minúsculas, números e símbolos (!@#$%).',
+            'phone.required' => 'O telefone é obrigatório.',
+            'phone.string' => 'O telefone deve ser uma string.',
+            'phone.regex' => 'O telefone pode estar nos seguintes formatos: (99) 9999-9999 ou (99) 99999-9999.',
+            'identifier.required' => 'A matrícula ou SIAPE é obrigatório.',
+            'identifier.string' => 'A matrícula ou SIAPE deve ser uma string.',
+            'identifier.unique' => 'Essa matrícula ou SIAPE já está em uso.',
+            'is_confirmed.required' => 'Por favor, informe se o usuário está confirmado ou não.',
+            'is_confirmed.boolean' => 'O dado se o usuário está confirmado ou não deve ser do tipo booleano.',
             'roles.array' => 'Os papéis devem ser um array.',
-            'roles.required' => 'O usuário deve ter ao menos um papel.',
+            'roles.required' => 'O usuário deve ter ao menos um papel no sistema.',
             'roles.*.string' => 'Cada papel deve ser uma string.',
-            'roles.*.required' => 'O usuário deve ter ao menos um papel.',
+            'roles.*.required' => 'O usuário deve ter ao menos um papel no sistema.',
         ];
     }
 }

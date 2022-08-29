@@ -66,7 +66,7 @@ trait CrudServiceTrait
         $model = $this->afterCreated($model, $data);
 
         if ($this instanceof HasVersionsServiceInterface) {
-            event(new $this->modelRegisterVersionEventClass($model, $eventAction, $eventMessage));
+            event(new $this->modelVersionEventClass($model, $eventAction, $eventMessage));
         }
 
         return $model;
@@ -106,7 +106,7 @@ trait CrudServiceTrait
         $this->afterUpdated($model, $data);
 
         if ($this instanceof HasVersionsServiceInterface) {
-            event(new $this->modelRegisterVersionEventClass($model, $eventAction, $eventMessage));
+            event(new $this->modelVersionEventClass($model, $eventAction, $eventMessage));
         }
     }
 
@@ -124,7 +124,7 @@ trait CrudServiceTrait
         ?string $eventMessage = 'O item foi removido.'
     ): void {
         if ($this instanceof HasVersionsServiceInterface) {
-            event(new $this->modelRegisterVersionEventClass($this->get($id), $eventAction, $eventMessage));
+            event(new $this->modelVersionEventClass($this->get($id), $eventAction, $eventMessage));
         }
 
         $this->modelClass::destroy($id);

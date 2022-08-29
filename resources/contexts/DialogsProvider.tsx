@@ -4,7 +4,7 @@ import Dialog from '../components/Dialog';
 
 export const DialogsContext = createContext(undefined);
 
-export default function DialogsProvider(props) {
+export default function (props) {
     const [dialogs, setDialogs] = useState([]);
 
     useEffect(() => {
@@ -26,8 +26,6 @@ export default function DialogsProvider(props) {
 
     const contextValues = { add: add, remove: remove };
 
-    console.log(dialogs);
-
     return (
         <DialogsContext.Provider value={contextValues}>
             {props.children}
@@ -36,7 +34,14 @@ export default function DialogsProvider(props) {
                 <>
                     <div className="DialogsProvider">
                         {dialogs.map(({ key, title, body, footer }) => (
-                            <Dialog key={key} title={title} body={body} footer={footer} close={() => remove(key)} />
+                            <Dialog
+                                key={key}
+                                id={key}
+                                title={title}
+                                body={body}
+                                footer={footer}
+                                close={() => remove(key)}
+                            />
                         ))}
                     </div>
                     <div className="modal-backdrop fade show"></div>

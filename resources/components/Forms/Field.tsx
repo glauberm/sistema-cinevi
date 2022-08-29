@@ -2,7 +2,7 @@ import React from 'react';
 import { Field as FormikField } from 'formik';
 import { FastField as FormikFastField } from 'formik';
 
-export default function Field(props) {
+export default function (props) {
     const {
         name,
         label,
@@ -33,7 +33,7 @@ export default function Field(props) {
     };
 
     return (
-        <div className="mb-3">
+        <div className="mb-4">
             <label htmlFor={name} className="form-label">
                 {label}
             </label>

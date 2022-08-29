@@ -45,7 +45,7 @@ export function reboot(url: string) {
 
     setAuthenticated(false);
 
-    window.location.href = `${authentication.login.path}?${urlParams}`;
+    // window.location.href = `${authentication.login.path}?${urlParams}`;
 }
 
 /**

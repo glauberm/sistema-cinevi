@@ -1,9 +1,8 @@
-import React from 'react';
 
 import SecureLayout from '../../layouts/SecureLayout';
 import ProductionRoleCreateOrUpdateForm from '../../forms/ProductionRole/ProductionRoleCreateOrUpdateForm';
 
-export default function ProductionRoleRevisionPage(props) {
+export default function (props) {
     const { id } = props.match.params;
 
     return (

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Events\UserRegisterVersionEvent;
+use App\Events\UserVersionEvent;
 use App\Models\User;
 
 class UserService implements CrudServiceInterface, HasVersionsServiceInterface
@@ -16,7 +16,7 @@ class UserService implements CrudServiceInterface, HasVersionsServiceInterface
 
     protected string $modelClass = User::class;
 
-    protected string $modelRegisterVersionEventClass = UserRegisterVersionEvent::class;
+    protected string $modelVersionEventClass = UserVersionEvent::class;
 
     protected string $modelVersionTableName = 'users_versions';
 

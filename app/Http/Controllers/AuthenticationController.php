@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthenticationLoginRequest;
+use App\Http\Requests\AuthenticationRegisterRequest;
 use App\Http\Requests\AuthenticationRequestResetPasswordRequest;
 use App\Http\Requests\AuthenticationRequestUpdateEmailRequest;
 use App\Http\Requests\AuthenticationResetPasswordRequest;
 use App\Http\Requests\AuthenticationUpdatePasswordRequest;
 use App\Http\Resources\User;
+use App\Mail\AuthenticationFinalizeRegistrationMail;
 use App\Mail\AuthenticationResetPasswordMail;
 use App\Mail\AuthenticationUpdateEmailMail;
+use App\Models\User as UserModel;
 use App\Services\UserService;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
@@ -32,8 +35,9 @@ class AuthenticationController extends Controller
 
     public function __construct(UserService $userService)
     {
-        $this->middleware(Authenticate::class . ':sanctum')->except(['login', 'requestResetPassword', 'resetPassword']);
-        $this->middleware(ValidateSignature::class)->only(['resetPassword']);
+        $this->middleware(Authenticate::class . ':sanctum')->except(['login', 'register', 'requestResetPassword', 'resetPassword']);
+
+        $this->middleware(ValidateSignature::class)->only(['finalizeRegistration', 'resetPassword', 'updateEmail']);
 
         if (!App::environment('testing')) {
             $this->middleware(ThrottleRequests::class . ':10,1')->only(['login']);
@@ -69,7 +73,7 @@ class AuthenticationController extends Controller
     public function logout(Request $request): JsonResponse
     {
         if ($request->user() === null) {
-            throw new \ErrorException('O usuário da requisição não foi encontrado.');
+            throw new \UnexpectedValueException('O usuário da requisição não foi encontrado.');
         }
 
         $request->user()->tokens()->delete();
@@ -87,41 +91,64 @@ class AuthenticationController extends Controller
         return new User(Auth::user());
     }
 
-    // /**
-    //  * Requisita o registro do usuário.
-    //  */
-    // public function requestRegister(AuthenticationRegisterRequest $request): JsonResponse
-    // {
-    //     $data = $request->validated();
+    /**
+     * Faz o cadastro de um usuário desativado e envia o e-mail para finalização de cadastro.
+     *
+     * @param  AuthenticationRegisterRequest  $request
+     * @return JsonResponse
+     */
+    public function register(AuthenticationRegisterRequest $request): JsonResponse
+    {
+        /** @var mixed[] $data */
+        $data = $request->validated();
 
-    //     if (!\is_array($data)) {
-    //         throw new \TypeError('Os dados da requisição não são um array.');
-    //     }
+        $data['roles'] = ['user'];
 
-    //     Mail::to($email)->queue(new UserCreateMail($url));
+        /** @var UserModel $user */
+        $user = $this->userService->create($data, 'register', 'O usuário foi cadastrado.');
 
-    //     return response()->json([
-    //         'message' => "Foi enviado para {$email} um link válido por 60 minutos para cadastro no sistema.",
-    //     ]);
-    // }
+        $url = URL::temporarySignedRoute(
+            'authentication.finalize_registration',
+            now()->addMinutes(60),
+            ['id' => $user->id]
+        );
 
-    // /**
-    //  * Realiza o registro do usuário.
-    //  */
-    // public function register(AuthenticationRegisterRequest $request): JsonResponse
-    // {
-    //     $data = $request->validated();
+        Mail::to($user->email)->queue(new AuthenticationFinalizeRegistrationMail($url));
 
-    //     if (!\is_array($data)) {
-    //         throw new \TypeError('Os dados da requisição não são um array.');
-    //     }
+        return response()->json([
+            'message' => "Foi enviado para {$user->email} um link válido por 60 minutos para você finalizar o seu cadastro.",
+        ]);
+    }
 
-    //     $this->userService->create($data, 'register', 'O usuário foi cadastrado.');
+    /**
+     * Realiza a finalização do cadastro através de uma URL com assinatura.
+     *
+     * @param  int  $id
+     * @return JsonResponse
+     */
+    public function finalizeRegistration(int $id): JsonResponse
+    {
+        $currentUserId = Auth::id();
 
-    //     return response()->json([
-    //         'message' => 'Seu cadastro foi realizado com sucesso. Você já pode entrar no sistema.',
-    //     ]);
-    // }
+        if (\is_null($currentUserId)) {
+            throw new UnauthorizedHttpException('', 'O id do usuário atual não foi encontrado.');
+        }
+
+        if ($currentUserId !== $id) {
+            throw new UnauthorizedHttpException('', 'O id do usuário atual não bate com o id da URL.');
+        }
+
+        $this->userService->update(
+            ['is_enabled' => true],
+            $id,
+            'finalize_registration',
+            'O cadastro do usuário foi finalizado.'
+        );
+
+        return response()->json([
+            'message' => 'Seu cadastro foi finalizado com sucesso. Você já pode entrar no sistema.',
+        ]);
+    }
 
     /**
      * Envia email com link para redefinir senha.
@@ -142,9 +169,11 @@ class AuthenticationController extends Controller
         $email = $data['email'];
 
         if ($user = $this->userService->getByEmail($email)) {
-            $url = URL::temporarySignedRoute('authentication.reset_password', now()->addMinutes(60), [
-                'id' => $user->id,
-            ]);
+            $url = URL::temporarySignedRoute(
+                'authentication.reset_password',
+                now()->addMinutes(60),
+                ['id' => $user->id]
+            );
 
             Mail::to($user->email)->queue(new AuthenticationResetPasswordMail($url));
 
@@ -192,41 +221,61 @@ class AuthenticationController extends Controller
             throw new \TypeError('Os dados da requisição não são um array.');
         }
 
-        $email = $data['email'];
+        $currentUserId = Auth::id();
 
-        $url = URL::temporarySignedRoute('authentication.update_email', now()->addMinutes(60), ['email' => $email]);
+        if (!\is_null($currentUserId)) {
+            $email = $data['email'];
 
-        Mail::to($email)->queue(new AuthenticationUpdateEmailMail($url));
+            $url = URL::temporarySignedRoute(
+                'authentication.update_email',
+                now()->addMinutes(60),
+                ['id' => $currentUserId, 'email' => $email]
+            );
 
-        return response()->json([
-            'message' => "Foi enviado para {$email} um link válido por 60 minutos para finalizar a atualização do seu e-mail.",
-        ]);
+            Mail::to($email)->queue(new AuthenticationUpdateEmailMail($url));
+
+            return response()->json([
+                'message' => "Foi enviado para {$email} um link válido por 60 minutos para finalizar a atualização do seu e-mail.",
+            ]);
+        }
+
+        throw new UnauthorizedHttpException('', 'O id do usuário atual não foi encontrado.');
     }
 
     /**
      * Atualiza o email do usuário autenticado.
      *
+     * @param  Request  $request
+     * @param  int  $id
      * @param  string  $email
      * @return JsonResponse
      */
-    public function updateEmail(string $email): JsonResponse
+    public function updateEmail(Request $request, int $id, string $email): JsonResponse
     {
         $currentUserId = Auth::id();
 
-        if (!\is_int($currentUserId)) {
-            throw new \TypeError('O id do usuário não é um inteiro.');
+        if (!\is_null($currentUserId)) {
+            if ($currentUserId !== $id) {
+                throw new UnauthorizedHttpException('', 'O id do usuário atual não bate com o id da URL.');
+            }
+
+            $this->userService->update(
+                ['email' => $email],
+                \intval($currentUserId),
+                'update_email',
+                'O e-mail do usuário foi atualizado.'
+            );
+
+            if ($request->user() === null) {
+                throw new \ErrorException('O usuário da requisição não foi encontrado.');
+            }
+
+            $request->user()->tokens()->delete();
+
+            return response()->json(['message' => 'E-mail editado com sucesso. Por favor, entre com seu novo e-mail.']);
         }
 
-        $this->userService->update(
-            ['email' => $email],
-            $currentUserId,
-            'update_email',
-            'O e-mail do usuário foi atualizado.'
-        );
-
-        Auth::logout();
-
-        return response()->json(['message' => 'E-mail editado com sucesso. Por favor, entre com seu novo e-mail.']);
+        throw new UnauthorizedHttpException('', 'O id do usuário atual não foi encontrado.');
     }
 
     /**
@@ -238,27 +287,32 @@ class AuthenticationController extends Controller
     public function updatePassword(AuthenticationUpdatePasswordRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $currentUserId = Auth::id();
 
         if (!\is_array($data)) {
             throw new \TypeError('Os dados da requisição não são um array.');
         }
 
-        if (!\is_int($currentUserId)) {
-            throw new \TypeError('O id do usuário não é um inteiro.');
+        $currentUserId = Auth::id();
+
+        if (!\is_null($currentUserId)) {
+            $password = $data['new_password'];
+
+            $this->userService->update(
+                ['password' => $password],
+                \intval($currentUserId),
+                'update_password',
+                'A senha do usuário foi atualizada.',
+            );
+
+            if ($request->user() === null) {
+                throw new \ErrorException('O usuário da requisição não foi encontrado.');
+            }
+
+            $request->user()->tokens()->delete();
+
+            return response()->json(['message' => 'Senha editada com sucesso. Por favor, entre com sua nova senha.']);
         }
 
-        $password = $data['new_password'];
-
-        $this->userService->update(
-            ['password' => $password],
-            $currentUserId,
-            'update_password',
-            'A senha do usuário foi atualizada.',
-        );
-
-        Auth::logout();
-
-        return response()->json(['message' => 'Senha editada com sucesso. Por favor, entre com sua nova senha.']);
+        throw new UnauthorizedHttpException('', 'O id do usuário atual não foi encontrado.');
     }
 }

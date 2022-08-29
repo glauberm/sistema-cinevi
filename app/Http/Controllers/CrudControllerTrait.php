@@ -16,13 +16,15 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 trait CrudControllerTrait
 {
     protected string $createdMessage = 'O item foi criado com sucesso.';
+
     protected string $updatedMessage = 'O item foi editado com sucesso.';
+
     protected string $removedMessage = 'O item foi removido com sucesso.';
 
     /**
      * Mostra uma coleção de recursos.
      *
-     * @param  Request            $request
+     * @param  Request  $request
      * @return ResourceCollection
      */
     public function paginate(Request $request): ResourceCollection
@@ -33,16 +35,15 @@ trait CrudControllerTrait
     /**
      * Adiciona um recurso.
      *
-     * @param FormRequest $request
+     * @param  FormRequest  $request
      * @return JsonResponse
      */
     public function create(FormRequest $request): JsonResponse
     {
-        if (!\is_array($request->validated())) {
-            throw new \TypeError('A requisição está em um formato inválido.');
-        }
+        /** @var mixed[] $data */
+        $data = $request->validated();
 
-        $model = $this->service->create($request->validated());
+        $model = $this->service->create($data);
 
         return response()->json(
             [
@@ -56,8 +57,8 @@ trait CrudControllerTrait
     /**
      * Mostra um recurso.
      *
-     * @param Request $request
-     * @param int $id
+     * @param  Request  $request
+     * @param  int  $id
      * @return JsonResource
      */
     public function show(Request $request, int $id): JsonResource
@@ -71,14 +72,15 @@ trait CrudControllerTrait
     /**
      * Atualiza um recurso.
      *
-     * @param FormRequest $request
-     * @param int $id
+     * @param  FormRequest  $request
+     * @param  int  $id
      * @return JsonResponse
+     *
      * @throws ConflictHttpException
      */
     public function update(FormRequest $request, int $id): JsonResponse
     {
-        if (!\is_array($request->validated())) {
+        if (! \is_array($request->validated())) {
             throw new \TypeError('A requisição está em um formato inválido.');
         }
 
@@ -90,8 +92,9 @@ trait CrudControllerTrait
     /**
      * Remove um recurso.
      *
-     * @param int $id
+     * @param  int  $id
      * @return JsonResponse
+     *
      * @throws AccessDeniedHttpException
      */
     public function remove(int $id): JsonResponse

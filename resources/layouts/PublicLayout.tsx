@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import authentication from '../routes/authentication';
@@ -8,7 +8,7 @@ interface PublicLayoutProps {
     children: ReactElement;
 }
 
-export default function PublicLayout(props: PublicLayoutProps) {
+export default function (props: PublicLayoutProps) {
     return (
         <BaseLayout>
             <div className="row">

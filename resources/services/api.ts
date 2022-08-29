@@ -69,12 +69,6 @@ export function handleError(error: AxiosError) {
                 }
 
                 return 'Há erros no formulário.';
-            case 401:
-                if (error.config.url === authentication.login.path) {
-                    return 'O e-mail ou senha estão incorretos.';
-                }
-
-                return 'Sua chave de autenticação não é válida.';
             case 404:
                 return 'Nenhum resultado encontrado.';
             case 429:

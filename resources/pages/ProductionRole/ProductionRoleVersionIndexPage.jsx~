@@ -1,9 +1,8 @@
-import React from 'react';
 
 import SecureLayout from '../../layouts/SecureLayout';
 import ProductionRoleVersionCollection from '../../collections/ProductionRole/ProductionRoleVersionCollection';
 
-export default function ProductionRoleVersionIndexPage(props) {
+export default function (props) {
     const { id } = props.match.params;
 
     return (

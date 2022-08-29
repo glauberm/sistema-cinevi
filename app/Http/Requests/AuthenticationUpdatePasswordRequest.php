@@ -4,27 +4,35 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticationUpdatePasswordRequest extends FormRequest
 {
     /**
-     * @inheritDoc
+     * Indicates if the validator should stop on the first rule failure.
+     *
+     * @var bool
      */
-    public function authorize(): bool
-    {
-        $user = Auth::user();
+    protected $stopOnFirstFailure = true;
 
-        if ($user === null) {
-            throw new AuthorizationException('O usuário não foi encontrado.');
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        $currentUser = $this->user();
+
+        if (\is_null($currentUser)) {
+            return false;
         }
 
-        return Auth::attempt([
-            'email' => $user->email,
-            'password' => $this->input('password'),
-        ]);
+        /** @var string $password */
+        $password = $this->input('password');
+
+        return Hash::check($password, $currentUser->password);
     }
 
     /**
@@ -62,13 +70,5 @@ class AuthenticationUpdatePasswordRequest extends FormRequest
             'new_password.confirmed' => 'As senhas informadas não coincidem.',
             'new_password.regex' => 'A nova senha deve conter letras maiúsculas e minúsculas, números e símbolos (!@#$%).',
         ];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function failedAuthorization()
-    {
-        throw new AuthorizationException('A senha atual informada está incorreta.');
     }
 }

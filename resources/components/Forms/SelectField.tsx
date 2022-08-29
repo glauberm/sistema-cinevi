@@ -1,35 +1,10 @@
 import React from 'react';
-import { Field as FormikField } from 'formik';
-import { FastField as FormikFastField } from 'formik';
 
+import Field from './Field';
 import Select from './Select';
 
-export default function SelectField(props) {
-    const { name, label, labelHidden, errors, touched, children, isLoading, withAddOn, isFastField } = props;
+export default function (props) {
+    const { name, label, errors, touched } = props;
 
-    const componentFn = ({ field }) => (
-        <Select
-            label={label}
-            labelHidden={labelHidden}
-            name={field.name}
-            value={field.value}
-            errors={errors}
-            touched={touched}
-            onChange={field.onChange}
-            isLoading={isLoading}
-            withAddOn={withAddOn}
-        >
-            {children}
-        </Select>
-    );
-
-    return isFastField ? (
-        <FormikFastField id={name} name={name}>
-            {componentFn}
-        </FormikFastField>
-    ) : (
-        <FormikField id={name} name={name}>
-            {componentFn}
-        </FormikField>
-    );
+    return <Field name={name} label={label} component={Select} errors={errors} touched={touched} />;
 }
