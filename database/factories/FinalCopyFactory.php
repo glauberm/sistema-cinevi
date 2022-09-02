@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\ProductionCategory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,6 +18,12 @@ class FinalCopyFactory extends Factory
      */
     public function definition()
     {
+        $owner = User::factory()->createOne();
+
+        $productionCategory = ProductionCategory::factory()->createOne();
+
+        $professor = User::factory()->createOne();
+
         return [
             'title' => $this->faker->word(),
             'synopsis' => $this->faker->text(),
@@ -43,11 +51,14 @@ class FinalCopyFactory extends Factory
             'budget' => $this->faker->randomNumber(5, true),
             'financing_sources' => $this->faker->text(),
             'supporters' => $this->faker->text(),
-            'has_dcp' => $this->faker->bool(),
+            'has_dcp' => $this->faker->boolean(),
             'cast' => $this->faker->text(),
             'participations' => $this->faker->text(),
             'prizes' => $this->faker->text(),
-            'confirmed' => $this->faker->bool(),
+            'confirmed' => $this->faker->boolean(),
+            'owner_id' => $owner->id,
+            'production_category_id' => $productionCategory->id,
+            'professor_id' => $professor->id,
         ];
     }
 }

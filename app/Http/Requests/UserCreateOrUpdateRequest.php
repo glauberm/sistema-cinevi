@@ -4,14 +4,41 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UserCreateOrUpdateRequest extends FormRequest
 {
     /**
+     * Indicates if the validator should stop on the first rule failure.
+     *
+     * @var bool
+     */
+    protected $stopOnFirstFailure = true;
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return Gate::allows('hasRole', 'admin') === true;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function failedAuthorization()
+    {
+        throw new AuthorizationException('Você não tem permissão para criar ou editar usuários.');
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, string[]>
+     * @return array<string,string[]>
      */
     public function rules()
     {
@@ -44,7 +71,7 @@ class UserCreateOrUpdateRequest extends FormRequest
     /**
      * Get the error messages for the defined validation rules.
      *
-     * @return array<string, string>
+     * @return array<string,string>
      */
     public function messages()
     {

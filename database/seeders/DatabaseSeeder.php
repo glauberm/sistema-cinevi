@@ -21,14 +21,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->state(['roles' => \json_encode(['user', 'admin'])])->createOne();
+        User::factory()->state(['roles' => ['user', 'admin']])->createOne();
         User::factory(30)->create();
         ProductionCategory::factory(31)->create();
         ProductionRole::factory(31)->create();
-        // Project::factory(31)->create();
+        Project::factory(31)->create();
         // FinalCopy::factory(31)->create();
         BookableCategory::factory(31)->create();
-        // Bookable::factory(31)->create();
-        // Booking::factory(31)->create();
+        Bookable::factory(31)->create();
+        Booking::factory(31)->create();
     }
 }

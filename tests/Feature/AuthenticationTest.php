@@ -8,6 +8,7 @@ use App\Mail\AuthenticationFinalizeRegistrationMail;
 use App\Mail\AuthenticationResetPasswordMail;
 use App\Mail\AuthenticationUpdateEmailMail;
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
@@ -122,7 +123,7 @@ class AuthenticationTest extends TestCase
 
         $url = URL::temporarySignedRoute(
             'authentication.finalize_registration',
-            now()->addMinutes(60),
+            CarbonImmutable::now()->addMinutes(60),
             ['id' => $user->id]
         );
 
@@ -180,7 +181,11 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->createOne();
 
-        $url = URL::temporarySignedRoute('authentication.reset_password', now()->addMinutes(60), ['id' => $user->id]);
+        $url = URL::temporarySignedRoute(
+            'authentication.reset_password',
+            CarbonImmutable::now()->addMinutes(60),
+            ['id' => $user->id]
+        );
 
         $response = $this->put($url, [
             'password' => 'Gl@uber7!',
@@ -229,7 +234,7 @@ class AuthenticationTest extends TestCase
 
         $url = URL::temporarySignedRoute(
             'authentication.update_email',
-            now()->addMinutes(60),
+            CarbonImmutable::now()->addMinutes(60),
             ['id' => $user->id, 'email' => $user->email]
         );
 

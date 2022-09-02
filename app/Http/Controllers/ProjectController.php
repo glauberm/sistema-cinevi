@@ -29,9 +29,7 @@ class ProjectController extends Controller implements CrudControllerInterface, H
     }
 
     /**
-     * Passa a requisição do formulário de criação para a interface CRUD.
-     *
-     * @param  ProjectCreateOrUpdateRequest $request
+     * @param  ProjectCreateOrUpdateRequest  $request
      * @return JsonResponse
      */
     public function doCreate(ProjectCreateOrUpdateRequest $request): JsonResponse
@@ -40,10 +38,8 @@ class ProjectController extends Controller implements CrudControllerInterface, H
     }
 
     /**
-     * Passa a requisição do formulário de edição para a interface CRUD.
-     *
-     * @param  ProjectCreateOrUpdateRequest $request
-     * @param  integer                             $id
+     * @param  ProjectCreateOrUpdateRequest  $request
+     * @param  integer                       $id
      * @return JsonResponse
      */
     public function doUpdate(ProjectCreateOrUpdateRequest $request, int $id): JsonResponse

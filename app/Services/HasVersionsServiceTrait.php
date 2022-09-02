@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\Version;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Query\Builder;
@@ -15,9 +16,7 @@ use Illuminate\Support\Facades\DB;
 trait HasVersionsServiceTrait
 {
     /**
-     * Ordena e pagina todas as versões de um item.
-     *
-     * @param int $id
+     * @param  integer               $id
      * @return LengthAwarePaginator
      */
     public function paginateVersions(int $id): LengthAwarePaginator
@@ -27,14 +26,12 @@ trait HasVersionsServiceTrait
             ->toArray();
 
         return Version::whereIn('id', $versionsIds)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('datetime', 'desc')
             ->paginate(10, ['*'], 'page');
     }
 
     /**
-     * Retorna uma versão de um item;
-     *
-     * @param int $id
+     * @param  integer                 $id
      * @return Version
      * @throws ModelNotFoundException
      */
@@ -44,44 +41,32 @@ trait HasVersionsServiceTrait
     }
 
     /**
-     * Cria uma nova versão de um item. Se já houver versões do item e a versão
-     * for de criação ou edição, checa se houveram alterações nele antes de
-     * criar a nova versão.
+     * Cria uma nova versão de um item. Se já houver versões do item e a versão for de edição, checa se houveram
+     * alterações no item antes de criar a nova versão.
      *
-     * @param Model         $model
-     * @param string                $action
-     * @param string                $message
-     * @param array<string, mixed>  $payloadArray
+     * @param  Model                $model
+     * @param  string               $action
+     * @param  string               $message
+     * @param  array<string,mixed>  $payload
      * @return void
      */
-    public function registerVersion($model, string $action, string $message, array $payloadArray): void
+    public function registerVersion($model, string $action, string $message, array $payload): void
     {
-        $payload = \json_encode($payloadArray, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
-
-        if ($payload === false) {
-            throw new \JsonException('Erro ao codificar payload da versão.');
-        }
-
-        /** @phpstan-ignore-next-line */
-        $modelId = $model->id;
+        $modelId = $model->getAttribute('id');
 
         if (!\is_int($modelId)) {
-            throw new \TypeError('O identificador do modelo não é um inteiro.');
+            throw new \InvalidArgumentException('O identificador do modelo deve ser um inteiro.');
         }
 
-        if ($lastModelVersion = $this->queryVersionsByModel($modelId)->first()) {
-            if (!\property_exists($lastModelVersion, 'version_id')) {
-                throw new \InvalidArgumentException('O identificador da versão do modelo não está presente.');
-            }
+        $lastModelVersion = $this->queryVersionsByModel($modelId)->first();
 
-            $lastVersion = Version::where('id', '=', $lastModelVersion->version_id)->firstOrFail();
+        if ($lastModelVersion instanceof Model) {
+            $lastModelVersionId = $lastModelVersion->getAttribute('version_id');
 
-            if (!\is_string($lastVersion->payload)) {
-                throw new \TypeError('O payload da versão não é uma string.');
-            }
+            $lastVersion = Version::where('id', '=', $lastModelVersionId)->firstOrFail();
 
-            if ($action === 'create' || $action === 'update') {
-                if (!(\json_decode($lastVersion->payload, true) === $payloadArray)) {
+            if ($action === 'update') {
+                if ($lastVersion->payload !== $payload) {
                     $this->createVersion($modelId, $action, $message, $payload);
                 }
             } else {
@@ -93,24 +78,23 @@ trait HasVersionsServiceTrait
     }
 
     /**
-     * Adiciona uma versão de um item.
-     *
-     * @param int $id
-     * @param string $action
-     * @param string $message
-     * @param string $payload
+     * @param integer              $id
+     * @param string               $action
+     * @param string               $message
+     * @param array<string,mixed>  $payload
      * @return void
      */
-    private function createVersion(int $id, string $action, string $message, string $payload): void
+    private function createVersion(int $id, string $action, string $message, array $payload): void
     {
         $version = Version::create([
+            'action' => $action,
+            'message' => $message,
             'payload' => $payload,
             'user_id' => Auth::id(),
             'user_ip' => request()->ip(),
             'user_agent' => request()->header('User-Agent'),
             'user_string' => Auth::user() ? Auth::user()->email : 'not_authenticated',
-            'action' => $action,
-            'message' => $message,
+            'datetime' => CarbonImmutable::now()
         ]);
 
         DB::table($this->modelVersionTableName)->insert([
@@ -120,9 +104,7 @@ trait HasVersionsServiceTrait
     }
 
     /**
-     * Busca na tabela de versões através do id do tipo do item da versão.
-     *
-     * @param int $id
+     * @param  integer  $id
      * @return Builder
      */
     private function queryVersionsByModel(int $id): Builder
@@ -130,6 +112,6 @@ trait HasVersionsServiceTrait
         return DB::table($this->modelVersionTableName)
             ->join('versions', 'versions.id', '=', $this->modelVersionTableName . '.version_id')
             ->where($this->modelVersionTableName . '.' . $this->modelVersionIdColumnName, '=', $id)
-            ->orderBy('versions.created_at', 'desc');
+            ->orderBy('versions.datetime', 'desc');
     }
 }

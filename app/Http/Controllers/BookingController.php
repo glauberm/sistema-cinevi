@@ -29,8 +29,6 @@ class BookingController extends Controller implements CrudControllerInterface, H
     }
 
     /**
-     * Passa a requisição do formulário de criação para a interface CRUD.
-     *
      * @param  BookingCreateOrUpdateRequest $request
      * @return JsonResponse
      */
@@ -40,10 +38,8 @@ class BookingController extends Controller implements CrudControllerInterface, H
     }
 
     /**
-     * Passa a requisição do formulário de edição para a interface CRUD.
-     *
-     * @param  BookingCreateOrUpdateRequest $request
-     * @param  integer                             $id
+     * @param  BookingCreateOrUpdateRequest  $request
+     * @param  integer                       $id
      * @return JsonResponse
      */
     public function doUpdate(BookingCreateOrUpdateRequest $request, int $id): JsonResponse

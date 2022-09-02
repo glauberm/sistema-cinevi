@@ -13,7 +13,7 @@ export default function (props: BaseLayoutProps) {
         const loading = document.getElementById('loading');
 
         if (loading === null) {
-            throw new Error('Elemento #loading não encontrado');
+            throw new DOMException('Elemento #loading não encontrado', 'NotFoundError');
         }
 
         loading.hidden = true;

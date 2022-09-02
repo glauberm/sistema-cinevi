@@ -44,7 +44,7 @@ return new class extends Migration
             $table->json('genres');
 
             $table->string('capture_format');
-            $table->text('capture_notes');
+            $table->text('capture_notes')->nullable();
 
             $table->text('venues');
 

@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
 
-            $table->string('code', 16)->unique();
-
             $table->unsignedBigInteger('owner_id')->nullable();
             $table
                 ->foreign('owner_id')

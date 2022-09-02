@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RemoveRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,44 +14,35 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 interface CrudControllerInterface
 {
     /**
-     * Mostra uma coleção de recursos.
-     *
-     * @param  Request            $request
+     * @param  Request             $request
      * @return ResourceCollection
      */
     public function paginate(Request $request): ResourceCollection;
 
     /**
-     * Adiciona um recurso.
-     *
-     * @param FormRequest $request
+     * @param FormRequest    $request
      * @return JsonResponse
      */
     public function create(FormRequest $request): JsonResponse;
 
     /**
-     * Mostra um recurso.
-     *
-     * @param Request $request
-     * @param int $id
+     * @param Request        $request
+     * @param integer        $id
      * @return JsonResource
      */
     public function show(Request $request, int $id): JsonResource;
 
     /**
-     * Atualiza um recurso.
-     *
-     * @param FormRequest $request
-     * @param int $id
+     * @param FormRequest    $request
+     * @param integer        $id
      * @return JsonResponse
      */
     public function update(FormRequest $request, int $id): JsonResponse;
 
     /**
-     * Remove um recurso.
-     *
-     * @param int $id
+     * @param  RemoveRequest  $request
+     * @param  integer        $id
      * @return JsonResponse
      */
-    public function remove(int $id): JsonResponse;
+    public function remove(RemoveRequest $request, int $id): JsonResponse;
 }

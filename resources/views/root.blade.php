@@ -1,13 +1,4 @@
 <!DOCTYPE html>
-<!--................................................-->
-<!--................__...............__.............-->
-<!--....__.._______/./_..___..____._/.(.)__..____...-->
-<!--..././././.___/.__.\/._.\/.__.`/././._.\/.__.\..-->
-<!--.././_/././.././_/./..__/./_/./././..__/./././..-->
-<!--..\__,_/_/../_.___/\___/\__,_/_/_/\___/_/./_/...-->
-<!--................................................-->
-<!--......................https://urbealien.dev.....-->
-<!--................................................-->
 <html lang="pt-BR" class="h-100 min-vh-100">
     <head>
         <meta charset="utf-8">
@@ -16,17 +7,8 @@
         <title>Departamento de Cinema e Vídeo da UFF</title>
         <meta name="description" content="Cadastre projetos, reserve equipamentos no almoxarifado e muito mais pelo celular, tablet ou qualquer outro dispositivo com acesso à internet. Sistema para alunos, funcionários ou professores do Departamento de Cinema e Vídeo da Universidade Federal Fluminense.">
 
-        <link rel="icon" href="{{ asset(mix('favicon.ico')) }}" />
-        <link rel="icon" href="{{ asset(mix('images/favicon.svg')) }}" type="image/svg+xml" />
-
         <meta name="robots" content="noindex, nofollow" />
         <meta name="googlebot" content="noindex, nofollow" />
-
-        <link href="{{ asset(mix('/fonts/GillSansNova-Medium.woff2')) }}" rel="preload" type="font/woff2" as="font" crossorigin>
-        <link href="{{ asset(mix('/fonts/GillSansNova-Bold.woff2')) }}" rel="preload" type="font/woff2" as="font" crossorigin>
-
-        <link rel="preload" href="{{ asset(mix('/css/app.css')) }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="{{ asset(mix('/css/app.css')) }}"></noscript>
 
         <style>
             @font-face {
@@ -45,6 +27,15 @@
 
             @php(readfile(public_path('/css/critical.css')));
         </style>
+
+        <link rel="icon" href="{{ asset(mix('favicon.ico')) }}" />
+        <link rel="icon" href="{{ asset(mix('images/favicon.svg')) }}" type="image/svg+xml" />
+
+        <link href="{{ asset(mix('/fonts/GillSansNova-Medium.woff2')) }}" rel="preload" type="font/woff2" as="font" crossorigin>
+        <link href="{{ asset(mix('/fonts/GillSansNova-Bold.woff2')) }}" rel="preload" type="font/woff2" as="font" crossorigin>
+
+        <link rel="preload" href="{{ asset(mix('/css/app.css')) }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="{{ asset(mix('/css/app.css')) }}"></noscript>
         
         <script async defer src="{{ mix('/js/app.js') }}"></script>      
 

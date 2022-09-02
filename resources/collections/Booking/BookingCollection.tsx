@@ -11,7 +11,7 @@ export default function () {
             {(booking, key) => (
                 <tr key={key}>
                     <td>
-                        <Link to={routes.update.getPath(booking.id)}>{booking.code}</Link>
+                        <Link to={routes.update.getPath(booking.id)}>#{booking.id}</Link>
                     </td>
                 </tr>
             )}

@@ -1,7 +1,5 @@
 # TODO
 
--   Passar Gates para FormRequests
--   UnauthorizedHttpException para uma exception customizada sem o www-authentication
 -   Lógicas de Negócio
 -   Permissões
 -   Configurações

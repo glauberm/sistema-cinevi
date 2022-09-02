@@ -28,7 +28,7 @@ class Version extends JsonResource
             'user_agent' => $this->resource->user_agent,
             'user_ip' => $this->resource->user_ip,
             'payload' => $this->resource->payload,
-            'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
+            'datetime' => $this->resource->datetime,
         ];
     }
 

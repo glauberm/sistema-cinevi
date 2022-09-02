@@ -20,6 +20,13 @@ return new class extends Migration
 
             $table->string('name')->index();
 
+            $table->unsignedBigInteger('bookable_category_id');
+            $table
+                ->foreign('bookable_category_id')
+                ->references('id')
+                ->on('bookable_categories')
+                ->onDelete('cascade');
+
             $table->string('inventory_number')->nullable();
             $table->string('serial_number')->nullable();
 

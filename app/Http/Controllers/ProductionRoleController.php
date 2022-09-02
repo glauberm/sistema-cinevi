@@ -29,9 +29,7 @@ class ProductionRoleController extends Controller implements CrudControllerInter
     }
 
     /**
-     * Passa a requisição do formulário de criação para a interface CRUD.
-     *
-     * @param  ProductionRoleCreateOrUpdateRequest $request
+     * @param  ProductionRoleCreateOrUpdateRequest  $request
      * @return JsonResponse
      */
     public function doCreate(ProductionRoleCreateOrUpdateRequest $request): JsonResponse
@@ -40,10 +38,8 @@ class ProductionRoleController extends Controller implements CrudControllerInter
     }
 
     /**
-     * Passa a requisição do formulário de edição para a interface CRUD.
-     *
-     * @param  ProductionRoleCreateOrUpdateRequest $request
-     * @param  integer                             $id
+     * @param  ProductionRoleCreateOrUpdateRequest  $request
+     * @param  integer                              $id
      * @return JsonResponse
      */
     public function doUpdate(ProductionRoleCreateOrUpdateRequest $request, int $id): JsonResponse

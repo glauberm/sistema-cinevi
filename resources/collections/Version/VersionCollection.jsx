@@ -17,7 +17,7 @@ export default function (props) {
                 <tr key={revision.id}>
                     <td>
                         <Link to={`/${linkToPrefix}/historico/${revision.id}`}>
-                            {`${getDate(revision.created_at)} às ${getTime(revision.created_at)}`}
+                            {`${getDate(revision.datetime)} às ${getTime(revision.datetime)}`}
                         </Link>
                     </td>
                     <td>{revision.message}</td>

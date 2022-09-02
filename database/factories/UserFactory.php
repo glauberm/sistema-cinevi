@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'identifier' => $this->faker->randomNumber(7, true),
             'is_enabled' => $this->faker->boolean(),
             'is_confirmed' => $this->faker->boolean(),
-            'roles' => \json_encode(['user']),
+            'roles' => ['user'],
         ];
     }
 }

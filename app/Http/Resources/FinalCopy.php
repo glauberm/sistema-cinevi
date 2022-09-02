@@ -17,7 +17,7 @@ class FinalCopy extends JsonResource
      * Transform the resource into an array.
      *
      * @param  Request  $request
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     public function toArray($request)
     {
@@ -54,6 +54,11 @@ class FinalCopy extends JsonResource
             'participations' => $this->resource->participations,
             'prizes' => $this->resource->prizes,
             'confirmed' => $this->resource->confirmed,
+            'owner' => User::make($this->whenLoaded('owner')),
+            'production_category' => ProductionCategory::make($this->whenLoaded('productionCategory')),
+            'professor' => User::make($this->whenLoaded('professor')),
+            'project' => Project::make($this->whenLoaded('project')),
+            'production_roles' => FinalCopyProductionRole::collection($this->whenLoaded('productionRoles')),
         ];
     }
 }

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property int     $id
- * @property string  $code
- * @property Carbon  $withdrawal_date
- * @property Carbon  $devolution_date
+ * @property integer          $id
+ * @property CarbonImmutable  $withdrawal_date
+ * @property CarbonImmutable  $devolution_date
  */
 class Booking extends Model
 {
@@ -32,13 +32,24 @@ class Booking extends Model
      * @var array<string>
      */
     protected $fillable = [
-        'code',
         'withdrawal_date',
         'devolution_date',
+        'owner_id',
+        'project_id'
     ];
 
     /**
-     * @return BelongsTo<User, self>
+     * The attributes that should be cast.
+     *
+     * @var array<string,string>
+     */
+    protected $casts = [
+        'withdrawal_date' => 'immutable_datetime:Y-m-d',
+        'devolution_date' => 'immutable_datetime:Y-m-d',
+    ];
+
+    /**
+     * @return BelongsTo<User,self>
      */
     public function owner(): BelongsTo
     {
@@ -46,10 +57,18 @@ class Booking extends Model
     }
 
     /**
-     * @return BelongsTo<Project, self>
+     * @return BelongsTo<Project,self>
      */
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * @return BelongsToMany<Bookable>
+     */
+    public function bookables(): BelongsToMany
+    {
+        return $this->belongsToMany(Bookable::class);
     }
 }

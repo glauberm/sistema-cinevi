@@ -9,7 +9,7 @@ import Router from './routes/Router';
 const rootElement = document.getElementById('root');
 
 if (rootElement === null) {
-    throw new Error('Elemento #root não encontrado.');
+    throw new DOMException('Elemento #root não encontrado.', 'NotFoundError');
 }
 
 const root = ReactDOM.createRoot(rootElement);

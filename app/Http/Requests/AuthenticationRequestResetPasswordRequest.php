@@ -9,9 +9,16 @@ use Illuminate\Foundation\Http\FormRequest;
 class AuthenticationRequestResetPasswordRequest extends FormRequest
 {
     /**
-     * Get the validation rules that apply to the request.
+     * Indicates if the validator should stop on the first rule failure.
      *
-     * @return array<string, string[]>
+     * @var bool
+     */
+    protected $stopOnFirstFailure = true;
+
+    /**
+     * Get the validation rules that apply to the request.
+     * 
+     * @return array<string,string[]>
      */
     public function rules()
     {
@@ -22,8 +29,8 @@ class AuthenticationRequestResetPasswordRequest extends FormRequest
 
     /**
      * Get the error messages for the defined validation rules.
-     *
-     * @return array<string, string>
+     * 
+     * @return array<string,string>
      */
     public function messages()
     {

@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RemoveRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 trait CrudControllerTrait
 {
@@ -22,9 +21,7 @@ trait CrudControllerTrait
     protected string $removedMessage = 'O item foi removido com sucesso.';
 
     /**
-     * Mostra uma coleção de recursos.
-     *
-     * @param  Request  $request
+     * @param  Request             $request
      * @return ResourceCollection
      */
     public function paginate(Request $request): ResourceCollection
@@ -33,14 +30,12 @@ trait CrudControllerTrait
     }
 
     /**
-     * Adiciona um recurso.
-     *
-     * @param  FormRequest  $request
+     * @param  FormRequest   $request
      * @return JsonResponse
      */
     public function create(FormRequest $request): JsonResponse
     {
-        /** @var mixed[] $data */
+        /** @var array<string,mixed> */
         $data = $request->validated();
 
         $model = $this->service->create($data);
@@ -55,10 +50,8 @@ trait CrudControllerTrait
     }
 
     /**
-     * Mostra um recurso.
-     *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request       $request
+     * @param  integer       $id
      * @return JsonResource
      */
     public function show(Request $request, int $id): JsonResource
@@ -70,41 +63,29 @@ trait CrudControllerTrait
     }
 
     /**
-     * Atualiza um recurso.
-     *
-     * @param  FormRequest  $request
-     * @param  int  $id
+     * @param  FormRequest   $request
+     * @param  integer       $id
      * @return JsonResponse
-     *
-     * @throws ConflictHttpException
      */
     public function update(FormRequest $request, int $id): JsonResponse
     {
-        if (! \is_array($request->validated())) {
-            throw new \TypeError('A requisição está em um formato inválido.');
-        }
+        /** @var array<string,mixed> */
+        $data = $request->validated();
 
-        $this->service->update($request->validated(), $id);
+        $this->service->update($data, $id);
 
         return response()->json(['message' => $this->updatedMessage]);
     }
 
     /**
-     * Remove um recurso.
-     *
-     * @param  int  $id
+     * @param  RemoveRequest  $request
+     * @param  integer        $id
      * @return JsonResponse
-     *
-     * @throws AccessDeniedHttpException
      */
-    public function remove(int $id): JsonResponse
+    public function remove(RemoveRequest $request, int $id): JsonResponse
     {
-        if (Gate::allows('isAdmin') === true) {
-            $this->service->remove($id);
+        $this->service->remove($id);
 
-            return response()->json(['message' => $this->removedMessage]);
-        }
-
-        throw new AccessDeniedHttpException('Você não tem permissão para remover itens permanentemente.');
+        return response()->json(['message' => $this->removedMessage]);
     }
 }

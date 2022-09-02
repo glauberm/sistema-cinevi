@@ -29,9 +29,7 @@ class ProductionCategoryController extends Controller implements CrudControllerI
     }
 
     /**
-     * Passa a requisição do formulário de criação para a interface CRUD.
-     *
-     * @param  ProductionCategoryCreateOrUpdateRequest $request
+     * @param  ProductionCategoryCreateOrUpdateRequest  $request
      * @return JsonResponse
      */
     public function doCreate(ProductionCategoryCreateOrUpdateRequest $request): JsonResponse
@@ -40,10 +38,8 @@ class ProductionCategoryController extends Controller implements CrudControllerI
     }
 
     /**
-     * Passa a requisição do formulário de edição para a interface CRUD.
-     *
-     * @param  ProductionCategoryCreateOrUpdateRequest $request
-     * @param  integer                             $id
+     * @param  ProductionCategoryCreateOrUpdateRequest  $request
+     * @param  integer                                  $id
      * @return JsonResponse
      */
     public function doUpdate(ProductionCategoryCreateOrUpdateRequest $request, int $id): JsonResponse

@@ -18,25 +18,45 @@ class ProductionRoleTest extends TestCase implements CrudTestInterface, HasVersi
 
     protected string $tableName = 'production_roles';
 
-    /** @var array<string, string> */
-    protected array $createRequest = [
-        'title' => 'Lorem Ipsum Dolor Sit Amet',
-    ];
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getCreateRequest(): array
+    {
+        return [
+            'title' => 'Lorem Ipsum Dolor Sit Amet',
+        ];
+    }
 
-    /** @var array<string, string> */
-    protected array $createDatabaseFields = [
-        'title' => 'Lorem Ipsum Dolor Sit Amet',
-    ];
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getCreateDatabaseFields(): array
+    {
+        return [
+            'title' => 'Lorem Ipsum Dolor Sit Amet',
+        ];
+    }
 
-    /** @var array<string, string> */
-    protected array $updateRequest = [
-        'title' => 'Consectur Lorem Ipsum Dolor Sit Amet',
-        'description' => 'Lorem Ipsum Dolor Sit Amet',
-    ];
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getUpdateRequest(): array
+    {
+        return [
+            'title' => 'Consectur Lorem Ipsum Dolor Sit Amet',
+            'description' => 'Lorem Ipsum Dolor Sit Amet',
+        ];
+    }
 
-    /** @var array<string, string> */
-    protected array $updateDatabaseFields = [
-        'title' => 'Consectur Lorem Ipsum Dolor Sit Amet',
-        'description' => 'Lorem Ipsum Dolor Sit Amet',
-    ];
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getUpdateDatabaseFields(): array
+    {
+        return [
+            'title' => 'Consectur Lorem Ipsum Dolor Sit Amet',
+            'description' => 'Lorem Ipsum Dolor Sit Amet',
+        ];
+    }
 }

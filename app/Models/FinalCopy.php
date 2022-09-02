@@ -7,40 +7,41 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property int              $id
- * @property string           $title
- * @property string           $synopsis
- * @property string[]|string  $genres
- * @property string           $capture_format
- * @property string           $capture_notes
- * @property string           $venues
- * @property ?string          $video_url
- * @property ?string          $video_password
- * @property ?string          $chromia
- * @property ?string          $proportion
- * @property ?string          $format
- * @property ?string          $duration
- * @property ?string          $native_digital_format
- * @property ?string          $codec
- * @property ?string          $container
- * @property ?string          $bitrate
- * @property ?string          $fps
- * @property ?string          $sound
- * @property ?string          $digital_sound_resolution
- * @property ?string          $digital_matrix_support
- * @property ?string          $camera
- * @property ?string          $editing_software
- * @property ?string          $sound_capture_equipment
- * @property ?string          $budget
- * @property ?string          $financing_sources
- * @property ?string          $supporters
- * @property ?string          $has_dcp
- * @property ?string          $cast
- * @property ?string          $participations
- * @property ?string          $prizes
- * @property bool             $confirmed
+ * @property integer        $id
+ * @property string         $title
+ * @property string         $synopsis
+ * @property string[]       $genres
+ * @property string         $capture_format
+ * @property string         $capture_notes
+ * @property string         $venues
+ * @property ?string        $video_url
+ * @property ?string        $video_password
+ * @property ?string        $chromia
+ * @property ?string        $proportion
+ * @property ?string        $format
+ * @property ?string        $duration
+ * @property ?string        $native_digital_format
+ * @property ?string        $codec
+ * @property ?string        $container
+ * @property ?string        $bitrate
+ * @property ?string        $fps
+ * @property ?string        $sound
+ * @property ?string        $digital_sound_resolution
+ * @property ?string        $digital_matrix_support
+ * @property ?string        $camera
+ * @property string[]|null  $editing_software
+ * @property ?string        $sound_capture_equipment
+ * @property ?string        $budget
+ * @property string[]|null  $financing_sources
+ * @property ?string        $supporters
+ * @property ?string        $has_dcp
+ * @property ?string        $cast
+ * @property ?string        $participations
+ * @property ?string        $prizes
+ * @property bool           $confirmed
  */
 class FinalCopy extends Model
 {
@@ -90,10 +91,24 @@ class FinalCopy extends Model
         'participations',
         'prizes',
         'confirmed',
+        'owner_id',
+        'production_category_id',
+        'professor_id'
     ];
 
     /**
-     * @return BelongsTo<User, self>
+     * The attributes that should be cast.
+     *
+     * @var array<string,string>
+     */
+    protected $casts = [
+        'genres' => 'array',
+        'editing_software' => 'array',
+        'financing_sources' => 'array',
+    ];
+
+    /**
+     * @return BelongsTo<User,self>
      */
     public function owner(): BelongsTo
     {
@@ -101,7 +116,7 @@ class FinalCopy extends Model
     }
 
     /**
-     * @return BelongsTo<ProductionCategory, self>
+     * @return BelongsTo<ProductionCategory,self>
      */
     public function productionCategory(): BelongsTo
     {
@@ -109,7 +124,7 @@ class FinalCopy extends Model
     }
 
     /**
-     * @return BelongsTo<User, self>
+     * @return BelongsTo<User,self>
      */
     public function professor(): BelongsTo
     {
@@ -117,10 +132,18 @@ class FinalCopy extends Model
     }
 
     /**
-     * @return BelongsTo<Project, self>
+     * @return BelongsTo<Project,self>
      */
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * @return BelongsToMany<ProductionRole>
+     */
+    public function productionRoles(): BelongsToMany
+    {
+        return $this->belongsToMany(ProductionRole::class)->using(FinalCopyProductionRole::class);
     }
 }

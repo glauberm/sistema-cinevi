@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('action');
             $table->text('message');
 
-            $table->longText('payload');
+            $table->json('payload');
 
             $table->ipAddress('user_ip')->nullable();
             $table->string('user_agent')->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('set null');
 
-            $table->timestamps();
+            $table->datetime('datetime');
         });
     }
 

@@ -29,8 +29,6 @@ class BookableCategoryController extends Controller implements CrudControllerInt
     }
 
     /**
-     * Passa a requisição do formulário de criação para a interface CRUD.
-     *
      * @param  BookableCategoryCreateOrUpdateRequest $request
      * @return JsonResponse
      */
@@ -40,10 +38,8 @@ class BookableCategoryController extends Controller implements CrudControllerInt
     }
 
     /**
-     * Passa a requisição do formulário de edição para a interface CRUD.
-     *
      * @param  BookableCategoryCreateOrUpdateRequest $request
-     * @param  integer                             $id
+     * @param  integer                               $id
      * @return JsonResponse
      */
     public function doUpdate(BookableCategoryCreateOrUpdateRequest $request, int $id): JsonResponse

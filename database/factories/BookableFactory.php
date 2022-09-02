@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\BookableCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,6 +17,8 @@ class BookableFactory extends Factory
      */
     public function definition()
     {
+        $bookableCategory = BookableCategory::factory()->createOne();
+
         return [
             'identifier' => $this->faker->numerify('##-##'),
             'name' => $this->faker->word(),
@@ -25,6 +28,7 @@ class BookableFactory extends Factory
             'notes' => $this->faker->text(),
             'is_under_maintenance' => $this->faker->boolean(),
             'is_return_overdue' => $this->faker->boolean(),
+            'bookable_category_id' => $bookableCategory->id,
         ];
     }
 }

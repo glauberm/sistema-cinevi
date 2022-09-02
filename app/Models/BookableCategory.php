@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int      $id
+ * @property integer  $id
  * @property string   $title
  * @property ?string  $description
  */

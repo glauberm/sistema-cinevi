@@ -10,42 +10,32 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface CrudServiceInterface
 {
     /**
-     * Ordena e pagina todos os dados.
-     *
-     * @param  mixed[] $data
+     * @param  mixed[]  $data
      * @return LengthAwarePaginator
      */
     public function paginate(array $data): LengthAwarePaginator;
 
     /**
-     * Adiciona um recurso.
-     *
-     * @param mixed[] $data
+     * @param  mixed[]  $data
      * @return Model
      */
     public function create(array $data): Model;
 
     /**
-     * Retorna um recurso.
-     *
-     * @param int $id
+     * @param  integer  $id
      * @return Model
      */
     public function get(int $id): Model;
 
     /**
-     * Atualiza um recurso.
-     *
-     * @param mixed[] $data
-     * @param int $id
+     * @param  mixed[]  $data
+     * @param  integer  $id
      * @return void
      */
     public function update(array $data, int $id): void;
 
     /**
-     * Remove um recurso.
-     *
-     * @param int $id
+     * @param  integer  $id
      * @return void
      */
     public function remove(int $id): void;

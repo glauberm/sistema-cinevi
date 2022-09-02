@@ -35,6 +35,14 @@ class Project extends JsonResource
             'has_attended_photography_discipline' => $this->resource->has_attended_photography_discipline,
             'has_attended_sound_discipline' => $this->resource->has_attended_sound_discipline,
             'has_attended_art_discipline' => $this->resource->has_attended_art_discipline,
+            'owner' => User::make($this->whenLoaded('owner')),
+            'production_category' => ProductionCategory::make($this->whenLoaded('productionCategory')),
+            'professor' => User::make($this->whenLoaded('professor')),
+            'directors' => User::collection($this->whenLoaded('directors')),
+            'producers' => User::collection($this->whenLoaded('producers')),
+            'photography_directors' => User::collection($this->whenLoaded('photographyDirectors')),
+            'sound_directors' => User::collection($this->whenLoaded('soundDirectors')),
+            'art_directors' => User::collection($this->whenLoaded('artDirectors')),
         ];
     }
 }

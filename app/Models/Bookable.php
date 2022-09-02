@@ -6,17 +6,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property int     $id
- * @property string  $identifier
- * @property string  $name
- * @property string  $inventory_number
- * @property string  $serial_number
- * @property string  $accessories
- * @property string  $notes
- * @property bool    $is_under_maintenance
- * @property bool    $is_return_overdue
+ * @property integer  $id
+ * @property string   $identifier
+ * @property string   $name
+ * @property string   $inventory_number
+ * @property string   $serial_number
+ * @property string   $accessories
+ * @property string   $notes
+ * @property bool     $is_under_maintenance
+ * @property bool     $is_return_overdue
+ * @property integer  $bookable_category_id
  */
 class Bookable extends Model
 {
@@ -43,5 +45,32 @@ class Bookable extends Model
         'notes',
         'is_under_maintenance',
         'is_return_overdue',
+        'bookable_category_id',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string,string>
+     */
+    protected $casts = [
+        'is_under_maintenance' => 'boolean',
+        'is_return_overdue' => 'boolean',
+    ];
+
+    /**
+     * @return BelongsToMany<User>
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * @return BelongsToMany<Booking>
+     */
+    public function bookings(): BelongsToMany
+    {
+        return $this->belongsToMany(Booking::class);
+    }
 }

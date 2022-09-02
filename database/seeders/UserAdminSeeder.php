@@ -14,6 +14,6 @@ class UserAdminSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->state(['roles' => \json_encode(['user', 'admin'])])->createOne();
+        User::factory()->state(['roles' => ['user', 'admin']])->createOne();
     }
 }

@@ -7,9 +7,16 @@ use Illuminate\Foundation\Http\FormRequest;
 class ProductionRoleCreateOrUpdateRequest extends FormRequest
 {
     /**
+     * Indicates if the validator should stop on the first rule failure.
+     *
+     * @var bool
+     */
+    protected $stopOnFirstFailure = true;
+
+    /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, string[]>
+     * @return array<string,string[]>
      */
     public function rules()
     {
@@ -22,7 +29,7 @@ class ProductionRoleCreateOrUpdateRequest extends FormRequest
     /**
      * Get the error messages for the defined validation rules.
      *
-     * @return array<string, string>
+     * @return array<string,string>
      */
     public function messages()
     {

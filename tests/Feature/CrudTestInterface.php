@@ -15,6 +15,4 @@ interface CrudTestInterface
     public function testUpdate(): void;
 
     public function testRemove(): void;
-
-    public function testRemoveIsAdminGate(): void;
 }

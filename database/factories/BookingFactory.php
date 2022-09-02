@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,10 +18,15 @@ class BookingFactory extends Factory
      */
     public function definition()
     {
+        $owner = User::factory()->createOne();
+
+        $project = Project::factory()->createOne();
+
         return [
-            'code' => $this->faker->numerify('##############'),
             'withdrawal_date' => $this->faker->date(),
             'devolution_date' => $this->faker->date(),
+            'owner_id' => $owner->id,
+            'project_id' => $project->id,
         ];
     }
 }

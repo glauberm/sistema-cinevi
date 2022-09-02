@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Hash;
 class AuthenticationRequestUpdateEmailRequest extends FormRequest
 {
     /**
+     * Indicates if the validator should stop on the first rule failure.
+     *
+     * @var bool
+     */
+    protected $stopOnFirstFailure = true;
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -31,9 +38,17 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
     }
 
     /**
+     * {@inheritDoc}
+     */
+    protected function failedAuthorization()
+    {
+        throw new AuthorizationException('A senha informada está incorreta.');
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, string[]>
+     * @return array<string,string[]>
      */
     public function rules()
     {
@@ -50,7 +65,7 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
                 'email',
                 'max:180',
                 'confirmed',
-                'unique:users,email,'.$user->id,
+                'unique:users,email,' . $user->id,
             ],
             'password' => ['required', 'string', 'min:8'],
         ];
@@ -59,7 +74,7 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
     /**
      * Get the error messages for the defined validation rules.
      *
-     * @return array<string, string>
+     * @return array<string,string>
      */
     public function messages()
     {
@@ -74,13 +89,5 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
             'password.string' => 'A senha deve ser uma string.',
             'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
         ];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
-    {
-        throw new AuthorizationException('A senha informada está incorreta.');
     }
 }

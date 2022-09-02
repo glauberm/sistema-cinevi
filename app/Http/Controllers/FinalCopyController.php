@@ -29,8 +29,6 @@ class FinalCopyController extends Controller implements CrudControllerInterface,
     }
 
     /**
-     * Passa a requisição do formulário de criação para a interface CRUD.
-     *
      * @param  FinalCopyCreateOrUpdateRequest $request
      * @return JsonResponse
      */
@@ -40,10 +38,8 @@ class FinalCopyController extends Controller implements CrudControllerInterface,
     }
 
     /**
-     * Passa a requisição do formulário de edição para a interface CRUD.
-     *
-     * @param  FinalCopyCreateOrUpdateRequest $request
-     * @param  integer                             $id
+     * @param  FinalCopyCreateOrUpdateRequest  $request
+     * @param  integer                         $id
      * @return JsonResponse
      */
     public function doUpdate(FinalCopyCreateOrUpdateRequest $request, int $id): JsonResponse
