@@ -1,8 +1,9 @@
 import React from 'react';
 
-export default function (props) {
+export default function Button(props) {
     return (
         <button
+            name={props.name}
             type={props.type || 'submit'}
             className={`btn ${props.className}`}
             disabled={props.isLoading || props.disabled}

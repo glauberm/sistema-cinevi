@@ -1,7 +1,7 @@
 # TODO
 
--   Lógicas de Negócio
--   Permissões
--   Configurações
--   Migração de dados
--   DataProvider no React
+- DataProvider no React
+- Permissões
+-- Mudar a função de paginação de acordo com o role do usuário
+- Lógicas de Negócio (emails e tal)
+- Migração de dados

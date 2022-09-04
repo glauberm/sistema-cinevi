@@ -1,5 +1,4 @@
 import * as crud from './crud';
-// import * as versionable from './has-versions';
 
 const URL_PREFIX = 'funcoes';
 
@@ -22,11 +21,3 @@ export function update(notifications, navigate, setLoading, id, values, options 
 export function remove(notifications, navigate, setLoading, id, options = null) {
     crud.remove(URL_PREFIX, notifications, navigate, setLoading, id, options);
 }
-
-// export function paginateVersions(notifications, setData, setLinks, setMeta, setLoading, id, page = 1, options = null) {
-//     versionable.paginateVersions(URL_PREFIX, notifications, setData, setLinks, setMeta, setLoading, id, page, options);
-// }
-
-// export function showVersion(notifications, setValues, setLoading, id, options = null) {
-//     versionable.showVersion(URL_PREFIX, notifications, setValues, setLoading, id, options);
-// }

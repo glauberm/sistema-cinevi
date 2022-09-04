@@ -1,20 +1,96 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import ptBrLocale from '@fullcalendar/core/locales/pt-br';
+import dayjs from 'dayjs';
+import 'dayjs/locale/pt-br';
 
-import { paginate } from '../../requests/booking';
 import routes from '../../routes/booking';
-import PaginatedTable from '../../components/Collections/PaginatedTable';
+import { NotificationsContext } from '../../contexts/NotificationsProvider';
+import { showBetween } from '../../requests/booking';
 
-export default function () {
+export default function (props) {
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [events, setEvents] = useState([]);
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [loadingNotification, setLoadingNotification] = useState(null);
+    const notifications = useContext(NotificationsContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (startDate !== null && endDate !== null) {
+            showBetween(
+                notifications,
+                setData,
+                setLoading,
+                dayjs(startDate).format('YYYY-MM-DD'),
+                dayjs(endDate).format('YYYY-MM-DD')
+            );
+        }
+    }, [startDate, endDate]);
+
+    useEffect(() => {
+        if (loading === true) {
+            setLoadingNotification(notifications.add('Carregando...'));
+        } else if (loadingNotification !== null) {
+            notifications.remove(loadingNotification.id);
+
+            setLoadingNotification(null);
+        }
+    }, [loading]);
+
+    useEffect(() => {
+        setEvents(
+            data.map((date) => ({
+                title: `#${date.id} - ${date.owner.name}`,
+                start: date.withdrawal_date,
+                end: date.devolution_date,
+                url: routes.update.getPath(date.id),
+            }))
+        );
+    }, [data]);
+
     return (
-        <PaginatedTable paginateFn={paginate}>
-            {(booking, key) => (
-                <tr key={key}>
-                    <td>
-                        <Link to={routes.update.getPath(booking.id)}>#{booking.id}</Link>
-                    </td>
-                </tr>
-            )}
-        </PaginatedTable>
+        <div className="BookingCollection">
+            <FullCalendar
+                plugins={[dayGridPlugin]}
+                initialView="dayGridMonth"
+                locale={ptBrLocale}
+                height="auto"
+                events={events}
+                eventBackgroundColor="#cce1e7"
+                eventBorderColor="#99c3d0"
+                eventTextColor="#212529"
+                displayEventTime={false}
+                datesSet={(dates) => {
+                    setStartDate(dates.start);
+                    setEndDate(dates.end);
+                }}
+                eventClick={(event) => {
+                    event.jsEvent.preventDefault();
+
+                    document.querySelectorAll(`a[href="${event.el.getAttribute('href')}"]`).forEach((el) => {
+                        el.classList.add('active');
+                    });
+
+                    if (event.el instanceof HTMLAnchorElement) {
+                        navigate(event.el.pathname);
+                    }
+                }}
+                eventMouseEnter={(event) => {
+                    document.querySelectorAll(`a[href="${event.el.getAttribute('href')}"]`).forEach((el) => {
+                        el.classList.add('hover');
+                    });
+                }}
+                eventMouseLeave={(event) => {
+                    document.querySelectorAll(`a[href="${event.el.getAttribute('href')}"]`).forEach((el) => {
+                        el.classList.remove('hover');
+                    });
+                }}
+            />
+        </div>
     );
 }

@@ -1,4 +1,5 @@
 import api, { handleError } from '../services/api';
+// import { api, handleError } from '../contexts/ApiProvider';
 
 export function paginate(urlPrefix, notifications, setData, setLinks, setMeta, setLoading, page = 1, options = null) {
     setLoading(true);
@@ -62,7 +63,12 @@ export function update(urlPrefix, notifications, navigate, setLoading, id, value
     api.put(`/${urlPrefix}/${id}/editar`, values)
         .then((response) => {
             notifications.add(response.data.message, 'success');
-            navigate(`/${urlPrefix}`);
+
+            if (options && options.navigateTo) {
+                navigate(options.navigateTo);
+            } else {
+                navigate(`/${urlPrefix}`);
+            }
         })
         .catch((error) => {
             notifications.add(handleError(error), 'danger');

@@ -48,7 +48,14 @@ export default function (props) {
         <Formik enableReinitialize initialValues={values} validationSchema={validationSchema} onSubmit={onSubmit}>
             {({ errors, touched }) => (
                 <Form>
-                    <Field name="title" label="Título" type="text" errors={errors.title} touched={touched.title} />
+                    <Field
+                        name="title"
+                        label="Título"
+                        type="text"
+                        size="lg"
+                        errors={errors.title}
+                        touched={touched.title}
+                    />
                     <Field
                         name="description"
                         label="Descrição"

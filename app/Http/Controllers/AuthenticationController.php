@@ -30,7 +30,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class AuthenticationController extends Controller
 {

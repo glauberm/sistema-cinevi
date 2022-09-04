@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookingCreateOrUpdateRequest;
+use App\Http\Requests\BookingShowBetweenRequest;
 use App\Http\Resources\Booking;
 use App\Services\BookingService;
-use App\Services\CrudServiceInterface;
-use App\Services\HasVersionsServiceInterface;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Routing\Controller;
 
 class BookingController extends Controller implements CrudControllerInterface, HasVersionsControllerInterface
@@ -19,13 +19,21 @@ class BookingController extends Controller implements CrudControllerInterface, H
 
     protected string $resourceClass = Booking::class;
 
-    protected CrudServiceInterface&HasVersionsServiceInterface $service;
+    protected BookingService $service;
 
     public function __construct(BookingService $service)
     {
         $this->service = $service;
 
         $this->middleware(Authenticate::class . ':sanctum');
+    }
+
+    public function showBetween(BookingShowBetweenRequest $request): ResourceCollection
+    {
+        /** @var array<string,mixed> */
+        $data = $request->validated();
+
+        return $this->resourceClass::collection($this->service->showBetween($data));
     }
 
     /**

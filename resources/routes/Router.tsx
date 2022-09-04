@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import { isAuthenticated } from '../services/auth';
@@ -42,7 +42,11 @@ export const publicRoutes = [
 ];
 
 export default function () {
-    const location = useLocation();
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, [pathname]);
 
     return (
         <Routes>
@@ -55,7 +59,7 @@ export default function () {
                             <SecureLayout>{route.element}</SecureLayout>
                         ) : (
                             <PublicLayout>
-                                <Navigate to={authentication.login.path} state={{ redirectTo: location.pathname }} />
+                                <Navigate to={authentication.login.path} state={{ redirectTo: pathname }} />
                             </PublicLayout>
                         )
                     }

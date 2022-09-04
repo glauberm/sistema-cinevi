@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import api, { handleError } from '../services/api';
+// import { api, handleError } from '../contexts/ApiProvider';
 import { setAuthenticated } from '../services/auth';
 import authentication from '../routes/authentication';
 
@@ -47,5 +48,15 @@ export function logout(notifications, navigate) {
         })
         .finally(() => {
             navigate(authentication.login.path);
+        });
+}
+
+export function getAuthenticatedUser(notifications, setAuthenticatedUser) {
+    api.get('/usuario-autenticado')
+        .then((response) => {
+            setAuthenticatedUser(response.data.data);
+        })
+        .catch((error) => {
+            notifications.add(handleError(error), 'danger');
         });
 }

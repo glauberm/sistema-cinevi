@@ -2,10 +2,6 @@
 
 @import './styles/variables';
 
-@import '~react-datetime/css/react-datetime.css';
-
-// @import '~bootstrap/scss/bootstrap';
-
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/maps';
@@ -53,8 +49,12 @@
 @import './images/Logo.svg';
 @import './images/Uff.svg';
 
+@import './collections/Booking/BookingCollection';
+
 @import './components/Notification';
+@import './components/Forms/Checkbox';
 @import './components/Forms/Field';
+@import './components/Collections/Items';
 
 @import './contexts/NotificationsProvider';
 @import './contexts/DialogsProvider';

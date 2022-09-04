@@ -3,13 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { create, show, update } from '../../requests/production-role';
+import { create, show, update } from '../../requests/final-copy';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
 import Form from '../../components/Forms/Form';
 import Field from '../../components/Forms/Field';
 import Button from '../../components/Button';
-import CheckboxField from '../../components/Forms/CheckboxField';
-import SelectField from '../../components/Forms/SelectField';
 
 const initialValues = {
     title: '',
@@ -92,38 +90,38 @@ export default function (props) {
                     />
                     <div className="row">
                         <div className="col-md">
-                            <SelectField
+                            {/* <SelectField
                                 name="owner"
                                 label="Responsável"
                                 errors={errors.owner}
                                 touched={touched.owner}
-                            />
+                            /> */}
                         </div>
                         <div className="col-md">
-                            <SelectField
+                            {/* <SelectField
                                 name="production_category"
                                 label="Modalidade"
                                 errors={errors.production_category}
                                 touched={touched.production_category}
-                            />
+                            /> */}
                         </div>
                         <div className="col-md">
-                            <SelectField
+                            {/* <SelectField
                                 name="professor"
                                 label="Professor"
                                 errors={errors.professor}
                                 touched={touched.professor}
-                            />
+                            /> */}
                         </div>
                     </div>
                     <div className="row">
-                        <SelectField
+                        {/* <SelectField
                             name="genres"
                             label="Gênero(s)"
                             isMulti
                             errors={errors.genres}
                             touched={touched.genres}
-                        />
+                        /> */}
                         <Field
                             type="text"
                             name="capture_format"

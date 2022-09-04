@@ -18,8 +18,12 @@ const menuItems = [
         links: [
             {
                 to: authentication.profile.path,
-                text: 'Seu índice',
+                text: 'Sua área',
             },
+            // {
+            //     to: '/comunidade',
+            //     text: 'Comunidade',
+            // },
             {
                 to: authentication.logout.path,
                 text: 'Saída',
@@ -79,9 +83,9 @@ const menuItems = [
     },
 ];
 
-export default function () {
+export default function Navigation() {
     return (
-        <nav className="mb-5">
+        <nav className="pt-2 mb-5 sticky-top vh-100 overflow-auto">
             {menuItems.map((item, key) => (
                 <div key={key} className="card mb-4">
                     <div className="card-header text-secondary bg-warning bg-gradient" aria-expanded="false">

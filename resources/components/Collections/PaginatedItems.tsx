@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
-import Table from '../../components/Collections/Table';
-import Pagination from '../../components/Collections/Pagination';
+import Items from './Items';
+import Pagination from './Pagination';
 import Spinner from '../Spinner';
 import Message from '../Message';
 
-export default function (props) {
-    const { paginateFn, children } = props;
+export default function PaginatedItems(props) {
+    const { paginateFn, linkToFn, selectFn, selected, children } = props;
 
     const [data, setData] = useState(null);
     const [links, setLinks] = useState(null);
@@ -27,10 +27,18 @@ export default function (props) {
     if (data) {
         if (Boolean(data.length)) {
             return (
-                <>
-                    <Table data={data}>{children}</Table>
+                <div>
+                    <Items
+                        data={data}
+                        linkToFn={linkToFn}
+                        selectFn={selectFn}
+                        selected={selected}
+                        isLoading={isLoading}
+                    >
+                        {children}
+                    </Items>
                     <Pagination links={links} meta={meta} paginate={paginate} isLoading={isLoading} />
-                </>
+                </div>
             );
         } else {
             return <Message>Nenhum resultado</Message>;

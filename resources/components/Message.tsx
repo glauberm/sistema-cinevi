@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function (props) {
-    return <p className="py-5 text-center alert alert-light">{props.children}</p>;
+export default function Message(props) {
+    return <p className="p-5 m-5 text-center text-muted">{props.children}</p>;
 }

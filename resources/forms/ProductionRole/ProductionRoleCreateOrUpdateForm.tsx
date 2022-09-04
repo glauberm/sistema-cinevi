@@ -50,8 +50,9 @@ export default function (props) {
                 <Form>
                     <Field
                         name="title"
-                        label="Título da função"
+                        label="Título"
                         type="text"
+                        size="lg"
                         errors={errors.title}
                         touched={touched.title}
                     />

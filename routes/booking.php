@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('reservas', [BookingController::class, 'paginate']);
 
+Route::get('reservas/entre', [BookingController::class, 'showBetween']);
+
 Route::get('reservas/versoes/{id}', [BookingController::class, 'showVersion']);
 
 Route::post('reservas/adicionar', [BookingController::class, 'doCreate']);

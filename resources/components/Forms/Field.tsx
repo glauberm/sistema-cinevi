@@ -2,17 +2,18 @@ import React from 'react';
 import { Field as FormikField } from 'formik';
 import { FastField as FormikFastField } from 'formik';
 
-export default function (props) {
+export default function Field(props) {
     const {
         name,
         label,
+        labelHidden,
         type,
         autoComplete,
         placeholder,
         as,
         component,
         style,
-        async,
+        size,
         errors,
         touched,
         children,
@@ -28,13 +29,16 @@ export default function (props) {
         as: as,
         component: component,
         style: style,
-        async: async,
-        className: `form-control Field ${errors && touched ? 'is-invalid' : ''}`,
+        className: `
+            form-control Field
+            ${size === 'lg' ? 'form-control-lg' : ''}
+            ${errors && touched ? 'is-invalid' : ''}
+        `,
     };
 
     return (
         <div className="mb-4">
-            <label htmlFor={name} className="form-label">
+            <label htmlFor={name} className={`form-label ${labelHidden ? 'visually-hidden-focusable' : ''}`}>
                 {label}
             </label>
             {isFastField ? (

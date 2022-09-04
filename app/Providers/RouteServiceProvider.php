@@ -20,6 +20,7 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/health-check.php');
             require base_path('routes/authentication.php');
             require base_path('routes/user.php');
+            require base_path('routes/configuration.php');
             require base_path('routes/bookable.php');
             require base_path('routes/bookable-category.php');
             require base_path('routes/booking.php');

@@ -7,8 +7,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserCreateOrUpdateRequest;
 use App\Http\Requests\UserRemoveRequest;
 use App\Http\Resources\User;
-use App\Services\CrudServiceInterface;
-use App\Services\HasVersionsServiceInterface;
 use App\Services\UserService;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
@@ -20,7 +18,7 @@ class UserController extends Controller implements CrudControllerInterface, HasV
 
     protected string $resourceClass = User::class;
 
-    protected CrudServiceInterface&HasVersionsServiceInterface $service;
+    protected UserService $service;
 
     public function __construct(UserService $service)
     {

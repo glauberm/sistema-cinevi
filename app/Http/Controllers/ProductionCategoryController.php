@@ -6,8 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductionCategoryCreateOrUpdateRequest;
 use App\Http\Resources\ProductionCategory;
-use App\Services\CrudServiceInterface;
-use App\Services\HasVersionsServiceInterface;
 use App\Services\ProductionCategoryService;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
@@ -19,7 +17,7 @@ class ProductionCategoryController extends Controller implements CrudControllerI
 
     protected string $resourceClass = ProductionCategory::class;
 
-    protected CrudServiceInterface&HasVersionsServiceInterface $service;
+    protected ProductionCategoryService $service;
 
     public function __construct(ProductionCategoryService $service)
     {

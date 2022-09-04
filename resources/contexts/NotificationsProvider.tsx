@@ -25,8 +25,11 @@ export default function (props: NotificationProviderProps) {
 
     const add = (content: string, status: string = 'info') => {
         const newNotification: NotificationInterface = { id: id, content: content, status: status };
+
         setNotifications([...notifications, newNotification]);
         setId(id + 1);
+
+        return newNotification;
     };
 
     const remove = (id: number) => {

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FieldArray, Formik } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { create, show, update } from '../../requests/user';
@@ -10,6 +10,7 @@ import Field from '../../components/Forms/Field';
 import Button from '../../components/Button';
 import CheckboxField from '../../components/Forms/CheckboxField';
 import Checkbox from '../../components/Forms/Checkbox';
+import CheckboxGroupField from '../../components/Forms/CheckboxGroupField';
 
 const initialValues = {
     name: '',
@@ -64,7 +65,7 @@ export default function (props) {
             // if (showRequest === 'revision') {
             //     showRevision(id);
             // } else {
-            // show(notifications, setValues, setLoading, props.id);
+            show(notifications, setValues, setLoading, props.id);
             // }
         }
     }, []);
@@ -77,26 +78,7 @@ export default function (props) {
                         <div className="col-md">
                             <Field name="name" label="Nome" type="text" errors={errors.name} touched={touched.name} />
                         </div>
-                        <div className="col-md">
-                            <Field
-                                name="email"
-                                label="Email"
-                                type="email"
-                                errors={errors.email}
-                                touched={touched.email}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md">
-                            <Field
-                                name="phone"
-                                label="Telefone"
-                                type="tel"
-                                errors={errors.phone}
-                                touched={touched.phone}
-                            />
-                        </div>
+
                         <div className="col-md">
                             <Field
                                 name="identifier"
@@ -108,6 +90,40 @@ export default function (props) {
                         </div>
                     </div>
                     <div className="row">
+                        <div className="col-md">
+                            <Field
+                                name="email"
+                                label="Email"
+                                type="email"
+                                errors={errors.email}
+                                touched={touched.email}
+                            />
+                        </div>
+                        <div className="col-md">
+                            <Field
+                                name="phone"
+                                label="Telefone"
+                                type="tel"
+                                errors={errors.phone}
+                                touched={touched.phone}
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md">
+                            <CheckboxGroupField
+                                name="roles"
+                                label="Papéis"
+                                selected={values.roles}
+                                onChange={(value) => setFieldValue('roles', value)}
+                                items={[
+                                    { label: 'Professor', value: 'professor' },
+                                    { label: 'Departamento', value: 'department' },
+                                    { label: 'Almoxarifado', value: 'warehouse' },
+                                    { label: 'Administrador', value: 'admin' },
+                                ]}
+                            />
+                        </div>
                         <div className="col-md">
                             <label id="status-group" className="form-label">
                                 Status
@@ -124,41 +140,6 @@ export default function (props) {
                                     label="Confirmado"
                                     errors={errors.is_confirmed}
                                     touched={touched.is_confirmed}
-                                />
-                            </div>
-                        </div>
-                        <div className="col-md">
-                            <label id="roles-group" className="form-label">
-                                Papéis
-                            </label>
-                            <div role="group" aria-labelledby="roles-group" className="mb-4">
-                                <Checkbox name="roles" label="Usuário" checked readOnly />
-                                <Checkbox
-                                    name="roles"
-                                    label="Departamento"
-                                    value="department"
-                                    checked={values.roles.includes('department')}
-                                    onChange={({ target }) =>
-                                        rolesOnChange(target, 'department', values.roles, setFieldValue)
-                                    }
-                                />
-                                <Checkbox
-                                    name="roles"
-                                    label="Almoxarifado"
-                                    value="warehouse"
-                                    checked={values.roles.includes('warehouse')}
-                                    onChange={({ target }) =>
-                                        rolesOnChange(target, 'warehouse', values.roles, setFieldValue)
-                                    }
-                                />
-                                <Checkbox
-                                    name="roles"
-                                    label="Administrador"
-                                    value="admin"
-                                    checked={values.roles.includes('admin')}
-                                    onChange={({ target }) =>
-                                        rolesOnChange(target, 'admin', values.roles, setFieldValue)
-                                    }
                                 />
                             </div>
                         </div>

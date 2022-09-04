@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { paginate } from '../../requests/bookable';
-import routes from '../../routes/bookable';
-import PaginatedTable from '../../components/Collections/PaginatedTable';
+import PaginatedItems from '../../components/Collections/PaginatedItems';
 
-export default function () {
+export default function (props) {
+    const { linkToFn, selectFn, selected, isLoading } = props;
+
     return (
-        <PaginatedTable paginateFn={paginate}>
-            {(bookable, key) => (
-                <tr key={key}>
-                    <td>
-                        <Link to={routes.update.getPath(bookable.id)}>{bookable.name}</Link>
-                    </td>
-                </tr>
-            )}
-        </PaginatedTable>
+        <PaginatedItems
+            paginateFn={paginate}
+            linkToFn={linkToFn}
+            selectFn={selectFn}
+            selected={selected}
+            isLoading={isLoading}
+        >
+            {(item) => <span>{item.name}</span>}
+        </PaginatedItems>
     );
 }

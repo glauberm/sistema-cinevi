@@ -8,18 +8,21 @@ import { NotificationsContext } from '../../contexts/NotificationsProvider';
 import Form from '../../components/Forms/Form';
 import Field from '../../components/Forms/Field';
 import Button from '../../components/Button';
-import SelectField from '../../components/Forms/SelectField';
 import CheckboxField from '../../components/Forms/CheckboxField';
+import Select from '../../components/Forms/Select';
+import SelectMultiple from '../../components/Forms/SelectMultiple';
+import BookableCategoryCollection from '../../collections/BookableCategory/BookableCategoryCollection';
+import UserCollection from '../../collections/User/UserCollection';
 
 const initialValues = {
     identifier: '',
     name: '',
-    category: '',
+    bookable_category: '',
     inventory_number: '',
     serial_number: '',
     accessories: '',
     notes: '',
-    users: '',
+    users: [],
     is_under_maintenance: false,
     is_return_overdue: false,
 };
@@ -61,7 +64,7 @@ export default function (props) {
 
     return (
         <Formik enableReinitialize initialValues={values} validationSchema={validationSchema} onSubmit={onSubmit}>
-            {({ errors, touched }) => (
+            {({ values, errors, touched, setFieldValue }) => (
                 <Form>
                     <div className="row">
                         <div className="col-md-2">
@@ -69,22 +72,37 @@ export default function (props) {
                                 name="identifier"
                                 label="Código"
                                 type="text"
+                                size="lg"
                                 errors={errors.identifier}
                                 touched={touched.identifier}
                             />
                         </div>
                         <div className="col-md-10">
-                            <Field name="name" label="Nome" type="text" errors={errors.name} touched={touched.name} />
+                            <Field
+                                name="name"
+                                label="Nome"
+                                type="text"
+                                size="lg"
+                                errors={errors.name}
+                                touched={touched.name}
+                            />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-md">
-                            <SelectField
-                                name="category"
+                            <Select
+                                name="bookable_category"
                                 label="Categoria"
-                                errors={errors.category}
-                                touched={touched.category}
-                            />
+                                value={values.bookable_category && values.bookable_category.title}
+                                errors={errors.bookable_category}
+                                touched={touched.bookable_category}
+                                selected={values.bookable_category}
+                                onChange={(item) => setFieldValue('bookable_category', item)}
+                            >
+                                {(selected, selectFn) => (
+                                    <BookableCategoryCollection selected={selected} selectFn={selectFn} />
+                                )}
+                            </Select>
                         </div>
                         <div className="col-md">
                             <Field
@@ -127,12 +145,18 @@ export default function (props) {
                     </div>
                     <div className="row">
                         <div className="col-md">
-                            <SelectField
-                                name="user"
-                                label="Quais usuários podem reservar este item?"
-                                errors={errors.user}
-                                touched={touched.user}
-                            />
+                            <SelectMultiple
+                                name="users"
+                                label="Reserva limitada a"
+                                multipleLabel={(user) => user.name}
+                                addLabel="Adicionar usuário"
+                                errors={errors.users}
+                                touched={touched.users}
+                                selected={values.users}
+                                onChange={(users) => setFieldValue('users', users)}
+                            >
+                                {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
+                            </SelectMultiple>
                         </div>
                         <div className="col-md">
                             <label id="status-group" className="form-label">

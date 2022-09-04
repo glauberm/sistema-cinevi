@@ -31,7 +31,8 @@ class Bookable extends JsonResource
             'notes' => $this->resource->notes,
             'is_under_maintenance' => $this->resource->is_under_maintenance,
             'is_return_overdue' => $this->resource->is_return_overdue,
-            'users' => User::make($this->whenLoaded('users')),
+            'bookable_category' => BookableCategory::make($this->whenLoaded('bookableCategory')),
+            'users' => User::collection($this->whenLoaded('users')),
             'bookings' => Booking::collection($this->whenLoaded('bookings')),
         ];
     }

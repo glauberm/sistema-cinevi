@@ -1,10 +1,10 @@
 import React from 'react';
 
 export default function Checkbox(props) {
-    const { label, name, value, checked, disabled, onChange, readOnly } = props;
+    const { label, name, value, checked, disabled, size, onChange, readOnly } = props;
 
     return (
-        <div className="form-check">
+        <div className={`form-check mb-2 ${size === 'sm' ? 'form-check-sm' : ''}`}>
             <input
                 id={name}
                 name={name}

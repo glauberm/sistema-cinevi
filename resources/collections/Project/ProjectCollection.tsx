@@ -3,18 +3,20 @@ import { Link } from 'react-router-dom';
 
 import { paginate } from '../../requests/project';
 import routes from '../../routes/project';
-import PaginatedTable from '../../components/Collections/PaginatedTable';
+import PaginatedItems from '../../components/Collections/PaginatedItems';
 
-export default function () {
+export default function (props) {
+    const { linkToFn, selectFn, selected, isLoading } = props;
+
     return (
-        <PaginatedTable paginateFn={paginate}>
-            {(project, key) => (
-                <tr key={key}>
-                    <td>
-                        <Link to={routes.update.getPath(project.id)}>{project.title}</Link>
-                    </td>
-                </tr>
-            )}
-        </PaginatedTable>
+        <PaginatedItems
+            paginateFn={paginate}
+            linkToFn={linkToFn}
+            selectFn={selectFn}
+            selected={selected}
+            isLoading={isLoading}
+        >
+            {(item) => <span>{item.title}</span>}
+        </PaginatedItems>
     );
 }

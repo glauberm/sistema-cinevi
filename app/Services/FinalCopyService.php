@@ -30,7 +30,7 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
      */
     public function afterCreated(FinalCopy $finalCopy, array $data): FinalCopy
     {
-        if (\array_key_exists('production_roles', $data)) {
+        if (\array_key_exists('production_roles', $data) && \is_array($data['production_roles'])) {
             /** @var array<int,array<string,mixed>> */
             $finalCopyProductionRoles = $data['production_roles'];
 
@@ -47,7 +47,7 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
      */
     public function afterUpdated(FinalCopy $finalCopy, array $data): void
     {
-        if (\array_key_exists('production_roles', $data)) {
+        if (\array_key_exists('production_roles', $data) && \is_array($data['production_roles'])) {
             /** @var array<int,array<string,mixed>> */
             $finalCopyProductionRoles = $data['production_roles'];
 

@@ -10,7 +10,7 @@ export default function () {
 
     return (
         <div>
-            <Title>Editar Usuário</Title>
+            <Title>Editar Reserva</Title>
 
             <BookingCreateOrUpdateForm id={params.id} />
 

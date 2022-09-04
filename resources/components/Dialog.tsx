@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-export default function (props) {
+export default function Dialog(props) {
     const [focusableEls, setFocusableEls] = useState([]);
     const [firstFocusableEl, setFirstFocusableEl] = useState(null);
     const [lastFocusableEl, setLastFocusableEl] = useState(null);
@@ -66,7 +66,6 @@ export default function (props) {
         }
 
         if (focusableEls.length > 0 && firstFocusableEl === null && lastFocusableEl === null) {
-            console.log('a');
             setFirstFocusableEl(focusableEls[0]);
             setLastFocusableEl(focusableEls[focusableEls.length - 1]);
         }
@@ -103,7 +102,6 @@ export default function (props) {
         }
 
         if (focusableEls.length > 0 && firstFocusableEl === null && lastFocusableEl === null) {
-            console.log('a');
             setFirstFocusableEl(focusableEls[0]);
             setLastFocusableEl(focusableEls[focusableEls.length - 1]);
         }

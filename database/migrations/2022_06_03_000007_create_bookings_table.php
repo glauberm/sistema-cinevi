@@ -30,8 +30,8 @@ return new class extends Migration
                 ->on('projects')
                 ->onDelete('cascade');
 
-            $table->date('withdrawal_date');
-            $table->date('devolution_date');
+            $table->datetime('withdrawal_date');
+            $table->datetime('devolution_date');
         });
     }
 

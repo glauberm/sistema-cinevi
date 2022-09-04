@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import NotificationsProvider from './contexts/NotificationsProvider';
+import ApiProvider from './contexts/ApiProvider';
 import DialogsProvider from './contexts/DialogsProvider';
 import Router from './routes/Router';
 
@@ -18,9 +19,11 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <NotificationsProvider>
-                <DialogsProvider>
-                    <Router />
-                </DialogsProvider>
+                <ApiProvider>
+                    <DialogsProvider>
+                        <Router />
+                    </DialogsProvider>
+                </ApiProvider>
             </NotificationsProvider>
         </BrowserRouter>
     </React.StrictMode>

@@ -67,9 +67,9 @@ class Project extends Model
      */
     protected $casts = [
         'genres' => 'array',
-        'pre_production_date' => 'immutable_datetime:Y-m-d',
-        'production_date' => 'immutable_datetime:Y-m-d',
-        'post_production_date' => 'immutable_datetime:Y-m-d',
+        'pre_production_date' => 'immutable_date',
+        'production_date' => 'immutable_date',
+        'post_production_date' => 'immutable_date',
         'has_attended_photography_discipline' => 'boolean',
         'has_attended_sound_discipline' => 'boolean',
         'has_attended_art_discipline' => 'boolean',

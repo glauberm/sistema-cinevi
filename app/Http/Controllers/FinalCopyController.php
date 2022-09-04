@@ -6,9 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FinalCopyCreateOrUpdateRequest;
 use App\Http\Resources\FinalCopy;
-use App\Services\CrudServiceInterface;
 use App\Services\FinalCopyService;
-use App\Services\HasVersionsServiceInterface;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -19,7 +17,7 @@ class FinalCopyController extends Controller implements CrudControllerInterface,
 
     protected string $resourceClass = FinalCopy::class;
 
-    protected CrudServiceInterface&HasVersionsServiceInterface $service;
+    protected FinalCopyService $service;
 
     public function __construct(FinalCopyService $service)
     {

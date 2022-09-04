@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="h-100 min-vh-100">
+<html lang="pt-BR" class="h-100 min-vh-100 bg-light">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +41,7 @@
 
         @yield('head')
     </head>
-    <body class="h-100">
+    <body class="h-100 bg-light">
         <div id="root" class="d-flex h-100"></div>
 
         @include('loading')

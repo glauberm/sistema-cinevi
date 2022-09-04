@@ -7,8 +7,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookableCreateOrUpdateRequest;
 use App\Http\Resources\Bookable;
 use App\Services\BookableService;
-use App\Services\CrudServiceInterface;
-use App\Services\HasVersionsServiceInterface;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -19,7 +17,7 @@ class BookableController extends Controller implements CrudControllerInterface, 
 
     protected string $resourceClass = Bookable::class;
 
-    protected CrudServiceInterface&HasVersionsServiceInterface $service;
+    protected BookableService $service;
 
     public function __construct(BookableService $service)
     {

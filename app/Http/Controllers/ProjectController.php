@@ -6,9 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectCreateOrUpdateRequest;
 use App\Http\Resources\Project;
-use App\Services\CrudServiceInterface;
 use App\Services\ProjectService;
-use App\Services\HasVersionsServiceInterface;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -19,7 +17,7 @@ class ProjectController extends Controller implements CrudControllerInterface, H
 
     protected string $resourceClass = Project::class;
 
-    protected CrudServiceInterface&HasVersionsServiceInterface $service;
+    protected ProjectService $service;
 
     public function __construct(ProjectService $service)
     {

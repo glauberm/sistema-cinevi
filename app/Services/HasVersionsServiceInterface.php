@@ -6,7 +6,6 @@ namespace App\Services;
 
 use App\Models\Version;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface HasVersionsServiceInterface

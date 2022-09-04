@@ -1,4 +1,5 @@
 import api, { handleError } from '../services/api';
+// import { api, handleError } from '../contexts/ApiProvider';
 
 export default function (notifications, setAuthorized, gate, userId = null) {
     api.get('/usuario-autenticado')

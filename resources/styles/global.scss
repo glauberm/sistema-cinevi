@@ -12,6 +12,7 @@ svg {
     max-height: 100%;
 }
 
-input[type='checkbox'] {
+.form-check-label,
+.form-check-input {
     cursor: pointer;
 }

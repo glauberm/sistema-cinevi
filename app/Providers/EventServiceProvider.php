@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Events\BookableCategoryVersionEvent;
 use App\Events\BookableVersionEvent;
 use App\Events\BookingVersionEvent;
+use App\Events\ConfigurationVersionEvent;
 use App\Events\FinalCopyVersionEvent;
 use App\Events\ProductionCategoryVersionEvent;
 use App\Events\ProductionRoleVersionEvent;
@@ -13,6 +14,7 @@ use App\Events\UserVersionEvent;
 use App\Listeners\BookableCategoryVersionListener;
 use App\Listeners\BookableVersionListener;
 use App\Listeners\BookingVersionListener;
+use App\Listeners\ConfigurationVersionListener;
 use App\Listeners\FinalCopyVersionListener;
 use App\Listeners\ProductionCategoryVersionListener;
 use App\Listeners\ProductionRoleVersionListener;
@@ -31,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
         BookableCategoryVersionEvent::class => [BookableCategoryVersionListener::class],
         BookableVersionEvent::class => [BookableVersionListener::class],
         BookingVersionEvent::class => [BookingVersionListener::class],
+        ConfigurationVersionEvent::class => [ConfigurationVersionListener::class],
         FinalCopyVersionEvent::class => [FinalCopyVersionListener::class],
         ProductionCategoryVersionEvent::class => [ProductionCategoryVersionListener::class],
         ProductionRoleVersionEvent::class => [ProductionRoleVersionListener::class],

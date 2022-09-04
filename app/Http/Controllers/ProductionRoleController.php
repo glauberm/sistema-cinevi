@@ -6,8 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductionRoleCreateOrUpdateRequest;
 use App\Http\Resources\ProductionRole;
-use App\Services\CrudServiceInterface;
-use App\Services\HasVersionsServiceInterface;
 use App\Services\ProductionRoleService;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
@@ -19,7 +17,7 @@ class ProductionRoleController extends Controller implements CrudControllerInter
 
     protected string $resourceClass = ProductionRole::class;
 
-    protected CrudServiceInterface&HasVersionsServiceInterface $service;
+    protected ProductionRoleService $service;
 
     public function __construct(ProductionRoleService $service)
     {

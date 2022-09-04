@@ -1,6 +1,28 @@
+import api, { handleError } from '../services/api';
+// import { api, handleError } from '../contexts/ApiProvider';
 import * as crud from './crud';
 
 const URL_PREFIX = 'reservas';
+
+export function showBetween(notifications, setData, setLoading, startDate, endDate) {
+    setLoading(true);
+
+    const urlParams = new URLSearchParams();
+
+    urlParams.append('start_date', startDate);
+    urlParams.append('end_date', endDate);
+
+    api.get(`/${URL_PREFIX}/entre?${urlParams}`)
+        .then((response) => {
+            setData(response.data.data);
+        })
+        .catch((error) => {
+            notifications.add(handleError(error), 'danger');
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+}
 
 export function paginate(notifications, setData, setLinks, setMeta, setLoading, page = 1, options = null) {
     crud.paginate(URL_PREFIX, notifications, setData, setLinks, setMeta, setLoading, page, options);

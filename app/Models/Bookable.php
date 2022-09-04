@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -18,7 +19,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string   $notes
  * @property bool     $is_under_maintenance
  * @property bool     $is_return_overdue
- * @property integer  $bookable_category_id
  */
 class Bookable extends Model
 {
@@ -57,6 +57,14 @@ class Bookable extends Model
         'is_under_maintenance' => 'boolean',
         'is_return_overdue' => 'boolean',
     ];
+
+    /**
+     * @return BelongsTo<BookableCategory,self>
+     */
+    public function bookableCategory(): BelongsTo
+    {
+        return $this->belongsTo(BookableCategory::class);
+    }
 
     /**
      * @return BelongsToMany<User>

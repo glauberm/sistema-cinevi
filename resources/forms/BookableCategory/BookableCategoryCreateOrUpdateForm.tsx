@@ -8,6 +8,7 @@ import { NotificationsContext } from '../../contexts/NotificationsProvider';
 import Form from '../../components/Forms/Form';
 import Field from '../../components/Forms/Field';
 import Button from '../../components/Button';
+import { ApiContext, handleError } from '../../contexts/ApiProvider';
 
 const initialValues = {
     title: '',
@@ -22,8 +23,8 @@ const validationSchema = Yup.object({
 export default function (props) {
     const [isLoading, setLoading] = useState(false);
     const [values, setValues] = useState(initialValues);
-
     const notifications = useContext(NotificationsContext);
+    const apiProvider = useContext(ApiContext);
     const navigate = useNavigate();
 
     const onSubmit = (values) => {
@@ -36,11 +37,20 @@ export default function (props) {
 
     useEffect(() => {
         if (props.id) {
-            // if (showRequest === 'revision') {
-            //     showRevision(id);
-            // } else {
-            show(notifications, setValues, setLoading, props.id);
-            // }
+            // show(apiProvider.api, notifications, setValues, setLoading, props.id);
+
+            apiProvider.api
+                .get(`/categorias-de-reservaveis/${props.id}`)
+                .then((response) => {
+                    let { data } = response.data;
+                    setValues(data);
+                })
+                .catch((error) => {
+                    notifications.add(handleError(error), 'danger');
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
         }
     }, []);
 
@@ -48,7 +58,14 @@ export default function (props) {
         <Formik enableReinitialize initialValues={values} validationSchema={validationSchema} onSubmit={onSubmit}>
             {({ errors, touched }) => (
                 <Form>
-                    <Field name="title" label="Título" type="text" errors={errors.title} touched={touched.title} />
+                    <Field
+                        name="title"
+                        label="Título"
+                        type="text"
+                        size="lg"
+                        errors={errors.title}
+                        touched={touched.title}
+                    />
                     <Field
                         name="description"
                         label="Descrição"

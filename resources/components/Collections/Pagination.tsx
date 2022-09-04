@@ -2,13 +2,13 @@ import React from 'react';
 
 import Button from '../Button';
 
-export default function (props) {
+export default function Pagination(props) {
     const { links, meta, paginate, isLoading } = props;
 
     return (
         <nav className="d-flex align-items-start justify-content-between">
             {meta && (
-                <div className="my-1 me-1">
+                <div className="my-1 me-3">
                     <small>{`Mostrando ${meta.from} a ${meta.to} de ${meta.total}`}</small>
                 </div>
             )}

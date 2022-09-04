@@ -21,4 +21,45 @@ class BookableService implements CrudServiceInterface, HasVersionsServiceInterfa
     protected string $modelVersionTableName = 'bookables_versions';
 
     protected string $modelVersionIdColumnName = 'bookable_id';
+
+    /**
+     * @param  integer                 $id
+     * @return Bookable
+     */
+    public function get(int $id): Bookable
+    {
+        return $this->modelClass::with(['bookableCategory', 'users', 'bookings'])->findOrFail($id);
+    }
+
+    /**
+     * @param  Bookable             $bookable
+     * @param  array<string,mixed>  $data
+     * @return Bookable
+     */
+    public function afterCreated(Bookable $bookable, array $data): Bookable
+    {
+        if (\array_key_exists('users', $data) && \is_array($data['users'])) {
+            /** @var array<int,array<string,mixed>> */
+            $users = $data['users'];
+
+            $bookable->users()->attach(\array_column($users, 'id'));
+        }
+
+        return $bookable;
+    }
+
+    /**
+     * @param  Bookable             $bookable
+     * @param  array<string,mixed>  $data
+     * @return void
+     */
+    public function afterUpdated(Bookable $bookable, array $data): void
+    {
+        if (\array_key_exists('users', $data) && \is_array($data['users'])) {
+            /** @var array<int,array<string,mixed>> */
+            $users = $data['users'];
+
+            $bookable->users()->sync(\array_column($users, 'id'));
+        }
+    }
 }

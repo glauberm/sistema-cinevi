@@ -1,0 +1,32 @@
+.Items {
+    &__item {
+        color: $link-color;
+        text-decoration: underline;
+
+        &:nth-child(odd) {
+            background-color: $gray-100;
+        }
+
+        &:nth-child(even) {
+            background-color: $white;
+        }
+
+        &:nth-child(odd),
+        &:nth-child(even) {
+            &:hover {
+                color: $link-hover-color;
+                background-color: $yellow-100;
+            }
+
+            &:active {
+                color: $link-hover-color;
+                background-color: $yellow-100;
+            }
+        }
+
+        &--selected {
+            color: $white !important;
+            background-color: $primary !important;
+        }
+    }
+}

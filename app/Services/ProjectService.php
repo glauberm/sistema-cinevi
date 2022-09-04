@@ -24,6 +24,25 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
     protected string $modelVersionIdColumnName = 'project_id';
 
     /**
+     * @param  integer                 $id
+     * @return Project
+     */
+    public function get(int $id): Project
+    {
+        return $this->modelClass::with([
+            'owner',
+            'productionCategory',
+            'professor',
+            'directors',
+            'producers',
+            'photographyDirectors',
+            'soundDirectors',
+            'artDirectors'
+        ])
+            ->findOrFail($id);
+    }
+
+    /**
      * @param  Project              $project
      * @param  array<string,mixed>  $data
      * @return Project

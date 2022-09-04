@@ -10,7 +10,7 @@ export default function () {
         <div>
             <Title>Categorias de Reserváveis</Title>
 
-            <BookableCategoryCollection />
+            <BookableCategoryCollection linkToFn={(item) => routes.update.getPath(item.id)} />
 
             <hr className="invisible" />
 

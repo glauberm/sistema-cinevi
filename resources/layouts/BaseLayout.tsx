@@ -26,8 +26,8 @@ export default function (props: BaseLayoutProps) {
     }, []);
 
     return (
-        <div className="d-flex w-100 h-100 pt-5 pb-3 mx-auto flex-column bg-light">
-            <div className="mb-auto bg-light">
+        <div className="d-flex w-100 h-100 pt-5 pb-3 mx-auto flex-column">
+            <div className="mb-auto">
                 <div className="container">
                     <header className="mx-auto text-center">
                         <Link to="/">
@@ -37,11 +37,11 @@ export default function (props: BaseLayoutProps) {
                 </div>
             </div>
 
-            <main className="py-5 bg-light">
+            <main className="py-5">
                 <div className="container">{props.children}</div>
             </main>
 
-            <footer className="mt-auto bg-light text-secondary">
+            <footer className="mt-auto text-secondary">
                 <div className="container text-center mb-4">
                     <a href="http://uff.br/" target="_blank">
                         <Uff />

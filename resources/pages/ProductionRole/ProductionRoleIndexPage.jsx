@@ -10,7 +10,7 @@ export default function () {
         <div>
             <Title>Funções</Title>
 
-            <ProductionRoleCollection />
+            <ProductionRoleCollection linkToFn={(item) => routes.update.getPath(item.id)} />
 
             <hr className="invisible" />
 

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Bookable;
 use App\Models\BookableCategory;
 use App\Models\Booking;
+use App\Models\Configuration;
 use App\Models\FinalCopy;
 use App\Models\ProductionCategory;
 use App\Models\ProductionRole;
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Configuration::factory()->createOne();
         User::factory()->state(['roles' => ['user', 'admin']])->createOne();
         User::factory(30)->create();
         ProductionCategory::factory(31)->create();

@@ -10,7 +10,7 @@ export default function () {
         <div>
             <Title>Reservas</Title>
 
-            <BookingCollection />
+            <BookingCollection linkToFn={(item) => routes.update.getPath(item.id)} />
 
             <hr className="invisible" />
 

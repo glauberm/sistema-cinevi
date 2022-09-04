@@ -6,7 +6,8 @@ namespace App\Services;
 
 use App\Events\BookingVersionEvent;
 use App\Models\Booking;
-use Illuminate\Database\Eloquent\Model;
+use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Collection;
 
 class BookingService implements CrudServiceInterface, HasVersionsServiceInterface
 {
@@ -22,6 +23,31 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     protected string $modelVersionTableName = 'bookings_versions';
 
     protected string $modelVersionIdColumnName = 'booking_id';
+
+    /**
+     * @param  array<string,mixed>  $data
+     * @return Collection<int,Booking>
+     */
+    public function showBetween(array $data): Collection
+    {
+        $startDate = $data['start_date'];
+
+        $endDate = $data['end_date'];
+
+        return $this->modelClass::with(['owner'])
+            ->whereBetween('withdrawal_date', [$startDate, $endDate])
+            ->orWhereBetween('devolution_date', [$startDate, $endDate])
+            ->get();
+    }
+
+    /**
+     * @param  integer                 $id
+     * @return Booking
+     */
+    public function get(int $id): Booking
+    {
+        return $this->modelClass::with(['owner', 'project', 'bookables'])->findOrFail($id);
+    }
 
     /**
      * @param  Booking              $booking

@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { paginate } from '../../requests/user';
-import routes from '../../routes/user';
-import PaginatedTable from '../../components/Collections/PaginatedTable';
+import PaginatedItems from '../../components/Collections/PaginatedItems';
 
-export default function () {
+export default function (props) {
+    const { linkToFn, selectFn, selected, isLoading } = props;
+
     return (
-        <PaginatedTable paginateFn={paginate}>
-            {(user, key) => (
-                <tr key={key}>
-                    <td>
-                        <Link to={routes.update.getPath(user.id)}>{user.email}</Link>
-                    </td>
-                </tr>
-            )}
-        </PaginatedTable>
+        <PaginatedItems
+            paginateFn={paginate}
+            linkToFn={linkToFn}
+            selectFn={selectFn}
+            selected={selected}
+            isLoading={isLoading}
+        >
+            {(item) => <span>{item.name}</span>}
+        </PaginatedItems>
     );
 }
