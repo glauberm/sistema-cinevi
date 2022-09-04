@@ -28,7 +28,7 @@ class AuthenticationResetPasswordRequest extends FormRequest
                 'string',
                 'min:8',
                 'confirmed',
-                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).*$/',
+                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
             ],
         ];
     }
@@ -45,7 +45,7 @@ class AuthenticationResetPasswordRequest extends FormRequest
             'password.string' => 'A senha deve ser uma string.',
             'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
             'password.confirmed' => 'As senhas informadas não coincidem.',
-            'password.regex' => 'A senha informada é muito fraca. Use letras maiúsculas e minúsculas, números e símbolos (!@#$%).',
+            'password.regex' => 'A senha deve conter letras maiúsculas, minúsculas e números.',
         ];
     }
 }

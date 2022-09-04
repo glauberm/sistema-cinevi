@@ -13,9 +13,9 @@ class AuthenticationFinalizeRegistrationMail extends Mailable
 
     public string $url;
 
-    public string $title = 'Confirmação de e-mail';
+    public string $title = 'Confirmação de email';
 
-    public string $urlText = 'Confirmar e-mail';
+    public string $urlText = 'Confirmar email';
 
     /**
      * Create a new message instance.
@@ -24,7 +24,7 @@ class AuthenticationFinalizeRegistrationMail extends Mailable
      */
     public function __construct(string $url)
     {
-        $this->url = \env('APP_URL').'/entrada?url='.\rawurlencode($url);
+        $this->url = \env('APP_URL') . '/entrada?url=' . \rawurlencode($url);
     }
 
     /**
@@ -34,15 +34,15 @@ class AuthenticationFinalizeRegistrationMail extends Mailable
      */
     public function build()
     {
-        /** @var string $name */
-        $name = env('MAIL_FROM_NAME');
-
         /** @var string $address */
         $address = env('MAIL_FROM_ADDRESS');
 
-        return $this->from($name, $address)
+        /** @var string $name */
+        $name = env('MAIL_FROM_NAME');
+
+        return $this->from($address, $name)
             ->subject($this->title)
-            ->view('emails/authentication-finalize-registration')
-            ->text('emails/authentication-finalize-registration-plain');
+            ->view('emails/authentication/finalize-registration')
+            ->text('emails/authentication/finalize-registration-plain');
     }
 }

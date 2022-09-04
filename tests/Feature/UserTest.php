@@ -22,40 +22,13 @@ class UserTest extends TestCase implements CrudTestInterface, HasVersionsTestInt
     /**
      * @return array<string,mixed>
      */
-    protected function getCreateRequest(): array
-    {
-        return [
-            'name' => 'Glauber Mota',
-            'email' => 'glaubernm@gmail.com',
-            'password' => 'Gl@uber7!',
-            'phone' => '(00) 71485-03148',
-            'identifier' => '1304856',
-            'is_enabled' => true,
-            'is_confirmed' => true,
-            'roles' => ['user'],
-        ];
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    protected function getCreateDatabaseFields(): array
-    {
-        return [
-            'name' => 'Glauber Mota',
-        ];
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
     protected function getUpdateRequest(): array
     {
         return [
             'name' => 'Glauber Teste',
             'email' => 'teste@gmail.com',
             'password' => '7Gl@uber!',
-            'phone' => '(01) 71485-03148',
+            'phone' => '17148503148',
             'identifier' => '991304856',
             'is_enabled' => false,
             'is_confirmed' => false,
@@ -70,12 +43,10 @@ class UserTest extends TestCase implements CrudTestInterface, HasVersionsTestInt
     {
         return [
             'name' => 'Glauber Teste',
+            'email' => 'teste@gmail.com',
+            'phone' => '17148503148',
+            'identifier' => '991304856',
         ];
-    }
-
-    protected function createSanctumActingAs(): void
-    {
-        Sanctum::actingAs(User::factory()->state(['roles' => ['user', 'admin']])->createOne());
     }
 
     protected function paginateSanctumActingAs(): void
@@ -102,5 +73,13 @@ class UserTest extends TestCase implements CrudTestInterface, HasVersionsTestInt
     protected function removeSanctumActingAs(): void
     {
         Sanctum::actingAs(User::factory()->state(['roles' => ['user', 'admin']])->createOne());
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreate(): void
+    {
+        $this->markTestSkipped('Os usuários só podem ser criados através do cadastro.');
     }
 }

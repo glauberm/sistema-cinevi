@@ -141,7 +141,7 @@ export default function Dialog(props) {
 
                     <div className="modal-body">{props.body}</div>
 
-                    <div className="modal-footer">{props.footer}</div>
+                    {props.footer && <div className="modal-footer">{props.footer}</div>}
                 </div>
             </div>
         </div>

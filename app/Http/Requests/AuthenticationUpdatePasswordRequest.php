@@ -16,24 +16,24 @@ class AuthenticationUpdatePasswordRequest extends FormRequest
      */
     protected $stopOnFirstFailure = true;
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        $currentUser = $this->user();
+    // /**
+    //  * Determine if the user is authorized to make this request.
+    //  *
+    //  * @return bool
+    //  */
+    // public function authorize()
+    // {
+    //     $currentUser = $this->user();
 
-        if (\is_null($currentUser)) {
-            return false;
-        }
+    //     if (\is_null($currentUser)) {
+    //         return false;
+    //     }
 
-        /** @var string $password */
-        $password = $this->input('password');
+    //     /** @var string $password */
+    //     $password = $this->input('password');
 
-        return Hash::check($password, $currentUser->password);
-    }
+    //     return Hash::check($password, $currentUser->password);
+    // }
 
     /**
      * Get the validation rules that apply to the request.
@@ -43,13 +43,13 @@ class AuthenticationUpdatePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => ['required', 'string'],
+            'password' => ['required', 'string', 'current_password'],
             'new_password' => [
                 'required',
                 'string',
                 'min:8',
                 'confirmed',
-                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).*$/',
+                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/'
             ],
         ];
     }
@@ -64,11 +64,12 @@ class AuthenticationUpdatePasswordRequest extends FormRequest
         return [
             'password.required' => 'A senha é obrigatória.',
             'password.string' => 'A senha deve ser uma string.',
+            'password.current_password' => 'A senha informada está incorreta.',
             'new_password.required' => 'A nova senha é obrigatória.',
             'new_password.string' => 'A nova senha deve ser uma string.',
             'new_password.min' => 'A nova senha deve ter no mínimo 8 caracteres.',
             'new_password.confirmed' => 'As senhas informadas não coincidem.',
-            'new_password.regex' => 'A nova senha deve conter letras maiúsculas e minúsculas, números e símbolos (!@#$%).',
+            'new_password.regex' => 'A senha deve conter letras maiúsculas, minúsculas e números.',
         ];
     }
 }

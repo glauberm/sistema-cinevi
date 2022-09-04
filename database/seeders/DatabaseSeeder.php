@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
     {
         Configuration::factory()->createOne();
         User::factory()->state(['roles' => ['user', 'admin']])->createOne();
+        User::factory()->state(['roles' => ['user', 'department']])->count(3)->create();
+        User::factory()->state(['roles' => ['user', 'warehouse']])->count(3)->create();
         User::factory(30)->create();
         ProductionCategory::factory(31)->create();
         ProductionRole::factory(31)->create();

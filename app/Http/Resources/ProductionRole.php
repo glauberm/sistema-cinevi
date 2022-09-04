@@ -24,7 +24,7 @@ class ProductionRole extends JsonResource
         return [
             'id' => $this->resource->id,
             'title' => $this->resource->title,
-            'description' => $this->resource->description,
+            'description' => $this->resource->description ?? '',
         ];
     }
 }

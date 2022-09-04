@@ -7,8 +7,6 @@ Route::get('usuarios', [UserController::class, 'paginate']);
 
 Route::get('usuarios/versoes/{id}', [UserController::class, 'showVersion']);
 
-Route::post('usuarios/adicionar', [UserController::class, 'doCreate']);
-
 Route::get('usuarios/{id}', [UserController::class, 'show']);
 
 Route::put('usuarios/{id}/editar', [UserController::class, 'doUpdate']);

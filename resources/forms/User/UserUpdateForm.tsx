@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { create, show, update } from '../../requests/user';
+import { show, update } from '../../requests/user';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
 import { ApiContext } from '../../contexts/ApiProvider';
 import Form from '../../components/Forms/Form';
@@ -15,26 +15,24 @@ import CheckboxGroupField from '../../components/Forms/CheckboxGroupField';
 const initialValues = {
     name: '',
     email: '',
-    password: '',
     phone: '',
     identifier: '',
     is_enabled: false,
     is_confirmed: false,
-    roles: ['user'],
+    roles: [],
 };
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Campo obrigatório'),
-    email: Yup.string().email('Endereço de e-mail inválido').required('Campo obrigatório'),
-    password: Yup.string().required('Campo obrigatório'),
+    email: Yup.string().email('Endereço de email inválido').required('Campo obrigatório'),
     phone: Yup.string().required('Campo obrigatório'),
     identifier: Yup.string().required('Campo obrigatório'),
     is_enabled: Yup.bool().required('Campo obrigatório'),
     is_confirmed: Yup.bool().required('Campo obrigatório'),
-    roles: Yup.array().min(1, 'Campo obrigatório'),
+    roles: Yup.array(),
 });
 
-export default function UserCreateOrUpdateForm(props) {
+export default function UserUpdateForm(props) {
     const [isLoading, setLoading] = useState(false);
     const [values, setValues] = useState(initialValues);
 
@@ -43,38 +41,28 @@ export default function UserCreateOrUpdateForm(props) {
     const navigate = useNavigate();
 
     const onSubmit = (values) => {
-        if (props.id) {
-            update(apiProvider.api, notifications, navigate, setLoading, props.id, values);
-        } else {
-            create(apiProvider.api, notifications, navigate, setLoading, values);
-        }
+        update(apiProvider.api, notifications, navigate, setLoading, props.id, values);
     };
 
     useEffect(() => {
-        if (props.id) {
-            show(apiProvider.api, notifications, setValues, setLoading, props.id);
-        }
+        show(apiProvider.api, notifications, setValues, setLoading, props.id);
     }, []);
 
     return (
         <Formik enableReinitialize initialValues={values} validationSchema={validationSchema} onSubmit={onSubmit}>
             {({ values, errors, touched, setFieldValue }) => (
                 <Form>
-                    <div className="row">
-                        <div className="col-md">
-                            <Field name="name" label="Nome" type="text" errors={errors.name} touched={touched.name} />
-                        </div>
-
-                        <div className="col-md">
-                            <Field
-                                name="identifier"
-                                label="Matrícula ou SIAPE"
-                                type="tel"
-                                errors={errors.identifier}
-                                touched={touched.identifier}
-                            />
-                        </div>
+                    <div className="col-md">
+                        <Field
+                            name="name"
+                            label="Nome"
+                            type="text"
+                            size="lg"
+                            errors={errors.name}
+                            touched={touched.name}
+                        />
                     </div>
+
                     <div className="row">
                         <div className="col-md">
                             <Field
@@ -87,6 +75,15 @@ export default function UserCreateOrUpdateForm(props) {
                         </div>
                         <div className="col-md">
                             <Field
+                                name="identifier"
+                                label="Matrícula ou SIAPE"
+                                type="tel"
+                                errors={errors.identifier}
+                                touched={touched.identifier}
+                            />
+                        </div>
+                        <div className="col-md">
+                            <Field
                                 name="phone"
                                 label="Telefone"
                                 type="tel"
@@ -95,6 +92,7 @@ export default function UserCreateOrUpdateForm(props) {
                             />
                         </div>
                     </div>
+
                     <div className="row">
                         <div className="col-md">
                             <CheckboxGroupField

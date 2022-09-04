@@ -35,9 +35,9 @@ class AuthenticationRequestResetPasswordRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'O e-mail é obrigatório.',
-            'email.string' => 'O e-mail deve ser uma string.',
-            'email.email' => 'O e-mail não é válido.',
+            'email.required' => 'O email é obrigatório.',
+            'email.string' => 'O email deve ser uma string.',
+            'email.email' => 'O email não é válido.',
         ];
     }
 }

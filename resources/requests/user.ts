@@ -6,10 +6,6 @@ export function paginate(api, notifications, setData, setLinks, setMeta, setLoad
     crud.paginate(URL_PREFIX, api, notifications, setData, setLinks, setMeta, setLoading, page, options);
 }
 
-export function create(api, notifications, navigate, setLoading, values, options = null) {
-    crud.create(URL_PREFIX, api, notifications, navigate, setLoading, values, options);
-}
-
 export function show(api, notifications, setValues, setLoading, id, options = null) {
     crud.show(URL_PREFIX, api, notifications, setValues, setLoading, id, options);
 }

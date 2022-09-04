@@ -10,15 +10,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property integer  $id
- * @property string   $identifier
- * @property string   $name
- * @property string   $inventory_number
- * @property string   $serial_number
- * @property string   $accessories
- * @property string   $notes
- * @property bool     $is_under_maintenance
- * @property bool     $is_return_overdue
+ * @property integer   $id
+ * @property string    $identifier
+ * @property string    $name
+ * @property ?string   $inventory_number
+ * @property ?string   $serial_number
+ * @property ?string   $accessories
+ * @property ?string   $notes
+ * @property bool      $is_under_maintenance
+ * @property bool      $is_return_overdue
  */
 class Bookable extends Model
 {

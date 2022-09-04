@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('identifier')->unique();
 
-            $table->boolean('is_enabled')->default(false);
-            $table->boolean('is_confirmed')->default(false);
+            $table->boolean('is_enabled');
+            $table->boolean('is_confirmed');
 
             $table->json('roles');
         });

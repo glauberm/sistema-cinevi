@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 export default function Notification(props) {
-    const { status, handleDismiss, content } = props;
+    const { status, handleDismiss, content, hasExtendedTime } = props;
     const [isActive, setActive] = useState(true);
     const [isSlidingOut, setSlidingOut] = useState(false);
 
@@ -21,7 +21,7 @@ export default function Notification(props) {
         };
 
         if (!timeoutSlideOut && isActive === true) {
-            timeoutSlideOut = setTimeout(slideOut, 5000);
+            timeoutSlideOut = setTimeout(slideOut, hasExtendedTime ? 10000 : 5000);
         }
 
         if (!timeoutDismiss && isActive === false) {

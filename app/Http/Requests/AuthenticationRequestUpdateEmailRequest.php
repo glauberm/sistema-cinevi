@@ -7,7 +7,7 @@ namespace App\Http\Requests;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+// use Illuminate\Support\Facades\Hash;
 
 class AuthenticationRequestUpdateEmailRequest extends FormRequest
 {
@@ -18,32 +18,32 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
      */
     protected $stopOnFirstFailure = true;
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        $currentUser = $this->user();
+    // /**
+    //  * Determine if the user is authorized to make this request.
+    //  *
+    //  * @return bool
+    //  */
+    // public function authorize()
+    // {
+    //     $currentUser = $this->user();
 
-        if (\is_null($currentUser)) {
-            return false;
-        }
+    //     if (\is_null($currentUser)) {
+    //         return false;
+    //     }
 
-        /** @var string $password */
-        $password = $this->input('password');
+    //     /** @var string $password */
+    //     $password = $this->input('password');
 
-        return Hash::check($password, $currentUser->password);
-    }
+    //     return Hash::check($password, $currentUser->password);
+    // }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
-    {
-        throw new AuthorizationException('A senha informada está incorreta.');
-    }
+    // /**
+    //  * {@inheritDoc}
+    //  */
+    // protected function failedAuthorization()
+    // {
+    //     throw new AuthorizationException('A senha informada está incorreta.');
+    // }
 
     /**
      * Get the validation rules that apply to the request.
@@ -67,7 +67,7 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
                 'confirmed',
                 'unique:users,email,' . $user->id,
             ],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8', 'current_password'],
         ];
     }
 
@@ -79,15 +79,16 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'O e-mail é obrigatório.',
-            'email.string' => 'O e-mail deve ser uma string.',
-            'email.email' => 'O endereço de e-mail não é válido.',
-            'email.max' => 'O e-mail deve ter no máximo 180 caracteres.',
-            'email.unique' => 'Esse e-mail já está em uso por outro usuário.',
-            'email.confirmed' => 'Os e-mails informados não coincidem.',
+            'email.required' => 'O email é obrigatório.',
+            'email.string' => 'O email deve ser uma string.',
+            'email.email' => 'O endereço de email não é válido.',
+            'email.max' => 'O email deve ter no máximo 180 caracteres.',
+            'email.unique' => 'Esse email já está em uso por outro usuário.',
+            'email.confirmed' => 'Os emails informados não coincidem.',
             'password.required' => 'A senha é obrigatória.',
             'password.string' => 'A senha deve ser uma string.',
             'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
+            'password.current_password' => 'A senha informada está incorreta.',
         ];
     }
 }

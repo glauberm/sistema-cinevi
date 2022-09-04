@@ -36,9 +36,9 @@ class AuthenticationLoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'O e-mail é obrigatório.',
-            'email.string' => 'O e-mail deve ser uma string.',
-            'email.email' => 'O e-mail não é válido.',
+            'email.required' => 'O email é obrigatório.',
+            'email.string' => 'O email deve ser uma string.',
+            'email.email' => 'O email não é válido.',
             'password.required' => 'A senha é obrigatória.',
             'password.string' => 'A senha deve ser uma string.',
             'password.min' => 'A senha deve ter no mínimo 8 caracteres.',

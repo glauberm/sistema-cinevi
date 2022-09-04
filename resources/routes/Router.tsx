@@ -35,9 +35,8 @@ export const secureRoutes = [
 export const publicRoutes = [
     authentication.login,
     authentication.register,
-    authentication.requestReset,
-    // authentication.requestResetPassword,
-    // authentication.resetPassword,
+    authentication.requestResetPassword,
+    authentication.resetPassword,
 ];
 
 export default function Router() {
@@ -58,6 +57,7 @@ export default function Router() {
             ))}
 
             <Route path={misc.notFound.path} element={<BaseLayout>{misc.notFound.element}</BaseLayout>} />
+
             <Route path="*" element={<Navigate to={misc.notFound.path} />} />
         </Routes>
     );

@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Events\UserVersionEvent;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserService implements CrudServiceInterface, HasVersionsServiceInterface
 {
@@ -23,13 +24,20 @@ class UserService implements CrudServiceInterface, HasVersionsServiceInterface
     protected string $modelVersionIdColumnName = 'user_id';
 
     /**
-     * Busca usuário por e-mail.
-     *
      * @param string $email
      * @return User|null
      */
     public function getByEmail(string $email): ?User
     {
         return $this->modelClass::where('email', '=', $email)->first();
+    }
+
+    /**
+     * @param  string $role
+     * @return Collection<int,User>
+     */
+    public function getAllWithRole(string $role): Collection
+    {
+        return $this->modelClass::whereJsonContains('roles', $role)->get();
     }
 }

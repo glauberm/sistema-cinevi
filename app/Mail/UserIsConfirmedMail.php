@@ -7,24 +7,24 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 
-class AuthenticationResetPasswordMail extends Mailable
+class UserIsConfirmedMail extends Mailable
 {
     use Queueable;
 
     public string $url;
 
-    public string $title = 'Redefinição de senha';
+    public string $title = 'Cadastro confirmado';
 
-    public string $urlText = 'Redefinir senha';
+    public string $urlText = 'Acessar';
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $url)
+    public function __construct()
     {
-        $this->url = \env('APP_URL') . '/redefinir-senha?url=' . \rawurlencode($url);
+        $this->url = \env('APP_URL') . '/entrada';
     }
 
     /**
@@ -42,7 +42,7 @@ class AuthenticationResetPasswordMail extends Mailable
 
         return $this->from($address, $name)
             ->subject($this->title)
-            ->view('emails/authentication/reset-password')
-            ->text('emails/authentication/reset-password-plain');
+            ->view('emails/user/is-confirmed')
+            ->text('emails/user/is-confirmed-plain');
     }
 }

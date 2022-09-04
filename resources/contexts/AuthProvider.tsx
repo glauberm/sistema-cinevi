@@ -10,16 +10,14 @@ export default function AuthProvider(props) {
     const apiProvider = useContext(ApiContext);
 
     const hasRole = (role) => {
-        if (authenticatedUser !== null) {
-            authenticatedUser.roles.includes(role);
-        }
+        return authenticatedUser !== null && authenticatedUser.roles.includes(role);
     };
 
     useEffect(() => {
         apiProvider.api
             .get('/usuario-autenticado')
             .then((response) => {
-                setAuthenticatedUser(response.data.resource);
+                setAuthenticatedUser(response.data.data);
             })
             .catch((error) => {
                 setAuthenticatedUser(false);

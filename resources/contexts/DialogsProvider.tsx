@@ -44,7 +44,7 @@ export default function DialogsProvider(props) {
                             />
                         ))}
                     </div>
-                    <div className="modal-backdrop fade show"></div>
+                    <div className="modal-backdrop show"></div>
                 </>
             )}
         </DialogsContext.Provider>

@@ -84,7 +84,7 @@
                     font-size: 13px;
                     color: #7a828a;
                 ">
-                    Esse é um e-mail automático, por favor não o responda.
+                    Esse é um email automático, por favor não o responda.
                 </small>
             </p>
         </div>

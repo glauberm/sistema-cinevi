@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string           $synopsis
  * @property string[]         $genres
  * @property string           $capture_format
- * @property string           $capture_notes
+ * @property ?string          $capture_notes
  * @property string           $venues
  * @property CarbonImmutable  $pre_production_date
  * @property CarbonImmutable  $production_date

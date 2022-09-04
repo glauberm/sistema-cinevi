@@ -13,9 +13,9 @@ class AuthenticationUpdateEmailMail extends Mailable
 
     public string $url;
 
-    public string $title = 'Atualizar e-mail de acesso';
+    public string $title = 'Atualizar email de acesso';
 
-    public string $urlText = 'Atualizar e-mail';
+    public string $urlText = 'Atualizar email';
 
     /**
      * Create a new message instance.
@@ -24,7 +24,7 @@ class AuthenticationUpdateEmailMail extends Mailable
      */
     public function __construct(string $url)
     {
-        $this->url = \env('APP_URL').'/atualizar-email?url='.\rawurlencode($url);
+        $this->url = \env('APP_URL') . '/atualizar-email?url=' . \rawurlencode($url);
     }
 
     /**
@@ -34,15 +34,15 @@ class AuthenticationUpdateEmailMail extends Mailable
      */
     public function build()
     {
-        /** @var string $name */
-        $name = env('MAIL_FROM_NAME');
-
         /** @var string $address */
         $address = env('MAIL_FROM_ADDRESS');
 
-        return $this->from($name, $address)
+        /** @var string $name */
+        $name = env('MAIL_FROM_NAME');
+
+        return $this->from($address, $name)
             ->subject($this->title)
-            ->view('emails/authentication-update-email')
-            ->text('emails/authentication-update-email-plain');
+            ->view('emails/authentication/update-email')
+            ->text('emails/authentication/update-email-plain');
     }
 }

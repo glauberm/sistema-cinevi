@@ -17,6 +17,7 @@ export default function Field(props) {
         errors,
         touched,
         children,
+        messages,
         isFastField,
     } = props;
 
@@ -41,12 +42,21 @@ export default function Field(props) {
             <label htmlFor={name} className={`form-label ${labelHidden ? 'visually-hidden-focusable' : ''}`}>
                 {label}
             </label>
+
             {isFastField ? (
                 <FormikFastField {...componentProps}>{children}</FormikFastField>
             ) : (
                 <FormikField {...componentProps}>{children}</FormikField>
             )}
+
             {errors && touched && <div className="invalid-feedback">{errors}</div>}
+
+            {messages &&
+                messages.map((message, key) => (
+                    <p key={key} className="text-muted lh-1 mb-2">
+                        <small>{message}</small>
+                    </p>
+                ))}
         </div>
     );
 }

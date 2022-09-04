@@ -159,7 +159,7 @@ class AuthenticationTest extends TestCase
     }
 
     /**
-     * Testa o envio da requisição de redefinição de senha com o e-mail errado.
+     * Testa o envio da requisição de redefinição de senha com o email errado.
      *
      * @return void
      */
@@ -196,7 +196,7 @@ class AuthenticationTest extends TestCase
     }
 
     /**
-     * Testa o envio da requisição de atualização de e-mail.
+     * Testa o envio da requisição de atualização de email.
      *
      * @return void
      */

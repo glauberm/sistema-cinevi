@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import UserCreateOrUpdateForm from '../../forms/User/UserCreateOrUpdateForm';
+import UserUpdateForm from '../../forms/User/UserUpdateForm';
 import UserRemoveForm from '../../forms/User/UserRemoveForm';
 import Title from '../../components/Title';
 
@@ -12,7 +12,7 @@ export default function UserUpdatePage() {
         <div>
             <Title>Editar Usuário</Title>
 
-            <UserCreateOrUpdateForm id={params.id} />
+            <UserUpdateForm id={params.id} />
 
             <hr className="invisible my-5" />
 

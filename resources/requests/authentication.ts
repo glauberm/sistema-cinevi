@@ -3,12 +3,7 @@ import axios from 'axios';
 import { handleError } from '../contexts/ApiProvider';
 import authentication from '../routes/authentication';
 
-/**
- * @param values
- * @param notifications
- * @param navigate
- */
-export function login(api, auth, values, notifications, navigate, setLoading) {
+export function login(api, auth, notifications, navigate, setLoading, values) {
     setLoading(true);
 
     axios
@@ -20,7 +15,7 @@ export function login(api, auth, values, notifications, navigate, setLoading) {
                     navigate(authentication.profile.path);
                 })
                 .catch((error) => {
-                    notifications.add(handleError(error), 'danger');
+                    notifications.add(handleError(error), 'danger', true);
                 })
                 .finally(() => {
                     setLoading(false);
@@ -31,10 +26,6 @@ export function login(api, auth, values, notifications, navigate, setLoading) {
         });
 }
 
-/**
- * @param notifications
- * @param navigate
- */
 export function logout(api, auth, notifications, navigate) {
     api.post('/saida')
         .then((response) => {
@@ -46,5 +37,113 @@ export function logout(api, auth, notifications, navigate) {
         })
         .finally(() => {
             navigate(authentication.login.path);
+        });
+}
+
+export function register(api, notifications, navigate, setLoading, values) {
+    setLoading(true);
+
+    api.post('/cadastro', values)
+        .then((response) => {
+            notifications.add(response.data.message, 'success', true);
+            navigate(authentication.login.path);
+        })
+        .catch((error) => {
+            notifications.add(handleError(error), 'danger');
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+}
+
+export function finalizeRegistration(api, notifications, setLoading, url) {
+    setLoading(true);
+
+    api.put(url)
+        .then((response) => {
+            notifications.add(response.data.message, 'success', true);
+        })
+        .catch((error) => {
+            notifications.add(handleError(error), 'danger');
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+}
+
+export function requestResetPassword(api, notifications, navigate, setLoading, values) {
+    setLoading(true);
+
+    api.post('/solicitar-redefinir-senha', values)
+        .then((response) => {
+            notifications.add(response.data.message, 'success', true);
+            navigate(authentication.login.path);
+        })
+        .catch((error) => {
+            notifications.add(handleError(error), 'danger');
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+}
+
+export function resetPassword(api, notifications, navigate, setLoading, url, values) {
+    setLoading(true);
+
+    api.put(url, values)
+        .then((response) => {
+            notifications.add(response.data.message, 'success');
+            navigate(authentication.login.path);
+        })
+        .catch((error) => {
+            notifications.add(handleError(error), 'danger');
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+}
+
+export function requestUpdateEmail(api, notifications, setLoading, values) {
+    setLoading(true);
+
+    api.post('/solicitar-atualizar-email', values)
+        .then((response) => {
+            notifications.add(response.data.message, 'success', true);
+        })
+        .catch((error) => {
+            notifications.add(handleError(error), 'danger');
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+}
+
+export function updateEmail(api, notifications, setLoading, url) {
+    setLoading(true);
+
+    api.put(url)
+        .then((response) => {
+            notifications.add(response.data.message, 'success', true);
+        })
+        .catch((error) => {
+            notifications.add(handleError(error), 'danger');
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+}
+
+export function updatePassword(api, notifications, setLoading, url) {
+    setLoading(true);
+
+    api.put(url)
+        .then((response) => {
+            notifications.add(response.data.message, 'success', true);
+        })
+        .catch((error) => {
+            notifications.add(handleError(error), 'danger');
+        })
+        .finally(() => {
+            setLoading(false);
         });
 }

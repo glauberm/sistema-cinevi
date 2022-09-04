@@ -23,24 +23,26 @@ class AuthenticationRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:180', 'unique:users,name'],
-            'email' => ['required', 'string', 'email', 'max:180', 'unique:users,email'],
+            'name' => ['required', 'string', 'max:180'],
+            'email' => ['required', 'string', 'email', 'max:180', 'unique:users,email', 'confirmed'],
             'password' => [
                 'required',
                 'string',
                 'min:8',
-                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).*$/',
+                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
             ],
             'phone' => [
                 'required',
-                'string',
-                'regex:/\(\d{2}\)\s(\d{5}|\d{4})-\d{4}/',
+                'numeric',
+                'min_digits:10',
+                'max_digits:11'
             ],
             'identifier' => [
                 'required',
-                'string',
+                'numeric',
                 'unique:users,identifier',
-                'regex:/^[0-9]*$/',
+                'min_digits:7',
+                'max_digits:9'
             ],
         ];
     }
@@ -53,21 +55,25 @@ class AuthenticationRegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => 'O e-mail é obrigatório.',
-            'email.string' => 'O e-mail deve ser uma string.',
-            'email.email' => 'O endereço de e-mail não é válido.',
-            'email.max' => 'O e-mail deve ter no máximo 180 caracteres.',
-            'email.unique' => 'Esse e-mail já está em uso por outro usuário.',
+            'email.required' => 'O email é obrigatório.',
+            'email.string' => 'O email deve ser uma string.',
+            'email.email' => 'O endereço de email não é válido.',
+            'email.max' => 'O email deve ter no máximo 180 caracteres.',
+            'email.unique' => 'Esse email já está em uso por outro usuário.',
+            'email.confirmed' => 'Os emails não coincidem.',
             'password.required' => 'A senha é obrigatória.',
             'password.string' => 'A senha deve ser uma string.',
             'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
             'password.confirmed' => 'As senhas informadas não coincidem.',
-            'password.regex' => 'A senha deve conter maiúsculas e minúsculas, números e símbolos (!@#$%).',
+            'password.regex' => 'A senha deve conter letras maiúsculas, minúsculas e números.',
             'phone.required' => 'O telefone é obrigatório.',
-            'phone.string' => 'O telefone deve ser uma string.',
-            'phone.regex' => 'O telefone pode estar nos seguintes formatos: (99) 9999-9999 ou (99) 99999-9999.',
+            'phone.numeric' => 'O telefone deve conter apenas números.',
+            'phone.min' => 'O telefone deve ter no mínimo 10 dígitos, com DDD.',
+            'phone.max' => 'O telefone deve ter no máximo 11 dígitos, com DDD.',
             'identifier.required' => 'A matrícula ou SIAPE é obrigatório.',
-            'identifier.string' => 'A matrícula ou SIAPE deve ser uma string.',
+            'identifier.numeric' => 'A matrícula ou SIAPE deve conter apenas números.',
+            'identifier.min_digits' => 'A matrícula ou SIAPE deve ter no mínimo 7 dígitos.',
+            'identifier.max_digits' => 'A matrícula ou SIAPE deve ter no máximo 9 dígitos.',
             'identifier.unique' => 'Essa matrícula ou SIAPE já está em uso.',
         ];
     }

@@ -155,7 +155,7 @@ export default function ConfigurationUpdateForm(props) {
                                         className="btn-secondary"
                                         onClick={() => arrayHelpers.push('')}
                                     >
-                                        Adicionar e-mail
+                                        Adicionar email
                                     </Button>
                                 </div>
                             )}
@@ -210,7 +210,7 @@ export default function ConfigurationUpdateForm(props) {
                                         className="btn-secondary"
                                         onClick={() => arrayHelpers.push('')}
                                     >
-                                        Adicionar e-mail
+                                        Adicionar email
                                     </Button>
                                 </div>
                             )}
@@ -256,7 +256,7 @@ export default function ConfigurationUpdateForm(props) {
                                         className="btn-secondary"
                                         onClick={() => arrayHelpers.push('')}
                                     >
-                                        Adicionar e-mail
+                                        Adicionar email
                                     </Button>
                                 </div>
                             )}

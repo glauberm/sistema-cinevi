@@ -13,6 +13,7 @@ type NotificationInterface = {
     id: number;
     content: string;
     status: string;
+    hasExtendedTime: boolean;
 };
 
 type NotificationProviderProps = {
@@ -23,8 +24,8 @@ export default function NotificationsProvider(props: NotificationProviderProps) 
     const [id, setId] = useState<number>(0);
     const [notifications, setNotifications] = useState<NotificationInterface[]>([]);
 
-    const add = (content: string, status: string = 'info') => {
-        const newNotification: NotificationInterface = { id: id, content: content, status: status };
+    const add = (content: string, status: string = 'info', hasExtendedTime: boolean = false) => {
+        const newNotification: NotificationInterface = { id, content, status, hasExtendedTime };
 
         setNotifications([...notifications, newNotification]);
         setId(id + 1);
@@ -44,8 +45,14 @@ export default function NotificationsProvider(props: NotificationProviderProps) 
 
             {Boolean(notifications.length) && (
                 <div className="NotificationsProvider" aria-live="polite" aria-atomic="true">
-                    {notifications.map(({ id, content, status }) => (
-                        <Notification key={id} content={content} status={status} handleDismiss={() => remove(id)} />
+                    {notifications.map(({ id, content, status, hasExtendedTime }) => (
+                        <Notification
+                            key={id}
+                            content={content}
+                            status={status}
+                            hasExtendedTime={hasExtendedTime}
+                            handleDismiss={() => remove(id)}
+                        />
                     ))}
                 </div>
             )}
