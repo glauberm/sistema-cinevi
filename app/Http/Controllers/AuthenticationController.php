@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Requests\AuthenticationLoginRequest;
 use App\Http\Requests\AuthenticationRegisterRequest;
 use App\Http\Requests\AuthenticationRequestResetPasswordRequest;
@@ -19,7 +20,6 @@ use App\Services\UserService;
 use Carbon\CarbonImmutable;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
-use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -37,7 +37,9 @@ class AuthenticationController extends Controller
 
     public function __construct(UserService $userService)
     {
-        $this->middleware(Authenticate::class . ':sanctum')->except(['login', 'register', 'requestResetPassword', 'resetPassword']);
+        $this->middleware(Authenticate::class . ':sanctum')->except([
+            'login', 'register', 'getAuthenticatedUser', 'requestResetPassword', 'resetPassword'
+        ]);
 
         $this->middleware(ValidateSignature::class)->only(['finalizeRegistration', 'resetPassword', 'updateEmail']);
 
@@ -57,7 +59,10 @@ class AuthenticationController extends Controller
         $data = $request->validated();
 
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
-            return new JsonResponse(['message' => 'Você entrou no sistema.']);
+            return new JsonResponse([
+                'message' => 'Você entrou no sistema.',
+                'resource' => new User(Auth::user()),
+            ]);
         }
 
         throw new AuthenticationException('O e-mail ou senha estão incorretos.');
@@ -74,23 +79,23 @@ class AuthenticationController extends Controller
             throw new AuthorizationException('O usuário da requisição não foi encontrado.');
         }
 
-        $user->tokens()->delete();
+        Auth::guard('web')->logout();
 
         return response()->json(['message' => 'Você saiu do sistema.']);
     }
 
     /**
-     * @return User
+     * @return JsonResponse|User
      */
-    public function getAuthenticatedUser(): User
+    public function getAuthenticatedUser(): JsonResponse|User
     {
         $user = Auth::user();
 
         if ($user === null) {
-            throw new AuthorizationException('O usuário atual não foi encontrado.');
+            return response()->json(['message' => 'Não há nenhum usuário autenticado.', 'data' => false], 404);
+        } else {
+            return new User(Auth::user());
         }
-
-        return new User(Auth::user());
     }
 
     /**
@@ -258,7 +263,7 @@ class AuthenticationController extends Controller
             'O e-mail do usuário foi atualizado.'
         );
 
-        $requestUser->tokens()->delete();
+        Auth::guard('web')->logout();
 
         return response()->json(['message' => 'E-mail editado com sucesso. Por favor, entre com seu novo e-mail.']);
     }
@@ -293,7 +298,7 @@ class AuthenticationController extends Controller
             'A senha do usuário foi atualizada.',
         );
 
-        $requestUser->tokens()->delete();
+        Auth::guard('web')->logout();
 
         return response()->json(['message' => 'Senha editada com sucesso. Por favor, entre com sua nova senha.']);
     }

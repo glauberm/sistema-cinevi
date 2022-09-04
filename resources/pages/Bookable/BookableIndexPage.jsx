@@ -5,7 +5,7 @@ import routes from '../../routes/bookable';
 import Title from '../../components/Title';
 import BookableCollection from '../../collections/Bookable/BookableCollection';
 
-export default function () {
+export default function BookableIndexPage() {
     return (
         <div>
             <Title>Reserváveis</Title>

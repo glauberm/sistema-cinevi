@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import BaseLayout from './BaseLayout';
 import Navigation from '../components/Navigation';
 
-export default function (props) {
+export default function SecureLayout(props) {
     const [isMenuActive, setMenuActive] = useState(true);
 
     useEffect(() => {

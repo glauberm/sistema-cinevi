@@ -5,7 +5,7 @@ import ProductionCategoryCreateOrUpdateForm from '../../forms/ProductionCategory
 import ProductionCategoryRemoveForm from '../../forms/ProductionCategory/ProductionCategoryRemoveForm';
 import Title from '../../components/Title';
 
-export default function () {
+export default function ProductionCategoryUpdatePage() {
     const params = useParams();
 
     return (

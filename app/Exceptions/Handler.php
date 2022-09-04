@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -42,6 +43,11 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+        $this->reportable(function (AuthenticationException $e) {
+            return response()->json(
+                ['message' => 'A sua chave de autenticação precisa ser renovada. Por favor, entre novamente.'],
+                401
+            );
+        });
     }
 }

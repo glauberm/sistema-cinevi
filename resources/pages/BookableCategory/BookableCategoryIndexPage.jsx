@@ -5,7 +5,7 @@ import routes from '../../routes/bookable-category';
 import Title from '../../components/Title';
 import BookableCategoryCollection from '../../collections/BookableCategory/BookableCategoryCollection';
 
-export default function () {
+export default function BookableCategoryIndexPage() {
     return (
         <div>
             <Title>Categorias de Reserváveis</Title>

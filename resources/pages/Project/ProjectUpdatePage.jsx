@@ -5,7 +5,7 @@ import ProjectCreateOrUpdateForm from '../../forms/Project/ProjectCreateOrUpdate
 import ProjectRemoveForm from '../../forms/Project/ProjectRemoveForm';
 import Title from '../../components/Title';
 
-export default function () {
+export default function ProjectUpdatePage() {
     const params = useParams();
 
     return (

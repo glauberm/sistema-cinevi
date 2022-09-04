@@ -1,27 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { remove } from '../../requests/bookable';
-import authorize from '../../requests/authorization';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
+import { ApiContext } from '../../contexts/ApiProvider';
+import { AuthContext } from '../../contexts/AuthProvider';
 import RemoveForm from '../RemoveForm';
 
-export default function (props) {
+export default function BookableRemoveForm(props) {
     const [isLoading, setLoading] = useState(false);
-    const [isAuthorized, setAuthorized] = useState(false);
 
     const notifications = useContext(NotificationsContext);
+    const apiProvider = useContext(ApiContext);
+    const authProvider = useContext(AuthContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        authorize(notifications, setAuthorized, 'isAdmin');
-    }, []);
-
-    const onSubmit = (event) => {
-        remove(notifications, navigate, setLoading, props.id);
+    const onSubmit = () => {
+        remove(apiProvider.api, notifications, navigate, setLoading, props.id);
     };
 
-    if (isAuthorized) {
+    if (authProvider.hasRole('admin')) {
         return <RemoveForm onSubmit={onSubmit} isLoading={isLoading} />;
     }
 

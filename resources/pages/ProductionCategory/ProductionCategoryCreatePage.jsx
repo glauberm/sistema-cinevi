@@ -3,7 +3,7 @@ import React from 'react';
 import ProductionCategoryCreateOrUpdateForm from '../../forms/ProductionCategory/ProductionCategoryCreateOrUpdateForm';
 import Title from '../../components/Title';
 
-export default function () {
+export default function ProductionCategoryCreatePage() {
     return (
         <div>
             <Title>Adicionar Modalidade</Title>

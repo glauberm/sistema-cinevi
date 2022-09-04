@@ -5,7 +5,7 @@ import routes from '../../routes/booking';
 import Title from '../../components/Title';
 import BookingCollection from '../../collections/Booking/BookingCollection';
 
-export default function () {
+export default function BookingIndexPage() {
     return (
         <div>
             <Title>Reservas</Title>

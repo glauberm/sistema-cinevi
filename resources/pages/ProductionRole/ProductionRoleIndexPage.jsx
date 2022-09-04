@@ -5,7 +5,7 @@ import routes from '../../routes/production-role';
 import Title from '../../components/Title';
 import ProductionRoleCollection from '../../collections/ProductionRole/ProductionRoleCollection';
 
-export default function () {
+export default function ProductionRoleIndexPage() {
     return (
         <div>
             <Title>Funções</Title>

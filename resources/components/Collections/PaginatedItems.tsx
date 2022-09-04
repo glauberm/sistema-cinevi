@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
+import { ApiContext } from '../../contexts/ApiProvider';
 import Items from './Items';
 import Pagination from './Pagination';
 import Spinner from '../Spinner';
@@ -15,9 +16,10 @@ export default function PaginatedItems(props) {
     const [isLoading, setLoading] = useState(false);
 
     const notifications = useContext(NotificationsContext);
+    const apiProvider = useContext(ApiContext);
 
     const paginate = (page = 1) => {
-        paginateFn(notifications, setData, setLinks, setMeta, setLoading, page);
+        paginateFn(apiProvider.api, notifications, setData, setLinks, setMeta, setLoading, page);
     };
 
     useEffect(() => {

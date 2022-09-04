@@ -5,7 +5,7 @@ import BookableCreateOrUpdateForm from '../../forms/Bookable/BookableCreateOrUpd
 import BookableRemoveForm from '../../forms/Bookable/BookableRemoveForm';
 import Title from '../../components/Title';
 
-export default function () {
+export default function BookableUpdatePage() {
     const params = useParams();
 
     return (

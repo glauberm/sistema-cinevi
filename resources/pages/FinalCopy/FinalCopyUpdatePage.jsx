@@ -5,7 +5,7 @@ import FinalCopyCreateOrUpdateForm from '../../forms/FinalCopy/FinalCopyCreateOr
 import FinalCopyRemoveForm from '../../forms/FinalCopy/FinalCopyRemoveForm';
 import Title from '../../components/Title';
 
-export default function () {
+export default function FinalCopyUpdatePage() {
     const params = useParams();
 
     return (

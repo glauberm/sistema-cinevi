@@ -7,10 +7,11 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 
 import routes from '../../routes/booking';
-import { NotificationsContext } from '../../contexts/NotificationsProvider';
 import { showBetween } from '../../requests/booking';
+import { NotificationsContext } from '../../contexts/NotificationsProvider';
+import { ApiContext } from '../../contexts/ApiProvider';
 
-export default function (props) {
+export default function BookingCollection() {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [events, setEvents] = useState([]);
@@ -18,11 +19,13 @@ export default function (props) {
     const [loading, setLoading] = useState(false);
     const [loadingNotification, setLoadingNotification] = useState(null);
     const notifications = useContext(NotificationsContext);
+    const apiProvider = useContext(ApiContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (startDate !== null && endDate !== null) {
             showBetween(
+                apiProvider.api,
                 notifications,
                 setData,
                 setLoading,

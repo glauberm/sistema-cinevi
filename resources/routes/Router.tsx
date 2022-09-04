@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
-import { isAuthenticated } from '../services/auth';
 import authentication from './authentication';
 import user from './user';
 import booking from './booking';
@@ -41,7 +40,7 @@ export const publicRoutes = [
     // authentication.resetPassword,
 ];
 
-export default function () {
+export default function Router() {
     const { pathname } = useLocation();
 
     useEffect(() => {
@@ -51,19 +50,7 @@ export default function () {
     return (
         <Routes>
             {secureRoutes.map((route, key) => (
-                <Route
-                    key={key}
-                    path={route.path}
-                    element={
-                        isAuthenticated() === true ? (
-                            <SecureLayout>{route.element}</SecureLayout>
-                        ) : (
-                            <PublicLayout>
-                                <Navigate to={authentication.login.path} state={{ redirectTo: pathname }} />
-                            </PublicLayout>
-                        )
-                    }
-                />
+                <Route key={key} path={route.path} element={<SecureLayout>{route.element}</SecureLayout>} />
             ))}
 
             {publicRoutes.map((route, key) => (

@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import { create, show, update } from '../../requests/production-category';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
+import { ApiContext } from '../../contexts/ApiProvider';
 import Form from '../../components/Forms/Form';
 import Field from '../../components/Forms/Field';
 import Button from '../../components/Button';
@@ -19,28 +20,25 @@ const validationSchema = Yup.object({
     description: Yup.string().nullable(),
 });
 
-export default function (props) {
+export default function ProductionCategoryCreateOrUpdateForm(props) {
     const [isLoading, setLoading] = useState(false);
     const [values, setValues] = useState(initialValues);
 
     const notifications = useContext(NotificationsContext);
+    const apiProvider = useContext(ApiContext);
     const navigate = useNavigate();
 
     const onSubmit = (values) => {
         if (props.id) {
-            update(notifications, navigate, setLoading, props.id, values);
+            update(apiProvider.api, notifications, navigate, setLoading, props.id, values);
         } else {
-            create(notifications, navigate, setLoading, values);
+            create(apiProvider.api, notifications, navigate, setLoading, values);
         }
     };
 
     useEffect(() => {
         if (props.id) {
-            // if (showRequest === 'revision') {
-            //     showRevision(id);
-            // } else {
-            show(notifications, setValues, setLoading, props.id);
-            // }
+            show(apiProvider.api, notifications, setValues, setLoading, props.id);
         }
     }, []);
 

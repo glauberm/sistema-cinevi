@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import { show, update } from '../../requests/configuration';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
+import { ApiContext } from '../../contexts/ApiProvider';
 import Form from '../../components/Forms/Form';
 import Field from '../../components/Forms/Field';
 import Button from '../../components/Button';
@@ -25,18 +26,20 @@ const validationSchema = Yup.object({
     // bookings_closed: Yup.bool().required('Campo obrigatório'),
 });
 
-export default function (props) {
+export default function ConfigurationUpdateForm(props) {
     const [isLoading, setLoading] = useState(false);
     const [values, setValues] = useState(initialValues);
+
     const notifications = useContext(NotificationsContext);
+    const apiProvider = useContext(ApiContext);
     const navigate = useNavigate();
 
     const onSubmit = (values) => {
-        update(notifications, navigate, setLoading, values, { navigateTo: '/' });
+        update(apiProvider.api, notifications, navigate, setLoading, values, { navigateTo: '/' });
     };
 
     useEffect(() => {
-        show(notifications, setValues, setLoading);
+        show(apiProvider.api, notifications, setValues, setLoading);
     }, []);
 
     return (

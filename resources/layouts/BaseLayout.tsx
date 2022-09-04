@@ -1,14 +1,18 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import { AuthContext } from '../contexts/AuthProvider';
 import Logo from '../images/Logo.svg';
 import Uff from '../images/Uff.svg';
+import authentication from '../routes/authentication';
 
-interface BaseLayoutProps {
+type Props = {
     children: ReactElement;
-}
+};
 
-export default function (props: BaseLayoutProps) {
+export default function BaseLayout(props: Props) {
+    const authProvider = useContext(AuthContext);
+
     useEffect(() => {
         const loading = document.getElementById('loading');
 
@@ -30,7 +34,9 @@ export default function (props: BaseLayoutProps) {
             <div className="mb-auto">
                 <div className="container">
                     <header className="mx-auto text-center">
-                        <Link to="/">
+                        <Link
+                            to={authProvider.isAuthenticated ? authentication.profile.path : authentication.login.path}
+                        >
                             <Logo />
                         </Link>
                     </header>

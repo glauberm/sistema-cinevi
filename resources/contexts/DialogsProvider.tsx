@@ -4,7 +4,7 @@ import Dialog from '../components/Dialog';
 
 export const DialogsContext = createContext(undefined);
 
-export default function (props) {
+export default function DialogsProvider(props) {
     const [dialogs, setDialogs] = useState([]);
 
     useEffect(() => {

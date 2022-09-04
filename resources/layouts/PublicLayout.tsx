@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom';
 import authentication from '../routes/authentication';
 import BaseLayout from './BaseLayout';
 
-interface PublicLayoutProps {
+type Props = {
     children: ReactElement;
-}
+};
 
-export default function (props: PublicLayoutProps) {
+export default function PublicLayout(props: Props) {
     return (
         <BaseLayout>
             <div className="row">

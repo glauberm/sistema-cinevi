@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-import api, { handleError } from '../services/api';
-// import { api, handleError } from '../contexts/ApiProvider';
-import { setAuthenticated } from '../services/auth';
+import { handleError } from '../contexts/ApiProvider';
 import authentication from '../routes/authentication';
 
 /**
@@ -10,7 +8,7 @@ import authentication from '../routes/authentication';
  * @param notifications
  * @param navigate
  */
-export function login(values, notifications, navigate, setLoading) {
+export function login(api, auth, values, notifications, navigate, setLoading) {
     setLoading(true);
 
     axios
@@ -18,7 +16,7 @@ export function login(values, notifications, navigate, setLoading) {
         .then((response) => {
             api.post('/entrada', values)
                 .then((response) => {
-                    setAuthenticated(true);
+                    auth.setAuthenticatedUser(response.data.resource);
                     navigate(authentication.profile.path);
                 })
                 .catch((error) => {
@@ -37,10 +35,10 @@ export function login(values, notifications, navigate, setLoading) {
  * @param notifications
  * @param navigate
  */
-export function logout(notifications, navigate) {
+export function logout(api, auth, notifications, navigate) {
     api.post('/saida')
         .then((response) => {
-            setAuthenticated(false);
+            auth.setAuthenticatedUser(false);
             notifications.add(response.data.message, 'success');
         })
         .catch((error) => {
@@ -48,15 +46,5 @@ export function logout(notifications, navigate) {
         })
         .finally(() => {
             navigate(authentication.login.path);
-        });
-}
-
-export function getAuthenticatedUser(notifications, setAuthenticatedUser) {
-    api.get('/usuario-autenticado')
-        .then((response) => {
-            setAuthenticatedUser(response.data.data);
-        })
-        .catch((error) => {
-            notifications.add(handleError(error), 'danger');
         });
 }

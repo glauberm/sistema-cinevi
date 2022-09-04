@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Requests\UserCreateOrUpdateRequest;
 use App\Http\Requests\UserRemoveRequest;
 use App\Http\Resources\User;
 use App\Services\UserService;
-use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 

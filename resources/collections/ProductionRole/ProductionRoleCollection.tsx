@@ -3,7 +3,7 @@ import React from 'react';
 import { paginate } from '../../requests/production-role';
 import PaginatedItems from '../../components/Collections/PaginatedItems';
 
-export default function (props) {
+export default function ProductionRoleCollection(props) {
     const { linkToFn, selectFn, selected, isLoading } = props;
 
     return (

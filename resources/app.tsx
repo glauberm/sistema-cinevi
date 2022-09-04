@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import NotificationsProvider from './contexts/NotificationsProvider';
 import ApiProvider from './contexts/ApiProvider';
+import AuthProvider from './contexts/AuthProvider';
 import DialogsProvider from './contexts/DialogsProvider';
 import Router from './routes/Router';
 
@@ -20,9 +21,11 @@ root.render(
         <BrowserRouter>
             <NotificationsProvider>
                 <ApiProvider>
-                    <DialogsProvider>
-                        <Router />
-                    </DialogsProvider>
+                    <AuthProvider>
+                        <DialogsProvider>
+                            <Router />
+                        </DialogsProvider>
+                    </AuthProvider>
                 </ApiProvider>
             </NotificationsProvider>
         </BrowserRouter>

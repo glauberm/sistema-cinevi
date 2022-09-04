@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Requests\BookingCreateOrUpdateRequest;
 use App\Http\Requests\BookingShowBetweenRequest;
 use App\Http\Resources\Booking;
 use App\Services\BookingService;
-use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Routing\Controller;

@@ -1,7 +1,16 @@
-import api, { handleError } from '../services/api';
-// import { api, handleError } from '../contexts/ApiProvider';
+import { handleError } from '../contexts/ApiProvider';
 
-export function paginate(urlPrefix, notifications, setData, setLinks, setMeta, setLoading, page = 1, options = null) {
+export function paginate(
+    urlPrefix,
+    api,
+    notifications,
+    setData,
+    setLinks,
+    setMeta,
+    setLoading,
+    page = 1,
+    options = null
+) {
     setLoading(true);
 
     const urlParams = new URLSearchParams();
@@ -22,7 +31,7 @@ export function paginate(urlPrefix, notifications, setData, setLinks, setMeta, s
         });
 }
 
-export function create(urlPrefix, notifications, navigate, setLoading, values, options = null) {
+export function create(urlPrefix, api, notifications, navigate, setLoading, values, options = null) {
     setLoading(true);
 
     api.post(`/${urlPrefix}/adicionar`, values)
@@ -36,7 +45,7 @@ export function create(urlPrefix, notifications, navigate, setLoading, values, o
         });
 }
 
-export function show(urlPrefix, notifications, setValues, setLoading, id, options = null) {
+export function show(urlPrefix, api, notifications, setValues, setLoading, id, options = null) {
     setLoading(true);
 
     api.get(`/${urlPrefix}/${id}`)
@@ -57,7 +66,7 @@ export function show(urlPrefix, notifications, setValues, setLoading, id, option
         });
 }
 
-export function update(urlPrefix, notifications, navigate, setLoading, id, values, options = null) {
+export function update(urlPrefix, api, notifications, navigate, setLoading, id, values, options = null) {
     setLoading(true);
 
     api.put(`/${urlPrefix}/${id}/editar`, values)
@@ -76,7 +85,7 @@ export function update(urlPrefix, notifications, navigate, setLoading, id, value
         });
 }
 
-export function remove(urlPrefix, notifications, navigate, setLoading, id, options = null) {
+export function remove(urlPrefix, api, notifications, navigate, setLoading, id, options = null) {
     setLoading(true);
 
     api.delete(`/${urlPrefix}/${id}/remover`)

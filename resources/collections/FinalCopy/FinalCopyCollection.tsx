@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { paginate } from '../../requests/final-copy';
-import routes from '../../routes/final-copy';
 import PaginatedItems from '../../components/Collections/PaginatedItems';
 
-export default function (props) {
+export default function FinalCopyCollection(props) {
     const { linkToFn, selectFn, selected, isLoading } = props;
 
     return (

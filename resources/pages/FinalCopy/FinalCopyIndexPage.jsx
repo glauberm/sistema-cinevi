@@ -5,7 +5,7 @@ import routes from '../../routes/final-copy';
 import Title from '../../components/Title';
 import FinalCopyCollection from '../../collections/FinalCopy/FinalCopyCollection';
 
-export default function () {
+export default function FinalCopyIndexPage() {
     return (
         <div>
             <Title>Reservas</Title>

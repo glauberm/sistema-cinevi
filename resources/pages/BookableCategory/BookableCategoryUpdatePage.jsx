@@ -5,7 +5,7 @@ import BookableCategoryCreateOrUpdateForm from '../../forms/BookableCategory/Boo
 import BookableCategoryRemoveForm from '../../forms/BookableCategory/BookableCategoryRemoveForm';
 import Title from '../../components/Title';
 
-export default function () {
+export default function BookableCategoryUpdatePage() {
     const params = useParams();
 
     return (

@@ -5,7 +5,7 @@ import UserCreateOrUpdateForm from '../../forms/User/UserCreateOrUpdateForm';
 import UserRemoveForm from '../../forms/User/UserRemoveForm';
 import Title from '../../components/Title';
 
-export default function () {
+export default function UserUpdatePage() {
     const params = useParams();
 
     return (

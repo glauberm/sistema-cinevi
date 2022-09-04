@@ -5,7 +5,7 @@ import routes from '../../routes/project';
 import Title from '../../components/Title';
 import ProjectCollection from '../../collections/Project/ProjectCollection';
 
-export default function () {
+export default function ProjectIndexPage() {
     return (
         <div>
             <Title>Projetos</Title>

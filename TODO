@@ -1,6 +1,5 @@
 # TODO
 
-- DataProvider no React
 - Permissões
 -- Mudar a função de paginação de acordo com o role do usuário
 - Lógicas de Negócio (emails e tal)

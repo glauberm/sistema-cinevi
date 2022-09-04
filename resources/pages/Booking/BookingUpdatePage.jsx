@@ -5,7 +5,7 @@ import BookingCreateOrUpdateForm from '../../forms/Booking/BookingCreateOrUpdate
 import BookingRemoveForm from '../../forms/Booking/BookingRemoveForm';
 import Title from '../../components/Title';
 
-export default function () {
+export default function BookingUpdatePage() {
     const params = useParams();
 
     return (

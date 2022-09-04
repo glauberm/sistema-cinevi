@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { login } from '../../requests/authentication';
 import authentication from '../../routes/authentication';
+import { login } from '../../requests/authentication';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
+import { ApiContext } from '../../contexts/ApiProvider';
+import { AuthContext } from '../../contexts/AuthProvider';
 import Form from '../../components/Forms/Form';
 import Field from '../../components/Forms/Field';
 import Button from '../../components/Button';
@@ -20,13 +22,15 @@ const validationSchema = Yup.object({
     password: Yup.string().required('Campo obrigatório'),
 });
 
-export default function (props) {
+export default function AuthenticationLoginForm() {
     const [isLoading, setLoading] = useState(false);
     const notifications = useContext(NotificationsContext);
+    const apiProvider = useContext(ApiContext);
+    const authProvider = useContext(AuthContext);
     const navigate = useNavigate();
 
     const onSubmit = (values) => {
-        login(values, notifications, navigate, setLoading);
+        login(apiProvider.api, authProvider, values, notifications, navigate, setLoading);
     };
 
     return (

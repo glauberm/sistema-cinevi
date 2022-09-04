@@ -5,7 +5,7 @@ import routes from '../../routes/production-category';
 import Title from '../../components/Title';
 import ProductionCategoryCollection from '../../collections/ProductionCategory/ProductionCategoryCollection';
 
-export default function () {
+export default function ProductionCategoryIndexPage() {
     return (
         <div>
             <Title>Modalidades</Title>

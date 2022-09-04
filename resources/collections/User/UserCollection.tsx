@@ -3,7 +3,7 @@ import React from 'react';
 import { paginate } from '../../requests/user';
 import PaginatedItems from '../../components/Collections/PaginatedItems';
 
-export default function (props) {
+export default function UserCollection(props) {
     const { linkToFn, selectFn, selected, isLoading } = props;
 
     return (

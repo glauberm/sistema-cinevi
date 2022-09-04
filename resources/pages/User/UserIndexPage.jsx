@@ -5,7 +5,7 @@ import routes from '../../routes/user';
 import Title from '../../components/Title';
 import UserCollection from '../../collections/User/UserCollection';
 
-export default function () {
+export default function UserIndexPage() {
     return (
         <div>
             <Title>Usuários</Title>

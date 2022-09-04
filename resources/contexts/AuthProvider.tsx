@@ -1,17 +1,40 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import { getAuthenticatedUser } from '../requests/authentication';
-import { NotificationsContext } from './NotificationsProvider';
+import { ApiContext } from './ApiProvider';
 
 export const AuthContext = createContext(undefined);
 
 export default function AuthProvider(props) {
-    const [user, setUser] = useState(null);
-    const notifications = useContext(NotificationsContext);
+    const [authenticatedUser, setAuthenticatedUser] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(null);
+    const apiProvider = useContext(ApiContext);
+
+    const hasRole = (role) => {
+        if (authenticatedUser !== null) {
+            authenticatedUser.roles.includes(role);
+        }
+    };
 
     useEffect(() => {
-        getAuthenticatedUser(notifications, setUser);
+        apiProvider.api
+            .get('/usuario-autenticado')
+            .then((response) => {
+                setAuthenticatedUser(response.data.resource);
+            })
+            .catch((error) => {
+                setAuthenticatedUser(false);
+            });
     }, []);
 
-    return <AuthContext.Provider value={{ user }}>{props.children}</AuthContext.Provider>;
+    useEffect(() => {
+        if (authenticatedUser !== null) {
+            setIsAuthenticated(authenticatedUser !== false);
+        }
+    }, [authenticatedUser]);
+
+    return (
+        <AuthContext.Provider value={{ authenticatedUser, setAuthenticatedUser, isAuthenticated, hasRole }}>
+            {authenticatedUser !== null && props.children}
+        </AuthContext.Provider>
+    );
 }

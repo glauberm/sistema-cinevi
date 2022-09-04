@@ -1,10 +1,8 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { createContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-import { logout } from '../requests/authentication';
 import authentication from '../routes/authentication';
-import { NotificationsContext } from './NotificationsProvider';
 
 type ValidationErrorResponseData = {
     errors: Array<string[]> | Array<Array<string[]>> | Array<Array<Array<string[]>>>;
@@ -14,24 +12,17 @@ type UndefinedErrorResponseData = {
     message: string;
 };
 
-export const api = axios.create({ baseURL: process.env.MIX_APP_BASE_API_URL });
-
 export const ApiContext = createContext(undefined);
 
 export default function ApiProvider(props) {
-    const notifications = useContext(NotificationsContext);
+    const { pathname } = useLocation();
     const navigate = useNavigate();
 
+    const api = axios.create({ baseURL: process.env.MIX_APP_BASE_API_URL });
+
     api.interceptors.response.use(undefined, (error) => {
-        if (
-            error.response &&
-            error.config &&
-            error.response.status === 401 &&
-            error.config.url !== authentication.login.path
-        ) {
-            logout(notifications, navigate);
-            navigate(authentication.login.path);
-            notifications.add('A sua chave de autenticação precisa ser renovada. Por favor, entre novamente.');
+        if (error.response && error.config && error.response.status === 401 && error.config.url !== '/entrada') {
+            navigate(authentication.login.path, { state: { redirectTo: pathname } });
         }
 
         return Promise.reject(error);

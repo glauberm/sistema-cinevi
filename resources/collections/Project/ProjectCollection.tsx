@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { paginate } from '../../requests/project';
-import routes from '../../routes/project';
 import PaginatedItems from '../../components/Collections/PaginatedItems';
 
-export default function (props) {
+export default function ProjectCollection(props) {
     const { linkToFn, selectFn, selected, isLoading } = props;
 
     return (

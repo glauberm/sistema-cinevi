@@ -2,24 +2,24 @@ import React, { createContext, ReactElement, useState } from 'react';
 
 import Notification from '../components/Notification';
 
-export interface NotificationsContextInterface {
+export type NotificationsContextInterface = {
     add: (content: string, status?: string) => void;
     remove: (id: number) => void;
-}
+};
 
 export const NotificationsContext = createContext<NotificationsContextInterface | undefined>(undefined);
 
-interface NotificationInterface {
+type NotificationInterface = {
     id: number;
     content: string;
     status: string;
-}
+};
 
-interface NotificationProviderProps {
+type NotificationProviderProps = {
     children: ReactElement;
-}
+};
 
-export default function (props: NotificationProviderProps) {
+export default function NotificationsProvider(props: NotificationProviderProps) {
     const [id, setId] = useState<number>(0);
     const [notifications, setNotifications] = useState<NotificationInterface[]>([]);
 
