@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 
-const currentYear = dayjs().year();
-const currentMonth = dayjs().month() + 1;
-const currentDay = dayjs().date();
+const currentYear = dayjs().year().toString();
+const currentMonth = (dayjs().month() + 1).toString().padStart(2, '0');
+const currentDay = dayjs().date().toString().padStart(2, '0');
 
 export default function DateField(props) {
     const { name, label, values, errors, touched, onChange } = props;
 
-    const [year, setYear] = useState(currentYear.toString());
-    const [month, setMonth] = useState(currentMonth.toString().padStart(2, '0'));
-    const [day, setDay] = useState(currentDay.toString().padStart(2, '0'));
+    const [year, setYear] = useState(currentYear);
+    const [month, setMonth] = useState(currentMonth);
+    const [day, setDay] = useState(currentDay);
     const [daysOptions, setDaysOptions] = useState([]);
 
     const setYearValue = ({ target }) => {
@@ -27,7 +27,11 @@ export default function DateField(props) {
     };
 
     useEffect(() => {
-        if (values !== null) {
+        onChange(`${currentYear}-${currentMonth}-${currentDay}`);
+    }, []);
+
+    useEffect(() => {
+        if (values !== '') {
             const date = dayjs(values);
 
             setYear(date.year().toString());
@@ -86,8 +90,8 @@ export default function DateField(props) {
                         onChange={setYearValue}
                     >
                         <option value={currentYear}>{currentYear}</option>
-                        <option value={currentYear + 1}>{currentYear + 1}</option>
-                        <option value={currentYear + 2}>{currentYear + 2}</option>
+                        <option value={parseInt(currentYear) + 1}>{parseInt(currentYear) + 1}</option>
+                        <option value={parseInt(currentYear) + 2}>{parseInt(currentYear) + 2}</option>
                     </select>
                 </div>
             </div>

@@ -13,9 +13,9 @@ class AuthenticationResetPasswordMail extends Mailable
 
     public string $url;
 
-    public string $title = 'Redefinição de senha';
-
     public string $urlText = 'Redefinir senha';
+
+    public string $title = 'Redefinição de senha';
 
     /**
      * Create a new message instance.

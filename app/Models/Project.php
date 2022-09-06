@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property bool             $has_attended_photography_discipline
  * @property bool             $has_attended_sound_discipline
  * @property bool             $has_attended_art_discipline
+ * @property User             $professor
  */
 class Project extends Model
 {

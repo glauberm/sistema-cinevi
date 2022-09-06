@@ -50,7 +50,7 @@ class Version extends Model
      */
     protected $casts = [
         'payload' => 'array',
-        'datetime' => 'immutable_datetime:Y-m-d H:i:s',
+        'datetime' => 'immutable_datetime',
     ];
 
     /**

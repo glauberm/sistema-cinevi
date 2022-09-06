@@ -23,16 +23,32 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Configuration::factory()->createOne();
-        User::factory()->state(['roles' => ['user', 'admin']])->createOne();
+
+        User::factory()
+            ->state(['email' => 'contato@cinemauff.com.br'])
+            ->state(['is_enabled' => true])
+            ->state(['is_confirmed' => true])
+            ->state(['roles' => ['user', 'admin']])
+            ->createOne();
+
         User::factory()->state(['roles' => ['user', 'department']])->count(3)->create();
+
         User::factory()->state(['roles' => ['user', 'warehouse']])->count(3)->create();
+
         User::factory(30)->create();
+
         ProductionCategory::factory(31)->create();
+
         ProductionRole::factory(31)->create();
+
         Project::factory(31)->create();
+
         // FinalCopy::factory(31)->create();
+
         BookableCategory::factory(31)->create();
+
         Bookable::factory(31)->create();
+
         Booking::factory(31)->create();
     }
 }

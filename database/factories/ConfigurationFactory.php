@@ -17,6 +17,7 @@ class ConfigurationFactory extends Factory
     public function definition()
     {
         return [
+            'id' => 1,
             'bookings_are_closed' => false,
             'bookings_forbidden_dates' => [
                 [

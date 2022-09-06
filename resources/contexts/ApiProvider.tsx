@@ -66,8 +66,8 @@ export function handleError(error: AxiosError) {
                 }
 
                 return 'Há erros no formulário.';
-            // case 404:
-            //     return 'Nenhum resultado encontrado.';
+            case 404:
+                return 'Nenhum resultado encontrado.';
             case 405:
                 return 'Método de requisição incorreto.';
             case 429:

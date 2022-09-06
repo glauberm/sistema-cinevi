@@ -23,8 +23,8 @@ class Booking extends JsonResource
     {
         return [
             'id' => $this->resource->id,
-            'withdrawal_date' => $this->resource->withdrawal_date,
-            'devolution_date' => $this->resource->devolution_date,
+            'withdrawal_date' => $this->resource->withdrawal_date->format('Y-m-d'),
+            'devolution_date' => $this->resource->devolution_date->format('Y-m-d'),
             'owner' => User::make($this->whenLoaded('owner')),
             'project' => Project::make($this->whenLoaded('project')),
             'bookables' => Bookable::collection($this->whenLoaded('bookables')),

@@ -15,7 +15,6 @@ import SelectMultiple from '../../components/Forms/SelectMultiple';
 import UserCollection from '../../collections/User/UserCollection';
 import Select from '../../components/Forms/Select';
 import ProductionCategoryCollection from '../../collections/ProductionCategory/ProductionCategoryCollection';
-import Checkbox from '../../components/Forms/Checkbox';
 import Section from '../../components/Section';
 import CheckboxGroupField from '../../components/Forms/CheckboxGroupField';
 
@@ -45,16 +44,18 @@ const initialValues = {
 const validationSchema = Yup.object({
     title: Yup.string().required('Campo obrigatório'),
     synopsis: Yup.string().required('Campo obrigatório'),
-    // owner: Yup.string().required('Campo obrigatório'),
+    owner: Yup.object().shape({
+        id: Yup.number().required('Campo obrigatório'),
+    }),
     // production_category: '',
     // professor: '',
     // genres: [],
     capture_format: Yup.string().nullable(),
     capture_notes: Yup.string().nullable(),
-    venues: Yup.string().nullable(),
-    pre_production_date: Yup.string().nullable(),
-    production_date: Yup.string().nullable(),
-    post_production_date: Yup.string().nullable(),
+    venues: Yup.string().required('Campo obrigatório'),
+    pre_production_date: Yup.string().required('Campo obrigatório'),
+    production_date: Yup.string().required('Campo obrigatório'),
+    post_production_date: Yup.string().required('Campo obrigatório'),
     has_attended_photography_discipline: Yup.bool().required('Campo obrigatório'),
     has_attended_sound_discipline: Yup.bool().required('Campo obrigatório'),
     has_attended_art_discipline: Yup.bool().required('Campo obrigatório'),
@@ -107,7 +108,7 @@ export default function ProjectCreateOrUpdateForm(props) {
                                 name="owner"
                                 label="Responsável"
                                 value={values.owner && values.owner.name}
-                                errors={errors.owner}
+                                errors={errors.owner && errors.owner}
                                 touched={touched.owner}
                                 selected={values.owner}
                                 onChange={(item) => setFieldValue('owner', item)}
@@ -170,6 +171,7 @@ export default function ProjectCreateOrUpdateForm(props) {
                                 <DateField
                                     name="pre_production_date"
                                     label="Pré-produção"
+                                    values={values.pre_production_date}
                                     errors={errors.pre_production_date}
                                     touched={touched.pre_production_date}
                                     onChange={(value) => setFieldValue('pre_production_date', value)}
@@ -179,6 +181,7 @@ export default function ProjectCreateOrUpdateForm(props) {
                                 <DateField
                                     name="production_date"
                                     label="Produção"
+                                    values={values.production_date}
                                     errors={errors.production_date}
                                     touched={touched.production_date}
                                     onChange={(value) => setFieldValue('production_date', value)}
@@ -188,6 +191,7 @@ export default function ProjectCreateOrUpdateForm(props) {
                                 <DateField
                                     name="post_production_date"
                                     label="Pós-produção"
+                                    values={values.post_production_date}
                                     errors={errors.post_production_date}
                                     touched={touched.post_production_date}
                                     onChange={(value) => setFieldValue('post_production_date', value)}
@@ -200,12 +204,18 @@ export default function ProjectCreateOrUpdateForm(props) {
                         <div className="row">
                             <div className="col-md">
                                 <Field
-                                    type="text"
                                     name="capture_format"
                                     label="Captação"
+                                    as="select"
                                     errors={errors.capture_format}
                                     touched={touched.capture_format}
-                                />
+                                >
+                                    <option value=""></option>
+                                    <option value="video">Vídeo</option>
+                                    <option value="film">Película</option>
+                                    <option value="digital">Digital</option>
+                                    <option value="other">Outra</option>
+                                </Field>
                                 <Field
                                     name="capture_notes"
                                     label="Detalhes da Captação"

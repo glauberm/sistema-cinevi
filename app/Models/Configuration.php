@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer                                     $id
- * @property bool                                        $bookings_are_closed
- * @property array{month:string,day:string,name:string}  $bookings_forbidden_dates
- * @property string[]                                    $bookings_create_or_update_emails
- * @property string                                      $final_copies_confirmation_message
- * @property string[]                                    $final_copies_create_emails
- * @property string[]                                    $final_copies_confirmed_emails
+ * @property integer                                            $id
+ * @property bool                                               $bookings_are_closed
+ * @property array<array{month:string,day:string,name:string}>  $bookings_forbidden_dates
+ * @property string[]                                           $bookings_create_or_update_emails
+ * @property string                                             $final_copies_confirmation_message
+ * @property string[]                                           $final_copies_create_emails
+ * @property string[]                                           $final_copies_confirmed_emails
  */
 class Configuration extends Model
 {

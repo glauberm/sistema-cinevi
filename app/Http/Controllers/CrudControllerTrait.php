@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RemoveRequest;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -38,6 +39,9 @@ trait CrudControllerTrait
         $data = $request->validated();
 
         $model = $this->service->create($data);
+
+        /** @phpstan-ignore-next-line */
+        $this->afterCreated($request, $model);
 
         return response()->json(
             [
@@ -73,6 +77,9 @@ trait CrudControllerTrait
 
         $this->service->update($data, $id);
 
+        /** @phpstan-ignore-next-line */
+        $this->afterUpdated($request, $id);
+
         return response()->json(['message' => $this->updatedMessage]);
     }
 
@@ -86,5 +93,25 @@ trait CrudControllerTrait
         $this->service->remove($id);
 
         return response()->json(['message' => $this->removedMessage]);
+    }
+
+    /**
+     * @param  FormRequest  $request
+     * @param  Model        $model
+     * @return void
+     */
+    protected function afterCreated(FormRequest $request, Model $model): void
+    {
+        //
+    }
+
+    /**
+     * @param  FormRequest  $request
+     * @param  int          $id
+     * @return void
+     */
+    protected function afterUpdated(FormRequest $request, int $id): void
+    {
+        //
     }
 }

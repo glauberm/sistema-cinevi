@@ -77,9 +77,9 @@ export default function Select(props) {
                         {children(selected, select)}
                     </div>
                 )}
-            </div>
 
-            {errors && touched && <div className="invalid-feedback">{errors}</div>}
+                {errors && touched && <div className="invalid-feedback">{errors.id}</div>}
+            </div>
         </div>
     );
 }

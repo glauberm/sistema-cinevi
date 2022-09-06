@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Models\Bookable;
 use App\Models\Booking;
+use App\Models\Configuration;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -44,6 +45,8 @@ class BookingTest extends TestCase implements CrudTestInterface, HasVersionsTest
      */
     protected function getCreateRequest(): array
     {
+        Configuration::factory()->createOne();
+
         $owner = User::factory()->createOne();
 
         $project = Project::factory()->createOne();
@@ -65,8 +68,8 @@ class BookingTest extends TestCase implements CrudTestInterface, HasVersionsTest
     protected function getCreateDatabaseFields(): array
     {
         return [
-            'withdrawal_date' => '2022-10-21 00:00:00',
-            'devolution_date' => '2022-10-27 23:59:59',
+            'withdrawal_date' => '2022-10-21',
+            'devolution_date' => '2022-10-27',
         ];
     }
 
@@ -75,6 +78,8 @@ class BookingTest extends TestCase implements CrudTestInterface, HasVersionsTest
      */
     protected function getUpdateRequest(): array
     {
+        Configuration::factory()->createOne();
+
         $owner = User::factory()->createOne();
 
         $project = Project::factory()->createOne();
@@ -96,8 +101,8 @@ class BookingTest extends TestCase implements CrudTestInterface, HasVersionsTest
     protected function getUpdateDatabaseFields(): array
     {
         return [
-            'withdrawal_date' => '2022-11-21 00:00:00',
-            'devolution_date' => '2022-11-25 23:59:59',
+            'withdrawal_date' => '2022-11-21',
+            'devolution_date' => '2022-11-25',
         ];
     }
 }

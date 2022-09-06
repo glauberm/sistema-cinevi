@@ -31,8 +31,9 @@ export default function Field(props) {
         component: component,
         style: style,
         className: `
-            form-control Field
-            ${size === 'lg' ? 'form-control-lg' : ''}
+            Field
+            ${as === 'select' ? 'form-select' : 'form-control'}
+            ${size === 'lg' ? (as === 'select' ? 'form-select-lg' : 'form-control-lg') : ''}
             ${errors && touched ? 'is-invalid' : ''}
         `,
     };

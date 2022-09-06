@@ -25,8 +25,16 @@ const initialValues = {
 const validationSchema = Yup.object({
     name: Yup.string().required('Campo obrigatório'),
     email: Yup.string().email('Endereço de email inválido').required('Campo obrigatório'),
-    phone: Yup.string().required('Campo obrigatório'),
-    identifier: Yup.string().required('Campo obrigatório'),
+    phone: Yup.string()
+        .required('Campo obrigatório')
+        .matches(/^\d+$/, 'Somente números')
+        .min(10, 'No mínimo 10 dígitos, com DDD')
+        .max(11, 'No máximo 11 dígitos, com DDD'),
+    identifier: Yup.string()
+        .required('Campo obrigatório')
+        .matches(/^\d+$/, 'Somente números')
+        .min(7, 'No mínimo 7 dígitos')
+        .max(9, 'No máximo 9 dígitos'),
     is_enabled: Yup.bool().required('Campo obrigatório'),
     is_confirmed: Yup.bool().required('Campo obrigatório'),
     roles: Yup.array(),
@@ -80,6 +88,7 @@ export default function UserUpdateForm(props) {
                                 type="tel"
                                 errors={errors.identifier}
                                 touched={touched.identifier}
+                                messages={['Somente números', 'Entre 7 e 9 dígitos']}
                             />
                         </div>
                         <div className="col-md">
@@ -89,6 +98,7 @@ export default function UserUpdateForm(props) {
                                 type="tel"
                                 errors={errors.phone}
                                 touched={touched.phone}
+                                messages={['Somente números', 'Entre 10 e 11 dígitos, com DDD']}
                             />
                         </div>
                     </div>

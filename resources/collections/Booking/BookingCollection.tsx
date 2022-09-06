@@ -47,12 +47,22 @@ export default function BookingCollection() {
 
     useEffect(() => {
         setEvents(
-            data.map((date) => ({
-                title: `#${date.id} - ${date.owner.name}`,
-                start: date.withdrawal_date,
-                end: date.devolution_date,
-                url: routes.update.getPath(date.id),
-            }))
+            data.map((date) => {
+                return {
+                    title: `#${date.id} - ${date.owner.name}`,
+                    start: dayjs(date.withdrawal_date)
+                        .set('hour', 0)
+                        .set('minute', 0)
+                        .set('second', 0)
+                        .format('YYYY-MM-DD HH:mm:ss'),
+                    end: dayjs(date.devolution_date)
+                        .set('hour', 23)
+                        .set('minute', 59)
+                        .set('second', 59)
+                        .format('YYYY-MM-DD HH:mm:ss'),
+                    url: routes.update.getPath(date.id),
+                };
+            })
         );
     }, [data]);
 

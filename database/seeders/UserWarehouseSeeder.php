@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class UserAdminSeeder extends Seeder
+class UserWarehouseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -15,10 +15,9 @@ class UserAdminSeeder extends Seeder
     public function run()
     {
         User::factory()
-            ->state(['email' => 'contato@cinemauff.com.br'])
             ->state(['is_enabled' => true])
             ->state(['is_confirmed' => true])
-            ->state(['roles' => ['user', 'admin']])
+            ->state(['roles' => ['user', 'warehouse']])
             ->createOne();
     }
 }

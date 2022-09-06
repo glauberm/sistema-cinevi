@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\CarbonImmutable;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property integer          $id
  * @property CarbonImmutable  $withdrawal_date
  * @property CarbonImmutable  $devolution_date
+ * @property Project          $project
  */
 class Booking extends Model
 {
@@ -45,17 +45,9 @@ class Booking extends Model
      * @var array<string,string>
      */
     protected $casts = [
-        'withdrawal_date' => 'immutable_datetime',
-        'devolution_date' => 'immutable_datetime',
+        'withdrawal_date' => 'immutable_date',
+        'devolution_date' => 'immutable_date',
     ];
-
-    /**
-     * @return Attribute<callable,callable>
-     */
-    public function devolutionDate(): Attribute
-    {
-        return Attribute::make(set: [$this, 'devolutionDateMutator']);
-    }
 
     /**
      * @return BelongsTo<User,self>
@@ -79,14 +71,5 @@ class Booking extends Model
     public function bookables(): BelongsToMany
     {
         return $this->belongsToMany(Bookable::class);
-    }
-
-    /**
-     * @param  string           $value
-     * @return CarbonImmutable
-     */
-    protected function devolutionDateMutator(string $value): CarbonImmutable
-    {
-        return CarbonImmutable::parse($value)->endOfDay();
     }
 }

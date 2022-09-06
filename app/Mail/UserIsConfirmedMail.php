@@ -13,9 +13,9 @@ class UserIsConfirmedMail extends Mailable
 
     public string $url;
 
-    public string $title = 'Cadastro confirmado';
-
     public string $urlText = 'Acessar';
+
+    public string $title = 'Cadastro confirmado';
 
     /**
      * Create a new message instance.

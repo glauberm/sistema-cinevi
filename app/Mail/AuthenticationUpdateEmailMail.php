@@ -13,9 +13,9 @@ class AuthenticationUpdateEmailMail extends Mailable
 
     public string $url;
 
-    public string $title = 'Atualizar email de acesso';
-
     public string $urlText = 'Atualizar email';
+
+    public string $title = 'Atualizar email de acesso';
 
     /**
      * Create a new message instance.

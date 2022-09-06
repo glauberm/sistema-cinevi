@@ -13,9 +13,9 @@ class AuthenticationFinalizeRegistrationMail extends Mailable
 
     public string $url;
 
-    public string $title = 'Confirmação de email';
-
     public string $urlText = 'Confirmar email';
+
+    public string $title = 'Confirmação de email';
 
     /**
      * Create a new message instance.

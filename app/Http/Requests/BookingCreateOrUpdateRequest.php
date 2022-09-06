@@ -2,6 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\BookingIsNotForbiddenDateRule;
+use App\Rules\BookingIsNotWeekendRule;
+use App\Rules\BookingsAreClosedRule;
+use App\Services\ConfigurationService;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -42,15 +46,33 @@ class BookingCreateOrUpdateRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string,string[]>
+     * @return array<string,mixed[]>
      */
-    public function rules()
+    public function rules(ConfigurationService $configurationService)
     {
         return [
-            'owner_id' => ['integer', 'required'],
+            'owner_id' => [
+                'integer',
+                'required',
+                new BookingsAreClosedRule($configurationService)
+            ],
             'project_id' => ['integer', 'required'],
-            'withdrawal_date' => ['string', 'required', 'date_format:Y-m-d'],
-            'devolution_date' => ['string', 'required', 'date_format:Y-m-d'],
+            'withdrawal_date' => [
+                'string',
+                'required',
+                'date_format:Y-m-d',
+                'after:today+2days',
+                new BookingIsNotWeekendRule(),
+                new BookingIsNotForbiddenDateRule($configurationService),
+            ],
+            'devolution_date' => [
+                'string',
+                'required',
+                'date_format:Y-m-d',
+                'after_or_equal:withdrawal_date',
+                new BookingIsNotWeekendRule(),
+                new BookingIsNotForbiddenDateRule($configurationService),
+            ],
             'bookables' => ['array', 'required'],
             'bookables.*.id' => ['integer', 'required'],
         ];
@@ -73,13 +95,28 @@ class BookingCreateOrUpdateRequest extends FormRequest
             'withdrawal_date.string' => 'O formato da data de retirada está incorreto.',
             'withdrawal_date.required' => 'A data de retirada é obrigatória.',
             'withdrawal_date.date_format' => "A data de retirada deve estar no seguinte formato: {$dateFormat}",
+            'withdrawal_date.after' => 'As reservas precisam ser feitas ou editadas com antecedência mínima de 3 dias.',
             'devolution_date.string' => 'O formato da data de devolução está incorreto.',
             'devolution_date.required' => 'A data de devolução é obrigatória.',
             'devolution_date.date_format' => "A data de devolução deve estar no seguinte formato: {$dateFormat}",
+            'devolution_date.after_or_equal' => 'As devoluções precisam ser feitas no dia da retirada ou após.',
             'bookables.array' => 'O formato dos reserváveis está incorreto.',
             'bookables.required' => 'É obrigatório informar os reserváveis associados à reserva.',
             'bookables.*.id.integer' => 'O formato dos reserváveis está incorreto.',
             'bookables.*.id.required' => 'É obrigatório informar os reserváveis associados à reserva.',
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array<string,string>
+     */
+    public function attributes()
+    {
+        return [
+            'withdrawal_date' => 'data de retirada',
+            'devolution_date' => 'data de devolução',
         ];
     }
 }

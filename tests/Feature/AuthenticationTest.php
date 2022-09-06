@@ -26,7 +26,10 @@ class AuthenticationTest extends TestCase
      */
     public function testLogin()
     {
-        $user = User::factory()->createOne();
+        $user = User::factory()
+            ->state(['is_enabled' => true])
+            ->state(['is_confirmed' => true])
+            ->createOne();
 
         $response = $this->post('api/entrada', [
             'email' => $user->email,
@@ -95,10 +98,13 @@ class AuthenticationTest extends TestCase
         $response = $this->post('api/cadastro', [
             'name' => 'Glauber Mota',
             'email' => $email,
+            'email_confirmation' => $email,
             'password' => 'Gl@uber7!',
-            'phone' => '(21) 99796-3685',
+            'phone' => '21997963685',
             'identifier' => '1345024',
         ]);
+
+        $response->assertOk();
 
         Mail::assertQueued(
             AuthenticationFinalizeRegistrationMail::class,
@@ -108,8 +114,6 @@ class AuthenticationTest extends TestCase
         );
 
         Mail::assertQueued(AuthenticationFinalizeRegistrationMail::class, 1);
-
-        $response->assertOk();
     }
 
     /**
@@ -149,13 +153,13 @@ class AuthenticationTest extends TestCase
 
         $response = $this->post('api/solicitar-redefinir-senha', ['email' => $user->email]);
 
+        $response->assertOk();
+
         Mail::assertQueued(AuthenticationResetPasswordMail::class, function ($mail) use ($user) {
             return $mail->hasTo($user->email);
         });
 
         Mail::assertQueued(AuthenticationResetPasswordMail::class, 1);
-
-        $response->assertOk();
     }
 
     /**
@@ -214,13 +218,13 @@ class AuthenticationTest extends TestCase
             'password' => 'Gl@uber7!',
         ]);
 
+        $response->assertOk();
+
         Mail::assertQueued(AuthenticationUpdateEmailMail::class, function ($mail) use ($user) {
             return $mail->hasTo($user->email);
         });
 
         Mail::assertQueued(AuthenticationUpdateEmailMail::class, 1);
-
-        $response->assertOk();
     }
 
     /**
