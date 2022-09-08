@@ -85,7 +85,7 @@ const menuItems = [
 
 export default function Navigation() {
     return (
-        <nav className="pt-2 mb-5 sticky-top vh-100 overflow-auto">
+        <nav className="pt-2 sticky-top vh-100 overflow-auto">
             {menuItems.map((item, key) => (
                 <div key={key} className="card mb-4">
                     <div className="card-header text-secondary bg-warning bg-gradient" aria-expanded="false">

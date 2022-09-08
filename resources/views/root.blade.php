@@ -42,7 +42,7 @@
         @yield('head')
     </head>
     <body class="h-100 bg-light">
-        <div id="root" class="d-flex h-100"></div>
+        <div id="root" class="position-relative d-flex h-100"></div>
 
         @include('loading')
 

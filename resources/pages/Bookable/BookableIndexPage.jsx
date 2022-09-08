@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import routes from '../../routes/bookable';
 import Title from '../../components/Title';
-import BookableCollection from '../../collections/Bookable/BookableCollection';
+import BookableCollection from '../../collections/BookableCollection';
 
 export default function BookableIndexPage() {
     return (

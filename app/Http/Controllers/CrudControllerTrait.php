@@ -21,16 +21,16 @@ trait CrudControllerTrait
     protected string $removedMessage = 'O item foi removido com sucesso.';
 
     /**
-     * @param  Request             $request
+     * @param  Request  $request
      * @return ResourceCollection
      */
     public function paginate(Request $request): ResourceCollection
     {
-        return $this->resourceClass::collection($this->service->paginate($request->all()));
+        return $this->resourceClass::collection($this->service->paginate($request));
     }
 
     /**
-     * @param  FormRequest   $request
+     * @param  FormRequest  $request
      * @return JsonResponse
      */
     public function create(FormRequest $request): JsonResponse
@@ -53,8 +53,8 @@ trait CrudControllerTrait
     }
 
     /**
-     * @param  Request       $request
-     * @param  integer       $id
+     * @param  Request  $request
+     * @param  int  $id
      * @return JsonResource
      */
     public function show(Request $request, int $id): JsonResource
@@ -66,8 +66,8 @@ trait CrudControllerTrait
     }
 
     /**
-     * @param  FormRequest   $request
-     * @param  integer       $id
+     * @param  FormRequest  $request
+     * @param  int  $id
      * @return JsonResponse
      */
     public function update(FormRequest $request, int $id): JsonResponse
@@ -85,7 +85,7 @@ trait CrudControllerTrait
 
     /**
      * @param  RemoveRequest  $request
-     * @param  integer        $id
+     * @param  int  $id
      * @return JsonResponse
      */
     public function remove(RemoveRequest $request, int $id): JsonResponse
@@ -97,7 +97,7 @@ trait CrudControllerTrait
 
     /**
      * @param  FormRequest  $request
-     * @param  Model        $model
+     * @param  Model  $model
      * @return void
      */
     protected function afterCreated(FormRequest $request, Model $model): void
@@ -107,7 +107,7 @@ trait CrudControllerTrait
 
     /**
      * @param  FormRequest  $request
-     * @param  int          $id
+     * @param  int  $id
      * @return void
      */
     protected function afterUpdated(FormRequest $request, int $id): void

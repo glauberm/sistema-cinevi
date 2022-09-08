@@ -1,7 +1,7 @@
 .Items {
     &__item {
         color: $link-color;
-        text-decoration: underline;
+        text-decoration: none;
 
         &:nth-child(odd) {
             background-color: $gray-100;
@@ -20,7 +20,7 @@
 
             &:active {
                 color: $link-hover-color;
-                background-color: $yellow-100;
+                background-color: $blue-100;
             }
         }
 

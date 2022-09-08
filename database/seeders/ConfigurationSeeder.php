@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Configuration;
 use Illuminate\Database\Seeder;
 
-class UserAdminSeeder extends Seeder
+class ConfigurationSeeder extends Seeder
 {
     /**
      * Seed the application's database.

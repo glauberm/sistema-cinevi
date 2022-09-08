@@ -7,49 +7,37 @@ namespace App\Services;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 trait CrudServiceTrait
 {
-    protected string $orderByColumn = 'id';
-
-    protected string $orderByDirection = 'desc';
-
-    protected int $itemsPerPage = 10;
-
     /**
-     * @param array<string,mixed>    $data
+     * @param  Request  $request
      * @return LengthAwarePaginator
      */
-    public function paginate(array $data): LengthAwarePaginator
+    public function paginate(Request $request): LengthAwarePaginator
     {
-        if (!\array_key_exists('orderByColumn', $data)) {
-            $data['orderByColumn'] = $this->orderByColumn;
+        $query = $this->modelClass::orderBy(
+            $request->input('order_by_column', 'id'),
+            $request->input('order_by_direction', 'desc')
+        );
+
+        $query = $this->beforePagination($query, $request);
+
+        $itemsPerPage = $request->input('items_per_page', 10);
+
+        if (! \is_int($itemsPerPage)) {
+            throw new \InvalidArgumentException('O número de itens por página deve ser um inteiro.');
         }
 
-        if (!\array_key_exists('orderByDirection', $data)) {
-            $data['orderByDirection'] = $this->orderByDirection;
-        }
-
-        if (!\array_key_exists('itemsPerPage', $data)) {
-            $data['itemsPerPage'] = $this->itemsPerPage;
-        }
-
-        if (!\is_int($data['itemsPerPage'])) {
-            throw new \InvalidArgumentException('O parâmetro "itemsPerPage" deve ser um inteiro.');
-        }
-
-        $query = $this->modelClass::orderBy($data['orderByColumn'], $data['orderByDirection']);
-
-        $query = $this->beforePagination($query, $data);
-
-        return $query->paginate($data['itemsPerPage'], ['*'], 'page');
+        return $query->paginate($itemsPerPage, ['*'], 'page');
     }
 
     /**
-     * @param array<string,mixed>  $data
-     * @param string|null          $eventAction
-     * @param string|null          $eventMessage
+     * @param  array<string,mixed>  $data
+     * @param  string|null  $eventAction
+     * @param  string|null  $eventMessage
      * @return Model
      */
     public function create(array $data, ?string $eventAction = 'create', ?string $eventMessage = 'O item foi criado.'): Model
@@ -66,8 +54,9 @@ trait CrudServiceTrait
     }
 
     /**
-     * @param  integer                 $id
+     * @param  int  $id
      * @return Model
+     *
      * @throws ModelNotFoundException
      */
     public function get(int $id): Model
@@ -76,10 +65,10 @@ trait CrudServiceTrait
     }
 
     /**
-     * @param array<string,mixed>  $data
-     * @param integer              $id
-     * @param string|null          $eventAction
-     * @param string|null          $eventMessage
+     * @param  array<string,mixed>  $data
+     * @param  int  $id
+     * @param  string|null  $eventAction
+     * @param  string|null  $eventMessage
      * @return void
      */
     public function update(array $data, int $id, ?string $eventAction = 'update', ?string $eventMessage = 'O item foi editado.'): void
@@ -97,9 +86,9 @@ trait CrudServiceTrait
     }
 
     /**
-     * @param integer      $id
-     * @param string|null  $eventAction
-     * @param string|null  $eventMessage
+     * @param  int  $id
+     * @param  string|null  $eventAction
+     * @param  string|null  $eventMessage
      * @return void
      */
     public function remove(int $id, ?string $eventAction = 'remove', ?string $eventMessage = 'O item foi removido.'): void
@@ -112,18 +101,18 @@ trait CrudServiceTrait
     }
 
     /**
-     * @param  Builder<Model>        $query
-     * @param  array<string,mixed>  $data
+     * @param  Builder<Model>  $query
+     * @param  Request  $request
      * @return Builder<Model>
      */
-    protected function beforePagination(Builder $query, array $data): Builder
+    protected function beforePagination(Builder $query, Request $request): Builder
     {
         return $query;
     }
 
     /**
-     * @param Model                 $model
-     * @param array<string,mixed>  $data
+     * @param  Model  $model
+     * @param  array<string,mixed>  $data
      * @return Model
      */
     protected function afterCreated(Model $model, array $data): Model
@@ -132,8 +121,8 @@ trait CrudServiceTrait
     }
 
     /**
-     * @param Model                  $model
-     * @param array<string,mixed>   $data
+     * @param  Model  $model
+     * @param  array<string,mixed>  $data
      * @return Model
      */
     protected function afterUpdated(Model $model, array $data): Model

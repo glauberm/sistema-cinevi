@@ -70,7 +70,6 @@ export default function SelectMultiple(props) {
                             checked
                             label={multipleLabel(item)}
                             name={`${name}-${key}`}
-                            size="sm"
                             onChange={() => setSelected(selected.filter((el) => el.id !== item.id))}
                         />
                     ))}
@@ -82,7 +81,7 @@ export default function SelectMultiple(props) {
                     <Button
                         type="button"
                         name={name}
-                        className="btn-secondary btn-sm"
+                        className="btn-secondary"
                         onClick={openDialog}
                         onBlur={closeDialog}
                     >

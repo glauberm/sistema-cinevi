@@ -12,8 +12,8 @@ import Button from '../../components/Button';
 import CheckboxField from '../../components/Forms/CheckboxField';
 import Select from '../../components/Forms/Select';
 import SelectMultiple from '../../components/Forms/SelectMultiple';
-import BookableCategoryCollection from '../../collections/BookableCategory/BookableCategoryCollection';
-import UserCollection from '../../collections/User/UserCollection';
+import BookableCategoryCollection from '../../collections/BookableCategoryCollection';
+import UserCollection from '../../collections/UserCollection';
 
 const initialValues = {
     identifier: '',

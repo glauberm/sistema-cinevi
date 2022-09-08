@@ -15,6 +15,14 @@ export function paginate(
 
     const urlParams = new URLSearchParams();
 
+    if (options && options.urlParams) {
+        Object.keys(options.urlParams).forEach((key) => {
+            if (options.urlParams[key]) {
+                urlParams.append(key, options.urlParams[key].toString());
+            }
+        });
+    }
+
     urlParams.append('page', page.toString());
 
     api.get(`/${urlPrefix}?${urlParams}`)

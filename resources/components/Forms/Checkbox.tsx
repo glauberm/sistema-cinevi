@@ -4,7 +4,7 @@ export default function Checkbox(props) {
     const { label, name, value, checked, disabled, size, onChange, readOnly } = props;
 
     return (
-        <div className={`form-check mb-2 ${size === 'sm' ? 'form-check-sm' : ''}`}>
+        <div className="form-check mb-2">
             <input
                 id={name}
                 name={name}

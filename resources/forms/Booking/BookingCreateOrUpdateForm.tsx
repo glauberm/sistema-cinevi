@@ -10,10 +10,10 @@ import Form from '../../components/Forms/Form';
 import DateField from '../../components/Forms/DateField';
 import Button from '../../components/Button';
 import SelectMultiple from '../../components/Forms/SelectMultiple';
-import BookableCollection from '../../collections/Bookable/BookableCollection';
+import BookableCollection from '../../collections/BookableCollection';
 import Select from '../../components/Forms/Select';
-import UserCollection from '../../collections/User/UserCollection';
-import ProjectCollection from '../../collections/Project/ProjectCollection';
+import UserCollection from '../../collections/UserCollection';
+import ProjectCollection from '../../collections/ProjectCollection';
 
 const initialValues = {
     withdrawal_date: '',

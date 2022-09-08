@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import routes from '../../routes/project';
 import Title from '../../components/Title';
-import ProjectCollection from '../../collections/Project/ProjectCollection';
+import ProjectCollection from '../../collections/ProjectCollection';
 
 export default function ProjectIndexPage() {
     return (

@@ -6,10 +6,10 @@ import ptBrLocale from '@fullcalendar/core/locales/pt-br';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 
-import routes from '../../routes/booking';
-import { showBetween } from '../../requests/booking';
-import { NotificationsContext } from '../../contexts/NotificationsProvider';
-import { ApiContext } from '../../contexts/ApiProvider';
+import routes from '../routes/booking';
+import { showBetween } from '../requests/booking';
+import { NotificationsContext } from '../contexts/NotificationsProvider';
+import { ApiContext } from '../contexts/ApiProvider';
 
 export default function BookingCollection() {
     const [startDate, setStartDate] = useState(null);

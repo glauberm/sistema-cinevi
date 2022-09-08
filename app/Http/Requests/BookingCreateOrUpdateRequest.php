@@ -30,11 +30,11 @@ class BookingCreateOrUpdateRequest extends FormRequest
 
         $project = $this->input('project');
 
-        if (!\is_array($owner) || !\array_key_exists('id', $owner)) {
+        if (! \is_array($owner) || ! \array_key_exists('id', $owner)) {
             throw new BadRequestHttpException('Os dados do responsável pela reserva estão em um formato inválido.');
         }
 
-        if (!\is_array($project) || !\array_key_exists('id', $project)) {
+        if (! \is_array($project) || ! \array_key_exists('id', $project)) {
             throw new BadRequestHttpException('Os dados do projeto associado à estão em um formato inválido.');
         }
 
@@ -54,14 +54,14 @@ class BookingCreateOrUpdateRequest extends FormRequest
             'owner_id' => [
                 'integer',
                 'required',
-                new BookingsAreClosedRule($configurationService)
+                new BookingsAreClosedRule($configurationService),
             ],
             'project_id' => ['integer', 'required'],
             'withdrawal_date' => [
                 'string',
                 'required',
                 'date_format:Y-m-d',
-                'after:today+2days',
+                'after_or_equal:today+3days',
                 new BookingIsNotWeekendRule(),
                 new BookingIsNotForbiddenDateRule($configurationService),
             ],
@@ -95,7 +95,7 @@ class BookingCreateOrUpdateRequest extends FormRequest
             'withdrawal_date.string' => 'O formato da data de retirada está incorreto.',
             'withdrawal_date.required' => 'A data de retirada é obrigatória.',
             'withdrawal_date.date_format' => "A data de retirada deve estar no seguinte formato: {$dateFormat}",
-            'withdrawal_date.after' => 'As reservas precisam ser feitas ou editadas com antecedência mínima de 3 dias.',
+            'withdrawal_date.after_or_equal' => 'As reservas precisam ser feitas ou editadas com antecedência mínima de 3 dias.',
             'devolution_date.string' => 'O formato da data de devolução está incorreto.',
             'devolution_date.required' => 'A data de devolução é obrigatória.',
             'devolution_date.date_format' => "A data de devolução deve estar no seguinte formato: {$dateFormat}",

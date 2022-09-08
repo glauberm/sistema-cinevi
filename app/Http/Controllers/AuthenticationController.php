@@ -22,7 +22,6 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
@@ -37,21 +36,21 @@ class AuthenticationController extends Controller
 
     public function __construct(UserService $userService)
     {
-        $this->middleware(Authenticate::class . ':sanctum')->except([
-            'login', 'register', 'finalizeRegistration', 'getAuthenticatedUser', 'requestResetPassword', 'resetPassword'
+        $this->middleware(Authenticate::class.':sanctum')->except([
+            'login', 'register', 'finalizeRegistration', 'getAuthenticatedUser', 'requestResetPassword', 'resetPassword',
         ]);
 
         $this->middleware(ValidateSignature::class)->only(['finalizeRegistration', 'resetPassword', 'updateEmail']);
 
-        if (!App::environment('testing')) {
-            $this->middleware(ThrottleRequests::class . ':5,15')->only(['login']);
+        if (! App::environment('testing')) {
+            $this->middleware(ThrottleRequests::class.':5,15')->only(['login']);
         }
 
         $this->userService = $userService;
     }
 
     /**
-     * @param  AuthenticationLoginRequest $request
+     * @param  AuthenticationLoginRequest  $request
      * @return JsonResponse
      */
     public function login(AuthenticationLoginRequest $request): JsonResponse
@@ -67,7 +66,7 @@ class AuthenticationController extends Controller
                 ]);
             }
 
-            if (Auth::user() !== null && !Auth::user()->is_enabled) {
+            if (Auth::user() !== null && ! Auth::user()->is_enabled) {
                 $this->sendFinalizeRegistrationMail(Auth::user());
 
                 Auth::guard('web')->logout();
@@ -77,7 +76,7 @@ class AuthenticationController extends Controller
                 );
             }
 
-            if (Auth::user() !== null && !Auth::user()->is_confirmed) {
+            if (Auth::user() !== null && ! Auth::user()->is_confirmed) {
                 Auth::guard('web')->logout();
 
                 throw new AuthenticationException(
@@ -90,17 +89,10 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param  Request       $request
      * @return JsonResponse
      */
-    public function logout(Request $request): JsonResponse
+    public function logout(): JsonResponse
     {
-        $user = $request->user();
-
-        if ($user === null) {
-            throw new AuthorizationException('O usuário da requisição não foi encontrado.');
-        }
-
         Auth::guard('web')->logout();
 
         return response()->json(['message' => 'Você saiu do sistema.']);
@@ -145,7 +137,7 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param  integer       $id
+     * @param  int  $id
      * @return JsonResponse
      */
     public function finalizeRegistration(int $id): JsonResponse
@@ -216,7 +208,7 @@ class AuthenticationController extends Controller
 
     /**
      * @param  AuthenticationResetPasswordRequest  $request
-     * @param  integer                             $id
+     * @param  int  $id
      * @return JsonResponse
      */
     public function resetPassword(AuthenticationResetPasswordRequest $request, int $id): JsonResponse
@@ -263,12 +255,11 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param  Request  $request
-     * @param  integer  $id
-     * @param  string   $email
+     * @param  int  $id
+     * @param  string  $email
      * @return JsonResponse
      */
-    public function updateEmail(Request $request, int $id, string $email): JsonResponse
+    public function updateEmail(int $id, string $email): JsonResponse
     {
         $currentUserId = Auth::id();
 
@@ -322,7 +313,7 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * @param  UserModel $user
+     * @param  UserModel  $user
      * @return void
      */
     private function sendFinalizeRegistrationMail(UserModel $user): void

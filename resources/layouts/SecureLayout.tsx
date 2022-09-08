@@ -32,9 +32,7 @@ export default function SecureLayout(props) {
                     <Navigation />
                 </div>
                 <div className="col-xl-9">
-                    <div className="h-100 p-md-5 p-sm-4 p-3 mb-5 bg-body rounded-3 position-relative">
-                        {props.children}
-                    </div>
+                    <div className="h-100 p-md-5 p-sm-4 p-3 mb-5 bg-body rounded-3">{props.children}</div>
                 </div>
             </div>
         </BaseLayout>

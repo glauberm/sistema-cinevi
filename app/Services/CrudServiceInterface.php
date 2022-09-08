@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface CrudServiceInterface
 {
     /**
-     * @param  mixed[]  $data
+     * @param  Request  $request
      * @return LengthAwarePaginator
      */
-    public function paginate(array $data): LengthAwarePaginator;
+    public function paginate(Request $request): LengthAwarePaginator;
 
     /**
      * @param  mixed[]  $data
@@ -22,20 +23,20 @@ interface CrudServiceInterface
     public function create(array $data): Model;
 
     /**
-     * @param  integer  $id
+     * @param  int  $id
      * @return Model
      */
     public function get(int $id): Model;
 
     /**
      * @param  mixed[]  $data
-     * @param  integer  $id
+     * @param  int  $id
      * @return void
      */
     public function update(array $data, int $id): void;
 
     /**
-     * @param  integer  $id
+     * @param  int  $id
      * @return void
      */
     public function remove(int $id): void;

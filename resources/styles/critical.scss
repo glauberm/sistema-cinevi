@@ -83,12 +83,20 @@
 }
 
 html {
-    height: 100%;
-    touch-action: manipulation;
-    text-rendering: optimizeLegibility;
-    -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
+    text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
+    touch-action: manipulation;
+}
+
+svg {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
 }
 
 body {
@@ -114,6 +122,11 @@ body {
 }
 
 .animated-favicon {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+
     &__ci {
         fill: #006989;
         animation-name: animated-favicon__ci;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import routes from '../../routes/production-category';
 import Title from '../../components/Title';
-import ProductionCategoryCollection from '../../collections/ProductionCategory/ProductionCategoryCollection';
+import ProductionCategoryCollection from '../../collections/ProductionCategoryCollection';
 
 export default function ProductionCategoryIndexPage() {
     return (

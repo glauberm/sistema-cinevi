@@ -8,23 +8,24 @@ import Spinner from '../Spinner';
 import Message from '../Message';
 
 export default function PaginatedItems(props) {
-    const { paginateFn, linkToFn, selectFn, selected, children } = props;
+    // const { paginateFn, linkToFn, selectFn, selected, children } = props;
+    const { data, links, meta, paginate, linkToFn, selected, selectFn, isLoading, children } = props;
 
-    const [data, setData] = useState(null);
-    const [links, setLinks] = useState(null);
-    const [meta, setMeta] = useState(null);
-    const [isLoading, setLoading] = useState(false);
+    // const [data, setData] = useState(null);
+    // const [links, setLinks] = useState(null);
+    // const [meta, setMeta] = useState(null);
+    // const [isLoading, setLoading] = useState(false);
 
-    const notifications = useContext(NotificationsContext);
-    const apiProvider = useContext(ApiContext);
+    // const notifications = useContext(NotificationsContext);
+    // const apiProvider = useContext(ApiContext);
 
-    const paginate = (page = 1) => {
-        paginateFn(apiProvider.api, notifications, setData, setLinks, setMeta, setLoading, page);
-    };
+    // const paginate = (page = 1) => {
+    //     paginateFn(apiProvider.api, notifications, setData, setLinks, setMeta, setLoading, page);
+    // };
 
-    useEffect(() => {
-        paginate();
-    }, []);
+    // useEffect(() => {
+    //     paginate();
+    // }, []);
 
     if (data) {
         if (Boolean(data.length)) {

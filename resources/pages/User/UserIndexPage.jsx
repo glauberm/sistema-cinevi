@@ -2,7 +2,7 @@ import React from 'react';
 
 import routes from '../../routes/user';
 import Title from '../../components/Title';
-import UserCollection from '../../collections/User/UserCollection';
+import UserCollection from '../../collections/UserCollection';
 
 export default function UserIndexPage() {
     return (

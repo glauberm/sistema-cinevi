@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import routes from '../../routes/booking';
 import Title from '../../components/Title';
-import BookingCollection from '../../collections/Booking/BookingCollection';
+import BookingCollection from '../../collections/BookingCollection';
 
 export default function BookingIndexPage() {
     return (

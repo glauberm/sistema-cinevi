@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import routes from '../../routes/production-role';
 import Title from '../../components/Title';
-import ProductionRoleCollection from '../../collections/ProductionRole/ProductionRoleCollection';
+import ProductionRoleCollection from '../../collections/ProductionRoleCollection';
 
 export default function ProductionRoleIndexPage() {
     return (

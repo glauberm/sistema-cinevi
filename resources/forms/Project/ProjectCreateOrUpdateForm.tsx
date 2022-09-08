@@ -12,9 +12,9 @@ import Button from '../../components/Button';
 import DateField from '../../components/Forms/DateField';
 import CheckboxField from '../../components/Forms/CheckboxField';
 import SelectMultiple from '../../components/Forms/SelectMultiple';
-import UserCollection from '../../collections/User/UserCollection';
+import UserCollection from '../../collections/UserCollection';
 import Select from '../../components/Forms/Select';
-import ProductionCategoryCollection from '../../collections/ProductionCategory/ProductionCategoryCollection';
+import ProductionCategoryCollection from '../../collections/ProductionCategoryCollection';
 import Section from '../../components/Section';
 import CheckboxGroupField from '../../components/Forms/CheckboxGroupField';
 
@@ -126,7 +126,9 @@ export default function ProjectCreateOrUpdateForm(props) {
                                 selected={values.professor}
                                 onChange={(item) => setFieldValue('professor', item)}
                             >
-                                {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
+                                {(selected, selectFn) => (
+                                    <UserCollection selected={selected} selectFn={selectFn} professorsOnly />
+                                )}
                             </Select>
                         </div>
                     </div>
@@ -237,108 +239,89 @@ export default function ProjectCreateOrUpdateForm(props) {
                     </Section>
 
                     <Section title="Equipe">
-                        <div className="row">
-                            <div className="col-md">
-                                <SelectMultiple
-                                    name="directors"
-                                    label="Diretores"
-                                    multipleLabel={(user) => user.name}
-                                    addLabel="Adicionar diretor"
-                                    errors={errors.directors}
-                                    touched={touched.directors}
-                                    selected={values.directors}
-                                    onChange={(user) => setFieldValue('directors', user)}
-                                >
-                                    {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
-                                </SelectMultiple>
-                            </div>
-                            <div className="col-md">
-                                <SelectMultiple
-                                    name="producers"
-                                    label="Produtores"
-                                    multipleLabel={(user) => user.name}
-                                    addLabel="Adicionar produtor"
-                                    errors={errors.producers}
-                                    touched={touched.producers}
-                                    selected={values.producers}
-                                    onChange={(user) => setFieldValue('producers', user)}
-                                >
-                                    {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
-                                </SelectMultiple>
-                            </div>
-                        </div>
+                        <SelectMultiple
+                            name="directors"
+                            label="Diretores"
+                            multipleLabel={(user) => user.name}
+                            addLabel="Adicionar diretor"
+                            errors={errors.directors}
+                            touched={touched.directors}
+                            selected={values.directors}
+                            onChange={(user) => setFieldValue('directors', user)}
+                        >
+                            {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
+                        </SelectMultiple>
 
-                        <div className="row">
-                            <div className="col-md">
-                                <SelectMultiple
-                                    name="photography_directors"
-                                    label="Diretores de fotografia"
-                                    multipleLabel={(user) => user.name}
-                                    addLabel="Adicionar diretor de fotografia"
-                                    errors={errors.photography_directors}
-                                    touched={touched.photography_directors}
-                                    selected={values.photography_directors}
-                                    onChange={(user) => setFieldValue('photography_directors', user)}
-                                >
-                                    {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
-                                </SelectMultiple>
-                                <div className="mb-4">
-                                    <CheckboxField
-                                        name="has_attended_photography_discipline"
-                                        label="Já cursaram a disciplina de Fotografia e Iluminação"
-                                        size="sm"
-                                        errors={errors.has_attended_photography_discipline}
-                                        touched={touched.has_attended_photography_discipline}
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-md">
-                                <SelectMultiple
-                                    name="sound_directors"
-                                    label="Diretores de som"
-                                    multipleLabel={(user) => user.name}
-                                    addLabel="Adicionar diretor de som"
-                                    errors={errors.sound_directors}
-                                    touched={touched.sound_directors}
-                                    selected={values.sound_directors}
-                                    onChange={(user) => setFieldValue('sound_directors', user)}
-                                >
-                                    {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
-                                </SelectMultiple>
-                                <div className="mb-4">
-                                    <CheckboxField
-                                        name="has_attended_sound_discipline"
-                                        label="Já cursaram a disciplina de Técnica de Som em Cinema e Audiovisual"
-                                        size="sm"
-                                        errors={errors.has_attended_sound_discipline}
-                                        touched={touched.has_attended_sound_discipline}
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-md">
-                                <SelectMultiple
-                                    name="art_directors"
-                                    label="Diretores de som"
-                                    multipleLabel={(user) => user.name}
-                                    addLabel="Adicionar diretor de arte"
-                                    errors={errors.art_directors}
-                                    touched={touched.art_directors}
-                                    selected={values.art_directors}
-                                    onChange={(user) => setFieldValue('art_directors', user)}
-                                >
-                                    {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
-                                </SelectMultiple>
-                                <div className="mb-4">
-                                    <CheckboxField
-                                        name="has_attended_art_discipline"
-                                        label="Já cursaram a disciplina de Design Visual"
-                                        size="sm"
-                                        errors={errors.has_attended_art_discipline}
-                                        touched={touched.has_attended_art_discipline}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                        <SelectMultiple
+                            name="producers"
+                            label="Produtores"
+                            multipleLabel={(user) => user.name}
+                            addLabel="Adicionar produtor"
+                            errors={errors.producers}
+                            touched={touched.producers}
+                            selected={values.producers}
+                            onChange={(user) => setFieldValue('producers', user)}
+                        >
+                            {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
+                        </SelectMultiple>
+
+                        <SelectMultiple
+                            name="photography_directors"
+                            label="Diretores de fotografia"
+                            multipleLabel={(user) => user.name}
+                            addLabel="Adicionar diretor de fotografia"
+                            errors={errors.photography_directors}
+                            touched={touched.photography_directors}
+                            selected={values.photography_directors}
+                            onChange={(user) => setFieldValue('photography_directors', user)}
+                        >
+                            {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
+                        </SelectMultiple>
+
+                        <SelectMultiple
+                            name="sound_directors"
+                            label="Diretores de som"
+                            multipleLabel={(user) => user.name}
+                            addLabel="Adicionar diretor de som"
+                            errors={errors.sound_directors}
+                            touched={touched.sound_directors}
+                            selected={values.sound_directors}
+                            onChange={(user) => setFieldValue('sound_directors', user)}
+                        >
+                            {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
+                        </SelectMultiple>
+
+                        <SelectMultiple
+                            name="art_directors"
+                            label="Diretores de arte"
+                            multipleLabel={(user) => user.name}
+                            addLabel="Adicionar diretor de arte"
+                            errors={errors.art_directors}
+                            touched={touched.art_directors}
+                            selected={values.art_directors}
+                            onChange={(user) => setFieldValue('art_directors', user)}
+                        >
+                            {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
+                        </SelectMultiple>
+
+                        <CheckboxField
+                            name="has_attended_photography_discipline"
+                            label="Os diretores de fotografia já cursaram a disciplina de Fotografia e Iluminação"
+                            errors={errors.has_attended_photography_discipline}
+                            touched={touched.has_attended_photography_discipline}
+                        />
+                        <CheckboxField
+                            name="has_attended_sound_discipline"
+                            label="Os diretores de som já cursaram a disciplina de Técnica de Som em Cinema e Audiovisual"
+                            errors={errors.has_attended_sound_discipline}
+                            touched={touched.has_attended_sound_discipline}
+                        />
+                        <CheckboxField
+                            name="has_attended_art_discipline"
+                            label="Os diretores de arte já cursaram a disciplina de Design Visual"
+                            errors={errors.has_attended_art_discipline}
+                            touched={touched.has_attended_art_discipline}
+                        />
                     </Section>
 
                     <Button type="submit" className="btn btn-lg btn-primary" isLoading={isLoading}>

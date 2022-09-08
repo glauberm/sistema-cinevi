@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 import routes from '../../routes/final-copy';
 import Title from '../../components/Title';
-import FinalCopyCollection from '../../collections/FinalCopy/FinalCopyCollection';
+import FinalCopyCollection from '../../collections/FinalCopyCollection';
 
 export default function FinalCopyIndexPage() {
     return (
         <div>
-            <Title>Reservas</Title>
+            <Title>Cópias Finais</Title>
 
             <FinalCopyCollection linkToFn={(item) => routes.update.getPath(item.id)} />
 

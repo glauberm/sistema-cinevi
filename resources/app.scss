@@ -7,7 +7,6 @@
 @import '~bootstrap/scss/maps';
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/root';
-
 @import '~bootstrap/scss/utilities';
 @import '~bootstrap/scss/reboot';
 @import '~bootstrap/scss/type';
@@ -39,22 +38,18 @@
 @import '~bootstrap/scss/spinners';
 // @import '~bootstrap/scss/offcanvas';
 // @import '~bootstrap/scss/placeholders';
-
 @import '~bootstrap/scss/helpers';
-
 @import '~bootstrap/scss/utilities/api';
 
-@import './styles/global';
+@import './styles/overrides/bootstrap';
+@import './styles/overrides/full-calendar';
 
 @import './images/Logo.svg';
 @import './images/Uff.svg';
 
-@import './collections/Booking/BookingCollection';
-
 @import './components/Notification';
-@import './components/Forms/Checkbox';
-@import './components/Forms/Field';
 @import './components/Collections/Items';
+@import './components/Forms/DateField';
 
 @import './contexts/NotificationsProvider';
 @import './contexts/DialogsProvider';

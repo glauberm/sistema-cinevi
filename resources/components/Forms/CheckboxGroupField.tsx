@@ -34,7 +34,6 @@ export default function CheckboxGroupField(props) {
                         name={`${name}-${key}`}
                         label={item.label}
                         checked={selected.includes(item.value)}
-                        size="sm"
                         onChange={() => select(item.value)}
                     />
                 ))}

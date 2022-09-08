@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import routes from '../../routes/bookable-category';
 import Title from '../../components/Title';
-import BookableCategoryCollection from '../../collections/BookableCategory/BookableCategoryCollection';
+import BookableCategoryCollection from '../../collections/BookableCategoryCollection';
 
 export default function AuthenticationProfilePage() {
     return (
