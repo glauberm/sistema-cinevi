@@ -67,10 +67,10 @@ const menuItems = [
                 to: project.index.path,
                 text: 'Projetos',
             },
-            {
-                to: finalCopy.index.path,
-                text: 'Cópias Finais',
-            },
+            // {
+            //     to: finalCopy.index.path,
+            //     text: 'Cópias Finais',
+            // },
             {
                 to: productionRole.index.path,
                 text: 'Funções',

@@ -53,7 +53,7 @@ export default function Field(props) {
 
             {messages &&
                 messages.map((message, key) => (
-                    <p key={key} className="text-muted lh-1 mb-2">
+                    <p key={key} className="text-muted lh-1 mt-1 mb-1">
                         <small>{message}</small>
                     </p>
                 ))}

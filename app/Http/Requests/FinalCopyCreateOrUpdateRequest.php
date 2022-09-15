@@ -27,15 +27,15 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
 
         $professor = $this->input('professor');
 
-        if (!\is_array($owner) || !\array_key_exists('id', $owner)) {
+        if (! \is_array($owner) || ! \array_key_exists('id', $owner)) {
             throw new BadRequestHttpException('O responsável pela cópia final foi informado em um formato inválido.');
         }
 
-        if (!\is_array($productionCategory) || !\array_key_exists('id', $productionCategory)) {
+        if (! \is_array($productionCategory) || ! \array_key_exists('id', $productionCategory)) {
             throw new BadRequestHttpException('A modalidade da cópia final foi informada em um formato inválido.');
         }
 
-        if (!\is_array($professor) || !\array_key_exists('id', $professor)) {
+        if (! \is_array($professor) || ! \array_key_exists('id', $professor)) {
             throw new BadRequestHttpException('O professor responsável pela cópia final foi informado em um formato inválido.');
         }
 
@@ -58,9 +58,9 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
             'synopsis' => ['required', 'string'],
             'genres' => ['required', 'array'],
             'genres.*' => ['required', 'string'],
-            'capture_format' => ['required', 'string'],
+            'capture_format' => ['nullable', 'string'],
             'capture_notes' => ['nullable', 'string'],
-            'venues' => ['required', 'string'],
+            'venues' => ['nullable', 'string'],
             'video_url' => ['nullable', 'string', 'url'],
             'video_password' => ['nullable', 'string'],
             'chromia' => ['nullable', 'string'],
@@ -114,10 +114,8 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
             'genres.array' => 'O(s) gênero(s) da cópia final devem estar em um array.',
             'genres.*.required' => 'Você deve informar o(s) gênero(s) da cópia final.',
             'genres.*.string' => 'O(s) gênero(s) da cópia final devem estar em um array de strings.',
-            'capture_format.required' => 'O formato de captação é obrigatório.',
             'capture_format.string' => 'O formato de captação deve ser uma string.',
             'capture_notes.string' => 'Os detalhes de captação deve ser uma string.',
-            'venues.required' => 'Você deve informar as locações da cópia final.',
             'venues.string' => 'As locações devem ser informadas em uma string.',
             'video_url.string' => 'A URL do vídeo deve ser uma string.',
             'video_url.url' => 'A URL do vídeo está malformatada.',
@@ -155,7 +153,7 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
             'production_roles.array' => 'A ficha técnica deve estar em um array.',
             'production_roles.*.production_role_id.integer' => 'Os identificadores das funções da ficha técnica devem ser um array.',
             'production_roles.*.users.array' => 'As equipes da ficha técnica devem ser arrays.',
-            'production_roles.*.users.*.id.integer' => 'Os identificadores das equipes da ficha técnica deve ser um array.'
+            'production_roles.*.users.*.id.integer' => 'Os identificadores das equipes da ficha técnica deve ser um array.',
         ];
     }
 }

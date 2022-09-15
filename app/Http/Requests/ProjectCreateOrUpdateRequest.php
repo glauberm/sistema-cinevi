@@ -28,15 +28,15 @@ class ProjectCreateOrUpdateRequest extends FormRequest
 
         $professor = $this->input('professor');
 
-        if (!\is_array($owner) || !\array_key_exists('id', $owner)) {
+        if (! \is_array($owner) || ! \array_key_exists('id', $owner)) {
             throw new BadRequestHttpException('O responsável pelo projeto foi informado em um formato inválido.');
         }
 
-        if (!\is_array($productionCategory) || !\array_key_exists('id', $productionCategory)) {
+        if (! \is_array($productionCategory) || ! \array_key_exists('id', $productionCategory)) {
             throw new BadRequestHttpException('A modalidade do projeto foi informada em um formato inválido.');
         }
 
-        if (!\is_array($professor) || !\array_key_exists('id', $professor)) {
+        if (! \is_array($professor) || ! \array_key_exists('id', $professor)) {
             throw new BadRequestHttpException('O professor responsável pelo projeto foi informado em um formato inválido.');
         }
 
@@ -59,9 +59,9 @@ class ProjectCreateOrUpdateRequest extends FormRequest
             'synopsis' => ['required', 'string'],
             'genres' => ['required', 'array'],
             'genres.*' => ['required', 'string'],
-            'capture_format' => ['required', 'string'],
+            'capture_format' => ['nullable', 'string'],
             'capture_notes' => ['nullable', 'string'],
-            'venues' => ['required', 'string'],
+            'venues' => ['nullable', 'string'],
             'pre_production_date' => ['required', 'string', 'date_format:Y-m-d'],
             'production_date' => ['required', 'string', 'date_format:Y-m-d'],
             'post_production_date' => ['required', 'string', 'date_format:Y-m-d'],
@@ -102,10 +102,8 @@ class ProjectCreateOrUpdateRequest extends FormRequest
             'genres.array' => 'O(s) gênero(s) do projeto devem estar em um array.',
             'genres.*.required' => 'Você deve informar o(s) gênero(s) do projeto.',
             'genres.*.string' => 'O(s) gênero(s) do projeto devem estar em um array de strings.',
-            'capture_format.required' => 'O formato de captação é obrigatório.',
             'capture_format.string' => 'O formato de captação deve ser uma string.',
             'capture_notes.string' => 'Os detalhes de captação deve ser uma string.',
-            'venues.required' => 'Você deve informar as locações do projeto.',
             'venues.string' => 'As locações devem ser informadas em uma string.',
             'pre_production_date.string' => 'O formato da data de pré-produção está incorreto.',
             'pre_production_date.required' => 'A data de pré-produção é obrigatória.',

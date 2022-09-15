@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { debounce } from 'lodash';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import ptBrLocale from '@fullcalendar/core/locales/pt-br';
@@ -18,13 +19,17 @@ export default function BookingCollection() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loadingNotification, setLoadingNotification] = useState(null);
+
     const notifications = useContext(NotificationsContext);
     const apiProvider = useContext(ApiContext);
+
     const navigate = useNavigate();
+
+    const debouncedShowBetween = useCallback(debounce(showBetween, 300), []);
 
     useEffect(() => {
         if (startDate !== null && endDate !== null) {
-            showBetween(
+            debouncedShowBetween(
                 apiProvider.api,
                 notifications,
                 setData,
@@ -47,22 +52,13 @@ export default function BookingCollection() {
 
     useEffect(() => {
         setEvents(
-            data.map((date) => {
-                return {
-                    title: `#${date.id} - ${date.owner.name}`,
-                    start: dayjs(date.withdrawal_date)
-                        .set('hour', 0)
-                        .set('minute', 0)
-                        .set('second', 0)
-                        .format('YYYY-MM-DD HH:mm:ss'),
-                    end: dayjs(date.devolution_date)
-                        .set('hour', 23)
-                        .set('minute', 59)
-                        .set('second', 59)
-                        .format('YYYY-MM-DD HH:mm:ss'),
-                    url: routes.update.getPath(date.id),
-                };
-            })
+            data.map((date) => ({
+                title: `#${date.id} - ${date.owner.name}`,
+                start: dayjs(date.withdrawal_date).format('YYYY-MM-DD'),
+                end: dayjs(date.devolution_date).add(1, 'day').format('YYYY-MM-DD'),
+                url: routes.update.getPath(date.id),
+                allDay: true,
+            }))
         );
     }, [data]);
 
@@ -73,6 +69,11 @@ export default function BookingCollection() {
                 initialView="dayGridMonth"
                 locale={ptBrLocale}
                 height="auto"
+                headerToolbar={{
+                    start: 'title',
+                    center: '',
+                    end: 'prev,next',
+                }}
                 events={events}
                 eventBackgroundColor="#cce1e7"
                 eventBorderColor="#99c3d0"

@@ -119,10 +119,10 @@ export default function UserUpdateForm(props) {
                             />
                         </div>
                         <div className="col-md">
-                            <label id="status-group" className="form-label">
+                            <label htmlFor="status-group" id="status-group-label" className="form-label">
                                 Status
                             </label>
-                            <div role="group" aria-labelledby="status-group" className="mb-4">
+                            <div role="group" id="status-group" aria-labelledby="status-group-label" className="mb-4">
                                 <CheckboxField
                                     name="is_enabled"
                                     label="Ativo"

@@ -7,10 +7,11 @@ export default function Select(props) {
         size,
         value,
         placeholder,
-        selected: selectedProps,
-        onChange,
         errors,
         touched,
+        messages,
+        selected: selectedProps,
+        onChange,
         children,
     } = props;
 
@@ -64,7 +65,7 @@ export default function Select(props) {
                     placeholder={placeholder || ''}
                     readOnly
                     className={`
-                    form-select Field
+                    form-select
                     ${size === 'lg' ? 'form-control-lg' : ''}
                     ${errors && touched ? 'is-invalid' : ''}
                 `}
@@ -72,13 +73,20 @@ export default function Select(props) {
                     onBlur={closeDialog}
                 />
 
+                {errors && touched && <div className="invalid-feedback">{errors.id}</div>}
+
+                {messages &&
+                    messages.map((message, key) => (
+                        <p key={key} className="text-muted lh-1 mt-1 mb-1">
+                            <small>{message}</small>
+                        </p>
+                    ))}
+
                 {isDialogOpen && (
                     <div className="position-absolute shadow p-3 mt-1 mb-5 bg-body rounded">
                         {children(selected, select)}
                     </div>
                 )}
-
-                {errors && touched && <div className="invalid-feedback">{errors.id}</div>}
             </div>
         </div>
     );

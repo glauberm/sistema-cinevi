@@ -5,7 +5,7 @@ import { FastField as FormikFastField } from 'formik';
 import Checkbox from './Checkbox';
 
 export default function CheckboxField(props) {
-    const { name, label, size, errors, touched, isFastField } = props;
+    const { name, label, errors, touched, isFastField } = props;
 
     const componentFn = ({ field, form }) => (
         <Checkbox
@@ -13,12 +13,11 @@ export default function CheckboxField(props) {
             label={label}
             name={field.name}
             value={field.value}
-            size={size}
+            errors={errors}
+            touched={touched}
             onChange={(e) => {
                 form.setFieldValue(field.name, e.target.checked);
             }}
-            errors={errors}
-            touched={touched}
         />
     );
 

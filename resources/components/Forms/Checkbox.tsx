@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Checkbox(props) {
-    const { label, name, value, checked, disabled, size, onChange, readOnly } = props;
+    const { label, name, value, errors, touched, checked, disabled, onChange, readOnly } = props;
 
     return (
         <div className="form-check mb-2">
@@ -10,7 +10,7 @@ export default function Checkbox(props) {
                 name={name}
                 type="checkbox"
                 checked={checked === null ? Boolean(value) : checked}
-                className="form-check-input"
+                className={`form-check-input ${errors && touched ? 'is-invalid' : ''}`}
                 disabled={disabled}
                 onChange={onChange}
                 readOnly={readOnly}

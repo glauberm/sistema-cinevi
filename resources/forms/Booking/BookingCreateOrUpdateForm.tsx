@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import dayjs from 'dayjs';
+import 'dayjs/locale/pt-br';
 
 import { create, show, update } from '../../requests/booking';
 import { NotificationsContext } from '../../contexts/NotificationsProvider';
@@ -90,6 +92,10 @@ export default function BookingCreateOrUpdateForm(props) {
                                 errors={errors.withdrawal_date}
                                 touched={touched.withdrawal_date}
                                 onChange={(value) => setFieldValue('withdrawal_date', value)}
+                                weekends={false}
+                                validRange={(nowDate) => ({
+                                    start: dayjs(nowDate).add(3, 'day').format('YYYY-MM-DD'),
+                                })}
                             />
                         </div>
                         <div className="col-md">
@@ -100,6 +106,10 @@ export default function BookingCreateOrUpdateForm(props) {
                                 errors={errors.devolution_date}
                                 touched={touched.devolution_date}
                                 onChange={(value) => setFieldValue('devolution_date', value)}
+                                weekends={false}
+                                validRange={(nowDate) => ({
+                                    start: dayjs(nowDate).add(3, 'day').format('YYYY-MM-DD'),
+                                })}
                             />
                         </div>
                     </div>

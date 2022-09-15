@@ -43,11 +43,15 @@ export default function UserCollection(props) {
 
     return (
         <div>
-            <div className="mb-3">
-                <label htmlFor="name" className="form-label">
-                    <small>Filtrar</small>
-                </label>
-                <input id="name" name="name" type="text" className="form-control form-control-sm" onChange={onChange} />
+            <div className="row">
+                <div className={selectFn ? 'col' : 'col-md-6'}>
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">
+                            Filtrar por nome
+                        </label>
+                        <input id="name" name="name" type="text" className="form-control" onChange={onChange} />
+                    </div>
+                </div>
             </div>
             <PaginatedItems
                 data={data}

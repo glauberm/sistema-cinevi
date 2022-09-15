@@ -43,10 +43,10 @@ return new class extends Migration
 
             $table->json('genres');
 
-            $table->string('capture_format');
+            $table->string('capture_format')->nullable();
             $table->text('capture_notes')->nullable();
 
-            $table->text('venues');
+            $table->text('venues')->nullable();
 
             $table->date('pre_production_date');
             $table->date('production_date');

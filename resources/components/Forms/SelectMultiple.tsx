@@ -9,10 +9,11 @@ export default function SelectMultiple(props) {
         label,
         multipleLabel,
         addLabel,
-        selected: selectedProps,
-        onChange,
         errors,
         touched,
+        messages,
+        selected: selectedProps,
+        onChange,
         children,
     } = props;
 
@@ -62,41 +63,52 @@ export default function SelectMultiple(props) {
                 {label}
             </label>
 
-            {Boolean(selected.length) && (
-                <div className="mb-3">
-                    {selected.map((item, key) => (
-                        <Checkbox
-                            key={key}
-                            checked
-                            label={multipleLabel(item)}
-                            name={`${name}-${key}`}
-                            onChange={() => setSelected(selected.filter((el) => el.id !== item.id))}
-                        />
-                    ))}
+            <div id={name} className={errors && touched ? 'is-invalid' : ''}>
+                {Boolean(selected.length) && (
+                    <div className="mb-3">
+                        {selected.map((item, key) => (
+                            <Checkbox
+                                key={key}
+                                checked
+                                name={`${name}-${key}`}
+                                label={multipleLabel(item)}
+                                errors={errors}
+                                touched={touched}
+                                onChange={() => setSelected(selected.filter((el) => el.id !== item.id))}
+                            />
+                        ))}
+                    </div>
+                )}
+
+                <div>
+                    <span ref={selectRef}>
+                        <Button
+                            type="button"
+                            name={name}
+                            className={`btn-sm ${errors && touched ? 'btn-danger' : 'btn-secondary'}`}
+                            onClick={openDialog}
+                            onBlur={closeDialog}
+                        >
+                            {addLabel}
+                        </Button>
+
+                        {isDialogOpen && (
+                            <div className="position-absolute shadow p-3 mt-1 mb-5 bg-body rounded">
+                                {children(selected, select)}
+                            </div>
+                        )}
+                    </span>
                 </div>
-            )}
-
-            <div>
-                <span ref={selectRef}>
-                    <Button
-                        type="button"
-                        name={name}
-                        className="btn-secondary"
-                        onClick={openDialog}
-                        onBlur={closeDialog}
-                    >
-                        {addLabel}
-                    </Button>
-
-                    {isDialogOpen && (
-                        <div className="position-absolute shadow p-3 mt-1 mb-5 bg-body rounded">
-                            {children(selected, select)}
-                        </div>
-                    )}
-                </span>
             </div>
 
             {errors && touched && <div className="invalid-feedback">{errors}</div>}
+
+            {messages &&
+                messages.map((message, key) => (
+                    <p key={key} className="text-muted lh-1 mt-1 mb-1">
+                        <small>{message}</small>
+                    </p>
+                ))}
         </div>
     );
 }

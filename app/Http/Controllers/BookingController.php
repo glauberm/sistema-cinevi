@@ -33,19 +33,19 @@ class BookingController extends Controller implements CrudControllerInterface, H
 
         $this->userService = $userService;
 
-        $this->middleware(Authenticate::class . ':sanctum');
+        $this->middleware(Authenticate::class.':sanctum');
     }
 
     public function showBetween(BookingShowBetweenRequest $request): ResourceCollection
     {
-        /** @var array<string,mixed> */
+        /** @var array{start_date:string,end_date:string} */
         $data = $request->validated();
 
         return $this->resourceClass::collection($this->service->showBetween($data));
     }
 
     /**
-     * @param  BookingCreateOrUpdateRequest $request
+     * @param  BookingCreateOrUpdateRequest  $request
      * @return JsonResponse
      */
     public function doCreate(BookingCreateOrUpdateRequest $request): JsonResponse
@@ -55,7 +55,7 @@ class BookingController extends Controller implements CrudControllerInterface, H
 
     /**
      * @param  BookingCreateOrUpdateRequest  $request
-     * @param  integer                       $id
+     * @param  int  $id
      * @return JsonResponse
      */
     public function doUpdate(BookingCreateOrUpdateRequest $request, int $id): JsonResponse
@@ -65,7 +65,7 @@ class BookingController extends Controller implements CrudControllerInterface, H
 
     /**
      * @param  BookingCreateOrUpdateRequest  $request
-     * @param  BookingModel                  $booking
+     * @param  BookingModel  $booking
      * @return void
      */
     protected function afterCreated(BookingCreateOrUpdateRequest $request, BookingModel $booking): void
@@ -82,7 +82,7 @@ class BookingController extends Controller implements CrudControllerInterface, H
 
     /**
      * @param  BookingCreateOrUpdateRequest  $request
-     * @param  int                           $id
+     * @param  int  $id
      * @return void
      */
     protected function afterUpdated(BookingCreateOrUpdateRequest $request, int $id): void

@@ -57,8 +57,21 @@
         }
     }
 
+    .fc-toolbar-chunk {
+        &:first-child {
+            margin-right: 0.5em;
+        }
+
+        &:last-child {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: end;
+            margin-left: 0.5em;
+        }
+    }
+
     .fc-daygrid-block-event .fc-event-title {
-        padding: 0.2rem 0.5rem;
+        padding: 0.2em 0.5em;
         font-size: $font-size-base;
         font-weight: bold;
     }

@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property integer        $id
+ * @property int        $id
  * @property string         $title
  * @property string         $synopsis
  * @property string[]       $genres
- * @property string         $capture_format
- * @property string         $capture_notes
- * @property string         $venues
+ * @property ?string        $capture_format
+ * @property ?string        $capture_notes
+ * @property ?string        $venues
  * @property ?string        $video_url
  * @property ?string        $video_password
  * @property ?string        $chromia
@@ -93,7 +93,7 @@ class FinalCopy extends Model
         'confirmed',
         'owner_id',
         'production_category_id',
-        'professor_id'
+        'professor_id',
     ];
 
     /**

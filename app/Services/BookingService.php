@@ -6,7 +6,6 @@ namespace App\Services;
 
 use App\Events\BookingVersionEvent;
 use App\Models\Booking;
-use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 
 class BookingService implements CrudServiceInterface, HasVersionsServiceInterface
@@ -25,7 +24,7 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     protected string $modelVersionIdColumnName = 'booking_id';
 
     /**
-     * @param  array<string,mixed>  $data
+     * @param  array{start_date:string,end_date:string}  $data
      * @return Collection<int,Booking>
      */
     public function showBetween(array $data): Collection
@@ -41,7 +40,7 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
-     * @param  integer                 $id
+     * @param  int  $id
      * @return Booking
      */
     public function get(int $id): Booking
@@ -50,7 +49,7 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
-     * @param  Booking              $booking
+     * @param  Booking  $booking
      * @param  array<string,mixed>  $data
      * @return Booking
      */
@@ -65,7 +64,7 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
-     * @param  Booking              $booking
+     * @param  Booking  $booking
      * @param  array<string,mixed>  $data
      * @return void
      */

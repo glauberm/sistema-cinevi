@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 
 export default function DateField(props) {
-    const { name, label, values, errors, touched, onChange } = props;
+    const { name, label, values, errors, touched, messages, onChange, weekends, validRange } = props;
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const selectRef = useRef(null);
@@ -49,10 +49,19 @@ export default function DateField(props) {
                     type="text"
                     readOnly
                     value={values}
-                    className="form-control"
+                    className={`form-control ${errors && touched ? 'is-invalid' : ''}`}
                     onFocus={openDialog}
                     onBlur={closeDialog}
                 />
+
+                {errors && touched && <div className="invalid-feedback">{errors}</div>}
+
+                {messages &&
+                    messages.map((message, key) => (
+                        <p key={key} className="text-muted lh-1 mt-1 mb-1">
+                            <small>{message}</small>
+                        </p>
+                    ))}
 
                 {isDialogOpen && (
                     <div className="position-absolute shadow p-3 mt-1 mb-5 bg-body rounded">
@@ -67,11 +76,9 @@ export default function DateField(props) {
                                     center: '',
                                     end: 'prev,next',
                                 }}
-                                weekends={false}
                                 initialDate={values || null}
-                                validRange={(nowDate) => ({
-                                    start: dayjs(nowDate).add(3, 'day').format('YYYY-MM-DD'),
-                                })}
+                                weekends={weekends}
+                                validRange={validRange}
                                 navLinks={true}
                                 navLinkDayClick={(date, jsEvent) => {
                                     jsEvent.preventDefault();
@@ -81,8 +88,6 @@ export default function DateField(props) {
                         </div>
                     </div>
                 )}
-
-                {errors && touched && <div className="invalid-feedback">{errors}</div>}
             </div>
         </div>
     );

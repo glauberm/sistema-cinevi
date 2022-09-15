@@ -12,13 +12,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property integer          $id
+ * @property int          $id
  * @property string           $title
  * @property string           $synopsis
  * @property string[]         $genres
- * @property string           $capture_format
+ * @property ?string          $capture_format
  * @property ?string          $capture_notes
- * @property string           $venues
+ * @property ?string          $venues
  * @property CarbonImmutable  $pre_production_date
  * @property CarbonImmutable  $production_date
  * @property CarbonImmutable  $post_production_date
@@ -58,7 +58,7 @@ class Project extends Model
         'has_attended_art_discipline',
         'owner_id',
         'production_category_id',
-        'professor_id'
+        'professor_id',
     ];
 
     /**

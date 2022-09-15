@@ -25,20 +25,20 @@ const initialValues = {
     production_category: '',
     professor: '',
     genres: [],
-    capture_format: '',
-    capture_notes: '',
-    venues: '',
     pre_production_date: '',
     production_date: '',
     post_production_date: '',
-    has_attended_photography_discipline: false,
-    has_attended_sound_discipline: false,
-    has_attended_art_discipline: false,
+    capture_format: '',
+    capture_notes: '',
+    venues: '',
     directors: [],
     producers: [],
     photography_directors: [],
     sound_directors: [],
     art_directors: [],
+    has_attended_photography_discipline: false,
+    has_attended_sound_discipline: false,
+    has_attended_art_discipline: false,
 };
 
 const validationSchema = Yup.object({
@@ -47,18 +47,27 @@ const validationSchema = Yup.object({
     owner: Yup.object().shape({
         id: Yup.number().required('Campo obrigatório'),
     }),
-    // production_category: '',
-    // professor: '',
-    // genres: [],
+    production_category: Yup.object().shape({
+        id: Yup.number().required('Campo obrigatório'),
+    }),
+    professor: Yup.object().shape({
+        id: Yup.number().required('Campo obrigatório'),
+    }),
+    genres: Yup.array().min(1, 'Campo obrigatório'),
     capture_format: Yup.string().nullable(),
     capture_notes: Yup.string().nullable(),
-    venues: Yup.string().required('Campo obrigatório'),
+    venues: Yup.string().nullable(),
     pre_production_date: Yup.string().required('Campo obrigatório'),
     production_date: Yup.string().required('Campo obrigatório'),
     post_production_date: Yup.string().required('Campo obrigatório'),
-    has_attended_photography_discipline: Yup.bool().required('Campo obrigatório'),
-    has_attended_sound_discipline: Yup.bool().required('Campo obrigatório'),
-    has_attended_art_discipline: Yup.bool().required('Campo obrigatório'),
+    directors: Yup.array().min(1, 'Campo obrigatório'),
+    producers: Yup.array().min(1, 'Campo obrigatório'),
+    photography_directors: Yup.array().min(1, 'Campo obrigatório'),
+    sound_directors: Yup.array().min(1, 'Campo obrigatório'),
+    art_directors: Yup.array().min(1, 'Campo obrigatório'),
+    has_attended_photography_discipline: Yup.bool().oneOf([true], 'Campo obrigatório'),
+    has_attended_sound_discipline: Yup.bool().oneOf([true], 'Campo obrigatório'),
+    has_attended_art_discipline: Yup.bool().oneOf([true], 'Campo obrigatório'),
 });
 
 export default function ProjectCreateOrUpdateForm(props) {
@@ -153,6 +162,8 @@ export default function ProjectCreateOrUpdateForm(props) {
                                 <CheckboxGroupField
                                     name="genres"
                                     label="Gêneros"
+                                    errors={errors.genres}
+                                    touched={touched.genres}
                                     selected={values.genres}
                                     onChange={(value) => setFieldValue('genres', value)}
                                     items={[
@@ -211,6 +222,7 @@ export default function ProjectCreateOrUpdateForm(props) {
                                     as="select"
                                     errors={errors.capture_format}
                                     touched={touched.capture_format}
+                                    messages={['Não obrigatório']}
                                 >
                                     <option value=""></option>
                                     <option value="video">Vídeo</option>
@@ -224,6 +236,7 @@ export default function ProjectCreateOrUpdateForm(props) {
                                     as="textarea"
                                     errors={errors.capture_notes}
                                     touched={touched.capture_notes}
+                                    messages={['Não obrigatório']}
                                 />
                             </div>
                             <div className="col-md">
@@ -233,6 +246,7 @@ export default function ProjectCreateOrUpdateForm(props) {
                                     as="textarea"
                                     errors={errors.venue}
                                     touched={touched.venue}
+                                    messages={['Não obrigatório']}
                                 />
                             </div>
                         </div>
