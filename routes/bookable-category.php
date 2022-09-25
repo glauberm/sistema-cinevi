@@ -7,11 +7,11 @@ Route::get('categorias-de-reservaveis', [BookableCategoryController::class, 'pag
 
 Route::get('categorias-de-reservaveis/versoes/{id}', [BookableCategoryController::class, 'showVersion']);
 
-Route::post('categorias-de-reservaveis/adicionar', [BookableCategoryController::class, 'doCreate']);
+Route::post('categorias-de-reservaveis/adicionar', [BookableCategoryController::class, 'create']);
 
 Route::get('categorias-de-reservaveis/{id}', [BookableCategoryController::class, 'show']);
 
-Route::put('categorias-de-reservaveis/{id}/editar', [BookableCategoryController::class, 'doUpdate']);
+Route::put('categorias-de-reservaveis/{id}/editar', [BookableCategoryController::class, 'update']);
 
 Route::delete('categorias-de-reservaveis/{id}/remover', [BookableCategoryController::class, 'remove']);
 

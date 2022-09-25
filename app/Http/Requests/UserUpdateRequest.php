@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Enums\UserRole;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
@@ -24,11 +25,11 @@ class UserUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('hasRole', 'admin') === true;
+        return Gate::allows('hasRole', UserRole::Admin);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected function failedAuthorization()
     {
@@ -49,7 +50,7 @@ class UserUpdateRequest extends FormRequest
                 'required',
                 'numeric',
                 'min_digits:10',
-                'max_digits:11'
+                'max_digits:11',
             ],
             'identifier' => [
                 'required',

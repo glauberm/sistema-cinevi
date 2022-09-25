@@ -11,23 +11,10 @@ class ProductionCategoryVersionEvent
 {
     use Dispatchable;
 
-    public ProductionCategory $productionCategory;
-
-    public string $action;
-
-    public string $message;
-
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(ProductionCategory $productionCategory, string $action, string $message)
-    {
-        $this->productionCategory = $productionCategory;
-
-        $this->action = $action;
-
-        $this->message = $message;
+    public function __construct(
+        public readonly ProductionCategory $productionCategory,
+        public readonly string $action,
+        public readonly string $message
+    ) {
     }
 }

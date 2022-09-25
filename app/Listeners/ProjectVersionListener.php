@@ -9,27 +9,29 @@ use App\Services\ProjectService;
 
 class ProjectVersionListener
 {
-    public ProjectService $service;
-
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct(ProjectService $service)
+    public function __construct(private readonly ProjectService $service)
     {
-        $this->service = $service;
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param ProjectVersionEvent  $event
-     * @return void
-     */
-    public function handle(ProjectVersionEvent $event)
+    public function handle(ProjectVersionEvent $event): void
     {
         $data = $event->project->toArray();
+
+        $data['owner'] = $event->project->owner->toArray();
+
+        $data['production_category'] = $event->project->productionCategory->toArray();
+
+        $data['professor'] = $event->project->professor->toArray();
+
+        $data['directors'] = $event->project->directors->toArray();
+
+        $data['producers'] = $event->project->producers->toArray();
+
+        $data['photography_directors'] = $event->project->photographyDirectors->toArray();
+
+        $data['sound_directors'] = $event->project->soundDirectors->toArray();
+
+        $data['art_directors'] = $event->project->artDirectors->toArray();
 
         $this->service->registerVersion($event->project, $event->action, $event->message, $data);
     }

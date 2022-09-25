@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
 
@@ -63,7 +64,7 @@ trait CrudTestTrait
 
     protected function removeSanctumActingAs(): void
     {
-        Sanctum::actingAs(User::factory()->state(['roles' => ['user', 'admin']])->createOne());
+        Sanctum::actingAs(User::factory()->state(['roles' => [UserRole::Admin]])->createOne());
     }
 
     /**

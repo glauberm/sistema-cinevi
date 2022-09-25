@@ -12,13 +12,11 @@ class Authenticate extends BaseAuthenticate
      * @param  Request  $request
      * @param  mixed[]  $guards
      * @return void
+     *
      * @throws AuthenticationException
      */
     protected function unauthenticated($request, array $guards)
     {
-        throw new AuthenticationException(
-            'Por favor, faça login para continuar.',
-            $guards
-        );
+        throw new AuthenticationException('Por favor, entre para continuar.', $guards);
     }
 }

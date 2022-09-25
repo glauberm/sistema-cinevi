@@ -16,10 +16,7 @@ import MonthAndDayField, { emptyValue } from '../../components/Forms/MonthAndDay
 const initialValues = {
     bookings_are_closed: false,
     bookings_forbidden_dates: [],
-    bookings_create_or_update_emails: [],
     final_copies_confirmation_message: '',
-    final_copies_create_emails: [],
-    final_copies_confirmed_emails: [],
 };
 
 const validationSchema = Yup.object({
@@ -114,52 +111,6 @@ export default function ConfigurationUpdateForm(props) {
                                 </div>
                             )}
                         />
-
-                        <h3 className="h5 mb-3 text-secondary">Emails notificados sobre adição e edição de reservas</h3>
-
-                        <FieldArray
-                            name="final_copies_create_emails"
-                            render={(arrayHelpers) => (
-                                <div className="mb-4">
-                                    {values.final_copies_create_emails &&
-                                        Boolean(values.final_copies_create_emails.length) &&
-                                        values.final_copies_create_emails.map((_, index) => (
-                                            <div
-                                                key={index}
-                                                className="row mb-4 mb-sm-0 mb-md-0 mb-lg-0 mb-xl-0 mb-xxl-0"
-                                            >
-                                                <div className="col-10">
-                                                    <Field
-                                                        name={`final_copies_create_emails.${index}`}
-                                                        type="email"
-                                                        label="Email"
-                                                        labelHidden
-                                                        // errors={errors[`bookings_forbidden_dates.${index}.description`]}
-                                                        // touched={touched.final_copies_create_emails[index]}
-                                                    />
-                                                </div>
-                                                <div className="col-2">
-                                                    <Button
-                                                        type="button"
-                                                        className="btn-outline-secondary"
-                                                        onClick={() => arrayHelpers.remove(index)}
-                                                    >
-                                                        Remover
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        ))}
-
-                                    <Button
-                                        type="button"
-                                        className="btn-secondary"
-                                        onClick={() => arrayHelpers.push('')}
-                                    >
-                                        Adicionar email
-                                    </Button>
-                                </div>
-                            )}
-                        />
                     </Section>
                     <Section title="Cópias Finais">
                         <Field
@@ -168,98 +119,6 @@ export default function ConfigurationUpdateForm(props) {
                             label="Mensagem para cópias finais ainda não confirmadas"
                             errors={errors.unconfirmed_final_copy_message}
                             touched={touched.unconfirmed_final_copy_message}
-                        />
-
-                        <h3 className="h5 mb-3 text-secondary">Emails notificados sobre novas cópias finais</h3>
-
-                        <FieldArray
-                            name="final_copies_create_emails"
-                            render={(arrayHelpers) => (
-                                <div className="mb-4">
-                                    {values.final_copies_create_emails &&
-                                        Boolean(values.final_copies_create_emails.length) &&
-                                        values.final_copies_create_emails.map((_, index) => (
-                                            <div
-                                                key={index}
-                                                className="row mb-4 mb-sm-0 mb-md-0 mb-lg-0 mb-xl-0 mb-xxl-0"
-                                            >
-                                                <div className="col-10">
-                                                    <Field
-                                                        name={`final_copies_create_emails.${index}`}
-                                                        type="email"
-                                                        label="Email"
-                                                        labelHidden
-                                                        // errors={errors[`bookings_forbidden_dates.${index}.description`]}
-                                                        // touched={touched.final_copies_create_emails[index]}
-                                                    />
-                                                </div>
-                                                <div className="col-2">
-                                                    <Button
-                                                        type="button"
-                                                        className="btn-outline-secondary"
-                                                        onClick={() => arrayHelpers.remove(index)}
-                                                    >
-                                                        Remover
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        ))}
-
-                                    <Button
-                                        type="button"
-                                        className="btn-secondary"
-                                        onClick={() => arrayHelpers.push('')}
-                                    >
-                                        Adicionar email
-                                    </Button>
-                                </div>
-                            )}
-                        />
-
-                        <h3 className="h5 mb-3 text-secondary">Emails notificados sobre cópias finais confirmadas</h3>
-
-                        <FieldArray
-                            name="final_copies_confirmed_emails"
-                            render={(arrayHelpers) => (
-                                <div className="mb-4">
-                                    {values.final_copies_confirmed_emails &&
-                                        Boolean(values.final_copies_confirmed_emails.length) &&
-                                        values.final_copies_confirmed_emails.map((_, index) => (
-                                            <div
-                                                key={index}
-                                                className="row mb-4 mb-sm-0 mb-md-0 mb-lg-0 mb-xl-0 mb-xxl-0"
-                                            >
-                                                <div className="col-10">
-                                                    <Field
-                                                        name={`final_copies_confirmed_emails.${index}`}
-                                                        type="email"
-                                                        label="Email"
-                                                        labelHidden
-                                                        // errors={errors[`bookings_forbidden_dates.${index}.description`]}
-                                                        // touched={touched.final_copies_create_emails[index]}
-                                                    />
-                                                </div>
-                                                <div className="col-2">
-                                                    <Button
-                                                        type="button"
-                                                        className="btn-outline-secondary"
-                                                        onClick={() => arrayHelpers.remove(index)}
-                                                    >
-                                                        Remover
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        ))}
-
-                                    <Button
-                                        type="button"
-                                        className="btn-secondary"
-                                        onClick={() => arrayHelpers.push('')}
-                                    >
-                                        Adicionar email
-                                    </Button>
-                                </div>
-                            )}
                         />
                     </Section>
                     <Button type="submit" className="btn btn-lg btn-primary" isLoading={isLoading}>

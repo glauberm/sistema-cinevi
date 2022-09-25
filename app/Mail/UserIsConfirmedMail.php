@@ -11,11 +11,11 @@ class UserIsConfirmedMail extends Mailable
 {
     use Queueable;
 
-    public string $url;
+    public string $title = 'Cadastro confirmado';
 
     public string $urlText = 'Acessar';
 
-    public string $title = 'Cadastro confirmado';
+    public readonly string $url;
 
     /**
      * Create a new message instance.
@@ -24,7 +24,7 @@ class UserIsConfirmedMail extends Mailable
      */
     public function __construct()
     {
-        $this->url = \env('APP_URL') . '/entrada';
+        $this->url = \env('APP_URL').'/entrada';
     }
 
     /**
@@ -42,7 +42,7 @@ class UserIsConfirmedMail extends Mailable
 
         return $this->from($address, $name)
             ->subject($this->title)
-            ->view('emails/user/is-confirmed')
-            ->text('emails/user/is-confirmed-plain');
+            ->view('emails/user/is-confirmed--html')
+            ->text('emails/user/is-confirmed--text');
     }
 }

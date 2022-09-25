@@ -17,7 +17,7 @@ class AuthenticationRegisterRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     * 
+     *
      * @return array<string,string[]>
      */
     public function rules()
@@ -35,21 +35,21 @@ class AuthenticationRegisterRequest extends FormRequest
                 'required',
                 'numeric',
                 'min_digits:10',
-                'max_digits:11'
+                'max_digits:11',
             ],
             'identifier' => [
                 'required',
                 'numeric',
                 'unique:users,identifier',
                 'min_digits:7',
-                'max_digits:9'
+                'max_digits:9',
             ],
         ];
     }
 
     /**
      * Get the error messages for the defined validation rules.
-     * 
+     *
      * @return array<string,string>
      */
     public function messages()

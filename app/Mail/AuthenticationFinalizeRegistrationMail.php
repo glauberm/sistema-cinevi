@@ -11,20 +11,13 @@ class AuthenticationFinalizeRegistrationMail extends Mailable
 {
     use Queueable;
 
-    public string $url;
+    public string $title = 'Confirmação de email';
 
     public string $urlText = 'Confirmar email';
 
-    public string $title = 'Confirmação de email';
-
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(string $url)
+    public function __construct(public string $url)
     {
-        $this->url = \env('APP_URL') . '/entrada?url=' . \rawurlencode($url);
+        $this->url = \env('APP_URL').'/entrada?url='.\rawurlencode($url);
     }
 
     /**
@@ -42,7 +35,7 @@ class AuthenticationFinalizeRegistrationMail extends Mailable
 
         return $this->from($address, $name)
             ->subject($this->title)
-            ->view('emails/authentication/finalize-registration')
-            ->text('emails/authentication/finalize-registration-plain');
+            ->view('emails/authentication/finalize-registration--html')
+            ->text('emails/authentication/finalize-registration--text');
     }
 }

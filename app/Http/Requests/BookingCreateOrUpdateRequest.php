@@ -2,12 +2,20 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UserRole;
 use App\Rules\BookingIsNotForbiddenDateRule;
 use App\Rules\BookingIsNotWeekendRule;
 use App\Rules\BookingsAreClosedRule;
+use App\Rules\UserIsSelf;
+use App\Rules\UserOwnsProject;
+use App\Services\AuthService;
 use App\Services\ConfigurationService;
+use App\Services\ProjectService;
+use App\Services\UserService;
 use Carbon\CarbonImmutable;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class BookingCreateOrUpdateRequest extends FormRequest
@@ -18,6 +26,33 @@ class BookingCreateOrUpdateRequest extends FormRequest
      * @var bool
      */
     protected $stopOnFirstFailure = true;
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        /** @var array<string,mixed> */
+        $data = $this->validated();
+
+        if ($this->route('id')) {
+            return Gate::allows('hasRole', UserRole::Admin) ||
+                Gate::allows('hasRole', UserRole::Warehouse) ||
+                Gate::allows('isUser', $data['owner_id']);
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function failedAuthorization()
+    {
+        throw new AuthorizationException('Você não tem permissão para editar esta reserva.');
+    }
 
     /**
      * Prepare the data for validation.
@@ -48,15 +83,25 @@ class BookingCreateOrUpdateRequest extends FormRequest
      *
      * @return array<string,mixed[]>
      */
-    public function rules(ConfigurationService $configurationService)
-    {
+    public function rules(
+        ConfigurationService $configurationService,
+        AuthService $authService,
+        UserService $userService,
+        ProjectService $projectService
+    ) {
+        $ownerIdRules = ['integer', 'required', new UserIsSelf($authService, $userService)];
+
+        if ($this->route('id')) {
+            $ownerIdRules[] = new BookingsAreClosedRule($configurationService, $authService, $userService);
+        }
+
         return [
-            'owner_id' => [
+            'owner_id' => $ownerIdRules,
+            'project_id' => [
                 'integer',
                 'required',
-                new BookingsAreClosedRule($configurationService),
+                new UserOwnsProject($authService, $userService, $projectService),
             ],
-            'project_id' => ['integer', 'required'],
             'withdrawal_date' => [
                 'string',
                 'required',
@@ -115,6 +160,8 @@ class BookingCreateOrUpdateRequest extends FormRequest
     public function attributes()
     {
         return [
+            'owner_id' => 'responsável pela reserva',
+            'project_id' => 'projeto associado à reserva',
             'withdrawal_date' => 'data de retirada',
             'devolution_date' => 'data de devolução',
         ];

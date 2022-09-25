@@ -7,9 +7,7 @@
         margin-bottom: 32px;
         font-size: 16px;
         color: #212529;
-        font-family: notifications-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial,
-                        'Noto Sans', Roboto, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-                        'Noto Color Emoji';">
+        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
     <thead>
         <tr>
             @foreach($headers as $header)

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property integer              $id
+ * @property int                  $id
  * @property string               $action
  * @property string               $message
  * @property array<string,mixed>  $payload

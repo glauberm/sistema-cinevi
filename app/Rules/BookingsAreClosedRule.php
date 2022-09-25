@@ -3,30 +3,30 @@
 namespace App\Rules;
 
 use App\Models\Configuration;
-use App\Models\User;
+use App\Services\AuthService;
 use App\Services\ConfigurationService;
+use App\Services\UserService;
 use Illuminate\Contracts\Validation\InvokableRule;
-use Illuminate\Support\Facades\Auth;
 
 class BookingsAreClosedRule implements InvokableRule
 {
-    private ConfigurationService $configurationService;
-
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct(ConfigurationService $configurationService)
-    {
-        $this->configurationService = $configurationService;
+    public function __construct(
+        private readonly ConfigurationService $configurationService,
+        private readonly AuthService $authService,
+        private readonly UserService $userService,
+    ) {
     }
 
     /**
      * Run the validation rule.
      *
-     * @param  string    $attribute
-     * @param  string    $value
+     * @param  string  $attribute
+     * @param  string  $value
      * @param  \Closure  $fail
      * @return void
      */
@@ -35,16 +35,9 @@ class BookingsAreClosedRule implements InvokableRule
         /** @var Configuration $configuration */
         $configuration = $this->configurationService->get(1);
 
-        /** @var User $user */
-        $user = Auth::user();
+        $authUser = $this->authService->getAuthUserOrFail();
 
-        if (
-            $configuration->bookings_are_closed === true &&
-            (!\in_array('admin', $user->roles) ||
-                !\in_array('warehouse', $user->roles) ||
-                !\in_array('department', $user->roles) ||
-                !\in_array('professor', $user->roles))
-        ) {
+        if ($configuration->bookings_are_closed === true && $this->userService->isOrdinary($authUser)) {
             $fail('As reservas estão fechadas para alunos.');
         }
     }

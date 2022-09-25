@@ -44,19 +44,7 @@ class ConfigurationTest extends TestCase implements HasVersionsTestInterface
                     'name' => 'Dia da Confraternização Universal',
                 ],
             ],
-            'bookings_create_or_update_emails' => [
-                'glaubernm@gmail.com',
-                'glaubernm@gmail.com',
-            ],
             'final_copies_confirmation_message' => 'Lorem Ipsum Dolor Sit Amet',
-            'final_copies_create_emails' => [
-                'glaubernm@gmail.com'
-            ],
-            'final_copies_confirmed_emails' => [
-                'glaubernm@gmail.com',
-                'glaubernm@gmail.com',
-                'glaubernm@gmail.com'
-            ],
         ];
     }
 

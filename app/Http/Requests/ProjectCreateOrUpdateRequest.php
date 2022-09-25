@@ -2,8 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UserRole;
+use App\Services\ProjectService;
 use Carbon\CarbonImmutable;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectCreateOrUpdateRequest extends FormRequest
@@ -14,6 +18,32 @@ class ProjectCreateOrUpdateRequest extends FormRequest
      * @var bool
      */
     protected $stopOnFirstFailure = true;
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize(ProjectService $service)
+    {
+        if ($id = $this->route('id')) {
+            $project = $service->get(\intval($id));
+
+            return Gate::allows('hasRole', UserRole::Admin) ||
+                Gate::allows('hasRole', UserRole::Department) ||
+                Gate::allows('isUser', $project->owner_id);
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function failedAuthorization()
+    {
+        throw new AuthorizationException('Você não tem permissão para editar este projeto.');
+    }
 
     /**
      * Prepare the data for validation.

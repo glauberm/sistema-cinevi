@@ -11,23 +11,10 @@ class UserVersionEvent
 {
     use Dispatchable;
 
-    public User $user;
-
-    public string $action;
-
-    public string $message;
-
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(User $user, string $action, string $message)
-    {
-        $this->user = $user;
-
-        $this->action = $action;
-
-        $this->message = $message;
+    public function __construct(
+        public readonly User $user,
+        public readonly string $action,
+        public readonly string $message
+    ) {
     }
 }

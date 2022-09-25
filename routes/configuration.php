@@ -7,4 +7,4 @@ Route::get('configuracoes/versoes/{id}', [ConfigurationController::class, 'showV
 
 Route::get('configuracoes/{id}', [ConfigurationController::class, 'show']);
 
-Route::put('configuracoes/{id}/editar', [ConfigurationController::class, 'doUpdate']);
+Route::put('configuracoes/{id}/editar', [ConfigurationController::class, 'update']);

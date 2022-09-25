@@ -9,25 +9,11 @@ use App\Services\UserService;
 
 class UserVersionListener
 {
-    public UserService $service;
-
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct(UserService $service)
+    public function __construct(private readonly UserService $service)
     {
-        $this->service = $service;
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param UserVersionEvent  $event
-     * @return void
-     */
-    public function handle(UserVersionEvent $event)
+    public function handle(UserVersionEvent $event): void
     {
         $data = $event->user->toArray();
 

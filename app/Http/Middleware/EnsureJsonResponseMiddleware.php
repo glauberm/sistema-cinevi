@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 class EnsureJsonResponseMiddleware
 {
     /**
-     * @param  Request                                        $request
+     * @param  Request  $request
      * @param  Closure(Request): (Response|RedirectResponse)  $next
      * @return Response|RedirectResponse
      */

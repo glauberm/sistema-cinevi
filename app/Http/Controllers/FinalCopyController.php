@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Requests\FinalCopyCreateOrUpdateRequest;
+use App\Http\Requests\FinalCopyRemoveRequest;
 use App\Http\Resources\FinalCopy;
 use App\Services\FinalCopyService;
 use Illuminate\Http\JsonResponse;
@@ -17,31 +18,23 @@ class FinalCopyController extends Controller implements CrudControllerInterface,
 
     protected string $resourceClass = FinalCopy::class;
 
-    protected FinalCopyService $service;
-
-    public function __construct(FinalCopyService $service)
+    public function __construct(protected readonly FinalCopyService $service)
     {
-        $this->service = $service;
-
-        $this->middleware(Authenticate::class . ':sanctum');
+        $this->middleware(Authenticate::class.':sanctum');
     }
 
-    /**
-     * @param  FinalCopyCreateOrUpdateRequest $request
-     * @return JsonResponse
-     */
-    public function doCreate(FinalCopyCreateOrUpdateRequest $request): JsonResponse
+    public function create(FinalCopyCreateOrUpdateRequest $request): JsonResponse
     {
-        return $this->create($request);
+        return $this->doCreate($request);
     }
 
-    /**
-     * @param  FinalCopyCreateOrUpdateRequest  $request
-     * @param  integer                         $id
-     * @return JsonResponse
-     */
-    public function doUpdate(FinalCopyCreateOrUpdateRequest $request, int $id): JsonResponse
+    public function update(FinalCopyCreateOrUpdateRequest $request, int $id): JsonResponse
     {
-        return $this->update($request, $id);
+        return $this->doUpdate($request, $id);
+    }
+
+    public function remove(FinalCopyRemoveRequest $request, int $id): JsonResponse
+    {
+        return $this->doRemove($request, $id);
     }
 }

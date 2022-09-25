@@ -7,11 +7,11 @@ Route::get('reservaveis', [BookableController::class, 'paginate']);
 
 Route::get('reservaveis/versoes/{id}', [BookableController::class, 'showVersion']);
 
-Route::post('reservaveis/adicionar', [BookableController::class, 'doCreate']);
+Route::post('reservaveis/adicionar', [BookableController::class, 'create']);
 
 Route::get('reservaveis/{id}', [BookableController::class, 'show']);
 
-Route::put('reservaveis/{id}/editar', [BookableController::class, 'doUpdate']);
+Route::put('reservaveis/{id}/editar', [BookableController::class, 'update']);
 
 Route::delete('reservaveis/{id}/remover', [BookableController::class, 'remove']);
 

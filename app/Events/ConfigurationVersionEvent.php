@@ -11,23 +11,10 @@ class ConfigurationVersionEvent
 {
     use Dispatchable;
 
-    public configuration $configuration;
-
-    public string $action;
-
-    public string $message;
-
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(Configuration $configuration, string $action, string $message)
-    {
-        $this->configuration = $configuration;
-
-        $this->action = $action;
-
-        $this->message = $message;
+    public function __construct(
+        public readonly Configuration $configuration,
+        public readonly string $action,
+        public readonly string $message
+    ) {
     }
 }

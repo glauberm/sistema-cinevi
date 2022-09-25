@@ -7,6 +7,8 @@ namespace App\Services;
 use App\Events\FinalCopyVersionEvent;
 use App\Models\FinalCopy;
 use App\Models\FinalCopyProductionRole;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterface
 {
@@ -23,12 +25,43 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
 
     protected string $modelVersionIdColumnName = 'final_copy_id';
 
+    public function __construct(private readonly AuthService $authService)
+    {
+    }
+
     /**
-     * @param  FinalCopy            $finalCopy
+     * @param  int  $id
+     * @return FinalCopy
+     */
+    public function get(int $id): FinalCopy
+    {
+        return $this->modelClass::with(['owner', 'productionCategory', 'professor'])->findOrFail($id);
+    }
+
+    /**
+     * @param  Builder<FinalCopy>  $query
+     * @param  Request  $request
+     * @return Builder<FinalCopy>
+     */
+    protected function beforePagination(Builder $query, Request $request): Builder
+    {
+        if (\is_string($request->input('status'))) {
+            switch ($request->input('status')) {
+                case 'owned_only':
+                    $query->where('owner_id', '=', $this->authService->getAuthIdOrFail());
+                    break;
+            }
+        }
+
+        return $query;
+    }
+
+    /**
+     * @param  FinalCopy  $finalCopy
      * @param  array<string,mixed>  $data
      * @return FinalCopy
      */
-    public function afterCreated(FinalCopy $finalCopy, array $data): FinalCopy
+    protected function afterCreated(FinalCopy $finalCopy, array $data): FinalCopy
     {
         if (\array_key_exists('production_roles', $data) && \is_array($data['production_roles'])) {
             /** @var array<int,array<string,mixed>> */
@@ -41,11 +74,11 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
     }
 
     /**
-     * @param  FinalCopy            $finalCopy
+     * @param  FinalCopy  $finalCopy
      * @param  array<string,mixed>  $data
      * @return void
      */
-    public function afterUpdated(FinalCopy $finalCopy, array $data): void
+    protected function afterUpdated(FinalCopy $finalCopy, array $data): void
     {
         if (\array_key_exists('production_roles', $data) && \is_array($data['production_roles'])) {
             /** @var array<int,array<string,mixed>> */
@@ -62,11 +95,11 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
                 $finalCopyProductionRole = FinalCopyProductionRole::updateOrCreate(
                     [
                         'id' => $finalCopyProductionRoles[$i]['id'],
-                        'final_copy_id' => $finalCopy->id
+                        'final_copy_id' => $finalCopy->id,
                     ],
                     [
                         'order' => $i,
-                        'production_role_id' => $finalCopyProductionRoles[$i]['production_role_id']
+                        'production_role_id' => $finalCopyProductionRoles[$i]['production_role_id'],
                     ],
                 );
 

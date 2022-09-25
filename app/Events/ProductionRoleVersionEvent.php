@@ -11,23 +11,10 @@ class ProductionRoleVersionEvent
 {
     use Dispatchable;
 
-    public ProductionRole $productionRole;
-
-    public string $action;
-
-    public string $message;
-
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(ProductionRole $productionRole, string $action, string $message)
-    {
-        $this->productionRole = $productionRole;
-
-        $this->action = $action;
-
-        $this->message = $message;
+    public function __construct(
+        public readonly ProductionRole $productionRole,
+        public readonly string $action,
+        public readonly string $message
+    ) {
     }
 }

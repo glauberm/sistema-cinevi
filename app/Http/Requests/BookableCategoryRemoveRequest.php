@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Enums\UserRole;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-class RemoveRequest extends FormRequest
+class BookableCategoryRemoveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,15 +18,15 @@ class RemoveRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('hasRole', 'admin') === true;
+        return Gate::allows('hasRole', UserRole::Admin) || Gate::allows('hasRole', UserRole::Warehouse);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected function failedAuthorization()
     {
-        throw new AuthorizationException('Você não tem permissão para remover itens.');
+        throw new AuthorizationException('Você não tem permissão para remover categorias de reserváveis.');
     }
 
     /**

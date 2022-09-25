@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use Illuminate\Auth\Access\AuthorizationException;
+use App\Services\AuthService;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Hash;
 
 class AuthenticationRequestUpdateEmailRequest extends FormRequest
 {
@@ -18,45 +16,14 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
      */
     protected $stopOnFirstFailure = true;
 
-    // /**
-    //  * Determine if the user is authorized to make this request.
-    //  *
-    //  * @return bool
-    //  */
-    // public function authorize()
-    // {
-    //     $currentUser = $this->user();
-
-    //     if (\is_null($currentUser)) {
-    //         return false;
-    //     }
-
-    //     /** @var string $password */
-    //     $password = $this->input('password');
-
-    //     return Hash::check($password, $currentUser->password);
-    // }
-
-    // /**
-    //  * {@inheritDoc}
-    //  */
-    // protected function failedAuthorization()
-    // {
-    //     throw new AuthorizationException('A senha informada está incorreta.');
-    // }
-
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string,string[]>
      */
-    public function rules()
+    public function rules(AuthService $authService)
     {
-        $user = Auth::user();
-
-        if ($user === null) {
-            throw new AuthorizationException('O usuário não foi encontrado.');
-        }
+        $authId = $authService->getAuthIdOrFail();
 
         return [
             'email' => [
@@ -65,7 +32,7 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
                 'email',
                 'max:180',
                 'confirmed',
-                'unique:users,email,' . $user->id,
+                'unique:users,email,'.$authId,
             ],
             'password' => ['required', 'string', 'min:8', 'current_password'],
         ];

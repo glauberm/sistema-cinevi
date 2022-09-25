@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
@@ -32,7 +33,7 @@ class UserTest extends TestCase implements CrudTestInterface, HasVersionsTestInt
             'identifier' => '991304856',
             'is_enabled' => false,
             'is_confirmed' => false,
-            'roles' => ['user', 'admin'],
+            'roles' => [UserRole::Admin],
         ];
     }
 
@@ -52,27 +53,27 @@ class UserTest extends TestCase implements CrudTestInterface, HasVersionsTestInt
     protected function paginateSanctumActingAs(): void
     {
         Sanctum::actingAs(User::factory()
-            ->state(['roles' => ['user', 'admin']])
+            ->state(['roles' => [UserRole::Admin]])
             ->createOne());
     }
 
     protected function showSanctumActingAs(): void
     {
         Sanctum::actingAs(User::factory()
-            ->state(['roles' => ['user', 'admin']])
+            ->state(['roles' => [UserRole::Admin]])
             ->createOne());
     }
 
     protected function updateSanctumActingAs(): void
     {
         Sanctum::actingAs(User::factory()
-            ->state(['roles' => ['user', 'admin']])
+            ->state(['roles' => [UserRole::Admin]])
             ->createOne());
     }
 
     protected function removeSanctumActingAs(): void
     {
-        Sanctum::actingAs(User::factory()->state(['roles' => ['user', 'admin']])->createOne());
+        Sanctum::actingAs(User::factory()->state(['roles' => [UserRole::Admin]])->createOne());
     }
 
     /**

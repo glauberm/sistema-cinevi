@@ -11,23 +11,10 @@ class FinalCopyVersionEvent
 {
     use Dispatchable;
 
-    public FinalCopy $finalCopy;
-
-    public string $action;
-
-    public string $message;
-
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(FinalCopy $finalCopy, string $action, string $message)
-    {
-        $this->finalCopy = $finalCopy;
-
-        $this->action = $action;
-
-        $this->message = $message;
+    public function __construct(
+        public readonly FinalCopy $finalCopy,
+        public readonly string $action,
+        public readonly string $message
+    ) {
     }
 }

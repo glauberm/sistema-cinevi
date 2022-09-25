@@ -9,27 +9,19 @@ use App\Services\FinalCopyService;
 
 class FinalCopyVersionListener
 {
-    public FinalCopyService $service;
-
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct(FinalCopyService $service)
+    public function __construct(private readonly FinalCopyService $service)
     {
-        $this->service = $service;
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param FinalCopyVersionEvent  $event
-     * @return void
-     */
-    public function handle(FinalCopyVersionEvent $event)
+    public function handle(FinalCopyVersionEvent $event): void
     {
         $data = $event->finalCopy->toArray();
+
+        $data['owner'] = $event->finalCopy->owner->toArray();
+
+        $data['production_category'] = $event->finalCopy->productionCategory->toArray();
+
+        $data['professor'] = $event->finalCopy->professor->toArray();
 
         $this->service->registerVersion($event->finalCopy, $event->action, $event->message, $data);
     }

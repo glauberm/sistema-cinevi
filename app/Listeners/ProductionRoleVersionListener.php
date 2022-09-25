@@ -9,25 +9,11 @@ use App\Services\ProductionRoleService;
 
 class ProductionRoleVersionListener
 {
-    public ProductionRoleService $service;
-
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct(ProductionRoleService $service)
+    public function __construct(private readonly ProductionRoleService $service)
     {
-        $this->service = $service;
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param ProductionRoleVersionEvent  $event
-     * @return void
-     */
-    public function handle(ProductionRoleVersionEvent $event)
+    public function handle(ProductionRoleVersionEvent $event): void
     {
         $data = $event->productionRole->toArray();
 

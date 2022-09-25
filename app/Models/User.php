@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property integer   $id
+ * @property int       $id
  * @property string    $name
  * @property string    $email
  * @property string    $password
@@ -55,7 +55,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token'
+        'remember_token',
     ];
 
     /**

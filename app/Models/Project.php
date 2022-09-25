@@ -6,26 +6,34 @@ namespace App\Models;
 
 use App\Enums\ProjectUserRole;
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property int          $id
- * @property string           $title
- * @property string           $synopsis
- * @property string[]         $genres
- * @property ?string          $capture_format
- * @property ?string          $capture_notes
- * @property ?string          $venues
- * @property CarbonImmutable  $pre_production_date
- * @property CarbonImmutable  $production_date
- * @property CarbonImmutable  $post_production_date
- * @property bool             $has_attended_photography_discipline
- * @property bool             $has_attended_sound_discipline
- * @property bool             $has_attended_art_discipline
- * @property User             $professor
+ * @property int                 $id
+ * @property string              $title
+ * @property string              $synopsis
+ * @property string[]            $genres
+ * @property ?string             $capture_format
+ * @property ?string             $capture_notes
+ * @property ?string             $venues
+ * @property CarbonImmutable     $pre_production_date
+ * @property CarbonImmutable     $production_date
+ * @property CarbonImmutable     $post_production_date
+ * @property bool                $has_attended_photography_discipline
+ * @property bool                $has_attended_sound_discipline
+ * @property bool                $has_attended_art_discipline
+ * @property User                $owner
+ * @property ProductionCategory  $productionCategory
+ * @property User                $professor
+ * @property Collection<User>    $directors
+ * @property Collection<User>    $producers
+ * @property Collection<User>    $photographyDirectors
+ * @property Collection<User>    $soundDirectors
+ * @property Collection<User>    $artDirectors
  */
 class Project extends Model
 {

@@ -17,22 +17,13 @@ class ConfigurationController extends Controller implements CrudControllerInterf
 
     protected string $resourceClass = Configuration::class;
 
-    protected ConfigurationService $service;
-
-    public function __construct(ConfigurationService $service)
+    public function __construct(protected readonly ConfigurationService $service)
     {
-        $this->service = $service;
-
-        $this->middleware(Authenticate::class . ':sanctum');
+        $this->middleware(Authenticate::class.':sanctum');
     }
 
-    /**
-     * @param  ConfigurationUpdateRequest  $request
-     * @param  integer                     $id
-     * @return JsonResponse
-     */
-    public function doUpdate(ConfigurationUpdateRequest $request, int $id): JsonResponse
+    public function update(ConfigurationUpdateRequest $request, int $id): JsonResponse
     {
-        return $this->update($request, $id);
+        return $this->doUpdate($request, $id);
     }
 }

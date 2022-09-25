@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UserRole;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class BookableCreateOrUpdateRequest extends FormRequest
@@ -15,6 +18,24 @@ class BookableCreateOrUpdateRequest extends FormRequest
     protected $stopOnFirstFailure = true;
 
     /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return Gate::allows('hasRole', UserRole::Admin) || Gate::allows('hasRole', UserRole::Warehouse);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function failedAuthorization()
+    {
+        throw new AuthorizationException('Você não tem permissão para criar ou editar reserváveis.');
+    }
+
+    /**
      * Prepare the data for validation.
      *
      * @return void
@@ -23,7 +44,7 @@ class BookableCreateOrUpdateRequest extends FormRequest
     {
         $bookableCategory = $this->input('bookable_category');
 
-        if (!\is_array($bookableCategory) || !\array_key_exists('id', $bookableCategory)) {
+        if (! \is_array($bookableCategory) || ! \array_key_exists('id', $bookableCategory)) {
             throw new BadRequestHttpException('Os dados da categoria de reservável estão em um formato inválido.');
         }
 
@@ -48,7 +69,7 @@ class BookableCreateOrUpdateRequest extends FormRequest
             'is_return_overdue' => ['required', 'boolean'],
             'bookable_category_id' => ['required', 'integer'],
             'users' => ['nullable', 'array'],
-            'users.*.id' => ['nullable', 'integer']
+            'users.*.id' => ['nullable', 'integer'],
         ];
     }
 

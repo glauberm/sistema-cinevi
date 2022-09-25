@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Requests\ProductionRoleCreateOrUpdateRequest;
+use App\Http\Requests\ProductionRoleRemoveRequest;
 use App\Http\Resources\ProductionRole;
 use App\Services\ProductionRoleService;
 use Illuminate\Http\JsonResponse;
@@ -17,31 +18,23 @@ class ProductionRoleController extends Controller implements CrudControllerInter
 
     protected string $resourceClass = ProductionRole::class;
 
-    protected ProductionRoleService $service;
-
-    public function __construct(ProductionRoleService $service)
+    public function __construct(protected readonly ProductionRoleService $service)
     {
-        $this->service = $service;
-
-        $this->middleware(Authenticate::class . ':sanctum');
+        $this->middleware(Authenticate::class.':sanctum');
     }
 
-    /**
-     * @param  ProductionRoleCreateOrUpdateRequest  $request
-     * @return JsonResponse
-     */
-    public function doCreate(ProductionRoleCreateOrUpdateRequest $request): JsonResponse
+    public function create(ProductionRoleCreateOrUpdateRequest $request): JsonResponse
     {
-        return $this->create($request);
+        return $this->doCreate($request);
     }
 
-    /**
-     * @param  ProductionRoleCreateOrUpdateRequest  $request
-     * @param  integer                              $id
-     * @return JsonResponse
-     */
-    public function doUpdate(ProductionRoleCreateOrUpdateRequest $request, int $id): JsonResponse
+    public function update(ProductionRoleCreateOrUpdateRequest $request, int $id): JsonResponse
     {
-        return $this->update($request, $id);
+        return $this->doUpdate($request, $id);
+    }
+
+    public function remove(ProductionRoleRemoveRequest $request, int $id): JsonResponse
+    {
+        return $this->doRemove($request, $id);
     }
 }

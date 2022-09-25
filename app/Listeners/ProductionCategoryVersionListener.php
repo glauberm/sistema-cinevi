@@ -9,25 +9,11 @@ use App\Services\ProductionCategoryService;
 
 class ProductionCategoryVersionListener
 {
-    public ProductionCategoryService $service;
-
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct(ProductionCategoryService $service)
+    public function __construct(private readonly ProductionCategoryService $service)
     {
-        $this->service = $service;
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param ProductionCategoryVersionEvent  $event
-     * @return void
-     */
-    public function handle(ProductionCategoryVersionEvent $event)
+    public function handle(ProductionCategoryVersionEvent $event): void
     {
         $data = $event->productionCategory->toArray();
 

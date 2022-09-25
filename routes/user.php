@@ -9,8 +9,8 @@ Route::get('usuarios/versoes/{id}', [UserController::class, 'showVersion']);
 
 Route::get('usuarios/{id}', [UserController::class, 'show']);
 
-Route::put('usuarios/{id}/editar', [UserController::class, 'doUpdate']);
+Route::put('usuarios/{id}/editar', [UserController::class, 'update']);
 
-Route::delete('usuarios/{id}/remover', [UserController::class, 'doRemove']);
+Route::delete('usuarios/{id}/remover', [UserController::class, 'remove']);
 
 Route::get('usuarios/{id}/versoes', [UserController::class, 'paginateVersions']);

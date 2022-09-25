@@ -11,23 +11,10 @@ class ProjectVersionEvent
 {
     use Dispatchable;
 
-    public Project $project;
-
-    public string $action;
-
-    public string $message;
-
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(Project $project, string $action, string $message)
-    {
-        $this->project = $project;
-
-        $this->action = $action;
-
-        $this->message = $message;
+    public function __construct(
+        public readonly Project $project,
+        public readonly string $action,
+        public readonly string $message
+    ) {
     }
 }

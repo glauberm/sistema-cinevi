@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 trait HasVersionsServiceTrait
 {
     /**
-     * @param  integer               $id
+     * @param  int  $id
      * @return LengthAwarePaginator
      */
     public function paginateVersions(int $id): LengthAwarePaginator
@@ -31,8 +31,9 @@ trait HasVersionsServiceTrait
     }
 
     /**
-     * @param  integer                 $id
+     * @param  int  $id
      * @return Version
+     *
      * @throws ModelNotFoundException
      */
     public function getVersion(int $id): Version
@@ -44,9 +45,9 @@ trait HasVersionsServiceTrait
      * Cria uma nova versão de um item. Se já houver versões do item e a versão for de edição, checa se houveram
      * alterações no item antes de criar a nova versão.
      *
-     * @param  Model                $model
-     * @param  string               $action
-     * @param  string               $message
+     * @param  Model  $model
+     * @param  string  $action
+     * @param  string  $message
      * @param  array<string,mixed>  $payload
      * @return void
      */
@@ -54,7 +55,7 @@ trait HasVersionsServiceTrait
     {
         $modelId = $model->getAttribute('id');
 
-        if (!\is_int($modelId)) {
+        if (! \is_int($modelId)) {
             throw new \InvalidArgumentException('O identificador do modelo deve ser um inteiro.');
         }
 
@@ -78,10 +79,10 @@ trait HasVersionsServiceTrait
     }
 
     /**
-     * @param integer              $id
-     * @param string               $action
-     * @param string               $message
-     * @param array<string,mixed>  $payload
+     * @param  int  $id
+     * @param  string  $action
+     * @param  string  $message
+     * @param  array<string,mixed>  $payload
      * @return void
      */
     private function createVersion(int $id, string $action, string $message, array $payload): void
@@ -93,8 +94,8 @@ trait HasVersionsServiceTrait
             'user_id' => Auth::id(),
             'user_ip' => request()->ip(),
             'user_agent' => request()->header('User-Agent'),
-            'user_string' => Auth::user() ? Auth::user()->email : 'not_authenticated',
-            'datetime' => CarbonImmutable::now()
+            'user_string' => Auth::user() ? Auth::user()->name : 'not_authenticated',
+            'datetime' => CarbonImmutable::now(),
         ]);
 
         DB::table($this->modelVersionTableName)->insert([
@@ -104,14 +105,14 @@ trait HasVersionsServiceTrait
     }
 
     /**
-     * @param  integer  $id
+     * @param  int  $id
      * @return Builder
      */
     private function queryVersionsByModel(int $id): Builder
     {
         return DB::table($this->modelVersionTableName)
-            ->join('versions', 'versions.id', '=', $this->modelVersionTableName . '.version_id')
-            ->where($this->modelVersionTableName . '.' . $this->modelVersionIdColumnName, '=', $id)
+            ->join('versions', 'versions.id', '=', $this->modelVersionTableName.'.version_id')
+            ->where($this->modelVersionTableName.'.'.$this->modelVersionIdColumnName, '=', $id)
             ->orderBy('versions.datetime', 'desc');
     }
 }

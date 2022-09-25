@@ -19,12 +19,7 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Testa o login.
-     *
-     * @return void
-     */
-    public function testLogin()
+    public function testLogin(): void
     {
         $user = User::factory()
             ->state(['is_enabled' => true])
@@ -39,12 +34,7 @@ class AuthenticationTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * Testa o login com uma senha errada, esperando um erro.
-     *
-     * @return void
-     */
-    public function testLoginErrorWithWrongPassword()
+    public function testLoginErrorWithWrongPassword(): void
     {
         $user = User::factory()->createOne();
 
@@ -56,12 +46,7 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(401);
     }
 
-    /**
-     * Testa o login.
-     *
-     * @return void
-     */
-    public function testLogout()
+    public function testLogout(): void
     {
         Sanctum::actingAs(User::factory()->createOne());
 
@@ -70,12 +55,7 @@ class AuthenticationTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * Testa a exibição do usuário autenticado.
-     *
-     * @return void
-     */
-    public function testGetAuthenticatedUser()
+    public function testGetAuthenticatedUser(): void
     {
         Sanctum::actingAs(User::factory()->createOne());
 
@@ -84,12 +64,7 @@ class AuthenticationTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * Testa o envio da requisição de cadastro.
-     *
-     * @return void
-     */
-    public function testRegister()
+    public function testRegister(): void
     {
         Mail::fake();
 
@@ -116,12 +91,7 @@ class AuthenticationTest extends TestCase
         Mail::assertQueued(AuthenticationFinalizeRegistrationMail::class, 1);
     }
 
-    /**
-     * Testa a redefinição de senha.
-     *
-     * @return void
-     */
-    public function testFinalizeRegistration()
+    public function testFinalizeRegistration(): void
     {
         $user = User::factory()->state(['is_enabled' => false])->createOne();
 
@@ -140,12 +110,7 @@ class AuthenticationTest extends TestCase
         $this->assertDatabaseHas('users', ['id' => $user->id, 'is_enabled' => true]);
     }
 
-    /**
-     * Testa o envio da requisição de redefinição de senha.
-     *
-     * @return void
-     */
-    public function testRequestResetPassword()
+    public function testRequestResetPassword(): void
     {
         Mail::fake();
 
@@ -162,12 +127,7 @@ class AuthenticationTest extends TestCase
         Mail::assertQueued(AuthenticationResetPasswordMail::class, 1);
     }
 
-    /**
-     * Testa o envio da requisição de redefinição de senha com o email errado.
-     *
-     * @return void
-     */
-    public function testRequestResetPasswordErrorWithWrongEmail()
+    public function testRequestResetPasswordErrorWithWrongEmail(): void
     {
         $response = $this->post('api/solicitar-redefinir-senha', [
             'email' => 'email.errado@gmail.com',
@@ -176,12 +136,7 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(404);
     }
 
-    /**
-     * Testa a redefinição de senha.
-     *
-     * @return void
-     */
-    public function testResetPassword()
+    public function testResetPassword(): void
     {
         $user = User::factory()->createOne();
 
@@ -199,12 +154,7 @@ class AuthenticationTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * Testa o envio da requisição de atualização de email.
-     *
-     * @return void
-     */
-    public function testRequestUpdateEmail()
+    public function testRequestUpdateEmail(): void
     {
         Mail::fake();
 
@@ -227,12 +177,7 @@ class AuthenticationTest extends TestCase
         Mail::assertQueued(AuthenticationUpdateEmailMail::class, 1);
     }
 
-    /**
-     * Testa a atualização de email.
-     *
-     * @return void
-     */
-    public function testUpdateEmail()
+    public function testUpdateEmail(): void
     {
         $user = User::factory()->createOne();
 
@@ -251,12 +196,7 @@ class AuthenticationTest extends TestCase
         $this->assertDatabaseHas('users', ['id' => $user->id, 'email' => $user->email]);
     }
 
-    /**
-     * Testa a atualização de senha.
-     *
-     * @return void
-     */
-    public function testUpdatePassword()
+    public function testUpdatePassword(): void
     {
         $user = User::factory()->createOne();
 

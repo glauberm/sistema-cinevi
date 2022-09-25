@@ -26,19 +26,7 @@ class ConfigurationFactory extends Factory
                     'name' => $this->faker->word(),
                 ],
             ],
-            'bookings_create_or_update_emails' => [
-                $this->faker->email(),
-                $this->faker->email(),
-            ],
             'final_copies_confirmation_message' => $this->faker->text(),
-            'final_copies_create_emails' => [
-                $this->faker->email(),
-            ],
-            'final_copies_confirmed_emails' => [
-                $this->faker->email(),
-                $this->faker->email(),
-                $this->faker->email(),
-            ],
         ];
     }
 }

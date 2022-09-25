@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UserRole;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class ProductionRoleCreateOrUpdateRequest extends FormRequest
 {
@@ -12,6 +15,24 @@ class ProductionRoleCreateOrUpdateRequest extends FormRequest
      * @var bool
      */
     protected $stopOnFirstFailure = true;
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return Gate::allows('hasRole', UserRole::Admin) || Gate::allows('hasRole', UserRole::Department);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function failedAuthorization()
+    {
+        throw new AuthorizationException('Você não tem permissão para criar ou editar funções.');
+    }
 
     /**
      * Get the validation rules that apply to the request.

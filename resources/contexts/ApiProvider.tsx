@@ -71,7 +71,7 @@ export function handleError(error: AxiosError) {
             case 405:
                 return 'Método de requisição incorreto.';
             case 429:
-                return 'Muitas requisições. Tente novamente em 15 minutos.';
+                return 'Muitas requisições. Tente novamente em 5 minutos.';
             case 500:
                 return 'Erro no servidor. A falha foi registrada.';
             default:

@@ -23,7 +23,7 @@ class BookableService implements CrudServiceInterface, HasVersionsServiceInterfa
     protected string $modelVersionIdColumnName = 'bookable_id';
 
     /**
-     * @param  integer                 $id
+     * @param  int  $id
      * @return Bookable
      */
     public function get(int $id): Bookable
@@ -32,7 +32,7 @@ class BookableService implements CrudServiceInterface, HasVersionsServiceInterfa
     }
 
     /**
-     * @param  Bookable             $bookable
+     * @param  Bookable  $bookable
      * @param  array<string,mixed>  $data
      * @return Bookable
      */
@@ -49,7 +49,7 @@ class BookableService implements CrudServiceInterface, HasVersionsServiceInterfa
     }
 
     /**
-     * @param  Bookable             $bookable
+     * @param  Bookable  $bookable
      * @param  array<string,mixed>  $data
      * @return void
      */

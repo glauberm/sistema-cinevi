@@ -20,13 +20,7 @@ return new class extends Migration
 
             $table->json('bookings_forbidden_dates');
 
-            $table->json('bookings_create_or_update_emails');
-
             $table->text('final_copies_confirmation_message');
-
-            $table->json('final_copies_create_emails');
-
-            $table->json('final_copies_confirmed_emails');
         });
     }
 

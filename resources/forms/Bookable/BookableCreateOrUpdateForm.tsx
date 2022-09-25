@@ -109,6 +109,7 @@ export default function BookableCreateOrUpdateForm(props) {
                                 type="text"
                                 errors={errors.inventory_number}
                                 touched={touched.inventory_number}
+                                messages={['Não obrigatório']}
                             />
                         </div>
                         <div className="col-md">
@@ -118,6 +119,7 @@ export default function BookableCreateOrUpdateForm(props) {
                                 type="text"
                                 errors={errors.serial_number}
                                 touched={touched.serial_number}
+                                messages={['Não obrigatório']}
                             />
                         </div>
                     </div>
@@ -129,6 +131,7 @@ export default function BookableCreateOrUpdateForm(props) {
                                 as="textarea"
                                 errors={errors.accessories}
                                 touched={touched.accessories}
+                                messages={['Não obrigatório']}
                             />
                         </div>
                         <div className="col-md">
@@ -138,6 +141,7 @@ export default function BookableCreateOrUpdateForm(props) {
                                 as="textarea"
                                 errors={errors.notes}
                                 touched={touched.notes}
+                                messages={['Não obrigatório']}
                             />
                         </div>
                     </div>
@@ -152,6 +156,7 @@ export default function BookableCreateOrUpdateForm(props) {
                                 touched={touched.users}
                                 selected={values.users}
                                 onChange={(users) => setFieldValue('users', users)}
+                                messages={['Não obrigatório']}
                             >
                                 {(selected, selectFn) => <UserCollection selected={selected} selectFn={selectFn} />}
                             </SelectMultiple>

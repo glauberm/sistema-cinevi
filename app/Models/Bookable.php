@@ -4,21 +4,25 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property integer   $id
- * @property string    $identifier
- * @property string    $name
- * @property ?string   $inventory_number
- * @property ?string   $serial_number
- * @property ?string   $accessories
- * @property ?string   $notes
- * @property bool      $is_under_maintenance
- * @property bool      $is_return_overdue
+ * @property int                  $id
+ * @property string               $identifier
+ * @property string               $name
+ * @property ?string              $inventory_number
+ * @property ?string              $serial_number
+ * @property ?string              $accessories
+ * @property ?string              $notes
+ * @property bool                 $is_under_maintenance
+ * @property bool                 $is_return_overdue
+ * @property BookableCategory     $bookableCategory
+ * @property Collection<User>     $users
+ * @property Collection<Booking>  $bookings
  */
 class Bookable extends Model
 {

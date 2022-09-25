@@ -9,27 +9,19 @@ use App\Services\BookableService;
 
 class BookableVersionListener
 {
-    public BookableService $service;
-
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct(BookableService $service)
+    public function __construct(private readonly BookableService $service)
     {
-        $this->service = $service;
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param BookableVersionEvent  $event
-     * @return void
-     */
-    public function handle(BookableVersionEvent $event)
+    public function handle(BookableVersionEvent $event): void
     {
-        $data = $event->bookable->toArray();
+        $data = $event->bookable->makeHidden('bookable_category_id')->toArray();
+
+        $data['bookable_category'] = $event->bookable->bookableCategory->toArray();
+
+        $data['users'] = $event->bookable->users->toArray();
+
+        $data['bookings'] = $event->bookable->bookings->toArray();
 
         $this->service->registerVersion($event->bookable, $event->action, $event->message, $data);
     }

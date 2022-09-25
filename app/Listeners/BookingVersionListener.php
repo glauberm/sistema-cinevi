@@ -9,27 +9,19 @@ use App\Services\BookingService;
 
 class BookingVersionListener
 {
-    public BookingService $service;
-
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct(BookingService $service)
+    public function __construct(private readonly BookingService $service)
     {
-        $this->service = $service;
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param BookingVersionEvent  $event
-     * @return void
-     */
-    public function handle(BookingVersionEvent $event)
+    public function handle(BookingVersionEvent $event): void
     {
         $data = $event->booking->toArray();
+
+        $data['owner'] = $event->booking->owner->toArray();
+
+        $data['project'] = $event->booking->project->toArray();
+
+        $data['bookables'] = $event->booking->bookables->toArray();
 
         $this->service->registerVersion($event->booking, $event->action, $event->message, $data);
     }

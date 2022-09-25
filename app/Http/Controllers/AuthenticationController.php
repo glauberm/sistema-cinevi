@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Http\Middleware\Authenticate;
 use App\Http\Requests\AuthenticationLoginRequest;
 use App\Http\Requests\AuthenticationRegisterRequest;
@@ -15,7 +16,9 @@ use App\Http\Resources\User;
 use App\Mail\AuthenticationFinalizeRegistrationMail;
 use App\Mail\AuthenticationResetPasswordMail;
 use App\Mail\AuthenticationUpdateEmailMail;
+use App\Mail\UserPendingApprovalMail;
 use App\Models\User as UserModel;
+use App\Services\AuthService;
 use App\Services\UserService;
 use Carbon\CarbonImmutable;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -32,9 +35,7 @@ use Illuminate\Support\Facades\URL;
 
 class AuthenticationController extends Controller
 {
-    private UserService $userService;
-
-    public function __construct(UserService $userService)
+    public function __construct(private readonly UserService $userService, private readonly AuthService $authService)
     {
         $this->middleware(Authenticate::class.':sanctum')->except([
             'login', 'register', 'finalizeRegistration', 'getAuthenticatedUser', 'requestResetPassword', 'resetPassword',
@@ -43,41 +44,42 @@ class AuthenticationController extends Controller
         $this->middleware(ValidateSignature::class)->only(['finalizeRegistration', 'resetPassword', 'updateEmail']);
 
         if (! App::environment('testing')) {
-            $this->middleware(ThrottleRequests::class.':5,15')->only(['login']);
+            $this->middleware(ThrottleRequests::class.':5,5')->only(['login']);
         }
-
-        $this->userService = $userService;
     }
 
-    /**
-     * @param  AuthenticationLoginRequest  $request
-     * @return JsonResponse
-     */
     public function login(AuthenticationLoginRequest $request): JsonResponse
     {
         /** @var array{email:string,password:string} */
         $data = $request->validated();
 
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
-            if (Auth::user() !== null && Auth::user()->is_enabled && Auth::user()->is_confirmed) {
+            try {
+                $authUser = $this->authService->getAuthUserOrFail();
+            } catch (AuthorizationException $e) {
+                $this->authService->logout();
+                throw $e;
+            }
+
+            if ($authUser->is_enabled && $authUser->is_confirmed) {
                 return response()->json([
                     'message' => 'Você entrou no sistema.',
-                    'resource' => new User(Auth::user()),
+                    'resource' => new User($authUser),
                 ]);
             }
 
-            if (Auth::user() !== null && ! Auth::user()->is_enabled) {
-                $this->sendFinalizeRegistrationMail(Auth::user());
+            if (! $authUser->is_enabled) {
+                $this->sendFinalizeRegistrationMail($authUser);
 
-                Auth::guard('web')->logout();
+                $this->authService->logout();
 
                 throw new AuthenticationException(
-                    'Seu email ainda não foi confirmado. O email de confirmação foi reenviado.'
+                    'Seu email ainda não foi confirmado. O email de confirmação foi reenviado e deve chegar em 15 minutos.'
                 );
             }
 
-            if (Auth::user() !== null && ! Auth::user()->is_confirmed) {
-                Auth::guard('web')->logout();
+            if (! $authUser->is_confirmed) {
+                $this->authService->logout();
 
                 throw new AuthenticationException(
                     'Seu cadastro ainda não foi confirmado pelo departamento. Quando ele for, você receberá um email.'
@@ -88,34 +90,24 @@ class AuthenticationController extends Controller
         throw new AuthenticationException('O email ou senha estão incorretos.');
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function logout(): JsonResponse
     {
-        Auth::guard('web')->logout();
+        $this->authService->logout();
 
         return response()->json(['message' => 'Você saiu do sistema.']);
     }
 
-    /**
-     * @return JsonResponse|User
-     */
     public function getAuthenticatedUser(): JsonResponse|User
     {
         $user = Auth::user();
 
-        if ($user === null) {
+        if (\is_null($user)) {
             return response()->json(['message' => 'Não há nenhum usuário autenticado.', 'data' => false], 404);
         } else {
-            return new User(Auth::user());
+            return new User($user);
         }
     }
 
-    /**
-     * @param  AuthenticationRegisterRequest  $request
-     * @return JsonResponse
-     */
     public function register(AuthenticationRegisterRequest $request): JsonResponse
     {
         /** @var array<string,mixed> */
@@ -123,7 +115,7 @@ class AuthenticationController extends Controller
 
         $data['is_enabled'] = false;
         $data['is_confirmed'] = false;
-        $data['roles'] = ['user'];
+        $data['roles'] = [];
 
         /** @var UserModel $user */
         $user = $this->userService->create($data, 'register', 'O usuário foi cadastrado.');
@@ -131,55 +123,32 @@ class AuthenticationController extends Controller
         $this->sendFinalizeRegistrationMail($user);
 
         return response()->json([
-            'message' => "Foi enviado para {$user->email} um link válido por 60 minutos para você finalizar o seu
-             cadastro.",
+            'message' => "Foi enviado para {$user->email} um link válido por 60 minutos para você finalizar o seu cadastro. O email deve chegar em 15 minutos.",
         ]);
     }
 
-    /**
-     * @param  int  $id
-     * @return JsonResponse
-     */
     public function finalizeRegistration(int $id): JsonResponse
     {
         /** @var UserModel $user */
         $user = $this->userService->get($id);
 
-        if ($user->is_enabled === true) {
-            return response()->json([
-                'message' => 'Seu email já foi confirmado.',
-            ]);
+        if ($user->is_enabled) {
+            return response()->json(['message' => 'Seu email já foi confirmado.']);
         }
 
-        $this->userService->update(
-            ['is_enabled' => true],
-            $id,
-            'finalize_registration',
-            'O cadastro do usuário foi finalizado.'
-        );
+        $this->userService->update(['is_enabled' => true], $id, 'finalize_registration', 'O cadastro do usuário foi finalizado.');
 
-        $departmentUsers = $this->userService->getAllWithRole('department');
+        $departmentUsers = $this->userService->getAllWithRole(UserRole::Department);
 
         foreach ($departmentUsers as $user) {
-            $url = URL::temporarySignedRoute(
-                'authentication.reset_password',
-                CarbonImmutable::now()->addMinutes(60),
-                ['id' => $user->id]
-            );
-
-            Mail::to($user->email)->queue(new AuthenticationResetPasswordMail($url));
+            Mail::to($user->email)->queue(new UserPendingApprovalMail($user));
         }
 
         return response()->json([
-            'message' => 'Seu email foi confirmado, mas o departamento ainda precisa confirmar seu cadastro. Você 
-            receberá um email em breve.',
+            'message' => 'Seu email foi confirmado, mas o departamento ainda precisa aprovar seu cadastro. Você receberá um email nos próximos dias.',
         ]);
     }
 
-    /**
-     * @param  AuthenticationRequestResetPasswordRequest  $request
-     * @return JsonResponse
-     */
     public function requestResetPassword(AuthenticationRequestResetPasswordRequest $request): JsonResponse
     {
         /** @var array{email:string} */
@@ -193,24 +162,15 @@ class AuthenticationController extends Controller
             throw new ModelNotFoundException('Um usuário com esse email não foi encontrado no sistema.');
         }
 
-        $url = URL::temporarySignedRoute(
-            'authentication.reset_password',
-            CarbonImmutable::now()->addMinutes(60),
-            ['id' => $user->id]
-        );
+        $url = URL::temporarySignedRoute('authentication.reset_password', CarbonImmutable::now()->addMinutes(60), ['id' => $user->id]);
 
         Mail::to($user->email)->queue(new AuthenticationResetPasswordMail($url));
 
         return response()->json([
-            'message' => "Foi enviado para {$email} um link válido por 60 minutos para redefinição de senha.",
+            'message' => "Foi enviado para {$email} um link válido por 60 minutos para redefinição de senha. O email deve chegar em 15 minutos.",
         ]);
     }
 
-    /**
-     * @param  AuthenticationResetPasswordRequest  $request
-     * @param  int  $id
-     * @return JsonResponse
-     */
     public function resetPassword(AuthenticationResetPasswordRequest $request, int $id): JsonResponse
     {
         /** @var array<string,mixed> */
@@ -223,106 +183,57 @@ class AuthenticationController extends Controller
         ]);
     }
 
-    /**
-     * @param  AuthenticationRequestUpdateEmailRequest  $request
-     * @return JsonResponse
-     */
     public function requestUpdateEmail(AuthenticationRequestUpdateEmailRequest $request): JsonResponse
     {
+        $authId = $this->authService->getAuthIdOrFail();
+
         /** @var array<string,mixed> */
         $data = $request->validated();
-
-        $currentUserId = Auth::id();
-
-        if (\is_null($currentUserId)) {
-            throw new AuthorizationException('O id do usuário atual não foi encontrado.');
-        }
 
         /** @var string */
         $email = $data['email'];
 
-        $url = URL::temporarySignedRoute(
-            'authentication.update_email',
-            CarbonImmutable::now()->addMinutes(60),
-            ['id' => $currentUserId, 'email' => $email]
-        );
+        $expiration = CarbonImmutable::now()->addMinutes(60);
+
+        $url = URL::temporarySignedRoute('authentication.update_email', $expiration, ['id' => $authId, 'email' => $email]);
 
         Mail::to($email)->queue(new AuthenticationUpdateEmailMail($url));
 
         return response()->json([
-            'message' => "Foi enviado para {$email} um link válido por 60 minutos para finalizar a atualização do seu email.",
+            'message' => "Foi enviado para {$email} um link válido por 60 minutos para finalizar a atualização do seu email. O email deve chegar em 15 minutos.",
         ]);
     }
 
-    /**
-     * @param  int  $id
-     * @param  string  $email
-     * @return JsonResponse
-     */
     public function updateEmail(int $id, string $email): JsonResponse
     {
-        $currentUserId = Auth::id();
+        $authId = $this->authService->getAuthIdOrFail();
 
-        if (\is_null($currentUserId)) {
-            throw new AuthorizationException('O id do usuário atual não foi encontrado.');
-        }
+        $this->userService->update(['email' => $email], $authId, 'update_email', 'O email do usuário foi atualizado.');
 
-        if ($currentUserId !== $id) {
-            throw new AuthorizationException('O id do usuário atual não bate com o id da URL.');
-        }
-
-        $this->userService->update(
-            ['email' => $email],
-            \intval($currentUserId),
-            'update_email',
-            'O email do usuário foi atualizado.'
-        );
-
-        Auth::guard('web')->logout();
+        $this->authService->logout();
 
         return response()->json(['message' => 'email editado com sucesso. Por favor, entre com seu novo email.']);
     }
 
-    /**
-     * @param  AuthenticationUpdatePasswordRequest  $request
-     * @return JsonResponse
-     */
     public function updatePassword(AuthenticationUpdatePasswordRequest $request): JsonResponse
     {
+        $authId = $this->authService->getAuthIdOrFail();
+
         /** @var array<string,mixed> */
         $data = $request->validated();
 
-        $currentUserId = Auth::id();
-
-        if (\is_null($currentUserId)) {
-            throw new AuthorizationException('O id do usuário atual não foi encontrado.');
-        }
-
         $password = $data['new_password'];
 
-        $this->userService->update(
-            ['password' => $password],
-            \intval($currentUserId),
-            'update_password',
-            'A senha do usuário foi atualizada.',
-        );
+        $this->userService->update(['password' => $password], $authId, 'update_password', 'A senha do usuário foi atualizada.');
 
-        Auth::guard('web')->logout();
+        $this->authService->logout();
 
         return response()->json(['message' => 'Senha editada com sucesso. Por favor, entre com sua nova senha.']);
     }
 
-    /**
-     * @param  UserModel  $user
-     * @return void
-     */
     private function sendFinalizeRegistrationMail(UserModel $user): void
     {
-        $url = URL::temporarySignedRoute(
-            'authentication.finalize_registration',
-            CarbonImmutable::now()->addMinutes(60),
-            ['id' => $user->id]
-        );
+        $url = URL::temporarySignedRoute('authentication.finalize_registration', CarbonImmutable::now()->addMinutes(60), ['id' => $user->id]);
 
         Mail::to($user->email)->queue(new AuthenticationFinalizeRegistrationMail($url));
     }

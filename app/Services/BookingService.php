@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Events\BookingVersionEvent;
+use App\Models\Bookable;
 use App\Models\Booking;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookingService implements CrudServiceInterface, HasVersionsServiceInterface
 {
@@ -22,6 +26,10 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     protected string $modelVersionTableName = 'bookings_versions';
 
     protected string $modelVersionIdColumnName = 'booking_id';
+
+    public function __construct(private readonly AuthService $authService)
+    {
+    }
 
     /**
      * @param  array{start_date:string,end_date:string}  $data
@@ -40,6 +48,21 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
+     * @param  Bookable  $bookable
+     * @return Collection<int,Booking>
+     */
+    public function getAllWithBookable(Bookable $bookable): Collection
+    {
+        $idsWithBookable = DB::table('bookable_booking')
+            ->select('booking_id')
+            ->where('bookable_id', '=', $bookable->id)
+            ->pluck('booking_id')
+            ->toArray();
+
+        return $this->modelClass::whereIn('id', $idsWithBookable);
+    }
+
+    /**
      * @param  int  $id
      * @return Booking
      */
@@ -49,11 +72,29 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
+     * @param  Builder<Booking>  $query
+     * @param  Request  $request
+     * @return Builder<Booking>
+     */
+    protected function beforePagination(Builder $query, Request $request): Builder
+    {
+        if (\is_string($request->input('status'))) {
+            switch ($request->input('status')) {
+                case 'owned_only':
+                    $query->where('owner_id', '=', $this->authService->getAuthIdOrFail());
+                    break;
+            }
+        }
+
+        return $query;
+    }
+
+    /**
      * @param  Booking  $booking
      * @param  array<string,mixed>  $data
      * @return Booking
      */
-    public function afterCreated(Booking $booking, array $data): Booking
+    protected function afterCreated(Booking $booking, array $data): Booking
     {
         /** @var array<int,array<string,mixed>> */
         $bookables = $data['bookables'];
@@ -68,7 +109,7 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
      * @param  array<string,mixed>  $data
      * @return void
      */
-    public function afterUpdated(Booking $booking, array $data): void
+    protected function afterUpdated(Booking $booking, array $data): void
     {
         /** @var array<int,array<string,mixed>> */
         $bookables = $data['bookables'];

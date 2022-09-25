@@ -9,11 +9,11 @@ Route::get('reservas/entre', [BookingController::class, 'showBetween']);
 
 Route::get('reservas/versoes/{id}', [BookingController::class, 'showVersion']);
 
-Route::post('reservas/adicionar', [BookingController::class, 'doCreate']);
+Route::post('reservas/adicionar', [BookingController::class, 'create']);
 
 Route::get('reservas/{id}', [BookingController::class, 'show']);
 
-Route::put('reservas/{id}/editar', [BookingController::class, 'doUpdate']);
+Route::put('reservas/{id}/editar', [BookingController::class, 'update']);
 
 Route::delete('reservas/{id}/remover', [BookingController::class, 'remove']);
 

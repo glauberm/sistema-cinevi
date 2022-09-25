@@ -11,20 +11,18 @@ class AuthenticationUpdateEmailMail extends Mailable
 {
     use Queueable;
 
-    public string $url;
+    public string $title = 'Atualizar email de acesso';
 
     public string $urlText = 'Atualizar email';
-
-    public string $title = 'Atualizar email de acesso';
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $url)
+    public function __construct(public string $url)
     {
-        $this->url = \env('APP_URL') . '/atualizar-email?url=' . \rawurlencode($url);
+        $this->url = \env('APP_URL').'/atualizar-email?url='.\rawurlencode($url);
     }
 
     /**
@@ -42,7 +40,7 @@ class AuthenticationUpdateEmailMail extends Mailable
 
         return $this->from($address, $name)
             ->subject($this->title)
-            ->view('emails/authentication/update-email')
-            ->text('emails/authentication/update-email-plain');
+            ->view('emails/authentication/update-email--html')
+            ->text('emails/authentication/update-email--text');
     }
 }

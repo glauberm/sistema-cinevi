@@ -9,23 +9,20 @@ use Illuminate\Contracts\Validation\InvokableRule;
 
 class BookingIsNotForbiddenDateRule implements InvokableRule
 {
-    private ConfigurationService $configurationService;
-
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct(ConfigurationService $configurationService)
+    public function __construct(private readonly ConfigurationService $configurationService)
     {
-        $this->configurationService = $configurationService;
     }
 
     /**
      * Run the validation rule.
      *
-     * @param  string    $attribute
-     * @param  string    $value
+     * @param  string  $attribute
+     * @param  string  $value
      * @param  \Closure  $fail
      * @return void
      */
@@ -41,7 +38,7 @@ class BookingIsNotForbiddenDateRule implements InvokableRule
                 $valueDate->month === \intval($forbiddenDate['month']) &&
                 $valueDate->day === \intval($forbiddenDate['day'])
             ) {
-                $fail('A :attribute não pode ser realizada na data de ' . $forbiddenDate['name']);
+                $fail('A :attribute não pode ser realizada na data de '.$forbiddenDate['name']);
             }
         }
     }

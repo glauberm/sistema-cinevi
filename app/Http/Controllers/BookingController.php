@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Http\Middleware\Authenticate;
 use App\Http\Requests\BookingCreateOrUpdateRequest;
+use App\Http\Requests\BookingRemoveRequest;
 use App\Http\Requests\BookingShowBetweenRequest;
 use App\Http\Resources\Booking;
-use App\Mail\BookingCreatedOrUpdatedMail;
+use App\Mail\BookingCreatedProfessorMail;
+use App\Mail\BookingCreatedWarehouseMail;
+use App\Mail\BookingUpdatedProfessorMail;
+use App\Mail\BookingUpdatedWarehouseMail;
 use App\Models\Booking as BookingModel;
 use App\Services\BookingService;
 use App\Services\UserService;
@@ -23,16 +28,8 @@ class BookingController extends Controller implements CrudControllerInterface, H
 
     protected string $resourceClass = Booking::class;
 
-    protected BookingService $service;
-
-    protected UserService $userService;
-
-    public function __construct(BookingService $service, UserService $userService)
+    public function __construct(protected readonly BookingService $service, protected readonly UserService $userService)
     {
-        $this->service = $service;
-
-        $this->userService = $userService;
-
         $this->middleware(Authenticate::class.':sanctum');
     }
 
@@ -44,58 +41,42 @@ class BookingController extends Controller implements CrudControllerInterface, H
         return $this->resourceClass::collection($this->service->showBetween($data));
     }
 
-    /**
-     * @param  BookingCreateOrUpdateRequest  $request
-     * @return JsonResponse
-     */
-    public function doCreate(BookingCreateOrUpdateRequest $request): JsonResponse
+    public function create(BookingCreateOrUpdateRequest $request): JsonResponse
     {
-        return $this->create($request);
+        return $this->doCreate($request);
     }
 
-    /**
-     * @param  BookingCreateOrUpdateRequest  $request
-     * @param  int  $id
-     * @return JsonResponse
-     */
-    public function doUpdate(BookingCreateOrUpdateRequest $request, int $id): JsonResponse
+    public function update(BookingCreateOrUpdateRequest $request, int $id): JsonResponse
     {
-        return $this->update($request, $id);
+        return $this->doUpdate($request, $id);
     }
 
-    /**
-     * @param  BookingCreateOrUpdateRequest  $request
-     * @param  BookingModel  $booking
-     * @return void
-     */
+    public function remove(BookingRemoveRequest $request, int $id): JsonResponse
+    {
+        return $this->doRemove($request, $id);
+    }
+
     protected function afterCreated(BookingCreateOrUpdateRequest $request, BookingModel $booking): void
     {
-        $warehouseUsers = $this->userService->getAllWithRole('warehouse');
+        $warehouseUsers = $this->userService->getAllWithRole(UserRole::Warehouse);
 
         foreach ($warehouseUsers as $user) {
-            Mail::to($user->email)->queue(new BookingCreatedOrUpdatedMail($booking, 'created'));
+            Mail::to($user->email)->queue(new BookingCreatedWarehouseMail($booking));
         }
 
-        Mail::to($booking->project->professor->email)
-            ->queue(new BookingCreatedOrUpdatedMail($booking, 'created-professor'));
+        Mail::to($booking->project->professor->email)->queue(new BookingCreatedProfessorMail($booking));
     }
 
-    /**
-     * @param  BookingCreateOrUpdateRequest  $request
-     * @param  int  $id
-     * @return void
-     */
     protected function afterUpdated(BookingCreateOrUpdateRequest $request, int $id): void
     {
         $booking = $this->service->get($id);
 
-        $warehouseUsers = $this->userService->getAllWithRole('warehouse');
+        $warehouseUsers = $this->userService->getAllWithRole(UserRole::Warehouse);
 
         foreach ($warehouseUsers as $user) {
-            Mail::to($user->email)->queue(new BookingCreatedOrUpdatedMail($booking, 'updated'));
+            Mail::to($user->email)->queue(new BookingUpdatedWarehouseMail($booking));
         }
 
-        Mail::to($booking->project->professor->email)
-            ->queue(new BookingCreatedOrUpdatedMail($booking, 'updated-professor'));
+        Mail::to($booking->project->professor->email)->queue(new BookingUpdatedProfessorMail($booking));
     }
 }

@@ -7,6 +7,9 @@ namespace App\Services;
 use App\Enums\ProjectUserRole;
 use App\Events\ProjectVersionEvent;
 use App\Models\Project;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class ProjectService implements CrudServiceInterface, HasVersionsServiceInterface
 {
@@ -23,8 +26,12 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
 
     protected string $modelVersionIdColumnName = 'project_id';
 
+    public function __construct(private readonly AuthService $authService)
+    {
+    }
+
     /**
-     * @param  integer                 $id
+     * @param  int  $id
      * @return Project
      */
     public function get(int $id): Project
@@ -37,17 +44,35 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
             'producers',
             'photographyDirectors',
             'soundDirectors',
-            'artDirectors'
+            'artDirectors',
         ])
             ->findOrFail($id);
     }
 
     /**
-     * @param  Project              $project
+     * @param  Builder<Project>  $query
+     * @param  Request  $request
+     * @return Builder<Project>
+     */
+    protected function beforePagination(Builder $query, Request $request): Builder
+    {
+        if (\is_string($request->input('status'))) {
+            switch ($request->input('status')) {
+                case 'owned_only':
+                    $query->where('owner_id', '=', $this->authService->getAuthIdOrFail());
+                    break;
+            }
+        }
+
+        return $query;
+    }
+
+    /**
+     * @param  Project  $project
      * @param  array<string,mixed>  $data
      * @return Project
      */
-    public function afterCreated(Project $project, array $data): Project
+    protected function afterCreated(Project $project, array $data): Project
     {
         /** @var array<int,array<string,mixed>> */
         $directors = $data['directors'];
@@ -93,11 +118,11 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
-     * @param  Project              $project
+     * @param  Project  $project
      * @param  array<string,mixed>  $data
      * @return void
      */
-    public function afterUpdated(Project $project, array $data): void
+    protected function afterUpdated(Project $project, array $data): void
     {
         /** @var array<int,array<string,mixed>> */
         $directors = $data['directors'];
@@ -138,5 +163,17 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
             \array_column($artDirectors, 'id'),
             ['role' => ProjectUserRole::ArtDirector]
         );
+    }
+
+    /**
+     * @param  int  $id
+     * @param  User  $user
+     * @return bool
+     */
+    public function isOwnedBy(int $id, User $user): bool
+    {
+        $project = $this->modelClass::with(['owner'])->findOrFail($id);
+
+        return $project->owner->id === $user->id;
     }
 }

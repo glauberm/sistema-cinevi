@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Requests\BookableCategoryCreateOrUpdateRequest;
+use App\Http\Requests\BookableCategoryRemoveRequest;
 use App\Http\Resources\BookableCategory;
 use App\Services\BookableCategoryService;
 use Illuminate\Http\JsonResponse;
@@ -17,31 +18,23 @@ class BookableCategoryController extends Controller implements CrudControllerInt
 
     protected string $resourceClass = BookableCategory::class;
 
-    protected BookableCategoryService $service;
-
-    public function __construct(BookableCategoryService $service)
+    public function __construct(protected readonly BookableCategoryService $service)
     {
-        $this->service = $service;
-
-        $this->middleware(Authenticate::class . ':sanctum');
+        $this->middleware(Authenticate::class.':sanctum');
     }
 
-    /**
-     * @param  BookableCategoryCreateOrUpdateRequest $request
-     * @return JsonResponse
-     */
-    public function doCreate(BookableCategoryCreateOrUpdateRequest $request): JsonResponse
+    public function create(BookableCategoryCreateOrUpdateRequest $request): JsonResponse
     {
-        return $this->create($request);
+        return $this->doCreate($request);
     }
 
-    /**
-     * @param  BookableCategoryCreateOrUpdateRequest $request
-     * @param  integer                               $id
-     * @return JsonResponse
-     */
-    public function doUpdate(BookableCategoryCreateOrUpdateRequest $request, int $id): JsonResponse
+    public function update(BookableCategoryCreateOrUpdateRequest $request, int $id): JsonResponse
     {
-        return $this->update($request, $id);
+        return $this->doUpdate($request, $id);
+    }
+
+    public function remove(BookableCategoryRemoveRequest $request, int $id): JsonResponse
+    {
+        return $this->doRemove($request, $id);
     }
 }

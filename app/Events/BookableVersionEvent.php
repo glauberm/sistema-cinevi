@@ -11,23 +11,10 @@ class BookableVersionEvent
 {
     use Dispatchable;
 
-    public Bookable $bookable;
-
-    public string $action;
-
-    public string $message;
-
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(Bookable $bookable, string $action, string $message)
-    {
-        $this->bookable = $bookable;
-
-        $this->action = $action;
-
-        $this->message = $message;
+    public function __construct(
+        public readonly Bookable $bookable,
+        public readonly string $action,
+        public readonly string $message
+    ) {
     }
 }

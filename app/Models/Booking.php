@@ -5,16 +5,19 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property integer          $id
- * @property CarbonImmutable  $withdrawal_date
- * @property CarbonImmutable  $devolution_date
- * @property Project          $project
+ * @property int                   $id
+ * @property CarbonImmutable       $withdrawal_date
+ * @property CarbonImmutable       $devolution_date
+ * @property User                  $owner
+ * @property Project               $project
+ * @property Collection<Bookable>  $bookables
  */
 class Booking extends Model
 {
@@ -36,7 +39,7 @@ class Booking extends Model
         'withdrawal_date',
         'devolution_date',
         'owner_id',
-        'project_id'
+        'project_id',
     ];
 
     /**

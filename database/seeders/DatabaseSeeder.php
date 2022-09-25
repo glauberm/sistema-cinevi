@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
 use App\Models\Bookable;
 use App\Models\BookableCategory;
 use App\Models\Booking;
@@ -28,12 +29,12 @@ class DatabaseSeeder extends Seeder
             ->state(['email' => 'contato@cinemauff.com.br'])
             ->state(['is_enabled' => true])
             ->state(['is_confirmed' => true])
-            ->state(['roles' => ['user', 'admin']])
+            ->state(['roles' => [UserRole::Admin]])
             ->createOne();
 
-        User::factory()->state(['roles' => ['user', 'department']])->count(3)->create();
+        User::factory()->state(['roles' => [UserRole::Department]])->count(3)->create();
 
-        User::factory()->state(['roles' => ['user', 'warehouse']])->count(3)->create();
+        User::factory()->state(['roles' => [UserRole::Warehouse]])->count(3)->create();
 
         User::factory(30)->create();
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 
 class AuthenticationUpdatePasswordRequest extends FormRequest
 {
@@ -15,25 +14,6 @@ class AuthenticationUpdatePasswordRequest extends FormRequest
      * @var bool
      */
     protected $stopOnFirstFailure = true;
-
-    // /**
-    //  * Determine if the user is authorized to make this request.
-    //  *
-    //  * @return bool
-    //  */
-    // public function authorize()
-    // {
-    //     $currentUser = $this->user();
-
-    //     if (\is_null($currentUser)) {
-    //         return false;
-    //     }
-
-    //     /** @var string $password */
-    //     $password = $this->input('password');
-
-    //     return Hash::check($password, $currentUser->password);
-    // }
 
     /**
      * Get the validation rules that apply to the request.
@@ -49,7 +29,7 @@ class AuthenticationUpdatePasswordRequest extends FormRequest
                 'string',
                 'min:8',
                 'confirmed',
-                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/'
+                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
             ],
         ];
     }

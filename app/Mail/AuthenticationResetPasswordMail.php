@@ -11,20 +11,18 @@ class AuthenticationResetPasswordMail extends Mailable
 {
     use Queueable;
 
-    public string $url;
+    public string $title = 'Redefinição de senha';
 
     public string $urlText = 'Redefinir senha';
-
-    public string $title = 'Redefinição de senha';
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $url)
+    public function __construct(public string $url)
     {
-        $this->url = \env('APP_URL') . '/redefinir-senha?url=' . \rawurlencode($url);
+        $this->url = \env('APP_URL').'/redefinir-senha?url='.\rawurlencode($url);
     }
 
     /**
@@ -42,7 +40,7 @@ class AuthenticationResetPasswordMail extends Mailable
 
         return $this->from($address, $name)
             ->subject($this->title)
-            ->view('emails/authentication/reset-password')
-            ->text('emails/authentication/reset-password-plain');
+            ->view('emails/authentication/reset-password--html')
+            ->text('emails/authentication/reset-password--text');
     }
 }
