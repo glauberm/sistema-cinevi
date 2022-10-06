@@ -6,16 +6,11 @@ namespace App\Services;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 trait CrudServiceTrait
 {
-    /**
-     * @param  Request  $request
-     * @return LengthAwarePaginator
-     */
     public function paginate(Request $request): LengthAwarePaginator
     {
         $query = $this->modelClass::orderBy(
@@ -36,9 +31,6 @@ trait CrudServiceTrait
 
     /**
      * @param  array<string,mixed>  $data
-     * @param  string|null  $eventAction
-     * @param  string|null  $eventMessage
-     * @return Model
      */
     public function create(array $data, ?string $eventAction = 'create', ?string $eventMessage = 'O item foi criado.'): Model
     {
@@ -54,22 +46,15 @@ trait CrudServiceTrait
     }
 
     /**
-     * @param  int  $id
-     * @return Model
-     *
-     * @throws ModelNotFoundException
+     * @param  string[]  $relations
      */
-    public function get(int $id): Model
+    public function get(int $id, array $relations = []): Model
     {
-        return $this->modelClass::findOrFail($id);
+        return $this->modelClass::with($relations)->findOrFail($id);
     }
 
     /**
      * @param  array<string,mixed>  $data
-     * @param  int  $id
-     * @param  string|null  $eventAction
-     * @param  string|null  $eventMessage
-     * @return void
      */
     public function update(array $data, int $id, ?string $eventAction = 'update', ?string $eventMessage = 'O item foi editado.'): void
     {
@@ -85,12 +70,6 @@ trait CrudServiceTrait
         }
     }
 
-    /**
-     * @param  int  $id
-     * @param  string|null  $eventAction
-     * @param  string|null  $eventMessage
-     * @return void
-     */
     public function remove(int $id, ?string $eventAction = 'remove', ?string $eventMessage = 'O item foi removido.'): void
     {
         if ($this instanceof HasVersionsServiceInterface) {
@@ -102,7 +81,6 @@ trait CrudServiceTrait
 
     /**
      * @param  Builder<Model>  $query
-     * @param  Request  $request
      * @return Builder<Model>
      */
     protected function beforePagination(Builder $query, Request $request): Builder
@@ -111,9 +89,7 @@ trait CrudServiceTrait
     }
 
     /**
-     * @param  Model  $model
      * @param  array<string,mixed>  $data
-     * @return Model
      */
     protected function afterCreated(Model $model, array $data): Model
     {
@@ -121,9 +97,7 @@ trait CrudServiceTrait
     }
 
     /**
-     * @param  Model  $model
      * @param  array<string,mixed>  $data
-     * @return Model
      */
     protected function afterUpdated(Model $model, array $data): Model
     {

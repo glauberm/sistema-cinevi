@@ -20,7 +20,7 @@ class ProjectRemoveRequest extends FormRequest
     public function authorize(ProjectService $service)
     {
         if ($id = $this->route('id')) {
-            $project = $service->get(\intval($id));
+            $project = $service->get(\intval($id), ['owner']);
 
             return Gate::allows('hasRole', UserRole::Admin) ||
                 Gate::allows('hasRole', UserRole::Department) ||

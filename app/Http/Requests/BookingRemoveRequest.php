@@ -20,7 +20,7 @@ class BookingRemoveRequest extends FormRequest
     public function authorize(BookingService $service)
     {
         if ($id = $this->route('id')) {
-            $booking = $service->get(\intval($id));
+            $booking = $service->get(\intval($id), ['owner']);
 
             return Gate::allows('hasRole', UserRole::Admin) === true ||
                 Gate::allows('hasRole', UserRole::Warehouse) === true ||

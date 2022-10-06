@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Events\BookingVersionEvent;
-use App\Models\Bookable;
 use App\Models\Booking;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BookingService implements CrudServiceInterface, HasVersionsServiceInterface
 {
     use CrudServiceTrait, HasVersionsServiceTrait {
         CrudServiceTrait::create as baseCreate;
+        CrudServiceTrait::get as baseGet;
         CrudServiceTrait::update as baseUpdate;
     }
 
@@ -48,32 +47,18 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
-     * @param  Bookable  $bookable
-     * @return Collection<int,Booking>
+     * @param  string[]  $relations
      */
-    public function getAllWithBookable(Bookable $bookable): Collection
+    public function get(int $id, array $relations = ['owner', 'project', 'bookables']): Booking
     {
-        $idsWithBookable = DB::table('bookable_booking')
-            ->select('booking_id')
-            ->where('bookable_id', '=', $bookable->id)
-            ->pluck('booking_id')
-            ->toArray();
+        /** @var Booking $booking */
+        $booking = $this->baseGet($id, $relations);
 
-        return $this->modelClass::whereIn('id', $idsWithBookable);
-    }
-
-    /**
-     * @param  int  $id
-     * @return Booking
-     */
-    public function get(int $id): Booking
-    {
-        return $this->modelClass::with(['owner', 'project', 'bookables'])->findOrFail($id);
+        return $booking;
     }
 
     /**
      * @param  Builder<Booking>  $query
-     * @param  Request  $request
      * @return Builder<Booking>
      */
     protected function beforePagination(Builder $query, Request $request): Builder
@@ -90,9 +75,7 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
-     * @param  Booking  $booking
      * @param  array<string,mixed>  $data
-     * @return Booking
      */
     protected function afterCreated(Booking $booking, array $data): Booking
     {
@@ -105,9 +88,7 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
-     * @param  Booking  $booking
      * @param  array<string,mixed>  $data
-     * @return void
      */
     protected function afterUpdated(Booking $booking, array $data): void
     {

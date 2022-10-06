@@ -15,6 +15,7 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
 {
     use CrudServiceTrait, HasVersionsServiceTrait {
         CrudServiceTrait::create as baseCreate;
+        CrudServiceTrait::get as baseGet;
         CrudServiceTrait::update as baseUpdate;
     }
 
@@ -31,22 +32,23 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
-     * @param  int  $id
-     * @return Project
+     * @param  string[]  $relations
      */
-    public function get(int $id): Project
+    public function get(int $id, array $relations = [
+        'owner',
+        'productionCategory',
+        'professor',
+        'directors',
+        'producers',
+        'photographyDirectors',
+        'soundDirectors',
+        'artDirectors',
+    ]): Project
     {
-        return $this->modelClass::with([
-            'owner',
-            'productionCategory',
-            'professor',
-            'directors',
-            'producers',
-            'photographyDirectors',
-            'soundDirectors',
-            'artDirectors',
-        ])
-            ->findOrFail($id);
+        /** @var Project $project */
+        $project = $this->baseGet($id, $relations);
+
+        return $project;
     }
 
     /**

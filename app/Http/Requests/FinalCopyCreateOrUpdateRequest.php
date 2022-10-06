@@ -26,7 +26,7 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
     public function authorize(FinalCopyService $service)
     {
         if ($id = $this->route('id')) {
-            $finalCopy = $service->get(\intval($id));
+            $finalCopy = $service->get(\intval($id), ['owner']);
 
             return Gate::allows('hasRole', UserRole::Admin) ||
                 Gate::allows('hasRole', UserRole::Department) ||

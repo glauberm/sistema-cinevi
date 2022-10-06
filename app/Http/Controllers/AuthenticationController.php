@@ -101,11 +101,9 @@ class AuthenticationController extends Controller
     {
         $user = Auth::user();
 
-        if (\is_null($user)) {
-            return response()->json(['message' => 'Não há nenhum usuário autenticado.', 'data' => false], 404);
-        } else {
-            return new User($user);
-        }
+        return $user
+            ? new User($user)
+            : response()->json(['message' => 'Não há nenhum usuário autenticado.', 'data' => false], 404);
     }
 
     public function register(AuthenticationRegisterRequest $request): JsonResponse
@@ -130,7 +128,7 @@ class AuthenticationController extends Controller
     public function finalizeRegistration(int $id): JsonResponse
     {
         /** @var UserModel $user */
-        $user = $this->userService->get($id);
+        $user = $this->userService->get($id, []);
 
         if ($user->is_enabled) {
             return response()->json(['message' => 'Seu email já foi confirmado.']);

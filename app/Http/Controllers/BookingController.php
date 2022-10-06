@@ -69,7 +69,7 @@ class BookingController extends Controller implements CrudControllerInterface, H
 
     protected function afterUpdated(BookingCreateOrUpdateRequest $request, int $id): void
     {
-        $booking = $this->service->get($id);
+        $booking = $this->service->get($id, ['project']);
 
         $warehouseUsers = $this->userService->getAllWithRole(UserRole::Warehouse);
 

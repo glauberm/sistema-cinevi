@@ -32,7 +32,7 @@ class UserController extends Controller implements CrudControllerInterface, HasV
         $data = $request->validated();
 
         /** @var UserModel $user */
-        $user = $this->service->get($id);
+        $user = $this->service->get($id, []);
 
         if (! $user->is_confirmed && $data['is_confirmed']) {
             Mail::to($user->email)->queue(new UserIsConfirmedMail());

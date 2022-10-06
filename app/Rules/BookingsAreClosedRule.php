@@ -37,7 +37,7 @@ class BookingsAreClosedRule implements InvokableRule
 
         $authUser = $this->authService->getAuthUserOrFail();
 
-        if ($configuration->bookings_are_closed === true && $this->userService->isOrdinary($authUser)) {
+        if ($configuration->bookings_are_closed && $this->userService->isOrdinary($authUser)) {
             $fail('As reservas estão fechadas para alunos.');
         }
     }

@@ -48,7 +48,7 @@
 -   [x] Proibição das devoluções serem feitas antes das retiradas
 -   [x] Proibição das retiradas ou devoluções cairem no final de semana
 -   [x] Proibição das retiradas ou devoluções cairem nas datas (dia e mês) proibidos nas configurações
--   [ ] Proibição dos equipamentos já reservados entre a retirada e devolução serem reservados novamente
+-   [x] Proibição dos equipamentos já reservados entre a retirada e devolução serem reservados novamente
 -   [x] E-mail para os usuários com papel de almoxarifado sobre a criação de uma reserva
 -   [x] E-mail para os usuários com papel de almoxarifado sobre a edição de uma reserva
 -   [x] E-mail para o professor responsável pelo projeto associado à reserva sobre a criação da reserva
@@ -90,9 +90,9 @@
 -   [x] Usuário comum (aluno) só pode adicionar a si mesmo como responsável do projeto
 -   [x] Somente usuários com papel de professor podem ser adicionados como professores responsáveis
 -   [x] Permissão de edição e remoção concedida apenas à usuários com papéis de administrador, departamento ou o próprio responsável do projeto
--   [ ] E-mails para usuários com papéis de departamento e almoxarifado sobre a criação de um novo projeto
--   [ ] E-mails para o professor responsável pelo projeto sobre a criação de um novo projeto
--   [ ] E-mails para a equipe do projeto sobre a criação de um novo projeto
+-   [x] E-mails para usuários com papéis de departamento e almoxarifado sobre a criação de um novo projeto
+-   [x] E-mails para o professor responsável pelo projeto sobre a criação de um novo projeto
+-   [x] E-mails para a equipe do projeto sobre a criação de um novo projeto
 -   [ ] Proibição de um novo projeto ser criado pelo usuário caso ele já possua um projeto sem cópia final
 
 ## Cópias Finais

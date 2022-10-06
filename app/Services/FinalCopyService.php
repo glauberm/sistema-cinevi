@@ -14,6 +14,7 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
 {
     use CrudServiceTrait, HasVersionsServiceTrait {
         CrudServiceTrait::create as baseCreate;
+        CrudServiceTrait::get as baseGet;
         CrudServiceTrait::update as baseUpdate;
     }
 
@@ -30,12 +31,14 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
     }
 
     /**
-     * @param  int  $id
-     * @return FinalCopy
+     * @param  string[]  $relations
      */
-    public function get(int $id): FinalCopy
+    public function get(int $id, array $relations = ['owner', 'productionCategory', 'professor']): FinalCopy
     {
-        return $this->modelClass::with(['owner', 'productionCategory', 'professor'])->findOrFail($id);
+        /** @var FinalCopy $finalCopy */
+        $finalCopy = $this->baseGet($id, $relations);
+
+        return $finalCopy;
     }
 
     /**

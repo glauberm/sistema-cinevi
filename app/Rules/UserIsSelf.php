@@ -29,7 +29,7 @@ class UserIsSelf implements InvokableRule
     {
         $authUser = $this->authService->getAuthUserOrFail();
 
-        if ($this->userService->isOrdinary($authUser) === true && $authUser->id !== $value) {
+        if ($this->userService->isOrdinary($authUser) && $authUser->id !== $value) {
             $fail("O {$attribute} deve ser você mesmo.");
         }
     }

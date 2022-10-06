@@ -11,7 +11,6 @@ use App\Http\Resources\Bookable;
 use App\Mail\BookableUnderMaintenanceMail;
 use App\Mail\BookableWithReturnOverdueMail;
 use App\Services\BookableService;
-use App\Services\BookingService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -26,10 +25,8 @@ class BookableController extends Controller implements CrudControllerInterface, 
 
     private ?bool $isReturnOverdueBeforeUpdate = null;
 
-    public function __construct(
-        protected readonly BookableService $service,
-        protected readonly BookingService $bookingService,
-    ) {
+    public function __construct(protected readonly BookableService $service)
+    {
         $this->middleware(Authenticate::class.':sanctum');
     }
 
@@ -57,20 +54,16 @@ class BookableController extends Controller implements CrudControllerInterface, 
 
     protected function afterUpdated(BookableCreateOrUpdateRequest $request, int $id): void
     {
-        $bookable = $this->service->get($id);
+        $bookable = $this->service->get($id, ['owner']);
 
         if ($this->isUnderMaintenanceBeforeUpdate === false && $bookable->is_under_maintenance === true) {
-            $bookings = $this->bookingService->getAllWithBookable($bookable);
-
-            foreach ($bookings as $booking) {
+            foreach ($bookable->bookings as $booking) {
                 Mail::to($booking->project->owner->email)->queue(new BookableUnderMaintenanceMail($bookable, $booking));
             }
         }
 
         if ($this->isReturnOverdueBeforeUpdate === false && $bookable->is_return_overdue === true) {
-            $bookings = $this->bookingService->getAllWithBookable($bookable);
-
-            foreach ($bookings as $booking) {
+            foreach ($bookable->bookings as $booking) {
                 Mail::to($booking->project->owner->email)->queue(new BookableWithReturnOverdueMail($bookable, $booking));
             }
         }

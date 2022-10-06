@@ -3,7 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Enums\UserRole;
+use App\Rules\UserHasProjectWithoutFinalCopyRule;
 use App\Services\ProjectService;
+use App\Services\UserService;
 use Carbon\CarbonImmutable;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
@@ -27,7 +29,7 @@ class ProjectCreateOrUpdateRequest extends FormRequest
     public function authorize(ProjectService $service)
     {
         if ($id = $this->route('id')) {
-            $project = $service->get(\intval($id));
+            $project = $service->get(\intval($id), ['owner']);
 
             return Gate::allows('hasRole', UserRole::Admin) ||
                 Gate::allows('hasRole', UserRole::Department) ||
@@ -80,9 +82,9 @@ class ProjectCreateOrUpdateRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string,string[]>
+     * @return array<string,mixed>
      */
-    public function rules()
+    public function rules(UserService $userService)
     {
         return [
             'title' => ['required', 'string'],
@@ -98,7 +100,7 @@ class ProjectCreateOrUpdateRequest extends FormRequest
             'has_attended_photography_discipline' => ['required', 'accepted'],
             'has_attended_sound_discipline' => ['required', 'accepted'],
             'has_attended_art_discipline' => ['required', 'accepted'],
-            'owner_id' => ['required', 'integer'],
+            'owner_id' => ['required', 'integer', new UserHasProjectWithoutFinalCopyRule($userService)],
             'production_category_id' => ['required', 'integer'],
             'professor_id' => ['required', 'integer'],
             'directors' => ['required', 'array'],
@@ -117,7 +119,7 @@ class ProjectCreateOrUpdateRequest extends FormRequest
     /**
      * Get the error messages for the defined validation rules.
      *
-     * @return array<string, string>
+     * @return array<string,string>
      */
     public function messages()
     {

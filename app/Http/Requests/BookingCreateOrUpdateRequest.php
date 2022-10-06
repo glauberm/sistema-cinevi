@@ -3,12 +3,14 @@
 namespace App\Http\Requests;
 
 use App\Enums\UserRole;
+use App\Rules\BookableIsNotReservedRule;
 use App\Rules\BookingIsNotForbiddenDateRule;
 use App\Rules\BookingIsNotWeekendRule;
 use App\Rules\BookingsAreClosedRule;
 use App\Rules\UserIsSelf;
 use App\Rules\UserOwnsProject;
 use App\Services\AuthService;
+use App\Services\BookableService;
 use App\Services\ConfigurationService;
 use App\Services\ProjectService;
 use App\Services\UserService;
@@ -87,7 +89,8 @@ class BookingCreateOrUpdateRequest extends FormRequest
         ConfigurationService $configurationService,
         AuthService $authService,
         UserService $userService,
-        ProjectService $projectService
+        ProjectService $projectService,
+        BookableService $bookableService
     ) {
         $ownerIdRules = ['integer', 'required', new UserIsSelf($authService, $userService)];
 
@@ -119,7 +122,11 @@ class BookingCreateOrUpdateRequest extends FormRequest
                 new BookingIsNotForbiddenDateRule($configurationService),
             ],
             'bookables' => ['array', 'required'],
-            'bookables.*.id' => ['integer', 'required'],
+            'bookables.*.id' => [
+                'integer',
+                'required',
+                new BookableIsNotReservedRule($bookableService),
+            ],
         ];
     }
 

@@ -33,7 +33,7 @@ class UserOwnsProject implements InvokableRule
     {
         $authUser = $this->authService->getAuthUserOrFail();
 
-        if ($this->userService->isOrdinary($authUser) === true && $this->projectService->isOwnedBy($value, $authUser)) {
+        if ($this->userService->isOrdinary($authUser) && $this->projectService->isOwnedBy($value, $authUser)) {
             $fail("O {$attribute} deve ser um projeto cujo responsável seja você.");
         }
     }

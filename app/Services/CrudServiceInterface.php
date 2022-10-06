@@ -10,34 +10,22 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface CrudServiceInterface
 {
-    /**
-     * @param  Request  $request
-     * @return LengthAwarePaginator
-     */
     public function paginate(Request $request): LengthAwarePaginator;
 
     /**
-     * @param  mixed[]  $data
-     * @return Model
+     * @param  array<string,mixed>  $data
      */
     public function create(array $data): Model;
 
     /**
-     * @param  int  $id
-     * @return Model
+     * @param  string[]  $relations
      */
-    public function get(int $id): Model;
+    public function get(int $id, array $relations = []): Model;
 
     /**
-     * @param  mixed[]  $data
-     * @param  int  $id
-     * @return void
+     * @param  array<string,mixed>  $data
      */
     public function update(array $data, int $id): void;
 
-    /**
-     * @param  int  $id
-     * @return void
-     */
     public function remove(int $id): void;
 }

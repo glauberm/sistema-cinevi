@@ -30,7 +30,7 @@ class UserIsProfessor implements InvokableRule
     {
         $authUser = $this->authService->getAuthUserOrFail();
 
-        if ($this->userService->hasRole($authUser, UserRole::Professor) !== true) {
+        if (! $this->userService->hasRole($authUser, UserRole::Professor)) {
             $fail("O {$attribute} deve ser um professor.");
         }
     }
