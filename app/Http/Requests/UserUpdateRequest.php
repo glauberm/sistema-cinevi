@@ -12,13 +12,6 @@ use Illuminate\Support\Facades\Gate;
 class UserUpdateRequest extends FormRequest
 {
     /**
-     * Indicates if the validator should stop on the first rule failure.
-     *
-     * @var bool
-     */
-    protected $stopOnFirstFailure = true;
-
-    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -81,7 +74,7 @@ class UserUpdateRequest extends FormRequest
             'phone.numeric' => 'O telefone deve conter apenas números.',
             'phone.min' => 'O telefone deve ter no mínimo 10 dígitos, com DDD.',
             'phone.max' => 'O telefone deve ter no máximo 11 dígitos, com DDD.',
-            'identifier.required' => 'A matrícula ou SIAPE é obrigatório.',
+            'identifier.required' => 'A matrícula ou SIAPE é obrigatória.',
             'identifier.string' => 'A matrícula ou SIAPE deve ser uma string.',
             'identifier.unique' => 'Essa matrícula ou SIAPE já está em uso.',
             'is_confirmed.required' => 'Por favor, informe se o usuário está confirmado ou não.',

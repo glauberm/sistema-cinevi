@@ -1,0 +1,14 @@
+.logo {
+    height: 3rem;
+    width: auto;
+    max-width: 100%;
+
+    &__primary {
+        fill: $primary;
+    }
+
+    &__secundary {
+        fill: $secondary;
+        stroke: $secondary;
+    }
+}

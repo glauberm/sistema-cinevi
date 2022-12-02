@@ -19,7 +19,7 @@ class ConfigurationController extends Controller implements CrudControllerInterf
 
     public function __construct(protected readonly ConfigurationService $service)
     {
-        $this->middleware(Authenticate::class.':sanctum');
+        $this->middleware(Authenticate::class);
     }
 
     public function update(ConfigurationUpdateRequest $request, int $id): JsonResponse

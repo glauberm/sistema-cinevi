@@ -20,7 +20,7 @@ class FinalCopyController extends Controller implements CrudControllerInterface,
 
     public function __construct(protected readonly FinalCopyService $service)
     {
-        $this->middleware(Authenticate::class.':sanctum');
+        $this->middleware(Authenticate::class);
     }
 
     public function create(FinalCopyCreateOrUpdateRequest $request): JsonResponse

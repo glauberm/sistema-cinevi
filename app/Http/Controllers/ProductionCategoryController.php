@@ -20,7 +20,7 @@ class ProductionCategoryController extends Controller implements CrudControllerI
 
     public function __construct(protected readonly ProductionCategoryService $service)
     {
-        $this->middleware(Authenticate::class.':sanctum');
+        $this->middleware(Authenticate::class);
     }
 
     public function create(ProductionCategoryCreateOrUpdateRequest $request): JsonResponse

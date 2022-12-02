@@ -9,13 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class AuthenticationRegisterRequest extends FormRequest
 {
     /**
-     * Indicates if the validator should stop on the first rule failure.
-     *
-     * @var bool
-     */
-    protected $stopOnFirstFailure = true;
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string,string[]>
@@ -24,12 +17,12 @@ class AuthenticationRegisterRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:180'],
-            'email' => ['required', 'string', 'email', 'max:180', 'unique:users,email', 'confirmed'],
-            'password' => [
+            'identifier' => [
                 'required',
-                'string',
-                'min:8',
-                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
+                'numeric',
+                'unique:users,identifier',
+                'min_digits:7',
+                'max_digits:9',
             ],
             'phone' => [
                 'required',
@@ -37,12 +30,12 @@ class AuthenticationRegisterRequest extends FormRequest
                 'min_digits:10',
                 'max_digits:11',
             ],
-            'identifier' => [
+            'email' => ['required', 'string', 'email', 'max:180', 'unique:users,email', 'confirmed'],
+            'password' => [
                 'required',
-                'numeric',
-                'unique:users,identifier',
-                'min_digits:7',
-                'max_digits:9',
+                'string',
+                'min:12',
+                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
             ],
         ];
     }
@@ -55,6 +48,9 @@ class AuthenticationRegisterRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.required' => 'O nome é obrigatório.',
+            'name.string' => 'O nome deve ser uma string.',
+            'name.max' => 'O nome deve ter no máximo 180 caracteres.',
             'email.required' => 'O email é obrigatório.',
             'email.string' => 'O email deve ser uma string.',
             'email.email' => 'O endereço de email não é válido.',
@@ -63,14 +59,14 @@ class AuthenticationRegisterRequest extends FormRequest
             'email.confirmed' => 'Os emails não coincidem.',
             'password.required' => 'A senha é obrigatória.',
             'password.string' => 'A senha deve ser uma string.',
-            'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
+            'password.min' => 'A senha deve ter no mínimo 12 caracteres.',
             'password.confirmed' => 'As senhas informadas não coincidem.',
             'password.regex' => 'A senha deve conter letras maiúsculas, minúsculas e números.',
             'phone.required' => 'O telefone é obrigatório.',
             'phone.numeric' => 'O telefone deve conter apenas números.',
             'phone.min' => 'O telefone deve ter no mínimo 10 dígitos, com DDD.',
             'phone.max' => 'O telefone deve ter no máximo 11 dígitos, com DDD.',
-            'identifier.required' => 'A matrícula ou SIAPE é obrigatório.',
+            'identifier.required' => 'A matrícula ou SIAPE é obrigatória.',
             'identifier.numeric' => 'A matrícula ou SIAPE deve conter apenas números.',
             'identifier.min_digits' => 'A matrícula ou SIAPE deve ter no mínimo 7 dígitos.',
             'identifier.max_digits' => 'A matrícula ou SIAPE deve ter no máximo 9 dígitos.',

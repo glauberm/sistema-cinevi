@@ -9,13 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class AuthenticationUpdatePasswordRequest extends FormRequest
 {
     /**
-     * Indicates if the validator should stop on the first rule failure.
-     *
-     * @var bool
-     */
-    protected $stopOnFirstFailure = true;
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string,string[]>
@@ -27,7 +20,7 @@ class AuthenticationUpdatePasswordRequest extends FormRequest
             'new_password' => [
                 'required',
                 'string',
-                'min:8',
+                'min:12',
                 'confirmed',
                 'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
             ],
@@ -47,7 +40,7 @@ class AuthenticationUpdatePasswordRequest extends FormRequest
             'password.current_password' => 'A senha informada está incorreta.',
             'new_password.required' => 'A nova senha é obrigatória.',
             'new_password.string' => 'A nova senha deve ser uma string.',
-            'new_password.min' => 'A nova senha deve ter no mínimo 8 caracteres.',
+            'new_password.min' => 'A nova senha deve ter no mínimo 12 caracteres.',
             'new_password.confirmed' => 'As senhas informadas não coincidem.',
             'new_password.regex' => 'A senha deve conter letras maiúsculas, minúsculas e números.',
         ];

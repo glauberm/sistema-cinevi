@@ -1,14 +1,12 @@
-@extends('layouts.email-html')
+<x-layout.email-html>
 
-@section('content')
-
-    @component('components.paragraph')
+    <x-email.paragraph>
         Você está recebendo este email porque solicitou uma redefinição de senha. Se você não solicitou uma redefinição, 
         ignore este email.
-    @endcomponent
+    </x-email.paragraph>
 
-    @component('components.paragraph')
+    <x-email.paragraph>
         Para redefinir sua senha, acesse o link abaixo. Este link é válido por 60 minutos.
-    @endcomponent
+    </x-email.paragraph>
 
-@endsection
+</x-layout.email-html>

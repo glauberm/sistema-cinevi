@@ -30,7 +30,7 @@ class BookingController extends Controller implements CrudControllerInterface, H
 
     public function __construct(protected readonly BookingService $service, protected readonly UserService $userService)
     {
-        $this->middleware(Authenticate::class.':sanctum');
+        $this->middleware(Authenticate::class);
     }
 
     public function showBetween(BookingShowBetweenRequest $request): ResourceCollection

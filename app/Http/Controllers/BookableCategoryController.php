@@ -20,7 +20,7 @@ class BookableCategoryController extends Controller implements CrudControllerInt
 
     public function __construct(protected readonly BookableCategoryService $service)
     {
-        $this->middleware(Authenticate::class.':sanctum');
+        $this->middleware(Authenticate::class);
     }
 
     public function create(BookableCategoryCreateOrUpdateRequest $request): JsonResponse

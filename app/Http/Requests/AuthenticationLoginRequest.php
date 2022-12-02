@@ -9,13 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class AuthenticationLoginRequest extends FormRequest
 {
     /**
-     * Indicates if the validator should stop on the first rule failure.
-     *
-     * @var bool
-     */
-    protected $stopOnFirstFailure = true;
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string,string[]>

@@ -73,11 +73,9 @@ trait CrudControllerTrait
 
     protected function afterCreated(FormRequest $request, Model $model): void
     {
-        //
     }
 
     protected function afterUpdated(FormRequest $request, int $id): void
     {
-        //
     }
 }

@@ -9,13 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class AuthenticationResetPasswordRequest extends FormRequest
 {
     /**
-     * Indicates if the validator should stop on the first rule failure.
-     *
-     * @var bool
-     */
-    protected $stopOnFirstFailure = true;
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string,string[]>
@@ -26,7 +19,7 @@ class AuthenticationResetPasswordRequest extends FormRequest
             'password' => [
                 'required',
                 'string',
-                'min:8',
+                'min:12',
                 'confirmed',
                 'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/',
             ],
@@ -43,7 +36,7 @@ class AuthenticationResetPasswordRequest extends FormRequest
         return [
             'password.required' => 'A senha é obrigatória.',
             'password.string' => 'A senha deve ser uma string.',
-            'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
+            'password.min' => 'A senha deve ter no mínimo 12 caracteres.',
             'password.confirmed' => 'As senhas informadas não coincidem.',
             'password.regex' => 'A senha deve conter letras maiúsculas, minúsculas e números.',
         ];

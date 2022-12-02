@@ -4,37 +4,13 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class Handler extends ExceptionHandler
 {
-    /**
-     * A list of exception types with their corresponding custom log levels.
-     *
-     * @var array<class-string<\Throwable>, \Psr\Log\LogLevel::*>
-     */
-    protected $levels = [
-        //
-    ];
-
-    /**
-     * A list of the exception types that are not reported.
-     *
-     * @var array<int, class-string<\Throwable>>
-     */
-    protected $dontReport = [
-        //
-    ];
-
-    /**
-     * A list of the inputs that are never flashed to the session on validation exceptions.
-     *
-     * @var array<int, string>
-     */
-    protected $dontFlash = [
-        //
-    ];
-
     /**
      * Register the exception handling callbacks for the application.
      *
@@ -42,6 +18,23 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+        $this->renderable(function (AuthenticationException $exception, $request) {
+            Session::flash('message', $exception->getMessage());
+            Session::flash('message-type', 'info');
+
+            return Redirect::route('authentication.login');
+        });
     }
+
+    // /**
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  \Illuminate\Auth\AuthenticationException  $exception
+    //  * @return \Symfony\Component\HttpFoundation\Response
+    //  */
+    // protected function unauthenticated($request, AuthenticationException $exception)
+    // {
+    //     return $this->shouldReturnJson($request, $exception)
+    //                 ? response()->json(['message' => $exception->getMessage()], 401)
+    //                 : redirect()->guest($exception->redirectTo() ?? route('authentication.login'));
+    // }
 }

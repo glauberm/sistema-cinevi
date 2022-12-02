@@ -23,7 +23,7 @@ class UserController extends Controller implements CrudControllerInterface, HasV
 
     public function __construct(protected readonly UserService $service)
     {
-        $this->middleware(Authenticate::class.':sanctum');
+        $this->middleware(Authenticate::class);
     }
 
     public function update(UserUpdateRequest $request, int $id): JsonResponse

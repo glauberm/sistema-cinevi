@@ -1,1 +1,1 @@
-@extends('layouts.email-html')
+@extends('layout.email-html')

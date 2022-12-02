@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Mail\AuthenticationFinalizeRegistrationMail;
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
 class AuthService
 {
@@ -14,11 +18,11 @@ class AuthService
     {
         $authId = Auth::id();
 
-        if (! \is_int($authId)) {
+        if (\is_null($authId)) {
             throw new AuthorizationException('O id do usuário atual é inválido.');
         }
 
-        return $authId;
+        return (int) $authId;
     }
 
     public function getAuthUserOrFail(): User
@@ -35,5 +39,17 @@ class AuthService
     public function logout(): void
     {
         Auth::guard('web')->logout();
+    }
+
+    public function sendFinalizeRegistrationMail(User $user): void
+    {
+        $url = URL::temporarySignedRoute(
+            'authentication.finalize_registration',
+            CarbonImmutable::now()->addMinutes(60),
+            ['id' => $user->id]
+        );
+
+        Mail::to($user->email)
+            ->queue(new AuthenticationFinalizeRegistrationMail($url));
     }
 }

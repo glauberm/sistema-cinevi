@@ -13,9 +13,9 @@ const mix = require('laravel-mix');
 
 mix.setPublicPath('public_html/');
 
-mix.sass('resources/app.scss', 'css').sass('resources/styles/critical.scss', 'css').version();
+mix.sass('resources/styles/index.scss', 'css').version();
 
-mix.ts('resources/app.tsx', 'js').react().version();
+mix.js('resources/scripts/index.js', 'js').version();
 
 mix.copy('resources/fonts/GillSansNova-Bold.woff2', 'public_html/fonts/GillSansNova-Bold.woff2')
     .copy('resources/fonts/GillSansNova-Medium.woff2', 'public_html/fonts/GillSansNova-Medium.woff2')

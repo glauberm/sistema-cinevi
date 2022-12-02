@@ -6,6 +6,9 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 
 class AuthenticationFinalizeRegistrationMail extends Mailable
 {
@@ -13,19 +16,14 @@ class AuthenticationFinalizeRegistrationMail extends Mailable
 
     public string $title = 'Confirmação de email';
 
-    public string $urlText = 'Confirmar email';
+    public string $action = 'Confirmar email';
 
     public function __construct(public string $url)
     {
-        $this->url = \env('APP_URL').'/entrada?url='.\rawurlencode($url);
+        $this->url = route('authentication.finalize_registration');
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
+    public function envelope(): Envelope
     {
         /** @var string $address */
         $address = env('MAIL_FROM_ADDRESS');
@@ -33,9 +31,17 @@ class AuthenticationFinalizeRegistrationMail extends Mailable
         /** @var string $name */
         $name = env('MAIL_FROM_NAME');
 
-        return $this->from($address, $name)
-            ->subject($this->title)
-            ->view('emails/authentication/finalize-registration--html')
-            ->text('emails/authentication/finalize-registration--text');
+        return new Envelope(
+            from: new Address($address, $name),
+            subject: $this->title,
+        );
+    }
+
+    public function content(): Content
+    {
+        return new Content(
+            view: 'emails/authentication/finalize_registration-html',
+            text: 'emails/authentication/finalize_registration-text'
+        );
     }
 }

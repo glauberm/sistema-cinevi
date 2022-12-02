@@ -20,7 +20,7 @@ class ProductionRoleController extends Controller implements CrudControllerInter
 
     public function __construct(protected readonly ProductionRoleService $service)
     {
-        $this->middleware(Authenticate::class.':sanctum');
+        $this->middleware(Authenticate::class);
     }
 
     public function create(ProductionRoleCreateOrUpdateRequest $request): JsonResponse

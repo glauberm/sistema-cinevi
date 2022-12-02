@@ -27,7 +27,7 @@ class BookableController extends Controller implements CrudControllerInterface, 
 
     public function __construct(protected readonly BookableService $service)
     {
-        $this->middleware(Authenticate::class.':sanctum');
+        $this->middleware(Authenticate::class);
     }
 
     public function create(BookableCreateOrUpdateRequest $request): JsonResponse

@@ -25,7 +25,7 @@ class ProjectController extends Controller implements CrudControllerInterface, H
 
     public function __construct(protected readonly ProjectService $service, protected readonly UserService $userService)
     {
-        $this->middleware(Authenticate::class.':sanctum');
+        $this->middleware(Authenticate::class);
     }
 
     public function create(ProjectCreateOrUpdateRequest $request): JsonResponse
