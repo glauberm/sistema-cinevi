@@ -15,7 +15,7 @@
 -   [ ] Cadastro
 -   [ ] Finalização do cadastro (confirmação do e-mail cadastrado)
 -   [ ] E-mail de novo usuário cadastrado que aguarda a confirmação do departamento
--   [ ] Recuperação de senha
+-   [ ] Redefonição de senha
 -   [ ] Edição do próprio e-mail com confirmação
 -   [ ] Edição da própria senha
 

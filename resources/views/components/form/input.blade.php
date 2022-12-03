@@ -12,12 +12,18 @@
         name="{{ $name }}"
         id="{{ $name }}"
         class="form-control @if ($errors->has($name)) is-invalid @endif"
-        @if ($errors->has($name)) aria-describedby="{{ $name }}-feedback" @endif   
-        @if ($type !== 'password' && old($name)) value="{{ old($name) }}" @endif
+        @if ($errors->has($name)) aria-describedby="{{ $name }}-feedback" @endif 
+        @isset ($readonly) readonly @endisset
+        @isset ($disabled) disabled @endisset
         @isset ($maxlength) maxlength="{{ $maxlength }}" @endisset
         @isset ($numeric)
             inputmode="numeric"
             pattern="[0-9]*"
+        @endisset
+        @isset ($value)
+            value="{{ $value }}"
+        @else
+            @if ($type !== 'password' && old($name)) value="{{ old($name) }}" @endif
         @endisset
     >
 

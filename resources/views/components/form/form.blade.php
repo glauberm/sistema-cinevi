@@ -1,6 +1,7 @@
 <form
     method="{{ $method ?? 'POST'}}"
     action="{{ $action }}"
+    novalidate
 >
     @csrf
 

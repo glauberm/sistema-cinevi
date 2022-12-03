@@ -18,9 +18,8 @@ class AuthenticationFinalizeRegistrationMail extends Mailable
 
     public string $action = 'Confirmar email';
 
-    public function __construct(public string $url)
+    public function __construct(public readonly string $url)
     {
-        $this->url = route('authentication.finalize_registration');
     }
 
     public function envelope(): Envelope

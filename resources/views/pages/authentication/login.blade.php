@@ -5,7 +5,7 @@
 
     <div class="text-center">
         <a href="{{ route('authentication.request_reset_password') }}" class="btn btn-link">
-            Recuperação de senha
+            Redefinição de senha
         </a>
     </div>
 </x-layout.public>

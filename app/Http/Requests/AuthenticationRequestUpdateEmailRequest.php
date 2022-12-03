@@ -27,7 +27,7 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
                 'confirmed',
                 'unique:users,email,'.$authId,
             ],
-            'password' => ['required', 'string', 'min:8', 'current_password'],
+            'password' => ['required', 'string', 'current_password'],
         ];
     }
 
@@ -47,7 +47,6 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
             'email.confirmed' => 'Os emails informados não coincidem.',
             'password.required' => 'A senha é obrigatória.',
             'password.string' => 'A senha deve ser uma string.',
-            'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
             'password.current_password' => 'A senha informada está incorreta.',
         ];
     }
