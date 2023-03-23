@@ -25,8 +25,8 @@ class AuthenticationRequestResetPasswordController extends Controller
     {
         $this->middleware(RedirectIfAuthenticated::class);
 
-        if (! App::environment('testing') && ! App::environment('development')) {
-            $this->middleware(ThrottleRequests::class.':5,5');
+        if (!App::environment('testing') && !App::environment('development')) {
+            $this->middleware(ThrottleRequests::class . ':5,5');
         }
     }
 
@@ -39,8 +39,10 @@ class AuthenticationRequestResetPasswordController extends Controller
 
         $user = $this->service->getByEmail($email);
 
-        if (\is_null($user)) {
-            throw new ModelNotFoundException('Um usuário com esse email não foi encontrado no sistema.');
+        if (is_null($user)) {
+            throw new ModelNotFoundException(
+                'Um usuário com esse email não foi encontrado no sistema.'
+            );
         }
 
         $url = URL::temporarySignedRoute(
@@ -52,8 +54,12 @@ class AuthenticationRequestResetPasswordController extends Controller
         Mail::to($user->email)
             ->queue(new AuthenticationResetPasswordMail($url));
 
-        Session::flash('message', "Foi enviado para {$email} um link válido por 60 minutos para redefinição de senha. 
-                                    O email deve chegar em 15 minutos.");
+        Session::flash(
+            'message',
+            "Foi enviado para {$email} um link válido por 60 minutos para
+            redefinição de senha. O email deve chegar em 15 minutos."
+        );
+
         Session::flash('message-type', 'success');
 
         return Redirect::route('authentication.login');

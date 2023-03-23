@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Requests\AuthenticationUpdatePasswordRequest;
 use App\Services\AuthService;
 use App\Services\UserService;
@@ -14,12 +15,16 @@ use Illuminate\Support\Facades\Session;
 
 class AuthenticationUpdatePasswordController extends Controller
 {
-    public function __construct(private readonly UserService $userService, private readonly AuthService $authService)
-    {
+    public function __construct(
+        private readonly AuthService $authService,
+        private readonly UserService $userService,
+    ) {
+        $this->middleware(Authenticate::class);
     }
 
-    public function updatePassword(AuthenticationUpdatePasswordRequest $request): RedirectResponse
-    {
+    public function __invoke(
+        AuthenticationUpdatePasswordRequest $request
+    ): RedirectResponse {
         $authId = $this->authService->getAuthIdOrFail();
 
         /** @var array<string,mixed> */
@@ -36,7 +41,11 @@ class AuthenticationUpdatePasswordController extends Controller
 
         $this->authService->logout();
 
-        Session::flash('message', 'Senha editada com sucesso. Por favor, entre com sua nova senha.');
+        Session::flash(
+            'message',
+            'Senha editada com sucesso. Por favor, entre com sua nova senha.',
+        );
+
         Session::flash('message-type', 'success');
 
         return Redirect::route('authentication.login');

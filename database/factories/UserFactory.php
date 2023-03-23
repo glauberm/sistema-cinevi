@@ -19,8 +19,8 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => 'Gl@uber7!',
-            'phone' => $this->faker->randomNumber(11, true),
+            'password' => 'Gl@uberM0ta7!',
+            'phone' => $this->faker->randomNumber(5, true) . $this->faker->randomNumber(6, true),
             'identifier' => $this->faker->randomNumber(7, true),
             'is_enabled' => $this->faker->boolean(),
             'is_confirmed' => $this->faker->boolean(),

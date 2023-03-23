@@ -39,16 +39,10 @@
     />
 
     <x-form.input
-        label="Confirme o email"
-        name="email_confirmation"
-        type="email"
-    />
-
-    <x-form.input
         label="Senha"
         name="password"
         type="password"
-        :messages="['Maiúsculas e minúsculas', 'Mínimo 16 caracteres']"
+        :messages="['Maiúsculas e minúsculas', 'Mínimo 12 caracteres']"
     />
 
     <div class="d-grid gap-2">

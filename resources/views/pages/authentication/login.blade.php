@@ -4,7 +4,10 @@
     <hr />
 
     <div class="text-center">
-        <a href="{{ route('authentication.request_reset_password') }}" class="btn btn-link">
+        <a
+            href="{{ route('authentication.request_reset_password') }}"
+            class="btn btn-link"
+        >
             Redefinição de senha
         </a>
     </div>

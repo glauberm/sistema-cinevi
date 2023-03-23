@@ -40,8 +40,12 @@ class AuthenticationRegisterController extends Controller
 
         $this->authService->sendFinalizeRegistrationMail($user);
 
-        Session::flash('message', "Foi enviado para {$user->email} um link válido por 60 minutos para você finalizar o 
-                                   seu cadastro. O email deve chegar em 15 minutos.");
+        Session::flash(
+            'message',
+            "Foi enviado para {$user->email} um link válido por 60 minutos para
+            você finalizar o seu cadastro. O email deve chegar em 15 minutos."
+        );
+
         Session::flash('message-type', 'success');
 
         return Redirect::route('authentication.login');

@@ -32,7 +32,11 @@ class AuthenticationFinalizeRegistrationController extends Controller
         $user = $this->service->get($id, []);
 
         if ($user->is_enabled) {
-            Session::flash('message', 'Seu email já foi confirmado. Você pode entrar no sistema.');
+            Session::flash(
+                'message',
+                'Seu email já foi confirmado. Você pode entrar no sistema.'
+            );
+
             Session::flash('message-type', 'info');
 
             return Redirect::route('authentication.login');
@@ -51,8 +55,12 @@ class AuthenticationFinalizeRegistrationController extends Controller
             Mail::to($user->email)->queue(new UserPendingApprovalMail($user));
         }
 
-        Session::flash('message', 'Seu email foi confirmado, mas o departamento ainda precisa aprovar seu cadastro. 
-                                    Você receberá um email nos próximos dias.');
+        Session::flash(
+            'message',
+            'Seu email foi confirmado, mas o departamento ainda precisa aprovar
+            seu cadastro. Você receberá um email nos próximos dias.'
+        );
+
         Session::flash('message-type', 'warning');
 
         return Redirect::route('authentication.login');

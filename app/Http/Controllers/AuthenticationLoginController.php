@@ -22,8 +22,8 @@ class AuthenticationLoginController extends Controller
     {
         $this->middleware(RedirectIfAuthenticated::class);
 
-        if (! App::environment('testing') && ! App::environment('development')) {
-            $this->middleware(ThrottleRequests::class.':5,5');
+        if (!App::environment('testing') && !App::environment('development')) {
+            $this->middleware(ThrottleRequests::class . ':5,5');
         }
     }
 
@@ -50,20 +50,24 @@ class AuthenticationLoginController extends Controller
                 return Redirect::route('authentication.index');
             }
 
-            if (! $authUser->is_enabled) {
+            if (!$authUser->is_enabled) {
                 $this->service->sendFinalizeRegistrationMail($authUser);
 
                 $this->service->logout();
 
-                throw new AuthenticationException('Seu email ainda não foi confirmado. O email de confirmação foi 
-                                                   reenviado e deve chegar em 15 minutos.');
+                throw new AuthenticationException(
+                    'Seu email ainda não foi confirmado. O email de confirmação
+                    foi reenviado e deve chegar em 15 minutos.'
+                );
             }
 
-            if (! $authUser->is_confirmed) {
+            if (!$authUser->is_confirmed) {
                 $this->service->logout();
 
-                throw new AuthenticationException('Seu cadastro ainda não foi confirmado pelo departamento. Quando ele 
-                                                   for, você receberá um email.');
+                throw new AuthenticationException(
+                    'Seu cadastro ainda não foi confirmado pelo departamento.
+                    Quando ele for, você receberá um email.'
+                );
             }
         }
 

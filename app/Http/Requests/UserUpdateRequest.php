@@ -36,9 +36,18 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules()
     {
+        /** @var string $id */
+        $id = $this->route('id');
+
         return [
             'name' => ['required', 'string', 'max:180'],
-            'email' => ['required', 'string', 'email', 'max:180', "unique:users,email,{$this->route('id')}"],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:180',
+                "unique:users,email,{$id}"
+            ],
             'phone' => [
                 'required',
                 'numeric',
@@ -48,7 +57,7 @@ class UserUpdateRequest extends FormRequest
             'identifier' => [
                 'required',
                 'string',
-                "unique:users,identifier,{$this->route('id')}",
+                "unique:users,identifier,{$id}",
                 'regex:/^[0-9]*$/',
             ],
             'is_confirmed' => ['required', 'boolean'],

@@ -30,7 +30,13 @@ class AuthenticationRegisterRequest extends FormRequest
                 'min_digits:10',
                 'max_digits:11',
             ],
-            'email' => ['required', 'string', 'email', 'max:180', 'unique:users,email', 'confirmed'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:180',
+                'unique:users,email'
+            ],
             'password' => [
                 'required',
                 'string',
@@ -56,7 +62,6 @@ class AuthenticationRegisterRequest extends FormRequest
             'email.email' => 'O endereço de email não é válido.',
             'email.max' => 'O email deve ter no máximo 180 caracteres.',
             'email.unique' => 'Esse email já está em uso por outro usuário.',
-            'email.confirmed' => 'Os emails não coincidem.',
             'password.required' => 'A senha é obrigatória.',
             'password.string' => 'A senha deve ser uma string.',
             'password.min' => 'A senha deve ter no mínimo 12 caracteres.',

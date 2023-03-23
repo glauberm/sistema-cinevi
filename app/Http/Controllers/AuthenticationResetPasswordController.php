@@ -27,9 +27,19 @@ class AuthenticationResetPasswordController extends Controller
         /** @var array<string,mixed> */
         $data = $request->validated();
 
-        $this->service->update($data, $id, 'reset_password', 'A senha do usuário foi redefinida.');
+        $this->service->update(
+            $data,
+            $id,
+            'reset_password',
+            'A senha do usuário foi redefinida.'
+        );
 
-        Session::flash('message', 'Sua senha foi redefinida. Você já pode entrar no sistema com sua nova senha.');
+        Session::flash(
+            'message',
+            'Sua senha foi redefinida. Você já pode entrar no sistema com sua
+            nova senha.'
+        );
+
         Session::flash('message-type', 'success');
 
         return Redirect::route('authentication.login');
