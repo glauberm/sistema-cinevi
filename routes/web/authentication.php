@@ -31,28 +31,46 @@ Route::view('cadastro', 'pages/authentication/register')
 Route::post('cadastro', AuthenticationRegisterController::class, 'register')
     ->name('authentication.register-action');
 
-Route::get('finalizar-cadastro/{id}', AuthenticationFinalizeRegistrationController::class)
+Route::get(
+    'finalizar-cadastro/{id}',
+    AuthenticationFinalizeRegistrationController::class
+)
     ->name('authentication.finalize_registration');
 
-Route::view('solicitar-redefinir-senha', 'pages/authentication/request_reset_password')
+Route::view(
+    'solicitar-redefinir-senha',
+    'pages/authentication/request_reset_password'
+)
     ->name('authentication.request_reset_password');
 
-Route::post('solicitar-redefinir-senha', AuthenticationRequestResetPasswordController::class)
+Route::post(
+    'solicitar-redefinir-senha',
+    AuthenticationRequestResetPasswordController::class
+)
     ->name('authentication.request_reset_password-action');
 
 Route::view('redefinir-senha/{id}', 'pages/authentication/reset_password')
     ->name('authentication.reset_password');
 
-Route::post('redefinir-senha/{id}', AuthenticationResetPasswordController::class)
+Route::post(
+    'redefinir-senha/{id}',
+    AuthenticationResetPasswordController::class
+)
     ->name('authentication.reset_password-action');
 
 Route::view('solicitar-atualizar-email', 'pages/authentication/request_update_email')
     ->name('authentication.request_update_email');
 
-Route::post('solicitar-atualizar-email', AuthenticationRequestUpdateEmailController::class)
+Route::post(
+    'solicitar-atualizar-email',
+    AuthenticationRequestUpdateEmailController::class
+)
     ->name('authentication.request_update_email-action');
 
-Route::get('atualizar-email/{email}', AuthenticationUpdateEmailController::class)
+Route::get(
+    'atualizar-email/{email}',
+    AuthenticationUpdateEmailController::class
+)
     ->name('authentication.update_email');
 
 Route::view('atualizar-senha', 'pages/authentication/update_password')

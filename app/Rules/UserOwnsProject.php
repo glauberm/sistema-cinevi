@@ -9,11 +9,6 @@ use Illuminate\Contracts\Validation\InvokableRule;
 
 class UserOwnsProject implements InvokableRule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
     public function __construct(
         private readonly AuthService $authService,
         private readonly UserService $userService,
@@ -33,8 +28,13 @@ class UserOwnsProject implements InvokableRule
     {
         $authUser = $this->authService->getAuthUserOrFail();
 
-        if ($this->userService->isOrdinary($authUser) && $this->projectService->isOwnedBy($value, $authUser)) {
-            $fail("O {$attribute} deve ser um projeto cujo responsável seja você.");
+        if (
+            $this->userService->isOrdinary($authUser)
+            && $this->projectService->isOwnedBy($value, $authUser)
+        ) {
+            $fail(
+                "O {$attribute} deve ser um projeto cujo responsável seja você."
+            );
         }
     }
 }

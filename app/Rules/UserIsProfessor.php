@@ -9,13 +9,10 @@ use Illuminate\Contracts\Validation\InvokableRule;
 
 class UserIsProfessor implements InvokableRule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct(private readonly AuthService $authService, private readonly UserService $userService)
-    {
+    public function __construct(
+        private readonly AuthService $authService,
+        private readonly UserService $userService
+    ) {
     }
 
     /**
@@ -30,7 +27,7 @@ class UserIsProfessor implements InvokableRule
     {
         $authUser = $this->authService->getAuthUserOrFail();
 
-        if (! $this->userService->hasRole($authUser, UserRole::Professor)) {
+        if (!$this->userService->hasRole($authUser, UserRole::Professor)) {
             $fail("O {$attribute} deve ser um professor.");
         }
     }

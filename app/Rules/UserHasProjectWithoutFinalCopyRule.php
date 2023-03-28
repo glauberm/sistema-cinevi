@@ -8,11 +8,6 @@ use Illuminate\Contracts\Validation\InvokableRule;
 
 class UserHasProjectWithoutFinalCopyRule implements InvokableRule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
     public function __construct(private readonly UserService $userService)
     {
     }
@@ -28,7 +23,7 @@ class UserHasProjectWithoutFinalCopyRule implements InvokableRule
     public function __invoke($attribute, $value, $fail)
     {
         /** @var User $user */
-        $user = $this->userService->get(\intval($value), ['projects']);
+        $user = $this->userService->get(intval($value), ['projects']);
 
         // foreach ($user->projects as $project) {
         //     if ($project->finalCopy->exists()) {

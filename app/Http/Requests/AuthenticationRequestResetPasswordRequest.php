@@ -9,11 +9,9 @@ use Illuminate\Foundation\Http\FormRequest;
 class AuthenticationRequestResetPasswordRequest extends FormRequest
 {
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,string[]>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'email' => ['required', 'string', 'email'],
@@ -21,11 +19,9 @@ class AuthenticationRequestResetPasswordRequest extends FormRequest
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'email.required' => 'O email é obrigatório.',

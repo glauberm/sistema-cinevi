@@ -11,30 +11,22 @@ use Illuminate\Support\Facades\Gate;
 
 class UserUpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
         return Gate::allows('hasRole', UserRole::Admin);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
+    protected function failedAuthorization(): void
     {
-        throw new AuthorizationException('Você não tem permissão para criar ou editar usuários.');
+        throw new AuthorizationException(
+            'Você não tem permissão para criar ou editar usuários.'
+        );
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,string[]>
      */
-    public function rules()
+    public function rules(): array
     {
         /** @var string $id */
         $id = $this->route('id');
@@ -67,11 +59,9 @@ class UserUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'email.required' => 'O email é obrigatório.',

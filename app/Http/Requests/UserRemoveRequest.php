@@ -11,30 +11,23 @@ use Illuminate\Support\Facades\Gate;
 
 class UserRemoveRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
-        return Gate::allows('hasRole', UserRole::Admin) && Gate::allows('isNotUser', $this->route('id'));
+        return Gate::allows('hasRole', UserRole::Admin)
+            && Gate::allows('isNotUser', $this->route('id'));
+    }
+
+    protected function failedAuthorization(): void
+    {
+        throw new AuthorizationException(
+            'Você não tem permissão para remover este usuário.'
+        );
     }
 
     /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
-    {
-        throw new AuthorizationException('Você não tem permissão para remover este usuário.');
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<void>
      */
-    public function rules()
+    public function rules(): array
     {
         return [];
     }

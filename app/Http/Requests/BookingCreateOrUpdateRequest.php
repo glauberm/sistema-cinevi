@@ -22,12 +22,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class BookingCreateOrUpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
         /** @var array<string,mixed> */
         $data = $this->validated();
@@ -41,31 +36,30 @@ class BookingCreateOrUpdateRequest extends FormRequest
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
+    protected function failedAuthorization(): void
     {
-        throw new AuthorizationException('Você não tem permissão para editar esta reserva.');
+        throw new AuthorizationException(
+            'Você não tem permissão para editar esta reserva.'
+        );
     }
 
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $owner = $this->input('owner');
 
         $project = $this->input('project');
 
-        if (! \is_array($owner) || ! \array_key_exists('id', $owner)) {
-            throw new BadRequestHttpException('Os dados do responsável pela reserva estão em um formato inválido.');
+        if (!is_array($owner) || !array_key_exists('id', $owner)) {
+            throw new BadRequestHttpException(
+                'Os dados do responsável pela reserva estão em um formato
+                inválido.'
+            );
         }
 
-        if (! \is_array($project) || ! \array_key_exists('id', $project)) {
-            throw new BadRequestHttpException('Os dados do projeto associado à estão em um formato inválido.');
+        if (!is_array($project) || !array_key_exists('id', $project)) {
+            throw new BadRequestHttpException(
+                'Os dados do projeto associado à estão em um formato inválido.'
+            );
         }
 
         $this->merge(['owner_id' => $owner['id']]);
@@ -74,8 +68,6 @@ class BookingCreateOrUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,mixed[]>
      */
     public function rules(
@@ -84,11 +76,17 @@ class BookingCreateOrUpdateRequest extends FormRequest
         UserService $userService,
         ProjectService $projectService,
         BookableService $bookableService
-    ) {
-        $ownerIdRules = ['integer', 'required', new UserIsSelf($authService, $userService)];
+    ): array {
+        $ownerIdRules = [
+            'integer', 'required', new UserIsSelf($authService, $userService)
+        ];
 
         if ($this->route('id')) {
-            $ownerIdRules[] = new BookingsAreClosedRule($configurationService, $authService, $userService);
+            $ownerIdRules[] = new BookingsAreClosedRule(
+                $configurationService,
+                $authService,
+                $userService
+            );
         }
 
         return [
@@ -96,7 +94,11 @@ class BookingCreateOrUpdateRequest extends FormRequest
             'project_id' => [
                 'integer',
                 'required',
-                new UserOwnsProject($authService, $userService, $projectService),
+                new UserOwnsProject(
+                    $authService,
+                    $userService,
+                    $projectService
+                ),
             ],
             'withdrawal_date' => [
                 'string',
@@ -124,11 +126,9 @@ class BookingCreateOrUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         $dateFormat = CarbonImmutable::now()->format('Y-m-d');
 
@@ -153,11 +153,9 @@ class BookingCreateOrUpdateRequest extends FormRequest
     }
 
     /**
-     * Get custom attributes for validator errors.
-     *
      * @return array<string,string>
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'owner_id' => 'responsável pela reserva',

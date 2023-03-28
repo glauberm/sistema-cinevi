@@ -33,8 +33,10 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
     /**
      * @param  string[]  $relations
      */
-    public function get(int $id, array $relations = ['owner', 'productionCategory', 'professor']): FinalCopy
-    {
+    public function get(
+        int $id,
+        array $relations = ['owner', 'productionCategory', 'professor']
+    ): FinalCopy {
         /** @var FinalCopy $finalCopy */
         $finalCopy = $this->baseGet($id, $relations);
 
@@ -43,15 +45,20 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
 
     /**
      * @param  Builder<FinalCopy>  $query
-     * @param  Request  $request
      * @return Builder<FinalCopy>
      */
-    protected function beforePagination(Builder $query, Request $request): Builder
-    {
-        if (\is_string($request->input('status'))) {
+    protected function beforePagination(
+        Builder $query,
+        Request $request
+    ): Builder {
+        if (is_string($request->input('status'))) {
             switch ($request->input('status')) {
                 case 'owned_only':
-                    $query->where('owner_id', '=', $this->authService->getAuthIdOrFail());
+                    $query->where(
+                        'owner_id',
+                        '=',
+                        $this->authService->getAuthIdOrFail()
+                    );
                     break;
             }
         }
@@ -60,13 +67,16 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
     }
 
     /**
-     * @param  FinalCopy  $finalCopy
      * @param  array<string,mixed>  $data
-     * @return FinalCopy
      */
-    protected function afterCreated(FinalCopy $finalCopy, array $data): FinalCopy
-    {
-        if (\array_key_exists('production_roles', $data) && \is_array($data['production_roles'])) {
+    protected function afterCreated(
+        FinalCopy $finalCopy,
+        array $data
+    ): FinalCopy {
+        if (
+            array_key_exists('production_roles', $data)
+            && is_array($data['production_roles'])
+        ) {
             /** @var array<int,array<string,mixed>> */
             $finalCopyProductionRoles = $data['production_roles'];
 
@@ -77,21 +87,25 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
     }
 
     /**
-     * @param  FinalCopy  $finalCopy
      * @param  array<string,mixed>  $data
-     * @return void
      */
     protected function afterUpdated(FinalCopy $finalCopy, array $data): void
     {
-        if (\array_key_exists('production_roles', $data) && \is_array($data['production_roles'])) {
+        if (
+            array_key_exists('production_roles', $data)
+            && is_array($data['production_roles'])
+        ) {
             /** @var array<int,array<string,mixed>> */
             $finalCopyProductionRoles = $data['production_roles'];
 
             FinalCopyProductionRole::where('final_copy_id', '=', $finalCopy->id)
-                ->whereNotIn('id', \array_column($finalCopyProductionRoles, 'id'))
+                ->whereNotIn(
+                    'id',
+                    array_column($finalCopyProductionRoles, 'id')
+                )
                 ->delete();
 
-            for ($i = 0; $i < \count($finalCopyProductionRoles); $i++) {
+            for ($i = 0; $i < count($finalCopyProductionRoles); $i++) {
                 /** @var array<int,array<string,mixed>> */
                 $users = $finalCopyProductionRoles[$i]['users'];
 
@@ -106,7 +120,8 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
                     ],
                 );
 
-                $finalCopyProductionRole->users()->sync(\array_column($users, 'id'));
+                $finalCopyProductionRole->users()
+                    ->sync(array_column($users, 'id'));
             }
         }
     }

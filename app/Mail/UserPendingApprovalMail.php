@@ -6,44 +6,28 @@ namespace App\Mail;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
 
-class UserPendingApprovalMail extends Mailable
+class UserPendingApprovalMail extends AbstractMail
 {
     use Queueable;
 
-    public string $title = 'Novo cadastro pendente de aprovação';
+    public string $title = 'Novo cadastro';
 
-    public string $urlText = 'Verificar usuário';
+    public string $action = 'Verificar usuário';
 
     public readonly string $url;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(User $user)
+    public function __construct(public readonly User $user)
     {
-        $this->url = \env('APP_URL').'/usuarios/'.$user->id;
+        $this->url = route('user.update', ['id' => $user->id]);
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
+    public function content(): Content
     {
-        /** @var string $address */
-        $address = env('MAIL_FROM_ADDRESS');
-
-        /** @var string $name */
-        $name = env('MAIL_FROM_NAME');
-
-        return $this->from($address, $name)
-            ->subject($this->title)
-            ->view('emails/user/pending-approval--html')
-            ->text('emails/user/pending-approval--text');
+        return new Content(
+            view: 'emails/user/pending_approval-html',
+            text: 'emails/user/pending_approval-text'
+        );
     }
 }

@@ -26,6 +26,13 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory;
 
     /**
+     * The column name of the "remember me" token.
+     *
+     * @var string
+     */
+    protected $rememberTokenName = null;
+
+    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
@@ -55,7 +62,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -70,7 +76,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return Attribute<callable, callable>
+     * @return Attribute<callable,callable>
      */
     public function password(): Attribute
     {

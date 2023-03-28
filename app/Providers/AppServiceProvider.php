@@ -7,21 +7,16 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * @return void
-     */
-    public function register()
+    public function register(): void
     {
-        $this->app->bind('path.public', function () {
-            return base_path().'/public_html';
-        });
+        /** @var \Illuminate\Foundation\Application $app */
+        $app = $this->app;
+
+        $app->usePublicPath(base_path() . '/public_html');
     }
 
-    /**
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
-        Model::preventLazyLoading();
+        Model::shouldBeStrict();
     }
 }

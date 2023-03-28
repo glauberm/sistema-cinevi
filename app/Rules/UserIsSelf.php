@@ -8,13 +8,10 @@ use Illuminate\Contracts\Validation\InvokableRule;
 
 class UserIsSelf implements InvokableRule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct(private readonly AuthService $authService, private readonly UserService $userService)
-    {
+    public function __construct(
+        private readonly AuthService $authService,
+        private readonly UserService $userService
+    ) {
     }
 
     /**
@@ -29,7 +26,10 @@ class UserIsSelf implements InvokableRule
     {
         $authUser = $this->authService->getAuthUserOrFail();
 
-        if ($this->userService->isOrdinary($authUser) && $authUser->id !== $value) {
+        if (
+            $this->userService->isOrdinary($authUser)
+            && $authUser->id !== $value
+        ) {
             $fail("O {$attribute} deve ser você mesmo.");
         }
     }

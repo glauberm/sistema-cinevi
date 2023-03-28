@@ -8,12 +8,7 @@ use Illuminate\Database\Seeder;
 
 class UserProfessorSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         User::factory()
             ->state(['is_enabled' => true])

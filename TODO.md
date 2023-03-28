@@ -3,8 +3,6 @@
 ## Sem Domínio
 
 -   [?] Remove CORS?
--   [ ] Alternate mailable syntax (https://laravel-news.com/laravel-9-35-0)
--   [ ] Todos os testes
 
 ## Autenticação
 

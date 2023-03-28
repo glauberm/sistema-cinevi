@@ -37,6 +37,7 @@ class Version extends Model
         'action',
         'message',
         'payload',
+        'user_id',
         'user_ip',
         'user_agent',
         'user_string',
@@ -56,7 +57,7 @@ class Version extends Model
     /**
      * Retorna o usuário associado à versão.
      *
-     * @return BelongsTo<User, self>
+     * @return BelongsTo<User,self>
      */
     public function user(): BelongsTo
     {

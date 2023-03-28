@@ -10,6 +10,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface CrudServiceInterface
 {
+    /**
+     * @return LengthAwarePaginator<Model>
+     */
     public function paginate(Request $request): LengthAwarePaginator;
 
     /**

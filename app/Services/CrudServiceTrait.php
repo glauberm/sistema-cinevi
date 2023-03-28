@@ -8,38 +8,52 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use InvalidArgumentException;
 
 trait CrudServiceTrait
 {
+    /**
+     * @return LengthAwarePaginator<Model>
+     */
     public function paginate(Request $request): LengthAwarePaginator
     {
         $query = $this->modelClass::orderBy(
-            $request->input('order_by_column', 'id'),
-            $request->input('order_by_direction', 'desc')
+            $request->input('ordenar_pela_coluna', 'id'),
+            $request->input('ordenar_pela_direcao', 'desc')
         );
 
         $query = $this->beforePagination($query, $request);
 
-        $itemsPerPage = $request->input('items_per_page', 10);
+        $itemsPerPage = $request->input('itens_por_pagina', 10);
 
-        if (! \is_int($itemsPerPage)) {
-            throw new \InvalidArgumentException('O número de itens por página deve ser um inteiro.');
+        if (!is_int($itemsPerPage)) {
+            throw new InvalidArgumentException(
+                'O número de itens por página deve ser um número inteiro.'
+            );
         }
 
-        return $query->paginate($itemsPerPage, ['*'], 'page');
+        /** @phpstan-ignore-next-line */
+        return $query->paginate($itemsPerPage, ['*'], 'pagina');
     }
 
     /**
      * @param  array<string,mixed>  $data
      */
-    public function create(array $data, ?string $eventAction = 'create', ?string $eventMessage = 'O item foi criado.'): Model
-    {
+    public function create(
+        array $data,
+        ?string $eventAction = 'create',
+        ?string $eventMessage = 'O item foi criado.'
+    ): Model {
         $model = $this->modelClass::create($data);
 
         $model = $this->afterCreated($model, $data);
 
         if ($this instanceof HasVersionsServiceInterface) {
-            event(new $this->modelVersionEventClass($model, $eventAction, $eventMessage));
+            event(new $this->modelVersionEventClass(
+                $model,
+                $eventAction,
+                $eventMessage
+            ));
         }
 
         return $model;
@@ -56,8 +70,12 @@ trait CrudServiceTrait
     /**
      * @param  array<string,mixed>  $data
      */
-    public function update(array $data, int $id, ?string $eventAction = 'update', ?string $eventMessage = 'O item foi editado.'): void
-    {
+    public function update(
+        array $data,
+        int $id,
+        ?string $eventAction = 'update',
+        ?string $eventMessage = 'O item foi editado.'
+    ): void {
         $model = $this->get($id);
 
         $model->update($data);
@@ -66,14 +84,25 @@ trait CrudServiceTrait
         $this->afterUpdated($model, $data);
 
         if ($this instanceof HasVersionsServiceInterface) {
-            event(new $this->modelVersionEventClass($model, $eventAction, $eventMessage));
+            event(new $this->modelVersionEventClass(
+                $model,
+                $eventAction,
+                $eventMessage
+            ));
         }
     }
 
-    public function remove(int $id, ?string $eventAction = 'remove', ?string $eventMessage = 'O item foi removido.'): void
-    {
+    public function remove(
+        int $id,
+        ?string $eventAction = 'remove',
+        ?string $eventMessage = 'O item foi removido.'
+    ): void {
         if ($this instanceof HasVersionsServiceInterface) {
-            event(new $this->modelVersionEventClass($this->get($id), $eventAction, $eventMessage));
+            event(new $this->modelVersionEventClass(
+                $this->get($id),
+                $eventAction,
+                $eventMessage
+            ));
         }
 
         $this->modelClass::destroy($id);
@@ -83,8 +112,10 @@ trait CrudServiceTrait
      * @param  Builder<Model>  $query
      * @return Builder<Model>
      */
-    protected function beforePagination(Builder $query, Request $request): Builder
-    {
+    protected function beforePagination(
+        Builder $query,
+        Request $request
+    ): Builder {
         return $query;
     }
 

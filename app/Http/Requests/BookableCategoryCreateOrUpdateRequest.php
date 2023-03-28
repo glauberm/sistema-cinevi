@@ -9,30 +9,24 @@ use Illuminate\Support\Facades\Gate;
 
 class BookableCategoryCreateOrUpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
-        return Gate::allows('hasRole', UserRole::Admin) || Gate::allows('hasRole', UserRole::Warehouse);
+        return Gate::allows('hasRole', UserRole::Admin)
+            || Gate::allows('hasRole', UserRole::Warehouse);
+    }
+
+    protected function failedAuthorization(): void
+    {
+        throw new AuthorizationException(
+            'Você não tem permissão para criar ou editar categorias de
+            reserváveis.'
+        );
     }
 
     /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
-    {
-        throw new AuthorizationException('Você não tem permissão para criar ou editar categorias de reserváveis.');
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,string[]>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'title' => ['required', 'string'],
@@ -41,11 +35,9 @@ class BookableCategoryCreateOrUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'title.required' => 'O nome é obrigatório.',

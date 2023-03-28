@@ -53,15 +53,18 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
 
     /**
      * @param  Builder<Project>  $query
-     * @param  Request  $request
      * @return Builder<Project>
      */
     protected function beforePagination(Builder $query, Request $request): Builder
     {
-        if (\is_string($request->input('status'))) {
+        if (is_string($request->input('status'))) {
             switch ($request->input('status')) {
                 case 'owned_only':
-                    $query->where('owner_id', '=', $this->authService->getAuthIdOrFail());
+                    $query->where(
+                        'owner_id',
+                        '=',
+                        $this->authService->getAuthIdOrFail()
+                    );
                     break;
             }
         }
@@ -70,9 +73,7 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
-     * @param  Project  $project
      * @param  array<string,mixed>  $data
-     * @return Project
      */
     protected function afterCreated(Project $project, array $data): Project
     {
@@ -92,27 +93,27 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
         $artDirectors = $data['art_directors'];
 
         $project->directors()->attach(
-            \array_column($directors, 'id'),
+            array_column($directors, 'id'),
             ['role' => ProjectUserRole::Director]
         );
 
         $project->producers()->attach(
-            \array_column($producers, 'id'),
+            array_column($producers, 'id'),
             ['role' => ProjectUserRole::Producer]
         );
 
         $project->photographyDirectors()->attach(
-            \array_column($photographyDirectors, 'id'),
+            array_column($photographyDirectors, 'id'),
             ['role' => ProjectUserRole::PhotographyDirector]
         );
 
         $project->soundDirectors()->attach(
-            \array_column($soundDirectors, 'id'),
+            array_column($soundDirectors, 'id'),
             ['role' => ProjectUserRole::SoundDirector]
         );
 
         $project->artDirectors()->attach(
-            \array_column($artDirectors, 'id'),
+            array_column($artDirectors, 'id'),
             ['role' => ProjectUserRole::ArtDirector]
         );
 
@@ -120,9 +121,7 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
     }
 
     /**
-     * @param  Project  $project
      * @param  array<string,mixed>  $data
-     * @return void
      */
     protected function afterUpdated(Project $project, array $data): void
     {
@@ -142,36 +141,31 @@ class ProjectService implements CrudServiceInterface, HasVersionsServiceInterfac
         $artDirectors = $data['art_directors'];
 
         $project->directors()->syncWithPivotValues(
-            \array_column($directors, 'id'),
+            array_column($directors, 'id'),
             ['role' => ProjectUserRole::Director]
         );
 
         $project->producers()->syncWithPivotValues(
-            \array_column($producers, 'id'),
+            array_column($producers, 'id'),
             ['role' => ProjectUserRole::Producer]
         );
 
         $project->photographyDirectors()->syncWithPivotValues(
-            \array_column($photographyDirectors, 'id'),
+            array_column($photographyDirectors, 'id'),
             ['role' => ProjectUserRole::PhotographyDirector]
         );
 
         $project->soundDirectors()->syncWithPivotValues(
-            \array_column($soundDirectors, 'id'),
+            array_column($soundDirectors, 'id'),
             ['role' => ProjectUserRole::SoundDirector]
         );
 
         $project->artDirectors()->syncWithPivotValues(
-            \array_column($artDirectors, 'id'),
+            array_column($artDirectors, 'id'),
             ['role' => ProjectUserRole::ArtDirector]
         );
     }
 
-    /**
-     * @param  int  $id
-     * @param  User  $user
-     * @return bool
-     */
     public function isOwnedBy(int $id, User $user): bool
     {
         $project = $this->modelClass::with(['owner'])->findOrFail($id);

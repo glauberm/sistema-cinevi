@@ -9,14 +9,20 @@ use App\Services\BookableCategoryService;
 
 class BookableCategoryVersionListener
 {
-    public function __construct(private readonly BookableCategoryService $service)
-    {
+    public function __construct(
+        private readonly BookableCategoryService $service
+    ) {
     }
 
     public function handle(BookableCategoryVersionEvent $event): void
     {
         $data = $event->bookableCategory->toArray();
 
-        $this->service->registerVersion($event->bookableCategory, $event->action, $event->message, $data);
+        $this->service->registerVersion(
+            $event->bookableCategory,
+            $event->action,
+            $event->message,
+            $data
+        );
     }
 }

@@ -7,12 +7,7 @@ use Illuminate\Database\Seeder;
 
 class ConfigurationSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         Configuration::factory()->createOne();
     }

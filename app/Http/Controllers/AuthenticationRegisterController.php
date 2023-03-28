@@ -16,13 +16,16 @@ use Illuminate\Support\Facades\Session;
 
 class AuthenticationRegisterController extends Controller
 {
-    public function __construct(private readonly UserService $userService, private readonly AuthService $authService)
-    {
+    public function __construct(
+        private readonly UserService $userService,
+        private readonly AuthService $authService
+    ) {
         $this->middleware(RedirectIfAuthenticated::class);
     }
 
-    public function __invoke(AuthenticationRegisterRequest $request): RedirectResponse
-    {
+    public function __invoke(
+        AuthenticationRegisterRequest $request
+    ): RedirectResponse {
         /** @var array<string,mixed> */
         $data = $request->validated();
 

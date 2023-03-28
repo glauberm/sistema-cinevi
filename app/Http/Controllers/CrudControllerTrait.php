@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View as ViewFacade;
 
 trait CrudControllerTrait
 {
@@ -19,12 +20,14 @@ trait CrudControllerTrait
 
     protected string $removedMessage = 'O item foi removido com sucesso.';
 
-    public function paginate(Request $request): ResourceCollection
+    public function paginate(Request $request): View
     {
-        return $this->resourceClass::collection($this->service->paginate($request));
+        return ViewFacade::make($this->paginateView, [
+            'data' => $this->service->paginate($request)
+        ]);
     }
 
-    public function doCreate(FormRequest $request): JsonResponse
+    public function doCreate(FormRequest $request): RedirectResponse
     {
         /** @var array<string,mixed> */
         $data = $request->validated();
@@ -34,24 +37,10 @@ trait CrudControllerTrait
         /** @phpstan-ignore-next-line */
         $this->afterCreated($request, $model);
 
-        return response()->json(
-            [
-                'message' => $this->createdMessage,
-                'resource' => new $this->resourceClass($model),
-            ],
-            201,
-        );
+        return Redirect::route($this->paginateRoute);
     }
 
-    public function show(Request $request, int $id): JsonResource
-    {
-        /** @var JsonResource $resource */
-        $resource = new $this->resourceClass($this->service->get($id));
-
-        return $resource;
-    }
-
-    public function doUpdate(FormRequest $request, int $id): JsonResponse
+    public function doUpdate(FormRequest $request, int $id): RedirectResponse
     {
         /** @var array<string,mixed> */
         $data = $request->validated();
@@ -61,14 +50,14 @@ trait CrudControllerTrait
         /** @phpstan-ignore-next-line */
         $this->afterUpdated($request, $id);
 
-        return response()->json(['message' => $this->updatedMessage]);
+        return Redirect::route($this->paginateRoute);
     }
 
-    public function doRemove(FormRequest $request, int $id): JsonResponse
+    public function doRemove(FormRequest $request, int $id): RedirectResponse
     {
         $this->service->remove($id);
 
-        return response()->json(['message' => $this->removedMessage]);
+        return Redirect::route($this->paginateRoute);
     }
 
     protected function afterCreated(FormRequest $request, Model $model): void

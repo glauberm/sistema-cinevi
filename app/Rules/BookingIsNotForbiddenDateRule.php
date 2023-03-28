@@ -9,13 +9,9 @@ use Illuminate\Contracts\Validation\InvokableRule;
 
 class BookingIsNotForbiddenDateRule implements InvokableRule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct(private readonly ConfigurationService $configurationService)
-    {
+    public function __construct(
+        private readonly ConfigurationService $configurationService
+    ) {
     }
 
     /**
@@ -35,10 +31,13 @@ class BookingIsNotForbiddenDateRule implements InvokableRule
 
         foreach ($configuration->bookings_forbidden_dates as $forbiddenDate) {
             if (
-                $valueDate->month === \intval($forbiddenDate['month']) &&
-                $valueDate->day === \intval($forbiddenDate['day'])
+                $valueDate->month === intval($forbiddenDate['month']) &&
+                $valueDate->day === intval($forbiddenDate['day'])
             ) {
-                $fail('A :attribute não pode ser realizada na data de '.$forbiddenDate['name']);
+                $fail(
+                    "A {$attribute} não pode ser realizada na data de
+                    {$forbiddenDate['name']}."
+                );
             }
         }
     }

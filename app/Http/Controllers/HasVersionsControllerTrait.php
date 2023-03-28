@@ -4,19 +4,23 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Version;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\View as ViewFacade;
 
 trait HasVersionsControllerTrait
 {
-    public function paginateVersions(Request $request, int $id): ResourceCollection
+    public function paginateVersions(Request $request, int $id): View
     {
-        return Version::collection($this->service->paginateVersions($id));
+        return ViewFacade::make($this->paginateVersionsView, [
+            'data' => $this->service->paginateVersions($id)
+        ]);
     }
 
-    public function showVersion(Request $request, int $id): Version
+    public function showVersion(Request $request, int $id): View
     {
-        return new Version($this->service->getVersion($id));
+        return ViewFacade::make($this->showVersionView, [
+            'data' => $this->service->getVersion($id)
+        ]);
     }
 }

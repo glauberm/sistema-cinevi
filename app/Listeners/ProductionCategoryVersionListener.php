@@ -17,6 +17,11 @@ class ProductionCategoryVersionListener
     {
         $data = $event->productionCategory->toArray();
 
-        $this->service->registerVersion($event->productionCategory, $event->action, $event->message, $data);
+        $this->service->registerVersion(
+            $event->productionCategory,
+            $event->action,
+            $event->message,
+            $data
+        );
     }
 }

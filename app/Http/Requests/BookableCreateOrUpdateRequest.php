@@ -10,46 +10,40 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class BookableCreateOrUpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
-        return Gate::allows('hasRole', UserRole::Admin) || Gate::allows('hasRole', UserRole::Warehouse);
+        return Gate::allows('hasRole', UserRole::Admin)
+            || Gate::allows('hasRole', UserRole::Warehouse);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
+    protected function failedAuthorization(): void
     {
-        throw new AuthorizationException('Você não tem permissão para criar ou editar reserváveis.');
+        throw new AuthorizationException(
+            'Você não tem permissão para criar ou editar reserváveis.'
+        );
     }
 
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $bookableCategory = $this->input('bookable_category');
 
-        if (! \is_array($bookableCategory) || ! \array_key_exists('id', $bookableCategory)) {
-            throw new BadRequestHttpException('Os dados da categoria de reservável estão em um formato inválido.');
+        if (
+            !is_array($bookableCategory)
+            || !array_key_exists('id', $bookableCategory)
+        ) {
+            throw new BadRequestHttpException(
+                'Os dados da categoria de reservável estão em um formato
+                inválido.'
+            );
         }
 
         $this->merge(['bookable_category_id' => $bookableCategory['id']]);
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,string[]>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'identifier' => ['required', 'string'],
@@ -67,11 +61,9 @@ class BookableCreateOrUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'identifier.required' => 'O código é obrigatório.',

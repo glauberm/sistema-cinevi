@@ -23,8 +23,9 @@ class AuthenticationRequestUpdateEmailController extends Controller
         $this->middleware(Authenticate::class);
     }
 
-    public function __invoke(AuthenticationRequestUpdateEmailRequest $request): RedirectResponse
-    {
+    public function __invoke(
+        AuthenticationRequestUpdateEmailRequest $request
+    ): RedirectResponse {
         /** @var array{email:string,password:string} $data */
         $data = $request->validated();
 

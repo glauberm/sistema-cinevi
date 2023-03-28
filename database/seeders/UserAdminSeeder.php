@@ -8,12 +8,7 @@ use Illuminate\Database\Seeder;
 
 class UserAdminSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         User::factory()
             ->state(['email' => 'contato@cinemauff.com.br'])

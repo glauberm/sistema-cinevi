@@ -9,30 +9,22 @@ use Illuminate\Support\Facades\Gate;
 
 class ConfigurationUpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
         return Gate::allows('hasRole', UserRole::Admin);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
+    protected function failedAuthorization(): void
     {
-        throw new AuthorizationException('Você não tem permissão para editar as configurações.');
+        throw new AuthorizationException(
+            'Você não tem permissão para editar as configurações.'
+        );
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,string[]>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'bookings_are_closed' => ['required', 'boolean'],
@@ -45,11 +37,9 @@ class ConfigurationUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'bookings_are_closed.required' => 'Você deve informar se as reservas estão fechadas para os alunos ou não',

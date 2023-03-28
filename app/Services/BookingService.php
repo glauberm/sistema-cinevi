@@ -49,8 +49,10 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     /**
      * @param  string[]  $relations
      */
-    public function get(int $id, array $relations = ['owner', 'project', 'bookables']): Booking
-    {
+    public function get(
+        int $id,
+        array $relations = ['owner', 'project', 'bookables']
+    ): Booking {
         /** @var Booking $booking */
         $booking = $this->baseGet($id, $relations);
 
@@ -61,12 +63,18 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
      * @param  Builder<Booking>  $query
      * @return Builder<Booking>
      */
-    protected function beforePagination(Builder $query, Request $request): Builder
-    {
-        if (\is_string($request->input('status'))) {
+    protected function beforePagination(
+        Builder $query,
+        Request $request
+    ): Builder {
+        if (is_string($request->input('status'))) {
             switch ($request->input('status')) {
                 case 'owned_only':
-                    $query->where('owner_id', '=', $this->authService->getAuthIdOrFail());
+                    $query->where(
+                        'owner_id',
+                        '=',
+                        $this->authService->getAuthIdOrFail()
+                    );
                     break;
             }
         }
@@ -82,7 +90,7 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
         /** @var array<int,array<string,mixed>> */
         $bookables = $data['bookables'];
 
-        $booking->bookables()->attach(\array_column($bookables, 'id'));
+        $booking->bookables()->attach(array_column($bookables, 'id'));
 
         return $booking;
     }
@@ -95,6 +103,6 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
         /** @var array<int,array<string,mixed>> */
         $bookables = $data['bookables'];
 
-        $booking->bookables()->sync(\array_column($bookables, 'id'));
+        $booking->bookables()->sync(array_column($bookables, 'id'));
     }
 }

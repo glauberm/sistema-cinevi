@@ -8,11 +8,9 @@ use Illuminate\Foundation\Http\FormRequest;
 class BookingShowBetweenRequest extends FormRequest
 {
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,string[]>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'start_date' => ['string', 'required', 'date_format:Y-m-d'],
@@ -21,11 +19,9 @@ class BookingShowBetweenRequest extends FormRequest
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         $dateFormat = CarbonImmutable::now()->format('Y-m-d');
 

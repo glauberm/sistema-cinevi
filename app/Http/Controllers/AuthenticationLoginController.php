@@ -27,8 +27,9 @@ class AuthenticationLoginController extends Controller
         }
     }
 
-    public function __invoke(AuthenticationLoginRequest $request): RedirectResponse
-    {
+    public function __invoke(
+        AuthenticationLoginRequest $request
+    ): RedirectResponse {
         /** @var array{email:string,password:string} */
         $data = $request->validated();
 

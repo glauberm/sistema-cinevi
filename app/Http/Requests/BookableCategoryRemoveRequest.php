@@ -11,30 +11,23 @@ use Illuminate\Support\Facades\Gate;
 
 class BookableCategoryRemoveRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
-        return Gate::allows('hasRole', UserRole::Admin) || Gate::allows('hasRole', UserRole::Warehouse);
+        return Gate::allows('hasRole', UserRole::Admin)
+            || Gate::allows('hasRole', UserRole::Warehouse);
+    }
+
+    protected function failedAuthorization(): void
+    {
+        throw new AuthorizationException(
+            'Você não tem permissão para remover categorias de reserváveis.'
+        );
     }
 
     /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
-    {
-        throw new AuthorizationException('Você não tem permissão para remover categorias de reserváveis.');
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<void>
      */
-    public function rules()
+    public function rules(): array
     {
         return [];
     }

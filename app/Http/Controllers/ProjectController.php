@@ -8,12 +8,11 @@ use App\Enums\UserRole;
 use App\Http\Middleware\Authenticate;
 use App\Http\Requests\ProjectCreateOrUpdateRequest;
 use App\Http\Requests\ProjectRemoveRequest;
-use App\Http\Resources\Project;
 use App\Mail\ProjectCreatedMail;
 use App\Models\Project as ProjectModel;
 use App\Services\ProjectService;
 use App\Services\UserService;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
 
@@ -21,35 +20,43 @@ class ProjectController extends Controller implements CrudControllerInterface, H
 {
     use CrudControllerTrait, HasVersionsControllerTrait;
 
-    protected string $resourceClass = Project::class;
-
-    public function __construct(protected readonly ProjectService $service, protected readonly UserService $userService)
-    {
+    public function __construct(
+        protected readonly ProjectService $service,
+        protected readonly UserService $userService
+    ) {
         $this->middleware(Authenticate::class);
     }
 
-    public function create(ProjectCreateOrUpdateRequest $request): JsonResponse
-    {
+    public function create(
+        ProjectCreateOrUpdateRequest $request
+    ): RedirectResponse {
         return $this->doCreate($request);
     }
 
-    public function update(ProjectCreateOrUpdateRequest $request, int $id): JsonResponse
-    {
+    public function update(
+        ProjectCreateOrUpdateRequest $request,
+        int $id
+    ): RedirectResponse {
         return $this->doUpdate($request, $id);
     }
 
-    public function remove(ProjectRemoveRequest $request, int $id): JsonResponse
-    {
+    public function remove(
+        ProjectRemoveRequest $request,
+        int $id
+    ): RedirectResponse {
         return $this->doRemove($request, $id);
     }
 
-    protected function afterCreated(ProjectCreateOrUpdateRequest $request, ProjectModel $project): void
-    {
+    protected function afterCreated(
+        ProjectCreateOrUpdateRequest $request,
+        ProjectModel $project
+    ): void {
         $departmentUsers = $this->userService->getAllWithRole(UserRole::Department);
 
         $warehouseUsers = $this->userService->getAllWithRole(UserRole::Warehouse);
 
-        Mail::to($project->professor->email)->queue(new ProjectCreatedMail($project));
+        Mail::to($project->professor->email)
+            ->queue(new ProjectCreatedMail($project));
 
         foreach ($project->directors as $user) {
             Mail::to($user->email)->queue(new ProjectCreatedMail($project));

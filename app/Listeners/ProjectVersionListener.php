@@ -19,7 +19,9 @@ class ProjectVersionListener
 
         $data['owner'] = $event->project->owner->toArray();
 
-        $data['production_category'] = $event->project->productionCategory->toArray();
+        $data['production_category'] = $event->project
+            ->productionCategory
+            ->toArray();
 
         $data['professor'] = $event->project->professor->toArray();
 
@@ -27,12 +29,19 @@ class ProjectVersionListener
 
         $data['producers'] = $event->project->producers->toArray();
 
-        $data['photography_directors'] = $event->project->photographyDirectors->toArray();
+        $data['photography_directors'] = $event->project
+            ->photographyDirectors
+            ->toArray();
 
         $data['sound_directors'] = $event->project->soundDirectors->toArray();
 
         $data['art_directors'] = $event->project->artDirectors->toArray();
 
-        $this->service->registerVersion($event->project, $event->action, $event->message, $data);
+        $this->service->registerVersion(
+            $event->project,
+            $event->action,
+            $event->message,
+            $data
+        );
     }
 }

@@ -17,12 +17,19 @@ class BookableVersionListener
     {
         $data = $event->bookable->makeHidden('bookable_category_id')->toArray();
 
-        $data['bookable_category'] = $event->bookable->bookableCategory->toArray();
+        $data['bookable_category'] = $event->bookable
+            ->bookableCategory
+            ->toArray();
 
         $data['users'] = $event->bookable->users->toArray();
 
         $data['bookings'] = $event->bookable->bookings->toArray();
 
-        $this->service->registerVersion($event->bookable, $event->action, $event->message, $data);
+        $this->service->registerVersion(
+            $event->bookable,
+            $event->action,
+            $event->message,
+            $data
+        );
     }
 }

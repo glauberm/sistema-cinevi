@@ -147,6 +147,7 @@ class FinalCopy extends Model
      */
     public function productionRoles(): BelongsToMany
     {
-        return $this->belongsToMany(ProductionRole::class)->using(FinalCopyProductionRole::class);
+        return $this->belongsToMany(ProductionRole::class)
+            ->using(FinalCopyProductionRole::class);
     }
 }

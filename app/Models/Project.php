@@ -113,7 +113,8 @@ class Project extends Model
      */
     public function directors(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->wherePivot('role', '=', ProjectUserRole::Director);
+        return $this->belongsToMany(User::class)
+            ->wherePivot('role', '=', ProjectUserRole::Director);
     }
 
     /**
@@ -121,7 +122,8 @@ class Project extends Model
      */
     public function producers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->wherePivot('role', '=', ProjectUserRole::Producer);
+        return $this->belongsToMany(User::class)
+            ->wherePivot('role', '=', ProjectUserRole::Producer);
     }
 
     /**
@@ -129,7 +131,8 @@ class Project extends Model
      */
     public function photographyDirectors(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->wherePivot('role', '=', ProjectUserRole::PhotographyDirector);
+        return $this->belongsToMany(User::class)
+            ->wherePivot('role', '=', ProjectUserRole::PhotographyDirector);
     }
 
     /**
@@ -137,7 +140,8 @@ class Project extends Model
      */
     public function soundDirectors(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->wherePivot('role', '=', ProjectUserRole::SoundDirector);
+        return $this->belongsToMany(User::class)
+            ->wherePivot('role', '=', ProjectUserRole::SoundDirector);
     }
 
     /**
@@ -145,6 +149,7 @@ class Project extends Model
      */
     public function artDirectors(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->wherePivot('role', '=', ProjectUserRole::ArtDirector);
+        return $this->belongsToMany(User::class)
+            ->wherePivot('role', '=', ProjectUserRole::ArtDirector);
     }
 }

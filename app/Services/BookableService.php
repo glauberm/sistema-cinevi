@@ -23,15 +23,23 @@ class BookableService implements CrudServiceInterface, HasVersionsServiceInterfa
 
     protected string $modelVersionIdColumnName = 'bookable_id';
 
-    public function hasConflictingBookingDate(int $id, string $withdrawalDate, string $devolutionDate): bool
-    {
+    public function hasConflictingBookingDate(
+        int $id,
+        string $withdrawalDate,
+        string $devolutionDate
+    ): bool {
         $bookable = $this->modelClass::with(['bookings'])->findOrFail($id);
 
         foreach ($bookable->bookings as $booking) {
-            if (($withdrawalDate >= $booking->withdrawal_date && $withdrawalDate <= $booking->devolution_date) ||
-                ($devolutionDate >= $booking->devolution_date && $devolutionDate <= $booking->withdrawal_date) ||
-                ($booking->withdrawal_date >= $withdrawalDate && $booking->devolution_date <= $withdrawalDate) ||
-                ($booking->devolution_date >= $devolutionDate && $booking->withdrawal_date <= $devolutionDate)) {
+            if (($withdrawalDate >= $booking->withdrawal_date
+                    && $withdrawalDate <= $booking->devolution_date) ||
+                ($devolutionDate >= $booking->devolution_date
+                    && $devolutionDate <= $booking->withdrawal_date) ||
+                ($booking->withdrawal_date >= $withdrawalDate
+                    && $booking->devolution_date <= $withdrawalDate) ||
+                ($booking->devolution_date >= $devolutionDate
+                    && $booking->withdrawal_date <= $devolutionDate)
+            ) {
                 return true;
             }
         }
@@ -42,8 +50,10 @@ class BookableService implements CrudServiceInterface, HasVersionsServiceInterfa
     /**
      * @param  string[]  $relations
      */
-    public function get(int $id, array $relations = ['bookableCategory', 'users', 'bookings']): Bookable
-    {
+    public function get(
+        int $id,
+        array $relations = ['bookableCategory', 'users', 'bookings']
+    ): Bookable {
         /** @var Bookable $bookable */
         $bookable = $this->baseGet($id, $relations);
 
@@ -55,11 +65,11 @@ class BookableService implements CrudServiceInterface, HasVersionsServiceInterfa
      */
     protected function afterCreated(Bookable $bookable, array $data): Bookable
     {
-        if (\array_key_exists('users', $data) && \is_array($data['users'])) {
+        if (array_key_exists('users', $data) && is_array($data['users'])) {
             /** @var array<int,array<string,mixed>> */
             $users = $data['users'];
 
-            $bookable->users()->attach(\array_column($users, 'id'));
+            $bookable->users()->attach(array_column($users, 'id'));
         }
 
         return $bookable;
@@ -70,11 +80,11 @@ class BookableService implements CrudServiceInterface, HasVersionsServiceInterfa
      */
     protected function afterUpdated(Bookable $bookable, array $data): void
     {
-        if (\array_key_exists('users', $data) && \is_array($data['users'])) {
+        if (array_key_exists('users', $data) && is_array($data['users'])) {
             /** @var array<int,array<string,mixed>> */
             $users = $data['users'];
 
-            $bookable->users()->sync(\array_column($users, 'id'));
+            $bookable->users()->sync(array_column($users, 'id'));
         }
     }
 }

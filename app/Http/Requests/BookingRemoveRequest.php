@@ -12,12 +12,7 @@ use Illuminate\Support\Facades\Gate;
 
 class BookingRemoveRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(BookingService $service)
+    public function authorize(BookingService $service): bool
     {
         if ($id = $this->route('id')) {
             $booking = $service->get(\intval($id), ['owner']);
@@ -30,20 +25,17 @@ class BookingRemoveRequest extends FormRequest
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
+    protected function failedAuthorization(): void
     {
-        throw new AuthorizationException('Você não tem permissão para remover esta reserva.');
+        throw new AuthorizationException(
+            'Você não tem permissão para remover esta reserva.'
+        );
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<void>
      */
-    public function rules()
+    public function rules(): array
     {
         return [];
     }

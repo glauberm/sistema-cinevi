@@ -28,16 +28,15 @@ class UserService implements CrudServiceInterface, HasVersionsServiceInterface
 
     /**
      * @param  Builder<User>  $query
-     * @param  Request  $request
      * @return Builder<User>
      */
     protected function beforePagination(Builder $query, Request $request): Builder
     {
-        if (\is_string($request->input('name'))) {
+        if (is_string($request->input('name'))) {
             $query->where('name', 'like', "%{$request->input('name')}%");
         }
 
-        if (\is_string($request->input('status'))) {
+        if (is_string($request->input('status'))) {
             switch ($request->input('status')) {
                 case 'disabled_only':
                     $query->where('is_enabled', '=', false);
@@ -48,24 +47,19 @@ class UserService implements CrudServiceInterface, HasVersionsServiceInterface
             }
         }
 
-        if (\is_string($request->input('role'))) {
+        if (is_string($request->input('role'))) {
             $query->whereJsonContains('roles', $request->input('role'));
         }
 
         return $query;
     }
 
-    /**
-     * @param  string  $email
-     * @return User|null
-     */
     public function getByEmail(string $email): ?User
     {
         return $this->modelClass::where('email', '=', $email)->first();
     }
 
     /**
-     * @param  UserRole  $role
      * @return Collection<int,User>
      */
     public function getAllWithRole(UserRole $role): Collection
@@ -73,25 +67,16 @@ class UserService implements CrudServiceInterface, HasVersionsServiceInterface
         return $this->modelClass::whereJsonContains('roles', $role)->get();
     }
 
-    /**
-     * @param  User  $user
-     * @param  UserRole  $role
-     * @return bool
-     */
     public function hasRole(User $user, UserRole $role): bool
     {
-        return \in_array($role, $user->roles);
+        return in_array($role, $user->roles);
     }
 
-    /**
-     * @param  User  $user
-     * @return bool
-     */
     public function isOrdinary(User $user): bool
     {
-        return ! \in_array(UserRole::Admin, $user->roles) ||
-                ! \in_array(UserRole::Department, $user->roles) ||
-                ! \in_array(UserRole::Warehouse, $user->roles) ||
-                ! \in_array(UserRole::Professor, $user->roles);
+        return !in_array(UserRole::Admin, $user->roles) ||
+            !in_array(UserRole::Department, $user->roles) ||
+            !in_array(UserRole::Warehouse, $user->roles) ||
+            !in_array(UserRole::Professor, $user->roles);
     }
 }

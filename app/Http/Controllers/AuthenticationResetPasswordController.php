@@ -22,8 +22,10 @@ class AuthenticationResetPasswordController extends Controller
         $this->middleware(ValidateSignature::class);
     }
 
-    public function __invoke(AuthenticationResetPasswordRequest $request, int $id): RedirectResponse
-    {
+    public function __invoke(
+        AuthenticationResetPasswordRequest $request,
+        int $id
+    ): RedirectResponse {
         /** @var array<string,mixed> */
         $data = $request->validated();
 

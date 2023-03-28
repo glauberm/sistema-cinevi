@@ -11,30 +11,23 @@ use Illuminate\Support\Facades\Gate;
 
 class ProductionCategoryRemoveRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
-        return Gate::allows('hasRole', UserRole::Admin) || Gate::allows('hasRole', UserRole::Department);
+        return Gate::allows('hasRole', UserRole::Admin)
+            || Gate::allows('hasRole', UserRole::Department);
+    }
+
+    protected function failedAuthorization(): void
+    {
+        throw new AuthorizationException(
+            'Você não tem permissão para remover modalidades.'
+        );
     }
 
     /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
-    {
-        throw new AuthorizationException('Você não tem permissão para remover modalidades.');
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<void>
      */
-    public function rules()
+    public function rules(): array
     {
         return [];
     }

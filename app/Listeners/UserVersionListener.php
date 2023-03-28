@@ -17,6 +17,11 @@ class UserVersionListener
     {
         $data = $event->user->toArray();
 
-        $this->service->registerVersion($event->user, $event->action, $event->message, $data);
+        $this->service->registerVersion(
+            $event->user,
+            $event->action,
+            $event->message,
+            $data
+        );
     }
 }

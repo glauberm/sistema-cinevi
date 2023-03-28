@@ -11,12 +11,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class FinalCopyCreateOrUpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(FinalCopyService $service)
+    public function authorize(FinalCopyService $service): bool
     {
         if ($id = $this->route('id')) {
             $finalCopy = $service->get(\intval($id), ['owner']);
@@ -29,20 +24,14 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
+    protected function failedAuthorization(): void
     {
-        throw new AuthorizationException('Você não tem permissão para editar esta cópia final.');
+        throw new AuthorizationException(
+            'Você não tem permissão para editar esta cópia final.'
+        );
     }
 
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $owner = $this->input('owner');
 
@@ -50,16 +39,28 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
 
         $professor = $this->input('professor');
 
-        if (! \is_array($owner) || ! \array_key_exists('id', $owner)) {
-            throw new BadRequestHttpException('O responsável pela cópia final foi informado em um formato inválido.');
+        if (!is_array($owner) || !array_key_exists('id', $owner)) {
+            throw new BadRequestHttpException(
+                'O responsável pela cópia final foi informado em um formato
+                inválido.'
+            );
         }
 
-        if (! \is_array($productionCategory) || ! \array_key_exists('id', $productionCategory)) {
-            throw new BadRequestHttpException('A modalidade da cópia final foi informada em um formato inválido.');
+        if (
+            !is_array($productionCategory)
+            || !array_key_exists('id', $productionCategory)
+        ) {
+            throw new BadRequestHttpException(
+                'A modalidade da cópia final foi informada em um formato
+                inválido.'
+            );
         }
 
-        if (! \is_array($professor) || ! \array_key_exists('id', $professor)) {
-            throw new BadRequestHttpException('O professor responsável pela cópia final foi informado em um formato inválido.');
+        if (!is_array($professor) || !array_key_exists('id', $professor)) {
+            throw new BadRequestHttpException(
+                'O professor responsável pela cópia final foi informado em um
+                formato inválido.'
+            );
         }
 
         $this->merge(['owner_id' => $owner['id']]);
@@ -70,11 +71,9 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,string[]>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'title' => ['required', 'string'],
@@ -122,11 +121,9 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'title.required' => 'O título é obrigatório.',

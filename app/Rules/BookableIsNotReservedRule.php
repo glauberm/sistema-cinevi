@@ -9,19 +9,13 @@ use Illuminate\Contracts\Validation\InvokableRule;
 class BookableIsNotReservedRule implements DataAwareRule, InvokableRule
 {
     /**
-     * All of the data under validation.
-     *
      * @var array<string,mixed>
      */
     protected $data = [];
 
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct(private readonly BookableService $bookableService)
-    {
+    public function __construct(
+        private readonly BookableService $bookableService
+    ) {
     }
 
     /**
@@ -40,7 +34,11 @@ class BookableIsNotReservedRule implements DataAwareRule, InvokableRule
         /** @var string $devolutionDate */
         $devolutionDate = $this->data['devolution_date'];
 
-        if ($this->bookableService->hasConflictingBookingDate(\intval($value), $withdrawalDate, $devolutionDate)) {
+        if ($this->bookableService->hasConflictingBookingDate(
+            intval($value),
+            $withdrawalDate,
+            $devolutionDate
+        )) {
             $fail('As reservas estão fechadas para alunos.');
         }
     }

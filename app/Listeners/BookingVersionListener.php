@@ -23,6 +23,11 @@ class BookingVersionListener
 
         $data['bookables'] = $event->booking->bookables->toArray();
 
-        $this->service->registerVersion($event->booking, $event->action, $event->message, $data);
+        $this->service->registerVersion(
+            $event->booking,
+            $event->action,
+            $event->message,
+            $data
+        );
     }
 }

@@ -30,8 +30,9 @@ class AuthenticationRequestResetPasswordController extends Controller
         }
     }
 
-    public function __invoke(AuthenticationRequestResetPasswordRequest $request): RedirectResponse
-    {
+    public function __invoke(
+        AuthenticationRequestResetPasswordRequest $request
+    ): RedirectResponse {
         /** @var array{email:string} */
         $data = $request->validated();
 

@@ -9,11 +9,9 @@ use Illuminate\Foundation\Http\FormRequest;
 class AuthenticationRegisterRequest extends FormRequest
 {
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,string[]>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:180'],
@@ -47,11 +45,9 @@ class AuthenticationRegisterRequest extends FormRequest
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'O nome é obrigatório.',

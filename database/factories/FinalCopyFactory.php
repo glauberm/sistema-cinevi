@@ -12,11 +12,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class FinalCopyFactory extends Factory
 {
     /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         $owner = User::factory()->createOne();
 

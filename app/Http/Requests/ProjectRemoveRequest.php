@@ -12,12 +12,7 @@ use Illuminate\Support\Facades\Gate;
 
 class ProjectRemoveRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(ProjectService $service)
+    public function authorize(ProjectService $service): bool
     {
         if ($id = $this->route('id')) {
             $project = $service->get(\intval($id), ['owner']);
@@ -30,20 +25,17 @@ class ProjectRemoveRequest extends FormRequest
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
+    protected function failedAuthorization(): void
     {
-        throw new AuthorizationException('Você não tem permissão para remover este projeto.');
+        throw new AuthorizationException(
+            'Você não tem permissão para remover este projeto.'
+        );
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<void>
      */
-    public function rules()
+    public function rules(): array
     {
         return [];
     }

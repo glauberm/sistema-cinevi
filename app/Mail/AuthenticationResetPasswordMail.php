@@ -5,42 +5,25 @@ declare(strict_types=1);
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
 
-class AuthenticationResetPasswordMail extends Mailable
+class AuthenticationResetPasswordMail extends AbstractMail
 {
     use Queueable;
 
     public string $title = 'Redefinição de senha';
 
-    public string $urlText = 'Redefinir senha';
+    public string $action = 'Redefinir senha';
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(public string $url)
+    public function __construct(public readonly string $url)
     {
-        $this->url = \env('APP_URL').'/redefinir-senha?url='.\rawurlencode($url);
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
+    public function content(): Content
     {
-        /** @var string $address */
-        $address = env('MAIL_FROM_ADDRESS');
-
-        /** @var string $name */
-        $name = env('MAIL_FROM_NAME');
-
-        return $this->from($address, $name)
-            ->subject($this->title)
-            ->view('emails/authentication/reset-password--html')
-            ->text('emails/authentication/reset-password--text');
+        return new Content(
+            view: 'emails/authentication/reset_password-html',
+            text: 'emails/authentication/reset_password-text'
+        );
     }
 }

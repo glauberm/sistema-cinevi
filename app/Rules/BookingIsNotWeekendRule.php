@@ -18,7 +18,7 @@ class BookingIsNotWeekendRule implements InvokableRule
     public function __invoke($attribute, $value, $fail)
     {
         if (CarbonImmutable::parse($value)->isWeekend()) {
-            $fail('A :attribute não pode ser um final de semana.');
+            $fail("A {$attribute} não pode ser um final de semana.");
         }
     }
 }

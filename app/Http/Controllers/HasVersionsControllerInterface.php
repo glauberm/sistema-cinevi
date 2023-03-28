@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Version;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Contracts\View\View;
 
 interface HasVersionsControllerInterface
 {
-    public function paginateVersions(Request $request, int $id): ResourceCollection;
+    public function paginateVersions(Request $request, int $id): View;
 
-    public function showVersion(Request $request, int $id): Version;
+    public function showVersion(Request $request, int $id): View;
 }

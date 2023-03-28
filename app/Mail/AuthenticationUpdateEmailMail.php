@@ -5,42 +5,25 @@ declare(strict_types=1);
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
 
-class AuthenticationUpdateEmailMail extends Mailable
+class AuthenticationUpdateEmailMail extends AbstractMail
 {
     use Queueable;
 
     public string $title = 'Atualizar email de acesso';
 
-    public string $urlText = 'Atualizar email';
+    public string $action = 'Atualizar email';
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(public string $url)
+    public function __construct(public readonly string $url)
     {
-        $this->url = \env('APP_URL').'/atualizar-email?url='.\rawurlencode($url);
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
+    public function content(): Content
     {
-        /** @var string $address */
-        $address = env('MAIL_FROM_ADDRESS');
-
-        /** @var string $name */
-        $name = env('MAIL_FROM_NAME');
-
-        return $this->from($address, $name)
-            ->subject($this->title)
-            ->view('emails/authentication/update-email--html')
-            ->text('emails/authentication/update-email--text');
+        return new Content(
+            view: 'emails/authentication/update_email-html',
+            text: 'emails/authentication/update_email-text'
+        );
     }
 }

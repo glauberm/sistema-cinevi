@@ -10,11 +10,9 @@ use Illuminate\Foundation\Http\FormRequest;
 class AuthenticationRequestUpdateEmailRequest extends FormRequest
 {
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,string[]>
      */
-    public function rules(AuthService $authService)
+    public function rules(AuthService $authService): array
     {
         $authId = $authService->getAuthIdOrFail();
 
@@ -25,18 +23,16 @@ class AuthenticationRequestUpdateEmailRequest extends FormRequest
                 'email',
                 'max:180',
                 'confirmed',
-                'unique:users,email,'.$authId,
+                'unique:users,email,' . $authId,
             ],
             'password' => ['required', 'string', 'current_password'],
         ];
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'email.required' => 'O email é obrigatório.',

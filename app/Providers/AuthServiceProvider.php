@@ -9,13 +9,10 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
         Gate::define('hasRole', function (User $user, UserRole $role) {
-            return \in_array($role, $user->roles, true);
+            return in_array($role->value, $user->roles, true);
         });
 
         Gate::define('isUser', function (User $user, int $userId) {

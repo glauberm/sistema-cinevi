@@ -18,8 +18,10 @@ class AuthService
     {
         $authId = Auth::id();
 
-        if (\is_null($authId)) {
-            throw new AuthorizationException('O id do usuário atual é inválido.');
+        if (is_null($authId)) {
+            throw new AuthorizationException(
+                'O id do usuário atual é inválido.'
+            );
         }
 
         return (int) $authId;
@@ -29,8 +31,10 @@ class AuthService
     {
         $authUser = Auth::user();
 
-        if (\is_null($authUser)) {
-            throw new AuthorizationException('O usuário atual não foi encontrado.');
+        if (is_null($authUser)) {
+            throw new AuthorizationException(
+                'O usuário atual não foi encontrado.'
+            );
         }
 
         return $authUser;

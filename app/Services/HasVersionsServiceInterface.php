@@ -11,23 +11,19 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface HasVersionsServiceInterface
 {
     /**
-     * @param  int  $id
-     * @return LengthAwarePaginator
+     * @return LengthAwarePaginator<Version>
      */
     public function paginateVersions(int $id): LengthAwarePaginator;
 
-    /**
-     * @param  int  $id
-     * @return Version
-     */
     public function getVersion(int $id): Version;
 
     /**
-     * @param  Model  $model
-     * @param  string  $action
-     * @param  string  $message
      * @param  array<string,mixed>  $payloadArray
-     * @return void
      */
-    public function registerVersion($model, string $action, string $message, array $payloadArray): void;
+    public function registerVersion(
+        Model $model,
+        string $action,
+        string $message,
+        array $payloadArray
+    ): void;
 }

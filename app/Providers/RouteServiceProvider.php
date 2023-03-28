@@ -9,16 +9,18 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * @return void
-     */
-    public function map()
+    public function map(): void
     {
-        Route::group(['middleware' => 'api', 'prefix' => 'api'], function ($router) {
-        });
-
         Route::group(['middleware' => 'web'], function ($router) {
             require base_path('routes/web/authentication.php');
+            require base_path('routes/web/user.php');
+            require base_path('routes/web/bookable-category.php');
         });
+
+        Route::group(
+            ['middleware' => 'api', 'prefix' => 'api'],
+            function ($router) {
+            }
+        );
     }
 }

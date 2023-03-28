@@ -14,12 +14,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectCreateOrUpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(ProjectService $service)
+    public function authorize(ProjectService $service): bool
     {
         if ($id = $this->route('id')) {
             $project = $service->get(\intval($id), ['owner']);
@@ -32,20 +27,14 @@ class ProjectCreateOrUpdateRequest extends FormRequest
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function failedAuthorization()
+    protected function failedAuthorization(): void
     {
-        throw new AuthorizationException('Você não tem permissão para editar este projeto.');
+        throw new AuthorizationException(
+            'Você não tem permissão para editar este projeto.'
+        );
     }
 
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $owner = $this->input('owner');
 
@@ -53,16 +42,33 @@ class ProjectCreateOrUpdateRequest extends FormRequest
 
         $professor = $this->input('professor');
 
-        if (! \is_array($owner) || ! \array_key_exists('id', $owner)) {
-            throw new BadRequestHttpException('O responsável pelo projeto foi informado em um formato inválido.');
+        if (
+            !is_array($owner)
+            || !array_key_exists('id', $owner)
+        ) {
+            throw new BadRequestHttpException(
+                'O responsável pelo projeto foi informado em um formato
+                inválido.'
+            );
         }
 
-        if (! \is_array($productionCategory) || ! \array_key_exists('id', $productionCategory)) {
-            throw new BadRequestHttpException('A modalidade do projeto foi informada em um formato inválido.');
+        if (
+            !is_array($productionCategory)
+            || !array_key_exists('id', $productionCategory)
+        ) {
+            throw new BadRequestHttpException(
+                'A modalidade do projeto foi informada em um formato inválido.'
+            );
         }
 
-        if (! \is_array($professor) || ! \array_key_exists('id', $professor)) {
-            throw new BadRequestHttpException('O professor responsável pelo projeto foi informado em um formato inválido.');
+        if (
+            !is_array($professor)
+            || !array_key_exists('id', $professor)
+        ) {
+            throw new BadRequestHttpException(
+                'O professor responsável pelo projeto foi informado em um
+                formato inválido.'
+            );
         }
 
         $this->merge(['owner_id' => $owner['id']]);
@@ -73,11 +79,9 @@ class ProjectCreateOrUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array<string,mixed>
      */
-    public function rules(UserService $userService)
+    public function rules(UserService $userService): array
     {
         return [
             'title' => ['required', 'string'],
@@ -110,11 +114,9 @@ class ProjectCreateOrUpdateRequest extends FormRequest
     }
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
      * @return array<string,string>
      */
-    public function messages()
+    public function messages(): array
     {
         $dateFormat = CarbonImmutable::now()->format('Y-m-d');
 

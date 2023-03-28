@@ -19,10 +19,17 @@ class FinalCopyVersionListener
 
         $data['owner'] = $event->finalCopy->owner->toArray();
 
-        $data['production_category'] = $event->finalCopy->productionCategory->toArray();
+        $data['production_category'] = $event->finalCopy
+            ->productionCategory
+            ->toArray();
 
         $data['professor'] = $event->finalCopy->professor->toArray();
 
-        $this->service->registerVersion($event->finalCopy, $event->action, $event->message, $data);
+        $this->service->registerVersion(
+            $event->finalCopy,
+            $event->action,
+            $event->message,
+            $data
+        );
     }
 }

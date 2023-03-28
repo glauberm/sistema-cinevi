@@ -17,6 +17,11 @@ class ProductionRoleVersionListener
     {
         $data = $event->productionRole->toArray();
 
-        $this->service->registerVersion($event->productionRole, $event->action, $event->message, $data);
+        $this->service->registerVersion(
+            $event->productionRole,
+            $event->action,
+            $event->message,
+            $data
+        );
     }
 }

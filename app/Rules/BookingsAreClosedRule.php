@@ -10,11 +10,6 @@ use Illuminate\Contracts\Validation\InvokableRule;
 
 class BookingsAreClosedRule implements InvokableRule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
     public function __construct(
         private readonly ConfigurationService $configurationService,
         private readonly AuthService $authService,
@@ -37,7 +32,10 @@ class BookingsAreClosedRule implements InvokableRule
 
         $authUser = $this->authService->getAuthUserOrFail();
 
-        if ($configuration->bookings_are_closed && $this->userService->isOrdinary($authUser)) {
+        if (
+            $configuration->bookings_are_closed
+            && $this->userService->isOrdinary($authUser)
+        ) {
             $fail('As reservas estão fechadas para alunos.');
         }
     }

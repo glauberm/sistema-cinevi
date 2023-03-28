@@ -10,11 +10,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ProductionCategoryFactory extends Factory
 {
     /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'title' => $this->faker->word(),

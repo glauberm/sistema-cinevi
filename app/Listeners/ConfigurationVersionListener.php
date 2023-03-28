@@ -17,6 +17,11 @@ class ConfigurationVersionListener
     {
         $data = $event->configuration->toArray();
 
-        $this->service->registerVersion($event->configuration, $event->action, $event->message, $data);
+        $this->service->registerVersion(
+            $event->configuration,
+            $event->action,
+            $event->message,
+            $data
+        );
     }
 }

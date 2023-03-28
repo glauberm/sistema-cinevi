@@ -17,6 +17,9 @@ class Authenticate extends BaseAuthenticate
      */
     protected function unauthenticated($request, array $guards)
     {
-        throw new AuthenticationException('Por favor, entre para continuar.', $guards);
+        throw new AuthenticationException(
+            'Por favor, entre para continuar.',
+            $guards
+        );
     }
 }

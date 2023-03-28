@@ -7,45 +7,30 @@ namespace App\Mail;
 use App\Models\Bookable;
 use App\Models\Booking;
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
 
-class BookableWithReturnOverdueMail extends Mailable
+class BookableWithReturnOverdueMail extends AbstractMail
 {
     use Queueable;
 
     public string $title = 'Reservável com devolução atrasada';
 
-    public string $urlText = 'Visualizar reserva';
+    public string $action = 'Visualizar reserva';
 
     public readonly string $url;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(public readonly Bookable $bookable, public readonly Booking $booking)
-    {
-        $this->url = \env('APP_URL').'/reservas/'.$booking->id;
+    public function __construct(
+        public readonly Bookable $bookable,
+        public readonly Booking $booking,
+    ) {
+        $this->url = route('booking.update', ['id' => $booking->id]);
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
+    public function content(): Content
     {
-        /** @var string $address */
-        $address = env('MAIL_FROM_ADDRESS');
-
-        /** @var string $name */
-        $name = env('MAIL_FROM_NAME');
-
-        return $this
-            ->from($address, $name)
-            ->subject($this->title)
-            ->view('emails/bookable/return-overdue--html')
-            ->text('emails/bookable/return-overdue--text');
+        return new Content(
+            view: 'emails/bookable/return_overdue-html',
+            text: 'emails/bookable/return_overdue-text'
+        );
     }
 }
