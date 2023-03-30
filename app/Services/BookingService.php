@@ -49,10 +49,8 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
     /**
      * @param  string[]  $relations
      */
-    public function get(
-        int $id,
-        array $relations = ['owner', 'project', 'bookables']
-    ): Booking {
+    public function get(int $id, array $relations = ['owner', 'project', 'bookables']): Booking
+    {
         /** @var Booking $booking */
         $booking = $this->baseGet($id, $relations);
 
@@ -63,10 +61,8 @@ class BookingService implements CrudServiceInterface, HasVersionsServiceInterfac
      * @param  Builder<Booking>  $query
      * @return Builder<Booking>
      */
-    protected function beforePagination(
-        Builder $query,
-        Request $request
-    ): Builder {
+    protected function beforePagination(Builder $query, Request $request): Builder
+    {
         if (is_string($request->input('status'))) {
             switch ($request->input('status')) {
                 case 'owned_only':

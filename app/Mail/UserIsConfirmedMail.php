@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailables\Content;
 
-class UserIsConfirmedMail extends AbstractMail
+class UserIsConfirmedMail extends DefaultMailable
 {
     use Queueable;
 
@@ -26,8 +26,8 @@ class UserIsConfirmedMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/user/is_confirmed-html',
-            text: 'emails/user/is_confirmed-text'
+            view: 'emails/user/is-confirmed--html',
+            text: 'emails/user/is-confirmed--text'
         );
     }
 }

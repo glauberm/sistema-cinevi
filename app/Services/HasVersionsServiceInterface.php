@@ -20,10 +20,5 @@ interface HasVersionsServiceInterface
     /**
      * @param  array<string,mixed>  $payloadArray
      */
-    public function registerVersion(
-        Model $model,
-        string $action,
-        string $message,
-        array $payloadArray
-    ): void;
+    public function registerVersion(Model $model, string $action, string $message, array $payloadArray): void;
 }

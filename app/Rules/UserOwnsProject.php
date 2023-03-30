@@ -5,9 +5,10 @@ namespace App\Rules;
 use App\Services\AuthService;
 use App\Services\ProjectService;
 use App\Services\UserService;
-use Illuminate\Contracts\Validation\InvokableRule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class UserOwnsProject implements InvokableRule
+class UserOwnsProject implements ValidationRule
 {
     public function __construct(
         private readonly AuthService $authService,
@@ -17,14 +18,9 @@ class UserOwnsProject implements InvokableRule
     }
 
     /**
-     * Run the validation rule.
-     *
-     * @param  string  $attribute
      * @param  int  $value
-     * @param  \Closure  $fail
-     * @return void
      */
-    public function __invoke($attribute, $value, $fail)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $authUser = $this->authService->getAuthUserOrFail();
 
@@ -33,7 +29,7 @@ class UserOwnsProject implements InvokableRule
             && $this->projectService->isOwnedBy($value, $authUser)
         ) {
             $fail(
-                "O {$attribute} deve ser um projeto cujo responsável seja você."
+                'O :attribute deve ser um projeto cujo responsável seja você.'
             );
         }
     }

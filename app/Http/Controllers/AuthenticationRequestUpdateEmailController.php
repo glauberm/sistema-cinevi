@@ -23,9 +23,8 @@ class AuthenticationRequestUpdateEmailController extends Controller
         $this->middleware(Authenticate::class);
     }
 
-    public function __invoke(
-        AuthenticationRequestUpdateEmailRequest $request
-    ): RedirectResponse {
+    public function __invoke(AuthenticationRequestUpdateEmailRequest $request): RedirectResponse
+    {
         /** @var array{email:string,password:string} $data */
         $data = $request->validated();
 
@@ -33,18 +32,17 @@ class AuthenticationRequestUpdateEmailController extends Controller
         $email = $data['email'];
 
         $url = URL::temporarySignedRoute(
-            'authentication.update_email',
+            'authentication.update-email',
             CarbonImmutable::now()->addMinutes(60),
             ['email' => $email]
         );
 
-        Mail::to($email)->queue(new AuthenticationUpdateEmailMail($url));
+        Mail::to($email)
+            ->queue(new AuthenticationUpdateEmailMail($url));
 
         Session::flash(
             'message',
-            "Foi enviado para {$email} um link válido por 60 minutos para
-            finalizar a atualização do seu email. O email deve chegar em 15
-            minutos."
+            "Foi enviado para {$email} um link válido por 60 minutos para finalizar a atualização do seu email. O email deve chegar em 15 minutos."
         );
 
         Session::flash('message-type', 'success');

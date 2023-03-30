@@ -33,10 +33,8 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
     /**
      * @param  string[]  $relations
      */
-    public function get(
-        int $id,
-        array $relations = ['owner', 'productionCategory', 'professor']
-    ): FinalCopy {
+    public function get(int $id, array $relations = ['owner', 'productionCategory', 'professor']): FinalCopy
+    {
         /** @var FinalCopy $finalCopy */
         $finalCopy = $this->baseGet($id, $relations);
 
@@ -47,10 +45,8 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
      * @param  Builder<FinalCopy>  $query
      * @return Builder<FinalCopy>
      */
-    protected function beforePagination(
-        Builder $query,
-        Request $request
-    ): Builder {
+    protected function beforePagination(Builder $query, Request $request): Builder
+    {
         if (is_string($request->input('status'))) {
             switch ($request->input('status')) {
                 case 'owned_only':
@@ -69,10 +65,8 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
     /**
      * @param  array<string,mixed>  $data
      */
-    protected function afterCreated(
-        FinalCopy $finalCopy,
-        array $data
-    ): FinalCopy {
+    protected function afterCreated(FinalCopy $finalCopy, array $data): FinalCopy
+    {
         if (
             array_key_exists('production_roles', $data)
             && is_array($data['production_roles'])
@@ -80,7 +74,23 @@ class FinalCopyService implements CrudServiceInterface, HasVersionsServiceInterf
             /** @var array<int,array<string,mixed>> */
             $finalCopyProductionRoles = $data['production_roles'];
 
-            $finalCopy->productionRoles()->createMany($finalCopyProductionRoles);
+            for ($i = 0; $i < count($finalCopyProductionRoles); $i++) {
+                $finalCopy->productionRoles()->attach(
+                    array_column(
+                        $finalCopyProductionRoles,
+                        'production_role_id'
+                    ),
+                    ['order' => $i]
+                );
+            }
+
+            foreach ($finalCopy->productionRoles as $finalCopyProductionRole) {
+                $finalCopyProductionRole->pivot->users()->attach(
+                    array_column($finalCopyProductionRole['users'], 'id')
+                );
+            }
+
+            dd($finalCopy);
         }
 
         return $finalCopy;

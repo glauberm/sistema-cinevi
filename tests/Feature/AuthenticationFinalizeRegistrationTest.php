@@ -17,7 +17,7 @@ class AuthenticationFinalizeRegistrationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testFinalizeRegistration()
+    public function testFinalizeRegistration(): void
     {
         Mail::fake();
 
@@ -34,7 +34,7 @@ class AuthenticationFinalizeRegistrationTest extends TestCase
             ->createOne();
 
         $url = URL::temporarySignedRoute(
-            'authentication.finalize_registration',
+            'authentication.finalize-registration',
             CarbonImmutable::now()->addMinutes(60),
             ['id' => $user->id]
         );

@@ -12,13 +12,13 @@ class AuthenticationLoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testLoginView()
+    public function testLoginView(): void
     {
         $this->get('entrada')
             ->assertOk();
     }
 
-    public function testLogin()
+    public function testLogin(): void
     {
         $user = User::factory()
             ->state(['is_enabled' => true])
@@ -33,7 +33,7 @@ class AuthenticationLoginTest extends TestCase
             ->assertRedirect('');
     }
 
-    public function testLoginError()
+    public function testLoginError(): void
     {
         $this->post('entrada', [
             'email' => 'email@errado.com',

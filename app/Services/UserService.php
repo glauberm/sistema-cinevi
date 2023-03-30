@@ -74,9 +74,9 @@ class UserService implements CrudServiceInterface, HasVersionsServiceInterface
 
     public function isOrdinary(User $user): bool
     {
-        return !in_array(UserRole::Admin, $user->roles) ||
-            !in_array(UserRole::Department, $user->roles) ||
-            !in_array(UserRole::Warehouse, $user->roles) ||
-            !in_array(UserRole::Professor, $user->roles);
+        return !in_array(UserRole::Admin->value, $user->roles)
+            && !in_array(UserRole::Department->value, $user->roles)
+            && !in_array(UserRole::Warehouse->value, $user->roles)
+            && !in_array(UserRole::Professor->value, $user->roles);
     }
 }

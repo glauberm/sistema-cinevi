@@ -12,7 +12,7 @@ class AuthenticationLogoutTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testLogout()
+    public function testLogout(): void
     {
         $user = User::factory()
             ->state(['is_enabled' => true])

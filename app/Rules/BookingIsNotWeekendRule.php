@@ -3,22 +3,18 @@
 namespace App\Rules;
 
 use Carbon\CarbonImmutable;
-use Illuminate\Contracts\Validation\InvokableRule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class BookingIsNotWeekendRule implements InvokableRule
+class BookingIsNotWeekendRule implements ValidationRule
 {
     /**
-     * Run the validation rule.
-     *
-     * @param  string  $attribute
-     * @param  string  $value
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
-     * @return void
+     * @param  string   $value
      */
-    public function __invoke($attribute, $value, $fail)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (CarbonImmutable::parse($value)->isWeekend()) {
-            $fail("A {$attribute} não pode ser um final de semana.");
+            $fail('A :attribute não pode ser um final de semana.');
         }
     }
 }

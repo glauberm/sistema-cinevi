@@ -10,18 +10,17 @@ use Carbon\CarbonImmutable;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectCreateOrUpdateRequest extends FormRequest
 {
     public function authorize(ProjectService $service): bool
     {
         if ($id = $this->route('id')) {
-            $project = $service->get(\intval($id), ['owner']);
+            $project = $service->get(intval($id), ['owner']);
 
-            return Gate::allows('hasRole', UserRole::Admin) ||
-                Gate::allows('hasRole', UserRole::Department) ||
-                Gate::allows('isUser', $project->owner_id);
+            return Gate::allows('hasRole', UserRole::Admin)
+                || Gate::allows('hasRole', UserRole::Department)
+                || Gate::allows('isUser', $project->owner_id);
         }
 
         return true;
@@ -34,50 +33,6 @@ class ProjectCreateOrUpdateRequest extends FormRequest
         );
     }
 
-    protected function prepareForValidation(): void
-    {
-        $owner = $this->input('owner');
-
-        $productionCategory = $this->input('production_category');
-
-        $professor = $this->input('professor');
-
-        if (
-            !is_array($owner)
-            || !array_key_exists('id', $owner)
-        ) {
-            throw new BadRequestHttpException(
-                'O responsável pelo projeto foi informado em um formato
-                inválido.'
-            );
-        }
-
-        if (
-            !is_array($productionCategory)
-            || !array_key_exists('id', $productionCategory)
-        ) {
-            throw new BadRequestHttpException(
-                'A modalidade do projeto foi informada em um formato inválido.'
-            );
-        }
-
-        if (
-            !is_array($professor)
-            || !array_key_exists('id', $professor)
-        ) {
-            throw new BadRequestHttpException(
-                'O professor responsável pelo projeto foi informado em um
-                formato inválido.'
-            );
-        }
-
-        $this->merge(['owner_id' => $owner['id']]);
-
-        $this->merge(['production_category_id' => $productionCategory['id']]);
-
-        $this->merge(['professor_id' => $professor['id']]);
-    }
-
     /**
      * @return array<string,mixed>
      */
@@ -86,8 +41,7 @@ class ProjectCreateOrUpdateRequest extends FormRequest
         return [
             'title' => ['required', 'string'],
             'synopsis' => ['required', 'string'],
-            'genres' => ['required', 'array'],
-            'genres.*' => ['required', 'string'],
+            'genres' => ['required', 'string'],
             'capture_format' => ['nullable', 'string'],
             'capture_notes' => ['nullable', 'string'],
             'venues' => ['nullable', 'string'],
@@ -126,9 +80,7 @@ class ProjectCreateOrUpdateRequest extends FormRequest
             'synopsis.required' => 'A sinopse é obrigatória.',
             'synopsis.string' => 'A sinopse deve ser uma string.',
             'genres.required' => 'Você deve informar o(s) gênero(s) do projeto.',
-            'genres.array' => 'O(s) gênero(s) do projeto devem estar em um array.',
-            'genres.*.required' => 'Você deve informar o(s) gênero(s) do projeto.',
-            'genres.*.string' => 'O(s) gênero(s) do projeto devem estar em um array de strings.',
+            'genres.string' => 'O(s) gênero(s) do projeto devem ser uma string.',
             'capture_format.string' => 'O formato de captação deve ser uma string.',
             'capture_notes.string' => 'Os detalhes de captação deve ser uma string.',
             'venues.string' => 'As locações devem ser informadas em uma string.',

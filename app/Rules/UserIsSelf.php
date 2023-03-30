@@ -4,9 +4,10 @@ namespace App\Rules;
 
 use App\Services\AuthService;
 use App\Services\UserService;
-use Illuminate\Contracts\Validation\InvokableRule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class UserIsSelf implements InvokableRule
+class UserIsSelf implements ValidationRule
 {
     public function __construct(
         private readonly AuthService $authService,
@@ -14,15 +15,7 @@ class UserIsSelf implements InvokableRule
     ) {
     }
 
-    /**
-     * Run the validation rule.
-     *
-     * @param  string  $attribute
-     * @param  string  $value
-     * @param  \Closure  $fail
-     * @return void
-     */
-    public function __invoke($attribute, $value, $fail)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $authUser = $this->authService->getAuthUserOrFail();
 
@@ -30,7 +23,7 @@ class UserIsSelf implements InvokableRule
             $this->userService->isOrdinary($authUser)
             && $authUser->id !== $value
         ) {
-            $fail("O {$attribute} deve ser você mesmo.");
+            $fail('O :attribute deve ser você mesmo.');
         }
     }
 }

@@ -26,7 +26,13 @@ class BookingController extends Controller implements CrudControllerInterface, H
 {
     use CrudControllerTrait, HasVersionsControllerTrait;
 
-    protected string $resourceClass = Booking::class;
+    protected string $paginateRoute = 'booking.index';
+
+    protected string $paginateView = 'pages/booking/index';
+
+    protected string $paginateVersionsView = 'pages/booking/versions-index';
+
+    protected string $showVersionView = 'pages/booking/version';
 
     public function __construct(
         protected readonly BookingService $service,
@@ -35,41 +41,31 @@ class BookingController extends Controller implements CrudControllerInterface, H
         $this->middleware(Authenticate::class);
     }
 
-    public function showBetween(
-        BookingShowBetweenRequest $request
-    ): ResourceCollection {
+    public function showBetween(BookingShowBetweenRequest $request): ResourceCollection
+    {
         /** @var array{start_date:string,end_date:string} */
         $data = $request->validated();
 
-        return $this->resourceClass::collection(
-            $this->service->showBetween($data)
-        );
+        return Booking::collection($this->service->showBetween($data));
     }
 
-    public function create(
-        BookingCreateOrUpdateRequest $request
-    ): RedirectResponse {
+    public function create(BookingCreateOrUpdateRequest $request): RedirectResponse
+    {
         return $this->doCreate($request);
     }
 
-    public function update(
-        BookingCreateOrUpdateRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function update(BookingCreateOrUpdateRequest $request, int $id): RedirectResponse
+    {
         return $this->doUpdate($request, $id);
     }
 
-    public function remove(
-        BookingRemoveRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function remove(BookingRemoveRequest $request, int $id): RedirectResponse
+    {
         return $this->doRemove($request, $id);
     }
 
-    protected function afterCreated(
-        BookingCreateOrUpdateRequest $request,
-        BookingModel $booking
-    ): void {
+    protected function afterCreated(BookingCreateOrUpdateRequest $request, BookingModel $booking): void
+    {
         $warehouseUsers = $this->userService
             ->getAllWithRole(UserRole::Warehouse);
 
@@ -82,10 +78,8 @@ class BookingController extends Controller implements CrudControllerInterface, H
             ->queue(new BookingCreatedProfessorMail($booking));
     }
 
-    protected function afterUpdated(
-        BookingCreateOrUpdateRequest $request,
-        int $id
-    ): void {
+    protected function afterUpdated(BookingCreateOrUpdateRequest $request, int $id): void
+    {
         $booking = $this->service->get($id, ['project']);
 
         $warehouseUsers = $this->userService

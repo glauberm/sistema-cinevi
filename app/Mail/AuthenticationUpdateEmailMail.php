@@ -7,7 +7,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailables\Content;
 
-class AuthenticationUpdateEmailMail extends AbstractMail
+class AuthenticationUpdateEmailMail extends DefaultMailable
 {
     use Queueable;
 
@@ -22,8 +22,8 @@ class AuthenticationUpdateEmailMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/authentication/update_email-html',
-            text: 'emails/authentication/update_email-text'
+            view: 'emails/authentication/update-email--html',
+            text: 'emails/authentication/update-email--text'
         );
     }
 }

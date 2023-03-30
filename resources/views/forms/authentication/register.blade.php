@@ -1,6 +1,6 @@
 <x-form.form
     method="POST"
-    action="{{ route('authentication.register-action') }}"
+    action="{{ route('authentication.register--action') }}"
 >
 
     <x-form.input

@@ -27,23 +27,19 @@ class AuthenticationLoginController extends Controller
         }
     }
 
-    public function __invoke(
-        AuthenticationLoginRequest $request
-    ): RedirectResponse {
+    public function __invoke(AuthenticationLoginRequest $request): RedirectResponse
+    {
         /** @var array{email:string,password:string} */
         $data = $request->validated();
 
-        if (Auth::attempt(
-            [
-                'email' => $data['email'],
-                'password' => $data['password'],
-            ],
-        )) {
+        if (Auth::attempt([
+            'email' => $data['email'],
+            'password' => $data['password'],
+        ])) {
             try {
                 $authUser = $this->service->getAuthUserOrFail();
             } catch (AuthorizationException $e) {
                 $this->service->logout();
-
                 throw $e;
             }
 
@@ -57,8 +53,7 @@ class AuthenticationLoginController extends Controller
                 $this->service->logout();
 
                 throw new AuthenticationException(
-                    'Seu email ainda não foi confirmado. O email de confirmação
-                    foi reenviado e deve chegar em 15 minutos.'
+                    'Seu email ainda não foi confirmado. O email de confirmação foi reenviado e deve chegar em 15 minutos.'
                 );
             }
 
@@ -66,8 +61,7 @@ class AuthenticationLoginController extends Controller
                 $this->service->logout();
 
                 throw new AuthenticationException(
-                    'Seu cadastro ainda não foi confirmado pelo departamento.
-                    Quando ele for, você receberá um email.'
+                    'Seu cadastro ainda não foi confirmado pelo departamento. Quando ele for, você receberá um email.'
                 );
             }
         }

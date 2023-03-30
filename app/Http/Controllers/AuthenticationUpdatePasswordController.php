@@ -22,9 +22,8 @@ class AuthenticationUpdatePasswordController extends Controller
         $this->middleware(Authenticate::class);
     }
 
-    public function __invoke(
-        AuthenticationUpdatePasswordRequest $request
-    ): RedirectResponse {
+    public function __invoke(AuthenticationUpdatePasswordRequest $request): RedirectResponse
+    {
         $authId = $this->authService->getAuthIdOrFail();
 
         /** @var array<string,mixed> */

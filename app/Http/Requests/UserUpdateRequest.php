@@ -53,8 +53,8 @@ class UserUpdateRequest extends FormRequest
                 'regex:/^[0-9]*$/',
             ],
             'is_confirmed' => ['required', 'boolean'],
-            'roles' => ['array', 'required'],
-            'roles.*' => ['string', 'required'],
+            'roles' => ['array', 'nullable'],
+            'roles.*' => ['string', 'nullable'],
         ];
     }
 
@@ -79,9 +79,7 @@ class UserUpdateRequest extends FormRequest
             'is_confirmed.required' => 'Por favor, informe se o usuário está confirmado ou não.',
             'is_confirmed.boolean' => 'O dado se o usuário está confirmado ou não deve ser do tipo booleano.',
             'roles.array' => 'Os papéis devem ser um array.',
-            'roles.required' => 'O usuário deve ter ao menos um papel no sistema.',
             'roles.*.string' => 'Cada papel deve ser uma string.',
-            'roles.*.required' => 'O usuário deve ter ao menos um papel no sistema.',
         ];
     }
 }

@@ -25,7 +25,7 @@ class FinalCopyFactory extends Factory
         return [
             'title' => $this->faker->word(),
             'synopsis' => $this->faker->text(),
-            'genres' => $this->faker->words(),
+            'genres' => $this->faker->words(asText: true),
             'capture_format' => $this->faker->word(),
             'capture_notes' => $this->faker->text(),
             'venues' => $this->faker->text(),

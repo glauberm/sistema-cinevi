@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 
-abstract class AbstractMail extends Mailable
+abstract class DefaultMailable extends Mailable
 {
     public string $title;
 

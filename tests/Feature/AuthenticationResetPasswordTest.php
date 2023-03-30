@@ -14,7 +14,7 @@ class AuthenticationResetPasswordTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testResetPasswordView()
+    public function testResetPasswordView(): void
     {
         $user = User::factory()
             ->state(['is_enabled' => true])
@@ -22,7 +22,7 @@ class AuthenticationResetPasswordTest extends TestCase
             ->createOne();
 
         $url = URL::temporarySignedRoute(
-            'authentication.reset_password',
+            'authentication.reset-password',
             CarbonImmutable::now()->addMinutes(60),
             ['id' => $user->id]
         );
@@ -31,7 +31,7 @@ class AuthenticationResetPasswordTest extends TestCase
             ->assertOk();
     }
 
-    public function testResetPassword()
+    public function testResetPassword(): void
     {
         $user = User::factory()
             ->state(['is_enabled' => true])
@@ -39,7 +39,7 @@ class AuthenticationResetPasswordTest extends TestCase
             ->createOne();
 
         $url = URL::temporarySignedRoute(
-            'authentication.reset_password-action',
+            'authentication.reset-password--action',
             CarbonImmutable::now()->addMinutes(60),
             ['id' => $user->id]
         );

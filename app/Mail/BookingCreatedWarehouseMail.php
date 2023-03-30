@@ -9,7 +9,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 
-class BookingCreatedWarehouseMail extends AbstractMail
+class BookingCreatedWarehouseMail extends DefaultMailable
 {
     use Queueable;
 
@@ -27,8 +27,8 @@ class BookingCreatedWarehouseMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/booking/created-warehouse-html',
-            text: 'emails/booking/created-warehouse-text'
+            view: 'emails/booking/created-warehouse--html',
+            text: 'emails/booking/created-warehouse--text'
         );
     }
 }

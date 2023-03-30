@@ -9,10 +9,8 @@ use Illuminate\Http\Response;
 
 class EnsureJsonResponseMiddleware
 {
-    public function handle(
-        Request $request,
-        Closure $next
-    ): Response|RedirectResponse {
+    public function handle(Request $request, Closure $next): Response|RedirectResponse
+    {
         $request->headers->set('Accept', 'application/json');
 
         return $next($request);

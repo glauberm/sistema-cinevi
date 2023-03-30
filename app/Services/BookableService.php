@@ -23,11 +23,8 @@ class BookableService implements CrudServiceInterface, HasVersionsServiceInterfa
 
     protected string $modelVersionIdColumnName = 'bookable_id';
 
-    public function hasConflictingBookingDate(
-        int $id,
-        string $withdrawalDate,
-        string $devolutionDate
-    ): bool {
+    public function hasConflictingBookingDate(int $id, string $withdrawalDate, string $devolutionDate): bool
+    {
         $bookable = $this->modelClass::with(['bookings'])->findOrFail($id);
 
         foreach ($bookable->bookings as $booking) {
@@ -50,10 +47,12 @@ class BookableService implements CrudServiceInterface, HasVersionsServiceInterfa
     /**
      * @param  string[]  $relations
      */
-    public function get(
-        int $id,
-        array $relations = ['bookableCategory', 'users', 'bookings']
-    ): Bookable {
+    public function get(int $id, array $relations = [
+        'bookableCategory',
+        'users',
+        'bookings'
+    ]): Bookable
+    {
         /** @var Bookable $bookable */
         $bookable = $this->baseGet($id, $relations);
 

@@ -36,7 +36,7 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('set null');
 
-            $table->json('genres');
+            $table->string('genres');
 
             $table->string('capture_format')->nullable();
             $table->text('capture_notes')->nullable();

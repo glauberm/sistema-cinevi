@@ -5,18 +5,21 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Mail\AuthenticationFinalizeRegistrationMail;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class AuthenticationRegisterTest extends TestCase
 {
-    public function testRegisterView()
+    use RefreshDatabase;
+
+    public function testRegisterView(): void
     {
         $this->get('cadastro')
             ->assertOk();
     }
 
-    public function testRegister()
+    public function testRegister(): void
     {
         Mail::fake();
 

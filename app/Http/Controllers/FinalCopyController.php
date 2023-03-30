@@ -15,28 +15,31 @@ class FinalCopyController extends Controller implements CrudControllerInterface,
 {
     use CrudControllerTrait, HasVersionsControllerTrait;
 
+    protected string $paginateRoute = 'final-copy.index';
+
+    protected string $paginateView = 'pages/final-copy/index';
+
+    protected string $paginateVersionsView = 'pages/final-copy/versions-index';
+
+    protected string $showVersionView = 'pages/final-copy/version';
+
     public function __construct(protected readonly FinalCopyService $service)
     {
         $this->middleware(Authenticate::class);
     }
 
-    public function create(
-        FinalCopyCreateOrUpdateRequest $request
-    ): RedirectResponse {
+    public function create(FinalCopyCreateOrUpdateRequest $request): RedirectResponse
+    {
         return $this->doCreate($request);
     }
 
-    public function update(
-        FinalCopyCreateOrUpdateRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function update(FinalCopyCreateOrUpdateRequest $request, int $id): RedirectResponse
+    {
         return $this->doUpdate($request, $id);
     }
 
-    public function remove(
-        FinalCopyRemoveRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function remove(FinalCopyRemoveRequest $request, int $id): RedirectResponse
+    {
         return $this->doRemove($request, $id);
     }
 }

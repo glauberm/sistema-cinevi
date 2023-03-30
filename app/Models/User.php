@@ -4,22 +4,31 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\ProjectUserRole;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property int       $id
- * @property string    $name
- * @property string    $email
- * @property string    $password
- * @property string    $phone
- * @property string    $identifier
- * @property bool      $is_enabled
- * @property bool      $is_confirmed
- * @property string[]  $roles
+ * @property int                  $id
+ * @property string               $name
+ * @property string               $email
+ * @property string               $password
+ * @property string               $phone
+ * @property string               $identifier
+ * @property bool                 $is_enabled
+ * @property bool                 $is_confirmed
+ * @property string[]             $roles
+ * @property Collection<Project>  $projects
+ * @property Collection<Project>  $projectsAsDirector
+ * @property Collection<Project>  $projectsAsProducer
+ * @property Collection<Project>  $projectsAsPhotographyDirector
+ * @property Collection<Project>  $projectsAsSoundDirector
+ * @property Collection<Project>  $projectsAsArtDirector
  */
 class User extends Authenticatable
 {
@@ -81,5 +90,58 @@ class User extends Authenticatable
     public function password(): Attribute
     {
         return Attribute::make(set: fn (string $value) => Hash::make($value));
+    }
+
+    /**
+     * @return HasMany<Project>
+     */
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class, 'owner_id');
+    }
+
+    /**
+     * @return HasMany<Project>
+     */
+    public function projectsAsDirector(): HasMany
+    {
+        return $this->hasMany(Project::class)
+            ->wherePivot('role', '=', ProjectUserRole::Director);
+    }
+
+    /**
+     * @return HasMany<Project>
+     */
+    public function projectsAsProducer(): HasMany
+    {
+        return $this->hasMany(Project::class)
+            ->wherePivot('role', '=', ProjectUserRole::Producer);
+    }
+
+    /**
+     * @return HasMany<Project>
+     */
+    public function projectsAsPhotographyDirector(): HasMany
+    {
+        return $this->hasMany(Project::class)
+            ->wherePivot('role', '=', ProjectUserRole::PhotographyDirector);
+    }
+
+    /**
+     * @return HasMany<Project>
+     */
+    public function projectsAsSoundDirector(): HasMany
+    {
+        return $this->hasMany(Project::class)
+            ->wherePivot('role', '=', ProjectUserRole::SoundDirector);
+    }
+
+    /**
+     * @return HasMany<Project>
+     */
+    public function projectsAsArtDirector(): HasMany
+    {
+        return $this->hasMany(Project::class)
+            ->wherePivot('role', '=', ProjectUserRole::ArtDirector);
     }
 }

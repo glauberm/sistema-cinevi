@@ -15,11 +15,11 @@ class FinalCopyRemoveRequest extends FormRequest
     public function authorize(FinalCopyService $service): bool
     {
         if ($id = $this->route('id')) {
-            $finalCopy = $service->get(\intval($id), ['owner']);
+            $finalCopy = $service->get(intval($id), ['owner']);
 
-            return Gate::allows('hasRole', UserRole::Admin) === true ||
-                Gate::allows('hasRole', UserRole::Department) === true ||
-                Gate::allows('isUser', $finalCopy->owner_id);
+            return Gate::allows('hasRole', UserRole::Admin) === true
+                || Gate::allows('hasRole', UserRole::Department) === true
+                || Gate::allows('isUser', $finalCopy->owner_id);
         }
 
         return false;

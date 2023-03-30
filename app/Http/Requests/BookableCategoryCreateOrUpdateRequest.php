@@ -18,8 +18,7 @@ class BookableCategoryCreateOrUpdateRequest extends FormRequest
     protected function failedAuthorization(): void
     {
         throw new AuthorizationException(
-            'Você não tem permissão para criar ou editar categorias de
-            reserváveis.'
+            'Você não tem permissão para criar ou editar categorias de reserváveis.'
         );
     }
 

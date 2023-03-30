@@ -7,7 +7,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailables\Content;
 
-class AuthenticationFinalizeRegistrationMail extends AbstractMail
+class AuthenticationFinalizeRegistrationMail extends DefaultMailable
 {
     use Queueable;
 
@@ -22,8 +22,8 @@ class AuthenticationFinalizeRegistrationMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/authentication/finalize_registration-html',
-            text: 'emails/authentication/finalize_registration-text'
+            view: 'emails/authentication/finalize-registration--html',
+            text: 'emails/authentication/finalize-registration--text'
         );
     }
 }

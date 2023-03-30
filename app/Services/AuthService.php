@@ -48,7 +48,7 @@ class AuthService
     public function sendFinalizeRegistrationMail(User $user): void
     {
         $url = URL::temporarySignedRoute(
-            'authentication.finalize_registration',
+            'authentication.finalize-registration',
             CarbonImmutable::now()->addMinutes(60),
             ['id' => $user->id]
         );

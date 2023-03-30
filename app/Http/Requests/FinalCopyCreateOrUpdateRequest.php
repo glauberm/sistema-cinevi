@@ -7,18 +7,17 @@ use App\Services\FinalCopyService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class FinalCopyCreateOrUpdateRequest extends FormRequest
 {
     public function authorize(FinalCopyService $service): bool
     {
         if ($id = $this->route('id')) {
-            $finalCopy = $service->get(\intval($id), ['owner']);
+            $finalCopy = $service->get(intval($id), ['owner']);
 
-            return Gate::allows('hasRole', UserRole::Admin) ||
-                Gate::allows('hasRole', UserRole::Department) ||
-                Gate::allows('isUser', $finalCopy->owner_id);
+            return Gate::allows('hasRole', UserRole::Admin)
+                || Gate::allows('hasRole', UserRole::Department)
+                || Gate::allows('isUser', $finalCopy->owner_id);
         }
 
         return true;
@@ -31,45 +30,6 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
         );
     }
 
-    protected function prepareForValidation(): void
-    {
-        $owner = $this->input('owner');
-
-        $productionCategory = $this->input('production_category');
-
-        $professor = $this->input('professor');
-
-        if (!is_array($owner) || !array_key_exists('id', $owner)) {
-            throw new BadRequestHttpException(
-                'O responsável pela cópia final foi informado em um formato
-                inválido.'
-            );
-        }
-
-        if (
-            !is_array($productionCategory)
-            || !array_key_exists('id', $productionCategory)
-        ) {
-            throw new BadRequestHttpException(
-                'A modalidade da cópia final foi informada em um formato
-                inválido.'
-            );
-        }
-
-        if (!is_array($professor) || !array_key_exists('id', $professor)) {
-            throw new BadRequestHttpException(
-                'O professor responsável pela cópia final foi informado em um
-                formato inválido.'
-            );
-        }
-
-        $this->merge(['owner_id' => $owner['id']]);
-
-        $this->merge(['production_category_id' => $productionCategory['id']]);
-
-        $this->merge(['professor_id' => $professor['id']]);
-    }
-
     /**
      * @return array<string,string[]>
      */
@@ -78,8 +38,7 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
         return [
             'title' => ['required', 'string'],
             'synopsis' => ['required', 'string'],
-            'genres' => ['required', 'array'],
-            'genres.*' => ['required', 'string'],
+            'genres' => ['required', 'string'],
             'capture_format' => ['nullable', 'string'],
             'capture_notes' => ['nullable', 'string'],
             'venues' => ['nullable', 'string'],
@@ -98,12 +57,10 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
             'digital_sound_resolution' => ['nullable', 'string'],
             'digital_matrix_support' => ['nullable', 'string'],
             'camera' => ['nullable', 'string'],
-            'editing_software' => ['nullable', 'array'],
-            'editing_software.*' => ['nullable', 'string'],
+            'editing_software' => ['nullable', 'string'],
             'sound_capture_equipment' => ['nullable', 'string'],
             'budget' => ['nullable', 'string'],
-            'financing_sources' => ['nullable', 'array'],
-            'financing_sources.*' => ['nullable', 'string'],
+            'financing_sources' => ['nullable', 'string'],
             'supporters' => ['nullable', 'string'],
             'has_dcp' => ['nullable', 'boolean'],
             'cast' => ['nullable', 'string'],
@@ -131,9 +88,7 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
             'synopsis.required' => 'A sinopse é obrigatória.',
             'synopsis.string' => 'A sinopse deve ser uma string.',
             'genres.required' => 'Você deve informar o(s) gênero(s) da cópia final.',
-            'genres.array' => 'O(s) gênero(s) da cópia final devem estar em um array.',
-            'genres.*.required' => 'Você deve informar o(s) gênero(s) da cópia final.',
-            'genres.*.string' => 'O(s) gênero(s) da cópia final devem estar em um array de strings.',
+            'genres.string' => 'O(s) gênero(s) da cópia final devem ser uma string.',
             'capture_format.string' => 'O formato de captação deve ser uma string.',
             'capture_notes.string' => 'Os detalhes de captação deve ser uma string.',
             'venues.string' => 'As locações devem ser informadas em uma string.',
@@ -153,12 +108,10 @@ class FinalCopyCreateOrUpdateRequest extends FormRequest
             'digital_sound_resolution.string' => 'A resolução do áudio digital deve ser uma string.',
             'digital_matrix_support.string' => 'O suporte da matriz digital deve ser uma string.',
             'camera.string' => 'A câmera deve ser uma string.',
-            'editing_software.array' => 'Os softwares de edição devem estar em um array.',
-            'editing_software.*.string' => 'Os softwares de edição devem ser uma string.',
+            'editing_software.string' => 'Os softwares de edição devem ser uma string.',
             'sound_capture_equipment.string' => 'O equipamento de captura de som ser uma string.',
             'budget.string' => 'O equipamento de captura de som ser uma string.',
-            'financing_sources.array' => 'As fontes de financiamento devem estar em um array.',
-            'financing_sources.*.string' => 'As fontes de financiamento devem ser uma string.',
+            'financing_sources.string' => 'As fontes de financiamento devem ser uma string.',
             'supporters.string' => 'Os apoiadores devem ser uma string.',
             'has_dcp.boolean' => 'A informação de se foi DCP deve ser um valor boolean.',
             'cast.string' => 'O elenco deve ser uma string.',

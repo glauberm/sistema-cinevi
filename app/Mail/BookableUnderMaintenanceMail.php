@@ -9,7 +9,7 @@ use App\Models\Booking;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailables\Content;
 
-class BookableUnderMaintenanceMail extends AbstractMail
+class BookableUnderMaintenanceMail extends DefaultMailable
 {
     use Queueable;
 
@@ -29,8 +29,8 @@ class BookableUnderMaintenanceMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/bookable/under_maintenance-html',
-            text: 'emails/bookable/under_maintenance-text'
+            view: 'emails/bookable/under-maintenance--html',
+            text: 'emails/bookable/under-maintenance--text'
         );
     }
 }

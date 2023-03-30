@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('final_copies_production_roles', function (Blueprint $table) {
+        Schema::create('final_copy_production_role', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedSmallInteger('order');
@@ -31,6 +31,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('final_copies_production_roles');
+        Schema::dropIfExists('final_copy_production_role');
     }
 };

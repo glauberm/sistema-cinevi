@@ -23,9 +23,8 @@ class AuthenticationRegisterController extends Controller
         $this->middleware(RedirectIfAuthenticated::class);
     }
 
-    public function __invoke(
-        AuthenticationRegisterRequest $request
-    ): RedirectResponse {
+    public function __invoke(AuthenticationRegisterRequest $request): RedirectResponse
+    {
         /** @var array<string,mixed> */
         $data = $request->validated();
 
@@ -45,8 +44,7 @@ class AuthenticationRegisterController extends Controller
 
         Session::flash(
             'message',
-            "Foi enviado para {$user->email} um link válido por 60 minutos para
-            você finalizar o seu cadastro. O email deve chegar em 15 minutos."
+            "Foi enviado para {$user->email} um link válido por 60 minutos para você finalizar o seu cadastro. O email deve chegar em 15 minutos."
         );
 
         Session::flash('message-type', 'success');

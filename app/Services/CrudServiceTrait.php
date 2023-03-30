@@ -39,11 +39,8 @@ trait CrudServiceTrait
     /**
      * @param  array<string,mixed>  $data
      */
-    public function create(
-        array $data,
-        ?string $eventAction = 'create',
-        ?string $eventMessage = 'O item foi criado.'
-    ): Model {
+    public function create(array $data, ?string $eventAction = 'create', ?string $eventMessage = 'O item foi criado.'): Model
+    {
         $model = $this->modelClass::create($data);
 
         $model = $this->afterCreated($model, $data);
@@ -70,12 +67,8 @@ trait CrudServiceTrait
     /**
      * @param  array<string,mixed>  $data
      */
-    public function update(
-        array $data,
-        int $id,
-        ?string $eventAction = 'update',
-        ?string $eventMessage = 'O item foi editado.'
-    ): void {
+    public function update(array $data, int $id, ?string $eventAction = 'update', ?string $eventMessage = 'O item foi editado.'): void
+    {
         $model = $this->get($id);
 
         $model->update($data);
@@ -92,11 +85,8 @@ trait CrudServiceTrait
         }
     }
 
-    public function remove(
-        int $id,
-        ?string $eventAction = 'remove',
-        ?string $eventMessage = 'O item foi removido.'
-    ): void {
+    public function remove(int $id, ?string $eventAction = 'remove', ?string $eventMessage = 'O item foi removido.'): void
+    {
         if ($this instanceof HasVersionsServiceInterface) {
             event(new $this->modelVersionEventClass(
                 $this->get($id),
@@ -112,10 +102,8 @@ trait CrudServiceTrait
      * @param  Builder<Model>  $query
      * @return Builder<Model>
      */
-    protected function beforePagination(
-        Builder $query,
-        Request $request
-    ): Builder {
+    protected function beforePagination(Builder $query, Request $request): Builder
+    {
         return $query;
     }
 

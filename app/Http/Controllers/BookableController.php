@@ -18,6 +18,14 @@ class BookableController extends Controller implements CrudControllerInterface, 
 {
     use CrudControllerTrait, HasVersionsControllerTrait;
 
+    protected string $paginateRoute = 'bookable.index';
+
+    protected string $paginateView = 'pages/bookable/index';
+
+    protected string $paginateVersionsView = 'pages/bookable/versions-index';
+
+    protected string $showVersionView = 'pages/bookable/version';
+
     private ?bool $isUnderMaintenanceBeforeUpdate = null;
 
     private ?bool $isReturnOverdueBeforeUpdate = null;
@@ -27,16 +35,13 @@ class BookableController extends Controller implements CrudControllerInterface, 
         $this->middleware(Authenticate::class);
     }
 
-    public function create(
-        BookableCreateOrUpdateRequest $request
-    ): RedirectResponse {
+    public function create(BookableCreateOrUpdateRequest $request): RedirectResponse
+    {
         return $this->doCreate($request);
     }
 
-    public function update(
-        BookableCreateOrUpdateRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function update(BookableCreateOrUpdateRequest $request, int $id): RedirectResponse
+    {
         /** @var array<string,mixed> $data */
         $data = $request->validated();
 
@@ -47,18 +52,14 @@ class BookableController extends Controller implements CrudControllerInterface, 
         return $this->doUpdate($request, $id);
     }
 
-    public function remove(
-        BookableRemoveRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function remove(BookableRemoveRequest $request, int $id): RedirectResponse
+    {
         return $this->doRemove($request, $id);
     }
 
-    protected function afterUpdated(
-        BookableCreateOrUpdateRequest $request,
-        int $id
-    ): void {
-        $bookable = $this->service->get($id, ['owner']);
+    protected function afterUpdated(BookableCreateOrUpdateRequest $request, int $id): void
+    {
+        $bookable = $this->service->get($id, ['users']);
 
         if (
             $this->isUnderMaintenanceBeforeUpdate === false

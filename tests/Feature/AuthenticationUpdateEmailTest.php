@@ -14,7 +14,7 @@ class AuthenticationUpdateEmailTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUpdateEmail()
+    public function testUpdateEmail(): void
     {
         $user = User::factory()
             ->state(['is_enabled' => true])
@@ -22,7 +22,7 @@ class AuthenticationUpdateEmailTest extends TestCase
             ->createOne();
 
         $url = URL::temporarySignedRoute(
-            'authentication.update_email',
+            'authentication.update-email',
             CarbonImmutable::now()->addMinutes(60),
             ['email' => $user->email]
         );

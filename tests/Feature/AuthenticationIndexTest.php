@@ -12,14 +12,14 @@ class AuthenticationIndexTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUnauthenticatedIndex()
+    public function testUnauthenticatedIndex(): void
     {
         $this->get('/')
             ->assertStatus(302)
             ->assertRedirect('entrada');
     }
 
-    public function testIndexView()
+    public function testIndexView(): void
     {
         $user = User::factory()
             ->state(['is_enabled' => true])

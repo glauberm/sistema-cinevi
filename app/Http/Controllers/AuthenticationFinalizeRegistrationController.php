@@ -52,13 +52,13 @@ class AuthenticationFinalizeRegistrationController extends Controller
         $departmentUsers = $this->service->getAllWithRole(UserRole::Department);
 
         foreach ($departmentUsers as $user) {
-            Mail::to($user->email)->queue(new UserPendingApprovalMail($user));
+            Mail::to($user->email)
+                ->queue(new UserPendingApprovalMail($user));
         }
 
         Session::flash(
             'message',
-            'Seu email foi confirmado, mas o departamento ainda precisa aprovar
-            seu cadastro. Você receberá um email nos próximos dias.'
+            'Seu email foi confirmado, mas o departamento ainda precisa aprovar seu cadastro. Você receberá um email nos próximos dias.'
         );
 
         Session::flash('message-type', 'warning');

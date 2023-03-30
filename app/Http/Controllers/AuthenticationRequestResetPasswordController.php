@@ -30,9 +30,8 @@ class AuthenticationRequestResetPasswordController extends Controller
         }
     }
 
-    public function __invoke(
-        AuthenticationRequestResetPasswordRequest $request
-    ): RedirectResponse {
+    public function __invoke(AuthenticationRequestResetPasswordRequest $request): RedirectResponse
+    {
         /** @var array{email:string} */
         $data = $request->validated();
 
@@ -47,7 +46,7 @@ class AuthenticationRequestResetPasswordController extends Controller
         }
 
         $url = URL::temporarySignedRoute(
-            'authentication.reset_password',
+            'authentication.reset-password',
             CarbonImmutable::now()->addMinutes(60),
             ['id' => $user->id]
         );
@@ -57,8 +56,7 @@ class AuthenticationRequestResetPasswordController extends Controller
 
         Session::flash(
             'message',
-            "Foi enviado para {$email} um link válido por 60 minutos para
-            redefinição de senha. O email deve chegar em 15 minutos."
+            "Foi enviado para {$email} um link válido por 60 minutos para redefinição de senha. O email deve chegar em 15 minutos."
         );
 
         Session::flash('message-type', 'success');

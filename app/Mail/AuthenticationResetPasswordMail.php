@@ -7,7 +7,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailables\Content;
 
-class AuthenticationResetPasswordMail extends AbstractMail
+class AuthenticationResetPasswordMail extends DefaultMailable
 {
     use Queueable;
 
@@ -22,8 +22,8 @@ class AuthenticationResetPasswordMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/authentication/reset_password-html',
-            text: 'emails/authentication/reset_password-text'
+            view: 'emails/authentication/reset-password--html',
+            text: 'emails/authentication/reset-password--text'
         );
     }
 }

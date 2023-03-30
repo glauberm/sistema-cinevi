@@ -3,8 +3,14 @@
 use App\Http\Controllers\ConfigurationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('configuracoes/versoes/{id}', [ConfigurationController::class, 'showVersion']);
+Route::view('configuracoes', 'pages/configuration/update')
+    ->name('configuration');
 
-Route::get('configuracoes/{id}', [ConfigurationController::class, 'show']);
+Route::post('configuracoes', [ConfigurationController::class, 'update'])
+    ->name('configuration--action');
 
-Route::put('configuracoes/{id}/editar', [ConfigurationController::class, 'update']);
+Route::get('configuracoes/versoes', [ConfigurationController::class, 'paginateVersions'])
+    ->name('configuration.paginate-versions');
+
+Route::get('configuracoes/versoes/{id}', [ConfigurationController::class, 'showVersion'])
+    ->name('configuration.show-version');

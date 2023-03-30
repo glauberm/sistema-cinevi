@@ -11,11 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 
 class RedirectIfAuthenticated
 {
-    public function handle(
-        Request $request,
-        Closure $next,
-        string|null ...$guards
-    ): Response|RedirectResponse {
+    public function handle(Request $request, Closure $next, string|null ...$guards): Response|RedirectResponse
+    {
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {

@@ -41,12 +41,8 @@ trait HasVersionsServiceTrait
      *
      * @param  array<string,mixed>  $payload
      */
-    public function registerVersion(
-        Model $model,
-        string $action,
-        string $message,
-        array $payload
-    ): void {
+    public function registerVersion(Model $model, string $action, string $message, array $payload): void
+    {
         $modelId = $model->getAttribute('id');
 
         if (!is_int($modelId)) {
@@ -78,12 +74,8 @@ trait HasVersionsServiceTrait
     /**
      * @param  array<string,mixed>  $payload
      */
-    private function createVersion(
-        int $id,
-        string $action,
-        string $message,
-        array $payload
-    ): void {
+    private function createVersion(int $id, string $action, string $message, array $payload): void
+    {
         $version = Version::create([
             'action' => $action,
             'message' => $message,

@@ -20,61 +20,43 @@ Route::view('entrada', 'pages/authentication/login')
     ->name('authentication.login');
 
 Route::post('entrada', AuthenticationLoginController::class)
-    ->name('authentication.login-action');
+    ->name('authentication.login--action');
 
 Route::post('saida', AuthenticationLogoutController::class)
-    ->name('authentication.logout-action');
+    ->name('authentication.logout--action');
 
 Route::view('cadastro', 'pages/authentication/register')
     ->name('authentication.register');
 
 Route::post('cadastro', AuthenticationRegisterController::class, 'register')
-    ->name('authentication.register-action');
+    ->name('authentication.register--action');
 
-Route::get(
-    'finalizar-cadastro/{id}',
-    AuthenticationFinalizeRegistrationController::class
-)
-    ->name('authentication.finalize_registration');
+Route::get('finalizar-cadastro/{id}', AuthenticationFinalizeRegistrationController::class)
+    ->name('authentication.finalize-registration');
 
-Route::view(
-    'solicitar-redefinir-senha',
-    'pages/authentication/request_reset_password'
-)
-    ->name('authentication.request_reset_password');
+Route::view('solicitar-redefinir-senha', 'pages/authentication/request-reset-password')
+    ->name('authentication.request-reset-password');
 
-Route::post(
-    'solicitar-redefinir-senha',
-    AuthenticationRequestResetPasswordController::class
-)
-    ->name('authentication.request_reset_password-action');
+Route::post('solicitar-redefinir-senha', AuthenticationRequestResetPasswordController::class)
+    ->name('authentication.request-reset-password--action');
 
-Route::view('redefinir-senha/{id}', 'pages/authentication/reset_password')
-    ->name('authentication.reset_password');
+Route::view('redefinir-senha/{id}', 'pages/authentication/reset-password')
+    ->name('authentication.reset-password');
 
-Route::post(
-    'redefinir-senha/{id}',
-    AuthenticationResetPasswordController::class
-)
-    ->name('authentication.reset_password-action');
+Route::post('redefinir-senha/{id}', AuthenticationResetPasswordController::class)
+    ->name('authentication.reset-password--action');
 
-Route::view('solicitar-atualizar-email', 'pages/authentication/request_update_email')
-    ->name('authentication.request_update_email');
+Route::view('solicitar-atualizar-email', 'pages/authentication/request-update-email')
+    ->name('authentication.request-update-email');
 
-Route::post(
-    'solicitar-atualizar-email',
-    AuthenticationRequestUpdateEmailController::class
-)
-    ->name('authentication.request_update_email-action');
+Route::post('solicitar-atualizar-email', AuthenticationRequestUpdateEmailController::class)
+    ->name('authentication.request-update-email--action');
 
-Route::get(
-    'atualizar-email/{email}',
-    AuthenticationUpdateEmailController::class
-)
-    ->name('authentication.update_email');
+Route::get('atualizar-email/{email}', AuthenticationUpdateEmailController::class)
+    ->name('authentication.update-email');
 
-Route::view('atualizar-senha', 'pages/authentication/update_password')
-    ->name('authentication.update_password');
+Route::view('atualizar-senha', 'pages/authentication/update-password')
+    ->name('authentication.update-password');
 
 Route::post('atualizar-senha', AuthenticationUpdatePasswordController::class)
-    ->name('authentication.update_password-action');
+    ->name('authentication.update-password--action');

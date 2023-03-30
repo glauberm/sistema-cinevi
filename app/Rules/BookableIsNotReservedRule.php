@@ -3,30 +3,33 @@
 namespace App\Rules;
 
 use App\Services\BookableService;
+use Closure;
 use Illuminate\Contracts\Validation\DataAwareRule;
-use Illuminate\Contracts\Validation\InvokableRule;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class BookableIsNotReservedRule implements DataAwareRule, InvokableRule
+class BookableIsNotReservedRule implements DataAwareRule, ValidationRule
 {
     /**
      * @var array<string,mixed>
      */
     protected $data = [];
 
-    public function __construct(
-        private readonly BookableService $bookableService
-    ) {
+    public function __construct(private readonly BookableService $bookableService)
+    {
     }
 
     /**
-     * Run the validation rule.
-     *
-     * @param  string  $attribute
-     * @param  string  $value
-     * @param  \Closure  $fail
-     * @return void
+     * @param  array<string,mixed>  $data
+     * @return $this
      */
-    public function __invoke($attribute, $value, $fail)
+    public function setData($data)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         /** @var string $withdrawalDate */
         $withdrawalDate = $this->data['withdrawal_date'];
@@ -41,18 +44,5 @@ class BookableIsNotReservedRule implements DataAwareRule, InvokableRule
         )) {
             $fail('As reservas estão fechadas para alunos.');
         }
-    }
-
-    /**
-     * Set the data under validation.
-     *
-     * @param  array<string,mixed>  $data
-     * @return $this
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
-
-        return $this;
     }
 }

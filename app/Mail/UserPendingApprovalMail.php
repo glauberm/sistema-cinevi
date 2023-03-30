@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailables\Content;
 
-class UserPendingApprovalMail extends AbstractMail
+class UserPendingApprovalMail extends DefaultMailable
 {
     use Queueable;
 
@@ -26,8 +26,8 @@ class UserPendingApprovalMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/user/pending_approval-html',
-            text: 'emails/user/pending_approval-text'
+            view: 'emails/user/pending-approval--html',
+            text: 'emails/user/pending-approval--text'
         );
     }
 }

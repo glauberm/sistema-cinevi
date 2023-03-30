@@ -9,7 +9,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 
-class ProjectCreatedMail extends AbstractMail
+class ProjectCreatedMail extends DefaultMailable
 {
     use Queueable;
 
@@ -27,8 +27,8 @@ class ProjectCreatedMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/project/created-html',
-            text: 'emails/project/created-text'
+            view: 'emails/project/created--html',
+            text: 'emails/project/created--text'
         );
     }
 }

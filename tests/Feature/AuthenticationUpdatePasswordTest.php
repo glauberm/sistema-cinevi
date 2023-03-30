@@ -12,7 +12,7 @@ class AuthenticationUpdatePasswordTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUpdatePasswordView()
+    public function testUpdatePasswordView(): void
     {
         $user = User::factory()
             ->state(['is_enabled' => true])
@@ -24,7 +24,7 @@ class AuthenticationUpdatePasswordTest extends TestCase
             ->assertOk();
     }
 
-    public function testUpdatePassword()
+    public function testUpdatePassword(): void
     {
         $user = User::factory()
             ->state(['is_enabled' => true])

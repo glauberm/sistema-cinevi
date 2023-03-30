@@ -11,12 +11,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int                 $id
  * @property string              $title
  * @property string              $synopsis
- * @property string[]            $genres
+ * @property string              $genres
  * @property ?string             $capture_format
  * @property ?string             $capture_notes
  * @property ?string             $venues
@@ -34,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property Collection<User>    $photographyDirectors
  * @property Collection<User>    $soundDirectors
  * @property Collection<User>    $artDirectors
+ * @property FinalCopy           $finalCopy
  */
 class Project extends Model
 {
@@ -75,7 +77,6 @@ class Project extends Model
      * @var array<string,string>
      */
     protected $casts = [
-        'genres' => 'array',
         'pre_production_date' => 'immutable_date',
         'production_date' => 'immutable_date',
         'post_production_date' => 'immutable_date',
@@ -151,5 +152,13 @@ class Project extends Model
     {
         return $this->belongsToMany(User::class)
             ->wherePivot('role', '=', ProjectUserRole::ArtDirector);
+    }
+
+    /**
+     * @return HasOne<FinalCopy>
+     */
+    public function finalCopy(): HasOne
+    {
+        return $this->hasOne(FinalCopy::class);
     }
 }

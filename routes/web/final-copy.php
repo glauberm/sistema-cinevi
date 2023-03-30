@@ -3,16 +3,26 @@
 use App\Http\Controllers\FinalCopyController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('copias-finais', [FinalCopyController::class, 'paginate']);
+Route::get('copias-finais', [FinalCopyController::class, 'paginate'])
+    ->name('final-copy.index');
 
-Route::get('copias-finais/versoes/{id}', [FinalCopyController::class, 'showVersion']);
+Route::get('copias-finais/versoes/{id}', [FinalCopyController::class, 'showVersion'])
+    ->name('final-copy.show-version');
 
-Route::post('copias-finais/adicionar', [FinalCopyController::class, 'create']);
+Route::view('copias-finais/adicionar', 'pages/final-copy/create')
+    ->name('final-copy.create');
 
-Route::get('copias-finais/{id}', [FinalCopyController::class, 'show']);
+Route::post('copias-finais/adicionar', [FinalCopyController::class, 'create'])
+    ->name('final-copy.create--action');
 
-Route::put('copias-finais/{id}/editar', [FinalCopyController::class, 'update']);
+Route::view('copias-finais/{id}/editar', 'pages/final-copy/update')
+    ->name('final-copy.update');
 
-Route::delete('copias-finais/{id}/remover', [FinalCopyController::class, 'remove']);
+Route::post('copias-finais/{id}/editar', [FinalCopyController::class, 'update'])
+    ->name('final-copy.update--action');
 
-Route::get('copias-finais/{id}/versoes', [FinalCopyController::class, 'paginateVersions']);
+Route::post('copias-finais/{id}/remover', [FinalCopyController::class, 'remove'])
+    ->name('final-copy.remove--action');
+
+Route::get('copias-finais/{id}/versoes', [FinalCopyController::class, 'paginateVersions'])
+    ->name('final-copy.paginate-versions');

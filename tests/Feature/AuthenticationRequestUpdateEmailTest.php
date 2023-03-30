@@ -14,7 +14,7 @@ class AuthenticationRequestUpdateEmailTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testRequestUpdateEmailView()
+    public function testRequestUpdateEmailView(): void
     {
         $user = User::factory()
             ->state(['is_enabled' => true])
@@ -26,7 +26,7 @@ class AuthenticationRequestUpdateEmailTest extends TestCase
             ->assertOk();
     }
 
-    public function testRequestUpdateEmail()
+    public function testRequestUpdateEmail(): void
     {
         Mail::fake();
 

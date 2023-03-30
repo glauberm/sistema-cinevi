@@ -8,7 +8,7 @@ use App\Models\Booking;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailables\Content;
 
-class BookingUpdatedWarehouseMail extends AbstractMail
+class BookingUpdatedWarehouseMail extends DefaultMailable
 {
     use Queueable;
 
@@ -26,8 +26,8 @@ class BookingUpdatedWarehouseMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/booking/updated-warehouse-html',
-            text: 'emails/booking/updated-warehouse-text'
+            view: 'emails/booking/updated-warehouse--html',
+            text: 'emails/booking/updated-warehouse--text'
         );
     }
 }

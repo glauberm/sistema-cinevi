@@ -15,37 +15,31 @@ class BookableCategoryController extends Controller implements CrudControllerInt
 {
     use CrudControllerTrait, HasVersionsControllerTrait;
 
-    protected string $paginateRoute = 'bookable_category.index';
+    protected string $paginateRoute = 'bookable-category.index';
 
-    protected string $paginateView = 'pages/bookable_category/index';
+    protected string $paginateView = 'pages/bookable-category/index';
 
-    protected string $paginateVersionsView;
+    protected string $paginateVersionsView = 'pages/bookable-category/versions-index';
 
-    protected string $showVersionView;
+    protected string $showVersionView = 'pages/bookable-category/version';
 
-    public function __construct(
-        protected readonly BookableCategoryService $service
-    ) {
+    public function __construct(protected readonly BookableCategoryService $service)
+    {
         $this->middleware(Authenticate::class);
     }
 
-    public function create(
-        BookableCategoryCreateOrUpdateRequest $request
-    ): RedirectResponse {
+    public function create(BookableCategoryCreateOrUpdateRequest $request): RedirectResponse
+    {
         return $this->doCreate($request);
     }
 
-    public function update(
-        BookableCategoryCreateOrUpdateRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function update(BookableCategoryCreateOrUpdateRequest $request, int $id): RedirectResponse
+    {
         return $this->doUpdate($request, $id);
     }
 
-    public function remove(
-        BookableCategoryRemoveRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function remove(BookableCategoryRemoveRequest $request, int $id): RedirectResponse
+    {
         return $this->doRemove($request, $id);
     }
 }

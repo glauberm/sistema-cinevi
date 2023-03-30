@@ -8,7 +8,7 @@ use App\Models\Booking;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailables\Content;
 
-class BookingCreatedProfessorMail extends AbstractMail
+class BookingCreatedProfessorMail extends DefaultMailable
 {
     use Queueable;
 
@@ -26,8 +26,8 @@ class BookingCreatedProfessorMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/booking/created-professor-html',
-            text: 'emails/booking/created-professor-text'
+            view: 'emails/booking/created-professor--html',
+            text: 'emails/booking/created-professor--text'
         );
     }
 }

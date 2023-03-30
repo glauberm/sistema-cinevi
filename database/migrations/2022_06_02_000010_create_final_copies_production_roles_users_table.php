@@ -15,7 +15,7 @@ return new class extends Migration
             $table
                 ->foreign('final_copy_production_role_id', 'f_copies_p_roles_users_f_copy_p_role_id_foreign')
                 ->references('id')
-                ->on('final_copies_production_roles')
+                ->on('final_copy_production_role')
                 ->onDelete('cascade');
 
             $table->unsignedBigInteger('user_id');

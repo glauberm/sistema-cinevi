@@ -18,15 +18,21 @@ class UserController extends Controller implements CrudControllerInterface, HasV
 {
     use CrudControllerTrait, HasVersionsControllerTrait;
 
+    protected string $paginateRoute = 'user.index';
+
+    protected string $paginateView = 'pages/user/index';
+
+    protected string $paginateVersionsView = 'pages/user/versions-index';
+
+    protected string $showVersionView = 'pages/user/version';
+
     public function __construct(protected readonly UserService $service)
     {
         $this->middleware(Authenticate::class);
     }
 
-    public function update(
-        UserUpdateRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function update(UserUpdateRequest $request, int $id): RedirectResponse
+    {
         /** @var array<string,mixed> */
         $data = $request->validated();
 
@@ -34,16 +40,15 @@ class UserController extends Controller implements CrudControllerInterface, HasV
         $user = $this->service->get($id, []);
 
         if (!$user->is_confirmed && $data['is_confirmed']) {
-            Mail::to($user->email)->queue(new UserIsConfirmedMail());
+            Mail::to($user->email)
+                ->queue(new UserIsConfirmedMail());
         }
 
         return $this->doUpdate($request, $id);
     }
 
-    public function remove(
-        UserRemoveRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function remove(UserRemoveRequest $request, int $id): RedirectResponse
+    {
         return $this->doRemove($request, $id);
     }
 }

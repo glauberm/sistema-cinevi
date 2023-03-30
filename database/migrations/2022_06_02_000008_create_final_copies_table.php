@@ -36,7 +36,7 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('set null');
 
-            $table->json('genres');
+            $table->string('genres');
 
             $table->string('capture_format')->nullable();
             $table->text('capture_notes')->nullable();
@@ -66,10 +66,10 @@ return new class extends Migration
             $table->string('digital_sound_resolution')->nullable();
             $table->string('digital_matrix_support')->nullable();
             $table->string('camera')->nullable();
-            $table->json('editing_software')->nullable();
+            $table->string('editing_software')->nullable();
             $table->string('sound_capture_equipment')->nullable();
             $table->string('budget')->nullable();
-            $table->json('financing_sources')->nullable();
+            $table->text('financing_sources')->nullable();
             $table->text('supporters')->nullable();
             $table->boolean('has_dcp')->nullable();
             $table->text('cast')->nullable();

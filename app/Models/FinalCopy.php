@@ -4,47 +4,50 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * @property int                 $id
- * @property string              $title
- * @property string              $synopsis
- * @property string[]            $genres
- * @property ?string             $capture_format
- * @property ?string             $capture_notes
- * @property ?string             $venues
- * @property ?string             $video_url
- * @property ?string             $video_password
- * @property ?string             $chromia
- * @property ?string             $proportion
- * @property ?string             $format
- * @property ?string             $duration
- * @property ?string             $native_digital_format
- * @property ?string             $codec
- * @property ?string             $container
- * @property ?string             $bitrate
- * @property ?string             $fps
- * @property ?string             $sound
- * @property ?string             $digital_sound_resolution
- * @property ?string             $digital_matrix_support
- * @property ?string             $camera
- * @property string[]|null       $editing_software
- * @property ?string             $sound_capture_equipment
- * @property ?string             $budget
- * @property string[]|null       $financing_sources
- * @property ?string             $supporters
- * @property ?string             $has_dcp
- * @property ?string             $cast
- * @property ?string             $participations
- * @property ?string             $prizes
- * @property bool                $confirmed
- * @property User                $owner
- * @property ProductionCategory  $productionCategory
- * @property User                $professor
+ * @property int                         $id
+ * @property string                      $title
+ * @property string                      $synopsis
+ * @property string                      $genres
+ * @property ?string                     $capture_format
+ * @property ?string                     $capture_notes
+ * @property ?string                     $venues
+ * @property ?string                     $video_url
+ * @property ?string                     $video_password
+ * @property ?string                     $chromia
+ * @property ?string                     $proportion
+ * @property ?string                     $format
+ * @property ?string                     $duration
+ * @property ?string                     $native_digital_format
+ * @property ?string                     $codec
+ * @property ?string                     $container
+ * @property ?string                     $bitrate
+ * @property ?string                     $fps
+ * @property ?string                     $sound
+ * @property ?string                     $digital_sound_resolution
+ * @property ?string                     $digital_matrix_support
+ * @property ?string                     $camera
+ * @property string[]|null               $editing_software
+ * @property ?string                     $sound_capture_equipment
+ * @property ?string                     $budget
+ * @property string[]|null               $financing_sources
+ * @property ?string                     $supporters
+ * @property ?string                     $has_dcp
+ * @property ?string                     $cast
+ * @property ?string                     $participations
+ * @property ?string                     $prizes
+ * @property bool                        $confirmed
+ * @property User                        $owner
+ * @property ProductionCategory          $productionCategory
+ * @property User                        $professor
+ * @property Project                     $project
+ * @property Collection<ProductionRole>  $productionRoles
  */
 class FinalCopy extends Model
 {
@@ -97,17 +100,6 @@ class FinalCopy extends Model
         'owner_id',
         'production_category_id',
         'professor_id',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string,string>
-     */
-    protected $casts = [
-        'genres' => 'array',
-        'editing_software' => 'array',
-        'financing_sources' => 'array',
     ];
 
     /**

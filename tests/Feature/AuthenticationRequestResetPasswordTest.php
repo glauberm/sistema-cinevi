@@ -14,13 +14,13 @@ class AuthenticationRequestResetPasswordTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testRequestResetPasswordView()
+    public function testRequestResetPasswordView(): void
     {
         $this->get('solicitar-redefinir-senha')
             ->assertOk();
     }
 
-    public function testRequestResetPassword()
+    public function testRequestResetPassword(): void
     {
         Mail::fake();
 

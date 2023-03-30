@@ -15,29 +15,31 @@ class ProductionCategoryController extends Controller implements CrudControllerI
 {
     use CrudControllerTrait, HasVersionsControllerTrait;
 
-    public function __construct(
-        protected readonly ProductionCategoryService $service
-    ) {
+    protected string $paginateRoute = 'production-category.index';
+
+    protected string $paginateView = 'pages/production-category/index';
+
+    protected string $paginateVersionsView = 'pages/production-category/versions-index';
+
+    protected string $showVersionView = 'pages/production-category/version';
+
+    public function __construct(protected readonly ProductionCategoryService $service)
+    {
         $this->middleware(Authenticate::class);
     }
 
-    public function create(
-        ProductionCategoryCreateOrUpdateRequest $request
-    ): RedirectResponse {
+    public function create(ProductionCategoryCreateOrUpdateRequest $request): RedirectResponse
+    {
         return $this->doCreate($request);
     }
 
-    public function update(
-        ProductionCategoryCreateOrUpdateRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function update(ProductionCategoryCreateOrUpdateRequest $request, int $id): RedirectResponse
+    {
         return $this->doUpdate($request, $id);
     }
 
-    public function remove(
-        ProductionCategoryRemoveRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function remove(ProductionCategoryRemoveRequest $request, int $id): RedirectResponse
+    {
         return $this->doRemove($request, $id);
     }
 }

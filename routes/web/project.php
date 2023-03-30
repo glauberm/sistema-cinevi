@@ -3,16 +3,26 @@
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('projetos', [ProjectController::class, 'paginate']);
+Route::get('projetos', [ProjectController::class, 'paginate'])
+    ->name('project.index');
 
-Route::get('projetos/versoes/{id}', [ProjectController::class, 'showVersion']);
+Route::get('projetos/versoes/{id}', [ProjectController::class, 'showVersion'])
+    ->name('project.show-version');
 
-Route::post('projetos/adicionar', [ProjectController::class, 'create']);
+Route::view('projetos/adicionar', 'pages/project/create')
+    ->name('project.create');
 
-Route::get('projetos/{id}', [ProjectController::class, 'show']);
+Route::post('projetos/adicionar', [ProjectController::class, 'create'])
+    ->name('project.create--action');
 
-Route::put('projetos/{id}/editar', [ProjectController::class, 'update']);
+Route::view('projetos/{id}/editar', 'pages/project/update')
+    ->name('project.update');
 
-Route::delete('projetos/{id}/remover', [ProjectController::class, 'remove']);
+Route::post('projetos/{id}/editar', [ProjectController::class, 'update'])
+    ->name('project.update--action');
 
-Route::get('projetos/{id}/versoes', [ProjectController::class, 'paginateVersions']);
+Route::post('projetos/{id}/remover', [ProjectController::class, 'remove'])
+    ->name('project.remove--action');
+
+Route::get('projetos/{id}/versoes', [ProjectController::class, 'paginateVersions'])
+    ->name('project.paginate-versions');

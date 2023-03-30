@@ -5,24 +5,19 @@ namespace App\Rules;
 use App\Models\Configuration;
 use App\Services\ConfigurationService;
 use Carbon\CarbonImmutable;
-use Illuminate\Contracts\Validation\InvokableRule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class BookingIsNotForbiddenDateRule implements InvokableRule
+class BookingIsNotForbiddenDateRule implements ValidationRule
 {
-    public function __construct(
-        private readonly ConfigurationService $configurationService
-    ) {
+    public function __construct(private readonly ConfigurationService $configurationService)
+    {
     }
 
     /**
-     * Run the validation rule.
-     *
-     * @param  string  $attribute
-     * @param  string  $value
-     * @param  \Closure  $fail
-     * @return void
+     * @param  string   $value
      */
-    public function __invoke($attribute, $value, $fail)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $valueDate = CarbonImmutable::parse($value);
 
@@ -35,8 +30,7 @@ class BookingIsNotForbiddenDateRule implements InvokableRule
                 $valueDate->day === intval($forbiddenDate['day'])
             ) {
                 $fail(
-                    "A {$attribute} não pode ser realizada na data de
-                    {$forbiddenDate['name']}."
+                    "A :attribute não pode ser realizada na data de {$forbiddenDate['name']}."
                 );
             }
         }

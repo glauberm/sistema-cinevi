@@ -22,10 +22,8 @@ class AuthenticationResetPasswordController extends Controller
         $this->middleware(ValidateSignature::class);
     }
 
-    public function __invoke(
-        AuthenticationResetPasswordRequest $request,
-        int $id
-    ): RedirectResponse {
+    public function __invoke(AuthenticationResetPasswordRequest $request, int $id): RedirectResponse
+    {
         /** @var array<string,mixed> */
         $data = $request->validated();
 
@@ -38,8 +36,7 @@ class AuthenticationResetPasswordController extends Controller
 
         Session::flash(
             'message',
-            'Sua senha foi redefinida. Você já pode entrar no sistema com sua
-            nova senha.'
+            'Sua senha foi redefinida. Você já pode entrar no sistema com sua nova senha.'
         );
 
         Session::flash('message-type', 'success');

@@ -11,6 +11,7 @@ use App\Rules\UserIsSelf;
 use App\Rules\UserOwnsProject;
 use App\Services\AuthService;
 use App\Services\BookableService;
+use App\Services\BookingService;
 use App\Services\ConfigurationService;
 use App\Services\ProjectService;
 use App\Services\UserService;
@@ -18,19 +19,17 @@ use Carbon\CarbonImmutable;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class BookingCreateOrUpdateRequest extends FormRequest
 {
-    public function authorize(): bool
+    public function authorize(BookingService $service): bool
     {
-        /** @var array<string,mixed> */
-        $data = $this->validated();
+        if ($id = $this->route('id')) {
+            $booking = $service->get(intval($id), ['owner']);
 
-        if ($this->route('id')) {
-            return Gate::allows('hasRole', UserRole::Admin) ||
-                Gate::allows('hasRole', UserRole::Warehouse) ||
-                Gate::allows('isUser', $data['owner_id']);
+            return Gate::allows('hasRole', UserRole::Admin)
+                || Gate::allows('hasRole', UserRole::Warehouse)
+                || Gate::allows('isUser', $booking->owner_id);
         }
 
         return true;
@@ -41,30 +40,6 @@ class BookingCreateOrUpdateRequest extends FormRequest
         throw new AuthorizationException(
             'Você não tem permissão para editar esta reserva.'
         );
-    }
-
-    protected function prepareForValidation(): void
-    {
-        $owner = $this->input('owner');
-
-        $project = $this->input('project');
-
-        if (!is_array($owner) || !array_key_exists('id', $owner)) {
-            throw new BadRequestHttpException(
-                'Os dados do responsável pela reserva estão em um formato
-                inválido.'
-            );
-        }
-
-        if (!is_array($project) || !array_key_exists('id', $project)) {
-            throw new BadRequestHttpException(
-                'Os dados do projeto associado à estão em um formato inválido.'
-            );
-        }
-
-        $this->merge(['owner_id' => $owner['id']]);
-
-        $this->merge(['project_id' => $project['id']]);
     }
 
     /**

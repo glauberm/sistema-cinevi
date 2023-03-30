@@ -9,7 +9,7 @@ use App\Models\Booking;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailables\Content;
 
-class BookableWithReturnOverdueMail extends AbstractMail
+class BookableWithReturnOverdueMail extends DefaultMailable
 {
     use Queueable;
 
@@ -29,8 +29,8 @@ class BookableWithReturnOverdueMail extends AbstractMail
     public function content(): Content
     {
         return new Content(
-            view: 'emails/bookable/return_overdue-html',
-            text: 'emails/bookable/return_overdue-text'
+            view: 'emails/bookable/return-overdue--html',
+            text: 'emails/bookable/return-overdue--text'
         );
     }
 }

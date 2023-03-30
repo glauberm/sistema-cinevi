@@ -4,31 +4,26 @@ namespace App\Rules;
 
 use App\Models\User;
 use App\Services\UserService;
-use Illuminate\Contracts\Validation\InvokableRule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class UserHasProjectWithoutFinalCopyRule implements InvokableRule
+class UserHasProjectWithoutFinalCopyRule implements ValidationRule
 {
     public function __construct(private readonly UserService $userService)
     {
     }
 
-    /**
-     * Run the validation rule.
-     *
-     * @param  string  $attribute
-     * @param  string  $value
-     * @param  \Closure  $fail
-     * @return void
-     */
-    public function __invoke($attribute, $value, $fail)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         /** @var User $user */
         $user = $this->userService->get(intval($value), ['projects']);
 
-        // foreach ($user->projects as $project) {
-        //     if ($project->finalCopy->exists()) {
-        //         $fail("O {$attribute} deve ser você mesmo.");
-        //     }
-        // }
+        foreach ($user->projects as $project) {
+            if ($project->finalCopy->exists()) {
+                $fail(
+                    'O :attribute não pode possuir um projeto sem cópia final.'
+                );
+            }
+        }
     }
 }

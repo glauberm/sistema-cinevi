@@ -6,7 +6,6 @@ use App\Enums\UserRole;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class BookableCreateOrUpdateRequest extends FormRequest
 {
@@ -21,23 +20,6 @@ class BookableCreateOrUpdateRequest extends FormRequest
         throw new AuthorizationException(
             'Você não tem permissão para criar ou editar reserváveis.'
         );
-    }
-
-    protected function prepareForValidation(): void
-    {
-        $bookableCategory = $this->input('bookable_category');
-
-        if (
-            !is_array($bookableCategory)
-            || !array_key_exists('id', $bookableCategory)
-        ) {
-            throw new BadRequestHttpException(
-                'Os dados da categoria de reservável estão em um formato
-                inválido.'
-            );
-        }
-
-        $this->merge(['bookable_category_id' => $bookableCategory['id']]);
     }
 
     /**

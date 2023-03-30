@@ -5,9 +5,10 @@ namespace App\Rules;
 use App\Enums\UserRole;
 use App\Services\AuthService;
 use App\Services\UserService;
-use Illuminate\Contracts\Validation\InvokableRule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class UserIsProfessor implements InvokableRule
+class UserIsProfessor implements ValidationRule
 {
     public function __construct(
         private readonly AuthService $authService,
@@ -15,20 +16,12 @@ class UserIsProfessor implements InvokableRule
     ) {
     }
 
-    /**
-     * Run the validation rule.
-     *
-     * @param  string  $attribute
-     * @param  string  $value
-     * @param  \Closure  $fail
-     * @return void
-     */
-    public function __invoke($attribute, $value, $fail)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $authUser = $this->authService->getAuthUserOrFail();
 
         if (!$this->userService->hasRole($authUser, UserRole::Professor)) {
-            $fail("O {$attribute} deve ser um professor.");
+            $fail('O :attribute deve ser um professor.');
         }
     }
 }
